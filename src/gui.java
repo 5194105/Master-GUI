@@ -53,6 +53,8 @@ public class gui {
      String udPicHighlight="udHighlight.png";
      String preratePicHighlight="prerateHighlight.png";
      
+     String libDirectoryDB,libDirectoryExcel,libDirectorySelenium;
+     
      WebDriver ieDriver;
      WebDriver firefoxDriver;
      WebDriver chromeDriver;
@@ -200,6 +202,10 @@ public class gui {
 	      else {
 	    	  imagePath=homePath.substring(0,homePath.length()-5);
 	        }
+	      
+	      libDirectoryDB=homePath+"\\libs+\\DB";
+	      libDirectoryExcel=homePath+"\\libs+\\Excel";
+	      libDirectorySelenium=homePath+"\\libs+\\Selenium";
 	      
 	      System.out.println(homePath);
 	      System.out.println(imagePath);
