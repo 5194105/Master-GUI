@@ -1,0 +1,16 @@
+GTM DB Username=GTM_REV_TOOLS
+GTM DB Password=Wr4l3pP5gWVd7apow8eZwnarI3s4e1
+RTM DB Username=ri
+RTM DB Password=ri
+Retry Attempts=3
+Seconds Timeout=5
+Rebill L2 URL=https://testsso.secure.fedex.com/L2/eRA/index.html
+Rebill L3 URL=https://testsso.secure.fedex.com/L3/eRA/index.html
+Rerate L2 URL=devsso.secure.fedex.com/L2/PRSApps/
+Rerate L3 URL=testsso.secure.fedex.com/L3/PRSApps/
+Prerate L2 URL=https://testsso.secure.fedex.com/prerates-l2
+Prerate L3 URL=https://testsso.secure.fedex.com/l3/prerates
+Instant Invoice L2 URL=https://testsso.secure.fedex.com/instant-invoicing-l2
+Instant Invoice L3 URL=https://testsso.secure.fedex.com/l3/instant-invoicing
+Rebill Result Table Name=rebill_results
+RTM DB Table Name=batch_shipping_results
