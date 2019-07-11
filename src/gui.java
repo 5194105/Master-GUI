@@ -1,10 +1,14 @@
 import java.awt.EventQueue;
 import java.awt.Image;
+import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -55,9 +59,24 @@ public class gui {
      
      String libDirectoryDB,libDirectoryExcel,libDirectorySelenium;
      
+     String GtmDbName,GtmDbResults,GtmDbPassword,retryAttempts,secondTimeout,rebillL2URL,rebillL3URL;
+     String rtmDbName,rtmDbPassword;
+     String rerateL2URL,rerateL3URL,prerateL2URL,prerateL3URL;
+     String instantInvoiceL2URL,instantInvoiceL3URL;
+     String rebillResultTable;
+     String rtmBatchShippingResults;
+     
      WebDriver ieDriver;
      WebDriver firefoxDriver;
      WebDriver chromeDriver;
+     
+     BufferedReader br;
+     
+     File tempFile,configFile;
+     
+     udAutomation ud;
+     
+     Object obj;
      
      config c;
 	
@@ -121,6 +140,7 @@ public class gui {
 		          	  if (mouseLabel==lblNewLabel_6) {     
 		        	  mouseLabelStringDark=rebillPic;
 		        	  mouseLabelStringLight=rebillPicHighlight;
+		        	  
 		          	  }       	  
 		        	  else if (mouseLabel==lblNewLabel_7) {	        		  
 		        		  mouseLabelStringDark=reratePic;
@@ -137,6 +157,7 @@ public class gui {
 		        	  else if (mouseLabel==lblNewLabel_10) {     
 		        	  mouseLabelStringDark=udPic;
 		        	  mouseLabelStringLight=udPicHighlight;
+		        	  obj=ud;
 		          	  }       	  
 		        	  else if (mouseLabel==lblNewLabel_11) {	        		  
 		        		  mouseLabelStringDark=datapopPic;
@@ -170,7 +191,38 @@ public class gui {
 		          mouseimageIcon = new ImageIcon(mouseDimg);
 		          mouseLabel.setIcon(mouseimageIcon);  
 		      }
-		  };
+		
+		  
+		  
+		    @Override
+		     public void mouseClicked(MouseEvent e)
+		    {
+				try {
+					
+					 if (mouseLabel==lblNewLabel_6) {     
+			        	  
+			          	  }       	  
+			        	  else if (mouseLabel==lblNewLabel_7) {	        		  
+     		  
+			        	  }
+			        	  else if (mouseLabel==lblNewLabel_8) {	        		  
+		     	  
+			        	  }		      	        	  
+			        	  else if (mouseLabel==lblNewLabel_9) {
+	        		  
+			        	  }
+			        	  else if (mouseLabel==lblNewLabel_10) { 
+			        	  ud = new udAutomation();
+			        	//  ud.frame.setVisible(true);
+			          	  }       	  
+			        	  else if (mouseLabel==lblNewLabel_11) {	        		  
+			        	  }
+
+						} catch (Exception ee) {
+							ee.printStackTrace();
+					}
+		    	}
+		  	};
 		
 		
 		  lblNewLabel_1.addMouseListener( ml );
@@ -302,6 +354,77 @@ public class gui {
 	
 	public void setUp() {
 		
+		
+		
+	    tempFile = new File(System.getProperty("user.dir")+"\\config.txt"); 
+        if (tempFile.exists()==true){
+            configFile=tempFile;
+        }
+        else{
+             configFile=new File(new File(tempFile.getParent()).getParent()+"\\config.txt");
+        }
+
+        try {
+        	br = new BufferedReader(new FileReader(configFile));
+        } catch (FileNotFoundException ex) {
+        	 System.out.println(ex);
+     }
+ 
+          String st;
+          int counter=0;
+          String tempString="";
+     try {
+         while ((st = br.readLine()) != null) {
+             counter++;
+             tempString=st.substring(st.indexOf("=")+1);
+             System.out.println(tempString);
+             System.out.println(st);
+             System.out.println("");
+             switch(counter){
+                 case 1 :
+                     GtmDbName=tempString;
+                 case 2 :
+                	 GtmDbPassword=tempString;
+                 case 3 :
+                     rtmDbName=tempString;
+                 case 4 :
+                	  rtmDbPassword=tempString; 
+                 case 5 :
+                	 retryAttempts=tempString;
+                 case 6 :
+                	 secondTimeout=tempString;
+                 case 7 :
+                	 rebillL2URL=tempString; 
+                 case 8 :
+                	 rebillL3URL=tempString;
+                 case 9 :
+                	 rerateL2URL=tempString;
+                 case 10 :
+                	 rerateL3URL=tempString;
+                 case 11 :
+                	 prerateL2URL=tempString;
+                 case 12 :
+                	 prerateL3URL=tempString;
+                 case 13 :
+                	 instantInvoiceL2URL=tempString;
+                 case 14 :
+                	 instantInvoiceL3URL=tempString;
+                 case 15 :
+                	 rebillResultTable=tempString;
+                 case 16 :
+                	 rtmBatchShippingResults=tempString;
+                	 
+                	 }
+         }
+     } catch (IOException ex) {
+    	 System.out.println(ex);
+     }
+     
+     
+     
+     
+
+		
 		String chromeSetProperty="webdriver.chrome.driver";
 		String ieSetProperty="webdriver.ie.driver";
 		//String firefoxSetProperty="";
@@ -311,12 +434,28 @@ public class gui {
 		//String firefoxPath="";
 		
 		c = new config();
+		
+	    c.setGtmDbName( GtmDbName);
+	    c.setGtmDbPassword( GtmDbPassword);
+	    c.setRetryAttempts( retryAttempts);
+	    c.setSecondTimeout( retryAttempts);
+	    c.setRebillL2URL( rebillL2URL);
+	    c.setRebillL3URL( rebillL3URL);
+	    c.setRtmDbName( rtmDbName);
+	    c.setRtmDbPassword( rtmDbPassword);
+	    c.setRerateL2URL( rerateL2URL);
+	    c.setRerateL3URL( rerateL3URL);
+	    c.setPrerateL2URL( prerateL2URL);
+	    c.setPrerateL3URL( prerateL3URL);
+	    c.setInstantInvoiceL2URL( instantInvoiceL2URL);
+	    c.setInstantInvoiceL3URL( instantInvoiceL3URL);
+	 	c.setRebillResultTable( rebillResultTable);
+	 	c.setRtmBatchShippingResults( rtmBatchShippingResults);	
 		c.setChromeProperty(chromeSetProperty);
 		c.setIeProperty(ieSetProperty);
 		c.setChromePath(chromePath);
 		c.setIeDriverPath(ieDriverPath);
-		//c.setIEDriver(c.getIeProperty(), c.getIeDriverPath());
-		//c.setChromeDriver(c.getChromeProperty(), c.getChromeDriverPath());
+
 		
 
 		
