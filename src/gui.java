@@ -56,6 +56,8 @@ public class gui {
      String datapopPicHighlight="datapopHighlight.png";
      String udPicHighlight="udHighlight.png";
      String preratePicHighlight="prerateHighlight.png";
+     String backPic="back.png";
+     String backPicHighlight="darkBack.png";
      
      String libDirectoryDB,libDirectoryExcel,libDirectorySelenium;
      
@@ -76,6 +78,11 @@ public class gui {
      File tempFile,configFile;
      
      udAutomation ud;
+     rebillAutomationGui rebill;
+     rerateAutomationGui rerate;
+     prerateAutomationGui prerate;
+     instantInvoiceAutomationGui instantInvoice;
+     datapopAutomationGui datapop;
      
      Object obj;
      
@@ -89,6 +96,7 @@ public class gui {
 	private JLabel lblNewLabel_9;
 	private JLabel lblNewLabel_10;
 	private JLabel lblNewLabel_11;
+	private JLabel lblNewLabel_12;
 
 	/**
 	 * Launch the application.
@@ -164,7 +172,11 @@ public class gui {
 		        		  mouseLabelStringDark=datapopPic;
 			        	  mouseLabelStringLight=datapopPicHighlight;	        		  
 		        	  }
-		        	      	        	  
+		        	      
+		        	  else if (mouseLabel==lblNewLabel_12) {	        		  
+		        		  mouseLabelStringDark=backPic;
+			        	  mouseLabelStringLight=backPicHighlight;	        		  
+		        	  }
 		        	
 		          
 		          try {
@@ -200,23 +212,25 @@ public class gui {
 		    {
 				try {
 					
+					
 					 if (mouseLabel==lblNewLabel_6) {     
-			        	  
+			        	  rebill = new rebillAutomationGui();
 			          	  }       	  
 			        	  else if (mouseLabel==lblNewLabel_7) {	        		  
-     		  
+			        		  rerate = new rerateAutomationGui();
 			        	  }
 			        	  else if (mouseLabel==lblNewLabel_8) {	        		  
-		     	  
+			        		  prerate = new prerateAutomationGui();
 			        	  }		      	        	  
 			        	  else if (mouseLabel==lblNewLabel_9) {
-	        		  
+			        		  instantInvoice= new instantInvoiceAutomationGui();
 			        	  }
 			        	  else if (mouseLabel==lblNewLabel_10) { 
 			        	  ud = new udAutomation();
 			        	//  ud.frame.setVisible(true);
 			          	  }       	  
-			        	  else if (mouseLabel==lblNewLabel_11) {	        		  
+			        	  else if (mouseLabel==lblNewLabel_11) {	   
+			        		  datapop= new datapopAutomationGui();
 			        	  }
 
 						} catch (Exception ee) {
@@ -237,6 +251,8 @@ public class gui {
 		  lblNewLabel_9.addMouseListener( ml );
 		  lblNewLabel_10.addMouseListener( ml );
 		  lblNewLabel_11.addMouseListener( ml );
+		  
+		  lblNewLabel_12.addMouseListener( ml );
 		  
 		  	  
 		  
@@ -268,6 +284,10 @@ public class gui {
 		frame.setBounds(100, 100, 1005, 718);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		lblNewLabel_12 = new JLabel("New label");
+		lblNewLabel_12.setBounds(0, 587, 99, 75);
+		frame.getContentPane().add(lblNewLabel_12);
 		
 		
 		
@@ -332,6 +352,7 @@ public class gui {
 						addIcon(lblNewLabel_9,instantPic);
 						addIcon(lblNewLabel_10,udPic);
 						addIcon(lblNewLabel_11,datapopPic);
+						addIcon(lblNewLabel_12,backPic);
 						addIcon(lblNewLabel,"default_template.png");
 		
 		
