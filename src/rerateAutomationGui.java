@@ -1,4 +1,6 @@
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -10,163 +12,44 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JRadioButton;
 
 import org.openqa.selenium.WebDriver;
+import javax.swing.JTextField;
 
 public class rerateAutomationGui {
 
 	private JFrame frame;
 
-	 BufferedImage img = null;
-     Image dimg;
-     ImageIcon imageIcon;
-     String homePath;
-     String imagePath;
-     BufferedImage mouseImage = null;
-     Image mouseDimg = null;
-     ImageIcon mouseimageIcon = null;
-     JLabel mouseLabel;
-     String mouseLabelStringName;
-     String mouseLabelStringLight;
-     String mouseLabelStringDark;
-     JLabel lblNewLabel_1;
-     JLabel lblNewLabel_2;
-     JLabel lblNewLabel_3;
-     JLabel lblNewLabel_4;
-     String optionsDark="options.png";
-     String dbDark="db.png";
-     String linkDark="link.png";
-     String infoDark="info.png";
-     String optionsLight="darkoptions.png";
-     String dbLight="darkdb.png";
-     String linkLight="darklink.png";
-     String infoLight="darkinfo.png";
-     String selectionBar="selectionbar.png";
-     String rebillPic="rebill.png";
-     String reratePic="rerate.png";
-     String instantPic="instant.png";
-     String datapopPic="datapop.png";
-     String udPic="ud.png";
-     String preratePic="prerate.png";
-     String rebillPicHighlight="rebillHighlight.png";
-     String reratePicHighlight="rerateHighlight.png";
-     String instantPicHighlight="instantHighlight.png";
-     String datapopPicHighlight="datapopHighlight.png";
-     String udPicHighlight="udHighlight.png";
-     String preratePicHighlight="prerateHighlight.png";
-     String backPic="back.png";
-     String backPicHighlight="darkBack.png";
-     
-     String libDirectoryDB,libDirectoryExcel,libDirectorySelenium;
-     
-     String GtmDbName,GtmDbResults,GtmDbPassword,retryAttempts,secondTimeout,rebillL2URL,rebillL3URL;
-     String rtmDbName,rtmDbPassword;
-     String rerateL2URL,rerateL3URL,prerateL2URL,prerateL3URL;
-     String instantInvoiceL2URL,instantInvoiceL3URL;
-     String rebillResultTable;
-     String rtmBatchShippingResults;
+	 
 
-     
-     WebDriver ieDriver;
-     WebDriver firefoxDriver;
-     WebDriver chromeDriver;
-     
-     BufferedReader br;
-     
-     File tempFile,configFile;
-     
-     udAutomation ud;
-     
-     Object obj;
-     
-     config c;
-     
-     private JLabel lblNewLabel_12;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					rerateAutomationGui window = new rerateAutomationGui();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+    private JLabel label;
+    private JLabel lblSource;
+    private JLabel executeLabel;
+    private JRadioButton radioButton;
+    private JRadioButton radioButton_1;
+    private JLabel label_2;
+    private JLabel lblRerateAutomation;
+    private JLabel excelLabel;
+    private JLabel dbLabel;
+    private JLabel browser;
+    private JRadioButton ie;
+    private JRadioButton chrome;
+    private JLabel startDateLabel;
+    private JLabel endDateLabel;
+    private JTextField startDate;
+    private JTextField endDate;
+    gui g;
 	/**
 	 * Create the application.
 	 */
-	public rerateAutomationGui() {
+	public rerateAutomationGui( gui g) {
+		this.g=g;
 		initialize();
-		 MouseListener ml = new MouseAdapter()
-		  {
-		              
-		      @Override
-		      public void mouseEntered(MouseEvent e)
-		      {
-		         
-		          mouseLabel = (JLabel)e.getSource();
-
-		          	  if (mouseLabel==lblNewLabel_1) {     
-		        	  mouseLabelStringDark=optionsDark;
-		        	  mouseLabelStringLight=optionsLight;
-		          	  }       	  
-		        	  else if (mouseLabel==lblNewLabel_2) {	        		  
-		        		  mouseLabelStringDark=dbDark;
-			        	  mouseLabelStringLight=dbLight;	        		  
-		        	  }
-		        	  else if (mouseLabel==lblNewLabel_3) {	        		  
-		        		  mouseLabelStringDark=linkDark;
-			        	  mouseLabelStringLight=linkLight;			     	  
-		        	  }		      	        	  
-		        	  else if (mouseLabel==lblNewLabel_4) {
-		        		  mouseLabelStringDark=infoDark;
-			        	  mouseLabelStringLight=infoLight;		        		  
-		        	  }
-		        	  else if (mouseLabel==lblNewLabel_12) {	        		  
-		        		  mouseLabelStringDark=backPic;
-			        	  mouseLabelStringLight=backPicHighlight;	        		  
-		        	  }
-			          
-			          try {
-			              mouseImage = ImageIO.read(new File(imagePath+"\\assets\\"+mouseLabelStringLight));
-			               } catch (IOException ee) {
-			                  ee.printStackTrace();
-			              }
-			          mouseDimg = mouseImage.getScaledInstance(mouseLabel.getWidth(), mouseLabel.getHeight(),
-			          Image.SCALE_SMOOTH);
-			          mouseimageIcon = new ImageIcon(mouseDimg);
-			          mouseLabel.setIcon(mouseimageIcon);  
-			      }
-
-			      @Override
-			      public void mouseExited(MouseEvent e)
-			      {
-			        mouseLabel = (JLabel)e.getSource();
-			          try {
-			              mouseImage = ImageIO.read(new File(imagePath+"\\assets\\"+mouseLabelStringDark));
-			               } catch (IOException ee) {
-			                  ee.printStackTrace();
-			              }
-			          mouseDimg = mouseImage.getScaledInstance(mouseLabel.getWidth(), mouseLabel.getHeight(),
-			          Image.SCALE_SMOOTH);
-			          mouseimageIcon = new ImageIcon(mouseDimg);
-			          mouseLabel.setIcon(mouseimageIcon);  
-			      }
-	};
-			
-				  lblNewLabel_1.addMouseListener( ml );
-				  lblNewLabel_2.addMouseListener( ml );
-				  lblNewLabel_3.addMouseListener( ml );
-				  lblNewLabel_4.addMouseListener( ml );
-				  lblNewLabel_12.addMouseListener( ml );
+		
 	}
 
 	
@@ -175,77 +58,131 @@ public class rerateAutomationGui {
 	 */
 	private void initialize() {
 
-		 homePath=System.getProperty("user.dir");
-	      if (System.getProperty("user.dir").indexOf("dist")==-1){
-	    	  imagePath=System.getProperty("user.dir");
-	        }
-	      else {
-	    	  imagePath=homePath.substring(0,homePath.length()-5);
-	        }
-	      
-	      libDirectoryDB=homePath+"\\libs+\\DB";
-	      libDirectoryExcel=homePath+"\\libs+\\Excel";
-	      libDirectorySelenium=homePath+"\\libs+\\Selenium";
-	      
-	      System.out.println(homePath);
-	      System.out.println(imagePath);
+		
 	        
 	        
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1005, 718);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		
+		
+		
+		excelLabel = new JLabel("New label");
+		excelLabel.setBounds(300, 350, 78, 56);
+	
+		dbLabel = new JLabel("New label");
+		dbLabel.setBounds(375, 350, 78, 56);
+
+		executeLabel = new JLabel("New label");
+		executeLabel.setBounds(375, 515, 284, 41);
+		
+		excelLabel.setName("excel");
+		dbLabel.setName("db");
+		executeLabel.setName("execute");
+		
+		
+		lblRerateAutomation = new JLabel("Rerate Automation");
+		lblRerateAutomation.setForeground(Color.WHITE);
+		lblRerateAutomation.setFont(new Font("Segoe UI", Font.BOLD, 42));
+		lblRerateAutomation.setBounds(353, 196, 386, 64);
+		frame.getContentPane().add(lblRerateAutomation);
 		frame.getContentPane().setLayout(null);
 		
 		
+		label = new JLabel("Level:");
+		label.setBounds(200, 281, 78, 31);
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		frame.getContentPane().add(label);
 		
-		lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBounds(0, 0, 112, 64);
-		frame.getContentPane().add(lblNewLabel_1);
+		lblSource = new JLabel("Source:");
+		lblSource.setForeground(Color.WHITE);
+		lblSource.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		lblSource.setBounds(192, 355, 99, 31);
+		frame.getContentPane().add(lblSource);
 		
-		lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setBounds(0, 67, 112, 64);
-		frame.getContentPane().add(lblNewLabel_2);
+		radioButton = new JRadioButton("L2");
+		radioButton.setOpaque(false);
+		radioButton.setForeground(Color.WHITE);
+		radioButton.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		radioButton.setBounds(275, 281, 69, 29);
+		frame.getContentPane().add(radioButton);
 		
-		lblNewLabel_3 = new JLabel("New label");
-		lblNewLabel_3.setBounds(0, 135, 112, 69);
-		frame.getContentPane().add(lblNewLabel_3);
+		radioButton_1 = new JRadioButton("L3");
+		radioButton_1.setOpaque(false);
+		radioButton_1.setForeground(Color.WHITE);
+		radioButton_1.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		radioButton_1.setBounds(350, 282, 69, 29);
+		frame.getContentPane().add(radioButton_1);
 		
-		lblNewLabel_4 = new JLabel("New label");
-		lblNewLabel_4.setBounds(0, 203, 112, 75);
-		frame.getContentPane().add(lblNewLabel_4);
+		label_2 = new JLabel("Compatible Mode: ");
+		label_2.setForeground(Color.WHITE);
+		label_2.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		label_2.setBounds(192, 444, 212, 29);
+		frame.getContentPane().add(label_2);
 		
-		lblNewLabel_12 = new JLabel("New label");
-		lblNewLabel_12.setBounds(0, 587, 99, 75);
-		frame.getContentPane().add(lblNewLabel_12);
+		JCheckBox checkBox = new JCheckBox("");
+		checkBox.setOpaque(false);
+		checkBox.setBounds(392, 444, 27, 29);
+		frame.getContentPane().add(checkBox);
+		
+		browser = new JLabel("Browser:");
+		browser.setForeground(Color.WHITE);
+		browser.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		browser.setBounds(501, 444, 212, 29);
+		frame.getContentPane().add(browser);
+		
+		ie = new JRadioButton("IE");
+		ie.setOpaque(false);
+		ie.setForeground(Color.WHITE);
+		ie.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		ie.setBounds(612, 444, 69, 29);
+		frame.getContentPane().add(ie);
+		
+		chrome = new JRadioButton("Chrome");
+		chrome.setOpaque(false);
+		chrome.setForeground(Color.WHITE);
+		chrome.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		chrome.setBounds(671, 445, 150, 29);
+		frame.getContentPane().add(chrome);
+		
+		startDateLabel = new JLabel("Start Date:");
+		startDateLabel.setForeground(Color.WHITE);
+		startDateLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		startDateLabel.setBounds(499, 276, 150, 31);
+		frame.getContentPane().add(startDateLabel);
+		
+		endDateLabel = new JLabel("End Date:");
+		endDateLabel.setForeground(Color.WHITE);
+		endDateLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		endDateLabel.setBounds(499, 355, 113, 31);
+		frame.getContentPane().add(endDateLabel);
+		
+		startDate = new JTextField();
+		startDate.setBounds(617, 276, 170, 31);
+		frame.getContentPane().add(startDate);
+		startDate.setColumns(10);
+		
+		endDate = new JTextField();
+		endDate.setColumns(10);
+		endDate.setBounds(617, 355, 170, 31);
+		frame.getContentPane().add(endDate);
+		
+		guiBase gb = new guiBase();
+		mouse m = new mouse(gb,g);
+		m.setFrame(frame);
+		m.setupBaseIcons();
+		m.addExcel(excelLabel);
+		m.addDb(dbLabel);
+		m.addExecute(executeLabel);
+		m.setupBackground();
 
-		addIcon(lblNewLabel_1,optionsDark);
-		addIcon(lblNewLabel_2,dbDark);
-		addIcon(lblNewLabel_3,linkDark);
-		addIcon(lblNewLabel_4,infoDark);
-		addIcon(lblNewLabel_12,backPic);
+	    frame.setVisible(true);
 		
-		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(0, 0, 983, 662);
-		frame.getContentPane().add(lblNewLabel);
-		addIcon(lblNewLabel,"default_template.png");
-		
-		frame.setVisible(true);
 		
 	}
 
-	public void addIcon(JLabel jlabel,String tempPic) {
-		
-		try {
-		    img = ImageIO.read(new File(imagePath+"\\assets\\"+tempPic));
-		} catch (IOException e) {
-		    
-		    e.printStackTrace();
-		}
-			dimg = img.getScaledInstance(jlabel.getWidth(), jlabel.getHeight(),
-		        Image.SCALE_SMOOTH);
-		  imageIcon = new ImageIcon(dimg);
-		  jlabel.setIcon(imageIcon);
-	}
+	
 	
 }

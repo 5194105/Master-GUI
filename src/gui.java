@@ -44,20 +44,24 @@ public class gui {
      String linkLight="darklink.png";
      String infoLight="darkinfo.png";
      String selectionBar="selectionbar.png";
-     String rebillPic="rebill.png";
-     String reratePic="rerate.png";
-     String instantPic="instant.png";
-     String datapopPic="datapop.png";
-     String udPic="ud.png";
-     String preratePic="prerate.png";
-     String rebillPicHighlight="rebillHighlight.png";
-     String reratePicHighlight="rerateHighlight.png";
-     String instantPicHighlight="instantHighlight.png";
-     String datapopPicHighlight="datapopHighlight.png";
-     String udPicHighlight="udHighlight.png";
-     String preratePicHighlight="prerateHighlight.png";
-     String backPic="back.png";
-     String backPicHighlight="darkBack.png";
+     String backgroundPic="default_template.png";
+     
+     
+     String rebillDefault="rebill.png";
+     String rerateDefault="rerate.png";
+     String instantDefault="instant.png";
+     String datapopDefault="datapop.png";
+     String udDefault="ud.png";
+     String prerateDefault="prerate.png";
+     
+     String rebillAlt="rebillHighlight.png";
+     String rerateAlt="rerateHighlight.png";
+     String instantAlt="instantHighlight.png";
+     String datapopAlt="datapopHighlight.png";
+     String udAlt="udHighlight.png";
+     String prerateAlt="prerateHighlight.png";
+     
+     
      
      String libDirectoryDB,libDirectoryExcel,libDirectorySelenium;
      
@@ -88,16 +92,12 @@ public class gui {
      
      config c;
 	
-	private JFrame frame;
-	private JLabel lblNewLabel_5;
-	private JLabel lblNewLabel_6;
-	private JLabel lblNewLabel_7;
-	private JLabel lblNewLabel_8;
-	private JLabel lblNewLabel_9;
-	private JLabel lblNewLabel_10;
-	private JLabel lblNewLabel_11;
-	private JLabel lblNewLabel_12;
+	JFrame frame;
 
+
+	
+	JLabel rebillGUI,rerateGUI,prerateGUI,instantInvoiceGUI,udAutomationGUI,datapopGUI,background;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -119,143 +119,7 @@ public class gui {
 	 */
 	public gui() {
 		initialize();
-		setUp();
-
-		  MouseListener ml = new MouseAdapter()
-		  {
-		              
-		      @Override
-		      public void mouseEntered(MouseEvent e)
-		      {
-		         
-		          mouseLabel = (JLabel)e.getSource();
-
-		          	  if (mouseLabel==lblNewLabel_1) {     
-		        	  mouseLabelStringDark=optionsDark;
-		        	  mouseLabelStringLight=optionsLight;
-		          	  }       	  
-		        	  else if (mouseLabel==lblNewLabel_2) {	        		  
-		        		  mouseLabelStringDark=dbDark;
-			        	  mouseLabelStringLight=dbLight;	        		  
-		        	  }
-		        	  else if (mouseLabel==lblNewLabel_3) {	        		  
-		        		  mouseLabelStringDark=linkDark;
-			        	  mouseLabelStringLight=linkLight;			     	  
-		        	  }		      	        	  
-		        	  else if (mouseLabel==lblNewLabel_4) {
-		        		  mouseLabelStringDark=infoDark;
-			        	  mouseLabelStringLight=infoLight;		        		  
-		        	  }
-		          	  if (mouseLabel==lblNewLabel_6) {     
-		        	  mouseLabelStringDark=rebillPic;
-		        	  mouseLabelStringLight=rebillPicHighlight;
-		        	  
-		          	  }       	  
-		        	  else if (mouseLabel==lblNewLabel_7) {	        		  
-		        		  mouseLabelStringDark=reratePic;
-			        	  mouseLabelStringLight=reratePicHighlight;	        		  
-		        	  }
-		        	  else if (mouseLabel==lblNewLabel_8) {	        		  
-		        		  mouseLabelStringDark=preratePic;
-			        	  mouseLabelStringLight=preratePicHighlight;			     	  
-		        	  }		      	        	  
-		        	  else if (mouseLabel==lblNewLabel_9) {
-		        		  mouseLabelStringDark=instantPic;
-			        	  mouseLabelStringLight=instantPicHighlight;		        		  
-		        	  }
-		        	  else if (mouseLabel==lblNewLabel_10) {     
-		        	  mouseLabelStringDark=udPic;
-		        	  mouseLabelStringLight=udPicHighlight;
-		        	  obj=ud;
-		          	  }       	  
-		        	  else if (mouseLabel==lblNewLabel_11) {	        		  
-		        		  mouseLabelStringDark=datapopPic;
-			        	  mouseLabelStringLight=datapopPicHighlight;	        		  
-		        	  }
-		        	      
-		        	  else if (mouseLabel==lblNewLabel_12) {	        		  
-		        		  mouseLabelStringDark=backPic;
-			        	  mouseLabelStringLight=backPicHighlight;	        		  
-		        	  }
-		        	
-		          
-		          try {
-		              mouseImage = ImageIO.read(new File(imagePath+"\\assets\\"+mouseLabelStringLight));
-		               } catch (IOException ee) {
-		                  ee.printStackTrace();
-		              }
-		          mouseDimg = mouseImage.getScaledInstance(mouseLabel.getWidth(), mouseLabel.getHeight(),
-		          Image.SCALE_SMOOTH);
-		          mouseimageIcon = new ImageIcon(mouseDimg);
-		          mouseLabel.setIcon(mouseimageIcon);  
-		      }
-
-		      @Override
-		      public void mouseExited(MouseEvent e)
-		      {
-		        mouseLabel = (JLabel)e.getSource();
-		          try {
-		              mouseImage = ImageIO.read(new File(imagePath+"\\assets\\"+mouseLabelStringDark));
-		               } catch (IOException ee) {
-		                  ee.printStackTrace();
-		              }
-		          mouseDimg = mouseImage.getScaledInstance(mouseLabel.getWidth(), mouseLabel.getHeight(),
-		          Image.SCALE_SMOOTH);
-		          mouseimageIcon = new ImageIcon(mouseDimg);
-		          mouseLabel.setIcon(mouseimageIcon);  
-		      }
-		
-		  
-		  
-		    @Override
-		     public void mouseClicked(MouseEvent e)
-		    {
-				try {
-					
-					
-					 if (mouseLabel==lblNewLabel_6) {     
-			        	  rebill = new rebillAutomationGui();
-			          	  }       	  
-			        	  else if (mouseLabel==lblNewLabel_7) {	        		  
-			        		  rerate = new rerateAutomationGui();
-			        	  }
-			        	  else if (mouseLabel==lblNewLabel_8) {	        		  
-			        		  prerate = new prerateAutomationGui();
-			        	  }		      	        	  
-			        	  else if (mouseLabel==lblNewLabel_9) {
-			        		  instantInvoice= new instantInvoiceAutomationGui();
-			        	  }
-			        	  else if (mouseLabel==lblNewLabel_10) { 
-			        	  ud = new udAutomation();
-			        	//  ud.frame.setVisible(true);
-			          	  }       	  
-			        	  else if (mouseLabel==lblNewLabel_11) {	   
-			        		  datapop= new datapopAutomationGui();
-			        	  }
-
-						} catch (Exception ee) {
-							ee.printStackTrace();
-					}
-		    	}
-		  	};
-		
-		
-		  lblNewLabel_1.addMouseListener( ml );
-		  lblNewLabel_2.addMouseListener( ml );
-		  lblNewLabel_3.addMouseListener( ml );
-		  lblNewLabel_4.addMouseListener( ml );
-		  
-		  lblNewLabel_6.addMouseListener( ml );
-		  lblNewLabel_7.addMouseListener( ml );
-		  lblNewLabel_8.addMouseListener( ml );
-		  lblNewLabel_9.addMouseListener( ml );
-		  lblNewLabel_10.addMouseListener( ml );
-		  lblNewLabel_11.addMouseListener( ml );
-		  
-		  lblNewLabel_12.addMouseListener( ml );
-		  
-		  	  
-		  
+		setUp();  
 		  	
 	}
 
@@ -284,95 +148,53 @@ public class gui {
 		frame.setBounds(100, 100, 1005, 718);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		lblNewLabel_12 = new JLabel("New label");
-		lblNewLabel_12.setBounds(0, 587, 99, 75);
-		frame.getContentPane().add(lblNewLabel_12);
-		
-		
-		
-		lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBounds(0, 0, 112, 64);
-		frame.getContentPane().add(lblNewLabel_1);
-		
-		lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setBounds(0, 67, 112, 64);
-		frame.getContentPane().add(lblNewLabel_2);
-		
-		lblNewLabel_3 = new JLabel("New label");
-		lblNewLabel_3.setBounds(0, 135, 112, 69);
-		frame.getContentPane().add(lblNewLabel_3);
-		
-		lblNewLabel_4 = new JLabel("New label");
-		lblNewLabel_4.setBounds(0, 203, 112, 75);
-		frame.getContentPane().add(lblNewLabel_4);
-		
-		lblNewLabel_5 = new JLabel("New label");
-		lblNewLabel_5.setBounds(320, 231, 442, 47);
-		frame.getContentPane().add(lblNewLabel_5);
+		frame.setName("menu");				
+						
+		rebillGUI = new JLabel("New label");
+		rebillGUI.setBounds(171, 309, 338, 64);
+		rebillGUI.setName("rebill");
+
 				
-				lblNewLabel_6 = new JLabel("New label");
-				lblNewLabel_6.setBounds(171, 309, 338, 64);
-				frame.getContentPane().add(lblNewLabel_6);
+		rerateGUI = new JLabel("New label");
+		rerateGUI.setBounds(171, 389, 338, 58);
+		rerateGUI.setName("rerate");
+
+		prerateGUI = new JLabel("New label");
+		prerateGUI.setBounds(171, 463, 338, 54);
+		prerateGUI.setName("prerate");
+
+		instantInvoiceGUI = new JLabel("New label");
+		instantInvoiceGUI.setBounds(561, 309, 338, 64);
+		instantInvoiceGUI.setName("instant");
+				
+		udAutomationGUI = new JLabel("New label");
+		udAutomationGUI.setBounds(561, 389, 338, 58);
+		udAutomationGUI.setName("ud");
+				
+		datapopGUI = new JLabel("New label");
+		datapopGUI.setBounds(561, 463, 338, 54);
+		datapopGUI.setName("datapop");
 						
-						
-						lblNewLabel_7 = new JLabel("New label");
-						lblNewLabel_7.setBounds(171, 389, 338, 58);
-						frame.getContentPane().add(lblNewLabel_7);
-						
-						lblNewLabel_8 = new JLabel("New label");
-						lblNewLabel_8.setBounds(171, 463, 338, 54);
-						frame.getContentPane().add(lblNewLabel_8);
-						
-						lblNewLabel_9 = new JLabel("New label");
-						lblNewLabel_9.setBounds(561, 309, 338, 64);
-						frame.getContentPane().add(lblNewLabel_9);
-						
-						lblNewLabel_10 = new JLabel("New label");
-						lblNewLabel_10.setBounds(561, 389, 338, 58);
-						frame.getContentPane().add(lblNewLabel_10);
-						
-						lblNewLabel_11 = new JLabel("New label");
-						lblNewLabel_11.setBounds(561, 463, 338, 54);
-						frame.getContentPane().add(lblNewLabel_11);
-						
-						JLabel lblNewLabel = new JLabel("New label");
-						lblNewLabel.setBounds(0, 0, 983, 662);
-						frame.getContentPane().add(lblNewLabel);
-							
-						
-						addIcon(lblNewLabel_1,optionsDark);
-						addIcon(lblNewLabel_2,dbDark);
-						addIcon(lblNewLabel_3,linkDark);
-						addIcon(lblNewLabel_4,infoDark);
-						addIcon(lblNewLabel_5,selectionBar);
-						addIcon(lblNewLabel_6,rebillPic);
-						addIcon(lblNewLabel_7,reratePic);
-						addIcon(lblNewLabel_8,preratePic);
-						addIcon(lblNewLabel_9,instantPic);
-						addIcon(lblNewLabel_10,udPic);
-						addIcon(lblNewLabel_11,datapopPic);
-						addIcon(lblNewLabel_12,backPic);
-						addIcon(lblNewLabel,"default_template.png");
+								
+		guiBase gb = new guiBase();
+		mouse m = new mouse(gb,this);
+		m.setFrame(frame);
+		m.setupBaseIcons();
 		
+		m.addIconWithMouse(rebillGUI,"rebill",rebillDefault,rebillAlt);
+		m.addIconWithMouse(rerateGUI,"rerate",rerateDefault,rerateAlt);
+		m.addIconWithMouse(prerateGUI,"prerate",prerateDefault,prerateAlt);
+		m.addIconWithMouse(instantInvoiceGUI,"instant",instantDefault,instantAlt);
+		m.addIconWithMouse(udAutomationGUI,"ud",udDefault,udAlt);
+		m.addIconWithMouse(datapopGUI,"datapop",datapopDefault,datapopAlt);	
 		
+		m.setupBackground();
+	
+	    frame.setVisible(true);
 
 	}
 	
-	public void addIcon(JLabel jlabel,String tempPic) {
-		
-		try {
-		    img = ImageIO.read(new File(imagePath+"\\assets\\"+tempPic));
-		} catch (IOException e) {
-		    
-		    e.printStackTrace();
-		}
-			dimg = img.getScaledInstance(jlabel.getWidth(), jlabel.getHeight(),
-		        Image.SCALE_SMOOTH);
-		  imageIcon = new ImageIcon(dimg);
-		  jlabel.setIcon(imageIcon);
-	}
-	
+
 	
 	public void setUp() {
 		
