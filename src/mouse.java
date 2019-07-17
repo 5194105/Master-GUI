@@ -121,9 +121,10 @@ public class mouse {
 	guiBase gb;
 	gui g;
 	
-	public mouse(guiBase gb,gui g) {
+	public mouse(guiBase gb,gui g,config c) {
 		this.g=g;
 		this.gb=gb;
+		this.c=c;
 		 
 		homePath=System.getProperty("user.dir");
 	      if (System.getProperty("user.dir").indexOf("dist")==-1){
@@ -246,6 +247,11 @@ public void addExecute(JLabel jlabel) {
 		jl.addMouseListener( ml );
 	}
 	
+	
+	public config getConfig() {
+		
+		return c;
+	}
 
 	
 	
@@ -320,7 +326,7 @@ public void setupMouseListener() {
 			    			instantInvoice = new instantInvoiceAutomationGui(g);
 			    		}
 			    		if (mouseLabel.getName().equals("ud")) {
-			    			ud= new udAutomation(g);
+			    			ud= new udAutomation(g,c);
 			    		}
 			    		if (mouseLabel.getName().equals("datapop")) {
 			    			datapop = new datapopAutomationGui(g);
@@ -351,8 +357,8 @@ public void setupMouseListener() {
 			    		if (mouseLabel.getName().equals("db")) {}
 			    		
 			    		//Execute
-			    		
-			    		if (mouseLabel.getName().equals("execute")) {}
+			    			if (mouseLabel.getName().equals("execute")) {}
+			    	
 			    		
 			    		
 			    		
@@ -427,7 +433,11 @@ public void setupMouseListener() {
 				    		
 				    		//Execute
 				    		
-				    		if (mouseLabel.getName().equals("execute")) {}
+				    		if (mouseLabel.getName().equals("execute")) {
+				    			
+				    			System.out.println("DO UD PROGRAM..... MEANS CALL YOUR UD CLASS LOGIC");
+				    			
+				    		}
 				    		
 				    		
 				    		

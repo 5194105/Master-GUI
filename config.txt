@@ -14,3 +14,5 @@ Instant Invoice L2 URL=https://testsso.secure.fedex.com/instant-invoicing-l2
 Instant Invoice L3 URL=https://testsso.secure.fedex.com/l3/instant-invoicing
 Rebill Result Table Name=rebill_results
 RTM DB Table Name=batch_shipping_results
+UD Username=f5194105
+UD Password=Online74

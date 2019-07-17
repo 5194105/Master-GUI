@@ -17,6 +17,7 @@ public class config {
     String instantInvoiceL2URL,instantInvoiceL3URL;
     String rebillResultTable;
     String rtmBatchShippingResults;
+    String udUsername,udPassword;
 	
 	public config() {
 		
@@ -213,7 +214,25 @@ public class config {
 		
 		return rtmBatchShippingResults;
 		}
+
 	
+	public void setUdUsername(String udUsername) {
+		
+		this.udUsername=udUsername;
+		}
+	public void  setUdPassword(String udPassword)  {
+		
+		this.udPassword=udPassword;
+		}
+	
+	public String getUdUsername() {
+		
+		return udUsername;
+		}
+	public String getUdPassword() {
+		
+		return udPassword;
+		}
 	
 	
 	

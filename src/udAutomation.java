@@ -42,6 +42,8 @@ public class udAutomation {
 	 private JLabel executeLabel;
 	 private JLabel lblSource;
 	 gui g;
+	 
+	 config c;
 
 	/**
 	 * Launch the application.
@@ -51,8 +53,9 @@ public class udAutomation {
 	/**
 	 * Create the application.
 	 */
-	public udAutomation( gui g) {
+	public udAutomation( gui g,config c) {
 		this.g=g;
+		this.c=c;
 		initialize();
 
 	}
@@ -160,8 +163,12 @@ public class udAutomation {
 		lblSource.setBounds(327, 475, 99, 31);
 		frame.getContentPane().add(lblSource);
 	
+		
+		//Making built in incons... here you no longer need to set picture or filechooser. You just make a label and 
+		//give it to addExcel() method.
 		excelLabel = new JLabel("New label");
 		excelLabel.setBounds(400, 478, 78, 56);
+		
 	
 		dbLabel = new JLabel("New label");
 		dbLabel.setBounds(475, 478, 78, 56);
@@ -173,17 +180,31 @@ public class udAutomation {
 		dbLabel.setName("db");
 		executeLabel.setName("execute");
 		
+		
+		//This will load the data that is common for all GUI screens (the background, side bar)
 		guiBase gb = new guiBase();
-		mouse m = new mouse(gb,g);
+		
+		//This will load the settings for mouse actions. If you want to add fuctionality to your GUI when clicking you
+		//modify this file so it can be used across all GUIs
+		mouse m = new mouse(gb,g,c);
+		
+		//Im giving this GUI into mouse options.
 		m.setFrame(frame);
+		//Im loading the JLabels that is common across all GUIS
 		m.setupBaseIcons();
+		//Im giving the excel,database, and execute buttons. This will load the Pics as well as some built in functionality.
 		m.addExcel(excelLabel);
 		m.addDb(dbLabel);
 		m.addExecute(executeLabel);
+		//This loads the background.
 		m.setupBackground();
 
-		
+		//Enables GUI to be visible.
 		frame.setVisible(true);
+		
+		
+		System.out.println("USERNAME: "+c.getUdUsername());
+		System.out.println("PasswordE: "+c.getUdPassword());
 		
 	
 	

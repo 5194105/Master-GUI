@@ -93,7 +93,8 @@ public class gui {
      config c;
 	
 	JFrame frame;
-
+	
+	String udUsername,udPassword;
 
 	
 	JLabel rebillGUI,rerateGUI,prerateGUI,instantInvoiceGUI,udAutomationGUI,datapopGUI,background;
@@ -118,8 +119,9 @@ public class gui {
 	 * Create the application.
 	 */
 	public gui() {
-		initialize();
 		setUp();  
+		initialize();
+		
 		  	
 	}
 
@@ -177,7 +179,7 @@ public class gui {
 						
 								
 		guiBase gb = new guiBase();
-		mouse m = new mouse(gb,this);
+		mouse m = new mouse(gb,this,c);
 		m.setFrame(frame);
 		m.setupBaseIcons();
 		
@@ -195,11 +197,12 @@ public class gui {
 	}
 	
 
-	
+	//Sets up config file
 	public void setUp() {
 		
 		
-		
+		//Gets path of config file in project directory. this is to get it wether you run from jar file
+		//or from eclipse.
 	    tempFile = new File(System.getProperty("user.dir")+"\\config.txt"); 
         if (tempFile.exists()==true){
             configFile=tempFile;
@@ -208,6 +211,8 @@ public class gui {
              configFile=new File(new File(tempFile.getParent()).getParent()+"\\config.txt");
         }
 
+        
+        //Sets up to read from config file
         try {
         	br = new BufferedReader(new FileReader(configFile));
         } catch (FileNotFoundException ex) {
@@ -217,13 +222,19 @@ public class gui {
           String st;
           int counter=0;
           String tempString="";
+          
+     //While line is not null     
      try {
          while ((st = br.readLine()) != null) {
              counter++;
+             
+             //Once it sees the '=' symbol it will save the rest of line to a variable
              tempString=st.substring(st.indexOf("=")+1);
              System.out.println(tempString);
              System.out.println(st);
              System.out.println("");
+             
+             //case statement is each line. first line GTM DB NAME so i saved as GtmDBName variable
              switch(counter){
                  case 1 :
                      GtmDbName=tempString;
@@ -257,7 +268,10 @@ public class gui {
                 	 rebillResultTable=tempString;
                  case 16 :
                 	 rtmBatchShippingResults=tempString;
-                	 
+                 case 17 :
+                	 udUsername=tempString;
+                 case 18 :
+                	 udPassword=tempString;
                 	 }
          }
      } catch (IOException ex) {
@@ -277,6 +291,8 @@ public class gui {
 		String ieDriverPath=homePath+"\\drivers\\IEDriverServer.exe";
 		//String firefoxPath="";
 		
+		
+		//Set up object so that we can reference this data throughout the program
 		c = new config();
 		
 	    c.setGtmDbName( GtmDbName);
@@ -299,6 +315,8 @@ public class gui {
 		c.setIeProperty(ieSetProperty);
 		c.setChromePath(chromePath);
 		c.setIeDriverPath(ieDriverPath);
+		c.setUdUsername(udUsername);
+		c.setUdPassword(udPassword);
 
 		
 
