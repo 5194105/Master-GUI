@@ -1,3 +1,4 @@
+package guis;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Window;
@@ -16,6 +17,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import org.openqa.selenium.WebDriver;
+
+import configuration.config;
+import configuration.mouse;
 
 public class gui {
 
@@ -179,7 +183,7 @@ public class gui {
 						
 								
 		guiBase gb = new guiBase();
-		mouse m = new mouse(gb,this,c);
+		mouse m = new mouse(gb,this,c,this);
 		m.setFrame(frame);
 		m.setupBaseIcons();
 		

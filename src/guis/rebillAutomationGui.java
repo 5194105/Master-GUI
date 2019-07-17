@@ -1,3 +1,4 @@
+package guis;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -14,12 +15,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import org.openqa.selenium.WebDriver;
+
+import configuration.config;
+import configuration.mouse;
+
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
 
-public class rebillAutomationGui extends guiSuper {
+public class rebillAutomationGui {
 
 	private JFrame frame;
 
@@ -36,8 +41,8 @@ public class rebillAutomationGui extends guiSuper {
      private JLabel label;
      private JLabel lblSource;
      private JLabel executeLabel;
-     private JRadioButton radioButton;
-     private JRadioButton radioButton_1;
+     private JRadioButton l2RadioButton;
+     private JRadioButton l3RadioButton;
      private JLabel label_2;
      private JLabel lblRebillAutomation;
      private JLabel excelLabel;
@@ -54,8 +59,9 @@ public class rebillAutomationGui extends guiSuper {
 	/**
 	 * Create the application.
 	 */
-	public rebillAutomationGui(gui g) {
+	public rebillAutomationGui(gui g,config c) {
 		this.g=g;
+		this.c=c;
 		g.frame.setVisible(false);
 		initialize();
 		
@@ -103,19 +109,22 @@ public class rebillAutomationGui extends guiSuper {
 		lblSource.setBounds(413, 344, 99, 31);
 		frame.getContentPane().add(lblSource);
 		
-		radioButton = new JRadioButton("L2");
-		radioButton.setOpaque(false);
-		radioButton.setForeground(Color.WHITE);
-		radioButton.setFont(new Font("Segoe UI", Font.BOLD, 22));
-		radioButton.setBounds(512, 281, 69, 29);
-		frame.getContentPane().add(radioButton);
+		l2RadioButton = new JRadioButton("L2");
+		l2RadioButton.setOpaque(false);
+		l2RadioButton.setForeground(Color.WHITE);
+		l2RadioButton.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		l2RadioButton.setBounds(512, 281, 69, 29);
+		l2RadioButton.setName("l2");
+		frame.getContentPane().add(l2RadioButton);
 		
-		radioButton_1 = new JRadioButton("L3");
-		radioButton_1.setOpaque(false);
-		radioButton_1.setForeground(Color.WHITE);
-		radioButton_1.setFont(new Font("Segoe UI", Font.BOLD, 22));
-		radioButton_1.setBounds(588, 282, 69, 29);
-		frame.getContentPane().add(radioButton_1);
+		
+		l3RadioButton = new JRadioButton("L3");
+		l3RadioButton.setOpaque(false);
+		l3RadioButton.setForeground(Color.WHITE);
+		l3RadioButton.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		l3RadioButton.setBounds(588, 282, 69, 29);
+		l3RadioButton.setName("l3");
+		frame.getContentPane().add(l3RadioButton);
 		
 		label_2 = new JLabel("Compatible Mode: ");
 		label_2.setForeground(Color.WHITE);
@@ -128,14 +137,19 @@ public class rebillAutomationGui extends guiSuper {
 		checkBox.setOpaque(false);
 		frame.getContentPane().add(checkBox);
 		
+	
+		
+		
 		guiBase gb = new guiBase();
-		mouse m = new mouse(gb,g);
+		mouse m = new mouse(gb,g,c,this);
 		m.setFrame(frame);
 		m.setupBaseIcons();
 		m.addExcel(excelLabel);
 		m.addDb(dbLabel);
 		m.addExecute(executeLabel);
 		m.setupBackground();
+		l2RadioButton.addMouseListener(m.m3);
+		l3RadioButton.addMouseListener(m.m3);
 
 	    frame.setVisible(true);
 

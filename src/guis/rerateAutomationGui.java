@@ -1,3 +1,4 @@
+package guis;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -16,47 +17,56 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
-import javax.swing.JTextField;
 
 import org.openqa.selenium.WebDriver;
 
-public class prerateAutomationGui {
+import configuration.config;
+import configuration.mouse;
+
+import javax.swing.JTextField;
+
+public class rerateAutomationGui {
 
 	private JFrame frame;
-	    private JLabel label;
-	    private JLabel lblSource;
-	    private JLabel executeLabel;
-	    private JRadioButton radioButton;
-	    private JRadioButton radioButton_1;
-	    private JLabel label_2;
-	    private JLabel lblRerateAutomation;
-	    private JLabel excelLabel;
-	    private JLabel dbLabel;
-	    private JLabel browser;
-	    private JRadioButton ie;
-	    private JRadioButton chrome;
-	    private JLabel startDateLabel;
-	    private JLabel endDateLabel;
-	    private JTextField startDate;
-	    private JTextField endDate;
-	    private JLabel lblPrerate;
-	    private JRadioButton rdbtnUpdate;
-	    private JRadioButton rdbtnHold;
-	    gui g;
-	
-	public prerateAutomationGui( gui g) {
+
+	 
+
+    private JLabel label;
+    private JLabel lblSource;
+    private JLabel executeLabel;
+    private JRadioButton radioButton;
+    private JRadioButton radioButton_1;
+    private JLabel label_2;
+    private JLabel lblRerateAutomation;
+    private JLabel excelLabel;
+    private JLabel dbLabel;
+    private JLabel browser;
+    private JRadioButton ie;
+    private JRadioButton chrome;
+    private JLabel startDateLabel;
+    private JLabel endDateLabel;
+    private JTextField startDate;
+    private JTextField endDate;
+    gui g;
+    config c;
+	/**
+	 * Create the application.
+	 */
+	public rerateAutomationGui( gui g,config c) {
 		this.g=g;
 		initialize();
 		
 	}
+
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-	       
+
 		
-        
-        
+	        
+	        
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1005, 718);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,7 +88,7 @@ public class prerateAutomationGui {
 		executeLabel.setName("execute");
 		
 		
-		lblRerateAutomation = new JLabel("Prerate Automation");
+		lblRerateAutomation = new JLabel("Rerate Automation");
 		lblRerateAutomation.setForeground(Color.WHITE);
 		lblRerateAutomation.setFont(new Font("Segoe UI", Font.BOLD, 42));
 		lblRerateAutomation.setBounds(353, 196, 386, 64);
@@ -126,21 +136,21 @@ public class prerateAutomationGui {
 		browser = new JLabel("Browser:");
 		browser.setForeground(Color.WHITE);
 		browser.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		browser.setBounds(499, 404, 212, 29);
+		browser.setBounds(501, 444, 212, 29);
 		frame.getContentPane().add(browser);
 		
 		ie = new JRadioButton("IE");
 		ie.setOpaque(false);
 		ie.setForeground(Color.WHITE);
 		ie.setFont(new Font("Segoe UI", Font.BOLD, 22));
-		ie.setBounds(610, 404, 69, 29);
+		ie.setBounds(612, 444, 69, 29);
 		frame.getContentPane().add(ie);
 		
 		chrome = new JRadioButton("Chrome");
 		chrome.setOpaque(false);
 		chrome.setForeground(Color.WHITE);
 		chrome.setFont(new Font("Segoe UI", Font.BOLD, 22));
-		chrome.setBounds(669, 405, 150, 29);
+		chrome.setBounds(671, 445, 150, 29);
 		frame.getContentPane().add(chrome);
 		
 		startDateLabel = new JLabel("Start Date:");
@@ -152,7 +162,7 @@ public class prerateAutomationGui {
 		endDateLabel = new JLabel("End Date:");
 		endDateLabel.setForeground(Color.WHITE);
 		endDateLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		endDateLabel.setBounds(499, 343, 113, 31);
+		endDateLabel.setBounds(499, 355, 113, 31);
 		frame.getContentPane().add(endDateLabel);
 		
 		startDate = new JTextField();
@@ -162,31 +172,11 @@ public class prerateAutomationGui {
 		
 		endDate = new JTextField();
 		endDate.setColumns(10);
-		endDate.setBounds(617, 340, 170, 31);
+		endDate.setBounds(617, 355, 170, 31);
 		frame.getContentPane().add(endDate);
 		
-		lblPrerate = new JLabel("Prerate:");
-		lblPrerate.setForeground(Color.WHITE);
-		lblPrerate.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		lblPrerate.setBounds(499, 453, 212, 29);
-		frame.getContentPane().add(lblPrerate);
-		
-		rdbtnUpdate = new JRadioButton("Update");
-		rdbtnUpdate.setOpaque(false);
-		rdbtnUpdate.setForeground(Color.WHITE);
-		rdbtnUpdate.setFont(new Font("Segoe UI", Font.BOLD, 22));
-		rdbtnUpdate.setBounds(610, 453, 120, 29);
-		frame.getContentPane().add(rdbtnUpdate);
-		
-		rdbtnHold = new JRadioButton("Hold");
-		rdbtnHold.setOpaque(false);
-		rdbtnHold.setForeground(Color.WHITE);
-		rdbtnHold.setFont(new Font("Segoe UI", Font.BOLD, 22));
-		rdbtnHold.setBounds(745, 454, 150, 29);
-		frame.getContentPane().add(rdbtnHold);
-		
 		guiBase gb = new guiBase();
-		mouse m = new mouse(gb,g);
+		mouse m = new mouse(gb,g,c,this);
 		m.setFrame(frame);
 		m.setupBaseIcons();
 		m.addExcel(excelLabel);
@@ -195,6 +185,10 @@ public class prerateAutomationGui {
 		m.setupBackground();
 
 	    frame.setVisible(true);
+		
+		
 	}
+
+	
 	
 }

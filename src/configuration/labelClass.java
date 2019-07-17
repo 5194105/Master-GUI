@@ -1,10 +1,11 @@
+package configuration;
 import javax.swing.JLabel;
+
 
 public class labelClass {
 	String name,defaultPic,altPic;
 	JLabel jl;
-	Object obj;
-	guiSuper superObj;
+
 	public labelClass(JLabel jl,String name,String defaultPic,String altPic) {
 		this.jl=jl;
 		this.name=name;
@@ -34,14 +35,5 @@ public class labelClass {
 	}
 	public void setJl(JLabel jl) {
 		this.jl = jl;
-	}
-	public void setObject(guiSuper newObj) {
-		//superObj = new (newObj().getClass());
-		//superObj = new (newObj.class);
-	
-	}
-	public Object getObject() {
-		
-		return obj;
 	}
 }

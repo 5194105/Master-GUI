@@ -1,3 +1,4 @@
+package configuration;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -14,6 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import org.openqa.selenium.WebDriver;
+
+import guis.guiBase;
 
 public class test {
 

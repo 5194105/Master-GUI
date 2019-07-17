@@ -1,3 +1,4 @@
+package configuration;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -18,6 +19,9 @@ public class config {
     String rebillResultTable;
     String rtmBatchShippingResults;
     String udUsername,udPassword;
+    String excelPath;
+    
+    Boolean compatible,level,source;
 	
 	public config() {
 		
@@ -235,6 +239,42 @@ public class config {
 		}
 	
 	
+	public void setLevel(Boolean level) {
+		
+		this.level=level;
+	}
+	public void setSource(Boolean source) {
+		
+		this.level=level;
+	}
+	public void setCompatibleMode(Boolean compatible) {
+		
+		this.level=level;
+	}
+	
+	public Boolean getLevel() {
+		
+		return level;
+	}
+	public Boolean getSource() {	
+		
+		return 	level;
+		}
+	public Boolean getCompatibleMode(Boolean compatible) {	
+		
+		return compatible;
+		}
+	
+	public void setExcelPath(String excelPath) {
+		
+		this.excelPath=excelPath;
+	}
+	
+	public String getExcelPath() {
+		
+		return excelPath;
+	}
+	
 	
 	
 	
@@ -273,10 +313,10 @@ public class config {
 		return taa1Con;
 	}
 	
-	public Connection getGtmRevToolsConnection(String dbCon,String username,String password) {
+	public Connection getGtmRevToolsConnection(String username,String password) {
 		
 		try {
-			gtmRevToolsCon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
+			gtmRevToolsCon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com",username,password);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

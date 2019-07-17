@@ -1,3 +1,7 @@
+package guis;
+
+
+
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -15,15 +19,18 @@ import javax.swing.JLabel;
 
 import org.openqa.selenium.WebDriver;
 
+import configuration.config;
+
 public class datapopAutomationGui {
 
 	private JFrame frame;
 	gui g;
+	config c;
 
 	/**
 	 * Create the application.
 	 */
-	public datapopAutomationGui(gui g) {
+	public datapopAutomationGui(gui g,config c) {
 		this.g=g;
 		initialize();
 	

@@ -1,3 +1,4 @@
+package guis;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -16,6 +17,10 @@ import java.awt.Font;
 import javax.swing.JRadioButton;
 import java.awt.SystemColor;
 import javax.swing.UIManager;
+
+import configuration.config;
+import configuration.mouse;
+
 import javax.swing.JTextField;
 
 public class udAutomation {
@@ -186,7 +191,7 @@ public class udAutomation {
 		
 		//This will load the settings for mouse actions. If you want to add fuctionality to your GUI when clicking you
 		//modify this file so it can be used across all GUIs
-		mouse m = new mouse(gb,g,c);
+		mouse m = new mouse(gb,g,c,this);
 		
 		//Im giving this GUI into mouse options.
 		m.setFrame(frame);

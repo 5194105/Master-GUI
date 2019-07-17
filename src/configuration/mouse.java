@@ -1,3 +1,4 @@
+package configuration;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -13,9 +14,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JRadioButton;
 
 import org.openqa.selenium.WebDriver;
 
+import guis.datapopAutomationGui;
+import guis.gui;
+import guis.guiBase;
+import guis.instantInvoiceAutomationGui;
+import guis.prerateAutomationGui;
+import guis.rebillAutomationGui;
+import guis.rerateAutomationGui;
+import guis.udAutomation;
+import rebill.rebillMain;
+import guis.guiBase;
 public class mouse {
 	
 	
@@ -51,6 +63,7 @@ public class mouse {
      Image mouseDimg = null;
      ImageIcon mouseimageIcon = null;
      JLabel mouseLabel;
+     JRadioButton mouseRadioButton;
      String mouseLabelStringName;
      String mouseLabelStringLight;
      String mouseLabelStringDark;
@@ -115,16 +128,21 @@ public class mouse {
      File tempFile,configFile;
      
      MouseListener ml,m2 ;
+
+	public MouseListener m3;
 	
 	JFrame frame;
 	
 	guiBase gb;
 	gui g;
+	Object obj;
 	
-	public mouse(guiBase gb,gui g,config c) {
+	
+	public mouse(guiBase gb,gui g,config c,Object obj) {
 		this.g=g;
 		this.gb=gb;
 		this.c=c;
+		this.obj=obj;
 		 
 		homePath=System.getProperty("user.dir");
 	      if (System.getProperty("user.dir").indexOf("dist")==-1){
@@ -314,22 +332,22 @@ public void setupMouseListener() {
 					System.out.println("LABEL NAME : "+mouseLabel.getName());
 					
 			    		if (mouseLabel.getName().equals("rebill")) {
-			    			rebill = new rebillAutomationGui(g);
+			    			rebill = new rebillAutomationGui(g,c);
 			    		}
 			    		if (mouseLabel.getName().equals("rerate")) {
-			    			rerate = new rerateAutomationGui(g);
+			    			rerate = new rerateAutomationGui(g,c);
 			    		}
 			    		if (mouseLabel.getName().equals("prerate")) {
-			    			prerate = new prerateAutomationGui(g);
+			    			prerate = new prerateAutomationGui(g,c);
 			    		}
 			    		if (mouseLabel.getName().equals("instant")) {
-			    			instantInvoice = new instantInvoiceAutomationGui(g);
+			    			instantInvoice = new instantInvoiceAutomationGui(g,c);
 			    		}
 			    		if (mouseLabel.getName().equals("ud")) {
 			    			ud= new udAutomation(g,c);
 			    		}
 			    		if (mouseLabel.getName().equals("datapop")) {
-			    			datapop = new datapopAutomationGui(g);
+			    			datapop = new datapopAutomationGui(g,c);
 			    		}
 			    		
 			    		
@@ -418,6 +436,8 @@ public void setupMouseListener() {
 				    		            file = jFileChooser1.getSelectedFile();
 				    		            // What to do with the file, e.g. display it in a TextArea
 				    		            filePath=file.getAbsolutePath();
+				    		            c.setExcelPath(filePath);
+				    		            c.setSource(false);
 
 				    		        } else {
 				    		            System.out.println("File access cancelled by user.");
@@ -429,13 +449,24 @@ public void setupMouseListener() {
 				    		
 				    		
 				    		//Database
-				    		if (mouseLabel.getName().equals("db")) {}
+				    		if (mouseLabel.getName().equals("db")) {
+				    			c.setSource(true);
+				    			
+				    		}
 				    		
 				    		//Execute
 				    		
 				    		if (mouseLabel.getName().equals("execute")) {
+				    			System.out.println(obj.getClass().getCanonicalName());
+				    			if (obj.getClass().getCanonicalName().equals("guis.rebillAutomationGui")) {
+				    			rebillMain rm = new rebillMain(c);
+				    			}
 				    			
-				    			System.out.println("DO UD PROGRAM..... MEANS CALL YOUR UD CLASS LOGIC");
+				    			if (obj.getClass().getCanonicalName().equals("guis.udAutomation")) {
+					    			//DO UD STUFF
+				    				//ud u = new ud(c);
+					    			}
+				    			
 				    			
 				    		}
 				    		
@@ -448,19 +479,46 @@ public void setupMouseListener() {
 						}
 			  		}
 				};
+				
+				
+				
+				
+				m3 = new MouseAdapter()
+				{
+					
+					
+				    @Override
+				    public void mouseEntered(MouseEvent e)
+				    {
+		
+				    }
+
+				    @Override
+				    public void mouseExited(MouseEvent e)
+				    {
+				     
+				    
+				       
+				    }
+
+
+				
+				  @Override
+				   public void mouseClicked(MouseEvent e)
+				  {
+					  mouseRadioButton = (JRadioButton)e.getSource();  
+					  
+					  if(mouseRadioButton.getName().contentEquals("l2"))
+					  
+						if (mouseRadioButton.isSelected()==true) {
+							System.out.println("TRUE");
+							c.setLevel(false);
+						}
+		
+				  		}
+					};
 			
 		
 		}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-}
+	}
 
