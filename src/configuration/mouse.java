@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
 import org.openqa.selenium.WebDriver;
@@ -86,9 +87,12 @@ public class mouse {
      String dbPic="database.png";
      String dbPicSelected="databaseSelected.png";
      String excelPic="excel.png";
-     String excelPicSelected="excelSelected.png";
+     String excelPicSelected="excelSelect.png";
      
+     Boolean excelBoolean=false;
+     Boolean databaseBoolean=false;
      
+     Boolean c1=false,c2=false;
    
     
      String selectionBar="selectionbar.png";
@@ -104,6 +108,9 @@ public class mouse {
      String datapopPicHighlight="datapopHighlight.png";
      String udPicHighlight="udHighlight.png";
      String preratePicHighlight="prerateHighlight.png";
+     
+     JLabel jLabelExcel,jLabelDatabase;
+     
 
      String backgroundPic="default_template.png";
      
@@ -202,44 +209,78 @@ public void addIcon(JLabel jlabel,String tempPic) {
 
 
 public void addExcel(JLabel jlabel) {
-	
+	jLabelExcel=jlabel;
 	try {
+		if(excelBoolean==false) {
+	
 	    img = ImageIO.read(new File(imagePath+"\\assets\\"+excelPic));
+		}
+		else {
+			  img = ImageIO.read(new File(imagePath+"\\assets\\"+excelPicSelected));
+		
+		}
 
 	} catch (IOException e) {
 	    
 	    e.printStackTrace();
 	}
-		dimg = img.getScaledInstance(jlabel.getWidth(), jlabel.getHeight(),
+		dimg = img.getScaledInstance(jLabelExcel.getWidth(), jLabelExcel.getHeight(),
 	        Image.SCALE_SMOOTH);
 	  imageIcon = new ImageIcon(dimg);
-	  jlabel.setIcon(imageIcon);
+	  jLabelExcel.setIcon(imageIcon);
 	  
-	  frame.getContentPane().add(jlabel);
-	  jlabel.addMouseListener(m2);
+	  frame.getContentPane().add(jLabelExcel);
+	
+	  
+	  jLabelExcel.getParent(). setComponentZOrder(
+			  jLabelExcel, 0);
+	  if (c1==false) {
+	  jLabelExcel.addMouseListener(m2);
+	  c1=true;
+	  }
 }
 
 public void addDb(JLabel jlabel) {
-	
+	jLabelDatabase=jlabel;
 	try {
+		
+		if(databaseBoolean==false) {
 	    img = ImageIO.read(new File(imagePath+"\\assets\\"+dbPic));
+		}
+		else {
+			 img = ImageIO.read(new File(imagePath+"\\assets\\"+dbPicSelected));
+			
+		}
 	} catch (IOException e) {
 	    
 	    e.printStackTrace();
 	}
-		dimg = img.getScaledInstance(jlabel.getWidth(), jlabel.getHeight(),
+		dimg = img.getScaledInstance(jLabelDatabase.getWidth(), jLabelDatabase.getHeight(),
 	        Image.SCALE_SMOOTH);
 	  imageIcon = new ImageIcon(dimg);
 	  jlabel.setIcon(imageIcon);
 	  
-	  frame.getContentPane().add(jlabel);
-	  jlabel.addMouseListener(m2);
+	  frame.getContentPane().add(jLabelDatabase);
+	 
+	  
+	  jLabelDatabase.getParent(). setComponentZOrder(
+			  jLabelDatabase, 0);
+	  
+	  
+	  if (c2==false) {
+	  jLabelDatabase.addMouseListener(m2);
+	  c2=true;
+	  }
+	  
 }
 
 public void addExecute(JLabel jlabel) {
 	
 	try {
+	
 	    img = ImageIO.read(new File(imagePath+"\\assets\\"+executePic));
+		
+	
 
 	} catch (IOException e) {
 	    
@@ -362,6 +403,8 @@ public void setupMouseListener() {
 			    		            // What to do with the file, e.g. display it in a TextArea
 			    		            filePath=file.getAbsolutePath();
 
+			    		           
+
 			    		        } else {
 			    		            System.out.println("File access cancelled by user.");
 			    		        }        // TODO add your handling code here:
@@ -372,7 +415,11 @@ public void setupMouseListener() {
 			    		
 			    		
 			    		//Database
-			    		if (mouseLabel.getName().equals("db")) {}
+			    		if (mouseLabel.getName().equals("db")) {
+			    			
+	    		            excelBoolean=false;
+	    		            addExcel(mouseLabel);
+			    		}
 			    		
 			    		//Execute
 			    			if (mouseLabel.getName().equals("execute")) {}
@@ -437,7 +484,12 @@ public void setupMouseListener() {
 				    		            // What to do with the file, e.g. display it in a TextArea
 				    		            filePath=file.getAbsolutePath();
 				    		            c.setExcelPath(filePath);
+				    		            System.out.println("SOURCE!!!!!!!");
 				    		            c.setSource(false);
+				    		            excelBoolean=true;
+				    		            addExcel(mouseLabel);
+				    		            databaseBoolean=false;
+						    			addDb(jLabelDatabase);
 
 				    		        } else {
 				    		            System.out.println("File access cancelled by user.");
@@ -450,6 +502,11 @@ public void setupMouseListener() {
 				    		
 				    		//Database
 				    		if (mouseLabel.getName().equals("db")) {
+				    			databaseBoolean=true;
+				    			addDb(mouseLabel);
+		    		            excelBoolean=false;
+				    			addExcel(jLabelExcel);
+				    			System.out.println("SOURCE!!!!!!!");
 				    			c.setSource(true);
 				    			
 				    		}
@@ -459,7 +516,16 @@ public void setupMouseListener() {
 				    		if (mouseLabel.getName().equals("execute")) {
 				    			System.out.println(obj.getClass().getCanonicalName());
 				    			if (obj.getClass().getCanonicalName().equals("guis.rebillAutomationGui")) {
-				    			rebillMain rm = new rebillMain(c);
+				    				System.out.println("Booleans "+c.getLevel()+"      "+c.getSource());
+				    				if(c.getLevel()!=null && c.getSource()!=null) {
+				    					JOptionPane.showMessageDialog(frame, "Started Rebill");
+				    					
+				    					//rebillMain rm = new rebillMain(c);
+				    				}
+				    				else {
+				    					JOptionPane.showMessageDialog(frame, "Please choose Level and Source");
+				    					
+				    				}
 				    			}
 				    			
 				    			if (obj.getClass().getCanonicalName().equals("guis.udAutomation")) {
@@ -506,6 +572,7 @@ public void setupMouseListener() {
 				  @Override
 				   public void mouseClicked(MouseEvent e)
 				  {
+					  /*
 					  mouseRadioButton = (JRadioButton)e.getSource();  
 					  
 					  if(mouseRadioButton.getName().contentEquals("l2"))
@@ -514,8 +581,9 @@ public void setupMouseListener() {
 							System.out.println("TRUE");
 							c.setLevel(false);
 						}
-		
+		*/
 				  		}
+				  		
 					};
 			
 		

@@ -21,7 +21,7 @@ public class config {
     String udUsername,udPassword;
     String excelPath;
     
-    Boolean compatible,level,source;
+    Boolean compatible,level=null,source=null;
 	
 	public config() {
 		
@@ -245,11 +245,11 @@ public class config {
 	}
 	public void setSource(Boolean source) {
 		
-		this.level=level;
+		this.source=source;
 	}
 	public void setCompatibleMode(Boolean compatible) {
 		
-		this.level=level;
+		this.compatible=compatible;
 	}
 	
 	public Boolean getLevel() {
@@ -258,9 +258,9 @@ public class config {
 	}
 	public Boolean getSource() {	
 		
-		return 	level;
+		return 	source;
 		}
-	public Boolean getCompatibleMode(Boolean compatible) {	
+	public Boolean getCompatibleMode() {	
 		
 		return compatible;
 		}

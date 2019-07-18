@@ -151,8 +151,37 @@ public class rebillAutomationGui {
 		l2RadioButton.addMouseListener(m.m3);
 		l3RadioButton.addMouseListener(m.m3);
 
+		
+		
 	    frame.setVisible(true);
-
+        
+	    
+	    l2RadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	l2RadioButtonActionPerformed(evt);
+            }
+        });
+	    
+	    l3RadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	l3RadioButtonActionPerformed(evt);
+            }
+        });
 		
 	}
+	
+		private void l2RadioButtonActionPerformed(java.awt.event.ActionEvent evt) { 
+			System.out.println("L2 RADIO");
+			if (l3RadioButton.isSelected()){
+				l3RadioButton.setSelected(false);
+		        }
+			c.setLevel(false);
+	}
+		private void l3RadioButtonActionPerformed(java.awt.event.ActionEvent evt) {   
+			System.out.println("L3 RADIO");
+			if (l2RadioButton.isSelected()){
+				l2RadioButton.setSelected(false);
+		        }
+			c.setLevel(true);
+		}
 }
