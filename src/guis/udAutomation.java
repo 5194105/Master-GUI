@@ -1,27 +1,18 @@
 package guis;
-import java.awt.EventQueue;
-import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
-import java.awt.SystemColor;
-import javax.swing.UIManager;
+import javax.swing.JTextField;
 
 import configuration.config;
 import configuration.mouse;
-
-import javax.swing.JTextField;
 
 public class udAutomation {
 
@@ -36,10 +27,10 @@ public class udAutomation {
 	private JLabel lblUnixPath;
 	private JRadioButton radioButton_1;
 	private JRadioButton rdbtnDom;
-	private JRadioButton rdbtngreen;
+	private JRadioButton rdbtngreen,rdbtnVDI,rdbtnRDP,rdbtnNAB,rdbtnAB,rdbtnNT,rdbtnCCAR;
 
 	private JTextField textField;
-	private JTextField textField_1;
+	private JPasswordField textField_1;
 	private JTextField textField_2;
 
 	 private JLabel excelLabel;
@@ -95,12 +86,22 @@ public class udAutomation {
 		rdbtnL_1.setBounds(517, 214, 69, 29);
 		frame.getContentPane().add(rdbtnL_1);
 		
-		radioButton_1 = new JRadioButton("");
-		radioButton_1.setOpaque(false);
-		radioButton_1.setForeground(Color.WHITE);
-		radioButton_1.setFont(new Font("Segoe UI", Font.BOLD, 22));
-		radioButton_1.setBounds(555, 343, 40, 29);
-		frame.getContentPane().add(radioButton_1);
+		
+		ButtonGroup bg3 =new ButtonGroup();
+		bg3.add(rdbtnL);
+		bg3.add(rdbtnL_1);
+		
+		
+		if(rdbtnL.isSelected())
+		{
+			c.setLevel(false);
+			
+		}else if(rdbtnL_1.isSelected())
+		{
+			c.setLevel(true);
+			
+		}
+		
 		
 		rdbtnDom = new JRadioButton("Dom");
 		rdbtnDom.setOpaque(false);
@@ -116,11 +117,171 @@ public class udAutomation {
 		rdbtngreen.setBounds(543, 389, 127, 29);
 		frame.getContentPane().add(rdbtngreen);
 		
-		lblCompatibleMode = new JLabel("Compatible Mode: ");
+		ButtonGroup bg =new ButtonGroup();
+		bg.add(rdbtnDom);
+		bg.add(rdbtngreen);
+		
+		
+		rdbtnNAB = new JRadioButton("NAB");
+		rdbtnNAB.setOpaque(false);
+		rdbtnNAB.setForeground(Color.WHITE);
+		rdbtnNAB.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		rdbtnNAB.setBounds(700, 220, 87, 29);
+		frame.getContentPane().add(rdbtnNAB);
+		
+		
+		
+		rdbtnAB = new JRadioButton("AB");
+		rdbtnAB.setOpaque(false);
+		rdbtnAB.setForeground(Color.WHITE);
+		rdbtnAB.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		rdbtnAB.setBounds(700, 260, 87, 29);
+		frame.getContentPane().add(rdbtnAB);
+		
+		
+		rdbtnNT = new JRadioButton("NT");
+		rdbtnNT.setOpaque(false);
+		rdbtnNT.setForeground(Color.WHITE);
+		rdbtnNT.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		rdbtnNT.setBounds(700, 300, 87, 29);
+		frame.getContentPane().add(rdbtnNT);
+		
+		
+		rdbtnCCAR = new JRadioButton("CCAR");
+		rdbtnCCAR.setOpaque(false);
+		rdbtnCCAR.setForeground(Color.WHITE);
+		rdbtnCCAR.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		rdbtnCCAR.setBounds(700, 340, 87, 29);
+		frame.getContentPane().add(rdbtnCCAR);
+		
+		
+		
+		
+		
+		
+		ButtonGroup bg1 =new ButtonGroup();
+		bg1.add(rdbtnNAB);
+		bg1.add(rdbtnAB);
+		bg1.add(rdbtnNT);
+		bg1.add(rdbtnCCAR);
+		
+		rdbtnNAB.setVisible(false);
+		rdbtnAB.setVisible(false);
+		rdbtnNT.setVisible(false);
+		rdbtnCCAR.setVisible(false);
+		
+		
+		//Dom button action event
+		rdbtnDom.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				rdbtnNAB.setVisible(true);
+				rdbtnAB.setVisible(true);
+				rdbtnNT.setVisible(true);
+				rdbtnCCAR.setVisible(true);
+				
+				
+				
+			}
+		});
+		
+		//GREEN button action event
+		rdbtngreen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				rdbtnNAB.setVisible(false);
+				rdbtnAB.setVisible(false);
+				rdbtnNT.setVisible(false);
+				rdbtnCCAR.setVisible(false);
+				
+				
+				
+			}
+		});
+		
+		
+		//type entry
+		if(rdbtnDom.isSelected())
+		{
+			c.setType("DOM");
+			
+			
+			
+		}else if(rdbtngreen.isSelected())
+		{
+			c.setType("GREEN");
+			
+			
+		}
+		
+		
+		//Flavour entry
+		
+		if(rdbtnNAB.isSelected())
+		{
+			c.setFlavour("NAB");
+			
+			
+			
+		}else if(rdbtnAB.isSelected())
+		{
+			c.setFlavour("AB");
+			
+			
+		}else if(rdbtnNT.isSelected())
+		{
+			c.setFlavour("NT");
+			
+			
+		}else if(rdbtnCCAR.isSelected())
+		{
+			c.setFlavour("CCAR");
+			
+			
+		}
+		
+		
+		
+		
+		lblCompatibleMode = new JLabel("Compatible :");
 		lblCompatibleMode.setForeground(Color.WHITE);
 		lblCompatibleMode.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		lblCompatibleMode.setBounds(327, 343, 212, 29);
+		lblCompatibleMode.setBounds(327, 343, 150, 29);
 		frame.getContentPane().add(lblCompatibleMode);
+		
+		
+		rdbtnVDI = new JRadioButton("VDI");
+		rdbtnVDI.setOpaque(false);
+		rdbtnVDI.setForeground(Color.WHITE);
+		rdbtnVDI.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		rdbtnVDI.setBounds(500, 343,100, 29);
+		frame.getContentPane().add(rdbtnVDI);
+		
+		
+		rdbtnRDP = new JRadioButton("RDP");
+		rdbtnRDP.setOpaque(false);
+		rdbtnRDP.setForeground(Color.WHITE);
+		rdbtnRDP.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		rdbtnRDP.setBounds(600, 343, 150, 29);
+		frame.getContentPane().add(rdbtnRDP);
+		
+		ButtonGroup bg2 =new ButtonGroup();
+		bg2.add(rdbtnVDI);
+		bg2.add(rdbtnRDP);
+		
+		
+		//compatible mode entry
+		
+		if(rdbtnVDI.isSelected())
+		{
+			c.setCompatibleMode(false);
+			
+			
+			
+		}else if(rdbtnRDP.isSelected())
+		{
+			c.setCompatibleMode(true);
+			
+			
+		}
 		
 		lblType = new JLabel("Type:");
 		lblType.setForeground(Color.WHITE);
@@ -140,21 +301,30 @@ public class udAutomation {
 		lblUsername.setBounds(327, 253, 125, 29);
 		frame.getContentPane().add(lblUsername);
 		
+			
 		lblPassword = new JLabel("Password:");
 		lblPassword.setForeground(Color.WHITE);
 		lblPassword.setFont(new Font("Segoe UI", Font.BOLD, 23));
 		lblPassword.setBounds(327, 298, 112, 29);
 		frame.getContentPane().add(lblPassword);
 		
+		
+		//username
 		textField = new JTextField();
 		textField.setBounds(451, 258, 194, 26);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		textField_1 = new JTextField();
+		
+		//password
+		textField_1 = new JPasswordField();
 		textField_1.setColumns(10);
 		textField_1.setBounds(450, 298, 194, 26);
 		frame.getContentPane().add(textField_1);
+		
+		
+		c.setUdUsername(textField.getText());
+		c.setUdPassword(textField_1.getText());
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
@@ -171,19 +341,20 @@ public class udAutomation {
 		
 		//Making built in incons... here you no longer need to set picture or filechooser. You just make a label and 
 		//give it to addExcel() method.
-		excelLabel = new JLabel("New label");
+		excelLabel = new JLabel("Excel");
 		excelLabel.setBounds(400, 478, 78, 56);
 		
 	
-		dbLabel = new JLabel("New label");
+		dbLabel = new JLabel("DB");
 		dbLabel.setBounds(475, 478, 78, 56);
 
-		executeLabel = new JLabel("New label");
+		executeLabel = new JLabel("Execute");
 		executeLabel.setBounds(355, 550, 142, 41);
 		
 		excelLabel.setName("excel");
 		dbLabel.setName("db");
 		executeLabel.setName("execute");
+		
 		
 		
 		//This will load the data that is common for all GUI screens (the background, side bar)
@@ -201,6 +372,9 @@ public class udAutomation {
 		m.addExcel(excelLabel);
 		m.addDb(dbLabel);
 		m.addExecute(executeLabel);
+		
+		m.addAkshayUDStuff(lblUnixPath,textField_2);
+		
 		//This loads the background.
 		m.setupBackground();
 

@@ -1012,32 +1012,55 @@ public class rebillMain {
             con.close();
         }
         
+        
+        
+        
+        //Importing all my data
         public void setUpData() {
-        	
+        	//Getting the source. Excel = false and Database=true. I set this in the GUI/Mouse CLass
         	if(c.getSource()==false){
+        		//Giving my excel path from GUI (path saved in config class... was passed through gui/mouse class)
         		excel e = new excel(c.getExcelPath());
+        		//Creates a workbook.
         		e.setUpExcelWorkbook();
+        		//Sets up the sheet at the a particular index (0 = sheet 1)
         		e.setUpExcelSheet(0);
+        		//Counts how much data there is. Parameter is which column it should count. This means will count
+        		//how many values/rows are there for column 3 (column 3 is never null.. so will get total rows).
+        		//This will exclude row 1 which is for headers.
         		e.setRowCountAutomatically(2);
+        		//Get number of columns.
         		e.setColCountAutomatically(0);
         		
+        		//You can also give  a fixed number of rows/columns using e.setRowCountManually(x) and e.setColCountManually(x)
+        		
+        		//This will save all my data into objects from rebillData class. RebillData class will have
+        		//getters and setters for every column in excel sheet (tin, tin count, trk, reason code, etc).
+        		
+        		//I go through each row in excel and save that entire row into a new object and at same time
+        		//add that object into an array list. This array list will hold each object (row) of data.
         		for (int i=1;i<e.getRowCount()+1;i++) {
-
+        			//Create new object and add it to my arraylist at same time.
+        			//uses the getCellData method which will use row,col paramter.
         			arrayData.add( new rebillData(e.getCellData(i, 0),e.getCellData(i, 1),e.getCellData(i, 2),e.getCellData(i, 3),e.getCellData(i, 4),e.getCellData(i, 5),e.getCellData(i, 6),e.getCellData(i, 7),e.getCellData(i+1, 8),e.getCellData(i, 9),e.getCellData(i, 10),e.getCellData(i, 11),e.getCellData(i, 12),e.getCellData(i+1, 13),e.getCellData(i, 14),e.getCellData(i, 15)));
         		}
+        		//Closes the excel sheet.
         		e.saveAndClose();
 
         	}
         	
         	if(c.getSource()==true){
         		database db = new database();
+        		//creates db connection
         		db.openDB(c.getGtmRevToolsConnection("GTM_REV_TOOLS", "Wr4l3pP5gWVd7apow8eZwnarI3s4e1"));
+        		//Gets the data we want via sql query.
         		db.readData("select * from rebill_regression where trkngnbr is not null");
         		ResultSet rs;
         		rs=db.getResultSet();
         		
         		String temp;
         		try {
+        			//Same as excel.. creates object and saves in arrayList.
         			while (rs.next()) {
         				arrayData.add(new rebillData(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16)));
         			}      			

@@ -20,6 +20,7 @@ public class config {
     String rtmBatchShippingResults;
     String udUsername,udPassword;
     String excelPath;
+    String type,flavour;
     
     Boolean compatible,level=null,source=null;
 	
@@ -275,6 +276,28 @@ public class config {
 		return excelPath;
 	}
 	
+public void setFlavour(String flavour) {
+		
+		this.flavour=flavour;
+	}
+	
+	public String getFlavour() {
+		
+		return flavour;
+	}
+	
+	
+	
+	//type is for DOMESTIC or GREEN
+	public void setType(String type) {
+		
+		this.type=type;
+	}
+	
+	public String getType() {
+		
+		return type;
+	}
 	
 	
 	

@@ -5,22 +5,13 @@ import configuration.excel;
 
 public class rebillData {
 	
-	excel e;
-	database db;
 	
 	 String result, description, test_input_nbr, tin_count, trkngnbr, reason_code,rebill_acct, login,
      invoice_nbr_1,invoice_nbr_2,password;
 	 
 	String mig,region,rsType,company,worktype;
 	 
-	public rebillData(excel e) {
-		this.e=e;
-		
-	}
-	
-	public rebillData(database db) {
-	this.db=db;
-	}
+
 	
 	
 

@@ -54,6 +54,7 @@ public class rerateAutomationGui {
 	 */
 	public rerateAutomationGui( gui g,config c) {
 		this.g=g;
+		this.c=c;
 		initialize();
 		
 	}

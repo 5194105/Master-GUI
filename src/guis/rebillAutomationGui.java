@@ -76,6 +76,10 @@ public class rebillAutomationGui {
 		frame.setBounds(100, 100, 1005, 718);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+	
+		executeLabel = new JLabel("New label");
+		executeLabel.setBounds(413, 489, 284, 41);
+		
 		
 		excelLabel = new JLabel("New label");
 		excelLabel.setBounds(512, 335, 78, 56);
@@ -83,8 +87,6 @@ public class rebillAutomationGui {
 		dbLabel = new JLabel("New label");
 		dbLabel.setBounds(619, 332, 78, 56);
 
-		executeLabel = new JLabel("New label");
-		executeLabel.setBounds(413, 489, 284, 41);
 		
 		excelLabel.setName("excel");
 		dbLabel.setName("db");

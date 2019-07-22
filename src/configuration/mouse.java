@@ -16,9 +16,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 
 import org.openqa.selenium.WebDriver;
 
+import UD.UdExecution;
 import guis.datapopAutomationGui;
 import guis.gui;
 import guis.guiBase;
@@ -27,11 +29,10 @@ import guis.prerateAutomationGui;
 import guis.rebillAutomationGui;
 import guis.rerateAutomationGui;
 import guis.udAutomation;
-import rebill.rebillMain;
-import guis.guiBase;
 public class mouse {
 	
-	
+	JLabel unixPath;
+	JTextField unixPathText;
 	
 	JLabel menuLabel,databaseLabel,linkLabel,infoLabel,backLabel,background;
 
@@ -54,6 +55,8 @@ public class mouse {
 	    config c;
 
 	    String level,date1,date2;
+	    
+	    String level1,compatibleMode;
 	
      String homePath;
      String imagePath;
@@ -296,7 +299,30 @@ public void addExecute(JLabel jlabel) {
 }
 
 
+
+public void addAkshayUDStuff(JLabel unixPath,JTextField unixPathText) {
 	
+	this.unixPath=unixPath;
+	this.unixPathText=unixPathText;
+	
+	
+}
+	
+
+public void addRemoveAkshayUDStuff(Boolean addRemove){
+	if (addRemove==false){
+	unixPath.setVisible(false);
+	unixPathText.setVisible(false);
+	}
+	else if (addRemove==true) {	
+		unixPath.setVisible(true);
+	unixPathText.setVisible(true);
+	}
+	
+	
+	
+}
+
 
 
 	public void addIconWithMouse(JLabel jl,String name,String defaultPic,String altPic) {
@@ -422,7 +448,11 @@ public void setupMouseListener() {
 			    		}
 			    		
 			    		//Execute
-			    			if (mouseLabel.getName().equals("execute")) {}
+			    			if (mouseLabel.getName().equals("execute")) {
+			    				
+			    				
+			    				
+			    			}
 			    	
 			    		
 			    		
@@ -490,6 +520,10 @@ public void setupMouseListener() {
 				    		            addExcel(mouseLabel);
 				    		            databaseBoolean=false;
 						    			addDb(jLabelDatabase);
+						    			addRemoveAkshayUDStuff(true);
+						    			
+						    			
+						    			
 
 				    		        } else {
 				    		            System.out.println("File access cancelled by user.");
@@ -508,6 +542,7 @@ public void setupMouseListener() {
 				    			addExcel(jLabelExcel);
 				    			System.out.println("SOURCE!!!!!!!");
 				    			c.setSource(true);
+				    			addRemoveAkshayUDStuff(false);
 				    			
 				    		}
 				    		
@@ -530,8 +565,37 @@ public void setupMouseListener() {
 				    			
 				    			if (obj.getClass().getCanonicalName().equals("guis.udAutomation")) {
 					    			//DO UD STUFF
-				    				//ud u = new ud(c);
+				    				
+				    				
+				    				if(c.getLevel()==false)
+				    				{
+				    					level1="L2";
+				    				}else if(c.getLevel()==true)
+				    				{
+				    					level1="L3";
+				    				}
+				    				
+				    				
+				    				if(c.getCompatibleMode())
+				    				{
+				    					compatibleMode="LOCAL";
+				    				}
+				    				else {
+				    					compatibleMode="RDP";
+				    				}
+				    				
+				    				
+				    				UdExecution ud=new UdExecution(level1,c.getType(),c.getUdUsername(),c.getUdPassword(),c.getExcelPath(),compatibleMode,c.getFlavour());
+				    				
+				    				
+				    				
+				    				
+				    				
 					    			}
+				    			
+				    			if (obj.getClass().getCanonicalName().equals("guis.rerateAutomationGui")) {
+				    				JOptionPane.showMessageDialog(frame, "Started Rerates");
+					    				}
 				    			
 				    			
 				    		}
