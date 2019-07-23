@@ -22,6 +22,7 @@ public class config {
     String excelPath;
     String type,flavour;
     String temp;
+    String unixPath;
     
     Boolean compatible,level=null,source=null;
 	
@@ -314,6 +315,16 @@ public void setFlavour(String flavour) {
 		
 		return temp;
 		
+	}
+	
+	public void setUnixPath(String unixPath) {
+		
+		this.unixPath=unixPath;
+	}
+	
+	public String getUnixPath() {
+		
+		return unixPath
 	}
 	
 	

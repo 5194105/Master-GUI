@@ -318,10 +318,10 @@ public void addRemoveAkshayUDStuff(Boolean addRemove){
 		unixPath.setVisible(true);
 	unixPathText.setVisible(true);
 	try {
-	unixPathText.setText(filePath);
+	//unixPathText.setText(filePath);
 	}
 	catch (Exception e) {
-		unixPathText.setText("");
+		//unixPathText.setText("");
 		
 	}
 	}
@@ -579,7 +579,7 @@ public void setupMouseListener() {
 				    					compatibleMode="RDP";
 				    				}
 				    				
-				    				
+				    				c.setUnixPath(unixPathText.getText());
 				    				UdExecution ud=new UdExecution(level1,c.getType(),c.getUdUsername(),c.getUdPassword(),c.getExcelPath(),compatibleMode,c.getFlavour());
 				    				
 				    				
