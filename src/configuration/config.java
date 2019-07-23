@@ -324,7 +324,7 @@ public void setFlavour(String flavour) {
 	
 	public String getUnixPath() {
 		
-		return unixPath
+		return unixPath;
 	}
 	
 	

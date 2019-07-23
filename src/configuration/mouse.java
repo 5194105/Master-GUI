@@ -578,9 +578,13 @@ public void setupMouseListener() {
 				    				else {
 				    					compatibleMode="RDP";
 				    				}
+				    				if(c.getSource()) {
+				    					c.setUnixPath("NA");
+				    				}else {
+				    					c.setUnixPath(unixPathText.getText());
+				    				}
 				    				
-				    				c.setUnixPath(unixPathText.getText());
-				    				UdExecution ud=new UdExecution(level1,c.getType(),c.getUdUsername(),c.getUdPassword(),c.getExcelPath(),compatibleMode,c.getFlavour());
+				    				UdExecution ud=new UdExecution(level1,c.getType(),c.getUnixPath(),c.getUdUsername(),c.getUdPassword(),c.getExcelPath(),compatibleMode,c.getFlavour());
 				    				
 				    				
 				    				

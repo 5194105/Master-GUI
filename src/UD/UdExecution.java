@@ -4,10 +4,13 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import configuration.config;
+import configuration.database;
+import configuration.excel;
+
 
 public class UdExecution {
 
@@ -29,8 +32,22 @@ public class UdExecution {
 	Connection con;
 	PreparedStatement ps1 = null;
 	ResultSet rs1 = null;
+	
+	config c;
 
-	public void dbconnect() throws ClassNotFoundException, SQLException {
+	
+	
+	
+	
+
+	public UdExecution(String level, String type,String unixPath, String username, String password, String filePath, String place,
+			String flavour) throws Exception {
+
+		database db = new database();
+		
+		db.openDB(c.getGtmRevToolsConnection(c.getGtmDbName(), c.getGtmDbPassword()));
+		
+		
 		String dbname = "";
 		if (flavour == "NA") {
 			dbname = "ud_non_airbill_pending";
@@ -44,25 +61,26 @@ public class UdExecution {
 			dbname = "ud_GREEN_pending";
 		}
 
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-
-		con = DriverManager.getConnection(
-				"jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com",
-				"GTM_REV_TOOLS", "Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
-
-		ps1 = con.prepareStatement("select * from " + dbname + " where item_prcs_cd is null or item_prcs_cd='OR'");
-
-		rs1 = ps1.executeQuery();
-
-		System.out.println("Yahooo DB Connected!");
-
-	}
-
-	public UdExecution(String level, String type, String username, String password, String filePath, String place,
-			String flavour) throws Exception {
-
+		
+		db.readData("select * from " + dbname + " where item_prcs_cd is null or item_prcs_cd='OR'");
+        ResultSet rs;
+        rs=db.getResultSet();
+       
+      
+        if(unixPath=="NA")
+        {
+        	path="/home/sqaatt/onlines/udpending";
+        }else
+        {
+        	path=unixPath;
+        	
+        	
+        }
+        
+        
+          
 		// Adding Flavour
-		this.flavour = flavour;
+		
 
 		if (flavour == "NA") {
 			filename = "NA";
@@ -92,9 +110,17 @@ public class UdExecution {
 			puttypath = "C:\\Users\\FedExUser\\Desktop\\putty.exe";
 		}
 		// ----------------------------------------------------
+		
+		//==========================================For Database reading==========================================
 		if (level == "L2") {
 
-			dbconnect();
+//			dbconnect();
+			
+			
+			
+			
+			
+			
 
 			// for spliting UD's into files
 			serverString = "irh22076.ute.fedex.com";
@@ -120,14 +146,14 @@ public class UdExecution {
 			type(password);
 			enter();
 			Thread.sleep(5000);
-			type("cd " + "/home/sqaatt/onlines/udpending");
+			type("cd " + path);
 			enter();
 			Thread.sleep(5000);
 			type("cat > " + filename);
 			Thread.sleep(5000);
 			enter();
-			while (rs1.next()) {
-				String s2 = rs1.getString(1);
+			while (rs.next()) {
+				String s2 = rs.getString(1);
 
 				int d = s2.length();
 				count = d / 20;
@@ -180,7 +206,7 @@ public class UdExecution {
 					type(password);
 					enter();
 					Thread.sleep(5000);
-					type("cd " + "/home/sqaatt/onlines/udpending");
+					type("cd " + path);
 					enter();
 					Thread.sleep(150);
 					System.out.println(command + filename + formatted);
@@ -218,7 +244,7 @@ public class UdExecution {
 					type(password);
 					enter();
 					Thread.sleep(5000);
-					type("cd " + "/home/sqaatt/onlines/udpending");
+					type("cd " + path);
 					enter();
 					Thread.sleep(150);
 					System.out.println(command + filename + formatted);
@@ -236,7 +262,7 @@ public class UdExecution {
 
 		else if (level == "L3") {
 
-			dbconnect();
+		
 			// for spliting UD's into files
 
 			serverString = "srh22080.ute.fedex.com";
@@ -262,21 +288,19 @@ public class UdExecution {
 			type(password);
 			enter();
 			Thread.sleep(5000);
-			type("cd " + "/home/sqaatt/onlines/udpending");
+			type("cd " + path);
 			enter();
 			Thread.sleep(5000);
 			type("cat > " + filename);
 			Thread.sleep(5000);
 			enter();
 			int d = 0;
-			while (rs1.next()) {
-				String s2 = rs1.getString(2);
+			while (rs.next()) {
+				String s2 = rs.getString(2);
 
 				d = d + 1;
 
-				int k;
-				char l;
-				int m1 = 0;
+				
 				type(s2);
 				enter();
 
@@ -329,7 +353,7 @@ public class UdExecution {
 					type(password);
 					enter();
 					Thread.sleep(5000);
-					type("cd " + "/home/sqaatt/onlines/udpending");
+					type("cd " + path);
 					enter();
 					Thread.sleep(150);
 					System.out.println(command + filename + formatted);
@@ -372,7 +396,7 @@ public class UdExecution {
 					type(password);
 					enter();
 					Thread.sleep(5000);
-					type("cd " + "/home/sqaatt/onlines/udpending");
+					type("cd " + path);
 					enter();
 					Thread.sleep(150);
 					System.out.println(command + filename + formatted);
@@ -388,8 +412,341 @@ public class UdExecution {
 			ps1.close();
 			rs1.close();
 			con.close();
+			
+			//==========================================Databse completed================================================
+			
 
-		}
+		}else if (level == "L2") {
+
+			//==========================================ForExcel reading==========================================
+				
+			
+			excel e = new excel(c.getExcelPath());
+            e.setUpExcelWorkbook();
+            //Sets up the sheet at the a particular index (0 = sheet 1)
+            e.setUpExcelSheet(0);
+            e.setRowCountAutomatically(2);
+         
+            
+            //Closes the excel sheet.
+            e.saveAndClose();
+
+				// for spliting UD's into files
+				serverString = "irh22076.ute.fedex.com";
+
+				Runtime r1 = Runtime.getRuntime();
+
+				String s1 = puttypath + " -ssh -l " + "f" + username + " -pw " + password + " " + serverString + "";
+
+				try {
+
+					p = r1.exec(s1);
+					Thread.sleep(3000);
+
+				} catch (Exception f) {
+					System.out.println(f);
+					f.printStackTrace();
+
+				}
+
+				type("sudo su - sqaatt");
+				enter();
+				Thread.sleep(150);
+				type(password);
+				enter();
+				Thread.sleep(5000);
+				type("cd " + path);
+				enter();
+				Thread.sleep(5000);
+				type("cat > " + filename);
+				Thread.sleep(5000);
+				enter();
+				while (rs.next()) {
+					String s2 = rs.getString(1);
+
+					
+				
+
+					type(s2);
+					enter();
+
+				}
+				Thread.sleep(10000);
+				doType(KeyEvent.VK_CONTROL, KeyEvent.VK_D);
+				Thread.sleep(9000);
+
+				enter();
+				type("split -l 20 -d -a 2 " + filename + " " + filename);
+				Thread.sleep(5000);
+
+				enter();
+
+				ps1.close();
+				rs1.close();
+				con.close();
+				// ----------------------------------------------------------------
+				if (type == "Domestic") {
+
+					for (int i=1;i<e.getRowCount()+1;i++) {
+						
+						String file=e.getCellData(i, 0);
+
+						
+						System.out.println("========================================================================");
+						command = "non_airbill_SOE.sh ";
+						serverString = "irh22076.ute.fedex.com";
+
+						Runtime r = Runtime.getRuntime();
+
+						String s = puttypath + " -ssh -l " + "f" + username + " -pw " + password + " " + serverString + "";
+
+						try {
+							
+							p = r.exec(s);
+							Thread.sleep(3000);
+
+						} catch (Exception f) {
+							System.out.println(f);
+							f.printStackTrace();
+
+						}
+
+						type("sudo su - sqaatt");
+						enter();
+						Thread.sleep(150);
+						type(password);
+						enter();
+						Thread.sleep(5000);
+						type("cd " + path);
+						enter();
+						Thread.sleep(150);
+						System.out.println(command + file);
+						type(command + file);
+						enter();
+					}
+
+				} else if (type == "$GREEN") {
+
+					command = "execute_green.sh ";
+					serverString = "irh22089.ute.fedex.com";
+
+					for (int i=1;i<e.getRowCount()+1;i++) {
+						
+						String file=e.getCellData(i, 0);
+
+						
+						System.out.println("========================================================================");
+
+						Runtime r = Runtime.getRuntime();
+
+						String s = puttypath + " -ssh -l " + "f" + username + " -pw " + password + " " + serverString + "";
+						try {
+							
+							p = r.exec(s);
+							Thread.sleep(3000);
+
+						} catch (Exception f) {
+							System.out.println(f);
+							f.printStackTrace();
+
+						}
+
+						type("sudo su - sqaatt");
+						enter();
+						Thread.sleep(150);
+						type(password);
+						enter();
+						Thread.sleep(5000);
+						type("cd " + path);
+						enter();
+						Thread.sleep(150);
+						System.out.println(command + file);
+						type(command + file);
+						enter();
+
+					}
+				}
+
+				ps1.close();
+				rs1.close();
+				con.close();
+
+			}
+
+			else if (level == "L3") {
+				
+				
+				excel e = new excel(c.getExcelPath());
+	            e.setUpExcelWorkbook();
+	            //Sets up the sheet at the a particular index (0 = sheet 1)
+	            e.setUpExcelSheet(0);
+	            e.setRowCountAutomatically(2);
+	         
+	            
+	            //Closes the excel sheet.
+	            e.saveAndClose();
+
+			
+				// for spliting UD's into files
+
+				serverString = "srh22080.ute.fedex.com";
+
+				Runtime r1 = Runtime.getRuntime();
+
+				String s1 = puttypath + " -ssh -l " + "f" + username + " -pw " + password + " " + serverString + "";
+
+				try {
+
+					p = r1.exec(s1);
+					Thread.sleep(3000);
+
+				} catch (Exception f) {
+					System.out.println(f);
+					f.printStackTrace();
+
+				}
+
+				type("sudo su - sqaatt");
+				enter();
+				Thread.sleep(150);
+				type(password);
+				enter();
+				Thread.sleep(5000);
+				type("cd " + path);
+				enter();
+				Thread.sleep(5000);
+				type("cat > " + filename);
+				Thread.sleep(5000);
+				enter();
+				
+				while (rs.next()) {
+					String s2 = rs.getString(2);
+
+					
+
+					type(s2);
+					enter();
+
+					
+
+				}
+				
+
+				Thread.sleep(10000);
+
+				doType(KeyEvent.VK_CONTROL, KeyEvent.VK_D);
+				enter();
+
+				Thread.sleep(5000);
+				enter();
+				type("split -l 20 -d -a 2 " + filename + " " + filename);
+				Thread.sleep(5000);
+				enter();
+
+				
+
+				// -------------------------------------
+				if (type == "Domestic") {
+
+					for (int i=1;i<e.getRowCount()+1;i++) {
+						
+						String file=e.getCellData(i, 0);
+
+						
+
+						System.out.println("========================================================================");
+						command = "non_airbill_SOE.sh ";
+						serverString = "srh22080.ute.fedex.com";
+
+						Runtime r = Runtime.getRuntime();
+
+						String s = puttypath + " -ssh -l " + "f" + username + " -pw " + password + " " + serverString + "";
+						try {
+							
+							p = r.exec(s);
+							Thread.sleep(3000);
+
+						} catch (Exception f) {
+							System.out.println(f);
+							f.printStackTrace();
+
+						}
+
+						type("sudo su - sqaatt");
+						enter();
+						Thread.sleep(150);
+						type(password);
+						enter();
+						Thread.sleep(5000);
+						type("cd " + path);
+						enter();
+						Thread.sleep(150);
+						System.out.println(command + file);
+						type(command + file);
+
+						
+						enter();
+
+					}
+				}
+
+				else if (type == "$GREEN") {
+
+					command = "execute_green.sh ";
+					serverString = "srh22097.ute.fedex.com";
+
+					for (int i=1;i<e.getRowCount()+1;i++) {
+						
+						String file=e.getCellData(i, 0);
+
+						
+						System.out.println("========================================================================");
+
+						Runtime r = Runtime.getRuntime();
+
+						String s = puttypath + " -ssh -l " + "f" + username + " -pw " + password + " " + serverString + "";
+						try {
+							
+							p = r.exec(s);
+							Thread.sleep(3000);
+
+						} catch (Exception f) {
+							System.out.println(f);
+							f.printStackTrace();
+
+						}
+
+						type("sudo su - sqaatt");
+						enter();
+						Thread.sleep(150);
+						type(password);
+						enter();
+						Thread.sleep(5000);
+						type("cd " + path);
+						enter();
+						Thread.sleep(150);
+						System.out.println(command + file);
+						type(command + file);
+
+						
+						enter();
+
+					}
+
+				}
+
+				ps1.close();
+				rs1.close();
+				con.close();
+				
+				//==========================================Excel completed================================================
+				
+
+			}
+		
+		
+		
+		
 
 	}
 

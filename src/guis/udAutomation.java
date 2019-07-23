@@ -118,20 +118,30 @@ public class udAutomation {
 		frame.getContentPane().add(rdbtnL_1);
 		
 		
+		
+		
+		rdbtnL.addActionListener(new java.awt.event.ActionListener() {
+			
+			  public void actionPerformed(java.awt.event.ActionEvent evt) {
+				  c.setLevel(false);
+	            }
+			
+		});
+		
+		rdbtnL_1.addActionListener(new java.awt.event.ActionListener() {
+			
+			  public void actionPerformed(java.awt.event.ActionEvent evt) {
+				  c.setLevel(true);
+	            }
+			
+		});
+		
+		
 		ButtonGroup bg3 =new ButtonGroup();
 		bg3.add(rdbtnL);
 		bg3.add(rdbtnL_1);
 		
 		
-		if(rdbtnL.isSelected())
-		{
-			c.setLevel(false);
-			
-		}else if(rdbtnL_1.isSelected())
-		{
-			c.setLevel(true);
-			
-		}
 		
 		
 		rdbtnDom = new JRadioButton("Dom");
@@ -248,7 +258,7 @@ public class udAutomation {
 		
 		if(rdbtnNAB.isSelected())
 		{
-			c.setFlavour("NAB");
+			c.setFlavour("NA");
 			
 			
 			
