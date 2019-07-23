@@ -20,6 +20,11 @@ import org.openqa.selenium.WebDriver;
 
 import configuration.config;
 import configuration.mouse;
+import rebill.rebillMain;
+
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class gui {
 
@@ -134,13 +139,7 @@ public class gui {
 	 */
 	private void initialize() {
 		
-		 homePath=System.getProperty("user.dir");
-	      if (System.getProperty("user.dir").indexOf("dist")==-1){
-	    	  imagePath=System.getProperty("user.dir");
-	        }
-	      else {
-	    	  imagePath=homePath.substring(0,homePath.length()-5);
-	        }
+		
 	      
 	      libDirectoryDB=homePath+"\\libs+\\DB";
 	      libDirectoryExcel=homePath+"\\libs+\\Excel";
@@ -154,6 +153,11 @@ public class gui {
 		frame.setBounds(100, 100, 1005, 718);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+	
+		
+		
+		
 		frame.setName("menu");				
 						
 		rebillGUI = new JLabel("New label");
@@ -180,6 +184,21 @@ public class gui {
 		datapopGUI = new JLabel("New label");
 		datapopGUI.setBounds(561, 463, 338, 54);
 		datapopGUI.setName("datapop");
+		
+		
+		
+		
+		
+		
+		
+		
+		JButton testButton = new JButton("Testing - Dont Click");
+		testButton.setBounds(740, 617, 207, 29);
+		frame.getContentPane().add(testButton);
+		
+		
+		
+		
 						
 								
 		guiBase gb = new guiBase();
@@ -197,6 +216,17 @@ public class gui {
 		m.setupBackground();
 	
 	    frame.setVisible(true);
+	    
+	    
+		testButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				c.setDriverType("1");
+				c.setSource(false);
+				c.setExcelPath("C:\\Users\\5194105\\Documents\\Eclipse Projects\\Master GUI\\test data\\rebill.xlsx");
+				rebillMain rebill = new rebillMain(c);
+			}
+		});
 
 	}
 	
@@ -204,6 +234,14 @@ public class gui {
 	//Sets up config file
 	public void setUp() {
 		
+		
+		 homePath=System.getProperty("user.dir");
+	      if (System.getProperty("user.dir").indexOf("dist")==-1){
+	    	  imagePath=System.getProperty("user.dir");
+	        }
+	      else {
+	    	  imagePath=homePath.substring(0,homePath.length()-5);
+	        }
 		
 		//Gets path of config file in project directory. this is to get it wether you run from jar file
 		//or from eclipse.
@@ -321,6 +359,8 @@ public class gui {
 		c.setIeDriverPath(ieDriverPath);
 		c.setUdUsername(udUsername);
 		c.setUdPassword(udPassword);
+		//c.setIEDriver(ieSetProperty,ieDriverPath );
+		//c.setChromeDriver(chromeSetProperty,chromePath);
 
 		
 
@@ -328,5 +368,4 @@ public class gui {
 		
 		
 	}
-	
 }

@@ -18,6 +18,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
@@ -69,9 +70,10 @@ public class rebillMain {
      
      
         public rebillMain(config c){
-        
+        this.c=c;
        //Saving all Excel or DB to rebillDataObject.
        setUpData();
+       setUpDriver();
         	
         	/*
         this.c=c;
@@ -1052,7 +1054,7 @@ public class rebillMain {
         	if(c.getSource()==true){
         		database db = new database();
         		//creates db connection
-        		db.openDB(c.getGtmRevToolsConnection("GTM_REV_TOOLS", "Wr4l3pP5gWVd7apow8eZwnarI3s4e1"));
+        		db.openDB(c.getGtmRevToolsConnection(c.getGtmDbName(), c.getGtmDbPassword()));
         		//Gets the data we want via sql query.
         		db.readData("select * from rebill_regression where trkngnbr is not null");
         		ResultSet rs;
@@ -1071,6 +1073,21 @@ public class rebillMain {
         		}	
         	}
         }  	
-     }
+
+        
+        public void setUpDriver() {
+        	
+        	if (c.getDriverType().equals("1")){
+        		c.setProperty(c.getIeProperty(),c.getIeDriverPath());
+        		driver = new InternetExplorerDriver();
+        	}
+        	
+        	if (c.getDriverType().equals("2")){
+        		c.setProperty(c.getChromeProperty(),c.getChromeDriverPath());
+        		driver = new ChromeDriver();
+        	}
+        	
+        	
+        }
    }
 //"insert into gtm_rev_tools.prerate_results (test_input_nbr,tin_count,trkngnbr,result,description,levels,cycle,type) values ('",A8,"','",B8,"','",C8,"','",D8,"','",E8,"');")

@@ -21,7 +21,6 @@ public class udAutomation {
 	private JLabel lblLevel;
 	private JRadioButton rdbtnL_1;
 	private JLabel lblUsername;
-	private JLabel lblPassword;
 	private JLabel lblCompatibleMode;
 	private JLabel lblType;
 	private JLabel lblUnixPath;
@@ -31,7 +30,6 @@ public class udAutomation {
 
 	private JTextField textField;
 	private JPasswordField textField_1;
-	private JTextField textField_2;
 
 	 private JLabel excelLabel;
 	 private JLabel dbLabel;
@@ -40,6 +38,8 @@ public class udAutomation {
 	 gui g;
 	 
 	 config c;
+	 private JTextField unixPathText;
+	 private JLabel lblPassword;
 
 	/**
 	 * Launch the application.
@@ -65,12 +65,43 @@ public class udAutomation {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1005, 718);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
 		
 		lblLevel = new JLabel("Level:");
 		lblLevel.setFont(new Font("Segoe UI", Font.BOLD, 23));
 		lblLevel.setForeground(Color.WHITE);
 		lblLevel.setBounds(327, 217, 69, 20);
 		frame.getContentPane().add(lblLevel);
+		
+			
+			lblSource = new JLabel("Source:");
+			lblSource.setForeground(Color.WHITE);
+			lblSource.setFont(new Font("Segoe UI", Font.BOLD, 23));
+			lblSource.setBounds(327, 433, 99, 31);
+			frame.getContentPane().add(lblSource);
+		
+		
+		//username
+		textField = new JTextField();
+		textField.setBounds(451, 258, 194, 26);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		
+		c.setUdUsername(textField.getText());
+		
+		
+		//password
+		textField_1 = new JPasswordField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(450, 298, 194, 26);
+		frame.getContentPane().add(textField_1);
+		c.setUdPassword(textField_1.getText());
+		
+		unixPathText = new JTextField();
+		unixPathText.setBounds(451, 485, 269, 26);
+		frame.getContentPane().add(unixPathText);
+		unixPathText.setColumns(10);
 		
 		JRadioButton rdbtnL = new JRadioButton("L2");
 		rdbtnL.setForeground(Color.WHITE);
@@ -292,7 +323,7 @@ public class udAutomation {
 		lblUnixPath = new JLabel("Unix Path:");
 		lblUnixPath.setForeground(Color.WHITE);
 		lblUnixPath.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		lblUnixPath.setBounds(327, 430, 125, 29);
+		lblUnixPath.setBounds(327, 480, 125, 29);
 		frame.getContentPane().add(lblUnixPath);
 		
 		lblUsername = new JLabel("Username:");
@@ -301,52 +332,21 @@ public class udAutomation {
 		lblUsername.setBounds(327, 253, 125, 29);
 		frame.getContentPane().add(lblUsername);
 		
-			
 		lblPassword = new JLabel("Password:");
 		lblPassword.setForeground(Color.WHITE);
 		lblPassword.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		lblPassword.setBounds(327, 298, 112, 29);
+		lblPassword.setBounds(327, 295, 125, 29);
 		frame.getContentPane().add(lblPassword);
-		
-		
-		//username
-		textField = new JTextField();
-		textField.setBounds(451, 258, 194, 26);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
-		
-		
-		//password
-		textField_1 = new JPasswordField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(450, 298, 194, 26);
-		frame.getContentPane().add(textField_1);
-		
-		
-		c.setUdUsername(textField.getText());
-		c.setUdPassword(textField_1.getText());
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(445, 435, 259, 26);
-		frame.getContentPane().add(textField_2);
-	
-		
-		lblSource = new JLabel("Source:");
-		lblSource.setForeground(Color.WHITE);
-		lblSource.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		lblSource.setBounds(327, 475, 99, 31);
-		frame.getContentPane().add(lblSource);
 	
 		
 		//Making built in incons... here you no longer need to set picture or filechooser. You just make a label and 
 		//give it to addExcel() method.
 		excelLabel = new JLabel("Excel");
-		excelLabel.setBounds(400, 478, 78, 56);
+		excelLabel.setBounds(415, 425, 78, 56);
 		
 	
 		dbLabel = new JLabel("DB");
-		dbLabel.setBounds(475, 478, 78, 56);
+		dbLabel.setBounds(490, 425, 78, 56);
 
 		executeLabel = new JLabel("Execute");
 		executeLabel.setBounds(355, 550, 142, 41);
@@ -355,6 +355,8 @@ public class udAutomation {
 		dbLabel.setName("db");
 		executeLabel.setName("execute");
 		
+		lblUnixPath.setVisible(false);
+		unixPathText.setVisible(false);
 		
 		
 		//This will load the data that is common for all GUI screens (the background, side bar)
@@ -373,7 +375,7 @@ public class udAutomation {
 		m.addDb(dbLabel);
 		m.addExecute(executeLabel);
 		
-		m.addAkshayUDStuff(lblUnixPath,textField_2);
+		m.addAkshayUDStuff(lblUnixPath, unixPathText);
 		
 		//This loads the background.
 		m.setupBackground();
@@ -388,6 +390,4 @@ public class udAutomation {
 	
 	
 	}
-	
-	
 }

@@ -317,6 +317,13 @@ public void addRemoveAkshayUDStuff(Boolean addRemove){
 	else if (addRemove==true) {	
 		unixPath.setVisible(true);
 	unixPathText.setVisible(true);
+	try {
+	unixPathText.setText(filePath);
+	}
+	catch (Exception e) {
+		unixPathText.setText("");
+		
+	}
 	}
 	
 	
@@ -421,19 +428,7 @@ public void setupMouseListener() {
 			    		
 			    		//Excel
 			    		if (mouseLabel.getName().equals("excel")) {
-			    			System.out.println("Clicked Excel");
-			    			  jFileChooser1.setFileSelectionMode(JFileChooser.APPROVE_OPTION);
-			    		        int returnVal = jFileChooser1.showOpenDialog(mouseLabel);
-			    		        if (returnVal == JFileChooser.APPROVE_OPTION) {
-			    		            file = jFileChooser1.getSelectedFile();
-			    		            // What to do with the file, e.g. display it in a TextArea
-			    		            filePath=file.getAbsolutePath();
-
-			    		           
-
-			    		        } else {
-			    		            System.out.println("File access cancelled by user.");
-			    		        }        // TODO add your handling code here:
+			    	
 			    			
 			    		}
 			    		

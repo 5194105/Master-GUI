@@ -11,7 +11,7 @@ public class config {
 	
 	Connection taa1Con,gtmRevToolsCon;
 	String chromeSetProperty,ieSetProperty,chromePath,ieDriverPath;
-	WebDriver driver;
+	WebDriver ieDriver,chromeDriver,tempWebDriver;
     String gtmDbName,gtmDbResults,gtmDbPassword,retryAttempts,secondTimeout,rebillL2URL,rebillL3URL;
     String rtmDbName,rtmDbPassword;
     String rerateL2URL,rerateL3URL,prerateL2URL,prerateL3URL;
@@ -21,6 +21,7 @@ public class config {
     String udUsername,udPassword;
     String excelPath;
     String type,flavour;
+    String temp;
     
     Boolean compatible,level=null,source=null;
 	
@@ -302,27 +303,63 @@ public void setFlavour(String flavour) {
 	
 	
 	
+	public void setDriverType(String temp) {
+		
+		
+	}
+	
+	
+	
+	public String getDriverType() {
+		
+		return temp;
+		
+	}
+	
+	
+	public WebDriver setUpWebDriver() {
+		
+		if (temp.equals("1")) {
+			tempWebDriver=ieDriver;
+		}
+		else if (temp.equals("2")) {
+			tempWebDriver=chromeDriver;
+		}
+		else if (temp.equals("3")) {
+			//tempWebDriver=fireFoxDriver;
+		}
+		return tempWebDriver;
+		
+	}
+	
+	
+	
 	public void setIEDriver(String property,String path){
 		
 		System.out.println(property);
 		System.out.println(path);
 		System.setProperty(property, path);
-		driver= new InternetExplorerDriver();
+		//ieDriver= new InternetExplorerDriver();
 	}
 	
 	public void setChromeDriver(String property,String path){
 		System.setProperty(property, path);
-		driver= new ChromeDriver();
+		//chromeDriver= new ChromeDriver();
+	}
+	
+	public void setProperty(String property,String path) {
+		
+		System.setProperty(property, path);
 	}
 	
 	public WebDriver getIEDriver(){
 		
-		return driver;
+		return ieDriver;
 	}
 	
 	public WebDriver getChromeDriver(){
 		
-		return driver;
+		return chromeDriver;
 	}
 	
 	public Connection getTaa1DbConnection(String dbCon,String username,String password) {
