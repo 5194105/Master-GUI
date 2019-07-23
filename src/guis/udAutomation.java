@@ -11,8 +11,10 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import UD.UdExecution;
 import configuration.config;
 import configuration.mouse;
+import javax.swing.JButton;
 
 public class udAutomation {
 
@@ -40,6 +42,9 @@ public class udAutomation {
 	 config c;
 	 private JTextField unixPathText;
 	 private JLabel lblPassword;
+	 private JButton btnNewButton;
+	 
+	 String level1,compatibleMode;
 
 	/**
 	 * Launch the application.
@@ -72,6 +77,9 @@ public class udAutomation {
 		lblLevel.setForeground(Color.WHITE);
 		lblLevel.setBounds(327, 217, 69, 20);
 		frame.getContentPane().add(lblLevel);
+			
+
+			frame.getContentPane().add(btnNewButton);
 		
 			
 			lblSource = new JLabel("Source:");
@@ -358,12 +366,12 @@ public class udAutomation {
 		dbLabel = new JLabel("DB");
 		dbLabel.setBounds(490, 425, 78, 56);
 
-		executeLabel = new JLabel("Execute");
-		executeLabel.setBounds(355, 550, 142, 41);
+		//executeLabel = new JLabel("Execute");
+		//executeLabel.setBounds(355, 550, 142, 41);
 		
-		excelLabel.setName("excel");
-		dbLabel.setName("db");
-		executeLabel.setName("execute");
+		//excelLabel.setName("excel");
+		//dbLabel.setName("db");
+		//executeLabel.setName("execute");
 		
 		lblUnixPath.setVisible(false);
 		unixPathText.setVisible(false);
@@ -383,7 +391,7 @@ public class udAutomation {
 		//Im giving the excel,database, and execute buttons. This will load the Pics as well as some built in functionality.
 		m.addExcel(excelLabel);
 		m.addDb(dbLabel);
-		m.addExecute(executeLabel);
+		//m.addExecute(executeLabel);
 		
 		m.addAkshayUDStuff(lblUnixPath, unixPathText);
 		
@@ -397,7 +405,60 @@ public class udAutomation {
 		System.out.println("USERNAME: "+c.getUdUsername());
 		System.out.println("PasswordE: "+c.getUdPassword());
 		
+		
+		
+		//NEW STUFF
+		btnNewButton = new JButton("Execute");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				if(c.getLevel()==false)
+				{
+					level1="L2";
+				}else if(c.getLevel()==true)
+				{
+					level1="L3";
+				}
+				
+				
+				if(c.getCompatibleMode())
+				{
+					compatibleMode="LOCAL";
+				}
+				else {
+					compatibleMode="RDP";
+				}
+				if(c.getSource()) {
+					c.setUnixPath("NA");
+				}else {
+					c.setUnixPath(unixPathText.getText());
+				
+				
+				}
+				try {
+					UdExecution ud=new UdExecution(level1,c.getType(),c.getUnixPath(),c.getUdUsername(),c.getUdPassword(),c.getExcelPath(),compatibleMode,c.getFlavour());
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnNewButton.setBounds(361, 564, 194, 46);
+		
 	
 	
-	}
+		
+		}
 }
