@@ -45,9 +45,11 @@ public class UdExecution {
 
 		database db = new database();
 		
+		System.out.println("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+		
 		System.out.println(c.getGtmDbName()+"------------------"+ c.getGtmDbPassword());
 		
-		db.openDB(c.getGtmRevToolsConnection(c.getGtmDbName(), c.getGtmDbPassword()));
+		db.openDB(c.getGtmRevToolsConnection("GTM_REV_TOOLS", "Wr4l3pP5gWVd7apow8eZwnarI3s4e1"));
 		
 		
 		String dbname = "";
