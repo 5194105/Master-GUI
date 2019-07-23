@@ -45,6 +45,8 @@ public class UdExecution {
 
 		database db = new database();
 		
+		System.out.println(c.getGtmDbName()+"------------------"+ c.getGtmDbPassword());
+		
 		db.openDB(c.getGtmRevToolsConnection(c.getGtmDbName(), c.getGtmDbPassword()));
 		
 		
@@ -112,6 +114,8 @@ public class UdExecution {
 		// ----------------------------------------------------
 		
 		//==========================================For Database reading==========================================
+		if(c.getSource()) {
+		
 		if (level == "L2") {
 
 //			dbconnect();
@@ -172,9 +176,7 @@ public class UdExecution {
 
 			enter();
 
-			ps1.close();
-			rs1.close();
-			con.close();
+			db.closeDB();
 			// ----------------------------------------------------------------
 			if (type == "Domestic") {
 
@@ -320,7 +322,7 @@ public class UdExecution {
 			Thread.sleep(5000);
 			enter();
 
-			
+			db.closeDB();
 
 			// -------------------------------------
 			if (type == "Domestic") {
@@ -409,14 +411,16 @@ public class UdExecution {
 
 			}
 
-			ps1.close();
-			rs1.close();
-			con.close();
+			db.closeDB();
 			
 			//==========================================Databse completed================================================
-			
+		}	
 
-		}else if (level == "L2") {
+		}else if(c.getSource()==false)
+			{
+			
+			
+			if(level == "L2") {
 
 			//==========================================ForExcel reading==========================================
 				
@@ -428,8 +432,8 @@ public class UdExecution {
             e.setRowCountAutomatically(2);
          
             
-            //Closes the excel sheet.
-            e.saveAndClose();
+    
+           
 
 				// for spliting UD's into files
 				serverString = "irh22076.ute.fedex.com";
@@ -583,8 +587,7 @@ public class UdExecution {
 	            e.setRowCountAutomatically(2);
 	         
 	            
-	            //Closes the excel sheet.
-	            e.saveAndClose();
+	            
 
 			
 				// for spliting UD's into files
@@ -744,7 +747,7 @@ public class UdExecution {
 
 			}
 		
-		
+			}
 		
 		
 
