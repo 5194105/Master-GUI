@@ -40,7 +40,7 @@ public class rebillMain {
     ArrayList<rebillData> dataArray;
     WebDriver driver;
     int loginCounter=0, singleTrackingNumber=0,totalTrackingNumber=0,
-        packageCounter=0,statCodeCounter1=0,statCodeCounter2=0,trackingNumberCounter=0,retryGetDetailCounter=0,
+        packageCounter=0,statCodeCounter1=0,statCodeCounter2=0,trackingNumberCounter=-1,retryGetDetailCounter=0,
         retryGetDetailCounterTotal=0,statCodeCounterTotal1, statCodeCount=0,rebillScreenCounter=0,statCodeCountCounter=0;
     WebDriverWait wait;
     Boolean exist,statCodeBoolean,popupExist,pass,popupBoolean;
@@ -65,132 +65,63 @@ public class rebillMain {
     Boolean source;
      String dbName,dbPassword,dbResults,retryAttempts,secondTimeout,l2URL,l3URL;
      config c;
+     Boolean continueBoolean;
+     String url;
+     By tempElement;
+     int stepOneCounter;
      
      
      
-     
-        public rebillMain(config c){
-        this.c=c;
-       //Saving all Excel or DB to rebillDataObject.
-       setUpData();
-       setUpDriver();
-        	
-        	/*
-        this.c=c;
-        this.dbName=c.getDbName();
-        this.dbPassword=c.getDbPassword();
-        this.dbResults=c.getDbResults();
-        this.retryAttempts=c.getRetryAttempts();
-        this.secondTimeout=c.getSecondTimeout();
-        this.l2URL=c.getL2URL();
-        this.l3URL=c.getL3URL();
-        timeOutCounter=Integer.parseInt(secondTimeout);
-        //Creates excel class that will be used to write to the excel.
-      
-        
-        //Gets our data from either rebill or excel ... based on GUI selection.
-        this.dataArray=dataArray;
-        
-        //Not really needed since we set connections back up... Need to remove.
-        this.con=c.getConnection(); 
-        
-        //True=DB False=Excel
-        this.source=c.getSource();
-        
-        this.level=c.getLevel();
-        
-        if(source==true){
-            et=new excelTesting(c.getFile());
-        }
-            //document.querySelector('#\31 554139273851-grid-container > div.ui-grid-viewport.ng-isolate-scope')
-        
-        
-            
-        //This is our first time getting data. trackingNumberCounter equals zero right now.
-        trackingNumber=dataArray.get(trackingNumberCounter).getTrkngnbr();
-        reasonCode=dataArray.get(trackingNumberCounter).getReason_code();
-        rebillAccountNumber=dataArray.get(trackingNumberCounter).getRebill_acct();
-        login=dataArray.get(trackingNumberCounter).getLogin();
-        password=dataArray.get(trackingNumberCounter).getPassword();
-        result=dataArray.get(trackingNumberCounter).getResult();
-        description=dataArray.get(trackingNumberCounter).getDescription();
-        test_input_nbr=dataArray.get(trackingNumberCounter).getTest_input_nbr();
-        tin_count=dataArray.get(trackingNumberCounter).getTin_count();
-        
-        System.out.println("TEST  "+trackingNumber);
-        System.out.println("TEST  "+reasonCode);
-        System.out.println("TEST  "+rebillAccountNumber);
-        System.out.println("TEST  "+login);
-        System.out.println("TEST  "+password);
-        System.out.println("TEST  "+result);
-        System.out.println("TEST  "+description);
-        System.out.println("TEST  "+test_input_nbr);
-        System.out.println("TEST  "+tin_count);
-        
-        
-        
-        
-        //This is to get webdriver located in project.
-        
-      
-            
-            tempFile = new File(System.getProperty("user.dir")+"\\chromedriver.exe"); 
-            System.out.println( System.getProperty("user.dir"));
-           
-            System.out.println(new File(tempFile.getParent()).getParent());
-           if (tempFile.exists()==true){
-               System.out.println("READ 1");
-               chromeDriverFile=tempFile;
-           }
-           else{
-               System.out.println("READ 2");
-                chromeDriverFile=new File(new File(tempFile.getParent()).getParentFile()+"\\chromedriver.exe");
-           }
-        
-        //Set it to chromedriver... IE does not work with ERA
-        //System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"\\chromedriver.exe");
-        
-        //Need to set this if using JAR
-        System.setProperty("webdriver.chrome.driver", chromeDriverFile.getAbsolutePath());
+        public rebillMain(config c) throws InterruptedException{
+        	this.c=c;
+        	setUpData();
+        	resetCounters();
+        	eraLogin();
+        	for (int i=0;i<dataArray.size();i++) {
+        		setUpNextTrackingNumber(i);
+        	}
 
-        //If EXE
-      //  System.setProperty("webdriver.chrome.driver",  System.getProperty("user.dir")+"\\lib\\chromedriver.exe");
-        
-           
-        //Lets login.
-        eraLogin();
-        
-        */
     }
-        
-        
-        
-        
-        
-        
-    
+
     //Will try to login... if it fails will try again. If it fails 3 times in a row program will end.
     public void eraLogin() throws InterruptedException{
             try{
-                driver = new ChromeDriver();
-                js = ((JavascriptExecutor) driver);
-        
-                if (level==true){
-                driver.get(l2URL);
-                }
-                else
-                {
-                driver.get(l3URL);
-                }
-                driver.manage().window().maximize();
-                
+            	setUpDriver();
+            	timeOutCounter=Integer.parseInt(c.getSecondTimeout());
+
                 //timeoutcounter is a notepad variable... will 5 seconds before moving on.
                 wait = new WebDriverWait(driver, timeOutCounter);
-                driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+                
                 driver.findElement(By.xpath("//*[@id=\"username\"]")).sendKeys(login);
+        
                 driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys(password); 
+            
                 driver.findElement(By.xpath("//*[@id=\"submit\"]")).click();
-               
+                
+                tempElement=By.xpath("//*[@id=\"trackingID\"]");
+                
+                isElementVisible(tempElement,1);
+                
+            	}
+            
+                catch(Exception e) {
+                	errorHandling(1);
+                	}
+            
+            
+            	if(continueBoolean==true) {
+            		
+            		try {
+            			  System.out.println("Made It Here Past Login Screen");
+						//getTrackingNumber();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+            	}
+                
+                
+                /*
                 //This will check if tracking number text box is there... proof we logged in.
                 exist=driver.findElement(By.xpath("//*[@id=\"trackingID\"]")).isDisplayed();
                 
@@ -208,8 +139,15 @@ public class rebillMain {
                 System.out.println("Unable to Login");
                 retryLogin();
             }
+            */
         }
         
+    
+    
+    
+    
+    
+    
     //
     public void getTrackingNumber() throws InterruptedException, SQLException, IOException{
         try{
@@ -893,17 +831,7 @@ public class rebillMain {
         }
             
           
-        public void setUpNextTrack(Boolean booResult,String resultString) throws InterruptedException, SQLException, IOException{
-           /*
-            if (pass==true){
-                    pass=false;
-                    UploadResults("pass",resultString,trackingNumber,test_input_nbr,tin_count);
-                }
-            else {
-                UploadResults("failed",resultString,trackingNumber,test_input_nbr,tin_count);
-            }
-            */
-           
+        public void setUpNextTrack(Boolean booResult,String resultString) throws InterruptedException, SQLException, IOException{     
            if (source==true){
                 et.writeResults(row,booResult,resultString);
            }
@@ -1019,6 +947,20 @@ public class rebillMain {
         
         //Importing all my data
         public void setUpData() {
+        	
+        	
+        	//Setting the URL
+        	if(c.getLevel()==false) {
+        		url=c.getRebillL2URL();
+        	}
+        	else if (c.getLevel()==true) {
+        		url=c.getRebillL3URL();
+        		
+        	}
+        	
+        	
+        	
+        	
         	//Getting the source. Excel = false and Database=true. I set this in the GUI/Mouse CLass
         	if(c.getSource()==false){
         		//Giving my excel path from GUI (path saved in config class... was passed through gui/mouse class)
@@ -1085,6 +1027,7 @@ public class rebillMain {
         	if (c.getDriverType().equals("1")){
         		c.setProperty(c.getIeProperty(),c.getIeDriverPath());
         		driver = new InternetExplorerDriver();
+        		js = ((JavascriptExecutor) driver);
         	}
         	
         	if (c.getDriverType().equals("2")){
@@ -1092,7 +1035,116 @@ public class rebillMain {
         		driver = new ChromeDriver();
         	}
         	
+        	js = ((JavascriptExecutor) driver);
+    		driver.get(url);
+    		driver.manage().window().maximize();
+        	
         	
         }
+        
+        
+        
+        
+        public void isElementVisible(By element, int step) throws InterruptedException {
+    		
+        	continueBoolean=false;
+        	
+        	try {
+    			wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+    			continueBoolean=true;
+    			}
+    		catch(NoSuchElementException e) {
+    			errorHandling(step);
+    		}
+    	}
+        
+       
+    	
+    	public void resetCounters() {
+    		stepOneCounter=0;
+    		
+    	}
+    	
+    	
+ 
+    	
+    	
+    	public void setUpNextTrackingNumber(int trackingNumberCounter) {   
+  
+              //Saves previous login in case login changes.
+              if(trackingNumberCounter>0) {
+            	  tempLogin=login;
+              }
+              else {
+            	  
+            	  tempLogin=arrayData.get(trackingNumberCounter).getLogin();
+              }
+              
+              
+              
+              //If no tracking number is left then program is completed.
+              try{
+              trackingNumber=arrayData.get(trackingNumberCounter).getTrkngnbr();
+              if (trackingNumber.equals("") ||trackingNumber==null ){
+                  System.out.println("REACHED HERE TEJESH!!!!!!!!!!!!!!!");
+                  JOptionPane.showMessageDialog(null, "Program Completed");
+                  System.exit(0);
+                  
+              }}
+              catch(Exception e){
+                  System.out.println("REACHED HERE TEJESH EXCEPTION!!!!!!!!!!!!!!!");
+                  JOptionPane.showMessageDialog(null, "Program Completed");
+               System.exit(0);
+              }
+              
+              
+              
+              reasonCode=arrayData.get(trackingNumberCounter).getReason_code();
+              rebillAccountNumber=arrayData.get(trackingNumberCounter).getRebill_acct();
+              login=arrayData.get(trackingNumberCounter).getLogin();
+              password=arrayData.get(trackingNumberCounter).getPassword();
+              result=arrayData.get(trackingNumberCounter).getResult();
+              description=arrayData.get(trackingNumberCounter).getDescription();
+              test_input_nbr=arrayData.get(trackingNumberCounter).getTest_input_nbr();
+              tin_count=arrayData.get(trackingNumberCounter).getTin_count();
+              
+             // System.exit();
+              //If login has changed it will close browser and login with new id
+              
+
+              
+              if (!tempLogin.equals(login)){
+
+            // driver.quit();
+            // eraLogin();
+              }
+              else
+              {
+              //  getTrackingNumber(); 
+              }
+    	}
+    	
+    	
+    	
+    	
+       	public void errorHandling(int step) throws InterruptedException {
+        	
+    		switch(step) {
+    		
+    		case 1:
+    			
+    			if(stepOneCounter<5) {
+    				stepOneCounter++;
+    				driver.quit();
+    				eraLogin();
+    			}
+    			else if(stepOneCounter>=5){
+    				System.out.println("Program Ended Because It Could Not Login");
+    				
+    			}
+    			
+    			break;
+    		
+    		}
+    	}
    }
-//"insert into gtm_rev_tools.prerate_results (test_input_nbr,tin_count,trkngnbr,result,description,levels,cycle,type) values ('",A8,"','",B8,"','",C8,"','",D8,"','",E8,"');")
