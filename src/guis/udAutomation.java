@@ -342,7 +342,7 @@ public class udAutomation {
 		m.addAkshayUDStuff(lblUnixPath, unixPathText);
 
 		btnNewButton = new JButton("Execute");
-	wButton.setBounds(361, 564, 194, 46);
+		btnNewButton.setBounds(361, 564, 194, 46);
 		frame.getContentPane().add(btnNewButton);
 		
 		//This loads the background.

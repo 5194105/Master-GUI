@@ -19,7 +19,7 @@ public class excel {
 	XSSFWorkbook  excelWorkBook;
 	XSSFSheet  excelSheet;
 	Cell c = null;
-	String cellData;
+	String cellData="a";
 	int sheetNumber;
 	
 	int rowCount,colCount;
@@ -117,7 +117,7 @@ public class excel {
 		
 		int couter=1;
 		rowCount=-1;
-		cellData="a";
+		
 		
 		while(!cellData.equals("") || cellData!=null || cellData.equals("null")) {
 			System.out.println("Inside Row Count Auto");

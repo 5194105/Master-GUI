@@ -412,9 +412,9 @@ public class UdExecution {
 				e.setUpExcelWorkbook();
 				// Sets up the sheet at the a particular index (0 = sheet 1)
 				e.setUpExcelSheet(0);
-				//e.setRowCountAutomatically(0);
+				e.setRowCountAutomatically(0);
 
-				e.setRowCountManually(25);
+				//e.setRowCountManually(25);
 
 				
 				// for spliting UD's into files
