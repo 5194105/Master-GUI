@@ -404,13 +404,13 @@ public class udAutomation {
 				//type entry
 				if(rdbtnDom.isSelected())
 				{
-					c.setType("DOM");
+					c.setType("Domestic");
 					
 					
 					
 				}else if(rdbtngreen.isSelected())
 				{
-					c.setType("GREEN");
+					c.setType("$GREEN");
 					
 					
 				}
