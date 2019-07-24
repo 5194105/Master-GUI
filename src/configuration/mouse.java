@@ -584,7 +584,7 @@ public void setupMouseListener() {
 				    					c.setUnixPath(unixPathText.getText());
 				    				}
 				    				
-				    				UdExecution ud=new UdExecution(level1,c.getType(),c.getUnixPath(),c.getUdUsername(),c.getUdPassword(),c.getExcelPath(),compatibleMode,c.getFlavour());
+				    				//UdExecution ud=new UdExecution(level1,c.getType(),c.getUnixPath(),c.getUdUsername(),c.getUdPassword(),c.getExcelPath(),compatibleMode,c.getFlavour());
 				    				
 				    				
 				    				

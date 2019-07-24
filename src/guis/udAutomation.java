@@ -475,10 +475,15 @@ public class udAutomation {
 				}
 				try {
 					
-					c.setGtmDbName("GTM_REV_TOOLS");
-					c.setGtmDbPassword( "Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
+					//This is no needed as it is already taken care of once program runs.
+					//c.setGtmDbName("GTM_REV_TOOLS");
+					//c.setGtmDbPassword( "Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
+					
+					//Passing config class that has alot of data stored.
 					System.out.println(level1+"----"+c.getType()+"==============="+c.getUnixPath()+"==============="+c.getUdUsername()+"==============="+c.getUdPassword()+"==============="+c.getExcelPath()+"==============="+compatibleMode+"==============="+c.getFlavour());
-					UdExecution ud=new UdExecution(level1,c.getType(),c.getUnixPath(),c.getUdUsername(),c.getUdPassword(),c.getExcelPath(),compatibleMode,c.getFlavour());
+					
+					//You also dont need to pass all these since it is stored in config object
+					UdExecution ud=new UdExecution(c,level1,c.getType(),c.getUnixPath(),c.getUdUsername(),c.getUdPassword(),c.getExcelPath(),compatibleMode,c.getFlavour());
 				
 				
 				} catch (Exception e1) {

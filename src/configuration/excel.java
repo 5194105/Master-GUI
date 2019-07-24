@@ -119,7 +119,7 @@ public class excel {
 		rowCount=-1;
 		cellData="a";
 		
-		while(!cellData.equals("")) {
+		while(!cellData.equals("") || cellData!=null || cellData.equals("null")) {
 			System.out.println("Inside Row Count Auto");
 			getCellData(couter,y);
 			rowCount++;
