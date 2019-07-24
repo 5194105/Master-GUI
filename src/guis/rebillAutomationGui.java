@@ -152,6 +152,9 @@ public class rebillAutomationGui {
 		m.setupBackground();
 		l2RadioButton.addMouseListener(m.m3);
 		l3RadioButton.addMouseListener(m.m3);
+		
+		//Sets Driver to Chrome
+		c.setDriverType("2");
 
 		
 		

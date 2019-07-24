@@ -4,8 +4,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 
 public class config {
 	
@@ -23,6 +21,7 @@ public class config {
     String type,flavour;
     String temp;
     String unixPath;
+    String driverType;
     
     Boolean compatible,level=null,source=null;
 	
@@ -304,16 +303,16 @@ public void setFlavour(String flavour) {
 	
 	
 	
-	public void setDriverType(String temp) {
+	public void setDriverType(String driverType) {
 		
-		
+		this.driverType=driverType;
 	}
 	
 	
 	
 	public String getDriverType() {
 		
-		return temp;
+		return driverType;
 		
 	}
 	
@@ -384,9 +383,11 @@ public void setFlavour(String flavour) {
 		return taa1Con;
 	}
 	
-	public Connection getGtmRevToolsConnection(String username,String password) {
+	public Connection getGtmRevToolsConnection(String username,String password) throws ClassNotFoundException {
 		
 		try {
+			
+			Class.forName("oracle.jdbc.driver.OracleDriver");
 			gtmRevToolsCon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com",username,password);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

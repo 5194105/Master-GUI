@@ -79,9 +79,7 @@ public class udAutomation {
 		frame.getContentPane().add(lblLevel);
 			
 
-	
-		
-			
+
 			lblSource = new JLabel("Source:");
 			lblSource.setForeground(Color.WHITE);
 			lblSource.setFont(new Font("Segoe UI", Font.BOLD, 23));
@@ -96,7 +94,7 @@ public class udAutomation {
 		textField.setColumns(10);
 		
 		
-		c.setUdUsername(textField.getText());
+		
 		
 		
 		//password
@@ -104,7 +102,7 @@ public class udAutomation {
 		textField_1.setColumns(10);
 		textField_1.setBounds(450, 298, 194, 26);
 		frame.getContentPane().add(textField_1);
-		c.setUdPassword(textField_1.getText());
+		
 		
 		unixPathText = new JTextField();
 		unixPathText.setBounds(451, 485, 269, 26);
@@ -246,47 +244,7 @@ public class udAutomation {
 			}
 		});
 		
-		
-		//type entry
-		if(rdbtnDom.isSelected())
-		{
-			c.setType("DOM");
-			
-			
-			
-		}else if(rdbtngreen.isSelected())
-		{
-			c.setType("GREEN");
-			
-			
-		}
-		
-		
-		//Flavour entry
-		
-		if(rdbtnNAB.isSelected())
-		{
-			c.setFlavour("NA");
-			
-			
-			
-		}else if(rdbtnAB.isSelected())
-		{
-			c.setFlavour("AB");
-			
-			
-		}else if(rdbtnNT.isSelected())
-		{
-			c.setFlavour("NT");
-			
-			
-		}else if(rdbtnCCAR.isSelected())
-		{
-			c.setFlavour("CCAR");
-			
-			
-		}
-		
+				
 		
 		
 		
@@ -317,20 +275,7 @@ public class udAutomation {
 		bg2.add(rdbtnRDP);
 		
 		
-		//compatible mode entry
 		
-		if(rdbtnVDI.isSelected())
-		{
-			c.setCompatibleMode(false);
-			
-			
-			
-		}else if(rdbtnRDP.isSelected())
-		{
-			c.setCompatibleMode(true);
-			
-			
-		}
 		
 		lblType = new JLabel("Type:");
 		lblType.setForeground(Color.WHITE);
@@ -369,12 +314,13 @@ public class udAutomation {
 		//executeLabel = new JLabel("Execute");
 		//executeLabel.setBounds(355, 550, 142, 41);
 		
-		//excelLabel.setName("excel");
-		//dbLabel.setName("db");
+		excelLabel.setName("excel");
+		dbLabel.setName("db");
 		//executeLabel.setName("execute");
 		
 		lblUnixPath.setVisible(false);
 		unixPathText.setVisible(false);
+		
 		
 		
 		//This will load the data that is common for all GUI screens (the background, side bar)
@@ -396,7 +342,7 @@ public class udAutomation {
 		m.addAkshayUDStuff(lblUnixPath, unixPathText);
 
 		btnNewButton = new JButton("Execute");
-		btnNewButton.setBounds(361, 564, 194, 46);
+	wButton.setBounds(361, 564, 194, 46);
 		frame.getContentPane().add(btnNewButton);
 		
 		//This loads the background.
@@ -411,19 +357,98 @@ public class udAutomation {
 		
 		
 		
-		//NEW STUFF
+
+		btnNewButton = new JButton("Execute");
+		btnNewButton.setBounds(361, 564, 194, 46);
+		frame.getContentPane().add(btnNewButton);
 
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				
+				c.setUdUsername(textField.getText());
+				c.setUdPassword(textField_1.getText());
+				
+				
+				//level entry
+
+				
+				if(rdbtnL.isSelected())
+				{
+					c.setLevel(false);
+					
+					
+					
+				}else if(rdbtnL_1.isSelected())
+				{
+					c.setLevel(true);
+					
+					
+				}
+				
+				
+				//compatible mode entry
+				
+				if(rdbtnVDI.isSelected())
+				{
+					c.setCompatibleMode(false);
+					
+					
+					
+				}else if(rdbtnRDP.isSelected())
+				{
+					c.setCompatibleMode(true);
+					
+					
+				}
+				
+				
+
+				//type entry
+				if(rdbtnDom.isSelected())
+				{
+					c.setType("DOM");
+					
+					
+					
+				}else if(rdbtngreen.isSelected())
+				{
+					c.setType("GREEN");
+					
+					
+				}
+				
+				
+				//Flavour entry
+				
+				if(rdbtnNAB.isSelected())
+				{
+					c.setFlavour("NA");
+					
+					
+					
+				}else if(rdbtnAB.isSelected())
+				{
+					c.setFlavour("AB");
+					
+					
+				}else if(rdbtnNT.isSelected())
+				{
+					c.setFlavour("NT");
+					
+					
+				}else if(rdbtnCCAR.isSelected())
+				{
+					c.setFlavour("CCAR");
+					
+					
+				}
+
 				
 				
 				
 				
-				
-				
-				
+				//put your if .selected() stuff here
 				
 				
 				
@@ -439,10 +464,10 @@ public class udAutomation {
 				
 				if(c.getCompatibleMode())
 				{
-					compatibleMode="LOCAL";
+					compatibleMode="RDP";
 				}
 				else {
-					compatibleMode="RDP";
+					compatibleMode="LOCAL";
 				}
 				if(c.getSource()) {
 					c.setUnixPath("NA");
@@ -452,13 +477,21 @@ public class udAutomation {
 				
 				}
 				try {
+					
+					c.setGtmDbName("GTM_REV_TOOLS");
+					c.setGtmDbPassword( "Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
+					System.out.println(level1+"----"+c.getType()+"==============="+c.getUnixPath()+"==============="+c.getUdUsername()+"==============="+c.getUdPassword()+"==============="+c.getExcelPath()+"==============="+compatibleMode+"==============="+c.getFlavour());
 					UdExecution ud=new UdExecution(level1,c.getType(),c.getUnixPath(),c.getUdUsername(),c.getUdPassword(),c.getExcelPath(),compatibleMode,c.getFlavour());
+				
+				
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					
 				}
 			}
 		});
+
 		
 			 
 	
