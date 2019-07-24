@@ -1054,7 +1054,12 @@ public class rebillMain {
         	if(c.getSource()==true){
         		database db = new database();
         		//creates db connection
-        		db.openDB(c.getGtmRevToolsConnection(c.getGtmDbName(), c.getGtmDbPassword()));
+        		try {
+					db.openDB(c.getGtmRevToolsConnection(c.getGtmDbName(), c.getGtmDbPassword()));
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
         		//Gets the data we want via sql query.
         		db.readData("select * from rebill_regression where trkngnbr is not null");
         		ResultSet rs;

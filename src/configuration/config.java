@@ -21,6 +21,7 @@ public class config {
     String type,flavour;
     String temp;
     String unixPath;
+    String driverType;
     
     Boolean compatible,level=null,source=null;
 	
@@ -302,16 +303,16 @@ public void setFlavour(String flavour) {
 	
 	
 	
-	public void setDriverType(String temp) {
+	public void setDriverType(String driverType) {
 		
-		
+		this.driverType=driverType;
 	}
 	
 	
 	
 	public String getDriverType() {
 		
-		return temp;
+		return driverType;
 		
 	}
 	

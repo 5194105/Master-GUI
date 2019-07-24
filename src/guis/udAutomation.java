@@ -79,9 +79,7 @@ public class udAutomation {
 		frame.getContentPane().add(lblLevel);
 			
 
-			
-		
-			
+
 			lblSource = new JLabel("Source:");
 			lblSource.setForeground(Color.WHITE);
 			lblSource.setFont(new Font("Segoe UI", Font.BOLD, 23));
@@ -342,6 +340,10 @@ public class udAutomation {
 		//m.addExecute(executeLabel);
 		
 		m.addAkshayUDStuff(lblUnixPath, unixPathText);
+
+		btnNewButton = new JButton("Execute");
+	wButton.setBounds(361, 564, 194, 46);
+		frame.getContentPane().add(btnNewButton);
 		
 		//This loads the background.
 		m.setupBackground();
@@ -355,10 +357,11 @@ public class udAutomation {
 		
 		
 		
-		//NEW STUFF
+
 		btnNewButton = new JButton("Execute");
 		btnNewButton.setBounds(361, 564, 194, 46);
 		frame.getContentPane().add(btnNewButton);
+
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -495,6 +498,7 @@ public class udAutomation {
 		});
 
 		
+			 
 	
 	
 		
