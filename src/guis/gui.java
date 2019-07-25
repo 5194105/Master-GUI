@@ -241,31 +241,31 @@ public class gui {
 				
 				//level entry
 
-				String level1,compatibleMode;
-				
-					c.setLevel(false);
-					c.setLevel(true);
-					c.setCompatibleMode(false);
-					c.setCompatibleMode(true);
-					c.setType("Domestic");
-					c.setFlavour("NA");
-				//	c.setFlavour("AB");
-					//c.setFlavour("NT");
-					//c.setFlavour("CCAR");
-					//level1="L2";
-					level1="L3";
-					compatibleMode="RDP";
-				//	compatibleMode="LOCAL";
-					c.setUdUsername("5194105");
-					c.setUdPassword("Online74");
-					c.setUnixPath("/home/sqaatt/onlines/udpending");
-					c.setExcelPath("C:\\Users\\FedExUser\\Desktop\\test.xlsx");
-				c.setSource(false);;
-				
+//				String level1,compatibleMode;
+//				
+//					c.setLevel(false);
+//					c.setLevel(true);
+//					c.setCompatibleMode(false);
+//					c.setCompatibleMode(true);
+//					c.setType("Domestic");
+//					c.setFlavour("NA");
+//				//	c.setFlavour("AB");
+//					//c.setFlavour("NT");
+//					//c.setFlavour("CCAR");
+//					//level1="L2";
+//					level1="L3";
+//					compatibleMode="RDP";
+//				//	compatibleMode="LOCAL";
+//					c.setUdUsername("5194105");
+//					c.setUdPassword("Online74");
+//					c.setUnixPath("/home/sqaatt/onlines/udpending");
+//					c.setExcelPath("C:\\Users\\FedExUser\\Desktop\\test.xlsx");
+//				c.setSource(false);;
+//				
 				
 				
 				try {
-					UdExecution ud=new UdExecution(c,level1,c.getType(),c.getUnixPath(),c.getUdUsername(),c.getUdPassword(),c.getExcelPath(),compatibleMode,c.getFlavour());
+					UdExecution ud=new UdExecution(c);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

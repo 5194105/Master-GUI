@@ -341,9 +341,7 @@ public class udAutomation {
 		
 		m.addAkshayUDStuff(lblUnixPath, unixPathText);
 
-		btnNewButton = new JButton("Execute");
-		btnNewButton.setBounds(361, 564, 194, 46);
-		frame.getContentPane().add(btnNewButton);
+		
 		
 		//This loads the background.
 		m.setupBackground();
@@ -352,8 +350,7 @@ public class udAutomation {
 		frame.setVisible(true);
 		
 		
-		System.out.println("USERNAME: "+c.getUdUsername());
-		System.out.println("PasswordE: "+c.getUdPassword());
+		
 		
 		
 		
@@ -368,6 +365,9 @@ public class udAutomation {
 				
 				c.setUdUsername(textField.getText());
 				c.setUdPassword(textField_1.getText());
+				
+				System.out.println("USERNAME: "+c.getUdUsername());
+				System.out.println("PasswordE: "+c.getUdPassword());
 				
 				
 				//level entry
@@ -453,22 +453,6 @@ public class udAutomation {
 				
 				
 				
-				if(c.getLevel()==false)
-				{
-					level1="L2";
-				}else if(c.getLevel()==true)
-				{
-					level1="L3";
-				}
-				
-				
-				if(c.getCompatibleMode())
-				{
-					compatibleMode="RDP";
-				}
-				else {
-					compatibleMode="LOCAL";
-				}
 				if(c.getSource()) {
 					c.setUnixPath("NA");
 				}else {
@@ -478,15 +462,13 @@ public class udAutomation {
 				}
 				try {
 					
-					//This is no needed as it is already taken care of once program runs.
-					//c.setGtmDbName("GTM_REV_TOOLS");
-					//c.setGtmDbPassword( "Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
+					
 					
 					//Passing config class that has alot of data stored.
 					System.out.println(level1+"----"+c.getType()+"==============="+c.getUnixPath()+"==============="+c.getUdUsername()+"==============="+c.getUdPassword()+"==============="+c.getExcelPath()+"==============="+compatibleMode+"==============="+c.getFlavour());
 					
 					//You also dont need to pass all these since it is stored in config object
-					UdExecution ud=new UdExecution(c,level1,c.getType(),c.getUnixPath(),c.getUdUsername(),c.getUdPassword(),c.getExcelPath(),compatibleMode,c.getFlavour());
+					UdExecution ud=new UdExecution(c);
 				
 				
 				} catch (Exception e1) {
