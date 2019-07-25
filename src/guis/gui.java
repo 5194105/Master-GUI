@@ -222,13 +222,19 @@ public class gui {
 		testButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			
-				/*
-				c.setDriverType("1");
+				
+				c.setDriverType("2");
 				c.setSource(false);
 				c.setExcelPath("C:\\Users\\5194105\\Documents\\Eclipse Projects\\Master GUI\\test data\\rebill.xlsx");
-				rebillMain rebill = new rebillMain(c);
+				c.setLevel(true);
+				try {
+					rebillMain rebill = new rebillMain(c);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
-			*/
+			/*
 				
 				//You can give them manually here to just see if program runs... if you dont want to type in GUI everytime.
 				
@@ -270,6 +276,7 @@ public class gui {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				*/
 				
 			}
 		});

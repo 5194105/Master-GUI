@@ -81,6 +81,7 @@ public class excel {
 				c=excelSheet.getRow(x).getCell(y);
 		 
 				cellData=c.toString();
+				System.out.println("Cell Data "+cellData);
 			}
 			catch(Exception e) {
 				System.out.println(e);
@@ -119,7 +120,7 @@ public class excel {
 		rowCount=-1;
 		
 		
-		while(!cellData.equals("") || cellData!=null || cellData.equals("null")) {
+		while(!cellData.equals("") && cellData!=null && !cellData.equals("null")) {
 			System.out.println("Inside Row Count Auto");
 			getCellData(couter,y);
 			rowCount++;
@@ -135,7 +136,7 @@ public class excel {
 		cellData="a";
 		colCount=-1;
 		System.out.println("Inside Col Count Auto");
-		while(!cellData.equals("")) {
+		while(!cellData.equals("") && cellData!=null && !cellData.equals("null")) {
 			
 			getCellData(x,couter);
 			colCount++;
