@@ -34,16 +34,43 @@ public class UdExecution {
 
 	// Create blank config class as global variable
 	config c;
+	String type,unixPath;
+	String filePath,place;
 
-	public UdExecution(config c, String level, String type, String unixPath, String username, String password,
-			String filePath, String place, String flavour) throws Exception {
+	public UdExecution(config c) throws Exception {
+		
+		if(c.getLevel()==false)
+		{
+			level="L2";
+		}else if(c.getLevel()==true)
+		{
+			level="L3";
+		}
+		
+		
+		if(c.getCompatibleMode())
+		{
+			place="RDP";
+		}
+		else {
+			place="LOCAL";
+		}
+		
+		
+		type=c.getType();
+		unixPath=	c.getUnixPath();
+		username= c.getUdUsername();
+		password=c.getUdPassword();
+				filePath=	c.getExcelPath();
+		
+		flavour=c.getFlavour();
 
 		// Pass the config class from GUI to your global variable
 		this.c = c;
 
 		database db = new database();
 
-		System.out.println("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
+		
 
 		System.out.println(c.getGtmDbName() + "------------------" + c.getGtmDbPassword());
 
@@ -560,7 +587,8 @@ public class UdExecution {
 				e.setUpExcelWorkbook();
 				// Sets up the sheet at the a particular index (0 = sheet 1)
 				e.setUpExcelSheet(0);
-				e.setRowCountManually(25);
+				e.setRowCountAutomatically(0);
+				//e.setRowCountManually(25);
 
 				// for spliting UD's into files
 
