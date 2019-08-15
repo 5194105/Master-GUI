@@ -325,6 +325,9 @@ public class gui {
              
              //Once it sees the '=' symbol it will save the rest of line to a variable
              tempString=st.substring(st.indexOf("=")+1);
+             
+             
+             
              System.out.println(tempString);
              System.out.println(st);
              System.out.println("");
