@@ -82,8 +82,11 @@ public class rebillMain {
     		 stepFiveLimit=2,
     		 stepSixLimit=2,
     		 stepSevenLimit=2;
-     String rebillResultStatus,rebillResultDesc;
+     String rebillResultStatus,rebillResultDesc,errorMessage;
      excel e;
+     
+     String tempError;
+     Boolean rebillError=false;
      
         public rebillMain(config c) throws InterruptedException{
         	this.c=c;
@@ -109,7 +112,7 @@ public class rebillMain {
             	setUpDriver();
             	timeOutCounter=Integer.parseInt(c.getSecondTimeout());
             	
-                //timeoutcounter is a notepad variable... will 5 seconds before moving on.
+                //timeoutcounter is a notepad variable... will X seconds before moving on.
                 wait = new WebDriverWait(driver, 10);
                 
                 driver.findElement(By.xpath("//*[@id=\"username\"]")).sendKeys(login);
@@ -128,10 +131,8 @@ public class rebillMain {
                 	System.out.println(e);
                 	errorHandling(1);
                 	}
+   
             
-            
-            	
-            		
             		try {
             			  System.out.println("Made It Here Past Login Screen");
 						  getTrackingNumber();
@@ -140,32 +141,7 @@ public class rebillMain {
 						e.printStackTrace();
 					}
             	
-            
-            		
-            		//write Results
-            	
-                
-                
-                /*
-                //This will check if tracking number text box is there... proof we logged in.
-                exist=driver.findElement(By.xpath("//*[@id=\"trackingID\"]")).isDisplayed();
-                
-                //Move to next method.
-                if (exist==true){
-                    getTrackingNumber();
-                }
-                else{
-                    retryLogin();
-                }
-            }
-            //If cant find Tracking Number Box... will reattempt login.
-            catch (Exception loginError){
-                System.out.println("eraLogin "+loginError);
-                System.out.println("Unable to Login");
-                retryLogin();
-            }
-            */
-        }
+    			}
         
     
     
@@ -209,6 +185,7 @@ public class rebillMain {
             
             for (int i=0;i<5;i++) {
             	try {
+            		 Thread.sleep(1000);
                      driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a")).click();
                      break;
             }
@@ -230,16 +207,10 @@ public class rebillMain {
             	}
                
             
-            
-            
-          //*[@id="invoicegridDataCheckBox0"]
-            
            // tryToClickElement(driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a")),2,5);     
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoicegridDataCheckBox0\"]")));
             driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a")).click();
-        	
-    	
-           
+        	    
             tempElement=By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[1]/div[2]/div/div[1]/div/label");
             isElementVisible(tempElement,2);
 
@@ -249,8 +220,6 @@ public class rebillMain {
             catch(Exception e){
                 System.out.println("Could not get past get trk screen");
                 System.out.println(e);
-                
-               
                 errorHandling(2);
                 }
  
@@ -398,13 +367,50 @@ public class rebillMain {
             }
          
          
-            tryToClickElement(driver.findElement(By.xpath("//*[@id=\"viewInvBtn\"]")),2,5);   
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/label[1]")));
+          //  tryToClickElement(driver.findElement(By.xpath("//*[@id=\"viewInvBtn\"]")),2,5);   
+          //  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/label[1]")));
             //Will try to click popup if there is one.
            
-
-
+//Trying To Rebill A Partial Amount
+            
+            
+            
+            rebillError=false;
+            
+            for (int i=0;i<5;i++) {
+            	try {
+            		 wait = new WebDriverWait(driver, 2);
+            		 driver.findElement(By.xpath("//*[@id=\"viewInvBtn\"]")).click();
+                     wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/label[1]")));
+                     break;
+            }
+            	catch(Exception e1) {
+            		 System.out.println("Could Not Click Package Tab");
+            	try {
+            		 Thread.sleep(1000);
+            		tempError= driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[1]/h4")).getText();
+            		if (tempError.equals("Trying To Rebill A Partial Amount")) {
+            			rebillError=true;
+            			errorMessage=tempError;
+            		}
+            		 driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/button[1]")).click();
+            		 System.out.println("Found Pop Up");
+            		 break;
+            	}
+            	catch(Exception e2) {
+            		System.out.println("Could Not find Popup");
+            	}
+            	}
+            	Thread.sleep(2000);
+            	}
+            
+           if (rebillError==false) {
             getDetailScreen();
+           }
+           else 
+           {
+        	   System.out.println(tempError);
+           }
           
     }
             catch(Exception e){
@@ -414,6 +420,21 @@ public class rebillMain {
      
            
         }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -440,9 +461,47 @@ public class rebillMain {
             contactMethodDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"rmrks\"]")));
             contactMethodDropDown.selectByValue("phone");  
 
-            tryToClickElement(  driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")),2,5);    
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")));
+          //  tryToClickElement(  driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")),2,5);    
+          //  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")));
+           
+            
+            
+            
+            
+            for (int i=0;i<5;i++) {
+            	try {
+            		 wait = new WebDriverWait(driver, 2);
+            		 driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).click();
+            		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")));
+                     break;
+            }
+            	catch(Exception e1) {
+            		 System.out.println("Could Not Click phone details Tab");
+            	try {
+            		 Thread.sleep(1000);		 
+            		
+            		tempError= driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/div[1]/h4")).getText();
+            		
+            		 if (tempError.indexOf("Management approval")!=-1) {
+            			rebillError=true;
+            			errorMessage=tempError;
+            		}
+            		 driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/div[3]/button[2]")).click();
+            		 System.out.println("Found Pop Up");
+            		 break;
+            	}
+            	catch(Exception e2) {
+            		System.out.println("Could Not find Popup");
+            	}
+            	}
+            	Thread.sleep(2000);
+            	}
+            
+            
+            if (rebillError==false){
             rebillScreen();
+            }
+            
             
         	}
             catch(Exception e){
@@ -452,6 +511,22 @@ public class rebillMain {
         }
             
         }
+        
+        
+   
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -700,6 +775,7 @@ public class rebillMain {
     		stepSixBoolean=false;
     		stepSevenBoolean=false;
     		successfulRebill=false;
+    		errorMessage="";
     	}
     	
     	
@@ -792,6 +868,11 @@ public class rebillMain {
     	
     	
     	
+    	
+    	
+    	
+    	
+    	
     	public void writeResults(int x) {
     		
     		if (successfulRebill==false) {
@@ -825,7 +906,7 @@ public class rebillMain {
     		}
     		
     		if(c.getSource()==false){
-    			e.setCellData(x,0,rebillResultDesc);
+    			e.setCellData(x,0,rebillResultDesc+" "+errorMessage);
     			e.setCellData(x,1,rebillResultStatus);
     			e.saveAndClose();
     		}
