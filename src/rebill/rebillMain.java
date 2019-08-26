@@ -206,15 +206,18 @@ public class rebillMain {
             
 
             //Search For Popup
-            
+            wait = new WebDriverWait(driver, 2);
             for (int i=0;i<5;i++) {
             	try {
+            		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a")));
                      driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a")).click();
                      break;
             }
             	catch(Exception e1) {
             		 System.out.println("Could Not Click Package Tab");
             	try {
+            		
+            		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(" /html[1]/body[1]/div[6]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]/div[2]/div[1]/div[1]/input[1]")));
             		 driver.findElement(By.xpath(" /html[1]/body[1]/div[6]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]/div[2]/div[1]/div[1]/input[1]")).sendKeys(invoice_nbr1);
             		 Thread.sleep(1000);
             		 driver.findElement(By.xpath("/html[1]/body[1]/div[6]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]")).click();
@@ -228,6 +231,7 @@ public class rebillMain {
             	}
             	Thread.sleep(2000);
             	}
+            wait = new WebDriverWait(driver, 10);
                
             
             
@@ -440,8 +444,36 @@ public class rebillMain {
             contactMethodDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"rmrks\"]")));
             contactMethodDropDown.selectByValue("phone");  
 
-            tryToClickElement(  driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")),2,5);    
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")));
+           // tryToClickElement(  driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")),2,5);    
+           // wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")));
+          
+            
+            wait = new WebDriverWait(driver, 2);
+            for (int i=0;i<5;i++) {
+            	try {
+            		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")));
+            		driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).click();
+
+                     break;
+            }
+            	catch(Exception e1) {
+            		 System.out.println("Could Not Click Package Tab");
+            	try {
+            		
+            		temp =  driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/h4")).getText();
+                   	driver.findElement(By.xpath("/html/body/div[6]/div/div/div[2]/button[1]")).click();
+            		 break;
+            	}
+            	catch(Exception e2) {
+            		System.out.println("Could Not find Popup");
+            	}
+            	}
+            	Thread.sleep(2000);
+            	}
+            wait = new WebDriverWait(driver, 10);
+            
+            
+            
             rebillScreen();
             
         	}
@@ -1144,3 +1176,10 @@ public class rebillMain {
     		}
     	}
    }
+
+
+//Loop over x amount of times
+
+//if found then
+
+

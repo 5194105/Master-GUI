@@ -225,7 +225,7 @@ public class gui {
 				
 				c.setDriverType("2");
 				c.setSource(false);
-				c.setExcelPath("C:\\Users\\5194105\\Documents\\Eclipse Projects\\Master GUI\\test data\\rebill.xlsx");
+				c.setExcelPath(homePath+"\\test data\\rebill.xlsx");
 				c.setLevel(true);
 				try {
 					rebillMain rebill = new rebillMain(c);
