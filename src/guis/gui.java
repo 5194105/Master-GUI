@@ -238,7 +238,7 @@ public class gui {
 				
 				//You can give them manually here to just see if program runs... if you dont want to type in GUI everytime.
 				
-				
+				//
 				
 				
 	//			c.setUdUsername(textField.getText());
