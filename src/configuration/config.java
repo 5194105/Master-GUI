@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 public class config {
 	
-	Connection taa1Con,gtmRevToolsCon;
+	Connection taa1Con,gtmRevToolsCon,ciCon;
 	String chromeSetProperty,ieSetProperty,chromePath,ieDriverPath;
 	WebDriver ieDriver,chromeDriver,tempWebDriver;
     String gtmDbName,gtmDbResults,gtmDbPassword,retryAttempts,secondTimeout,rebillL2URL,rebillL3URL;
@@ -22,6 +22,9 @@ public class config {
     String temp;
     String unixPath;
     String driverType;
+    String ciUsername;
+    String ciPassword;
+    String ciDbString;
     
     Boolean compatible,level=null,source=null;
 	
@@ -394,6 +397,42 @@ public void setFlavour(String flavour) {
 			e.printStackTrace();
 		}
 		return gtmRevToolsCon;
+	}
+	
+	
+	public String getCiUsername() {
+		
+		return ciUsername;
+	}
+	public String getCiPassword() {
+		return ciPassword;
+	}
+	public String getCiDbString() 
+	{
+		return ciDbString;
+	}
+
+	public void setCiUsername(String ciUsername) {
+		this.ciUsername=ciUsername;
+		
+	}
+	public void setCiPassword(String ciPassword) {
+		this.ciPassword=ciPassword;
+	}
+	public void setCiDbString(String ciDbString) {
+		this.ciDbString=ciDbString;
+			}
+	
+	
+	public Connection getCiDbConnection(String dbCon,String username,String password) {
+		
+		try {
+			ciCon=DriverManager.getConnection(dbCon,username,password);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ciCon;
 	}
 	
 }

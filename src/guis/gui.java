@@ -22,6 +22,7 @@ import UD.UdExecution;
 import configuration.config;
 import configuration.mouse;
 import rebill.rebillMain;
+import rebill_troubleshoot.rebillTroubleshoot;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -196,6 +197,17 @@ public class gui {
 		JButton testButton = new JButton("Testing - Dont Click");
 		testButton.setBounds(740, 617, 207, 29);
 		frame.getContentPane().add(testButton);
+		
+		JButton btnRebillTroubleshoot = new JButton("Rebill Troubleshoot");
+		btnRebillTroubleshoot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				rebillTroubleshoot rt = new rebillTroubleshoot();
+				
+			}
+		});
+		btnRebillTroubleshoot.setBounds(64, 631, 153, 23);
+		frame.getContentPane().add(btnRebillTroubleshoot);
 		
 		
 		
@@ -417,8 +429,11 @@ public class gui {
 		c.setUdPassword(udPassword);
 		//c.setIEDriver(ieSetProperty,ieDriverPath );
 		//c.setChromeDriver(chromeSetProperty,chromePath);
+		c.setCiUsername("test_readonly");
+		c.setCiPassword("perftest");
+		c.setCiDbString("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/CVM_QUERY_SVC1_CL,cn=OracleConect,dc=ute,dc=fedex,dc=com");
 
-		
+		c.getCiDbConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/CVM_QUERY_SVC1_CL,cn=OracleConect,dc=ute,dc=fedex,dc=com","test_readonly","perftest");
 
 		
 		
