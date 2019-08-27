@@ -2,6 +2,7 @@ package rebill_troubleshoot;
 
 import java.util.ArrayList;
 
+import configuration.config;
 import configuration.excel;
 import rebill.rebillData;
 
@@ -9,9 +10,10 @@ public class rebillTroubleshoot {
 	excel e;
 	String homePath;
 	ArrayList<rtData> rtDataArray = new ArrayList<rtData>();
-	public rebillTroubleshoot() {
+	config c;
+	public rebillTroubleshoot(config c) {
 		
-		
+		this.c=c;
 		 homePath=System.getProperty("user.dir");
 	     
 		

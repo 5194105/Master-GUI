@@ -202,7 +202,7 @@ public class gui {
 		btnRebillTroubleshoot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				rebillTroubleshoot rt = new rebillTroubleshoot();
+				rebillTroubleshoot rt = new rebillTroubleshoot(c);
 				
 			}
 		});
