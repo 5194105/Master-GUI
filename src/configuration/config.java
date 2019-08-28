@@ -424,7 +424,7 @@ public void setFlavour(String flavour) {
 			}
 	
 	
-	public Connection getCiDbConnection(String dbCon,String username,String password) {
+	public void setCiDbConnection(String dbCon,String username,String password) {
 		
 		try {
 			ciCon=DriverManager.getConnection(dbCon,username,password);
@@ -432,7 +432,19 @@ public void setFlavour(String flavour) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//return ciCon;
+	}
+
+	public Connection getCiDbConnection() {
+
 		return ciCon;
 	}
-	
 }
+
+
+//IE2VD393_T =
+//(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=idb00296.ute.fedex.com)(PORT=1526)))(CONNECT_DATA=(SERVICE_NAME=IDB00296)))
+
+//PT1VD393_T =
+//(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=sdb00324.ute.fedex.com)(PORT=1526)))(CONNECT_DATA=(SERVICE_NAME=SDB00324)))
+

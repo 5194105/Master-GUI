@@ -29,6 +29,7 @@ import guis.prerateAutomationGui;
 import guis.rebillAutomationGui;
 import guis.rerateAutomationGui;
 import guis.udAutomation;
+import rebill.rebillMain;
 public class mouse {
 	
 	JLabel unixPath;
@@ -548,9 +549,9 @@ public void setupMouseListener() {
 				    			if (obj.getClass().getCanonicalName().equals("guis.rebillAutomationGui")) {
 				    				System.out.println("Booleans "+c.getLevel()+"      "+c.getSource());
 				    				if(c.getLevel()!=null && c.getSource()!=null) {
-				    					JOptionPane.showMessageDialog(frame, "Started Rebill");
+				    					//JOptionPane.showMessageDialog(frame, "Started Rebill");
 				    					
-				    					//rebillMain rm = new rebillMain(c);
+				    					rebillMain rm = new rebillMain(c);
 				    				}
 				    				else {
 				    					JOptionPane.showMessageDialog(frame, "Please choose Level and Source");

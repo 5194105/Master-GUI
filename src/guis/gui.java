@@ -433,7 +433,7 @@ public class gui {
 		c.setCiPassword("perftest");
 		c.setCiDbString("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/CVM_QUERY_SVC1_CL,cn=OracleConect,dc=ute,dc=fedex,dc=com");
 
-		c.getCiDbConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/CVM_QUERY_SVC1_CL,cn=OracleConect,dc=ute,dc=fedex,dc=com","test_readonly","perftest");
+		c.setCiDbConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/CVM_QUERY_SVC1_CL,cn=OracleConect,dc=ute,dc=fedex,dc=com","test_readonly","perftest");
 
 		
 		

@@ -6,9 +6,10 @@ package rebill_troubleshoot;
 
 public class rtData {
 	String tinAmount,eligableAmount,testInputNbr,trkngnbr,eligable,type,ints,mig,srcOrg,device,oreStatus,invoiceNbr1,invoiceNbr2,rebillAcct,comments;
-
+	int rowCounter;
 	
-	public rtData(String tinAmount,String eligableAmount,String testInputNbr,String trkngnbr,String eligable,String type,String ints,String mig,String srcOrg,String device,String oreStatus,String invoiceNbr1,String invoiceNbr2,String rebillAcct,String comments) {
+	public rtData(int rowCounter,String tinAmount,String eligableAmount,String testInputNbr,String trkngnbr,String eligable,String type,String ints,String mig,String srcOrg,String device,String oreStatus,String invoiceNbr1,String invoiceNbr2,String rebillAcct,String comments) {
+		this.rowCounter=rowCounter;
 		this.tinAmount=tinAmount;
 		this.eligableAmount=eligableAmount;
 		this.testInputNbr=testInputNbr;
@@ -25,6 +26,22 @@ public class rtData {
 		this.rebillAcct=rebillAcct;
 		this.comments=comments;
 	}
+
+
+	
+	
+	public int getRowCounter() {
+		return rowCounter;
+	}
+
+
+
+
+	public void setRowCounter(int rowCounter) {
+		this.rowCounter = rowCounter;
+	}
+
+
 
 
 	public String getTinAmount() {

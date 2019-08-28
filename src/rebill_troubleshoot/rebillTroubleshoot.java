@@ -1,5 +1,6 @@
 package rebill_troubleshoot;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 
 import configuration.config;
@@ -11,9 +12,20 @@ public class rebillTroubleshoot {
 	String homePath;
 	ArrayList<rtData> rtDataArray = new ArrayList<rtData>();
 	config c;
+	Connection ciCon;
+	ArrayList<rtData> rtDataArrayTemp = new ArrayList<rtData>();
+	ArrayList<String> usedData = new  ArrayList<String>();
+	Boolean ignoreBoolean=false;
+	String tempTIN;
+	String tempResult;
+	
+	Boolean timePeriod,nonRM,notShipped,notDaily,nonDTT;
+	Boolean tempNonRM;
+	
 	public rebillTroubleshoot(config c) {
 		
 		this.c=c;
+		ciCon=c.getCiDbConnection();
 		 homePath=System.getProperty("user.dir");
 	     
 		
@@ -40,9 +52,96 @@ public class rebillTroubleshoot {
 		for (int i=1;i<e.getRowCount()+1;i++) {
 			//Create new object and add it to my arraylist at same time.
 			//uses the getCellData method which will use row,col paramter.
-			rtDataArray.add( new rtData(e.getCellData(i, 2),e.getCellData(i, 3),e.getCellData(i, 4),e.getCellData(i, 5),e.getCellData(i, 6),e.getCellData(i, 7),e.getCellData(i+1, 8),e.getCellData(i, 9),e.getCellData(i, 10),e.getCellData(i, 11),e.getCellData(i, 12),e.getCellData(i+1, 13),e.getCellData(i, 14),e.getCellData(i, 15),e.getCellData(i, 16)));
+			rtDataArray.add( new rtData(i,e.getCellData(i, 2),e.getCellData(i, 3),e.getCellData(i, 4),e.getCellData(i, 5),e.getCellData(i, 6),e.getCellData(i, 7),e.getCellData(i+1, 8),e.getCellData(i, 9),e.getCellData(i, 10),e.getCellData(i, 11),e.getCellData(i, 12),e.getCellData(i+1, 13),e.getCellData(i, 14),e.getCellData(i, 15),e.getCellData(i, 16)));
 		}
 		//Closes the excel sheet.
+		addTempArray();
+		System.out.println("End of Rebill TroubleShoot");
+		
+		
+		
+	}
+	
+	public void addTempArray() {
+		for (int i=0;i<rtDataArray.size();i++) {
+			ignoreBoolean=false;
+			tempTIN="";
+			for (int j=0;j<usedData.size();j++) {
+				if (rtDataArray.get(i).getTestInputNbr().equals(usedData.get(j))) {
+					ignoreBoolean=true;
+				}
+			}
+			
+			if (ignoreBoolean==false){
+					tempTIN=rtDataArray.get(i).getTestInputNbr();
+					for (int k=0;k<rtDataArray.size();k++) {
+						if (rtDataArray.get(k).equals(tempTIN)) {
+							rtDataArrayTemp.add(rtDataArray.get(k));
+							
+						}
+					}
+					resetBooleans();
+					doLogic();
+					results();
+					usedData.add(tempTIN);
+					System.out.println("RUN THROUGH THIS");
+					
+		}
+			}
+				
+			//	if (ignoreBoolean==false && rtDataArrayTemp.isEmpty()==true) {
+			//		rtDataArrayTemp.add(rtDataArray.get(i));
+			//		break;
+			//	}
+	}
+	
+	public void doLogic() {
+		
+		for (int i=0;i<rtDataArrayTemp.size();i++) {
+			if(rtDataArrayTemp.get(i).getTrkngnbr().equals("null")) {
+				notShipped=true;
+			}
+			
+			if (rtDataArrayTemp.get(i).getOreStatus().equals("RM")|| rtDataArrayTemp.get(i).getOreStatus().equals("Y")){
+				if(rtDataArrayTemp.get(i).getDevice().indexOf("DTT")==-1) {
+					nonRM=false;
+				}	
+			}
+			
+			if(rtDataArrayTemp.get(i).getDevice().indexOf("DTT")==-1) {
+				nonDTT=true;
+			
+			}
+			
+		}
+	}
+	
+	public void resetBooleans() {
+		tempNonRM=true;
+		timePeriod=false;
+		nonRM=true;
+		notShipped=false;
+		notDaily=false;
+		nonDTT=false;
+		
+	}
+	
+	public void results() {
+		
+		tempResult="";
+		
+		if (notShipped==true) {
+			
+			tempResult+="Was Not Shipped";
+		}
+		
+		for (int i=0;i<rtDataArrayTemp.size();i++) {
+			e.setCellData(rtDataArrayTemp.get(i).getRowCounter(),17,"Comment HERE");
+			}
 		e.saveAndClose();
 	}
-}
+	
+
+	}
+	
+
