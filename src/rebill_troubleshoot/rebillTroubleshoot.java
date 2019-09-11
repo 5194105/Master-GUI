@@ -27,6 +27,24 @@ public class rebillTroubleshoot {
 	String lparDate;
 	String trackTemp;
 	
+	String LEVELS;
+	String CYCLE;
+	String TIN_AMOUNT;
+	String ELIGABLE_AMOUNT;
+	String TEST_INPUT_NBR;
+	String TRKNGNBR;
+	String ELIGABLE	;
+	String TYPE	;
+	String INT	;
+	String MIG	;
+	String SRC_ORG	;
+	String DEVICE	;
+	String ORE_STATUS	;
+	String INVOICE_NBR_1	;
+	String INVOICE_NBR_2	;
+	String REBILL_ACCT	;
+	String COMMENTS;
+	
 	Boolean timePeriod,nonRM,notShipped,notDaily,nonDTT;
 	Boolean tempNonRM;
 	ResultSet rs;
@@ -115,10 +133,10 @@ public class rebillTroubleshoot {
 				rowCounterSql++;
 				
 				for (int i=1;i<17;i++) {
-		//	System.out.print(rs.getString(i)+"   ");
-					System.out.println("Counter "+rowCounterSql);
+					System.out.print(rs.getString(i)+"   ");
+					//System.out.println("Counter "+rowCounterSql);
 			e.setCellData(rowCounterSql, i-1, rs.getString(i));
-			
+		//	checkNull();
 		}
 				
 		
@@ -143,6 +161,27 @@ public class rebillTroubleshoot {
 	
 	
 	public void checkNull() {
+		
+		
+		
+		LEVELS=rs.getString(1);
+		CYCLE
+		TIN_AMOUNT
+		ELIGABLE_AMOUNT
+		TEST_INPUT_NBR
+		TRKNGNBR
+		ELIGABLE	
+		TYPE	
+		INT	
+		MIG	
+		SRC_ORG	
+		DEVICE	
+		ORE_STATUS	
+		INVOICE_NBR_1	
+		INVOICE_NBR_2	
+		REBILL_ACCT	
+		COMMENTS
+
 		
 	}
 	

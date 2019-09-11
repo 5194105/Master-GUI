@@ -103,7 +103,7 @@ public class excel {
 	public void setCellData(int x, int y, String data) {
 		
 		try {
-		System.out.println (data);
+		//System.out.println (data);
 		if (data.equals("") || data==null) {
 			data="null";
 		}
