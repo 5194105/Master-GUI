@@ -82,6 +82,8 @@ public class guiBase {
 
      public  String backgroundDefault="default_template.png";
      
+     public String rebillTroubleshootPic="rebillTroubleshootPic.png";
+     public String rebillTroubleshootPicHighlight="rebillTroubleshootPicHighlight.png";
 
 	
 

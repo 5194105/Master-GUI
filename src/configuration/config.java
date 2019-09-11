@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 public class config {
 	
-	Connection taa1Con,gtmRevToolsCon,ciCon;
+	Connection taa1Con,gtmRevToolsCon,ciCon,oreL2Con,oreL3Con;
 	String chromeSetProperty,ieSetProperty,chromePath,ieDriverPath;
 	WebDriver ieDriver,chromeDriver,tempWebDriver;
     String gtmDbName,gtmDbResults,gtmDbPassword,retryAttempts,secondTimeout,rebillL2URL,rebillL3URL;
@@ -25,6 +25,7 @@ public class config {
     String ciUsername;
     String ciPassword;
     String ciDbString;
+    String lparDate="";
     
     Boolean compatible,level=null,source=null;
 	
@@ -386,7 +387,7 @@ public void setFlavour(String flavour) {
 		return taa1Con;
 	}
 	
-	public Connection getGtmRevToolsConnection(String username,String password) throws ClassNotFoundException {
+public void setGtmRevToolsConnection(String username,String password) throws ClassNotFoundException {
 		
 		try {
 			
@@ -396,6 +397,12 @@ public void setFlavour(String flavour) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
+	
+	public Connection getGtmRevToolsConnection() throws ClassNotFoundException {
+		
+	
 		return gtmRevToolsCon;
 	}
 	
@@ -439,7 +446,61 @@ public void setFlavour(String flavour) {
 
 		return ciCon;
 	}
+
+
+public void setOreL2DbConnection(String dbCon,String username,String password) {
+	
+	try {
+		oreL2Con=DriverManager.getConnection("jdbc:oracle:thin:idb00248.ute.fedex.com:1526:IE2VD925","test_readonly","perftest");
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	//return ciCon;
 }
+
+public Connection getOreL2DbConnection() {
+
+	return oreL2Con;
+}
+
+
+
+public void setOreL3DbConnection() {
+	
+	try {
+		
+		
+		oreL3Con=DriverManager.getConnection("jdbc:oracle:thin:@//sdb00261.ute.fedex.com:1526/PT1VD925","test_readonly", "perftest");
+		//oreL3Con=DriverManager.getConnection("jdbc:oracle:thin:sdb00261.ute.fedex.com:1526:PT1VD925","test_readonly", "perftest");
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	//return ciCon;
+}
+
+public Connection getOreL3DbConnection() {
+
+	return oreL3Con;
+}
+
+
+public void setLparDate(String lparDate) {
+	
+	this.lparDate=lparDate;
+}
+
+public String getLparDate( ) {
+	
+	return lparDate;
+}
+}
+
+
+//jdbc:oracle:thin:@<host>:<port>:<SID>
+
+//Example: jdbc:oracle:thin:192.168.2.1:1521:X01A
 
 
 //IE2VD393_T =

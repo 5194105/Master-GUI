@@ -22,6 +22,9 @@ public class excel {
 	String cellData="a";
 	int sheetNumber;
 	
+	 XSSFWorkbook newWorkbook;
+	 XSSFSheet newSheet;
+	
 	int rowCount,colCount;
 	
 	public excel(String filePath) {
@@ -37,6 +40,8 @@ public class excel {
 		
 	}
 	
+	public excel() {}
+	
 	
 	public void setUpExcelWorkbook() {
 		
@@ -46,10 +51,13 @@ public class excel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 	}
 		
+	
+
+	
+	
+	
 	public void setUpExcelSheet(int x) {
 		sheetNumber=x;
 		excelSheet= excelWorkBook.getSheetAt(x);  
@@ -94,6 +102,17 @@ public class excel {
 	
 	public void setCellData(int x, int y, String data) {
 		
+		try {
+		System.out.println (data);
+		if (data.equals("") || data==null) {
+			data="null";
+		}
+		}
+		catch(Exception e) {
+			System.out.println(e);
+			data="null";
+			
+		}
 		c = excelSheet.getRow(x).createCell(y);
         c = excelSheet.getRow(x).getCell(y);
         c.setCellValue(data);
@@ -162,6 +181,18 @@ public class excel {
 	public int getColCount() {
 		
 		return colCount;
+	}
+	
+	public void createExcelWorkbook() {
+		  
+			newWorkbook = new XSSFWorkbook();
+			excelWorkBook=newWorkbook;
+		
+
+	}
+	public void createSheet(String sheetName) {
+		excelSheet = newWorkbook.createSheet(sheetName);
+
 	}
 	
 }

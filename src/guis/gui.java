@@ -72,7 +72,9 @@ public class gui {
      String udAlt="udHighlight.png";
      String prerateAlt="prerateHighlight.png";
      
-     
+     public String rebillTroubleshootPic="rebillTroubleshootPic.png";
+     public String rebillTroubleshootAlt="rebillTroubleshootPicHighlight.png";
+
      
      String libDirectoryDB,libDirectoryExcel,libDirectorySelenium;
      
@@ -99,6 +101,8 @@ public class gui {
      instantInvoiceAutomationGui instantInvoice;
      datapopAutomationGui datapop;
      
+     
+     
      Object obj;
      
      config c;
@@ -108,7 +112,7 @@ public class gui {
 	String udUsername,udPassword;
 
 	
-	JLabel rebillGUI,rerateGUI,prerateGUI,instantInvoiceGUI,udAutomationGUI,datapopGUI,background;
+	JLabel rebillGUI,rerateGUI,prerateGUI,instantInvoiceGUI,udAutomationGUI,datapopGUI,background,rebillTroubleShootGUI;
 	
 	/**
 	 * Launch the application.
@@ -130,7 +134,12 @@ public class gui {
 	 * Create the application.
 	 */
 	public gui() {
-		setUp();  
+		try {
+			setUp();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
 		initialize();
 		
 		  	
@@ -174,6 +183,11 @@ public class gui {
 		prerateGUI = new JLabel("New label");
 		prerateGUI.setBounds(171, 463, 338, 54);
 		prerateGUI.setName("prerate");
+		
+		rebillTroubleShootGUI = new JLabel("New label");
+		rebillTroubleShootGUI.setBounds(171, 525, 338, 54);
+		rebillTroubleShootGUI.setName("rebillTroubleshoot");
+		
 
 		instantInvoiceGUI = new JLabel("New label");
 		instantInvoiceGUI.setBounds(561, 309, 338, 64);
@@ -202,7 +216,12 @@ public class gui {
 		btnRebillTroubleshoot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				rebillTroubleshoot rt = new rebillTroubleshoot(c);
+				try {
+					rebillTroubleshoot rt = new rebillTroubleshoot(c);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 			}
 		});
@@ -225,6 +244,7 @@ public class gui {
 		m.addIconWithMouse(instantInvoiceGUI,"instant",instantDefault,instantAlt);
 		m.addIconWithMouse(udAutomationGUI,"ud",udDefault,udAlt);
 		m.addIconWithMouse(datapopGUI,"datapop",datapopDefault,datapopAlt);	
+		m.addIconWithMouse(rebillTroubleShootGUI,"rebillTroubleshoot",rebillTroubleshootPic,rebillTroubleshootAlt);	
 		
 		m.setupBackground();
 	
@@ -297,7 +317,7 @@ public class gui {
 	
 
 	//Sets up config file
-	public void setUp() {
+	public void setUp() throws ClassNotFoundException {
 		
 		
 		 homePath=System.getProperty("user.dir");
@@ -407,6 +427,7 @@ public class gui {
 		
 	    c.setGtmDbName( GtmDbName);
 	    c.setGtmDbPassword( GtmDbPassword);
+	    c.setGtmRevToolsConnection(GtmDbName, GtmDbPassword);
 	    c.setRetryAttempts( retryAttempts);
 	    c.setSecondTimeout( retryAttempts);
 	    c.setRebillL2URL( rebillL2URL);

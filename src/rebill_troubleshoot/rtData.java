@@ -6,6 +6,7 @@ package rebill_troubleshoot;
 
 public class rtData {
 	String tinAmount,eligableAmount,testInputNbr,trkngnbr,eligable,type,ints,mig,srcOrg,device,oreStatus,invoiceNbr1,invoiceNbr2,rebillAcct,comments;
+	String lparDate="";String singleComment="";
 	int rowCounter;
 	
 	public rtData(int rowCounter,String tinAmount,String eligableAmount,String testInputNbr,String trkngnbr,String eligable,String type,String ints,String mig,String srcOrg,String device,String oreStatus,String invoiceNbr1,String invoiceNbr2,String rebillAcct,String comments) {
@@ -191,5 +192,24 @@ public class rtData {
 
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+	
+	public void setLparDate(String lparDate) {
+		this.lparDate=lparDate;
+		
+	}
+	public String getLparDate() {
+		
+		return lparDate;
+	}
+	
+	
+	public void setSingleComment(String singleComment) {
+		this.singleComment=singleComment;
+		
+	}
+	public String getSingleComment() {
+		
+		return singleComment;
 	}
 }

@@ -30,6 +30,7 @@ import guis.rebillAutomationGui;
 import guis.rerateAutomationGui;
 import guis.udAutomation;
 import rebill.rebillMain;
+import rebill_troubleshoot.rebillTroubleshoot;
 public class mouse {
 	
 	JLabel unixPath;
@@ -43,6 +44,7 @@ public class mouse {
     prerateAutomationGui prerate;
     instantInvoiceAutomationGui instantInvoice;
     datapopAutomationGui datapop;
+    rebillTroubleshoot rt;
 	 
     
 
@@ -425,6 +427,11 @@ public void setupMouseListener() {
 			    			datapop = new datapopAutomationGui(g,c);
 			    		}
 			    		
+			    		if (mouseLabel.getName().equals("rebillTroubleshoot")) {
+			    			JOptionPane.showMessageDialog(frame, "Started");
+			    			rt = new rebillTroubleshoot(c);
+			    			JOptionPane.showMessageDialog(frame, "Finished");
+			    		}
 			    		
 			    		
 			    		//Excel
