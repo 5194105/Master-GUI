@@ -21,6 +21,7 @@ import org.openqa.selenium.WebDriver;
 import UD.UdExecution;
 import configuration.config;
 import configuration.mouse;
+import configuration.testStuff;
 import rebill.rebillMain;
 import rebill_troubleshoot.rebillTroubleshoot;
 
@@ -217,8 +218,9 @@ public class gui {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				try {
-					rebillTroubleshoot rt = new rebillTroubleshoot(c);
-				} catch (ClassNotFoundException e) {
+					//rebillTroubleshoot rt = new rebillTroubleshoot(c);
+					testStuff ts = new testStuff(c);
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

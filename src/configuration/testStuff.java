@@ -1,5 +1,7 @@
 package configuration;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,9 +11,39 @@ import rebill.rebillData;
 public class testStuff {
 
 	static ArrayList<rebillData> arrayData = new ArrayList<rebillData>();
-	
-	public static void main(String[] args) {
+	config c;
+	Connection oreCon;
+	public testStuff(config c) {
+		c.setLevel(true);
+		if (c.getLevel()==true){
+			c.setOreL3DbConnection();
+			oreCon=c.getOreL3DbConnection();
+		}
+		else if (c.getLevel()==false){
+			//c.setOreL2DbConnection();
+			oreCon=c.getOreL2DbConnection();
+		}
 		
+		
+		PreparedStatement ps;
+		ResultSet rs;
+		String trk="794945365796";
+		try {
+			ps=oreCon.prepareStatement("select distinct LPAR_ENHCMNT_DT from INTL_EXPRS_ONLN_SCHEMA.INTL_package a join INTL_EXPRS_ONLN_SCHEMA.INTL_package_event b on b.ONLN_PKG_ID=a.ONLN_PKG_ID where pkg_trkng_nbr=?");
+			ps.setString(1, trk);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				System.out.println(rs.getString(1).toString());
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//ps=oreL3Con.prepareStatement("select * from INTL_EXPRS_ONLN_SCHEMA.INTL_package");
+		
+	
 		
 		/*
 		excel e = new excel("C:\\Users\\5194105\\Documents\\Eclipse Projects\\Master GUI\\test data\\rebill.xlsx");
