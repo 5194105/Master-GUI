@@ -5,6 +5,7 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -45,9 +46,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import configuration.config;
+
 public class abc {
-	boolean browser=false;
-	String level;
+	 Boolean isPresent=false;
+	int retryCounter=0;
+	int i=0;
+	Object o;
+	WebDriverWait wait;
+	config c;
+	String browser;
+	Boolean level;
 	long serviceLong1,serviceLong2;
 	long invoiceLong1,invoiceLong2;
 	long acctLong1,acctLong2;
@@ -90,7 +99,9 @@ public class abc {
          Boolean compatibleMode;
          Boolean chrome;
          String levelUrl;
-	
+         
+         WebElement element;
+/*	
 	public abc (String filepath,String d,String d2,String level,boolean broswer,boolean compatibleMode,boolean chrome) throws IOException, InterruptedException{
 		
 		this.filepath=filepath;
@@ -98,124 +109,93 @@ public class abc {
 		this.d2=d2;
 		this.level=level;
 		this.browser=broswer;
-                this.compatibleMode=compatibleMode;
-                System.out.println("HEREEEEE");
-                this.chrome=chrome;
-                
-                
-		/*
-		this.filepath="C:\\Users\\FedExUser\\Desktop\\AK\\Rerate.xlsx";
-		this.d="12/01/2001";
-		this.d2="01/02/2019";
-		this.level="L3";
-		this.browser=false;
-		*/
+        this.compatibleMode=compatibleMode;
+        System.out.println("HEREEEEE");
+        this.chrome=chrome;
+   
 	
 	}	
-	public void ReadWrite() throws IOException, InterruptedException, UnreachableBrowserException, TimeoutException, StaleElementReferenceException, AWTException {
-
-            if (level.contentEquals("L2")||level.contentEquals("l2"))
-		{
-			levelUrl="https://devsso.secure.fedex.com/L2/PRSApps/";
-		}
-		else if (level.contentEquals("L3")||level.contentEquals("l3"))
-		{
-			levelUrl="https://testsso.secure.fedex.com/L3/PRSApps/";
-		}
-            
-            
-            
-		if (browser== true){
-			String home=System.getProperty("user.dir");
-			System.setProperty("webdriver.gecko.driver", home+ "\\geckodriver.exe");
-			//driver = new FirefoxDriver();	
-		}else if (browser==false){
-                    try{
-                        
-        String webDriverPath;
-        String homePath=System.getProperty("user.dir");
-        
-        if (System.getProperty("user.dir").indexOf("dist")==-1){
-            webDriverPath=System.getProperty("user.dir");
-        }
-        else {
-        webDriverPath=homePath.substring(0,homePath.length()-5);
-        }
-                        
-                        
-        if (chrome==true){
-            System.setProperty("webdriver.chrome.driver", webDriverPath+ "\\chromedriver.exe");
-            driver= new ChromeDriver();
-            driver.get(levelUrl);
-        }
-        else{
-        
-        
-		String home=System.getProperty("user.dir");
-		System.out.println(home);
-                   
-                    if (compatibleMode==true){
-                    DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-		    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
-		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
-		    capabilities.setCapability("ignoreZoomSetting", true);
-		    capabilities.setCapability("ignoreProtectedModeSettings", true);
-		    capabilities.setCapability("initialBrowserUrl",levelUrl);
-			
-		    
-		    
-			System.setProperty("webdriver.ie.driver", webDriverPath+ "\\IEDriverServer.exe");
-			 driver = new InternetExplorerDriver(capabilities);
-                 
-                    }
-                    else {
-                    System.setProperty("webdriver.ie.driver", webDriverPath+ "\\IEDriverServer.exe");
-                    driver = new InternetExplorerDriver();
-                    driver.get(levelUrl);
-                    }
-        }
-                    }
-                    catch(Exception e){
-                    System.out.println(e);
-                    }
-		}
-		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-		WebDriverWait wait = new WebDriverWait( driver,10);
+	*/
+	
+	public abc (String filepath,String d,String d2,Boolean level,String broswer,boolean compatibleMode,config c) throws IOException, InterruptedException{
 		
-		driver.manage().window().maximize();          
-		driver.findElement(By.id("username")).sendKeys("477023");
-		driver.findElement(By.id("password")).sendKeys("477023");
-		driver.findElement(By.id("submit")).click();
-		fin =new FileInputStream(new File(filepath));
-		wb=new XSSFWorkbook(fin);
+		this.filepath=filepath;
+		this.d=d;
+		this.d2=d2;
+		this.level=level;
+		this.browser=broswer;
+        this.compatibleMode=compatibleMode;
+        this.c=c;
+ 
+        setGlobalVars();
+        setCurrentData();
+        /*
+        System.out.println(filepath);
+		System.out.println(startDateText);
+		System.out.println(endDateText);
+		System.out.println(level);
+		System.out.println(broswer);
+		System.out.println(compatibleMode);
+		*/
+        
+	}	
+	
+	public void setGlobalVars() {
+	    if (level==false)
+			{
+				levelUrl="https://devsso.secure.fedex.com/L2/PRSApps/";
+			}
+			else if (level==true)
+			{
+				levelUrl="https://testsso.secure.fedex.com/L3/PRSApps/";
+			}
+
+	    if (browser.equals("1")) {
+	    	c.setProperty(c.getIeProperty(),c.getIeDriverPath());
+    		driver = new InternetExplorerDriver();
+	    }
+	    if (browser.equals("2")) {
+	    	c.setProperty(c.getChromeProperty(),c.getChromeDriverPath());
+    		driver = new ChromeDriver();
+	    }
+	 
+	    
+	  //  driver.get("https://testsso.secure.fedex.com/L3/PRSApps/");
+	    
+	    try {
+			fin =new FileInputStream(new File(filepath));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			wb=new XSSFWorkbook(fin);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		int sheetcount = wb.getNumberOfSheets();
 		Object o =null;
+	    
+		
+	}
+	
+	
+	
+	public void setCurrentData() {
+		
+		
+		login();
 		for(j=0;j<1;j++)
 		{
 			sheet=	wb.getSheetAt(j);
 			sh1 =wb.getSheetAt(j).getSheetName();
 			rowcount = sheet.getLastRowNum()-sheet.getFirstRowNum();
-			int i=0;
-			while (!getCellValue(o,sheet.getRow(i).getCell(2)).equals("null"))
-			//for(int i=1;i<=rowcount;i++)
 			
+			while (!getCellValue(o,sheet.getRow(i).getCell(2)).equals("null"))
 			{
-                            i++;
+              i++;                       
 				try {
-					if (level.contentEquals("L2")||level.contentEquals("l2"))
-					{                                                   
-						driver.get("https://devsso.secure.fedex.com/L2/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10");
-					}
-					else if (level.contentEquals("L3")||level.contentEquals("l3"))
-					{
-						driver.get("https://testsso.secure.fedex.com/L3/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10");
-					}
-					
-					//Gets Data from Excel
-                                        
-                                        System.out.println("I Value: "+i);
-                                         System.out.println("Sheet name "+sheet.getSheetName());
-					
 					acct1 =	getCellValue(o,sheet.getRow(i).getCell(2));		
 					System.out.println(acct1);	
 					acct2=	getCellValue(o,sheet.getRow(i).getCell(3));	
@@ -266,8 +246,70 @@ public class abc {
 						ground=false;
 						express=false;
 					}
-						
+					
+	ReadWrite();
+			
+					//This will retry the trk once.
+					if (retryCounter==1) {
+						retryCounter=0;
+						ReadWrite();
+					}
+				}
+				
+				
+				catch(Exception e) {
+					System.out.println(e);
+				}
 
+		}
+		}
+	}
+
+	
+	
+	public void login() {
+		 	driver.get(levelUrl);
+			driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+			wait = new WebDriverWait( driver,10);
+			driver.manage().window().maximize();          
+			driver.findElement(By.id("username")).sendKeys("477023");
+			driver.findElement(By.id("password")).sendKeys("477023");
+			driver.findElement(By.id("submit")).click();
+	}
+	
+	
+	public void ReadWrite() throws IOException, InterruptedException, UnreachableBrowserException, TimeoutException, StaleElementReferenceException, AWTException {
+
+		if (level==false)
+		{                                                   
+			driver.get("https://devsso.secure.fedex.com/L2/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10");
+		}
+		else if (level==true)
+		{
+			driver.get("https://testsso.secure.fedex.com/L3/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10");
+		}
+		
+		try {
+		isPresent = driver.findElements(By.xpath("//*[@id=\"form1\"]/table/tbody/tr[3]/td/table[3]/tbody/tr/td/table/tbody/tr[2]/td/table/tbody[1]/tr[1]/td[1]/b/font")).size() > 0;
+		//element = driver.findElement(By.xpath("//*[@id=\"form1\"]/table/tbody/tr[3]/td/table[3]/tbody/tr/td/table/tbody/tr[2]/td/table/tbody[1]/tr[1]/td[1]/b/font"));
+		}
+		
+		catch(Exception e) {
+			driver.quit();
+			login();
+			if (level==false)
+			{                                                   
+				driver.get("https://devsso.secure.fedex.com/L2/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10");
+			}
+			else if (level==true)
+			{
+				driver.get("https://testsso.secure.fedex.com/L3/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10");
+			}
+		}
+		
+		
+		
+			try {
 					//Setting Default Settings.
 					driver.findElement(By.name("accName")).sendKeys(name);
 					driver.findElement(By.name("vep_ae_num")).sendKeys("1575");
@@ -387,8 +429,7 @@ public class abc {
 					
 					
 					
-					Thread.sleep(10000);
-
+					Thread.sleep(10000);				
 					//Determines which checkboxes to select for first trk.
 					switch(service1) {
 					case "Express Domestic":
@@ -619,11 +660,11 @@ public class abc {
 					Thread.sleep(7000);
 
 */
-					if (level.contentEquals("L2")||level.contentEquals("l2"))
+					if (level==false)
 					{
 						driver.get("https://devsso.secure.fedex.com/L2/PRSApps/inbox/inbox_router.jsp?inbox_id=11");
 					}
-					else if (level.contentEquals("L3")||level.contentEquals("l3"))
+					else if (level==true)
 					{
 						driver.get("https://testsso.secure.fedex.com/L3/PRSApps/inbox/inbox_router.jsp?inbox_id=11");
 					}			
@@ -687,7 +728,7 @@ public class abc {
 						sheet.getRow(i).createCell(14).setCellValue("Invalid Account Number");
 						fout = new FileOutputStream(new File(filepath));
 						wb.write(fout);
-						continue;
+			
 					}
 					else
 					{
@@ -695,7 +736,7 @@ public class abc {
 						sheet.getRow(i).createCell(14).setCellValue("Try This Manually");
 						fout = new FileOutputStream(new File(filepath));
 						wb.write(fout);
-						continue;
+				
 					}
 				}
 				catch (SocketException g)
@@ -704,7 +745,7 @@ public class abc {
 					sheet.getRow(i).createCell(14).setCellValue("Try This Manually");
 					fout = new FileOutputStream(new File(filepath));
 					wb.write(fout);
-					continue;
+			
 				}
 				catch (WebDriverException h)
 				{
@@ -712,7 +753,7 @@ public class abc {
 					sheet.getRow(i).createCell(14).setCellValue("Try This Manually");
 					fout = new FileOutputStream(new File(filepath));
 					wb.write(fout);
-					continue;
+				
 
 				}
 				
@@ -723,7 +764,7 @@ public class abc {
 					sheet.getRow(i).createCell(14).setCellValue("Try This Manually");
 					fout = new FileOutputStream(new File(filepath));
 					wb.write(fout);
-					continue;
+				
 
 				}
 			
@@ -731,26 +772,18 @@ public class abc {
 				catch(NullPointerException k)
 				{
 					System.out.println("STEPHEN "+k);
-					continue;
+				
 				}
 
 
 			}	
-		}
-		driver.quit();
-	}
+		
+
 	
 	
+
 	
-	
-	public static void getNineDigitAcct(){}
-	public static void getNationalAcct(){}
-	public static void getCELevel(){}
-	
-	
-	
-	
-	
+
 	
 	
 	

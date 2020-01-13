@@ -429,7 +429,7 @@ public class gui {
 		
 	    c.setGtmDbName( GtmDbName);
 	    c.setGtmDbPassword( GtmDbPassword);
-	    c.setGtmRevToolsConnection(GtmDbName, GtmDbPassword);
+	   // c.setGtmRevToolsConnection(GtmDbName, GtmDbPassword);
 	    c.setRetryAttempts( retryAttempts);
 	    c.setSecondTimeout( retryAttempts);
 	    c.setRebillL2URL( rebillL2URL);
@@ -456,7 +456,7 @@ public class gui {
 		c.setCiPassword("perftest");
 		c.setCiDbString("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/CVM_QUERY_SVC1_CL,cn=OracleConect,dc=ute,dc=fedex,dc=com");
 
-		c.setCiDbConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/CVM_QUERY_SVC1_CL,cn=OracleConect,dc=ute,dc=fedex,dc=com","test_readonly","perftest");
+	//	c.setCiDbConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/CVM_QUERY_SVC1_CL,cn=OracleConect,dc=ute,dc=fedex,dc=com","test_readonly","perftest");
 
 		
 		
