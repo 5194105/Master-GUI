@@ -666,6 +666,17 @@ public void setupMouseListener() {
 					    				}
 				    			
 				    			
+				    			
+				    			
+				    			
+				    			if (obj.getClass().getCanonicalName().equals("guis.instantInvoiceAutomationGui")) {
+				    				
+				    				System.out.println("STARTED INSTANT INVOICE");
+
+					    				}
+				    			
+				    			
+				    			
 				    		}
 				    		
 				    		

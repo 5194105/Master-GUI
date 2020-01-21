@@ -28,16 +28,8 @@ public class rebillAutomationGui {
 
 	private JFrame frame;
 
-	
-     String execute="execute.png";
-     String dbPic="database.png";
-     String dbPicSelected="databaseSelected.png";
-     String excelPic="excel.png";
-     String excelPicSelected="excelSelected.png";
-     
      config c;
-    
- 
+   
      private JLabel label;
      private JLabel lblSource;
      private JLabel executeLabel;
