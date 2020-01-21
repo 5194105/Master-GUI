@@ -3,6 +3,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -150,16 +151,19 @@ public class mouse {
 	guiBase gb;
 	gui g;
 	Object obj;
+	JFrame currentFrame;
+	JFrame infoPane;  
 	
 	
 	
     public rerateAutomationGui rag;
 	
-	public mouse(guiBase gb,gui g,config c,Object obj) {
+	public mouse(guiBase gb,gui g,config c,Object obj,JFrame currentFrame) {
 		this.g=g;
 		this.gb=gb;
 		this.c=c;
 		this.obj=obj;
+		this.currentFrame=currentFrame;
 		 
 		homePath=System.getProperty("user.dir");
 	      if (System.getProperty("user.dir").indexOf("dist")==-1){
@@ -462,33 +466,34 @@ public void setupMouseListener() {
 			    			JOptionPane.showMessageDialog(frame, "Finished");
 			    		}
 			    		
+			    		//Info Label
+			    		if (mouseLabel.getName().equals("info")) {		
+			    			 infoPane=new JFrame();  
+			    			    JOptionPane.showMessageDialog(infoPane,"Hello from GTMC Revenue Execution Onlines Team!");  
+			    		}
 			    		
+  		
 			    		//Excel
 			    		if (mouseLabel.getName().equals("excel")) {
 			    	
 			    			
-			    		}
-			    		
-			    		
-			    		
-			    		
+			    		} 		
 			    		//Database
-			    		if (mouseLabel.getName().equals("db")) {
-			    			
+			    		if (mouseLabel.getName().equals("db")) {		
 	    		            excelBoolean=false;
 	    		            addExcel(mouseLabel);
 			    		}
 			    		
 			    		//Execute
 			    			if (mouseLabel.getName().equals("execute")) {
-			    				
-			    				
-			    				
 			    			}
-			    	
-			    		
-			    		
-			    		
+			    			if (mouseLabel.getName().equals("back")) {
+			    				if (!obj.getClass().getCanonicalName().equals("guis.gui")) {
+			    					g.frame.setVisible(true);
+			    					//currentFrame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+			    					currentFrame.setVisible(false);
+			    				}
+			    			}
 			    		
 			        }
 						 catch (Exception ee) {
