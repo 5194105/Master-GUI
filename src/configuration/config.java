@@ -26,8 +26,12 @@ public class config {
     String ciPassword;
     String ciDbString;
     String lparDate="";
+
     String cycle;
     String homePath;
+
+    String startDate,endDate;
+
     
     Boolean compatible,level=null,source=null;
 	
@@ -522,7 +526,27 @@ public String getLparDate( ) {
 	
 	return lparDate;
 }
+
+public void setStartDate(String startDate) {
+	this.startDate=startDate;
 }
+public void setEndDate(String endDate) {
+	this.endDate=endDate;
+}
+
+public String getStartDate( ) {
+	
+	return startDate;
+}
+
+public String getEndDate( ) {
+	
+	return endDate;
+}
+
+}
+
+
 
 
 //jdbc:oracle:thin:@<host>:<port>:<SID>

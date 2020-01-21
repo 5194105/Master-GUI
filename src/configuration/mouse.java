@@ -31,6 +31,7 @@ import guis.rerateAutomationGui;
 import guis.udAutomation;
 import rebill.rebillMain;
 import rebill_troubleshoot.rebillTroubleshoot;
+import rerate.abc;
 public class mouse {
 	
 	JLabel unixPath;
@@ -151,6 +152,9 @@ public class mouse {
 	Object obj;
 	
 	
+	
+    public rerateAutomationGui rag;
+	
 	public mouse(guiBase gb,gui g,config c,Object obj) {
 		this.g=g;
 		this.gb=gb;
@@ -165,6 +169,31 @@ public class mouse {
 	    	  imagePath=homePath.substring(0,homePath.length()-5);
 	        }
 	      setupMouseListener();
+		
+	}
+	
+	//rerate
+	public mouse(guiBase gb,gui g,config c,Object obj,rerateAutomationGui rag) {
+		this.g=g;
+		this.gb=gb;
+		this.c=c;
+		this.obj=obj;
+		this.rag=rag;
+		 
+		homePath=System.getProperty("user.dir");
+	      if (System.getProperty("user.dir").indexOf("dist")==-1){
+	    	  imagePath=System.getProperty("user.dir");
+	        }
+	      else {
+	    	  imagePath=homePath.substring(0,homePath.length()-5);
+	        }
+	      setupMouseListener();
+		
+	}
+	
+	
+	public void setupRerate(rerateAutomationGui rag) {
+		this.rag=rag;
 		
 	}
 	
@@ -601,7 +630,34 @@ public void setupMouseListener() {
 					    			}
 				    			
 				    			if (obj.getClass().getCanonicalName().equals("guis.rerateAutomationGui")) {
+				    				
+				    				System.out.println("Booleans "+c.getLevel()+"      "+c.getSource());
+				    				if(c.getLevel()!=null && c.getSource()!=null) {
 				    				JOptionPane.showMessageDialog(frame, "Started Rerates");
+				    				
+				    				String filepath=c.getExcelPath();
+				    				String startDateText=c.getStartDate();
+				    				String endDateText=c.getEndDate();
+				    				Boolean level=c.getLevel();
+				    				String broswer=c.getDriverType();
+				    				boolean compatibleMode=c.getCompatibleMode();
+				    				
+				    			//	c.setStartDate(rag.startDate.getText());
+				    				//c.setEndDate(rag.endDate.getText());
+				    				
+				    				
+				    				System.out.println(filepath);
+				    				System.out.println(startDateText);
+				    				System.out.println(endDateText);
+				    				System.out.println(level);
+				    				System.out.println(broswer);
+				    				System.out.println(compatibleMode);
+				    				abc rerate = new abc (filepath, startDateText,endDateText, level, broswer,compatibleMode, c);
+				    				
+					    			
+				    				}
+				    				
+				    				
 					    				}
 				    			
 				    			
