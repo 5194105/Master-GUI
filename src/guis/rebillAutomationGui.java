@@ -143,7 +143,7 @@ public class rebillAutomationGui {
 		
 		
 		guiBase gb = new guiBase();
-		mouse m = new mouse(gb,g,c,this);
+		mouse m = new mouse(gb,g,c,this,frame);
 		m.setFrame(frame);
 		m.setupBaseIcons();
 		m.addExcel(excelLabel);

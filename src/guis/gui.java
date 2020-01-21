@@ -109,7 +109,7 @@ public class gui {
      
      config c;
 	
-	JFrame frame;
+	public JFrame frame;
 	
 	String udUsername,udPassword;
 
@@ -238,7 +238,7 @@ public class gui {
 						
 								
 		guiBase gb = new guiBase();
-		mouse m = new mouse(gb,this,c,this);
+		mouse m = new mouse(gb,this,c,this,frame);
 		m.setFrame(frame);
 		m.setupBaseIcons();
 		

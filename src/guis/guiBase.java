@@ -40,7 +40,7 @@ public class guiBase {
     prerateAutomationGui prerate;
     instantInvoiceAutomationGui instantInvoice;
     datapopAutomationGui datapop;
-	 
+	Object obj;
     
 
     public ArrayList<labelClass> labelClassArray = new ArrayList<labelClass>();
@@ -97,17 +97,17 @@ public class guiBase {
 	      else {
 	    	  imagePath=homePath.substring(0,homePath.length()-5);
 	        }
-	      
+	      //Y,X,W,H
 	    menuLabel = new JLabel("menu");
-	  	menuLabel.setBounds(0, 0, 112, 64);
+	  	menuLabel.setBounds(0, 0, 110, 64);
 		databaseLabel = new JLabel("db");
-		databaseLabel.setBounds(0, 67, 112, 64);
+		databaseLabel.setBounds(0, 60, 105, 64);
 		linkLabel = new JLabel("link");
-		linkLabel.setBounds(0, 135, 112, 69);
+		linkLabel.setBounds(0, 126, 105, 64);
 		infoLabel = new JLabel("info");
-		infoLabel.setBounds(0, 203, 112, 75);
+		infoLabel.setBounds(0, 192, 105, 64);
 		backLabel = new JLabel("back");
-		backLabel.setBounds(0, 580, 99, 75);
+		backLabel.setBounds(0, 595, 105, 64);
 		background = new JLabel("New label");
 		background.setBounds(0, 0, 983, 662);
 				
@@ -117,6 +117,7 @@ public class guiBase {
 		infoLabel.setName("info");
 		backLabel.setName("back");
 		background.setName("background");
+		//this.obj=obj;
       
 		}	
 	}
