@@ -641,16 +641,6 @@ public class rebillMain {
 
 
 
-        
-        
-
-   
-           
-        
-          
-       
-        
-        
         //Importing all my data
         public void setUpData() {
         	
@@ -698,7 +688,7 @@ public class rebillMain {
         		e.saveAndClose();
 
         	}
-        	
+        	/*
         	if(c.getSource()==true){
         		database db = new database();
         		//creates db connection
@@ -725,6 +715,7 @@ public class rebillMain {
         			e.printStackTrace();
         		}	
         	}
+        	*/
         }  	
 
         

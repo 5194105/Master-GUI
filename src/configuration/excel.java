@@ -141,9 +141,14 @@ public class excel {
 		
 		while(!cellData.equals("") && cellData!=null && !cellData.equals("null")) {
 			System.out.println("Inside Row Count Auto");
+			try {
 			getCellData(couter,y);
 			rowCount++;
 			couter++;
+			}
+			catch(NullPointerException e) {
+				System.out.println("Hit Null");
+			}
 		}
 		
 		
