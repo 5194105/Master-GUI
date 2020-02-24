@@ -143,11 +143,11 @@ public class abc {
 	public void setGlobalVars() {
 	    if (level==false)
 			{
-				levelUrl="https://devsso.secure.fedex.com/L2/PRSApps/";
+				levelUrl=c.getRerateL2URL();
 			}
 			else if (level==true)
 			{
-				levelUrl="https://testsso.secure.fedex.com/L3/PRSApps/";
+				levelUrl=c.getRerateL3URL();
 			}
 
 	    if (browser.equals("1")) {
@@ -247,7 +247,7 @@ public class abc {
 						express=false;
 					}
 					
-	ReadWrite();
+					ReadWrite();
 			
 					//This will retry the trk once.
 					if (retryCounter==1) {
@@ -268,13 +268,31 @@ public class abc {
 	
 	
 	public void login() {
-		 	driver.get(levelUrl);
+		 //	driver.get(levelUrl);
+		 	driver.get("testsso.secure.fedex.com/L3/PRSApps/");
+		 	
 			driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 			wait = new WebDriverWait( driver,10);
-			driver.manage().window().maximize();          
-			driver.findElement(By.id("username")).sendKeys("477023");
-			driver.findElement(By.id("password")).sendKeys("477023");
-			driver.findElement(By.id("submit")).click();
+			driver.manage().window().maximize();     
+			
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		//	driver.findElement(By.xpath("//*[@id=\"username\"]"));
+		//	driver.findElement(By.xpath("//*[@id=\"password\"]"));
+		//	driver.findElement(By.xpath("//*[@id=\"submit\"]")).click();
+			
+			
+			//driver.findElement(By.id("username")).sendKeys("477023");
+			//driver.findElement(By.id("password")).sendKeys("477023");
+			//driver.findElement(By.id("submit")).click();
+			//driver.findElement(By.id("username")).sendKeys("477023");
+			//driver.findElement(By.id("password")).sendKeys("477023");
+			//driver.findElement(By.id("submit")).click();
 	}
 	
 	
