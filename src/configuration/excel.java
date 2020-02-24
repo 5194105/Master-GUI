@@ -89,7 +89,7 @@ public class excel {
 				c=excelSheet.getRow(x).getCell(y);
 		 
 				cellData=c.toString();
-				System.out.println("Cell Data "+cellData);
+			//	System.out.println("Cell Data "+cellData);
 			}
 			catch(Exception e) {
 				System.out.println(e);
@@ -159,7 +159,7 @@ public class excel {
 		int couter=0;
 		cellData="a";
 		colCount=-1;
-		System.out.println("Inside Col Count Auto");
+		//System.out.println("Inside Col Count Auto");
 		while(!cellData.equals("") && cellData!=null && !cellData.equals("null")) {
 			
 			getCellData(x,couter);

@@ -5,6 +5,7 @@
     <classes>
       <class name="testng.testingonly">
         <methods>
+          <include name="setupExcel"/>
           <include name="testMethod"/>
         </methods>
       </class> <!-- testng.testingonly -->
