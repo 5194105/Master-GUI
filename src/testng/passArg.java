@@ -21,7 +21,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ISuiteListener;
+import org.testng.TestListenerAdapter;
 import org.testng.TestNG;
+import org.testng.collections.Lists;
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
@@ -110,43 +112,9 @@ public class passArg implements ISuiteListener{
 	
 	
 	public static void main(String[] args) {
+	
+		
 		/*
-		//or from eclipse.
-    	homePath=System.getProperty("user.dir");
-    	System.out.println("homePath" +System.getProperty("user.dir"));
-    	e = new excel(homePath+"\\test data\\rerate2.xlsx");
-    	e.setUpExcelWorkbook();
-    	e.setUpExcelSheet(0);
-    	e.setRowCountAutomatically(0);
-    	e.setColCountAutomatically(0);
-    	rowCount=e.getRowCount();
-    	colCount=e.getColCount()-2;
-		
-    	
-    	System.out.println(rowCount);
-    	int total= rowCount/4;
-    	abc = rowCount%4;
-    	
-    	
-    	
-    	System.out.println(total);
-    	
-    	
-    	System.out.println(abc);
-    	abc = rowCount%3;
-    	System.out.println(abc);
-    	abc = rowCount%2;
-    	System.out.println(abc);
-    	abc = rowCount%1;
-    	System.out.println(abc);
-		
-		
-		
-		
-		config c = new config();
-		c.setExcelPath("HELLO WORLD");
-		*/
-		
         XmlSuite xmlSuite = new XmlSuite();
         xmlSuite.setName("Sample_Suite");
         Map<String, String> fieldValues = new HashMap<>();
@@ -161,9 +129,33 @@ public class passArg implements ISuiteListener{
         tng.setXmlSuites(Collections.singletonList(xmlSuite));
         tng.run();
 		
+		*/
 		
-        
-        
+		/*
+		    XmlSuite xmlSuite = new XmlSuite();
+	        xmlSuite.setName("Sample_Suite");
+	        Map<String, String> fieldValues = new HashMap<>();
+	        fieldValues.put("name", "Hello");
+	        xmlSuite.setParameters(fieldValues);
+	        XmlTest xmlTest = new XmlTest(xmlSuite);
+	        xmlTest.setName("Sample_test");
+	       // xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
+	        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testingonly.class)));
+	        xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
+	        TestNG tng = new TestNG();
+	        tng.setXmlSuites(Collections.singletonList(xmlSuite));
+	        tng.run();
+	        */
+	        
+	        
+			
+	        TestListenerAdapter tla = new TestListenerAdapter();
+	        TestNG testng = new TestNG();
+	        List<String> suites = Lists.newArrayList();
+	        suites.add("C:\\Users\\theth\\git\\Master-GUI\\test-output\\testng-failed.xml");//path to xml..
+	       // suites.add("c:/tests/testng2.xml");
+	        testng.setTestSuites(suites);
+	        testng.run();
         
       
         

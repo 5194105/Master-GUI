@@ -5,8 +5,11 @@
     <classes>
       <class name="testng.testingonly">
         <methods>
+          <include name="testMethod4" invocation-numbers="0"/>
+          <include name="testMethod3" invocation-numbers="0 1"/>
           <include name="setupExcel"/>
-          <include name="testMethod" invocation-numbers="4"/>
+          <include name="testMethod" invocation-numbers="0 1"/>
+          <include name="testMethod2" invocation-numbers="0 1"/>
         </methods>
       </class> <!-- testng.testingonly -->
     </classes>

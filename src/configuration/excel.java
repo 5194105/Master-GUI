@@ -22,6 +22,7 @@ public class excel {
 	String cellData="a";
 	int sheetNumber;
 	
+	
 	 XSSFWorkbook newWorkbook;
 	 XSSFSheet newSheet;
 	
@@ -116,6 +117,24 @@ public class excel {
 		c = excelSheet.getRow(x).createCell(y);
         c = excelSheet.getRow(x).getCell(y);
         c.setCellValue(data);
+	}
+	
+	
+	
+	public void writeCellData() {
+		
+		try {
+			excelOutputStream = new FileOutputStream(new File(filePath));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			excelWorkBook.write(excelOutputStream);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	

@@ -9,6 +9,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -20,6 +23,10 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.TestNG;
+import org.testng.xml.XmlClass;
+import org.testng.xml.XmlSuite;
+import org.testng.xml.XmlTest;
 
 import UD.UdExecution;
 import guis.datapopAutomationGui;
@@ -33,6 +40,7 @@ import guis.udAutomation;
 import rebill.rebillMain;
 import rebill_troubleshoot.rebillTroubleshoot;
 import rerate.abc;
+import testng.testingonly;
 public class mouse {
 	
 	JLabel unixPath;
@@ -635,7 +643,7 @@ public void setupMouseListener() {
 					    			}
 				    			
 				    			if (obj.getClass().getCanonicalName().equals("guis.rerateAutomationGui")) {
-				    				
+				    			
 				    				System.out.println("Booleans "+c.getLevel()+"      "+c.getSource());
 				    				if(c.getLevel()!=null && c.getSource()!=null) {
 				    				JOptionPane.showMessageDialog(frame, "Started Rerates");
@@ -650,7 +658,7 @@ public void setupMouseListener() {
 				    			//	c.setStartDate(rag.startDate.getText());
 				    				//c.setEndDate(rag.endDate.getText());
 				    				
-				    				
+				    				/*
 				    				System.out.println(filepath);
 				    				System.out.println(startDateText);
 				    				System.out.println(endDateText);
@@ -659,6 +667,25 @@ public void setupMouseListener() {
 				    				System.out.println(compatibleMode);
 				    				abc rerate = new abc (filepath, startDateText,endDateText, level, broswer,compatibleMode, c);
 				    				
+				    				*/
+				    				
+				    		        XmlSuite xmlSuite = new XmlSuite();
+				    		        xmlSuite.setName("Sample_Suite");
+				    		        Map<String, String> fieldValues = new HashMap<>();
+				    		        fieldValues.put("filepathExcel", filepath);
+				    		        fieldValues.put("startDateText", startDateText);
+				    		        fieldValues.put("endDateText", endDateText);
+				    		        fieldValues.put("broswer", "true");
+				    		        fieldValues.put("compatibleMode", "false");
+				    		        xmlSuite.setParameters(fieldValues);
+				    		        XmlTest xmlTest = new XmlTest(xmlSuite);
+				    		        xmlTest.setName("Rerate Test");
+				    		        //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
+				    		        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testingonly.class)));
+				    		        xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
+				    		        TestNG tng = new TestNG();
+				    		        tng.setXmlSuites(Collections.singletonList(xmlSuite));
+				    		        tng.run();
 					    			
 				    				}
 				    				
@@ -667,11 +694,11 @@ public void setupMouseListener() {
 				    			
 				    			
 				    		}
+					}
 				    		
 				    		
 				    		
-				    		
-				        }
+				        
 							 catch (Exception ee) {
 								ee.printStackTrace();	
 						}
