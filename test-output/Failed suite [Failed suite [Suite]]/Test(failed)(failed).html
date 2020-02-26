@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>TestNG:  Sample_test</title>
+<title>TestNG:  Test(failed)(failed)</title>
 <link href="../testng.css" rel="stylesheet" type="text/css" />
 <link href="../my-testng.css" rel="stylesheet" type="text/css" />
 
@@ -53,13 +53,13 @@ function toggleAllBoxes() {
 
 </head>
 <body>
-<h2 align='center'>Sample_test</h2><table border='1' align="center">
+<h2 align='center'>Test(failed)(failed)</h2><table border='1' align="center">
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/0/0</td>
 </tr><tr>
-<td>Started on:</td><td>Wed Feb 26 11:25:11 EST 2020</td>
+<td>Started on:</td><td>Wed Feb 26 11:42:53 EST 2020</td>
 </tr>
-<tr><td>Total time:</td><td>0 seconds (33 ms)</td>
+<tr><td>Total time:</td><td>0 seconds (30 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -76,34 +76,29 @@ function toggleAllBoxes() {
 </tr>
 <tr>
 <td title='testng.testingonly.setupExcel()'><b>setupExcel</b><br>Test class: testng.testingonly</td>
-<td><div><pre>java.lang.NullPointerException
-	at java.io.File.&lt;init&gt;(Unknown Source)
-	at configuration.excel.&lt;init&gt;(excel.java:33)
-	at testng.testingonly.setupExcel(testingonly.java:142)
+<td><div><pre>org.testng.TestNGException: 
+Parameter &apos;filepathExcel&apos; is required by BeforeClass on method setupExcel but has not been marked @Optional or defined
+in C:\Users\theth\git\Master-GUI\test-output\testng-failed.xml
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
 	at java.lang.Thread.run(Unknown Source)
-... Removed 10 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace239246415", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace239246415'><pre>java.lang.NullPointerException
-	at java.io.File.&lt;init&gt;(Unknown Source)
-	at configuration.excel.&lt;init&gt;(excel.java:33)
-	at testng.testingonly.setupExcel(testingonly.java:142)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-	at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:62)
-	at org.testng.internal.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:340)
-	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:294)
+... Removed 7 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace854810854", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace854810854'><pre>org.testng.TestNGException: 
+Parameter &apos;filepathExcel&apos; is required by BeforeClass on method setupExcel but has not been marked @Optional or defined
+in C:\Users\theth\git\Master-GUI\test-output\testng-failed.xml
+	at org.testng.internal.Parameters.createParams(Parameters.java:289)
+	at org.testng.internal.Parameters.createParametersForMethod(Parameters.java:377)
+	at org.testng.internal.Parameters.createParameters(Parameters.java:721)
+	at org.testng.internal.Parameters.createConfigurationParameters(Parameters.java:164)
+	at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:275)
 	at org.testng.internal.TestMethodWorker.invokeBeforeClassMethods(TestMethodWorker.java:176)
 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:122)
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
 	at java.lang.Thread.run(Unknown Source)
 </pre></div></td>
-<td>0</td>
-<td>testng.testingonly@30c7da1e</td></tr>
+<td>-1582735373</td>
+<td>testng.testingonly@3a883ce7</td></tr>
 </table><p>
 </body>
 </html>
