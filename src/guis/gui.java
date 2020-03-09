@@ -24,6 +24,7 @@ import configuration.mouse;
 import configuration.testStuff;
 import rebill.rebillMain;
 import rebill_troubleshoot.rebillTroubleshoot;
+import ud_compare.udcompare;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -213,13 +214,14 @@ public class gui {
 		testButton.setBounds(740, 617, 207, 29);
 		frame.getContentPane().add(testButton);
 		
-		JButton btnRebillTroubleshoot = new JButton("Rebill Troubleshoot");
+		JButton btnRebillTroubleshoot = new JButton("Test Whatever");
 		btnRebillTroubleshoot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				try {
 					//rebillTroubleshoot rt = new rebillTroubleshoot(c);
-					testStuff ts = new testStuff(c);
+				//	testStuff ts = new testStuff(c);
+					udcompare uc = new udcompare(c);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

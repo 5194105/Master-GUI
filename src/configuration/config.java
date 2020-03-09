@@ -26,7 +26,12 @@ public class config {
     String ciPassword;
     String ciDbString;
     String lparDate="";
+
+    String cycle;
+    String homePath;
+
     String startDate,endDate;
+
     
     Boolean compatible,level=null,source=null;
 	
@@ -246,6 +251,27 @@ public class config {
 		}
 	
 	
+	public void setHomePath(String homePath) {
+		
+		this.homePath=homePath;
+	}
+	public String getHomePath() {
+		
+		return homePath;
+	}
+	
+	
+	public void setCycle(String cycle) {
+		
+		this.cycle=cycle;
+	}
+	public String getCycle() {
+		
+		return cycle;
+	}
+	
+	
+	
 	public void setLevel(Boolean level) {
 		
 		this.level=level;
@@ -377,11 +403,12 @@ public void setFlavour(String flavour) {
 		return chromeDriver;
 	}
 	
-	public Connection getTaa1DbConnection(String dbCon,String username,String password) {
+	public Connection getTaa1DbConnection() {
 		
 		try {
-			taa1Con=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD1_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
-		} catch (SQLException e) {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			taa1Con=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD1_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","ri","ri");
+		} catch (SQLException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -433,14 +460,17 @@ public void setGtmRevToolsConnection(String username,String password) throws Cla
 	
 	
 	public void setCiDbConnection(String dbCon,String username,String password) {
-		
+		/*
 		try {
-			ciCon=DriverManager.getConnection(dbCon,username,password);
+		//	ciCon=DriverManager.getConnection(dbCon,username,password);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		//return ciCon;
+		 
+		 */
+		 
 	}
 
 	public Connection getCiDbConnection() {

@@ -7,6 +7,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -18,11 +21,15 @@ public class excel {
 	FileOutputStream excelOutputStream;
 	XSSFWorkbook  excelWorkBook;
 	XSSFSheet  excelSheet;
-	Cell c = null;
+	XSSFCell cell = null;
 	String cellData="a";
 	int sheetNumber;
+<<<<<<< HEAD
 	
 	
+=======
+	XSSFRow row;
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 	 XSSFWorkbook newWorkbook;
 	 XSSFSheet newSheet;
 	
@@ -87,10 +94,15 @@ public class excel {
 		
 			cellData="";
 			try {
-				c=excelSheet.getRow(x).getCell(y);
+				cell=excelSheet.getRow(x).getCell(y);
 		 
+<<<<<<< HEAD
 				cellData=c.toString();
 			//	System.out.println("Cell Data "+cellData);
+=======
+				cellData=cell.toString();
+				System.out.println("Cell Data "+cellData);
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 			}
 			catch(Exception e) {
 				System.out.println(e);
@@ -114,9 +126,31 @@ public class excel {
 			data="null";
 			
 		}
-		c = excelSheet.getRow(x).createCell(y);
-        c = excelSheet.getRow(x).getCell(y);
-        c.setCellValue(data);
+		System.out.println("Sheet Name"+ excelSheet.getSheetName());
+		System.out.println(x);
+		System.out.println(y);
+		System.out.println("data" +data);
+		//Row r;
+		
+		//Row row = excelSheet.getRow(x);
+		//Cell cell = row.createCell(y); 
+		
+		//cell.setCellValue(data);
+		
+	
+		try {
+		row=excelSheet.getRow(x);
+		cell = row.createCell(y);
+		}
+		catch(Exception ee) {
+			row = excelSheet.createRow(x);
+			cell = row.createCell(y);
+		}
+		cell.setCellValue(data);
+		
+		//c = excelSheet.getRow(x).createCell(y);
+       // c = excelSheet.getRow(x).getCell(y);
+       // c.setCellValue(data);
 	}
 	
 	
@@ -189,6 +223,7 @@ public class excel {
 		
 	}
 	
+
 	
 	public void setRowCountManually(int rowCount) {
 		this.rowCount=rowCount;
@@ -216,7 +251,15 @@ public class excel {
 	}
 	public void createSheet(String sheetName) {
 		excelSheet = newWorkbook.createSheet(sheetName);
-
+	}
+	
+	public void createSheetUD(String sheetName) {
+		excelSheet = excelWorkBook.createSheet(sheetName);
+	}
+	
+	
+	public void deleteSheet(String sheetName) {
+		excelWorkBook.removeSheetAt(excelWorkBook.getSheetIndex(sheetName));
 	}
 	
 }

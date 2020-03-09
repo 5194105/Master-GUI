@@ -1,5 +1,7 @@
 package guis;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -11,18 +13,34 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JRadioButton;
 
 import org.openqa.selenium.WebDriver;
 
 import configuration.config;
+import configuration.mouse;
 
 public class instantInvoiceAutomationGui {
 
 	private JFrame frame;
-	gui g;
-	config c;
+	  config c;
+	   
+	     private JLabel label;
+	     private JLabel lblSource;
+	     private JLabel executeLabel;
+	     private JRadioButton l2RadioButton;
+	     private JRadioButton l3RadioButton;
+	     private JLabel label_2;
+	     private JLabel lblInstantInvoiceAutomation;
+	     private JLabel excelLabel;
+	     private JLabel dbLabel;
+	     
+	     gui g;
+	     
+	     mouse m;
 	
 	
 	/**
@@ -30,6 +48,8 @@ public class instantInvoiceAutomationGui {
 	 */
 	public instantInvoiceAutomationGui(gui g,config c) {
 		this.g=g;
+		this.c=c;
+		g.frame.setVisible(false);
 		initialize();
 		
 	}
@@ -46,8 +66,121 @@ public class instantInvoiceAutomationGui {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
+		executeLabel = new JLabel("New label");
+		executeLabel.setBounds(413, 489, 284, 41);
+		
+		
+		excelLabel = new JLabel("New label");
+		excelLabel.setBounds(512, 335, 78, 56);
+	
+		dbLabel = new JLabel("New label");
+		dbLabel.setBounds(619, 332, 78, 56);
+
+		
+		excelLabel.setName("excel");
+		dbLabel.setName("db");
+		executeLabel.setName("execute");
+		
+		
+		lblInstantInvoiceAutomation = new JLabel("Instant Invoice Automation");
+		lblInstantInvoiceAutomation.setForeground(Color.WHITE);
+		lblInstantInvoiceAutomation.setFont(new Font("Segoe UI", Font.BOLD, 42));
+		lblInstantInvoiceAutomation.setBounds(353, 196, 386, 64);
+		frame.getContentPane().add(lblInstantInvoiceAutomation);
+		
+		label = new JLabel("Level:");
+		label.setBounds(413, 281, 78, 31);
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		frame.getContentPane().add(label);
+		
+		lblSource = new JLabel("Source:");
+		lblSource.setForeground(Color.WHITE);
+		lblSource.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		lblSource.setBounds(413, 344, 99, 31);
+		frame.getContentPane().add(lblSource);
+		
+		l2RadioButton = new JRadioButton("L2");
+		l2RadioButton.setOpaque(false);
+		l2RadioButton.setForeground(Color.WHITE);
+		l2RadioButton.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		l2RadioButton.setBounds(512, 281, 69, 29);
+		l2RadioButton.setName("l2");
+		frame.getContentPane().add(l2RadioButton);
+		
+		
+		l3RadioButton = new JRadioButton("L3");
+		l3RadioButton.setOpaque(false);
+		l3RadioButton.setForeground(Color.WHITE);
+		l3RadioButton.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		l3RadioButton.setBounds(588, 282, 69, 29);
+		l3RadioButton.setName("l3");
+		frame.getContentPane().add(l3RadioButton);
+		
+		label_2 = new JLabel("Compatible Mode: ");
+		label_2.setForeground(Color.WHITE);
+		label_2.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		label_2.setBounds(413, 405, 212, 29);
+		frame.getContentPane().add(label_2);
+		
+		JCheckBox checkBox = new JCheckBox("");
+		checkBox.setBounds(630, 405, 27, 29);
+		checkBox.setOpaque(false);
+		frame.getContentPane().add(checkBox);
+		
+	
+		
+		
+		guiBase gb = new guiBase();
+		mouse m = new mouse(gb,g,c,this,frame);
+		m.setFrame(frame);
+		m.setupBaseIcons();
+		m.addExcel(excelLabel);
+		m.addDb(dbLabel);
+		m.addExecute(executeLabel);
+		m.setupBackground();
+		l2RadioButton.addMouseListener(m.m3);
+		l3RadioButton.addMouseListener(m.m3);
+		
+		//Sets Driver to Chrome
+		c.setDriverType("2");
+		
+		
+	
+		
+		
+	    frame.setVisible(true);
+        
+	    
+	    l2RadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	l2RadioButtonActionPerformed(evt);
+            }
+        });
+	    
+	    l3RadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	l3RadioButtonActionPerformed(evt);
+            }
+        });
 		
 	}
+	
+		private void l2RadioButtonActionPerformed(java.awt.event.ActionEvent evt) { 
+			System.out.println("L2 RADIO");
+			if (l3RadioButton.isSelected()){
+				l3RadioButton.setSelected(false);
+		        }
+			c.setLevel(false);
+	}
+		private void l3RadioButtonActionPerformed(java.awt.event.ActionEvent evt) {   
+			System.out.println("L3 RADIO");
+			if (l2RadioButton.isSelected()){
+				l2RadioButton.setSelected(false);
+		        }
+			c.setLevel(true);
+		}
+}
 
 	
-}
+

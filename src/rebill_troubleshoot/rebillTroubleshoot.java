@@ -221,20 +221,22 @@ public class rebillTroubleshoot {
 		for (int i=0;i<rtDataArrayTemp.size();i++) {
 				trackTemp="";
 
+			//If Elgible then will skip the else.
 			if (rtDataArrayTemp.get(i).getEligable().equals("Y")) {
-				
+					nonDTT=true;
 					setSingleComment="Is Eligable";
 			}
 			
-			else {
-				
-			
+			//If DTT Then skip the else
+			else {			
 			if(rtDataArrayTemp.get(i).getDevice().indexOf("DTT")!=-1) {
 				
 				setSingleComment="DTT Trk";
-
 			}
+			
+			
 			else {
+				nonDTT=true;
 				
 				if(rtDataArrayTemp.get(i).getOreStatus().equals("RM")) {
 					
@@ -248,20 +250,11 @@ public class rebillTroubleshoot {
 			}
 		}
 			
-			
-		
 			if (rtDataArrayTemp.get(i).getOreStatus().equals("RM")|| rtDataArrayTemp.get(i).getOreStatus().equals("Y")){
-				if(rtDataArrayTemp.get(i).getDevice().indexOf("DTT")==-1) {
+			
 					nonRM=false;
-				}	
 			}
-			
-			if(rtDataArrayTemp.get(i).getDevice().indexOf("DTT")==-1) {
-				nonDTT=true;
-			
-			}
-			
-			
+
 			setTimeperiodStatus=getTimeperiodStatus(rtDataArrayTemp.get(i).getTrkngnbr());
 			
 			for (int q=0;q<rtDataArray.size();q++) {
@@ -276,6 +269,33 @@ public class rebillTroubleshoot {
 			 setSingleComment="";
 			 setTinComments="";
 		
+		}
+	}
+	
+	
+	public void determineResult(String tempTin){
+		
+		resultString="";
+		
+		if (nonRM==true) {
+					
+					resultString+="No RM Device Trks ";
+				}
+		if (nonDTT==false) {
+			
+			resultString+="All DTT Tracks ";
+		}
+		if (notShipped==false && nonRM==false &&  nonDTT==true) {
+			
+			resultString+="Check Execution Date ";
+		}
+		
+		
+		for (int q=0;q<rtDataArray.size();q++) {
+			if (rtDataArray.get(q).getTestInputNbr().equals(tempTin)) {
+				rtDataArray.get(q).setFullComments(resultString);
+			}
+			
 		}
 	}
 	
@@ -383,31 +403,7 @@ public class rebillTroubleshoot {
 	}
 	
 	
-	public void determineResult(String tempTin){
-		
-		resultString="";
-		
-		if (nonRM==true) {
-					
-					resultString+="No RM Device Trks ";
-				}
-		if (nonDTT==false) {
-			
-			resultString+="All DTT Tracks ";
-		}
-		if (notShipped==false && nonRM==false &&  nonDTT==true) {
-			
-			resultString+="Check Execution Date ";
-		}
-		
-		
-		for (int q=0;q<rtDataArray.size();q++) {
-			if (rtDataArray.get(q).getTestInputNbr().equals(tempTin)) {
-				rtDataArray.get(q).setFullComments(resultString);
-			}
-			
-		}
-	}
+
 	
 	public void resetBooleans() {
 		tempNonRM=true;
@@ -447,7 +443,8 @@ public class rebillTroubleshoot {
 		
 		for (int i=0;i<rtDataArray.size();i++) {
 			e.setCellData(rtDataArray.get(i).getRowCounter(),16,rtDataArray.get(i).getTimeperiodStatus());
-			e.setCellData(rtDataArray.get(i).getRowCounter(),18,resultString);
+			e.setCellData(rtDataArray.get(i).getRowCounter(),18,rtDataArray.get(i).getFullComments());
+			
 			if (rtDataArray.get(i).getSingleComment()!=null || !rtDataArray.get(i).getSingleComment().equals("")) {
 				if(rtDataArray.get(i).getLparDate().equals("") || rtDataArray.get(i).getLparDate()==null) {
 				e.setCellData(rtDataArray.get(i).getRowCounter(),17,rtDataArray.get(i).getSingleComment());
