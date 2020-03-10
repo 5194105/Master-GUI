@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Sample_Suite]">
+  <parameter name="startDateText" value="02/26/2020"/>
+  <parameter name="level" value="3"/>
+  <parameter name="filePathExcel" value="C:\Users\5194105\Documents\aaaaaareratetestng.xlsx"/>
+  <parameter name="endDateText" value="02/27/2020"/>
+  <parameter name="broswer" value="chrome"/>
+  <parameter name="compatibleMode" value=""/>
+  <test name="Rerate Test(failed)" parallel="methods">
+    <classes>
+      <class name="testng.testingonly">
+        <methods>
+          <include name="testMethod3"/>
+          <include name="setupExcel"/>
+          <include name="setupExcel"/>
+          <include name="setupExcel"/>
+          <include name="testMethod"/>
+          <include name="testMethod2"/>
+        </methods>
+      </class> <!-- testng.testingonly -->
+    </classes>
+  </test> <!-- Rerate Test(failed) -->
+</suite> <!-- Failed suite [Sample_Suite] -->
