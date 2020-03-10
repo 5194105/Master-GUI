@@ -33,7 +33,9 @@ public class config {
     String startDate,endDate;
 
     
-    Boolean compatible,level=null,source=null;
+    Boolean compatible;
+    
+    String level,source;
 	
 	public config() {
 		
@@ -272,7 +274,7 @@ public class config {
 	
 	
 	
-	public void setLevel(Boolean level) {
+	public void setLevel(String level) {
 		
 		this.level=level;
 	}
@@ -285,7 +287,7 @@ public class config {
 		this.compatible=compatible;
 	}
 	
-	public Boolean getLevel() {
+	public String getLevel() {
 		
 		return level;
 	}

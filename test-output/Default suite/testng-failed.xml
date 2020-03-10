@@ -3,11 +3,12 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="testng.testingonly">
+      <class name="testng.prerateTestNG">
         <methods>
-          <include name="testMethod"/>
+          <include name="testMethod3"/>
+          <include name="setupExcel"/>
         </methods>
-      </class> <!-- testng.testingonly -->
+      </class> <!-- testng.prerateTestNG -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

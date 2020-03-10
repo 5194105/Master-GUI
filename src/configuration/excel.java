@@ -24,7 +24,9 @@ public class excel {
 	XSSFCell cell = null;
 	String cellData="a";
 	int sheetNumber;
+
 	XSSFRow row;
+
 	 XSSFWorkbook newWorkbook;
 	 XSSFSheet newSheet;
 	
@@ -91,11 +93,13 @@ public class excel {
 			try {
 				cell=excelSheet.getRow(x).getCell(y);
 		 
+
 				cellData=cell.toString();
-				System.out.println("Cell Data "+cellData);
+				//System.out.println("Cell Data "+cellData);
+
 			}
 			catch(Exception e) {
-				System.out.println(e);
+			//	System.out.println(e);
 				cellData="null";
 				
 			}
@@ -144,6 +148,24 @@ public class excel {
 	}
 	
 	
+	
+	public void writeCellData() {
+		
+		try {
+			excelOutputStream = new FileOutputStream(new File(filePath));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			excelWorkBook.write(excelOutputStream);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
 	public void saveAndClose() {
 		
 		try {
@@ -165,7 +187,7 @@ public class excel {
 		
 		
 		while(!cellData.equals("") && cellData!=null && !cellData.equals("null")) {
-			System.out.println("Inside Row Count Auto");
+			//System.out.println("Inside Row Count Auto");
 			try {
 			getCellData(couter,y);
 			rowCount++;
@@ -184,7 +206,7 @@ public class excel {
 		int couter=0;
 		cellData="a";
 		colCount=-1;
-		System.out.println("Inside Col Count Auto");
+		//System.out.println("Inside Col Count Auto");
 		while(!cellData.equals("") && cellData!=null && !cellData.equals("null")) {
 			
 			getCellData(x,couter);
