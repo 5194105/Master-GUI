@@ -560,7 +560,7 @@ public void setupMouseListener() {
 				    		            filePath=file.getAbsolutePath();
 				    		            c.setExcelPath(filePath);
 				    		            System.out.println("SOURCE!!!!!!!");
-				    		            c.setSource(false);
+				    		            
 				    		            excelBoolean=true;
 				    		            addExcel(mouseLabel);
 				    		            databaseBoolean=false;
@@ -586,7 +586,7 @@ public void setupMouseListener() {
 		    		            excelBoolean=false;
 				    			addExcel(jLabelExcel);
 				    			System.out.println("SOURCE!!!!!!!");
-				    			c.setSource(true);
+				    			c.setSource("");
 				    			addRemoveAkshayUDStuff(false);
 				    			
 				    		}
@@ -612,10 +612,10 @@ public void setupMouseListener() {
 					    			//DO UD STUFF
 				    				
 				    				
-				    				if(c.getLevel()==false)
+				    				if(c.getLevel().equals("2"))
 				    				{
 				    					level1="L2";
-				    				}else if(c.getLevel()==true)
+				    				}else if(c.getLevel().equals("3"))
 				    				{
 				    					level1="L3";
 				    				}
@@ -628,7 +628,7 @@ public void setupMouseListener() {
 				    				else {
 				    					compatibleMode="RDP";
 				    				}
-				    				if(c.getSource()) {
+				    				if(c.getSource().equals("")) {
 				    					c.setUnixPath("NA");
 				    				}else {
 				    					c.setUnixPath(unixPathText.getText());
@@ -651,7 +651,7 @@ public void setupMouseListener() {
 				    				String filepath=c.getExcelPath();
 				    				String startDateText=c.getStartDate();
 				    				String endDateText=c.getEndDate();
-				    				Boolean level=c.getLevel();
+				    				String level=c.getLevel();
 				    				String broswer=c.getDriverType();
 				    				boolean compatibleMode=c.getCompatibleMode();
 				    				

@@ -383,7 +383,7 @@ public class prerateTestNG {
         
         }
          */
-            
+    driver.get(levelUrl);
     driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 	wait = new WebDriverWait( driver,10);
 	driver.manage().window().maximize();
