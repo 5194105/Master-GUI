@@ -5,11 +5,8 @@
     <classes>
       <class name="testng.prerateTestNG">
         <methods>
-          <include name="testMethod3" invocation-numbers="0"/>
           <include name="setupExcel"/>
-          <include name="testMethod4" invocation-numbers="0"/>
-          <include name="testMethod1" invocation-numbers="0"/>
-          <include name="testMethod2" invocation-numbers="0"/>
+          <include name="testMethod1"/>
         </methods>
       </class> <!-- testng.prerateTestNG -->
     </classes>
