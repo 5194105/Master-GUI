@@ -1,4 +1,4 @@
-package testng;
+package prerate;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -9,7 +9,10 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -27,24 +30,30 @@ public class prerateTestNG {
   
 
 	String tempFile,configFile;
-	excel e;
+	excel excelVar;
+	boolean fl;
 	 Boolean isPresent=false;
 	int retryCounter=0;
 	int i=0;
 	Object o;
 	WebDriverWait wait1,wait2,wait3,wait4;
 	config c;
-	
-	
+	public  JavascriptExecutor Executor;
+	public  JavascriptExecutor Executor1;
+	public  JavascriptExecutor Executor2;
+	public  JavascriptExecutor Executor3;
+	public  JavascriptExecutor Executor4 ;
+	public  WebElement elementAK;
+	public  WebElement element1;
+	public  WebElement element2;
+	public  WebElement element3;
+	public  WebElement element4;
 	long serviceLong1,serviceLong2;
 	long invoiceLong1,invoiceLong2;
 	long acctLong1,acctLong2;
 	long trkngLong1,trkngLong2;
 	String a ;
 	int count1,count2,count3,count4 ;
-	String url1 ="https://testsso.secure.fedex.com/L3/PRSApps/rerate/iscreen/rrAERerateMain.jsp";
-	String url2="https://destsso.secure.fedex.com/L2/PRSApps/rerate/iscreen/rrAERerateMain.jsp";
-
 	String  sh1;
 	String filepath;
 	String d="02/20/2020";
@@ -60,6 +69,7 @@ public class prerateTestNG {
 	WebDriver driver1,driver2,driver3,driver4;
 	static int sheetcount;
 	static int j ;
+	 boolean flag2 ;
 
 	 Boolean isChecked1=false,isChecked2=false,isChecked3=false,isChecked4=false;
         Boolean compatibleMode;
@@ -74,7 +84,8 @@ public class prerateTestNG {
 		String ieSetProperty="webdriver.ie.driver";
 		//String firefoxSetProperty="";
 		
-
+		int k;
+		boolean sel;
 		
 		String chromePath=homePath+"\\drivers\\chromedriver.exe";
 	
@@ -100,7 +111,7 @@ public class prerateTestNG {
 		
 		
 		
-		
+		int count;
 		
 		
 		
@@ -142,14 +153,14 @@ public class prerateTestNG {
 		//or from eclipse.
     	homePath=System.getProperty("user.dir");
     	System.out.println("homePath" +System.getProperty("user.dir"));
-    	e = new excel(homePath+"\\test data\\PRERATE_UPDATE.xlsx");
+    	excelVar = new excel(homePath+"\\test data\\PRERATE_UPDATE.xlsx");
     	//e = new excel(filepathExcel);
-    	e.setUpExcelWorkbook();
-    	e.setUpExcelSheet(0);
-    	e.setRowCountAutomatically(0);
-    	e.setColCountAutomatically(0);
-    	rowCount=e.getRowCount();
-    	colCount=e.getColCount()+1;
+    	excelVar.setUpExcelWorkbook();
+    	excelVar.setUpExcelSheet(0);
+    	excelVar.setRowCountAutomatically(0);
+    	excelVar.setColCountAutomatically(0);
+    	rowCount=excelVar.getRowCount();
+    	colCount=excelVar.getColCount()+1;
     	System.out.println("ROW COUNT "+rowCount);
     	System.out.println("COL COUNT "+colCount);
     	total= rowCount/4;
@@ -192,7 +203,7 @@ public class prerateTestNG {
     		for(int j=0;j<colCount-1;j++) {
     	
     			
-    				obj[objCount][j]=e.getCellData(i, j);
+    				obj[objCount][j]=excelVar.getCellData(i, j);
     			
     		}
     		obj[objCount][colCount-1]=i;
@@ -221,7 +232,7 @@ public class prerateTestNG {
     		for(int j=0;j<colCount-1;j++) {
     		//	System.out.println(j);
     		//	System.out.println(e.getCellData(i, j));
-    			obj[objCount][j]=e.getCellData(i, j);
+    			obj[objCount][j]=excelVar.getCellData(i, j);
     		}
     		obj[objCount][colCount-1]=i;
     		objCount++;
@@ -239,8 +250,8 @@ public class prerateTestNG {
     	for(int i=3;i<=rowCount;i+=4) {
     		for(int j=0;j<colCount-1;j++) {
     			System.out.println(i);
-    			System.out.println(e.getCellData(i, j));
-    			obj[objCount][j]=e.getCellData(i, j);
+    			System.out.println(excelVar.getCellData(i, j));
+    			obj[objCount][j]=excelVar.getCellData(i, j);
     		}
     		obj[objCount][colCount-1]=i;
     		objCount++;
@@ -257,7 +268,7 @@ public class prerateTestNG {
     	int objCount=0;
     	for(int i=4;i<=rowCount;i+=4) {
     		for(int j=0;j<colCount-1;j++) {
-    			obj[objCount][j]=e.getCellData(i, j);
+    			obj[objCount][j]=excelVar.getCellData(i, j);
     		}
     		obj[objCount][colCount-1]=i;
     		objCount++;
@@ -383,7 +394,7 @@ public class prerateTestNG {
         
         }
          */
-            
+    driver.get(levelUrl);
     driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 	wait = new WebDriverWait( driver,10);
 	driver.manage().window().maximize();
@@ -392,5 +403,157 @@ public class prerateTestNG {
 	driver.findElement(By.id("submit")).click();
     	
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public void doPrerate(WebDriver driver,WebDriverWait wait, String type, String comment,String podScan,String tinCount,String testInputNbr,String trk,String amount,String currcode,String approverID,String cc1,String cm1,String cc2 ,String cm2 ,String cc3,String cm3 ,String cc4 ,String cm4,int rowNumber) throws InterruptedException {
+    	driver.switchTo().frame("header");
+		driver.findElement(By.id("preRateEntrySelection")).click();
+		driver.switchTo().defaultContent();
+		driver.switchTo().frame("content");
+		driver.findElement(By.xpath("//input[@id='preRateEntrySelForm:trackingNo_input']")).sendKeys(trk);
+		driver.findElement(By.xpath("//button[@id='preRateEntrySelForm:search_button']")).click();
+		Thread.sleep(2000);
+		try{
+			//flag=driver.findElement(By.className("ui-faces-message-text")).isDisplayed();
+			//System.out.println("Error flag"+flag);
+			//System.out.println(driver.findElement(By.className("ui-faces-message-text")).getText());
+			String er=driver.findElement(By.className("ui-faces-message-text")).getText();
+			driver.switchTo().defaultContent();
+			
+		}
+		catch (NoSuchElementException a){
+			//System.out.println("Noerrormsg : " + flag);
+		}
+		//Thread.sleep(2000);
+
+		driver.findElement(By.xpath("//a[@id='preRateEntryForm:actionId_link']")).click();
+		element = driver.findElement(By.xpath("//div[@id='preRateEntryForm:actionId_div']/div/div[2]/span[2]"));
+		Executor = (JavascriptExecutor)driver;
+		Executor.executeScript("arguments[0].click();", element);
+		Thread.sleep(1000);
+		if (type.equals("ADDR CHANGE FEE")){
+			driver.findElement(By.xpath("//a[@id='preRateEntryForm:preRateTypeCd_link']")).click();
+			element1 = driver.findElement(By.xpath("//div[@id='preRateEntryForm:preRateTypeCd_div']/div/div[2]/span[2]"));
+			Executor1 = (JavascriptExecutor)driver;
+			Executor1.executeScript("arguments[0].click();", element1);
+		}
+		else if(type.equals("COLD CHAIN")){
+			driver.findElement(By.xpath("//a[@id='preRateEntryForm:preRateTypeCd_link']")).click();
+			element2 = driver.findElement(By.xpath("//div[@id='preRateEntryForm:preRateTypeCd_div']/div/div[4]/span[2]"));
+			Executor2 = (JavascriptExecutor)driver;
+			Executor2.executeScript("arguments[0].click();", element2);
+		}
+		else if(type.equals("Trucking Fees")){
+			driver.findElement(By.xpath("//a[@id='preRateEntryForm:preRateTypeCd_link']")).click();
+			element3 = driver.findElement(By.xpath("//div[@id='preRateEntryForm:preRateTypeCd_div']/div/div[3]/span[2]"));
+			Executor3 = (JavascriptExecutor)driver;
+			Executor3.executeScript("arguments[0].click();", element3);
+		}
+		else if(type.equals("PH LPC")){
+			if(level.contentEquals("L2")||level.contentEquals("l2")){
+				//L2 PHLPC=12 and L3 PHLPC=8
+				driver.findElement(By.xpath("//a[@id='preRateEntryForm:preRateTypeCd_link']")).click();
+				element4 = driver.findElement(By.xpath("//div[@id='preRateEntryForm:preRateTypeCd_div']/div/div[12]/span[2]"));
+				JavascriptExecutor Executor4 = (JavascriptExecutor)driver;
+				Executor4.executeScript("arguments[0].click();", element4);
+			}
+			else if (level.contentEquals("L3")||level.contentEquals("l3")){
+				driver.findElement(By.xpath("//a[@id='preRateEntryForm:preRateTypeCd_link']")).click();
+				element4 = driver.findElement(By.xpath("//div[@id='preRateEntryForm:preRateTypeCd_div']/div/div[8]/span[2]"));
+				JavascriptExecutor Executor4 = (JavascriptExecutor)driver;
+				Executor4.executeScript("arguments[0].click();", element4);
+
+			}
+		}
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:paymentComponent:amountId:pymt_amnt_input']")).sendKeys(amount);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:paymentComponent:currCodeId:cuu_code_input']")).sendKeys(currcode);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:paymentComponent:rateApprover_input']")).sendKeys(approverID);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde1_input']")).sendKeys(cc1);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt1_input']")).sendKeys(cm1);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde2_input']")).sendKeys(cc2);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt2_input']")).sendKeys(cm2);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde3_input']")).sendKeys(cc3);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt3_input']")).sendKeys(cm3);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde3_input']")).sendKeys(cc3);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt3_input']")).sendKeys(cm3);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde4_input']")).sendKeys(cc4);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt4_input']")).sendKeys(cm4);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde3_input']")).sendKeys(cc4);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt3_input']")).sendKeys(cm4);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde4_input']")).sendKeys(cc4);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt4_input']")).sendKeys(cm4);
+			
+
+		
+		driver.findElement(By.xpath("//button[@id='preRateEntryForm:PreRateEntrySubmit_button']")).click();
+		Thread.sleep(6000);
+		try{
+			count=(driver.findElements(By.xpath("//input[@type='checkbox']")).size());
+			//System.out.println(count);
+			for( k=2;k<count;k++){
+				sel=driver.findElements(By.xpath("//input[@type='checkbox']")).get(k).isEnabled();
+				if(sel==true){
+					driver.findElements(By.xpath("//input[@type='checkbox']")).get(k).click();
+				}
+				else {
+					//System.out.println("disabled");
+					fl=true;
+					break;
+				}
+			}
+			driver.findElement(By.xpath("//button[@id='preRateEntryForm:PreRateEntrySubmit_button']")).click();
+			Thread.sleep(6000);
+		}
+		catch (NoSuchElementException a){
+			//System.out.println("just proceed further");
+		}
+		try{
+
+			flag2=driver.findElement(By.xpath("//input[@id='preRateEntrySelForm:trackingNo_input']")).isDisplayed();
+			excelVar.setCellData(rowNumber, 1, "Completed");
+			excelVar.saveAndClose();
+			driver.switchTo().defaultContent();
+		
+		}
+		catch (NoSuchElementException a){
+			if(fl==true){
+
+				excelVar.setCellData(rowNumber, 1, "Override Disabled");
+				excelVar.saveAndClose();
+				driver.switchTo().defaultContent();
+		
+			}
+			else{
+				//System.out.println("Nosuccessfull : " + flag2);
+				excelVar.setCellData(rowNumber, 1, "Try this manually");
+				excelVar.saveAndClose();
+				driver.switchTo().defaultContent();
+		
+			}
+		}
 	
+	catch (NullPointerException f)
+	{
+		excelVar.setCellData(rowNumber, 1, "Try this manually");
+		excelVar.saveAndClose();
+		driver.switchTo().defaultContent();
+	
+	}
+	catch (WebDriverException h)
+	{
+		excelVar.setCellData(rowNumber, 1, "Try this manually");
+		excelVar.saveAndClose();
+		driver.switchTo().defaultContent();
+	}
 }
+    	
+    }
+	
+
