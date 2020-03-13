@@ -85,7 +85,7 @@ public class prerateAutomationGui {
 		
 		lblRerateAutomation = new JLabel("Prerate Automation");
 		lblRerateAutomation.setForeground(Color.WHITE);
-		lblRerateAutomation.setFont(new Font("Segoe UI", Font.BOLD, 42));
+		lblRerateAutomation.setFont(new Font("Segoe UI", Font.BOLD, 36));
 		lblRerateAutomation.setBounds(353, 196, 386, 64);
 		frame.getContentPane().add(lblRerateAutomation);
 		frame.getContentPane().setLayout(null);
@@ -131,67 +131,45 @@ public class prerateAutomationGui {
 		browser = new JLabel("Browser:");
 		browser.setForeground(Color.WHITE);
 		browser.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		browser.setBounds(499, 404, 212, 29);
+		browser.setBounds(499, 276, 150, 31);
 		frame.getContentPane().add(browser);
 		
 		ie = new JRadioButton("IE");
 		ie.setOpaque(false);
 		ie.setForeground(Color.WHITE);
 		ie.setFont(new Font("Segoe UI", Font.BOLD, 22));
-		ie.setBounds(610, 404, 69, 29);
+		ie.setBounds(610, 280, 69, 29);
 		frame.getContentPane().add(ie);
 		
 		chrome = new JRadioButton("Chrome");
 		chrome.setOpaque(false);
 		chrome.setForeground(Color.WHITE);
 		chrome.setFont(new Font("Segoe UI", Font.BOLD, 22));
-		chrome.setBounds(669, 405, 150, 29);
+		chrome.setBounds(610, 315, 150, 29);
 		frame.getContentPane().add(chrome);
-		
-		startDateLabel = new JLabel("Start Date:");
-		startDateLabel.setForeground(Color.WHITE);
-		startDateLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		startDateLabel.setBounds(499, 276, 150, 31);
-		frame.getContentPane().add(startDateLabel);
-		
-		endDateLabel = new JLabel("End Date:");
-		endDateLabel.setForeground(Color.WHITE);
-		endDateLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		endDateLabel.setBounds(499, 343, 113, 31);
-		frame.getContentPane().add(endDateLabel);
-		
-		startDate = new JTextField();
-		startDate.setBounds(617, 276, 170, 31);
-		frame.getContentPane().add(startDate);
-		startDate.setColumns(10);
-		
-		endDate = new JTextField();
-		endDate.setColumns(10);
-		endDate.setBounds(617, 340, 170, 31);
-		frame.getContentPane().add(endDate);
-		
+
 		lblPrerate = new JLabel("Prerate:");
 		lblPrerate.setForeground(Color.WHITE);
 		lblPrerate.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		lblPrerate.setBounds(499, 453, 212, 29);
+		lblPrerate.setBounds(499, 370, 212, 29);
 		frame.getContentPane().add(lblPrerate);
 		
 		rdbtnUpdate = new JRadioButton("Update");
 		rdbtnUpdate.setOpaque(false);
 		rdbtnUpdate.setForeground(Color.WHITE);
 		rdbtnUpdate.setFont(new Font("Segoe UI", Font.BOLD, 22));
-		rdbtnUpdate.setBounds(610, 453, 120, 29);
+		rdbtnUpdate.setBounds(610, 375, 120, 29);
 		frame.getContentPane().add(rdbtnUpdate);
 		
 		rdbtnHold = new JRadioButton("Hold");
 		rdbtnHold.setOpaque(false);
 		rdbtnHold.setForeground(Color.WHITE);
 		rdbtnHold.setFont(new Font("Segoe UI", Font.BOLD, 22));
-		rdbtnHold.setBounds(745, 454, 150, 29);
+		rdbtnHold.setBounds(610, 410, 150, 29);
 		frame.getContentPane().add(rdbtnHold);
 		
 		guiBase gb = new guiBase();
-		mouse m = new mouse(gb,g,c,this);
+		mouse m = new mouse(gb,g,c,this,frame);
 		m.setFrame(frame);
 		m.setupBaseIcons();
 		m.addExcel(excelLabel);

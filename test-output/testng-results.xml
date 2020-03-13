@@ -2,16 +2,30 @@
 <testng-results skipped="0" failed="1" ignored="0" total="5" passed="4">
   <reporter-output>
   </reporter-output>
+<<<<<<< HEAD
   <suite name="Suite" duration-ms="55759" started-at="2020-03-11T11:54:37 EDT" finished-at="2020-03-11T11:55:33 EDT">
+=======
+  <suite name="Suite" duration-ms="321608" started-at="2020-03-12T19:02:23Z" finished-at="2020-03-12T19:07:44Z">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
     <groups>
     </groups>
+<<<<<<< HEAD
     <test name="Test" duration-ms="55759" started-at="2020-03-11T11:54:37 EDT" finished-at="2020-03-11T11:55:33 EDT">
       <class name="prerate.prerateTestNG">
         <test-method status="PASS" signature="setupExcel()[pri:0, instance:prerate.prerateTestNG@610694f1]" name="setupExcel" is-config="true" duration-ms="300" started-at="2020-03-11T11:54:37 EDT" finished-at="2020-03-11T11:54:37 EDT">
+=======
+    <test name="Test" duration-ms="321608" started-at="2020-03-12T19:02:23Z" finished-at="2020-03-12T19:07:44Z">
+      <class name="testng.prerateTestNG">
+        <test-method status="PASS" signature="setupExcel()[pri:0, instance:testng.prerateTestNG@7823a2f9]" name="setupExcel" is-config="true" duration-ms="1046" started-at="2020-03-12T15:02:23Z" finished-at="2020-03-12T15:02:24Z">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupExcel -->
+<<<<<<< HEAD
         <test-method status="FAIL" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNG@610694f1]" name="testMethod1" duration-ms="54145" started-at="2020-03-11T11:54:37 EDT" data-provider="data-provider1" finished-at="2020-03-11T11:55:32 EDT">
+=======
+        <test-method status="FAIL" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.prerateTestNG@7823a2f9]" name="testMethod1" duration-ms="275924" started-at="2020-03-12T15:02:24Z" data-provider="data-provider1" finished-at="2020-03-12T15:07:00Z">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
           <exception class="org.testng.internal.reflect.MethodMatcherException">
             <message>
               <![CDATA[
@@ -42,6 +56,7 @@ at java.lang.Thread.run(Unknown Source)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod1 -->
+<<<<<<< HEAD
         <test-method status="PASS" signature="testMethod3(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNG@610694f1]" name="testMethod3" duration-ms="55431" started-at="2020-03-11T11:54:38 EDT" data-provider="data-provider3" finished-at="2020-03-11T11:55:33 EDT">
           <params>
             <param index="0">
@@ -139,6 +154,9 @@ at java.lang.Thread.run(Unknown Source)
           </reporter-output>
         </test-method> <!-- testMethod3 -->
         <test-method status="PASS" signature="testMethod2(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNG@610694f1]" name="testMethod2" duration-ms="54530" started-at="2020-03-11T11:54:38 EDT" data-provider="data-provider2" finished-at="2020-03-11T11:55:32 EDT">
+=======
+        <test-method status="PASS" signature="testMethod2(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.prerateTestNG@7823a2f9]" name="testMethod2" duration-ms="320505" started-at="2020-03-12T15:02:24Z" data-provider="data-provider2" finished-at="2020-03-12T15:07:44Z">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
           <params>
             <param index="0">
               <value>
@@ -234,7 +252,11 @@ at java.lang.Thread.run(Unknown Source)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod2 -->
+<<<<<<< HEAD
         <test-method status="PASS" signature="testMethod4(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNG@610694f1]" name="testMethod4" duration-ms="54881" started-at="2020-03-11T11:54:38 EDT" data-provider="data-provider4" finished-at="2020-03-11T11:55:32 EDT">
+=======
+        <test-method status="PASS" signature="testMethod4(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.prerateTestNG@7823a2f9]" name="testMethod4" duration-ms="278034" started-at="2020-03-12T15:02:24Z" data-provider="data-provider4" finished-at="2020-03-12T15:07:02Z">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
           <params>
             <param index="0">
               <value>
@@ -330,7 +352,107 @@ at java.lang.Thread.run(Unknown Source)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod4 -->
+<<<<<<< HEAD
         <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNG@610694f1]" name="testMethod1" duration-ms="54130" started-at="2020-03-11T11:54:38 EDT" data-provider="data-provider1" finished-at="2020-03-11T11:55:32 EDT">
+=======
+        <test-method status="PASS" signature="testMethod3(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.prerateTestNG@7823a2f9]" name="testMethod3" duration-ms="276101" started-at="2020-03-12T15:02:24Z" data-provider="data-provider3" finished-at="2020-03-12T15:07:00Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[COLD CHAIN]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[NA]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[177953]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[540303677035]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[4]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[USD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[5071714]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[2]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[2]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[null]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[null]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[null]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[null]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[3]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod3 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.prerateTestNG@7823a2f9]" name="testMethod1" duration-ms="275898" started-at="2020-03-12T15:02:24Z" data-provider="data-provider1" finished-at="2020-03-12T15:07:00Z">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
           <params>
             <param index="0">
               <value>

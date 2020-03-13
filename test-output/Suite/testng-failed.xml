@@ -5,8 +5,15 @@
     <classes>
       <class name="prerate.prerateTestNG">
         <methods>
+<<<<<<< HEAD
           <include name="testMethod1"/>
+=======
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
           <include name="setupExcel"/>
+<<<<<<< HEAD
+=======
+          <include name="testMethod1"/>
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
         </methods>
       </class> <!-- prerate.prerateTestNG -->
     </classes>

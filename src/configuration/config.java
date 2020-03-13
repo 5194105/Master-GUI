@@ -278,7 +278,7 @@ public class config {
 		
 		this.level=level;
 	}
-	public void setSource(Boolean source) {
+	public void setSource(String source) {
 		
 		this.source=source;
 	}
@@ -291,7 +291,7 @@ public class config {
 		
 		return level;
 	}
-	public Boolean getSource() {	
+	public String getSource() {	
 		
 		return 	source;
 		}
