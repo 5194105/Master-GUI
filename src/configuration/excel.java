@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -92,10 +93,22 @@ public class excel {
 			cellData="";
 			try {
 				cell=excelSheet.getRow(x).getCell(y);
-		 
-
 				cellData=cell.toString();
-				//System.out.println("Cell Data "+cellData);
+			
+				
+				if (cell.getCellType()==Cell.CELL_TYPE_NUMERIC) {
+					cellData=new BigDecimal(cell.toString()).toPlainString();
+					System.out.println(cellData);
+				}
+				/*
+				else {
+					cellData=cell.toString();
+					System.out.println(cellData);
+				}
+				*/
+			//	cellData=cell.toString();
+				
+				System.out.println("Cell Data "+cellData);
 
 			}
 			catch(Exception e) {

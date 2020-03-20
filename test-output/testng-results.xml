@@ -1,45 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="1" ignored="0" total="5" passed="4">
+<testng-results skipped="0" failed="1" ignored="0" total="8" passed="7">
   <reporter-output>
   </reporter-output>
-<<<<<<< HEAD
-  <suite name="Suite" duration-ms="55759" started-at="2020-03-11T11:54:37 EDT" finished-at="2020-03-11T11:55:33 EDT">
-=======
-  <suite name="Suite" duration-ms="321608" started-at="2020-03-12T19:02:23Z" finished-at="2020-03-12T19:07:44Z">
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+  <suite name="Suite" duration-ms="300556" started-at="2020-03-20T16:07:13 EDT" finished-at="2020-03-20T16:12:14 EDT">
     <groups>
     </groups>
-<<<<<<< HEAD
-    <test name="Test" duration-ms="55759" started-at="2020-03-11T11:54:37 EDT" finished-at="2020-03-11T11:55:33 EDT">
-      <class name="prerate.prerateTestNG">
-        <test-method status="PASS" signature="setupExcel()[pri:0, instance:prerate.prerateTestNG@610694f1]" name="setupExcel" is-config="true" duration-ms="300" started-at="2020-03-11T11:54:37 EDT" finished-at="2020-03-11T11:54:37 EDT">
-=======
-    <test name="Test" duration-ms="321608" started-at="2020-03-12T19:02:23Z" finished-at="2020-03-12T19:07:44Z">
-      <class name="testng.prerateTestNG">
-        <test-method status="PASS" signature="setupExcel()[pri:0, instance:testng.prerateTestNG@7823a2f9]" name="setupExcel" is-config="true" duration-ms="1046" started-at="2020-03-12T15:02:23Z" finished-at="2020-03-12T15:02:24Z">
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+    <test name="Test" duration-ms="300556" started-at="2020-03-20T16:07:13 EDT" finished-at="2020-03-20T16:12:14 EDT">
+      <class name="testng.testingonly">
+        <test-method status="PASS" signature="setupExcel()[pri:0, instance:testng.testingonly@32709393]" name="setupExcel" is-config="true" duration-ms="363" started-at="2020-03-20T16:07:13 EDT" finished-at="2020-03-20T16:07:14 EDT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupExcel -->
-<<<<<<< HEAD
-        <test-method status="FAIL" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNG@610694f1]" name="testMethod1" duration-ms="54145" started-at="2020-03-11T11:54:37 EDT" data-provider="data-provider1" finished-at="2020-03-11T11:55:32 EDT">
-=======
-        <test-method status="FAIL" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.prerateTestNG@7823a2f9]" name="testMethod1" duration-ms="275924" started-at="2020-03-12T15:02:24Z" data-provider="data-provider1" finished-at="2020-03-12T15:07:00Z">
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+        <test-method status="FAIL" signature="testMethod4(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.testingonly@32709393]" name="testMethod4" duration-ms="152476" started-at="2020-03-20T16:07:14 EDT" data-provider="data-provider4" finished-at="2020-03-20T16:09:46 EDT">
           <exception class="org.testng.internal.reflect.MethodMatcherException">
             <message>
               <![CDATA[
-[public void prerate.prerateTestNG.testMethod1(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int)] has no parameters defined but was found to be using a data provider (either explicitly specified or inherited from class level annotation).
+[public void testng.testingonly.testMethod4(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int)] has no parameters defined but was found to be using a data provider (either explicitly specified or inherited from class level annotation).
 Data provider mismatch
-Method: testMethod1([Parameter{index=0, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=1, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=2, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=3, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=4, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=5, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=6, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=7, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=8, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=9, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=10, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=11, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=12, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=13, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=14, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=15, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=16, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=17, type=int, declaredAnnotations=[]}])
-Arguments: [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]]]>
+Method: testMethod4([Parameter{index=0, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=1, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=2, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=3, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=4, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=5, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=6, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=7, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=8, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=9, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=10, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=11, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=12, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=13, type=int, declaredAnnotations=[]}])
+Arguments: [null,null,null,null,null,null,null,null,null,null,null,null,null,null]]]>
             </message>
             <full-stacktrace>
               <![CDATA[org.testng.internal.reflect.MethodMatcherException: 
-[public void prerate.prerateTestNG.testMethod1(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int)] has no parameters defined but was found to be using a data provider (either explicitly specified or inherited from class level annotation).
+[public void testng.testingonly.testMethod4(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,int)] has no parameters defined but was found to be using a data provider (either explicitly specified or inherited from class level annotation).
 Data provider mismatch
-Method: testMethod1([Parameter{index=0, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=1, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=2, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=3, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=4, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=5, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=6, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=7, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=8, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=9, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=10, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=11, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=12, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=13, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=14, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=15, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=16, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=17, type=int, declaredAnnotations=[]}])
-Arguments: [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]
+Method: testMethod4([Parameter{index=0, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=1, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=2, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=3, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=4, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=5, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=6, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=7, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=8, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=9, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=10, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=11, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=12, type=java.lang.String, declaredAnnotations=[]}, Parameter{index=13, type=int, declaredAnnotations=[]}])
+Arguments: [null,null,null,null,null,null,null,null,null,null,null,null,null,null]
 at org.testng.internal.reflect.DataProviderMethodMatcher.getConformingArguments(DataProviderMethodMatcher.java:43)
 at org.testng.internal.Parameters.injectParameters(Parameters.java:925)
 at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:34)
@@ -55,195 +41,151 @@ at java.lang.Thread.run(Unknown Source)
           </exception> <!-- org.testng.internal.reflect.MethodMatcherException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testMethod1 -->
-<<<<<<< HEAD
-        <test-method status="PASS" signature="testMethod3(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNG@610694f1]" name="testMethod3" duration-ms="55431" started-at="2020-03-11T11:54:38 EDT" data-provider="data-provider3" finished-at="2020-03-11T11:55:33 EDT">
+        </test-method> <!-- testMethod4 -->
+        <test-method status="PASS" signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.testingonly@32709393]" name="testMethod" duration-ms="152497" started-at="2020-03-20T16:07:14 EDT" data-provider="data-provider1" finished-at="2020-03-20T16:09:46 EDT">
           <params>
             <param index="0">
               <value>
-                <![CDATA[COLD CHAIN]]>
+                <![CDATA[105153]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[NA]]>
+                <![CDATA[1]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[N]]>
+                <![CDATA[450312851]]>
               </value>
             </param>
             <param index="3">
               <value>
-                <![CDATA[1]]>
+                <![CDATA[null]]>
               </value>
             </param>
             <param index="4">
               <value>
-                <![CDATA[177953]]>
+                <![CDATA[470009994827]]>
               </value>
             </param>
             <param index="5">
               <value>
-                <![CDATA[540303677035]]>
+                <![CDATA[]]>
               </value>
             </param>
             <param index="6">
               <value>
-                <![CDATA[4]]>
+                <![CDATA[421171989]]>
               </value>
             </param>
             <param index="7">
               <value>
-                <![CDATA[USD]]>
+                <![CDATA[null]]>
               </value>
             </param>
             <param index="8">
               <value>
-                <![CDATA[5071714]]>
+                <![CDATA[Express Domestic]]>
               </value>
             </param>
             <param index="9">
               <value>
-                <![CDATA[050]]>
+                <![CDATA[null]]>
               </value>
             </param>
             <param index="10">
               <value>
-                <![CDATA[2]]>
+                <![CDATA[Tracking Number]]>
               </value>
             </param>
             <param index="11">
               <value>
-                <![CDATA[010]]>
+                <![CDATA[Express 9-digit]]>
               </value>
             </param>
             <param index="12">
               <value>
-                <![CDATA[2]]>
+                <![CDATA[L2C3-105153-1-39]]>
               </value>
             </param>
             <param index="13">
               <value>
-                <![CDATA[null]]>
-              </value>
-            </param>
-            <param index="14">
-              <value>
-                <![CDATA[null]]>
-              </value>
-            </param>
-            <param index="15">
-              <value>
-                <![CDATA[null]]>
-              </value>
-            </param>
-            <param index="16">
-              <value>
-                <![CDATA[null]]>
-              </value>
-            </param>
-            <param index="17">
-              <value>
-                <![CDATA[3]]>
+                <![CDATA[1]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testMethod3 -->
-        <test-method status="PASS" signature="testMethod2(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNG@610694f1]" name="testMethod2" duration-ms="54530" started-at="2020-03-11T11:54:38 EDT" data-provider="data-provider2" finished-at="2020-03-11T11:55:32 EDT">
-=======
-        <test-method status="PASS" signature="testMethod2(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.prerateTestNG@7823a2f9]" name="testMethod2" duration-ms="320505" started-at="2020-03-12T15:02:24Z" data-provider="data-provider2" finished-at="2020-03-12T15:07:44Z">
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+        </test-method> <!-- testMethod -->
+        <test-method status="PASS" signature="testMethod2(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.testingonly@32709393]" name="testMethod2" duration-ms="152412" started-at="2020-03-20T16:07:14 EDT" data-provider="data-provider2" finished-at="2020-03-20T16:09:46 EDT">
           <params>
             <param index="0">
               <value>
-                <![CDATA[Trucking Fees]]>
+                <![CDATA[105153]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[NA]]>
+                <![CDATA[1]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[N]]>
+                <![CDATA[450312851]]>
               </value>
             </param>
             <param index="3">
               <value>
-                <![CDATA[1]]>
+                <![CDATA[null]]>
               </value>
             </param>
             <param index="4">
               <value>
-                <![CDATA[177497]]>
+                <![CDATA[470009994827]]>
               </value>
             </param>
             <param index="5">
               <value>
-                <![CDATA[539140308168]]>
+                <![CDATA[]]>
               </value>
             </param>
             <param index="6">
               <value>
-                <![CDATA[600]]>
+                <![CDATA[421171989]]>
               </value>
             </param>
             <param index="7">
               <value>
-                <![CDATA[USD]]>
+                <![CDATA[null]]>
               </value>
             </param>
             <param index="8">
               <value>
-                <![CDATA[5071714]]>
+                <![CDATA[Express Domestic]]>
               </value>
             </param>
             <param index="9">
               <value>
-                <![CDATA[050]]>
+                <![CDATA[null]]>
               </value>
             </param>
             <param index="10">
               <value>
-                <![CDATA[400]]>
+                <![CDATA[Tracking Number]]>
               </value>
             </param>
             <param index="11">
               <value>
-                <![CDATA[010]]>
+                <![CDATA[Express 9-digit]]>
               </value>
             </param>
             <param index="12">
               <value>
-                <![CDATA[200]]>
+                <![CDATA[L2C3-105153-1-40]]>
               </value>
             </param>
             <param index="13">
-              <value>
-                <![CDATA[null]]>
-              </value>
-            </param>
-            <param index="14">
-              <value>
-                <![CDATA[null]]>
-              </value>
-            </param>
-            <param index="15">
-              <value>
-                <![CDATA[null]]>
-              </value>
-            </param>
-            <param index="16">
-              <value>
-                <![CDATA[null]]>
-              </value>
-            </param>
-            <param index="17">
               <value>
                 <![CDATA[2]]>
               </value>
@@ -252,98 +194,74 @@ at java.lang.Thread.run(Unknown Source)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod2 -->
-<<<<<<< HEAD
-        <test-method status="PASS" signature="testMethod4(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNG@610694f1]" name="testMethod4" duration-ms="54881" started-at="2020-03-11T11:54:38 EDT" data-provider="data-provider4" finished-at="2020-03-11T11:55:32 EDT">
-=======
-        <test-method status="PASS" signature="testMethod4(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.prerateTestNG@7823a2f9]" name="testMethod4" duration-ms="278034" started-at="2020-03-12T15:02:24Z" data-provider="data-provider4" finished-at="2020-03-12T15:07:02Z">
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+        <test-method status="PASS" signature="testMethod4(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.testingonly@32709393]" name="testMethod4" duration-ms="152460" started-at="2020-03-20T16:07:14 EDT" data-provider="data-provider4" finished-at="2020-03-20T16:09:46 EDT">
           <params>
             <param index="0">
               <value>
-                <![CDATA[Trucking Fees]]>
+                <![CDATA[105153]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[NA]]>
+                <![CDATA[1]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[N]]>
+                <![CDATA[450312851]]>
               </value>
             </param>
             <param index="3">
               <value>
-                <![CDATA[1]]>
+                <![CDATA[null]]>
               </value>
             </param>
             <param index="4">
               <value>
-                <![CDATA[178109]]>
+                <![CDATA[470009994827]]>
               </value>
             </param>
             <param index="5">
               <value>
-                <![CDATA[539303559522]]>
+                <![CDATA[]]>
               </value>
             </param>
             <param index="6">
               <value>
-                <![CDATA[600]]>
+                <![CDATA[421171989]]>
               </value>
             </param>
             <param index="7">
               <value>
-                <![CDATA[USD]]>
+                <![CDATA[null]]>
               </value>
             </param>
             <param index="8">
               <value>
-                <![CDATA[5071714]]>
+                <![CDATA[Express Domestic]]>
               </value>
             </param>
             <param index="9">
               <value>
-                <![CDATA[050]]>
+                <![CDATA[null]]>
               </value>
             </param>
             <param index="10">
               <value>
-                <![CDATA[500]]>
+                <![CDATA[Tracking Number]]>
               </value>
             </param>
             <param index="11">
               <value>
-                <![CDATA[010]]>
+                <![CDATA[Express 9-digit]]>
               </value>
             </param>
             <param index="12">
               <value>
-                <![CDATA[100]]>
+                <![CDATA[L2C3-105153-1-42]]>
               </value>
             </param>
             <param index="13">
-              <value>
-                <![CDATA[null]]>
-              </value>
-            </param>
-            <param index="14">
-              <value>
-                <![CDATA[null]]>
-              </value>
-            </param>
-            <param index="15">
-              <value>
-                <![CDATA[null]]>
-              </value>
-            </param>
-            <param index="16">
-              <value>
-                <![CDATA[null]]>
-              </value>
-            </param>
-            <param index="17">
               <value>
                 <![CDATA[4]]>
               </value>
@@ -352,97 +270,74 @@ at java.lang.Thread.run(Unknown Source)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod4 -->
-<<<<<<< HEAD
-        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNG@610694f1]" name="testMethod1" duration-ms="54130" started-at="2020-03-11T11:54:38 EDT" data-provider="data-provider1" finished-at="2020-03-11T11:55:32 EDT">
-=======
-        <test-method status="PASS" signature="testMethod3(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.prerateTestNG@7823a2f9]" name="testMethod3" duration-ms="276101" started-at="2020-03-12T15:02:24Z" data-provider="data-provider3" finished-at="2020-03-12T15:07:00Z">
+        <test-method status="PASS" signature="testMethod3(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.testingonly@32709393]" name="testMethod3" duration-ms="152184" started-at="2020-03-20T16:07:14 EDT" data-provider="data-provider3" finished-at="2020-03-20T16:09:46 EDT">
           <params>
             <param index="0">
               <value>
-                <![CDATA[COLD CHAIN]]>
+                <![CDATA[105153]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[NA]]>
+                <![CDATA[1]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[N]]>
+                <![CDATA[450312851]]>
               </value>
             </param>
             <param index="3">
               <value>
-                <![CDATA[1]]>
+                <![CDATA[null]]>
               </value>
             </param>
             <param index="4">
               <value>
-                <![CDATA[177953]]>
+                <![CDATA[470009994827]]>
               </value>
             </param>
             <param index="5">
               <value>
-                <![CDATA[540303677035]]>
+                <![CDATA[]]>
               </value>
             </param>
             <param index="6">
               <value>
-                <![CDATA[4]]>
+                <![CDATA[421171989]]>
               </value>
             </param>
             <param index="7">
               <value>
-                <![CDATA[USD]]>
+                <![CDATA[null]]>
               </value>
             </param>
             <param index="8">
               <value>
-                <![CDATA[5071714]]>
+                <![CDATA[Express Domestic]]>
               </value>
             </param>
             <param index="9">
               <value>
-                <![CDATA[050]]>
+                <![CDATA[null]]>
               </value>
             </param>
             <param index="10">
               <value>
-                <![CDATA[2]]>
+                <![CDATA[Tracking Number]]>
               </value>
             </param>
             <param index="11">
               <value>
-                <![CDATA[010]]>
+                <![CDATA[Express 9-digit]]>
               </value>
             </param>
             <param index="12">
               <value>
-                <![CDATA[2]]>
+                <![CDATA[L2C3-105153-1-41]]>
               </value>
             </param>
             <param index="13">
-              <value>
-                <![CDATA[null]]>
-              </value>
-            </param>
-            <param index="14">
-              <value>
-                <![CDATA[null]]>
-              </value>
-            </param>
-            <param index="15">
-              <value>
-                <![CDATA[null]]>
-              </value>
-            </param>
-            <param index="16">
-              <value>
-                <![CDATA[null]]>
-              </value>
-            </param>
-            <param index="17">
               <value>
                 <![CDATA[3]]>
               </value>
@@ -451,104 +346,235 @@ at java.lang.Thread.run(Unknown Source)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod3 -->
-        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.prerateTestNG@7823a2f9]" name="testMethod1" duration-ms="275898" started-at="2020-03-12T15:02:24Z" data-provider="data-provider1" finished-at="2020-03-12T15:07:00Z">
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+        <test-method status="PASS" signature="testMethod3(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.testingonly@32709393]" name="testMethod3" duration-ms="143596" started-at="2020-03-20T16:09:46 EDT" data-provider="data-provider3" finished-at="2020-03-20T16:12:10 EDT">
           <params>
             <param index="0">
               <value>
-                <![CDATA[ADDR CHANGE FEE]]>
+                <![CDATA[105153]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[NA]]>
+                <![CDATA[1]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[N]]>
+                <![CDATA[450312851]]>
               </value>
             </param>
             <param index="3">
               <value>
-                <![CDATA[1]]>
+                <![CDATA[null]]>
               </value>
             </param>
             <param index="4">
               <value>
-                <![CDATA[179834]]>
+                <![CDATA[470009994827]]>
               </value>
             </param>
             <param index="5">
               <value>
-                <![CDATA[539646415820]]>
+                <![CDATA[]]>
               </value>
             </param>
             <param index="6">
               <value>
-                <![CDATA[200]]>
+                <![CDATA[421171989]]>
               </value>
             </param>
             <param index="7">
               <value>
-                <![CDATA[USD]]>
+                <![CDATA[null]]>
               </value>
             </param>
             <param index="8">
               <value>
-                <![CDATA[910808]]>
+                <![CDATA[Express Domestic]]>
               </value>
             </param>
             <param index="9">
               <value>
-                <![CDATA[050]]>
+                <![CDATA[null]]>
               </value>
             </param>
             <param index="10">
               <value>
-                <![CDATA[100]]>
+                <![CDATA[Tracking Number]]>
               </value>
             </param>
             <param index="11">
               <value>
-                <![CDATA[010]]>
+                <![CDATA[Express 9-digit]]>
               </value>
             </param>
             <param index="12">
               <value>
-                <![CDATA[100]]>
+                <![CDATA[L2C3-105153-1-45]]>
               </value>
             </param>
             <param index="13">
               <value>
-                <![CDATA[null]]>
-              </value>
-            </param>
-            <param index="14">
-              <value>
-                <![CDATA[null]]>
-              </value>
-            </param>
-            <param index="15">
-              <value>
-                <![CDATA[null]]>
-              </value>
-            </param>
-            <param index="16">
-              <value>
-                <![CDATA[null]]>
-              </value>
-            </param>
-            <param index="17">
-              <value>
-                <![CDATA[1]]>
+                <![CDATA[7]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testMethod1 -->
-      </class> <!-- prerate.prerateTestNG -->
+        </test-method> <!-- testMethod3 -->
+        <test-method status="PASS" signature="testMethod2(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.testingonly@32709393]" name="testMethod2" duration-ms="147752" started-at="2020-03-20T16:09:46 EDT" data-provider="data-provider2" finished-at="2020-03-20T16:12:14 EDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[105153]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[450312851]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[null]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[470009994827]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[421171989]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[null]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[Express Domestic]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[null]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[Tracking Number]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[Express 9-digit]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[L2C3-105153-1-44]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[6]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod2 -->
+        <test-method status="PASS" signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.testingonly@32709393]" name="testMethod" duration-ms="145717" started-at="2020-03-20T16:09:46 EDT" data-provider="data-provider1" finished-at="2020-03-20T16:12:12 EDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[105153]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[450312851]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[null]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[470009994827]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[421171989]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[null]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[Express Domestic]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[null]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[Tracking Number]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[Express 9-digit]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[L2C3-105153-1-43]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[5]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+      </class> <!-- testng.testingonly -->
     </test> <!-- Test -->
   </suite> <!-- Suite -->
 </testng-results>

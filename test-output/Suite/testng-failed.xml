@@ -3,19 +3,12 @@
 <suite thread-count="4" guice-stage="DEVELOPMENT" name="Failed suite [Suite]" parallel="methods">
   <test thread-count="4" name="Test(failed)" parallel="methods">
     <classes>
-      <class name="prerate.prerateTestNG">
+      <class name="testng.testingonly">
         <methods>
-<<<<<<< HEAD
-          <include name="testMethod1"/>
-=======
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+          <include name="testMethod4"/>
           <include name="setupExcel"/>
-<<<<<<< HEAD
-=======
-          <include name="testMethod1"/>
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
         </methods>
-      </class> <!-- prerate.prerateTestNG -->
+      </class> <!-- testng.testingonly -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

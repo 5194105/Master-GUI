@@ -539,6 +539,30 @@ public void setupMouseListener() {
 			    }
 
 
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
+			    
 			
 			  @Override
 			   public void mouseClicked(MouseEvent e)
@@ -643,11 +667,12 @@ public void setupMouseListener() {
 					    			}
 				    			
 				    			if (obj.getClass().getCanonicalName().equals("guis.rerateAutomationGui")) {
-				    			
+				    				c.setSource("excel");
+				    				
 				    				System.out.println("Booleans "+c.getLevel()+"      "+c.getSource());
+				    				
 				    				if(c.getLevel()!=null && c.getSource()!=null) {
 				    				JOptionPane.showMessageDialog(frame, "Started Rerates");
-				    				
 				    				String filepath=c.getExcelPath();
 				    				String startDateText=c.getStartDate();
 				    				String endDateText=c.getEndDate();

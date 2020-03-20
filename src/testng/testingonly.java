@@ -148,14 +148,15 @@ public class testingonly {
 	    	colCount=e.getColCount()-1;
 	    	System.out.println("ROW COUNT "+rowCount);
 	    	total= rowCount/4;
+	    	System.out.println(total);
 	    	
 	    	
-	    	
-	    	totalMod=total%4;
+	    	totalMod=rowCount%4;
 	    	totalRows1=total;
 	    	totalRows2=total;
 	    	totalRows3=total;
 	    	totalRows4=total;
+	    	System.out.println(totalMod);
 	    	switch(totalMod) {
 	    	case 1:
 	    		totalRows1++;
@@ -175,13 +176,13 @@ public class testingonly {
 		
 		
 	    @DataProvider(name = "data-provider1")
-	    public Object[][] dataProviderMethod1() { 
+	    public synchronized Object[][] dataProviderMethod1() { 
 	   	
     	 
 	
 	    	Object [][] obj = new Object[totalRows1][colCount];
 	    	int objCount=0;
-	    	for(int i=1;i<=rowCount;i+=4) {
+	    	for(int i=1;i<rowCount;i+=4) {
 	    		for(int j=0;j<colCount;j++) {
 	    			System.out.println(e.getCellData(i, j));
 	    				obj[objCount][j]=e.getCellData(i, j);
@@ -203,13 +204,13 @@ public class testingonly {
 	    
 	    
 	    @DataProvider(name = "data-provider2")
-	    public Object[][] dataProviderMethod2() { 
+	    public synchronized Object[][] dataProviderMethod2() { 
 	    
 	  
 	    	 
 	    	Object [][] obj = new Object[totalRows2][colCount];
 	    	int objCount=0;
-	    	for(int i=2;i<=rowCount;i+=4) {
+	    	for(int i=2;i<rowCount;i+=4) {
 	    		for(int j=0;j<colCount;j++) {
 	    			obj[objCount][j]=e.getCellData(i, j);
 	    		}
@@ -222,11 +223,11 @@ public class testingonly {
 	    }
 	    
 	    @DataProvider(name = "data-provider3")
-	    public Object[][] dataProviderMethod3() { 
+	    public synchronized Object[][] dataProviderMethod3() { 
 	    
 	    	Object [][] obj = new Object[totalRows3][colCount];
 	    	int objCount=0;
-	    	for(int i=3;i<=rowCount;i+=4) {
+	    	for(int i=3;i<rowCount;i+=4) {
 	    		for(int j=0;j<colCount;j++) {
 	    			obj[objCount][j]=e.getCellData(i, j);
 	    		}
@@ -239,11 +240,11 @@ public class testingonly {
 	    }
 	    
 	    @DataProvider(name = "data-provider4")
-	    public Object[][] dataProviderMethod4() { 
+	    public synchronized Object[][] dataProviderMethod4() { 
 	    	
 	    	Object [][] obj = new Object[totalRows4][colCount];
 	    	int objCount=0;
-	    	for(int i=4;i<=rowCount;i+=4) {
+	    	for(int i=4;i<rowCount;i+=4) {
 	    		for(int j=0;j<colCount;j++) {
 	    			obj[objCount][j]=e.getCellData(i, j);
 	    		}
@@ -345,7 +346,7 @@ public class testingonly {
 				express2=false;
 			}
 
-			System.out.println("Hello 1");
+			System.out.println("Hello 2");
 			doWork(driver2,wait2,CEDropDown2,alert2,r2,cc21,cc22,comboBoxesHandling2,isChecked2,count2,testInputNbr, tinCount, acct1, acct2, trkng1, trkng2, inv1, inv2, service1, service2, rerateType, acctType, name,combo2,ground2,express2,testCounter);
 			
 
@@ -391,7 +392,7 @@ public class testingonly {
 				express3=false;
 			}
 
-			System.out.println("Hello 1");
+			System.out.println("Hello 3");
 			doWork(driver3,wait3,CEDropDown3,alert3,r3,cc31,cc32,comboBoxesHandling3,isChecked3,count3,testInputNbr, tinCount, acct1, acct2, trkng1, trkng2, inv1, inv2, service1, service2, rerateType, acctType, name,combo3,ground3,express3,testCounter);
 			
 
@@ -441,13 +442,13 @@ public class testingonly {
 				express4=false;
 			}
 
-			System.out.println("Hello 1");
+			System.out.println("Hello 4");
 			doWork(driver4,wait4,CEDropDown4,alert4,r4,cc41,cc42,comboBoxesHandling4,isChecked4,count4,testInputNbr, tinCount, acct1, acct2, trkng1, trkng2, inv1, inv2, service1, service2, rerateType, acctType, name,combo4,ground4,express4,testCounter);
 			
 	    }
 	  
 	  public void doWork(WebDriver driver, WebDriverWait wait,Select CEDropDown,Alert alert,Robot r,ArrayList<String> cc1,ArrayList<String> cc2, List<WebElement> comboBoxesHandling, Boolean isChecked,int count,String testInputNbr,String tinCount,String acct1,String acct2,String trkng1,String trkng2,String inv1,String inv2,String service1,String service2,String rerateType,String acctType,String name, Boolean combo,Boolean express,Boolean ground,int testCounter) {
-	      Assert.assertTrue(false,"Failed at Login");
+	//      Assert.assertTrue(false,"Failed at Login");
 		  String requestId;
 		  driver.get("https://testsso.secure.fedex.com/L3/PRSApps/");
 		  driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
@@ -1423,7 +1424,7 @@ Thread.sleep(2000);
 
 			
 			try {
-			int count;
+			
 			String requestId;
 			if (level==false)
 			{
@@ -1432,16 +1433,15 @@ Thread.sleep(2000);
 			else if (level==true)
 			{
 				driver.get("https://testsso.secure.fedex.com/L3/PRSApps/inbox/inbox_router.jsp?inbox_id=11");
-			}			
-			driver.findElement(By.xpath("//a[contains(text(),'"+name+"')]")).getText();
-			count = driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]")).size();
-			requestId = driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[3]/font")).get(count-1).getText();
-		//	sheet=wb.getSheetAt(0);
-		//	sheet.getRow(i).createCell(13).setCellValue(a);
-		//	fout = new FileOutputStream(new File(filepath));
-		//	wb.write(fout);
-			writeToExcel(testCounter,13,requestId);
+			}
 			
+			
+			  
+	
+			
+			
+			
+			int count = getRerateId(driver,name,testCounter);
 			driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[1]/input")).get(count-1).click();
 			Thread.sleep(1000);
 			driver.findElement(By.name("btnAcceptTask")).click();
@@ -1540,7 +1540,16 @@ Thread.sleep(2000);
 	  
 	  
 	  
-	  
+	public synchronized int getRerateId(WebDriver driver, String name,int testCounter) {
+		int count;
+		String requestId;
+		driver.findElement(By.xpath("//a[contains(text(),'"+name+"')]")).getText();
+		count = driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]")).size();
+		requestId = driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[3]/font")).get(count-1).getText();
+		writeToExcel(testCounter,13,requestId);
+		return count;
+		
+	}
 	  
 	  
 	public synchronized void writeToExcel(int rowCountExcel,int colCountExcel,String outputString){

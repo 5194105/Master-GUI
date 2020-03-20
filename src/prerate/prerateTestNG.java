@@ -38,6 +38,7 @@ public class prerateTestNG {
 	Object o;
 	WebDriverWait wait1,wait2,wait3,wait4;
 	config c;
+	/*
 	public  JavascriptExecutor Executor;
 	public  JavascriptExecutor Executor1;
 	public  JavascriptExecutor Executor2;
@@ -53,6 +54,7 @@ public class prerateTestNG {
 	long acctLong1,acctLong2;
 	long trkngLong1,trkngLong2;
 	String a ;
+	*/
 	int count1,count2,count3,count4 ;
 	String  sh1;
 	String filepath;
@@ -65,7 +67,7 @@ public class prerateTestNG {
 	static FileInputStream fin;
 	static FileOutputStream fout;
 	public int  rowcount;
-	//WebDriver driver;
+
 	WebDriver driver1,driver2,driver3,driver4;
 	static int sheetcount;
 	static int j ;
@@ -76,7 +78,7 @@ public class prerateTestNG {
         Boolean chrome;
         
         
-        WebElement element;
+      //  WebElement element;
 	
        String  homePath=System.getProperty("user.dir");
        String browser="2";
@@ -164,7 +166,7 @@ public class prerateTestNG {
     	System.out.println("ROW COUNT "+rowCount);
     	System.out.println("COL COUNT "+colCount);
     	total= rowCount/4;
-    	totalMod=total%4;
+    	totalMod=rowCount%4;
     	totalRows1=total;
     	totalRows2=total;
     	totalRows3=total;
@@ -195,15 +197,19 @@ public class prerateTestNG {
 	
 	
     @DataProvider(name = "data-provider1")
-    public Object[][] dataProviderMethod1() { 
- 
+    public synchronized Object[][] dataProviderMethod1() { 
+    	String tempString="";
     	Object [][] obj = new Object[totalRows1][colCount];
     	int objCount=0;
     	for(int i=1;i<=rowCount;i+=4) {
     		for(int j=0;j<colCount-1;j++) {
     	
-    			
-    				obj[objCount][j]=excelVar.getCellData(i, j);
+    				System.out.println("ROW:"+i+" COL:"+j);
+    				tempString=excelVar.getCellData(i, j);
+    					if (tempString.equals("null")){
+    						tempString="";
+    					}
+    				obj[objCount][j]=tempString;
     			
     		}
     		obj[objCount][colCount-1]=i;
@@ -222,17 +228,20 @@ public class prerateTestNG {
     
     
     @DataProvider(name = "data-provider2")
-    public Object[][] dataProviderMethod2() { 
+    public synchronized Object[][] dataProviderMethod2() { 
     	
     
-
+    	String tempString="";
     	Object [][] obj = new Object[totalRows2][colCount];
     	int objCount=0;
     	for(int i=2;i<=rowCount;i+=4) {
     		for(int j=0;j<colCount-1;j++) {
-    		//	System.out.println(j);
-    		//	System.out.println(e.getCellData(i, j));
-    			obj[objCount][j]=excelVar.getCellData(i, j);
+    			System.out.println("ROW:"+i+" COL:"+j);
+				tempString=excelVar.getCellData(i, j);
+					if (tempString.equals("null")){
+						tempString="";
+					}
+				obj[objCount][j]=tempString;
     		}
     		obj[objCount][colCount-1]=i;
     		objCount++;
@@ -243,15 +252,20 @@ public class prerateTestNG {
     }
     
     @DataProvider(name = "data-provider3")
-    public Object[][] dataProviderMethod3() { 
-    
+    public synchronized Object[][] dataProviderMethod3() { 
+    	String tempString="";
     	Object [][] obj = new Object[totalRows3][colCount];
     	int objCount=0;
     	for(int i=3;i<=rowCount;i+=4) {
     		for(int j=0;j<colCount-1;j++) {
-    			System.out.println(i);
-    			System.out.println(excelVar.getCellData(i, j));
-    			obj[objCount][j]=excelVar.getCellData(i, j);
+    			
+    			
+    			System.out.println("ROW:"+i+" COL:"+j);
+				tempString=excelVar.getCellData(i, j);
+					if (tempString.equals("null")){
+						tempString="";
+					}
+				obj[objCount][j]=tempString;
     		}
     		obj[objCount][colCount-1]=i;
     		objCount++;
@@ -262,13 +276,18 @@ public class prerateTestNG {
     }
     
     @DataProvider(name = "data-provider4")
-    public Object[][] dataProviderMethod4() { 
-    	
+    public synchronized Object[][] dataProviderMethod4() { 
+    	String tempString="";
     	Object [][] obj = new Object[totalRows4][colCount];
     	int objCount=0;
     	for(int i=4;i<=rowCount;i+=4) {
     		for(int j=0;j<colCount-1;j++) {
-    			obj[objCount][j]=excelVar.getCellData(i, j);
+    			System.out.println("ROW:"+i+" COL:"+j);
+				tempString=excelVar.getCellData(i, j);
+					if (tempString.equals("null")){
+						tempString="";
+					}
+				obj[objCount][j]=tempString;
     		}
     		obj[objCount][colCount-1]=i;
     		objCount++;
@@ -296,6 +315,14 @@ public class prerateTestNG {
     System.setProperty(chromeSetProperty,chromePath);
     driver1 = new ChromeDriver();
     login(driver1,wait1);
+    try {
+		doPrerate(driver1,wait1,type, comment,podScan,tinCount, testInputNbr, trk, amount, currcode, approverID, cc1, cm1, cc2 , cm2 , cc3, cm3 , cc4 , cm4, rowNumber,1);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    
+    
     
     }
     @Test(dataProvider="data-provider2")
@@ -312,6 +339,15 @@ public class prerateTestNG {
     System.setProperty(chromeSetProperty,chromePath);
     driver2 = new ChromeDriver();
     login(driver2,wait2);
+    try {
+		doPrerate(driver2,wait2,type, comment,podScan,tinCount, testInputNbr, trk, amount, currcode, approverID, cc1, cm1, cc2 , cm2 , cc3, cm3 , cc4 , cm4, rowNumber,2);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    
+    
+    
     }
     @Test(dataProvider="data-provider3")
     public void testMethod3( String type, String comment,String podScan,String tinCount,String testInputNbr,String trk,String amount,String currcode,String approverID,String cc1,String cm1,String cc2 ,String cm2 ,String cc3,String cm3 ,String cc4 ,String cm4,int rowNumber) {
@@ -327,7 +363,20 @@ public class prerateTestNG {
     System.setProperty(chromeSetProperty,chromePath);
     driver3 = new ChromeDriver();
     login(driver3,wait3);
+    try {
+		doPrerate(driver3,wait3,type, comment,podScan,tinCount, testInputNbr, trk, amount, currcode, approverID, cc1, cm1, cc2 , cm2 , cc3, cm3 , cc4 , cm4, rowNumber,3);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
     }
+    
+    
+    
+    
+    
+    
+    
     @Test(dataProvider="data-provider4")
     public void testMethod4( String type, String comment,String podScan,String tinCount,String testInputNbr,String trk,String amount,String currcode,String approverID,String cc1,String cm1,String cc2 ,String cm2 ,String cc3,String cm3 ,String cc4 ,String cm4,int rowNumber) {
   
@@ -345,6 +394,12 @@ public class prerateTestNG {
     
     
     login(driver4,wait4);
+    try {
+		doPrerate(driver4,wait4,type, comment,podScan,tinCount, testInputNbr, trk, amount, currcode, approverID, cc1, cm1, cc2 , cm2 , cc3, cm3 , cc4 , cm4, rowNumber,4);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
     
     }
     
@@ -362,11 +417,14 @@ public class prerateTestNG {
 	}
 	else if (level.equals("3"))
 	{
-		levelUrl="https://testsso.secure.fedex.com/l3/prerates";
+		levelUrl="https://testedcsso.secure.fedex.com/l3/prerates";
+		//levelUrl="https://testsso.secure.fedex.com/l3/prerates";
 	}
         
  
-  
+  //edc
+    
+    
 /*
          if (chrome==false){
          if (compatibleMode==true){
@@ -412,11 +470,27 @@ public class prerateTestNG {
     
     
     
-    public void doPrerate(WebDriver driver,WebDriverWait wait, String type, String comment,String podScan,String tinCount,String testInputNbr,String trk,String amount,String currcode,String approverID,String cc1,String cm1,String cc2 ,String cm2 ,String cc3,String cm3 ,String cc4 ,String cm4,int rowNumber) throws InterruptedException {
+    public void doPrerate(WebDriver driver,WebDriverWait wait, String type, String comment,String podScan,String tinCount,String testInputNbr,String trk,String amount,String currcode,String approverID,String cc1,String cm1,String cc2 ,String cm2 ,String cc3,String cm3 ,String cc4 ,String cm4,int rowNumber, int instanceNumber) throws InterruptedException {
+    	
+    	WebElement element;
+    	JavascriptExecutor Executor;
+    	JavascriptExecutor Executor1;
+    	JavascriptExecutor Executor2;
+    	JavascriptExecutor Executor3;
+    	JavascriptExecutor Executor4;
+    	WebElement element1;
+    	WebElement element2;
+    	WebElement element3;
+    	WebElement element4;
+
+    
+    	
+    	
     	driver.switchTo().frame("header");
 		driver.findElement(By.id("preRateEntrySelection")).click();
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame("content");
+		System.out.println("Instance :"+instanceNumber+" Tracking Number: "+trk);
 		driver.findElement(By.xpath("//input[@id='preRateEntrySelForm:trackingNo_input']")).sendKeys(trk);
 		driver.findElement(By.xpath("//button[@id='preRateEntrySelForm:search_button']")).click();
 		Thread.sleep(2000);
@@ -428,7 +502,7 @@ public class prerateTestNG {
 			driver.switchTo().defaultContent();
 			
 		}
-		catch (NoSuchElementException a){
+		catch (NoSuchElementException aa){
 			//System.out.println("Noerrormsg : " + flag);
 		}
 		//Thread.sleep(2000);
@@ -457,17 +531,17 @@ public class prerateTestNG {
 			Executor3.executeScript("arguments[0].click();", element3);
 		}
 		else if(type.equals("PH LPC")){
-			if(level.contentEquals("L2")||level.contentEquals("l2")){
+			if(level.contentEquals("2")){
 				//L2 PHLPC=12 and L3 PHLPC=8
 				driver.findElement(By.xpath("//a[@id='preRateEntryForm:preRateTypeCd_link']")).click();
 				element4 = driver.findElement(By.xpath("//div[@id='preRateEntryForm:preRateTypeCd_div']/div/div[12]/span[2]"));
-				JavascriptExecutor Executor4 = (JavascriptExecutor)driver;
+				Executor4 = (JavascriptExecutor)driver;
 				Executor4.executeScript("arguments[0].click();", element4);
 			}
-			else if (level.contentEquals("L3")||level.contentEquals("l3")){
+			else if (level.contentEquals("3")){
 				driver.findElement(By.xpath("//a[@id='preRateEntryForm:preRateTypeCd_link']")).click();
 				element4 = driver.findElement(By.xpath("//div[@id='preRateEntryForm:preRateTypeCd_div']/div/div[8]/span[2]"));
-				JavascriptExecutor Executor4 = (JavascriptExecutor)driver;
+				Executor4 = (JavascriptExecutor)driver;
 				Executor4.executeScript("arguments[0].click();", element4);
 
 			}
@@ -517,23 +591,26 @@ public class prerateTestNG {
 		try{
 
 			flag2=driver.findElement(By.xpath("//input[@id='preRateEntrySelForm:trackingNo_input']")).isDisplayed();
-			excelVar.setCellData(rowNumber, 1, "Completed");
-			excelVar.saveAndClose();
+			//excelVar.setCellData(rowNumber, 1, "Completed");
+			//excelVar.saveAndClose();
+			writeToExcel(rowNumber,1,"Completed");
 			driver.switchTo().defaultContent();
 		
 		}
 		catch (NoSuchElementException a){
 			if(fl==true){
 
-				excelVar.setCellData(rowNumber, 1, "Override Disabled");
-				excelVar.saveAndClose();
+				//excelVar.setCellData(rowNumber, 1, "Override Disabled");
+				//excelVar.saveAndClose();
+				writeToExcel(rowNumber,1,"Override Disabled");
 				driver.switchTo().defaultContent();
 		
 			}
 			else{
 				//System.out.println("Nosuccessfull : " + flag2);
-				excelVar.setCellData(rowNumber, 1, "Try this manually");
-				excelVar.saveAndClose();
+				//excelVar.setCellData(rowNumber, 1, "Try this manually");
+
+				writeToExcel(rowNumber,1,"Try this manually");
 				driver.switchTo().defaultContent();
 		
 			}
@@ -541,19 +618,28 @@ public class prerateTestNG {
 	
 	catch (NullPointerException f)
 	{
-		excelVar.setCellData(rowNumber, 1, "Try this manually");
-		excelVar.saveAndClose();
+		//excelVar.setCellData(rowNumber, 1, "Try this manually");
+		writeToExcel(rowNumber,1,"Try this manually");
 		driver.switchTo().defaultContent();
 	
 	}
 	catch (WebDriverException h)
 	{
-		excelVar.setCellData(rowNumber, 1, "Try this manually");
-		excelVar.saveAndClose();
+		//excelVar.setCellData(rowNumber, 1, "Try this manually");
+		writeToExcel(rowNumber,1,"Try this manually");
+		
 		driver.switchTo().defaultContent();
 	}
 }
     	
+    
+    
+	public synchronized void writeToExcel(int rowCountExcel,int colCountExcel,String outputString){
+		
+		excelVar.setCellData(rowCountExcel, colCountExcel, outputString);
+		excelVar.writeCellData();
+	}
+    
     }
 	
 

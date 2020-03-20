@@ -267,14 +267,14 @@ public class rerateAutomationGui {
 			if (l3RadioButton.isSelected()){
 				l3RadioButton.setSelected(false);
 		        }
-			c.setLevel(false);
+			c.setLevel("2");
 	}
 		private void l3RadioButtonActionPerformed(java.awt.event.ActionEvent evt) {   
 			System.out.println("L3 RADIO");
 			if (l2RadioButton.isSelected()){
 				l2RadioButton.setSelected(false);
 		        }
-			c.setLevel(true);
+			c.setLevel("3");
 		}
 	
 		
