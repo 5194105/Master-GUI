@@ -182,7 +182,7 @@ public class testingonly {
 	
 	    	Object [][] obj = new Object[totalRows1][colCount];
 	    	int objCount=0;
-	    	for(int i=1;i<rowCount;i+=4) {
+	    	for(int i=1;i<=rowCount;i+=4) {
 	    		for(int j=0;j<colCount;j++) {
 	    			System.out.println(e.getCellData(i, j));
 	    				obj[objCount][j]=e.getCellData(i, j);
@@ -210,7 +210,7 @@ public class testingonly {
 	    	 
 	    	Object [][] obj = new Object[totalRows2][colCount];
 	    	int objCount=0;
-	    	for(int i=2;i<rowCount;i+=4) {
+	    	for(int i=2;i<=rowCount;i+=4) {
 	    		for(int j=0;j<colCount;j++) {
 	    			obj[objCount][j]=e.getCellData(i, j);
 	    		}
@@ -227,7 +227,7 @@ public class testingonly {
 	    
 	    	Object [][] obj = new Object[totalRows3][colCount];
 	    	int objCount=0;
-	    	for(int i=3;i<rowCount;i+=4) {
+	    	for(int i=3;i<=rowCount;i+=4) {
 	    		for(int j=0;j<colCount;j++) {
 	    			obj[objCount][j]=e.getCellData(i, j);
 	    		}
@@ -244,7 +244,7 @@ public class testingonly {
 	    	
 	    	Object [][] obj = new Object[totalRows4][colCount];
 	    	int objCount=0;
-	    	for(int i=4;i<rowCount;i+=4) {
+	    	for(int i=4;i<=rowCount;i+=4) {
 	    		for(int j=0;j<colCount;j++) {
 	    			obj[objCount][j]=e.getCellData(i, j);
 	    		}
