@@ -2,6 +2,10 @@ package prerate;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -154,6 +158,12 @@ public class prerateTestNG {
 	
 	@BeforeClass
 	public void setupExcel() {
+        try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//or from eclipse.
     	homePath=System.getProperty("user.dir");
     	System.out.println("homePath" +System.getProperty("user.dir"));
@@ -561,7 +571,7 @@ public class prerateTestNG {
 			
 		
 		//Fast way to move to next screen... fails if prerate input not there.
-		checkVal(driver,By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[3]/td/span/div[3]/div[1]/div/div/span[1]"),By.className("ui-faces-message-text"),1,10,1,10);
+		checkVal(driver,By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[3]/td/span/div[3]/div[1]/div/div/span[1]"),By.className("ui-faces-message-text"),1,10,1,10,trk);
 	
 		
 		
@@ -645,7 +655,7 @@ public class prerateTestNG {
 		
 		
 		//ENABLE THIS TO SUBMIT!!!!!!
-		//driver.findElement(By.xpath("//button[@id='preRateEntryForm:PreRateEntrySubmit_button']")).click();
+		driver.findElement(By.xpath("//button[@id='preRateEntryForm:PreRateEntrySubmit_button']")).click();
 		
 		
 		
@@ -658,7 +668,7 @@ public class prerateTestNG {
 		//Not sure what this is trying to find... we should check to see if successful first tho.
 		try {
 			
-			checkVal(driver,By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]"),By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[6]/td/table/tbody/tr[2]/td/span/span/span/span[2]"),2,5,1,10);
+			checkVal(driver,By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]"),By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[6]/td/table/tbody/tr[2]/td/span/span/span/span[2]"),2,5,1,10,trk);
 			
 			/*
 			//String er=driver.findElement(By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[6]/td/table/tbody/tr[2]/td/span/span/span/span[2]")).getText();
@@ -683,7 +693,7 @@ public class prerateTestNG {
 		
 		
 		try {
-			checkVal(driver,By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]"),By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[4]/td/span/div/div[1]/div[2]/div/table[2]/tbody/tr/td/span/span/span/span[2]"),2,5,1,10);
+			checkVal(driver,By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]"),By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[4]/td/span/div/div[1]/div[2]/div/table[2]/tbody/tr/td/span/span/span/span[2]"),2,5,1,10,trk);
 			
 			/*
 			//Not sure what this is trying to find... we should check to see if successful first tho.
@@ -732,8 +742,8 @@ public class prerateTestNG {
 		}
 		try{
 
-			checkVal(driver,By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]"),By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[6]/td/table/tbody/tr[2]/td/span/span/span/span[2]"),2,5,1,10);	
-			checkVal(driver,By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]"),By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[4]/td/span/div/div[1]/div[2]/div/table[2]/tbody/tr/td/span/span/span/span[2]"),2,5,1,10);
+			checkVal(driver,By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]"),By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[6]/td/table/tbody/tr[2]/td/span/span/span/span[2]"),2,5,1,10,trk);	
+			checkVal(driver,By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]"),By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[4]/td/span/div/div[1]/div[2]/div/table[2]/tbody/tr/td/span/span/span/span[2]"),2,5,1,10,trk);
 			
 			//flag2=driver.findElement(By.xpath("//input[@id='preRateEntrySelForm:trackingNo_input']")).isDisplayed();
 			//excelVar.setCellData(rowNumber, 1, "Completed");
@@ -793,7 +803,7 @@ public class prerateTestNG {
 	
 	//This is to help speed up program. It will look for the next object.. if found then continue.. if not quickly look for any error message.
 	//The next object will have a wait, 
-	public void checkVal(WebDriver driver,By elementNew,By elementOld,int caseNumber,int waitTimeLong,int waitTimeShort,int waitTimeDefault) {
+	public void checkVal(WebDriver driver,By elementNew,By elementOld,int caseNumber,int waitTimeLong,int waitTimeShort,int waitTimeDefault,String trkngnbr) {
 		
 		String newString,oldString;
 		Boolean skip=false;
@@ -826,9 +836,14 @@ public class prerateTestNG {
 		
 		case 2:
 			try {
-				driver.findElement(elementNew);
-				Assert.assertTrue(driver.findElement(elementNew).getText().equals("Shipment Selection for Pre-Rate Entry"), "Made it back to prerate entry screen.");
-				skip=true;
+				//driver.findElement(elementNew);
+				//Assert.assertTrue(driver.findElement(elementNew).getText().equals("Shipment Selection for Pre-Rate Entry"), "Made it back to prerate entry screen.");
+				if (driver.findElement(elementNew).getText().equals("Shipment Selection for Pre-Rate Entry")) {
+					if (validateORE(trkngnbr)==true) {
+						Assert.assertTrue(true);
+					}
+					skip=true;
+				}
 			}
 			catch(Exception e) {
 				System.out.println("Could not go back to prerate entry screen...");
@@ -848,9 +863,12 @@ public class prerateTestNG {
 		}
 		case 3:
 			try {
-				driver.findElement(elementNew);
-				Assert.assertTrue(driver.findElement(elementNew).getText().equals("Shipment Selection for Pre-Rate Entry"), "Made it back to prerate entry screen.");
-				skip=true;
+				if (driver.findElement(elementNew).getText().equals("Shipment Selection for Pre-Rate Entry")) {
+					if (validateORE(trkngnbr)==true) {
+						Assert.assertTrue(true);
+					}
+					skip=true;
+			}
 			}
 			catch(Exception e) {
 				System.out.println("Could not find top error....");
@@ -876,6 +894,61 @@ public class prerateTestNG {
 		}
 		  driver.manage().timeouts().implicitlyWait(waitTimeDefault,TimeUnit.SECONDS);
 		}
+	
+ 
+public  Boolean validateORE(String trkngnbr){
+ Boolean result=null;
+	Connection con = null;
+ if (level.equals("2")){
+        con=c.getOreL2DbConnection();
+ }
+ else if  (level.equals("3")){
+	 con=c.getOreL2DbConnection();
+}
+ PreparedStatement ps = null;
+try {
+	ps = con.prepareStatement(
+	         "select * from INTL_EXPRS_ONLN_SCHEMA.intl_package a join INTL_EXPRS_ONLN_SCHEMA.intl_package_event_history b on a.ONLN_PKG_ID =b.ONLN_PKG_ID where TRAN_NM ='PRUPD' and pkg_trkng_nbr=?");
+} catch (SQLException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+        //   "select * from INTL_EXPRS_ONLN_SCHEMA.intl_package");
+
+   
+       try {
+		ps.setString(1,trkngnbr);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+       ResultSet rs = null;
+	try {
+		rs = ps.executeQuery();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+       try {
+		if (rs.next()==false){
+		      System.out.println("Is NULL");
+		result=false;   
+		}
+		   else{
+		      System.out.println("IS NOT NULL");
+		      result=true;
+		   }
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+       
+       return result;
+}
+
+	
+	
+	
 	
     }
 	

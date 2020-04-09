@@ -484,7 +484,7 @@ public void setGtmRevToolsConnection(String username,String password) throws Cla
 public void setOreL2DbConnection(String dbCon,String username,String password) {
 	
 	try {
-		oreL2Con=DriverManager.getConnection("jdbc:oracle:thin:idb00248.ute.fedex.com:1526:IE2VD925","test_readonly","perftest");
+		oreL2Con=DriverManager.getConnection("jdbc:oracle:thin:@//idb00248.ute.fedex.com:1526/IE2VD925","test_readonly","perftest");
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
