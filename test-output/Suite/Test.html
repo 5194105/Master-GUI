@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>10/0/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>43/15/0</td>
 </tr><tr>
-<td>Started on:</td><td>Wed Apr 08 11:33:48 EDT 2020</td>
+<td>Started on:</td><td>Thu Apr 23 14:09:00 EDT 2020</td>
 </tr>
-<tr><td>Total time:</td><td>1006 seconds (1006485 ms)</td>
+<tr><td>Total time:</td><td>911 seconds (911075 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -67,6 +67,452 @@ function toggleAllBoxes() {
 </tr>
 </table><p/>
 <small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod1()'><b>testMethod1</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 188387, 2, 459304394877, 200, USD, 910808, 050, 100, 010, 100, , , , , 1</td>
+<td><div><pre>java.lang.AssertionError: Technical Error Occurred in Edits; Try again ,4364
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:721)
+	at prerate.prerateTestNGSlow.testMethod1(prerateTestNGSlow.java:315)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace335700541", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace335700541'><pre>java.lang.AssertionError: Technical Error Occurred in Edits; Try again ,4364
+	at org.testng.Assert.fail(Assert.java:93)
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:721)
+	at prerate.prerateTestNGSlow.testMethod1(prerateTestNGSlow.java:315)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>86</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod1()'><b>testMethod1</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 123634, 1, 794819980509, 1456.25, USD, 5056981, 050, 728.125, 010, 728.125, , , , , 13</td>
+<td><div><pre>java.lang.AssertionError: Sum of Charge Details does not equal Payment Total Amount
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:737)
+	at prerate.prerateTestNGSlow.testMethod1(prerateTestNGSlow.java:315)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace793291024", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace793291024'><pre>java.lang.AssertionError: Sum of Charge Details does not equal Payment Total Amount
+	at org.testng.Assert.fail(Assert.java:93)
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:737)
+	at prerate.prerateTestNGSlow.testMethod1(prerateTestNGSlow.java:315)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>95</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod1()'><b>testMethod1</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 168617, 1, 794820164309, 594.9, AUD, 5056981, 050, 251.6, 010, 39, 012, 304.3, , , 21</td>
+<td><div><pre>java.lang.AssertionError: No Error Found, but still failed
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:749)
+	at prerate.prerateTestNGSlow.testMethod1(prerateTestNGSlow.java:315)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace814858630", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace814858630'><pre>java.lang.AssertionError: No Error Found, but still failed
+	at org.testng.Assert.fail(Assert.java:93)
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:749)
+	at prerate.prerateTestNGSlow.testMethod1(prerateTestNGSlow.java:315)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>94</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod1()'><b>testMethod1</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 103842, 1, 794820133630, 55000, CNY, 910808, 050, 20000, 010, 20000, , , 001, 15000, 25</td>
+<td><div><pre>java.lang.AssertionError: Override Disabled.
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:682)
+	at prerate.prerateTestNGSlow.testMethod1(prerateTestNGSlow.java:315)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace375325509", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace375325509'><pre>java.lang.AssertionError: Override Disabled.
+	at org.testng.Assert.fail(Assert.java:93)
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:682)
+	at prerate.prerateTestNGSlow.testMethod1(prerateTestNGSlow.java:315)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>53</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod1()'><b>testMethod1</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 189247, 1, 794820039235, 200, USD, 910808, 050, 100, 010, 100, , , , , 45</td>
+<td><div><pre>java.lang.AssertionError: Override Disabled.
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:682)
+	at prerate.prerateTestNGSlow.testMethod1(prerateTestNGSlow.java:315)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace72797104", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace72797104'><pre>java.lang.AssertionError: Override Disabled.
+	at org.testng.Assert.fail(Assert.java:93)
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:682)
+	at prerate.prerateTestNGSlow.testMethod1(prerateTestNGSlow.java:315)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>48</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod1()'><b>testMethod1</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 149310, 1, 794820134464, 300, USD, 5080136, 050, 100, 010, 100, 976, 100, , , 57</td>
+<td><div><pre>java.lang.AssertionError: Override Disabled.
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:682)
+	at prerate.prerateTestNGSlow.testMethod1(prerateTestNGSlow.java:315)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace380990724", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace380990724'><pre>java.lang.AssertionError: Override Disabled.
+	at org.testng.Assert.fail(Assert.java:93)
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:682)
+	at prerate.prerateTestNGSlow.testMethod1(prerateTestNGSlow.java:315)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>46</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod2()'><b>testMethod2</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: Trucking Fees, , N, 177497, 1, 794820030514, 600, USD, 5071714, 050, 400, 010, 200, , , , , 6</td>
+<td><div><pre>java.lang.AssertionError: Override Disabled.
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:682)
+	at prerate.prerateTestNGSlow.testMethod2(prerateTestNGSlow.java:339)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1453062661", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1453062661'><pre>java.lang.AssertionError: Override Disabled.
+	at org.testng.Assert.fail(Assert.java:93)
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:682)
+	at prerate.prerateTestNGSlow.testMethod2(prerateTestNGSlow.java:339)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>51</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod2()'><b>testMethod2</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 97695, 1, 459272597840, 48.62, MXN, 5056981, 050, 47.3, 010, 1.32, , , , 00.00, 14</td>
+<td><div><pre>java.lang.AssertionError: Make sure to add Charge Codes for each Charge Amount entered!
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:737)
+	at prerate.prerateTestNGSlow.testMethod2(prerateTestNGSlow.java:339)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1147798583", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1147798583'><pre>java.lang.AssertionError: Make sure to add Charge Codes for each Charge Amount entered!
+	at org.testng.Assert.fail(Assert.java:93)
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:737)
+	at prerate.prerateTestNGSlow.testMethod2(prerateTestNGSlow.java:339)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>89</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod2()'><b>testMethod2</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 143567, 1, 794819998783, 300, USD, 5080136, 050, 100, 010, 100, 977, 100, , , 58</td>
+<td><div><pre>java.lang.AssertionError: Override Disabled.
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:682)
+	at prerate.prerateTestNGSlow.testMethod2(prerateTestNGSlow.java:339)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace605024386", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace605024386'><pre>java.lang.AssertionError: Override Disabled.
+	at org.testng.Assert.fail(Assert.java:93)
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:682)
+	at prerate.prerateTestNGSlow.testMethod2(prerateTestNGSlow.java:339)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>46</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod3()'><b>testMethod3</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 176660, 1, 459256648815, 400, USD, 5056981, 050, 100, 010, 100, 001, 200, , , 3</td>
+<td><div><pre>java.lang.AssertionError: No Error Found, but still failed
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:749)
+	at prerate.prerateTestNGSlow.testMethod3(prerateTestNGSlow.java:363)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace782742585", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace782742585'><pre>java.lang.AssertionError: No Error Found, but still failed
+	at org.testng.Assert.fail(Assert.java:93)
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:749)
+	at prerate.prerateTestNGSlow.testMethod3(prerateTestNGSlow.java:363)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>109</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod3()'><b>testMethod3</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 112720, 1, 458710797292, 100, USD, 910808, 050, 50, 010, 50, , , , , 31</td>
+<td><div><pre>java.lang.AssertionError: Failed selecting dropdown menu...
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:607)
+	at prerate.prerateTestNGSlow.testMethod3(prerateTestNGSlow.java:363)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1674387331", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1674387331'><pre>java.lang.AssertionError: Failed selecting dropdown menu...
+	at org.testng.Assert.fail(Assert.java:93)
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:607)
+	at prerate.prerateTestNGSlow.testMethod3(prerateTestNGSlow.java:363)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>29</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod3()'><b>testMethod3</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 173353, 1, 794820028960, 200, PHP, 5080136, 050, 100, 010, 100, , , , , 51</td>
+<td><div><pre>java.lang.AssertionError: Override Disabled.
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:682)
+	at prerate.prerateTestNGSlow.testMethod3(prerateTestNGSlow.java:363)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace359452387", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace359452387'><pre>java.lang.AssertionError: Override Disabled.
+	at org.testng.Assert.fail(Assert.java:93)
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:682)
+	at prerate.prerateTestNGSlow.testMethod3(prerateTestNGSlow.java:363)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>49</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod4()'><b>testMethod4</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 177305, 1, 459289404282, 400, USD, 5056981, 050, 100, 010, 100, 001, 200, , , 4</td>
+<td><div><pre>java.lang.AssertionError: Technical Error Occurred in Edits; Try again ,4364
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:721)
+	at prerate.prerateTestNGSlow.testMethod4(prerateTestNGSlow.java:394)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace2070183939", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace2070183939'><pre>java.lang.AssertionError: Technical Error Occurred in Edits; Try again ,4364
+	at org.testng.Assert.fail(Assert.java:93)
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:721)
+	at prerate.prerateTestNGSlow.testMethod4(prerateTestNGSlow.java:394)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>89</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod4()'><b>testMethod4</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 167694, 1, 794820371898, 145.89, CAD, 5071714, 050, 81.97, 010, 38.3, 012, 4.92, 001, 20.70, 16</td>
+<td><div><pre>java.lang.AssertionError: Override Disabled.
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:682)
+	at prerate.prerateTestNGSlow.testMethod4(prerateTestNGSlow.java:394)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace2054966941", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace2054966941'><pre>java.lang.AssertionError: Override Disabled.
+	at org.testng.Assert.fail(Assert.java:93)
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:682)
+	at prerate.prerateTestNGSlow.testMethod4(prerateTestNGSlow.java:394)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>59</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod4()'><b>testMethod4</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 147512, 1, 794820002801, 100, NMP, 910808, 050, 50, 010, 40, , , 163, 10, 28</td>
+<td><div><pre>java.lang.IndexOutOfBoundsException: Index: 3, Size: 3
+	at java.util.ArrayList.rangeCheck(Unknown Source)
+	at java.util.ArrayList.get(Unknown Source)
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:676)
+	at prerate.prerateTestNGSlow.testMethod4(prerateTestNGSlow.java:394)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 10 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace431674304", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace431674304'><pre>java.lang.IndexOutOfBoundsException: Index: 3, Size: 3
+	at java.util.ArrayList.rangeCheck(Unknown Source)
+	at java.util.ArrayList.get(Unknown Source)
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:676)
+	at prerate.prerateTestNGSlow.testMethod4(prerateTestNGSlow.java:394)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>55</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+</table><p>
 <table width='100%' border='1' class='invocation-passed'>
 <tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
 <tr><td><b>Test method</b></td>
@@ -75,55 +521,220 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='testng.testingonly.testMethod()'><b>testMethod</b><br>Test class: testng.testingonly<br>Parameters: 105292, 1, 610211682, , 134759738601, , 421454960, , Express Domestic, , Tracking Number, Express 9-digit, L3C8-105292-1-100, 1</td>
+<td title='prerate.prerateTestNGSlow.testMethod1()'><b>testMethod1</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: COLD CHAIN, , N, 176731, 1, 459289400780, 400, COP, 5056981, 050, 100, 010, 100, 001, 200, , , 5</td>
 <td></td>
-<td>208</td>
-<td>testng.testingonly@75c072cb</td></tr>
+<td>65</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
 <tr>
-<td title='testng.testingonly.testMethod()'><b>testMethod</b><br>Test class: testng.testingonly<br>Parameters: 105962, 1, 450312398, , 304869738608, , 421456251, , Express Domestic, , Tracking Number, Express 9-digit, L3C8-105292-1-102, 5</td>
+<td title='prerate.prerateTestNGSlow.testMethod1()'><b>testMethod1</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 177803, 1, 459287644922, 300, USD, 910808, 050, 100, 010, 200, , , , , 9</td>
 <td></td>
-<td>176</td>
-<td>testng.testingonly@75c072cb</td></tr>
+<td>63</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
 <tr>
-<td title='testng.testingonly.testMethod()'><b>testMethod</b><br>Test class: testng.testingonly<br>Parameters: 105265, 1, 450312657, , 418869738607, , 421456212, , Express Domestic, , Tracking Number, Express 9-digit, L3C8-105292-1-104, 9</td>
+<td title='prerate.prerateTestNGSlow.testMethod1()'><b>testMethod1</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 138361, 1, 794820347893, 426.72, USD, 5071714, 050, 237.53, 010, 39.19, 012, 25, 001, 125, 17</td>
 <td></td>
-<td>147</td>
-<td>testng.testingonly@75c072cb</td></tr>
+<td>45</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
 <tr>
-<td title='testng.testingonly.testMethod2()'><b>testMethod2</b><br>Test class: testng.testingonly<br>Parameters: 126610, 1, 450312851, , 209969738600, , 421453046, , Express Domestic, , Tracking Number, Express 9-digit, L3C8-126610-1-101, 2</td>
+<td title='prerate.prerateTestNGSlow.testMethod1()'><b>testMethod1</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 100929, 1, 458517407869, 179.66, USD, 910808, 050, 100, 010, 79.66, , , , , 29</td>
 <td></td>
-<td>683</td>
-<td>testng.testingonly@75c072cb</td></tr>
+<td>38</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
 <tr>
-<td title='testng.testingonly.testMethod2()'><b>testMethod2</b><br>Test class: testng.testingonly<br>Parameters: 94772, 1, 128599983, , 368969738601, , 421455357, , Express Domestic, , Tracking Number, Express 9-digit, L3C8-126610-1-103, 6</td>
+<td title='prerate.prerateTestNGSlow.testMethod1()'><b>testMethod1</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 460, 1, 458710798597, 300, USD, 910808, 050, 100, 010, 200, , , , , 33</td>
 <td></td>
-<td>172</td>
-<td>testng.testingonly@75c072cb</td></tr>
+<td>36</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
 <tr>
-<td title='testng.testingonly.testMethod2()'><b>testMethod2</b><br>Test class: testng.testingonly<br>Parameters: 105265, 1, 450312657, , 418869738607, , 421456212, , Express Domestic, , Tracking Number, Express 9-digit, L3C8-126610-1-105, 10</td>
+<td title='prerate.prerateTestNGSlow.testMethod1()'><b>testMethod1</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 188409, 1, 794820519009, 200, USD, 910808, 050, 100, 010, 100, , , , , 37</td>
 <td></td>
-<td>148</td>
-<td>testng.testingonly@75c072cb</td></tr>
+<td>58</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
 <tr>
-<td title='testng.testingonly.testMethod3()'><b>testMethod3</b><br>Test class: testng.testingonly<br>Parameters: 105676, 1, 451143280, , 240972736735, , 737228120, , Express Domestic, , Tracking Number, Express 9-digit, L3C8-105292-1-101, 3</td>
+<td title='prerate.prerateTestNGSlow.testMethod1()'><b>testMethod1</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 193556, 1, 459292395497, 200, USD, 910808, 050, 100, 010, 100, , , , , 41</td>
 <td></td>
-<td>209</td>
-<td>testng.testingonly@75c072cb</td></tr>
+<td>59</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
 <tr>
-<td title='testng.testingonly.testMethod3()'><b>testMethod3</b><br>Test class: testng.testingonly<br>Parameters: 105265, 1, 450312657, , 418869738607, , 421456212, , Express Domestic, , Tracking Number, Express 9-digit, L3C8-105292-1-103, 7</td>
+<td title='prerate.prerateTestNGSlow.testMethod1()'><b>testMethod1</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 168932, 1, 458517174950, 200, JPY, 5080136, 050, 100, 010, 100, , , , , 49</td>
 <td></td>
-<td>175</td>
-<td>testng.testingonly@75c072cb</td></tr>
+<td>60</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
 <tr>
-<td title='testng.testingonly.testMethod4()'><b>testMethod4</b><br>Test class: testng.testingonly<br>Parameters: 106174, 1, 710204780, , 282869738600, , 421452835, , Express Domestic, , Tracking Number, Express 9-digit, L3C8-126610-1-102, 4</td>
+<td title='prerate.prerateTestNGSlow.testMethod1()'><b>testMethod1</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 173359, 1, 458517175875, 200, THB, 5080136, 050, 100, 010, 100, , , , , 53</td>
 <td></td>
-<td>681</td>
-<td>testng.testingonly@75c072cb</td></tr>
+<td>56</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
 <tr>
-<td title='testng.testingonly.testMethod4()'><b>testMethod4</b><br>Test class: testng.testingonly<br>Parameters: 105265, 1, 450312657, , 418869738607, , 421456212, , Express Domestic, , Tracking Number, Express 9-digit, L3C8-126610-1-104, 8</td>
+<td title='prerate.prerateTestNGSlow.testMethod2()'><b>testMethod2</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 188762, 2, 459041545860, 200, USD, 910808, 050, 100, 010, 100, , , , , 2</td>
 <td></td>
-<td>173</td>
-<td>testng.testingonly@75c072cb</td></tr>
+<td>79</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod2()'><b>testMethod2</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 177604, 1, 459289409310, 200, AUD, 910808, 050, 100, 010, 100, , , , , 10</td>
+<td></td>
+<td>59</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod2()'><b>testMethod2</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 109514, 1, 458710797237, 261.01, USD, 5071714, 050, 200, 010, 61.01, , , , , 18</td>
+<td></td>
+<td>39</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod2()'><b>testMethod2</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 138145, 1, 794820539114, 2035.50, EUR, 5056981, 050, 2000, 010, 35.5, , , , , 22</td>
+<td></td>
+<td>68</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod2()'><b>testMethod2</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 112309, 1, 458699349729, 1443.2, GBP, 910808, 050, 1000, 010, 443.2, , , , , 26</td>
+<td></td>
+<td>77</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod2()'><b>testMethod2</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 147969, 1, 794820240820, 658.32, USD, 910808, 050, 282.11, 010, 46.55, 012, 329.66, , , 30</td>
+<td></td>
+<td>38</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod2()'><b>testMethod2</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 136796, 1, 458699351475, 750000, USD, 910808, 050, 700000, 010, 50000, , , , , 34</td>
+<td></td>
+<td>67</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod2()'><b>testMethod2</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 188402, 1, 459308394770, 200, USD, 910808, 050, 100, 010, 100, , , , , 38</td>
+<td></td>
+<td>60</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod2()'><b>testMethod2</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 188787, 1, 458517412695, 200, USD, 910808, 050, 100, 010, 100, , , , , 42</td>
+<td></td>
+<td>37</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod2()'><b>testMethod2</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 188067, 1, 794820348216, 200, USD, 910808, 050, 100, 010, 100, , , , , 46</td>
+<td></td>
+<td>61</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod2()'><b>testMethod2</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 128675, 1, 458529974657, 200, USD, 5080136, 050, 100, 010, 100, , , , , 50</td>
+<td></td>
+<td>62</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod2()'><b>testMethod2</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 173354, 1, 458517175853, 200, NTD, 5080136, 050, 100, 010, 100, , , , , 54</td>
+<td></td>
+<td>57</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod3()'><b>testMethod3</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 177016, 1, 459289403827, 400, USD, 5056981, 036, 50, 050, 100, 010, 250, , , 7</td>
+<td></td>
+<td>61</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod3()'><b>testMethod3</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 179712, 1, 794820174479, 120, USD, 910808, 050, 40, 010, 80, , , , , 11</td>
+<td></td>
+<td>64</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod3()'><b>testMethod3</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 131141, 1, 459292394869, 217.25, USD, 5056981, 050, 200, 010, 17.25, , , , , 15</td>
+<td></td>
+<td>43</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod3()'><b>testMethod3</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 130772, 1, 458529974727, 71.50, CAD, 5056981, 050, 30, 010, 41.5, , , , , 19</td>
+<td></td>
+<td>38</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod3()'><b>testMethod3</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 146360, 1, 459292395291, 10312.5, HKD, 5056981, 050, 10000, 010, 312.5, , , , , 23</td>
+<td></td>
+<td>64</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod3()'><b>testMethod3</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 112311, 1, 459272594656, 682.1, NMP, 910808, 050, 611, 010, 61.1, , , 163, 10, 27</td>
+<td></td>
+<td>38</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod3()'><b>testMethod3</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 112326, 1, 458517170071, 350, USD, 910808, 050, 300, 010, 50, , , , , 35</td>
+<td></td>
+<td>40</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod3()'><b>testMethod3</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 188395, 1, 459024945261, 200, USD, 910808, 050, 100, 010, 100, , , , , 39</td>
+<td></td>
+<td>60</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod3()'><b>testMethod3</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 188815, 1, 459304394796, 200, USD, 910808, 050, 100, 010, 100, , , , , 43</td>
+<td></td>
+<td>59</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod3()'><b>testMethod3</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 188177, 1, 459292396298, 200, USD, 910808, 050, 100, 010, 100, , , , , 47</td>
+<td></td>
+<td>65</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod3()'><b>testMethod3</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 173360, 1, 458517175886, 200, MYR, 5080136, 050, 100, 010, 100, , , , , 55</td>
+<td></td>
+<td>63</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod4()'><b>testMethod4</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 177418, 1, 459289403275, 200, USD, 910808, 050, 100, 010, 100, , , , , 8</td>
+<td></td>
+<td>61</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod4()'><b>testMethod4</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 179769, 1, 794820174814, 239.61, EUR, 910808, 050, 200, 010, 39.61, , , , , 12</td>
+<td></td>
+<td>38</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod4()'><b>testMethod4</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 103849, 1, 458699349604, 376.04, USD, 5056981, 050, 53.26, 010, 292.78, 012, 30, , , 20</td>
+<td></td>
+<td>60</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod4()'><b>testMethod4</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 97683, 1, 458517420693, 78.63, USD, 5056981, 050, 40, 010, 38.63, , , , , 24</td>
+<td></td>
+<td>44</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod4()'><b>testMethod4</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 75904, 1, 459272597622, 2, USD, 910808, 050, 1, 010, 1, , , , , 32</td>
+<td></td>
+<td>66</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod4()'><b>testMethod4</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 126322, 1, 458699350825, 450, USD, 910808, 050, 400, 010, 50, , , , , 36</td>
+<td></td>
+<td>61</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod4()'><b>testMethod4</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 188389, 1, 459300644614, 200, USD, 910808, 050, 100, 010, 100, , , , , 40</td>
+<td></td>
+<td>62</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod4()'><b>testMethod4</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 188410, 1, 794820189195, 200, USD, 910808, 050, 100, 010, 100, , , , , 44</td>
+<td></td>
+<td>58</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod4()'><b>testMethod4</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 187651, 1, 459256648826, 200, USD, 910808, 050, 100, 010, 100, , , , , 48</td>
+<td></td>
+<td>59</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod4()'><b>testMethod4</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , N, 173358, 1, 458517175864, 200, SGD, 5080136, 050, 100, 010, 100, , , , , 52</td>
+<td></td>
+<td>59</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
+<tr>
+<td title='prerate.prerateTestNGSlow.testMethod4()'><b>testMethod4</b><br>Test class: prerate.prerateTestNGSlow<br>Parameters: ADDR CHANGE FEE, , Y, 153404, 1, 458517173975, 300, USD, 5080136, 050, 100, 010, 100, 976, 100, , , 56</td>
+<td></td>
+<td>36</td>
+<td>prerate.prerateTestNGSlow@39aeed2f</td></tr>
 </table><p>
 </body>
 </html>

@@ -30,8 +30,8 @@ public class prerateAutomationGui {
 	    private JLabel label;
 	    private JLabel lblSource;
 	    private JLabel executeLabel;
-	    private JRadioButton radioButton;
-	    private JRadioButton radioButton_1;
+	    private JRadioButton l2RadioButton;
+	    private JRadioButton l3RadioButton;
 	    private JLabel label_2;
 	    private JLabel lblRerateAutomation;
 	    private JLabel excelLabel;
@@ -51,6 +51,7 @@ public class prerateAutomationGui {
 	
 	public prerateAutomationGui( gui g,config c) {
 		this.g=g;
+		this.c=c;
 		initialize();
 		
 	}
@@ -103,19 +104,20 @@ public class prerateAutomationGui {
 		lblSource.setBounds(192, 355, 99, 31);
 		frame.getContentPane().add(lblSource);
 		
-		radioButton = new JRadioButton("L2");
-		radioButton.setOpaque(false);
-		radioButton.setForeground(Color.WHITE);
-		radioButton.setFont(new Font("Segoe UI", Font.BOLD, 22));
-		radioButton.setBounds(275, 281, 69, 29);
-		frame.getContentPane().add(radioButton);
+		l2RadioButton = new JRadioButton("L2");
+		l2RadioButton.setOpaque(false);
+		l2RadioButton.setForeground(Color.WHITE);
+		l2RadioButton.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		l2RadioButton.setBounds(275, 281, 69, 29);
+		frame.getContentPane().add(l2RadioButton);
 		
-		radioButton_1 = new JRadioButton("L3");
-		radioButton_1.setOpaque(false);
-		radioButton_1.setForeground(Color.WHITE);
-		radioButton_1.setFont(new Font("Segoe UI", Font.BOLD, 22));
-		radioButton_1.setBounds(350, 282, 69, 29);
-		frame.getContentPane().add(radioButton_1);
+		l3RadioButton = new JRadioButton("L3");
+		l3RadioButton.setOpaque(false);
+		l3RadioButton.setForeground(Color.WHITE);
+		l3RadioButton.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		l3RadioButton.setBounds(350, 282, 69, 29);
+		frame.getContentPane().add(l3RadioButton);
+	
 		
 		label_2 = new JLabel("Compatible Mode: ");
 		label_2.setForeground(Color.WHITE);
@@ -177,7 +179,101 @@ public class prerateAutomationGui {
 		m.addExecute(executeLabel);
 		m.setupBackground();
 
+		
+		l2RadioButton.addMouseListener(m.m3);
+		l3RadioButton.addMouseListener(m.m3);
+		
+		
+		
+		//Sets Driver to Chrome
+		if (ie.isSelected()==true) {
+			c.setDriverType("1");
+		}
+		if (chrome.isSelected()==true) {
+			c.setDriverType("2");
+		} 
+
+		
+		
+		if (checkBox.isSelected()==true) {
+			c.setCompatibleMode("true");
+		}
+		else if (checkBox.isSelected()==false) {
+			c.setCompatibleMode("false");
+		}
+
+		
+
+		
+		
 	    frame.setVisible(true);
+	    
+	    
+		
+	    l2RadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	l2RadioButtonActionPerformed(evt);
+            }
+        });
+	    
+	    l3RadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	l3RadioButtonActionPerformed(evt);
+            }
+        });
+	    
+		ie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	ieActionPerformed(evt);
+            }
+        });
+	    
+	    chrome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	chromeActionPerformed(evt);
+            }
+        });
+		
+	    
+	    
+		
 	}
 	
-}
+		private void l2RadioButtonActionPerformed(java.awt.event.ActionEvent evt) { 
+			System.out.println("L2 RADIO");
+			if (l3RadioButton.isSelected()){
+				l3RadioButton.setSelected(false);
+		        }
+			c.setLevel("2");
+	}
+		private void l3RadioButtonActionPerformed(java.awt.event.ActionEvent evt) {   
+			System.out.println("L3 RADIO");
+			if (l2RadioButton.isSelected()){
+				l2RadioButton.setSelected(false);
+		        }
+			c.setLevel("3");
+		}
+	
+		
+		
+	
+	
+	
+		private void ieActionPerformed(java.awt.event.ActionEvent evt) { 
+			System.out.println("ie RADIO");
+			if (chrome.isSelected()){
+				chrome.setSelected(false);
+		        }
+			c.setDriverType("1");
+	}
+		private void chromeActionPerformed(java.awt.event.ActionEvent evt) {   
+			System.out.println("chrome RADIO");
+			if (ie.isSelected()){
+				ie.setSelected(false);
+		        }
+			c.setDriverType("2");
+		}
+	   
+	}
+	
+

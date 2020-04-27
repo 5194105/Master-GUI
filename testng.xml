@@ -3,7 +3,7 @@
 <suite thread-count="4" name="Suite" parallel="methods">
   <test name="Test">
     <classes>
-      <class name="prerate.prerateTestNG"/>
+      <class name="prerate.prerateTestNGSlow"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

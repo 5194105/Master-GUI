@@ -33,7 +33,7 @@ public class config {
     String startDate,endDate;
 
     
-    Boolean compatible;
+    String compatible;
     
     String level,source;
 	
@@ -282,7 +282,7 @@ public class config {
 		
 		this.source=source;
 	}
-	public void setCompatibleMode(Boolean compatible) {
+	public void setCompatibleMode(String compatible) {
 		
 		this.compatible=compatible;
 	}
@@ -295,7 +295,7 @@ public class config {
 		
 		return 	source;
 		}
-	public Boolean getCompatibleMode() {	
+	public String getCompatibleMode() {	
 		
 		return compatible;
 		}

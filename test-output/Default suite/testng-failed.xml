@@ -3,12 +3,14 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="testng.prerateTestNG">
+      <class name="prerate.prerateTestNG">
         <methods>
-          <include name="testMethod3"/>
+          <include name="testMethod1" invocation-numbers="0 1 3"/>
           <include name="setupExcel"/>
+          <include name="testMethod3" invocation-numbers="1 19"/>
+          <include name="testMethod4" invocation-numbers="0 6"/>
         </methods>
-      </class> <!-- testng.prerateTestNG -->
+      </class> <!-- prerate.prerateTestNG -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

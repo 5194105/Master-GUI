@@ -37,6 +37,7 @@ import guis.prerateAutomationGui;
 import guis.rebillAutomationGui;
 import guis.rerateAutomationGui;
 import guis.udAutomation;
+import prerate.prerateTestNGSlow;
 import rebill.rebillMain;
 import rebill_troubleshoot.rebillTroubleshoot;
 import rerate.abc;
@@ -584,7 +585,7 @@ public void setupMouseListener() {
 				    		            filePath=file.getAbsolutePath();
 				    		            c.setExcelPath(filePath);
 				    		            System.out.println("SOURCE!!!!!!!");
-				    		            
+				    		            c.setSource("excel");
 				    		            excelBoolean=true;
 				    		            addExcel(mouseLabel);
 				    		            databaseBoolean=false;
@@ -645,7 +646,7 @@ public void setupMouseListener() {
 				    				}
 				    				
 				    				
-				    				if(c.getCompatibleMode())
+				    				if(c.getCompatibleMode().equals("false"))
 				    				{
 				    					compatibleMode="LOCAL";
 				    				}
@@ -678,7 +679,7 @@ public void setupMouseListener() {
 				    				String endDateText=c.getEndDate();
 				    				String level=c.getLevel();
 				    				String broswer=c.getDriverType();
-				    				boolean compatibleMode=c.getCompatibleMode();
+				    				String compatibleMode=c.getCompatibleMode();
 				    				
 				    			//	c.setStartDate(rag.startDate.getText());
 				    				//c.setEndDate(rag.endDate.getText());
@@ -725,6 +726,46 @@ public void setupMouseListener() {
 				    				
 				    				System.out.println("STARTED INSTANT INVOICE");
 
+					    				}
+				    			
+				    			
+				    			
+				    			
+				    			if (obj.getClass().getCanonicalName().equals("guis.prerateAutomationGui")) {
+				    				System.out.println("Booleans "+c.getLevel()+"      "+c.getSource());		    				
+				    				if(c.getLevel()!=null && c.getSource()!=null) {
+				    				JOptionPane.showMessageDialog(frame, "Started Prerate");
+				    				String filepath=c.getExcelPath();
+				    				String level=c.getLevel();
+				    				String broswer=c.getDriverType();
+				    				
+				    				String compatibleMode=c.getCompatibleMode();
+				    				System.out.println("filepath"+" "+filepath);
+				    				System.out.println("level"+" "+level);
+				    				System.out.println("broswer"+" "+broswer);
+				    				System.out.println("compatibleMode"+" "+compatibleMode);
+				    			
+				    		        XmlSuite xmlSuite = new XmlSuite();
+				    		        xmlSuite.setName("Sample_Suite");
+				    		        Map<String, String> fieldValues = new HashMap<>();
+				    		        fieldValues.put("filepathExcelParameter", filepath);
+				    		        fieldValues.put("levelParameter", level);
+				    		        fieldValues.put("broswerParameter", broswer);
+				    		        fieldValues.put("compatibleModeParameter", compatibleMode);
+				    		        
+				    		        xmlSuite.setParameters(fieldValues);
+				    		        XmlTest xmlTest = new XmlTest(xmlSuite);
+				    		        xmlTest.setName("Prerate Test");
+				    		        //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
+				    		        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(prerateTestNGSlow.class)));
+				    		        xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
+				    		        TestNG tng = new TestNG();
+				    		        tng.setXmlSuites(Collections.singletonList(xmlSuite));
+				    		        tng.run();
+					    			
+				    				}
+				    				
+				    				
 					    				}
 				    			
 				    			

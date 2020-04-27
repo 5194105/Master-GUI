@@ -146,7 +146,7 @@ public class prerateTestNG {
 	
 		
 		
-	String level="3";
+	String level="2";
 		
 		
 		
@@ -485,7 +485,7 @@ public class prerateTestNG {
         
     if (level.equals("2"))
 	{
-		levelUrl="https://testsso.secure.fedex.com/prerates-l2/";
+		levelUrl="https://testsso.secure.fedex.com/l2/prerates";
 	}
 	else if (level.equals("3"))
 	{
@@ -554,7 +554,7 @@ public class prerateTestNG {
     	WebElement element2;
     	WebElement element3;
     	WebElement element4;
-
+    	Boolean skipRestCheck=false;
   
 
     	
@@ -571,7 +571,7 @@ public class prerateTestNG {
 			
 		
 		//Fast way to move to next screen... fails if prerate input not there.
-		checkVal(driver,By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[3]/td/span/div[3]/div[1]/div/div/span[1]"),By.className("ui-faces-message-text"),1,10,1,10,trk);
+		checkVal(driver,By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[3]/td/span/div[3]/div[1]/div/div/span[1]"),By.className("ui-faces-message-text"),1,10,1,10,trk,rowNumber);
 	
 		
 		
@@ -617,7 +617,8 @@ public class prerateTestNG {
 			}
 		}
 		} catch(Exception e) {
-			
+			System.out.println(e);
+			writeToExcel(rowNumber,1, "Failed selecting dropdown menu...");
 			Assert.fail("Failed selecting dropdown menu...");
 		}
 		
@@ -634,23 +635,32 @@ public class prerateTestNG {
 		System.out.println("cc4 "+cc4);
 		System.out.println("cm4 "+cm4);
 
+		
+		
+	
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:paymentComponent:amountId:pymt_amnt_input']")).clear();
 		driver.findElement(By.xpath("//input[@id='preRateEntryForm:paymentComponent:amountId:pymt_amnt_input']")).sendKeys(amount);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:paymentComponent:currCodeId:cuu_code_input']")).clear();
 		driver.findElement(By.xpath("//input[@id='preRateEntryForm:paymentComponent:currCodeId:cuu_code_input']")).sendKeys(currcode);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:paymentComponent:rateApprover_input']")).clear();
 		driver.findElement(By.xpath("//input[@id='preRateEntryForm:paymentComponent:rateApprover_input']")).sendKeys(approverID);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde1_input']")).clear();
 		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde1_input']")).sendKeys(cc1);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt1_input']")).clear();
 		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt1_input']")).sendKeys(cm1);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde2_input']")).clear();
 		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde2_input']")).sendKeys(cc2);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt2_input']")).clear();
 		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt2_input']")).sendKeys(cm2);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde3_input']")).clear();
 		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde3_input']")).sendKeys(cc3);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt3_input']")).clear();
 		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt3_input']")).sendKeys(cm3);
-	//	driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde3_input']")).sendKeys(cc3);
-	//	driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt3_input']")).sendKeys(cm3);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde4_input']")).clear();
 		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde4_input']")).sendKeys(cc4);
+		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt4_input']")).clear();
 		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt4_input']")).sendKeys(cm4);
-	//	driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde3_input']")).sendKeys(cc4);
-	//	driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt3_input']")).sendKeys(cm4);
-	//	driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde4_input']")).sendKeys(cc4);
-	//	driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt4_input']")).sendKeys(cm4);
+
 			
 		
 		
@@ -661,6 +671,7 @@ public class prerateTestNG {
 		
 		}
 		catch(Exception e) {
+			 writeToExcel(rowNumber,1, "Failed on the input menu...");
 			 Assert.fail("Failed on the input menu...");
 		}
 		
@@ -668,57 +679,14 @@ public class prerateTestNG {
 		//Not sure what this is trying to find... we should check to see if successful first tho.
 		try {
 			
-			checkVal(driver,By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]"),By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[6]/td/table/tbody/tr[2]/td/span/span/span/span[2]"),2,5,1,10,trk);
+		skipRestCheck=	checkVal(driver,By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]"),By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[6]/td/table/tbody/tr[2]/td/span/span/span/span[2]"),2,5,1,10,trk,rowNumber);
 			
-			/*
-			//String er=driver.findElement(By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[6]/td/table/tbody/tr[2]/td/span/span/span/span[2]")).getText();
-			System.out.println(er);
-			driver.switchTo().defaultContent();
-			
-			if(er!=null) {
-				 Assert.fail(er);
+		}
+		catch(Exception e) {
+				System.out.println(e);	
 			}
-		
-			*/
-		}
-		catch(NullPointerException e) {
-			System.out.println("Didnt find external error...");
 			
-		}
-		
-		catch(NoSuchElementException e) {
-			System.out.println("Didnt find external error...");
-			
-		}
-		
-		
-		try {
-			checkVal(driver,By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]"),By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[4]/td/span/div/div[1]/div[2]/div/table[2]/tbody/tr/td/span/span/span/span[2]"),2,5,1,10,trk);
-			
-			/*
-			//Not sure what this is trying to find... we should check to see if successful first tho.
-			String er=driver.findElement(By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[4]/td/span/div/div[1]/div[2]/div/table[2]/tbody/tr/td/span/span/span/span[2]")).getText();
-			System.out.println(er);
-		//	driver.switchTo().defaultContent();
-			
-			if(er!=null) {
-				 Assert.fail(er);
-			}
-		*/
-			
-		}
-		catch(NullPointerException e) {
-			System.out.println("Didnt find external error...");
-			
-		}
-		
-		catch(NoSuchElementException e) {
-			System.out.println("Didnt find external error...");
-			
-		}
-		
-		
-		
+		if (skipRestCheck==false) {
 		try{
 			count=(driver.findElements(By.xpath("//input[@type='checkbox']")).size());
 			//System.out.println(count);
@@ -729,6 +697,7 @@ public class prerateTestNG {
 				}
 				else {
 					//System.out.println("disabled");
+					writeToExcel(rowNumber,1, "Override Disabled.");
 					Assert.fail("Override Disabled.");
 					fl=true;
 					break;
@@ -740,19 +709,32 @@ public class prerateTestNG {
 		catch (NoSuchElementException a){
 			//System.out.println("just proceed further");
 		}
+		}
+		
 		try{
-
-			checkVal(driver,By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]"),By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[6]/td/table/tbody/tr[2]/td/span/span/span/span[2]"),2,5,1,10,trk);	
-			checkVal(driver,By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]"),By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[4]/td/span/div/div[1]/div[2]/div/table[2]/tbody/tr/td/span/span/span/span[2]"),2,5,1,10,trk);
-			
+			if (skipRestCheck==false) {
+			skipRestCheck=		checkVal(driver,By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]"),By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[6]/td/table/tbody/tr[2]/td/span/span/span/span[2]"),2,5,1,10,trk,rowNumber);	
+			}
+			if (skipRestCheck==false) {
+			skipRestCheck=		checkVal(driver,By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]"),By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[4]/td/span/div/div[1]/div[2]/div/table[2]/tbody/tr/td/span/span/span/span[2]"),2,5,1,10,trk,rowNumber);
+			}
 			//flag2=driver.findElement(By.xpath("//input[@id='preRateEntrySelForm:trackingNo_input']")).isDisplayed();
 			//excelVar.setCellData(rowNumber, 1, "Completed");
 			//excelVar.saveAndClose();
-			writeToExcel(rowNumber,1,"Completed");
+			//checkVal(driver,By.xpath("//input[@id='preRateEntrySelForm:trackingNo_input']"),By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[3]/td/span/div[3]/div[1]/div/div/span[1]"),1,10,1,10,trk,rowNumber);
+			if (skipRestCheck==false) {
+			//Actually Should not reach here.
+			writeToExcel(rowNumber,1,"Failed Somewhere... No Error Found Tho");
+			Assert.fail("No Error Found, but still failed");
+			//writeToExcel(rowNumber,1,"Completed");
 			driver.switchTo().defaultContent();
+			}
 		
 		}
 		catch (NoSuchElementException a){
+		
+		}
+		if (skipRestCheck==false) {
 			if(fl==true){
 
 				//excelVar.setCellData(rowNumber, 1, "Override Disabled");
@@ -770,21 +752,6 @@ public class prerateTestNG {
 		
 			}
 		}
-	
-	catch (NullPointerException f)
-	{
-		//excelVar.setCellData(rowNumber, 1, "Try this manually");
-		writeToExcel(rowNumber,1,"Try this manually");
-		driver.switchTo().defaultContent();
-	
-	}
-	catch (WebDriverException h)
-	{
-		//excelVar.setCellData(rowNumber, 1, "Try this manually");
-		writeToExcel(rowNumber,1,"Try this manually");
-		
-		driver.switchTo().defaultContent();
-	}
 }
     	
     
@@ -803,13 +770,15 @@ public class prerateTestNG {
 	
 	//This is to help speed up program. It will look for the next object.. if found then continue.. if not quickly look for any error message.
 	//The next object will have a wait, 
-	public void checkVal(WebDriver driver,By elementNew,By elementOld,int caseNumber,int waitTimeLong,int waitTimeShort,int waitTimeDefault,String trkngnbr) {
+	public Boolean checkVal(WebDriver driver,By elementNew,By elementOld,int caseNumber,int waitTimeLong,int waitTimeShort,int waitTimeDefault,String trkngnbr,int rowNumber) {
 		
 		String newString,oldString;
 		Boolean skip=false;
 		WebElement we;
 		switch(caseNumber) {
 			
+		
+		//This checks to see if we made it to prerate input screen
 		case 1:
 			try {
 					driver.findElement(elementNew);
@@ -823,27 +792,37 @@ public class prerateTestNG {
 				try {
 					driver.manage().timeouts().implicitlyWait(waitTimeShort,TimeUnit.SECONDS);
 					oldString=driver.findElement(elementOld).getText();
+					writeToExcel(rowNumber,1, oldString);
 					Assert.fail(oldString);
+				
 				}
 				catch(Exception e) {
 					System.out.println("Could not find prerate input page...");
+					writeToExcel(rowNumber,1, "Unknown Error... Could not find prerate input page or Not Eligible Shipment Error");
 					Assert.fail("Unknown Error... Could not find prerate input page or Not Eligible Shipment Error");
-				}
+					}
 			}
 			
 			
 		break;
 		
+		
+		
+		
+		
 		case 2:
-			try {
-				//driver.findElement(elementNew);
-				//Assert.assertTrue(driver.findElement(elementNew).getText().equals("Shipment Selection for Pre-Rate Entry"), "Made it back to prerate entry screen.");
+			try {	
 				if (driver.findElement(elementNew).getText().equals("Shipment Selection for Pre-Rate Entry")) {
+					/*
 					if (validateORE(trkngnbr)==true) {
 						Assert.assertTrue(true);
 					}
+					*/
+					writeToExcel(rowNumber,1, "Passed");
+					Assert.assertTrue(true);
 					skip=true;
 				}
+				
 			}
 			catch(Exception e) {
 				System.out.println("Could not go back to prerate entry screen...");
@@ -853,6 +832,7 @@ public class prerateTestNG {
 			try {
 				driver.manage().timeouts().implicitlyWait(waitTimeShort,TimeUnit.SECONDS);
 				oldString=driver.findElement(elementOld).getText();
+				writeToExcel(rowNumber,1, oldString);
 				Assert.fail(oldString);
 			}
 			catch(Exception e) {
@@ -864,9 +844,13 @@ public class prerateTestNG {
 		case 3:
 			try {
 				if (driver.findElement(elementNew).getText().equals("Shipment Selection for Pre-Rate Entry")) {
+					/*
 					if (validateORE(trkngnbr)==true) {
+						
 						Assert.assertTrue(true);
 					}
+					*/
+					Assert.assertTrue(true);
 					skip=true;
 			}
 			}
@@ -878,6 +862,7 @@ public class prerateTestNG {
 			try {
 				driver.manage().timeouts().implicitlyWait(waitTimeShort,TimeUnit.SECONDS);
 				oldString=driver.findElement(elementOld).getText();
+				writeToExcel(rowNumber,1, "Passed");
 				Assert.fail(oldString);
 			}
 			catch(Exception e) {
@@ -886,13 +871,15 @@ public class prerateTestNG {
 			}
 			break;
 		}
-			
+		case 4:
+			break;
 		
 			
 			
 			
 		}
 		  driver.manage().timeouts().implicitlyWait(waitTimeDefault,TimeUnit.SECONDS);
+		  return skip;
 		}
 	
  
