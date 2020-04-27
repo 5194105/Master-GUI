@@ -689,10 +689,17 @@ public class prerateTestNGSlow {
 					 return;
 				}
 				*/
-			Thread.sleep(10000);
-			wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]")), "Shipment Selection for Pre-Rate Entry"));
+			 Thread.sleep(10000);
+			
+			
+			 wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]")), "Shipment Selection for Pre-Rate Entry"));
+			 if (validateEC(trk)==true) {
 			 writeToExcel(rowNumber,1, "Passed");
 			 return;
+			 }
+			 else {
+				 System.out.println("Could not find in EC DB...");
+			 }
 		}
 		catch(Exception e) {
 				System.out.println("Did Not Find Prerate Home Page First Time Around");	
@@ -734,12 +741,13 @@ public class prerateTestNGSlow {
 		try{
 			Thread.sleep(10000);
 			wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]")), "Shipment Selection for Pre-Rate Entry"));
-			//webElementTemp=By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[2]/table/tbody/tr[1]/td[1]/span/span[1]/label");
-			//	webElementTemp=By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]");
-		//	if (driver.findElement(webElementTemp).getText().equals("Shipment Selection for Pre-Rate Entry")) {
+			 if (validateEC(trk)==true) {
 				 writeToExcel(rowNumber,1, "Passed");
 				 return;
-		//	}
+		}
+			 else {
+					 System.out.println("Could not find in EC DB...");
+				 }
 		}
 			catch(Exception e) {
 				System.out.println("Did not find homepage after trying to enable stat codes");	
@@ -920,19 +928,21 @@ public class prerateTestNGSlow {
 		}
 	
  
-public  Boolean validateORE(String trkngnbr){
+public  Boolean validateEC(String trkngnbr){
  Boolean result=null;
 	Connection con = null;
  if (level.equals("2")){
-        con=c.getOreL2DbConnection();
+       // con=c.getOreL2DbConnection();
+        con=c.getEcL2DbConnection();
  }
  else if  (level.equals("3")){
-	 con=c.getOreL2DbConnection();
+	// con=c.getOreL2DbConnection();
+	 con=c.getEcL2DbConnection();
 }
  PreparedStatement ps = null;
 try {
 	ps = con.prepareStatement(
-	         "select * from INTL_EXPRS_ONLN_SCHEMA.intl_package a join INTL_EXPRS_ONLN_SCHEMA.intl_package_event_history b on a.ONLN_PKG_ID =b.ONLN_PKG_ID where TRAN_NM ='PRUPD' and pkg_trkng_nbr=?");
+	         "select * from ec_intl_schema.ec_pre_rate_history where pkg_trkng_nbr in=?");
 } catch (SQLException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
@@ -956,7 +966,7 @@ try {
        try {
 		if (rs.next()==false){
 		      System.out.println("Is NULL");
-		result=false;   
+		      result=false;   
 		}
 		   else{
 		      System.out.println("IS NOT NULL");

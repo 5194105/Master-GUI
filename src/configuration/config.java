@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 public class config {
 	
-	Connection taa1Con,gtmRevToolsCon,ciCon,oreL2Con,oreL3Con;
+	Connection taa1Con,gtmRevToolsCon,ciCon,oreL2Con,oreL3Con,ecL2Con,ecL3Con;
 	String chromeSetProperty,ieSetProperty,chromePath,ieDriverPath;
 	WebDriver ieDriver,chromeDriver,tempWebDriver;
     String gtmDbName,gtmDbResults,gtmDbPassword,retryAttempts,secondTimeout,rebillL2URL,rebillL3URL;
@@ -517,6 +517,49 @@ public Connection getOreL3DbConnection() {
 
 	return oreL3Con;
 }
+
+
+
+public void setEcL2DbConnection() {
+	
+	try {
+		
+		
+		ecL2Con=DriverManager.getConnection("jdbc:oracle:thin:@//idb00271.ute.fedex.com:1526/IE2VD991","test_readonly", "perftest");
+			} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+}
+
+public Connection getEcL2DbConnection() {
+
+	return ecL2Con;
+}
+
+
+public void setEcL3DbConnection() {
+	
+	try {
+		
+		
+		ecL3Con=DriverManager.getConnection("jdbc:oracle:thin:@//sdb00299.ute.fedex.com:1526/PT1VD991","test_readonly", "perftest");
+		} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+}
+
+public Connection getEcL3DbConnection() {
+
+	return ecL3Con;
+}
+
+
+
+
 
 
 public void setLparDate(String lparDate) {
