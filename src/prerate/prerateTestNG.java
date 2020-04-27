@@ -146,7 +146,7 @@ public class prerateTestNG {
 	
 		
 		
-	String level="3";
+	String level="2";
 		
 		
 		
@@ -485,7 +485,7 @@ public class prerateTestNG {
         
     if (level.equals("2"))
 	{
-		levelUrl="https://testsso.secure.fedex.com/prerates-l2/";
+		levelUrl="https://testsso.secure.fedex.com/l2/prerates/";
 	}
 	else if (level.equals("3"))
 	{
