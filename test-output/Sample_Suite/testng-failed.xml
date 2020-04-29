@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Sample_Suite]">
-  <parameter name="startDateText" value="02/26/2020"/>
-  <parameter name="level" value="3"/>
-  <parameter name="filePathExcel" value="C:\Users\5194105\Documents\aaaaaareratetestng.xlsx"/>
-  <parameter name="endDateText" value="02/27/2020"/>
-  <parameter name="broswer" value="chrome"/>
-  <parameter name="compatibleMode" value=""/>
-  <test name="Rerate Test(failed)" parallel="methods">
+  <parameter name="compatibleModeParameter" value="false"/>
+  <parameter name="levelParameter" value="2"/>
+  <parameter name="filepathExcelParameter" value="C:\Users\FedExUser\Documents\PRERATE_UPDATE.xlsx"/>
+  <parameter name="broswerParameter" value="2"/>
+  <test name="Prerate Test(failed)" parallel="methods">
     <classes>
-      <class name="testng.testingonly">
+      <class name="prerate.prerateTestNGSlow">
         <methods>
-          <include name="testMethod3"/>
+          <include name="testMethod2" invocation-numbers="0"/>
+          <include name="testMethod1" invocation-numbers="0"/>
+          <include name="testMethod3" invocation-numbers="0"/>
+          <include name="testMethod4" invocation-numbers="0"/>
           <include name="setupExcel"/>
-          <include name="setupExcel"/>
-          <include name="setupExcel"/>
-          <include name="testMethod"/>
-          <include name="testMethod2"/>
         </methods>
-      </class> <!-- testng.testingonly -->
+      </class> <!-- prerate.prerateTestNGSlow -->
     </classes>
-  </test> <!-- Rerate Test(failed) -->
+  </test> <!-- Prerate Test(failed) -->
 </suite> <!-- Failed suite [Sample_Suite] -->

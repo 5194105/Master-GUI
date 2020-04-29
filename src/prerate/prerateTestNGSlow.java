@@ -2,6 +2,7 @@ package prerate;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,7 +37,7 @@ public class prerateTestNGSlow {
   
     //False = Running from xml only
 	//True = Running from GUI only
-	Boolean testingMode=false;
+	Boolean testingMode;
 	
 	
 	String tempFile,configFile;
@@ -106,11 +107,29 @@ public class prerateTestNGSlow {
 	String level;
 		
 
-	
+	/*
 	@BeforeClass
 	@Parameters({"filepathExcelParameter","levelParameter","broswerParameter","compatibleModeParameter"})
 	public void setupExcel(String filepathExcelParameter,String levelParameter,String broswerParameter,Boolean compatibleModeParameter) {
-        try {
+  */
+	
+	@BeforeClass
+	public void setupExcel() {
+		testingMode=true;
+		if (testingMode==true) {
+		c = new config();
+		c.setEcL2DbConnection();
+		c.setEcL3DbConnection();
+		}
+		
+		try {
+			Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -123,10 +142,12 @@ public class prerateTestNGSlow {
         	excelVar = new excel(homePath+"\\test data\\PRERATE_UPDATE.xlsx");
         }
         else {
+        	/*
         	excelVar = new excel(filepathExcelParameter);
         	browser=broswerParameter;
         	level=levelParameter;
         	compatibleMode=compatibleModeParameter;
+        	*/
         }
         
         
@@ -638,7 +659,19 @@ public class prerateTestNGSlow {
 			}
 		}
 		} catch(Exception e) {
-			System.out.println(e);
+			try{
+				String errorMessageDropdown;
+				By dropDownError;
+				dropDownError=By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[5]/td/span/div/div/table/tbody/tr/td/div/div/div/div[2]/table/tbody/tr/td[3]/div/span");
+				errorMessage=driver.findElement(dropDownError).getText();
+				writeToExcel(rowNumber,1, errorMessage);
+				Assert.fail(errorMessage);
+				}
+			catch(Exception ee) {
+				System.out.println("Didnt find error message from dropdown menu...");
+				
+			}
+			driver.findElement(By.xpath("//button[@id='preRateEntryForm:PreRateEntrySubmit_button']")).click();
 			writeToExcel(rowNumber,1, "Failed selecting dropdown menu...");
 			Assert.fail("Failed selecting dropdown menu...");
 		}
@@ -929,7 +962,7 @@ public class prerateTestNGSlow {
 	
  
 public  Boolean validateEC(String trkngnbr){
- Boolean result=null;
+	Boolean result=null;
 	Connection con = null;
  if (level.equals("2")){
        // con=c.getOreL2DbConnection();
@@ -942,7 +975,7 @@ public  Boolean validateEC(String trkngnbr){
  PreparedStatement ps = null;
 try {
 	ps = con.prepareStatement(
-	         "select * from ec_intl_schema.ec_pre_rate_history where pkg_trkng_nbr in=?");
+	         "select * from ec_intl_schema.ec_pre_rate_history where pkg_trkng_nbr =?");
 } catch (SQLException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();

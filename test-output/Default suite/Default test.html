@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/0/0</td>
 </tr><tr>
-<td>Started on:</td><td>Mon Apr 20 17:03:38 EDT 2020</td>
+<td>Started on:</td><td>Tue Apr 28 09:20:13 CDT 2020</td>
 </tr>
-<tr><td>Total time:</td><td>0 seconds (262 ms)</td>
+<tr><td>Total time:</td><td>0 seconds (203 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -75,15 +75,9 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='prerate.prerateTestNG.setupExcel()'><b>setupExcel</b><br>Test class: prerate.prerateTestNG</td>
-<td><div><pre>org.apache.poi.openxml4j.exceptions.NotOfficeXmlFileException: No valid entries or contents found, this is not a valid OOXML (Office Open XML) file
-	at org.apache.poi.openxml4j.opc.ZipPackage.getPartsImpl(ZipPackage.java:290)
-	at org.apache.poi.openxml4j.opc.OPCPackage.getParts(OPCPackage.java:774)
-	at org.apache.poi.openxml4j.opc.OPCPackage.open(OPCPackage.java:344)
-	at org.apache.poi.util.PackageHelper.open(PackageHelper.java:37)
-	at org.apache.poi.xssf.usermodel.XSSFWorkbook.&lt;init&gt;(XSSFWorkbook.java:285)
-	at configuration.excel.setUpExcelWorkbook(excel.java:55)
-	at prerate.prerateTestNG.setupExcel(prerateTestNG.java:172)
+<td title='prerate.prerateTestNGSlow.setupExcel()'><b>setupExcel</b><br>Test class: prerate.prerateTestNGSlow</td>
+<td><div><pre>java.lang.NullPointerException
+	at prerate.prerateTestNGSlow.setupExcel(prerateTestNGSlow.java:119)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -109,15 +103,9 @@ function toggleAllBoxes() {
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
-</pre></div><a href='#' onClick='toggleBox("stack-trace737945227", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace737945227'><pre>org.apache.poi.openxml4j.exceptions.NotOfficeXmlFileException: No valid entries or contents found, this is not a valid OOXML (Office Open XML) file
-	at org.apache.poi.openxml4j.opc.ZipPackage.getPartsImpl(ZipPackage.java:290)
-	at org.apache.poi.openxml4j.opc.OPCPackage.getParts(OPCPackage.java:774)
-	at org.apache.poi.openxml4j.opc.OPCPackage.open(OPCPackage.java:344)
-	at org.apache.poi.util.PackageHelper.open(PackageHelper.java:37)
-	at org.apache.poi.xssf.usermodel.XSSFWorkbook.&lt;init&gt;(XSSFWorkbook.java:285)
-	at configuration.excel.setUpExcelWorkbook(excel.java:55)
-	at prerate.prerateTestNG.setupExcel(prerateTestNG.java:172)
+</pre></div><a href='#' onClick='toggleBox("stack-trace19353935", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace19353935'><pre>java.lang.NullPointerException
+	at prerate.prerateTestNGSlow.setupExcel(prerateTestNGSlow.java:119)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
@@ -145,7 +133,7 @@ function toggleAllBoxes() {
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
 </pre></div></td>
 <td>0</td>
-<td>prerate.prerateTestNG@6f96c77</td></tr>
+<td>prerate.prerateTestNGSlow@1d48005</td></tr>
 </table><p>
 </body>
 </html>
