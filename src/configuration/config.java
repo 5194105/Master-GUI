@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 public class config {
 	
-	Connection taa1Con,gtmRevToolsCon,ciCon,oreL2Con,oreL3Con,ecL2Con,ecL3Con;
+	Connection taa1Con,gtmRevToolsCon,ciCon,oreL2Con,oreL3Con,ecL2Con,ecL3Con,eraL2Con,eraL3Con;
 	String chromeSetProperty,ieSetProperty,chromePath,ieDriverPath;
 	WebDriver ieDriver,chromeDriver,tempWebDriver;
     String gtmDbName,gtmDbResults,gtmDbPassword,retryAttempts,secondTimeout,rebillL2URL,rebillL3URL;
@@ -558,6 +558,24 @@ public Connection getEcL3DbConnection() {
 }
 
 
+
+public void setEraL2DbConnection() {
+	
+	try {
+		
+		
+		eraL2Con=DriverManager.getConnection("jdbc:oracle:thin:@//idb00270.ute.fedex.com:1526/IDB00270.ute.fedex.com","test_readonly", "perftest");
+		} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+}
+
+public Connection getEraL2DbConnection() {
+
+	return eraL2Con;
+}
 
 
 

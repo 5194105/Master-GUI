@@ -260,9 +260,9 @@ public class gui {
 			
 				
 				c.setDriverType("2");
-				c.setSource(false);
+				c.setSource("excel");
 				c.setExcelPath(homePath+"\\test data\\rebill.xlsx");
-				c.setLevel(true);
+				c.setLevel("2");
 				try {
 					rebillMain rebill = new rebillMain(c);
 				} catch (InterruptedException e) {

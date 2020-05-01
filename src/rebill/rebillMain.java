@@ -94,7 +94,7 @@ public class rebillMain {
         	resetCounters();
         	
         	//for (int i=0;i<arrayData.size();i++) {
-        	for (int i=0;i<50;i++) {
+        	for (int i=0;i<74;i++) {
         		resetCounters();
         		setUpNextTrackingNumber(i);
         		writeResults(i+1);
@@ -208,8 +208,8 @@ public class rebillMain {
                
             
            // tryToClickElement(driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a")),2,5);     
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoicegridDataCheckBox0\"]")));
-            driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a")).click();
+          //  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoicegridDataCheckBox0\"]")));
+          //  driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a")).click();
         	    
             tempElement=By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[1]/div[2]/div/div[1]/div/label");
             isElementVisible(tempElement,2);
@@ -274,7 +274,7 @@ public class rebillMain {
         public void clickStatCodeAll(int statCount) throws InterruptedException, SQLException, IOException{
         
         	stepThreeBoolean=true;
-        statCodeCount=0;
+        	statCodeCount=0;
              try {
                  Thread.sleep (1000);
                  js.executeScript("window.scrollTo(0,500)");
@@ -322,44 +322,60 @@ public class rebillMain {
             //For domestic.
             if (login.equals("5194105")){
                 switch (reasonCode){
+            
                     case "RRA" :
-                        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[2]")));
-                        driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[2]")).click();
+                    	//wait.until(ExpectedConditions.visibilityOfElementLocated(reasonCodeDropDown.selectByValue("RRA")));
+                    	reasonCodeDropDown.selectByValue("RRA - REBILL RECIP ACCT   ");
+                     //   wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[2]")));
+                     //   driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[2]")).click();
                         break;
                     case "RSA" :
-                        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[3]")));
-                        driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[3]")).click();
+                    	reasonCodeDropDown.selectByVisibleText("RSA - REBILL SHIPPER ACCT ");
+                     //   wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[3]")));
+                     //   driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[3]")).click();
                         break;
                     case "RTA" :
-                        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[4]")));
-                        driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[4]")).click();
-                        break;
+                    	reasonCodeDropDown.selectByValue("RTA - REBILL THIRD PARTY  ");
+                      //  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[4]")));
+                     //   driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[4]")).click();
+                    case "RBS" :  
+                    	reasonCodeDropDown.selectByValue("RBS - REBILL SAME ACCOUNT");
+                    	break;
                     }
                 }
             else {//*[@id="invoice-grid"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select
                  switch (reasonCode){
-                    case "RRA" :
-                        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[13]")));
-                        driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[18]")).click();
+                  
+                 
+                 case "RRA" :
+                	 reasonCodeDropDown.selectByValue("RRA - REBILL RECIP ACCT");
+                      //  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[13]")));
+                      //  driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[18]")).click();
                         break;
                     case "RSA" :
-                        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[17]")));
-                        driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[17]")).click();
+                    	reasonCodeDropDown.selectByValue("RSA - REBILL SHIPPER ACCT");
+                     //   wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[17]")));
+                     //   driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[17]")).click();
                         break;
                     case "RTA" :
-                        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[19]")));
-                        driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[19]")).click();
+                    	reasonCodeDropDown.selectByValue("RTA - S,R INCORRECT BILLING-REBILL TO 3RD PART");
+                      //  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[19]")));
+                      //  driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[19]")).click();
                         break;
                     case "KPR" :
-                        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[1]")));
-                        driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[1]")).click();
+                    	reasonCodeDropDown.selectByValue("KPR - MANIFEST KEYPUNCH ERROR-ACCT NO/BILL OPT");
+                    	//KPR - MANIFEST KEYPUNCH ERROR-ACCT NO/BILL OPT
+                    	//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[1]")));
+                        //driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[1]")).click();
                         break;
-                        
                     case "RSD" :
-                        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[20]")));
-                        driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[20]")).click();
+                    	reasonCodeDropDown.selectByValue("RRSD - SHIPPER DECLINES-BILL RECIPIENT 3RD PART");
+                       // wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[20]")));
+                      //  driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[20]")).click();
                         break;
-                        
+                    case "RBS" :  
+                    	reasonCodeDropDown.selectByValue("RBS - REBILL SAME ACCOUNT");
+                    	break;
                         ////*[@id="invoice-grid"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select
                         
                         
@@ -442,6 +458,7 @@ public class rebillMain {
         
         //This includes PRI, phone, etc
         public void getDetailScreen() throws InterruptedException, SQLException, IOException{
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
         	stepFiveBoolean=true;
         	try{
                 statCodeBoolean=false;
@@ -486,7 +503,9 @@ public class rebillMain {
             			rebillError=true;
             			errorMessage=tempError;
             		}
-            		 driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/div[3]/button[2]")).click();
+            		 
+            		 driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/button[1]")).click();
+            		 // driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/div[3]/button[2]")).click();
             		 System.out.println("Found Pop Up");
             		 break;
             	}
@@ -565,7 +584,7 @@ public class rebillMain {
             // Thread.sleep(2000);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")));
             System.out.println("REBILLED!!!!!");
-            //driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")).click();
+            driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")).click();
             //*[@id="invoice-grid"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]
             
 
@@ -586,7 +605,8 @@ public class rebillMain {
             	if (temp.indexOf("Click Rebill to continue")!=-1) {
             		   driver.findElement(By.xpath("/html/body/div[6]/div/div/div[2]/button[1]")).click();
             		   //CLICK REBILL
-
+            		   driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")).click();
+                       
             		}
             	}
             catch(Exception e1) {
@@ -646,10 +666,10 @@ public class rebillMain {
         	
         	
         	//Setting the URL
-        	if(c.getLevel()==false) {
+        	if(c.getLevel().equals("2")) {
         		url=c.getRebillL2URL();
         	}
-        	else if (c.getLevel()==true) {
+        	else if (c.getLevel().equals("3")) {
         		url=c.getRebillL3URL();
         		
         	}
@@ -658,7 +678,7 @@ public class rebillMain {
         	
         	
         	//Getting the source. Excel = false and Database=true. I set this in the GUI/Mouse CLass
-        	if(c.getSource()==false){
+        	if(c.getSource()=="excel"){
         		//Giving my excel path from GUI (path saved in config class... was passed through gui/mouse class)
         		e = new excel(c.getExcelPath());
         		//Creates a workbook.
@@ -788,8 +808,10 @@ public class rebillMain {
               
               //If no tracking number is left then program is completed.
               try{
+            	  System.out.println(arrayData.size());
+            	  System.out.println(trackingNumberCounter);
               trackingNumber=arrayData.get(trackingNumberCounter).getTrkngnbr();
-              if (trackingNumber.equals("") ||trackingNumber==null ){
+              if (trackingNumber.equals("") || trackingNumber==null ){
                   System.out.println("REACHED HERE TEJESH!!!!!!!!!!!!!!!");
                   JOptionPane.showMessageDialog(null, "Program Completed");
                   System.exit(0);
@@ -818,9 +840,23 @@ public class rebillMain {
               
              // System.exit();
               //If login has changed it will close browser and login with new id
+             
+              
+              
+              
+              try {
+             	 if(trackingNumberCounter>0) {
+             		 driver.quit();
+             	 }
+                
+ 				eraLogin();
+ 			} catch (InterruptedException e) {
+ 				// TODO Auto-generated catch block
+ 				e.printStackTrace();
+ 			}
               
 
-              
+              /*
               if (!tempLogin.equals(login)){
 
              
@@ -835,7 +871,7 @@ public class rebillMain {
 				e.printStackTrace();
 			}
               }
-              
+              */
             
               
               //This is for first trk
@@ -896,7 +932,7 @@ public class rebillMain {
     			rebillResultStatus="Pass";
     		}
     		
-    		if(c.getSource()==false){
+    		if(c.getSource().equals("excel")){
     			e.setCellData(x,0,rebillResultDesc+" "+errorMessage);
     			e.setCellData(x,1,rebillResultStatus);
     			e.saveAndClose();
