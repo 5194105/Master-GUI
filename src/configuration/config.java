@@ -524,7 +524,6 @@ public void setEcL2DbConnection() {
 	
 	try {
 		
-		
 		ecL2Con=DriverManager.getConnection("jdbc:oracle:thin:@//idb00271.ute.fedex.com:1526/IE2VD991","test_readonly", "perftest");
 			} catch (SQLException e) {
 		// TODO Auto-generated catch block
@@ -544,8 +543,8 @@ public void setEcL3DbConnection() {
 	try {
 		
 		
-		ecL3Con=DriverManager.getConnection("jdbc:oracle:thin:@//sdb00299.ute.fedex.com:1526/PT1VD991","test_readonly", "perftest");
-		} catch (SQLException e) {
+		ecL3Con=DriverManager.getConnection("jdbc:oracle:thin:@//sdb00299.ute.fedex.com:1526/SDB00299.ute.fedex.com","test_readonly", "perftest");
+			} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
