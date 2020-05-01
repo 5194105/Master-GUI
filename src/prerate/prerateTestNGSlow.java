@@ -37,7 +37,7 @@ public class prerateTestNGSlow {
   
     //False = Running from xml only
 	//True = Running from GUI only
-	Boolean testingMode;
+	Boolean testingMode,homeComputer;
 	
 	
 	String tempFile,configFile;
@@ -116,6 +116,7 @@ public class prerateTestNGSlow {
 	@BeforeClass
 	public void setupExcel() {
 		testingMode=true;
+		homeComputer=false;
 		if (testingMode==true) {
 		c = new config();
 		c.setEcL2DbConnection();
@@ -610,6 +611,7 @@ public class prerateTestNGSlow {
 			driver.findElement(By.xpath("//button[@id='preRateEntrySelForm:search_button']")).click();
     		}
     	catch(Exception e){
+    		
     		System.out.println("Failed on Home Page");
     		System.out.println(e);
     		Assert.fail("Failed on Home Page");
@@ -673,6 +675,10 @@ public class prerateTestNGSlow {
 			}
 			driver.findElement(By.xpath("//button[@id='preRateEntryForm:PreRateEntrySubmit_button']")).click();
 			writeToExcel(rowNumber,1, "Failed selecting dropdown menu...");
+			 if (validateEC(trk)==true && homeComputer==false) {
+				 writeToExcel(rowNumber,1, "Passed");
+				 return;
+			 }
 			Assert.fail("Failed selecting dropdown menu...");
 		}
 		
@@ -708,6 +714,10 @@ public class prerateTestNGSlow {
 		
 		}
 		catch(Exception e) {
+			 if (validateEC(trk)==true && homeComputer==false) {
+				 writeToExcel(rowNumber,1, "Passed");
+				 return;
+			 }
 			 writeToExcel(rowNumber,1, "Failed on the input menu...");
 			 Assert.fail("Failed on the input menu...");
 		}
@@ -754,6 +764,10 @@ public class prerateTestNGSlow {
 					driver.findElements(By.xpath("//input[@type='checkbox']")).get(k).click();
 				}
 				else {
+					 if (validateEC(trk)==true && homeComputer==false) {
+						 writeToExcel(rowNumber,1, "Passed");
+						 return;
+					 }
 					writeToExcel(rowNumber,1, "Override Disabled.");
 					Assert.fail("Override Disabled.");
 					break;
@@ -794,6 +808,10 @@ public class prerateTestNGSlow {
 		try{
 			webElementTemp=By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[6]/td/table/tbody/tr[2]/td/span/span/span/span[2]");
 			errorMessage=driver.findElement(webElementTemp).getText();
+			 if (validateEC(trk)==true && homeComputer==false) {
+				 writeToExcel(rowNumber,1, "Passed");
+				 return;
+			 }
 			writeToExcel(rowNumber,1, errorMessage);
 			Assert.fail(errorMessage);
 
@@ -810,6 +828,10 @@ public class prerateTestNGSlow {
 		try{
 			webElementTemp=By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[4]/td/span/div/div[1]/div[2]/div/table[2]/tbody/tr/td/span/span/span/span[2]");
 			errorMessage=driver.findElement(webElementTemp).getText();
+			 if (validateEC(trk)==true && homeComputer==false) {
+				 writeToExcel(rowNumber,1, "Passed");
+				 return;
+			 }
 			writeToExcel(rowNumber,1, errorMessage);
 			Assert.fail(errorMessage);
 		}
@@ -822,6 +844,10 @@ public class prerateTestNGSlow {
 		
 		try {
 			//Actually Should not reach here.
+			 if (validateEC(trk)==true && homeComputer==false) {
+				 writeToExcel(rowNumber,1, "Passed");
+				 return;
+			 }
 			writeToExcel(rowNumber,1,"Failed Somewhere... No Error Found Tho");
 			Assert.fail("No Error Found, but still failed");
 		
