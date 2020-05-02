@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite thread-count="4" guice-stage="DEVELOPMENT" name="Failed suite [Suite]" parallel="methods">
-  <test name="Test(failed)" parallel="methods">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
     <classes>
-      <class name="prerate.prerateTestNGSlow">
+      <class name="rebill.testngRebillSlow">
         <methods>
-          <include name="testMethod2" invocation-numbers="0 1"/>
-          <include name="testMethod1" invocation-numbers="0 1"/>
-          <include name="testMethod3" invocation-numbers="0 1"/>
-          <include name="testMethod4" invocation-numbers="0"/>
+          <include name="testMethod1"/>
+          <include name="testMethod2"/>
+          <include name="testMethod4"/>
           <include name="setupExcel"/>
+          <include name="testMethod3"/>
         </methods>
-      </class> <!-- prerate.prerateTestNGSlow -->
+      </class> <!-- rebill.testngRebillSlow -->
     </classes>
-  </test> <!-- Test(failed) -->
-</suite> <!-- Failed suite [Suite] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

@@ -3,15 +3,15 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="prerate.prerateTestNGSlow">
+      <class name="rebill.testngRebillSlow">
         <methods>
-          <include name="testMethod2" invocation-numbers="0"/>
-          <include name="testMethod1" invocation-numbers="0"/>
-          <include name="testMethod3" invocation-numbers="0"/>
-          <include name="testMethod4" invocation-numbers="0"/>
+          <include name="testMethod1"/>
+          <include name="testMethod2"/>
+          <include name="testMethod4"/>
           <include name="setupExcel"/>
+          <include name="testMethod3"/>
         </methods>
-      </class> <!-- prerate.prerateTestNGSlow -->
+      </class> <!-- rebill.testngRebillSlow -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
