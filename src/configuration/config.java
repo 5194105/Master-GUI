@@ -524,8 +524,15 @@ public void setEcL2DbConnection() {
 	
 	try {
 		
-		ecL2Con=DriverManager.getConnection("jdbc:oracle:thin:@//idb00271.ute.fedex.com:1526/IE2VD991","test_readonly", "perftest");
-			} catch (SQLException e) {
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		eraL2Con=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/INVADJ_SVC_INT,cn=OracleContext,dc=ute,dc=fedex,dc=com","INVADJ_APP","apppwdli");
+			
+	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
@@ -574,6 +581,25 @@ public void setEraL2DbConnection() {
 public Connection getEraL2DbConnection() {
 
 	return eraL2Con;
+}
+
+
+public void setEraL3DbConnection() {
+	
+	try {
+		
+		
+		eraL3Con=DriverManager.getConnection("jdbc:oracle:thin:@//idb00270.ute.fedex.com:1526/IDB00270.ute.fedex.com","test_readonly", "perftest");
+		} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+}
+
+public Connection getEraL3DbConnection() {
+
+	return eraL3Con;
 }
 
 

@@ -11,8 +11,12 @@ public class Highest {
 
 	 
 	static config c = new config();
+	static String level="2";
     public static void main(String[] args) {
-        /*
+     
+    	
+    }
+    	/*
     	try {
     		Runtime.getRuntime().exec("taskkill /F /IM Google Chrome.exe");
     	    String line;
@@ -35,15 +39,21 @@ public class Highest {
     }
 */
     	
-    	
+    public static Object[] validateResults(String trkngnbr) {
     	
     	    	Boolean result=null;
     	    	Connection con = null;
+    	    	Object[] resultArray = new Object[2];
     	    	
     	    	try {
     	    	
-    	    	
-    	    		 con=c.getEraL2DbConnection();
+    	    		if (level.equals("2")){
+    	       		 
+    	       		 con=c.getEraL2DbConnection();
+    	       	 }
+    	       	 else if (level.equals("3")){
+    	       		 con=c.getEraL3DbConnection();
+    	       	 	}
     	    	
     	    	}
     	    	catch(Exception e) {
@@ -52,25 +62,21 @@ public class Highest {
     	    	}
     	    	
 
-    	    	PreparedStatement ps = null;
+    	    	PreparedStatement stmt = null;
+    	    	ResultSet rs = null;
     	    	try {
     	    		
-    	    		ps = con.prepareStatement(
-    	    		         "select STATUS_DESC,ERROR_DESC from invadj_schema.rdt_rebill_request where airbill_nbr =?");
+    	    		stmt=con.prepareStatement("select * from invadj_schema.rdt_rebill_request where airbill_nbr=?");  
+    				stmt.setString(1,"794820100904");  
+    				rs = stmt.executeQuery();
     	    	} catch (SQLException e) {
     	    		// TODO Auto-generated catch block
     	    		e.printStackTrace();
     	    	}
     	    	      
-    	    	       try {
-    	    			ps.setString(1,"794820100904");
-    	    		} catch (SQLException e) {
-    	    			// TODO Auto-generated catch block
-    	    			e.printStackTrace();
-    	    		}
-    	    	       ResultSet rs = null;
+    	    	   
     	    		try {
-    	    			rs = ps.executeQuery();
+    	    			rs = stmt.executeQuery();
     	    		} catch (SQLException e) {
     	    			// TODO Auto-generated catch block
     	    			e.printStackTrace();
@@ -78,21 +84,30 @@ public class Highest {
     	    	       try {
     	    			if (rs.next()==false){
     	    			      System.out.println("Is NULL");
-    	    			      result=false;   
+    	    			      resultArray[0]="fail";
+    	    			      resultArray[1]="Not In ERA Database";
     	    			}
     	    			   else{
     	    				    String statusDesc = rs.getString("STATUS_DESC");
-    	    	                String errorDesc = rs.getString("ERROR_DESC");
-    	    	                
+    	    	                String errorDesc = rs.getString("ERROR_DESC"); 	    	                
     	    	                System.out.println(statusDesc +"    "+errorDesc);
+    	    	              
+    	    	              if (statusDesc.equals("SUCCESS")) {
+	      	    			      resultArray[0]="pass";
+	      	    			      resultArray[1]="completed";
+    	    	              }
+    	    	              else {
+	      	    			      resultArray[0]="fail";
+	      	    			      resultArray[1]=errorDesc;
+    	    	              }
     	    			   }
     	    		} catch (SQLException e) {
     	    			// TODO Auto-generated catch block
     	    			e.printStackTrace();
     	    		}
-    	    	       
-    	    	    
-}
+    	    	 return resultArray;      
+    }    
+
 }
  
 

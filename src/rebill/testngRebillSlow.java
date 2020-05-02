@@ -24,6 +24,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
@@ -38,7 +39,7 @@ public class testngRebillSlow {
 	
     //False = Running from xml only
 	//True = Running from GUI only
-	Boolean testingMode=false;
+	Boolean testingMode=true;
 	
 	
 	String tempFile,configFile;
@@ -110,9 +111,13 @@ public class testngRebillSlow {
 	
 	
 	@BeforeClass
-	@Parameters({"filepathExcelParameter","levelParameter","broswerParameter","compatibleModeParameter"})
-	public void setupExcel(String filepathExcelParameter,String levelParameter,String broswerParameter,Boolean compatibleModeParameter) {
-        try {
+	//@Parameters({"filepathExcelParameter","levelParameter","broswerParameter","compatibleModeParameter"})
+	//public void setupExcel(String filepathExcelParameter,String levelParameter,String broswerParameter,Boolean compatibleModeParameter) {
+	public void setupExcel() {
+	       
+		
+				
+		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -120,15 +125,18 @@ public class testngRebillSlow {
 		}
         
         if (testingMode==true){
+        	c=new config();
         	browser="2";
         	level="2";
         	excelVar = new excel(homePath+"\\test data\\rebill.xlsx");
         }
         else {
+        	/* ENABLE IF TESTING IS OFF!!!!!!!!
         	excelVar = new excel(filepathExcelParameter);
         	browser=broswerParameter;
         	level=levelParameter;
         	compatibleMode=compatibleModeParameter;
+        	*/
         }
         
         
@@ -138,10 +146,11 @@ public class testngRebillSlow {
     	
     	excelVar.setUpExcelWorkbook();
     	excelVar.setUpExcelSheet(0);
-    	excelVar.setRowCountAutomatically(0);
-    	excelVar.setColCountAutomatically(2);
+    	excelVar.setRowCountAutomatically(2);
+    	excelVar.setColCountAutomatically(0);
     	rowCount=excelVar.getRowCount();
     	colCount=excelVar.getColCount()+1;
+    	
     	total= rowCount/4;
     	totalMod=rowCount%4;
     	totalRows1=total;
@@ -170,11 +179,12 @@ public class testngRebillSlow {
         if (level.equals("2"))
     	{
     		levelUrl="https://testsso.secure.fedex.com/L2/eRA/index.html";
+    		c.setEraL2DbConnection();
     	}
     	else if (level.equals("3"))
     	{
     		levelUrl="https://testsso.secure.fedex.com/L3/eRA/index.html";
-    		//levelUrl="https://testsso.secure.fedex.com/l3/prerates";
+    		c.setEraL3DbConnection();
     	}
             
     	
@@ -284,6 +294,17 @@ public class testngRebillSlow {
     
     @Test(dataProvider="data-provider1")
     public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber) {
+     
+    	System.out.println("Instance: 1");
+    	//Will Check if Trk is already successful;
+  	  String[] resultArray = validateResults(trk);
+  	  if ( resultArray[0].equals("pass")){
+       	 
+       	 writeToExcel(rowNumber, 0,"pass");
+       	 writeToExcel(rowNumber, 1,"completed");
+       	 return;
+        }
+    	
     	try { 
     		driver1.quit();
 	  }
@@ -327,7 +348,17 @@ public class testngRebillSlow {
    
     @Test(dataProvider="data-provider2")
     public void testMethod2( String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber) {
-   
+     
+    	System.out.println("Instance: 2");
+    	//Will Check if Trk is already successful;
+  	  String[] resultArray = validateResults(trk);
+  	  if ( resultArray[0].equals("pass")){
+       	 
+       	 writeToExcel(rowNumber, 0,"pass");
+       	 writeToExcel(rowNumber, 1,"completed");
+       	 return;
+        }
+  	  
     	try { 
     		driver2.quit();
 	  }
@@ -366,7 +397,16 @@ public class testngRebillSlow {
     }
     @Test(dataProvider="data-provider3")
     public void testMethod3( String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber) {
-   
+    	System.out.println("Instance: 3");
+    	
+    	//Will Check if Trk is already successful;
+  	  String[] resultArray = validateResults(trk);
+  	  if ( resultArray[0].equals("pass")){
+       	 
+       	 writeToExcel(rowNumber, 0,"pass");
+       	 writeToExcel(rowNumber, 1,"completed");
+       	 return;
+        }
     	try { 
     		driver3.quit();
 	  }
@@ -411,7 +451,15 @@ public class testngRebillSlow {
     
     @Test(dataProvider="data-provider4")
     public void testMethod4(String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber) {
-  
+    	System.out.println("Instance: 4");
+    	//Will Check if Trk is already successful;
+    	  String[] resultArray = validateResults(trk);
+    	  if ( resultArray[0].equals("pass")){
+         	 
+         	 writeToExcel(rowNumber, 0,"pass");
+         	 writeToExcel(rowNumber, 1,"completed");
+         	 return;
+          }
     	try { 
     		driver4.quit();
 	  }
@@ -453,14 +501,19 @@ public class testngRebillSlow {
     
     public void login(WebDriver driver,WebDriverWait wait,String login,String password) {
     	
-	    driver.get(levelUrl);
-	    driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-		wait = new WebDriverWait(driver,10);
-		driver.manage().window().maximize();
-		driver.findElement(By.id("username")).sendKeys(login);
-		driver.findElement(By.id("password")).sendKeys(password);
-		driver.findElement(By.id("submit")).click();
-    	
+    	try {
+		    driver.get(levelUrl);
+		    driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+			wait = new WebDriverWait(driver,10);
+			driver.manage().window().maximize();
+			driver.findElement(By.id("username")).sendKeys(login);
+			driver.findElement(By.id("password")).sendKeys(password);
+			driver.findElement(By.id("submit")).click();
+    	}
+    	catch(Exception e) {
+    		
+    		 Assert.fail("Could Not Login");
+    	}
     }
     
     
@@ -489,6 +542,7 @@ public class testngRebillSlow {
     	} 
     	catch(Exception e) {
     		System.out.println("Failed on Entering Tracking Number");
+    		 Assert.fail("Failed on Entering Tracking Number");
     		
     	}
     	
@@ -511,7 +565,7 @@ public class testngRebillSlow {
     		driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a")).click();
 
     }	catch(Exception e) {
-			System.out.println("Found Popup and clicked OK..");
+        Assert.fail("Could Not Find Popup Or COntinue to Package Screen");
 		
 	}
     	
@@ -555,6 +609,7 @@ public class testngRebillSlow {
         catch(Exception e){
         	 System.out.println("Could Not Clicked All Stat Codes");
             System.out.println(e);
+            Assert.fail("Could Not Clicked All Stat Codes");
 
         }
     	
@@ -637,6 +692,7 @@ public class testngRebillSlow {
       catch(Exception e) {
     	  
     	  System.out.println("Failed at Drop Down");
+    	  Assert.fail("Failed at Drop Down");
       }
    
          
@@ -675,6 +731,7 @@ public class testngRebillSlow {
          	}
          	catch(Exception e2) {
          		System.out.println("Could Not find Popup"+e2);
+         		 Assert.fail(e2 +" Could Not find Popup");
          	}
          		 
          		 
@@ -717,6 +774,7 @@ public class testngRebillSlow {
          	   				}
          	   				catch(Exception ee) {
          	   					System.out.println(ee+"Could Not Get to Rebill Screen");
+         	   				 Assert.fail(ee+" Could Not Get to Rebill Screen");
          	   				}
          	   			}
          	   		
@@ -770,7 +828,7 @@ public class testngRebillSlow {
              	}
              	catch(Exception e) {
              		System.out.println("Failed Trying to Rebill..");
-             		
+             		 Assert.fail("Failed Trying to Rebill..");
              	}
 
             
@@ -780,10 +838,23 @@ public class testngRebillSlow {
              }
              catch (Exception e) {
             	 System.out.println("Failed Validating in DB");
+            	 Assert.fail("Failed Validating in DB");
              }
             
              //If False.. think maybe there is stat codes to select.
-             if (validated==false) {
+            
+             String[] resultArray = validateResults(trk);
+             
+             
+             
+             if ( resultArray[0].equals("pass")){
+            	 
+            	 writeToExcel(rowNumber, 0,"pass");
+            	 writeToExcel(rowNumber, 1,"completed");
+            	 return;
+            	 
+             }
+             if (resultArray[0].equals("fail")) {
             	 try {
             		 //Sometimes just needs to click continue to rebill
             		String tempString =  driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/h4")).getText();
@@ -824,28 +895,48 @@ public class testngRebillSlow {
             
             catch(Exception e2) {
             	System.out.println("Did not reach override errors or failed here");
+            	 Assert.fail("Faled At Last Rebill Screen: Did not reach override errors or failed here");
             }
             	 
             	 //Check For Validation again and save result.
-            	 
+            	  resultArray = validateResults(trk);
+            	  if ( resultArray[0].equals("pass")){
+                 	 
+                 	 writeToExcel(rowNumber, 0,"pass");
+                 	 writeToExcel(rowNumber, 1,"completed");
+                 	 
+                  }
+                  if (resultArray[1].equals("fail")) {
+                	  writeToExcel(rowNumber, 0,"fail");
+                  	  writeToExcel(rowNumber, 1,resultArray[1]);
+                  	  Assert.fail("Faled At Last Rebill Screen: "+resultArray[1]);
+                	  
+                  }
           }
+             
+             
         }
     }
     
     
     
     
-    public Boolean validateResults(String trkngnbr) {
+    public String[] validateResults(String trk) {
+    	
     	Boolean result=null;
     	Connection con = null;
+    	String[] resultArray = new String[2];
+    	
     	try {
     	
-    	 if (level.equals("2")){
-    		 con=c.getEraL2DbConnection();
-    	 }
-    	 else if (level.equals("3")){
-    		 con=c.getEraL2DbConnection();
-    	 	}
+    		if (level.equals("2")){
+       		 
+       		 con=c.getEraL2DbConnection();
+       	 }
+       	 else if (level.equals("3")){
+       		 con=c.getEraL3DbConnection();
+       	 	}
+    	
     	}
     	catch(Exception e) {
     		
@@ -853,25 +944,21 @@ public class testngRebillSlow {
     	}
     	
 
-    	PreparedStatement ps = null;
+    	PreparedStatement stmt = null;
+    	ResultSet rs = null;
     	try {
     		
-    		ps = con.prepareStatement(
-    		         "select STATUS_DESC,ERROR_DESC from invadj_schema.rdt_rebill_request where airbill_nbr =?");
+    		stmt=con.prepareStatement("select * from invadj_schema.rdt_rebill_request where airbill_nbr=?");  
+			stmt.setString(1,trk);  
+			rs = stmt.executeQuery();
     	} catch (SQLException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
     	}
     	      
-    	       try {
-    			ps.setString(1,trkngnbr);
-    		} catch (SQLException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    		}
-    	       ResultSet rs = null;
+    	   
     		try {
-    			rs = ps.executeQuery();
+    			rs = stmt.executeQuery();
     		} catch (SQLException e) {
     			// TODO Auto-generated catch block
     			e.printStackTrace();
@@ -879,20 +966,35 @@ public class testngRebillSlow {
     	       try {
     			if (rs.next()==false){
     			      System.out.println("Is NULL");
-    			      result=false;   
+    			      resultArray[0]="fail";
+    			      resultArray[1]="Not In ERA Database";
     			}
     			   else{
-    			      System.out.println("IS NOT NULL");
-    			      result=true;
+    				    String statusDesc = rs.getString("STATUS_DESC");
+    	                String errorDesc = rs.getString("ERROR_DESC"); 	    	                
+    	                System.out.println(statusDesc +"    "+errorDesc);
+    	              
+    	              if (statusDesc.equals("SUCCESS")) {
+  	    			      resultArray[0]="pass";
+  	    			      resultArray[1]="completed";
+    	              }
+    	              else {
+  	    			      resultArray[0]="fail";
+  	    			      resultArray[1]=errorDesc;
+    	              }
     			   }
     		} catch (SQLException e) {
     			// TODO Auto-generated catch block
     			e.printStackTrace();
     		}
-    	       
-    	       return result;
-    	}
-
+    	 return resultArray;      
+}    
+    
+public synchronized void writeToExcel(int rowCountExcel,int colCountExcel,String outputString){
+		
+		excelVar.setCellData(rowCountExcel, colCountExcel, outputString);
+		excelVar.writeCellData();
+	}
     }
     
 
