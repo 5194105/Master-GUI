@@ -2,7 +2,9 @@ package rebill;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,7 +42,7 @@ public class testngRebillSlow {
     //False = Running from xml only
 	//True = Running from GUI only
 	Boolean testingMode=true;
-	
+	Boolean uploadTrkToDB=true;
 	
 	String tempFile,configFile;
 	excel excelVar;
@@ -114,7 +116,13 @@ public class testngRebillSlow {
 	//@Parameters({"filepathExcelParameter","levelParameter","broswerParameter","compatibleModeParameter"})
 	//public void setupExcel(String filepathExcelParameter,String levelParameter,String broswerParameter,Boolean compatibleModeParameter) {
 	public void setupExcel() {
-	       
+	
+		try {
+			Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 				
 		try {
@@ -186,7 +194,7 @@ public class testngRebillSlow {
     		levelUrl="https://testsso.secure.fedex.com/L3/eRA/index.html";
     		c.setEraL3DbConnection();
     	}
-            
+       
     	
 	}
 	
@@ -292,7 +300,7 @@ public class testngRebillSlow {
     
     
     
-    @Test(dataProvider="data-provider1")
+    @Test(dataProvider="data-provider1",retryAnalyzer = Retry.class)
     public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber) {
      
     	System.out.println("Instance: 1");
@@ -329,7 +337,7 @@ public class testngRebillSlow {
     		System.setProperty(chromeSetProperty,chromePath);
     		driver1 = new ChromeDriver();
     	}
-    	
+    	wait1 = new WebDriverWait(driver1,20);
 	    login(driver1,wait1,login,password);
 	  
 	    try {
@@ -346,7 +354,7 @@ public class testngRebillSlow {
     
     }
    
-    @Test(dataProvider="data-provider2")
+    @Test(dataProvider="data-provider2",retryAnalyzer = Retry.class)
     public void testMethod2( String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber) {
      
     	System.out.println("Instance: 2");
@@ -384,7 +392,8 @@ public class testngRebillSlow {
     		System.setProperty(chromeSetProperty,chromePath);
     		driver2 = new ChromeDriver();
     	}
-	    login(driver2,wait2,login,password);
+    	 wait2 = new WebDriverWait(driver2,20);
+    	login(driver2,wait2,login,password);
 	    try {
 	    	doRebill(driver2,wait2, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber,2);
 		} catch (InterruptedException e) {
@@ -395,7 +404,7 @@ public class testngRebillSlow {
     
     
     }
-    @Test(dataProvider="data-provider3")
+    @Test(dataProvider="data-provider3",retryAnalyzer = Retry.class)
     public void testMethod3( String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber) {
     	System.out.println("Instance: 3");
     	
@@ -433,7 +442,7 @@ public class testngRebillSlow {
     		driver3 = new ChromeDriver();
     	}
     	
-    	
+    	 wait3 = new WebDriverWait(driver3,20);
     login(driver3,wait3,login,password);
     try {
     	doRebill(driver3,wait3, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber,3);
@@ -449,7 +458,7 @@ public class testngRebillSlow {
     
     
     
-    @Test(dataProvider="data-provider4")
+    @Test(dataProvider="data-provider4",retryAnalyzer = Retry.class)
     public void testMethod4(String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber) {
     	System.out.println("Instance: 4");
     	//Will Check if Trk is already successful;
@@ -486,7 +495,7 @@ public class testngRebillSlow {
     		driver4 = new ChromeDriver();
     	}
     	
-    	
+    	 wait4 = new WebDriverWait(driver4,20);
     login(driver4,wait4,login,password);
     try {
     	doRebill(driver4,wait4, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber,4);
@@ -519,11 +528,16 @@ public class testngRebillSlow {
     
     public void doRebill(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber, int instanceNumber) throws InterruptedException {
     
-    	JavascriptExecutor js = null;
+    	JavascriptExecutor js= (JavascriptExecutor) driver;
     	By tempElement;
     	int packageCounter=0;
     	Boolean exist;
-    	 WebElement scrollElement;
+    	WebElement scrollElement;
+    	Boolean packageTab=false;
+    	wait=new WebDriverWait(driver,20);
+    	driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+
+    	
     	
     	try {
     	//In order for clear button to be clickable need to scroll up
@@ -548,7 +562,14 @@ public class testngRebillSlow {
     	
     	//Try to Click Package Tab
     	try {  
-    		driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a")).click();
+    		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div/div/div/div/div[2]/div")));
+    	//	/html/body/div[2]/div/div/div/div/div[1]/div[1]/div/div[2]/form/div[1]/div[1]/div/div[2]/div/input
+    		//WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a")));
+        	//element.click();
+    		WebElement element =driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a"));
+    		js.executeScript("arguments[0].click()", element);
+    		packageTab=true;
+        	//driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a")).click();
     	}
     	catch(Exception e) {
     		System.out.println("Could Not Find PopUp..");
@@ -556,17 +577,21 @@ public class testngRebillSlow {
     	}
     	
     	//Trying to find popup
+    	if (packageTab==false) {
     	try {  
     		driver.findElement(By.xpath(" /html[1]/body[1]/div[6]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]/div[2]/div[1]/div[1]/input[1]")).sendKeys(invoiceNbr1);
     		Thread.sleep(1000);
     		driver.findElement(By.xpath("/html[1]/body[1]/div[6]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]")).click();
     		driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/button[1]")).click();
     		System.out.println("Found Pop Up");
-    		driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a")).click();
+    		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div/div/div/div/div[2]/div")));
+        		WebElement element =driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a"));
+        		js.executeScript("arguments[0].click()", element);
+        	
 
     }	catch(Exception e) {
         Assert.fail("Could Not Find Popup Or COntinue to Package Screen");
-		
+    	}
 	}
     	
     	
@@ -575,11 +600,11 @@ public class testngRebillSlow {
     	try{
     		packageCounter=0;
                 while(true){
-                  
+                	driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
                 	exist= driver.findElement(By.xpath("//*[@id=\"packageLevelServicegridCheckBox"+packageCounter+"\"]")).isDisplayed();
                 	packageCounter++;
                     System.out.println("packageCounter "+packageCounter);
-                    Thread.sleep (500);
+                    
                 }
             }
             catch(NoSuchElementException e){
@@ -595,13 +620,12 @@ public class testngRebillSlow {
     	
     	//Click on all Charge Codes
     	 try {
-             Thread.sleep (1000);
+    		 driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
              js.executeScript("window.scrollTo(0,500)");
              scrollElement =  driver.findElement(By.xpath("//*[@id=\"packageLevelServicegridCheckBox"+(packageCounter-1)+"\"]"));
              js.executeScript("arguments[0].scrollIntoView();", scrollElement);
-             Thread.sleep (1000);
              driver.findElement(By.xpath("//*[@id=\"packageLevelServicegridCheckBox"+(packageCounter-1)+"\"]")).click();
-             Thread.sleep (1500);
+
             
             
             System.out.println("Clicked All Stat Codes");
@@ -639,23 +663,42 @@ public class testngRebillSlow {
 	         //Setting up the reasonCode Dropdown.
 	         Select  reasonCodeDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select")));
 	       
+	         /*******************************************************/
+	         List<WebElement> options = driver.findElements(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select"));
+	    	 int counter=0;
+	         for (WebElement option : options) {
+	        	 
+	    		 System.out.println(counter +":" +option.getText());
+	    		 counter++;
+	             }
+	       
+	         
+	         /***************************************************************************/
+	         
 	         //For domestic.
 	         if (login.equals("5194105")){
 	             switch (reasonCode){
          
                  case "RRA" :
-                 	reasonCodeDropDown.selectByValue("RRA - REBILL RECIP ACCT   ");
-                    //driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[2]")).click();
+                	
+                 	//reasonCodeDropDown.selectByValue("RRA - REBILL RECIP ACCT   ");
+                 								
+                    driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[2]")).click();
                      break;
                  case "RSA" :
-                 	reasonCodeDropDown.selectByVisibleText("RSA - REBILL SHIPPER ACCT ");
-                    //driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[3]")).click();
+                
+        	        
+                 //	reasonCodeDropDown.selectByVisibleText("RSA - REBILL SHIPPER ACCT ");
+                    driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[3]")).click();
                      break;
                  case "RTA" :
-                 	reasonCodeDropDown.selectByValue("RTA - REBILL THIRD PARTY  ");
-                     //driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[4]")).click();
+                
+                 //	reasonCodeDropDown.selectByValue("RTA - REBILL THIRD PARTY  ");
+                     driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[4]")).click();
+                	 break;
                  case "RBS" :  
-                 	reasonCodeDropDown.selectByValue("RBS - REBILL SAME ACCOUNT");
+                
+                 //	reasonCodeDropDown.selectByValue("RBS - REBILL SAME ACCOUNT");
                  	break;
                  }
              }
@@ -663,27 +706,30 @@ public class testngRebillSlow {
               switch (reasonCode){
                
               	case "RRA" :
-              		reasonCodeDropDown.selectByValue("RRA - REBILL RECIP ACCT");
-                    //driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[18]")).click();
+              		//reasonCodeDropDown.selectByValue("RRA - REBILL RECIP ACCT");
+                         		
+              			driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[15]")).click();
                      break;
                  case "RSA" :
-                 	reasonCodeDropDown.selectByValue("RSA - REBILL SHIPPER ACCT");
-                 	//driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[17]")).click();
+                 //	reasonCodeDropDown.selectByValue("RSA - REBILL SHIPPER ACCT");
+                 	driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[17]")).click();
                      break;
                  case "RTA" :
-                 	reasonCodeDropDown.selectByValue("RTA - S,R INCORRECT BILLING-REBILL TO 3RD PART");
-                 	//driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[19]")).click();
+                 //	reasonCodeDropDown.selectByValue("RTA - S,R INCORRECT BILLING-REBILL TO 3RD PART");
+                 	driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[21]")).click();
                      break;
                  case "KPR" :
-                 	reasonCodeDropDown.selectByValue("KPR - MANIFEST KEYPUNCH ERROR-ACCT NO/BILL OPT");
-                    //driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[1]")).click();
+                 //	reasonCodeDropDown.selectByValue("KPR - MANIFEST KEYPUNCH ERROR-ACCT NO/BILL OPT");
+                    //driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[21]")).click();
                      break;
                  case "RSD" :
-                 	reasonCodeDropDown.selectByValue("RRSD - SHIPPER DECLINES-BILL RECIPIENT 3RD PART");
-                    //driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[20]")).click();
+                 //	reasonCodeDropDown.selectByValue("RRSD - SHIPPER DECLINES-BILL RECIPIENT 3RD PART");
+                    driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[18]")).click();
                      break;
                  case "RBS" :  
-                 	reasonCodeDropDown.selectByValue("RBS - REBILL SAME ACCOUNT");
+                // 	reasonCodeDropDown.selectByValue("RBS - REBILL SAME ACCOUNT");
+                 	  driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[6]")).click();
+                    								  
                  	break;
                  }
 	         }
@@ -711,13 +757,19 @@ public class testngRebillSlow {
          
         
          	try {
-         	
+         		//tHIS BUTTON IS BUGGY!!!! click many times!!!!!!!!
+         		 Thread.sleep(5000);
+         		// driver.findElement(By.xpath("//*[@id=\"viewInvBtn\"]")).click();
+         		// driver.findElement(By.xpath("//*[@id=\"viewInvBtn\"]")).click();
+         		// driver.findElement(By.xpath("//*[@id=\"viewInvBtn\"]")).click();
          		 driver.findElement(By.xpath("//*[@id=\"viewInvBtn\"]")).click();
+         		 Thread.sleep(2000);
                  wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/label[1]")));
                  
          }
          	catch(Exception e1) {
-         		 System.out.println("Could Not Click Package Tab");
+	
+         		System.out.println("Could Not Click Rebill After Action Code");
          		 try {
          			 Thread.sleep(1000);
          			 String tempError= driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[1]/h4")).getText();
@@ -733,7 +785,7 @@ public class testngRebillSlow {
          		System.out.println("Could Not find Popup"+e2);
          		 Assert.fail(e2 +" Could Not find Popup");
          	}
-         		 
+        } 
          		 
          		 
          	
@@ -748,7 +800,7 @@ public class testngRebillSlow {
              	 */
          		 
          		 
-         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+      //   js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
              try{
             	 //Click on rebill RPI Complete, Phone, and Continue
                   if (login.equals("5194105")){
@@ -825,6 +877,7 @@ public class testngRebillSlow {
                     }
 
              	driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")).click();
+             	Thread.sleep(15000);
              	}
              	catch(Exception e) {
              		System.out.println("Failed Trying to Rebill..");
@@ -851,6 +904,9 @@ public class testngRebillSlow {
             	 
             	 writeToExcel(rowNumber, 0,"pass");
             	 writeToExcel(rowNumber, 1,"completed");
+            	 if(uploadTrkToDB==true) {
+                 	  writeToDB(testInputNbr,tinCount,trk,resultArray);
+                 	 }
             	 return;
             	 
              }
@@ -900,26 +956,86 @@ public class testngRebillSlow {
             	 
             	 //Check For Validation again and save result.
             	  resultArray = validateResults(trk);
-            	  if ( resultArray[0].equals("pass")){
+            	
+            	  try {
+            	  if (resultArray[0].equals("pass")){
                  	 
                  	 writeToExcel(rowNumber, 0,"pass");
                  	 writeToExcel(rowNumber, 1,"completed");
-                 	 
+                	 if(uploadTrkToDB==true) {
+                     	  writeToDB(testInputNbr,tinCount,trk,resultArray);
+                     	 }
                   }
-                  if (resultArray[1].equals("fail")) {
+                  if (resultArray[0].equals("fail")) {
                 	  writeToExcel(rowNumber, 0,"fail");
                   	  writeToExcel(rowNumber, 1,resultArray[1]);
-                  	  Assert.fail("Faled At Last Rebill Screen: "+resultArray[1]);
+                  	 if(uploadTrkToDB==true) {
+                  	  writeToDB(testInputNbr,tinCount,trk,resultArray);
+                  	 }
+                  	//  Assert.fail("Faled At Last Rebill Screen: "+resultArray[1]);
                 	  
                   }
+            	  }
+            	  catch(Exception e) {
+            		  System.out.println("FAILED AT END?");
+            	  }
           }
              
              
         }
+    
+    
+    
+    public synchronized void writeToDB(String testInputNbr,String tinCount,String trk,String[] resultArray) {
+    	Connection GTMcon=null;
+    	try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
+			
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+    	PreparedStatement stmt = null;
+    	
+
+    	try {
+        //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
+    	stmt=GTMcon.prepareStatement("insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values (?,?,?,?,?)");  
+		stmt.setString(1,testInputNbr);  
+		stmt.setString(2,tinCount);  
+		stmt.setString(3,trk);  
+		stmt.setString(4,resultArray[0]);  
+		stmt.setString(5,resultArray[1]);  
+	
+		stmt.executeUpdate();
+    	}
+    	catch(Exception e) {
+    		System.out.println(e);
+    	}
+		
+    	
+    	
+    	try {
+		//	update gtm_rev_tools.rebill_results set result='fail',description='6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables' where trkngnbr='566166113544';
+		stmt=GTMcon.prepareStatement("update rebill_results set result=?,description=? where trkngnbr=?");  
+		
+		stmt.setString(1,resultArray[0]);  
+		stmt.setString(2,resultArray[1]); 
+		stmt.setString(3,trk); 
+		stmt.executeUpdate();
+		
+	}
+	catch(Exception e) {
+		System.out.println(e);
+	}
+
+    	
     }
-    
-    
-    
     
     public String[] validateResults(String trk) {
     	

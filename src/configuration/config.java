@@ -422,6 +422,7 @@ public void setGtmRevToolsConnection(String username,String password) throws Cla
 		try {
 			
 			Class.forName("oracle.jdbc.driver.OracleDriver");
+								//jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com
 			gtmRevToolsCon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com",username,password);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
