@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="Master GUI">
+    <property environment="env"/>
+    <property name="ECLIPSE_HOME" value="../../Desktop/eclipse/"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.8"/>
+    <property name="source" value="1.8"/>
+    <path id="TestNG.libraryclasspath">
+        <pathelement location="${ECLIPSE_HOME}plugins/org.testng.eclipse_6.11.0.201703011520/lib/testng.jar"/>
+        <pathelement location="${ECLIPSE_HOME}plugins/org.testng.eclipse_6.11.0.201703011520/lib/jcommander.jar"/>
+        <pathelement location="${ECLIPSE_HOME}plugins/org.testng.eclipse_6.11.0.201703011520/lib/bsh-2.0b4.jar"/>
+        <pathelement location="${ECLIPSE_HOME}plugins/org.testng.eclipse_6.11.0.201703011520/lib/snakeyaml.jar"/>
+    </path>
+    <path id="Master GUI.classpath">
+        <pathelement location="target/classes"/>
+        <pathelement location="lib/byte-buddy-1.8.15.jar"/>
+        <pathelement location="lib/client-combined-3.141.59-sources.jar"/>
+        <pathelement location="lib/client-combined-3.141.59.jar"/>
+        <pathelement location="lib/commons-codec-1.10.jar"/>
+        <pathelement location="lib/commons-collections4-4.1.jar"/>
+        <pathelement location="lib/commons-exec-1.3.jar"/>
+        <pathelement location="lib/commons-logging-1.2.jar"/>
+        <pathelement location="lib/curvesapi-1.04.jar"/>
+        <pathelement location="lib/guava-25.0-jre.jar"/>
+        <pathelement location="lib/junit-4.12.jar"/>
+        <pathelement location="lib/log4j-1.2.17.jar"/>
+        <pathelement location="lib/ojdbc6.jar"/>
+        <pathelement location="lib/okhttp-3.11.0.jar"/>
+        <pathelement location="lib/okio-1.14.0.jar"/>
+        <pathelement location="lib/poi-3.15.jar"/>
+        <pathelement location="lib/poi-examples-3.15.jar"/>
+        <pathelement location="lib/poi-excelant-3.15.jar"/>
+        <pathelement location="lib/poi-ooxml-3.15.jar"/>
+        <pathelement location="lib/poi-ooxml-schemas-3.15.jar"/>
+        <pathelement location="lib/poi-scratchpad-3.15.jar"/>
+        <pathelement location="lib/xmlbeans-2.6.0.jar"/>
+        <path refid="TestNG.libraryclasspath"/>
+    </path>
+    <path id="Maven Dependencies.libraryclasspath">
+        <pathelement location="../../.m2/repository/org/testng/testng/7.0.0/testng-7.0.0.jar"/>
+    </path>
+    <path id="run.gui (1).classpath">
+        <path refid="Master GUI.classpath"/>
+        <path refid="Maven Dependencies.libraryclasspath"/>
+    </path>
+    <path id="run.gui.classpath">
+        <path refid="Master GUI.classpath"/>
+        <path refid="Maven Dependencies.libraryclasspath"/>
+    </path>
+    <target name="init">
+        <mkdir dir="target/classes"/>
+        <copy includeemptydirs="false" todir="target/classes">
+            <fileset dir="src">
+                <include name="**/*.java"/>
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="target/classes"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="target/classes" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <include name="**/*.java"/>
+            <classpath refid="Master GUI.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="gui (1)">
+        <java classname="guis.gui" failonerror="true" fork="yes">
+            <classpath refid="run.gui (1).classpath"/>
+        </java>
+    </target>
+    <target name="gui">
+        <java classname="gui" failonerror="true" fork="yes">
+            <classpath refid="run.gui.classpath"/>
+        </java>
+    </target>
+    <target name="testdb">
+        <java classname="testingonly.testdb" failonerror="true" fork="yes">
+            <classpath refid="Master GUI.classpath"/>
+        </java>
+    </target>
+    <target name="Highest">
+        <java classname="testingonly.Highest" failonerror="true" fork="yes">
+            <classpath refid="Master GUI.classpath"/>
+        </java>
+    </target>
+    <target name="updateRebillDb">
+        <java classname="rebill.updateRebillDb" failonerror="true" fork="yes">
+            <classpath refid="Master GUI.classpath"/>
+        </java>
+    </target>
+</project>
