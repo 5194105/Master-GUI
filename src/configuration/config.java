@@ -26,7 +26,17 @@ public class config {
     String ciPassword;
     String ciDbString;
     String lparDate="";
+    Boolean allCheckBox;
+    Boolean nullCheckBox;
+    Boolean failedCheckBox;
+	Boolean domesticCheckBox;
+	Boolean internationalCheckBox;
+	Boolean expressCheckBox;
+	Boolean groundCheckBox;
 
+
+
+    
     String cycle;
     String homePath;
 
@@ -636,7 +646,83 @@ public String getEndDate( ) {
 	return endDate;
 }
 
+
+
+
+
+
+
+public void setAllCheckBox(Boolean allCheckBox) {
+	this.allCheckBox=allCheckBox;
 }
+
+public void setNullCheckBox(Boolean nullCheckBox) {
+	this.nullCheckBox=nullCheckBox;
+}
+
+public void setFailedCheckBox(Boolean failedCheckBox) {
+	this.failedCheckBox=failedCheckBox;
+}
+
+public void setDomesticCheckBox(Boolean domesticCheckBox) {
+	this.domesticCheckBox=domesticCheckBox;
+}
+
+public void setInternationalCheckBox(Boolean internationalCheckBox) {
+	this.internationalCheckBox=internationalCheckBox;
+}
+
+public void setExpressCheckBox(Boolean expressCheckBox) {
+	this.expressCheckBox=expressCheckBox;
+}
+
+public void setGroundCheckBox(Boolean groundCheckBox) {
+	this.groundCheckBox=groundCheckBox;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+public Boolean getAllCheckBox() {
+	return allCheckBox;
+}
+
+public Boolean getNullCheckBox() {
+	return nullCheckBox;
+}
+
+public Boolean getFailedCheckBox() {
+	return failedCheckBox;
+}
+
+public Boolean getDomesticCheckBox() {
+	return domesticCheckBox;
+}
+
+public Boolean getInternationalCheckBox() {
+	return internationalCheckBox;
+}
+
+public Boolean getExpressCheckBox() {
+	return expressCheckBox;
+}
+
+public Boolean getGroundCheckBox() {
+	return groundCheckBox;
+}
+
+
+}
+
+
 
 
 

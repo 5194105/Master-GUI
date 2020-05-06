@@ -2,7 +2,10 @@ package guis;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,18 +16,23 @@ import configuration.mouse;
 
 public class rebillAutomationExtendGUI {
 	private JFrame frame;
+	private JButton saveAndCLose;
+	
+	private JLabel statusLabel;
+	private JLabel allLabel;
+	private JLabel nullLabel;
+	private JLabel failedLabel;
+	private JLabel flavorLabel;
+	private JLabel domesticLabel;
+	private JLabel internationalLabel;
+	private JLabel expressLabel;
+	private JLabel groundLabel;
+	
 
     config c;
   
-    private JLabel label;
-    private JLabel lblSource;
-    private JLabel executeLabel;
-    private JRadioButton l2RadioButton;
-    private JRadioButton l3RadioButton;
-    private JLabel label_2;
-    private JLabel lblRebillAutomation;
-    private JLabel excelLabel;
-    private JLabel dbLabel;
+    private JLabel saveAndClose;
+ 
     
     gui g;
     
@@ -47,68 +55,120 @@ public class rebillAutomationExtendGUI {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 	
-		executeLabel = new JLabel("New label");
-		executeLabel.setBounds(413, 489, 284, 41);
 		
 		
-		excelLabel = new JLabel("New label");
-		excelLabel.setBounds(512, 335, 78, 56);
-	
-		dbLabel = new JLabel("New label");
-		dbLabel.setBounds(619, 332, 78, 56);
-
 		
-		excelLabel.setName("excel");
-		dbLabel.setName("db");
-		executeLabel.setName("execute");
+		saveAndCLose =new JButton("Save and Close");  
+		saveAndCLose.setBounds(413, 489, 284, 41);  
+		frame.getContentPane().add(saveAndCLose);
 		
 		
-		lblRebillAutomation = new JLabel("Rebill Automation");
-		lblRebillAutomation.setForeground(Color.WHITE);
-		lblRebillAutomation.setFont(new Font("Segoe UI", Font.BOLD, 42));
-		lblRebillAutomation.setBounds(353, 196, 386, 64);
-		frame.getContentPane().add(lblRebillAutomation);
-		
-		label = new JLabel("Level:");
-		label.setBounds(413, 281, 78, 31);
-		label.setForeground(Color.WHITE);
-		label.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		frame.getContentPane().add(label);
-		
-		lblSource = new JLabel("Source:");
-		lblSource.setForeground(Color.WHITE);
-		lblSource.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		lblSource.setBounds(413, 344, 99, 31);
-		frame.getContentPane().add(lblSource);
-		
-		l2RadioButton = new JRadioButton("L2");
-		l2RadioButton.setOpaque(false);
-		l2RadioButton.setForeground(Color.WHITE);
-		l2RadioButton.setFont(new Font("Segoe UI", Font.BOLD, 22));
-		l2RadioButton.setBounds(512, 281, 69, 29);
-		l2RadioButton.setName("l2");
-		frame.getContentPane().add(l2RadioButton);
+		statusLabel = new JLabel("Status");
+		statusLabel.setBounds(300, 280, 78, 31);
+		statusLabel.setForeground(Color.WHITE);
+		statusLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		frame.getContentPane().add(statusLabel);
 		
 		
-		l3RadioButton = new JRadioButton("L3");
-		l3RadioButton.setOpaque(false);
-		l3RadioButton.setForeground(Color.WHITE);
-		l3RadioButton.setFont(new Font("Segoe UI", Font.BOLD, 22));
-		l3RadioButton.setBounds(588, 282, 69, 29);
-		l3RadioButton.setName("l3");
-		frame.getContentPane().add(l3RadioButton);
+		allLabel = new JLabel("All:");
+		allLabel.setBounds(300, 320, 78, 31);
+		allLabel.setForeground(Color.WHITE);
+		allLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		frame.getContentPane().add(allLabel);
 		
-		label_2 = new JLabel("Compatible Mode: ");
-		label_2.setForeground(Color.WHITE);
-		label_2.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		label_2.setBounds(413, 405, 212, 29);
-		frame.getContentPane().add(label_2);
+		nullLabel = new JLabel("Null:");
+		nullLabel.setBounds(300, 360, 78, 31);
+		nullLabel.setForeground(Color.WHITE);
+		nullLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		frame.getContentPane().add(nullLabel);
 		
+		failedLabel = new JLabel("Failed:");
+		failedLabel.setBounds(300, 400, 78, 31);
+		failedLabel.setForeground(Color.WHITE);
+		failedLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		frame.getContentPane().add(failedLabel);
+		
+		
+		
+		flavorLabel = new JLabel("Flavor");
+		flavorLabel.setBounds(600, 280, 100, 31);
+		flavorLabel.setForeground(Color.WHITE);
+		flavorLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		frame.getContentPane().add(flavorLabel);
+		
+		domesticLabel = new JLabel("Domestic:");
+		domesticLabel.setBounds(600, 320, 120, 31);
+		domesticLabel.setForeground(Color.WHITE);
+		domesticLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		frame.getContentPane().add(domesticLabel);
+		
+		internationalLabel = new JLabel("International:");
+		internationalLabel.setBounds(600, 360, 150, 31);
+		internationalLabel.setForeground(Color.WHITE);
+		internationalLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		frame.getContentPane().add(internationalLabel);
+		
+		expressLabel = new JLabel("Express:");
+		expressLabel.setBounds(600, 400, 120, 31);
+		expressLabel.setForeground(Color.WHITE);
+		expressLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		frame.getContentPane().add(expressLabel);
+		
+		groundLabel = new JLabel("Ground:");
+		groundLabel.setBounds(600, 440, 120, 31);
+		groundLabel.setForeground(Color.WHITE);
+		groundLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		frame.getContentPane().add(groundLabel);
+		
+		/*
 		JCheckBox checkBox = new JCheckBox("");
 		checkBox.setBounds(630, 405, 27, 29);
 		checkBox.setOpaque(false);
 		frame.getContentPane().add(checkBox);
+		*/
 		
+		
+		
+		JCheckBox allBox = new JCheckBox("");
+		allBox.setBounds(415, 320, 27, 29);
+		allBox.setOpaque(false);
+		frame.getContentPane().add(allBox);
+		
+		JCheckBox nullBox = new JCheckBox("");
+		nullBox.setBounds(415, 360, 27, 29);
+		nullBox.setOpaque(false);
+		frame.getContentPane().add(nullBox);
+		
+		JCheckBox failedBox = new JCheckBox("");
+		failedBox.setBounds(415, 400, 27, 29);
+		failedBox.setOpaque(false);
+		frame.getContentPane().add(failedBox);
+		
+		
+		
+		
+		
+		JCheckBox domBox = new JCheckBox("");
+		domBox.setBounds(750, 320, 27, 29);
+		domBox.setOpaque(false);
+		frame.getContentPane().add(domBox);
+
+		JCheckBox internationalBox = new JCheckBox("");
+		internationalBox.setBounds(750, 360, 27, 29);
+		internationalBox.setOpaque(false);
+		frame.getContentPane().add(internationalBox);
+		
+		JCheckBox expressBox = new JCheckBox("");
+		expressBox.setBounds(750, 400, 27, 29);
+		expressBox.setOpaque(false);
+		frame.getContentPane().add(expressBox);
+		
+		JCheckBox groundBox = new JCheckBox("");
+		groundBox.setBounds(750, 440, 27, 29);
+		groundBox.setOpaque(false);
+		frame.getContentPane().add(groundBox);
+		
+
 	
 		
 		
@@ -116,15 +176,10 @@ public class rebillAutomationExtendGUI {
 		mouse m = new mouse(gb,g,c,this,frame);
 		m.setFrame(frame);
 		m.setupBaseIcons();
-		m.addExcel(excelLabel);
-		m.addDb(dbLabel);
-		m.addExecute(executeLabel);
-		m.setupBackground();
-		l2RadioButton.addMouseListener(m.m3);
-		l3RadioButton.addMouseListener(m.m3);
 		
-		//Sets Driver to Chrome
-		c.setDriverType("2");
+		m.setupBackground();
+
+	
 		
 		
 	
@@ -133,32 +188,77 @@ public class rebillAutomationExtendGUI {
 	    frame.setVisible(true);
         
 	    
-	    l2RadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	l2RadioButtonActionPerformed(evt);
-            }
-        });
 	    
-	    l3RadioButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	l3RadioButtonActionPerformed(evt);
-            }
-        });
-		
+	    
+	    
+	    
+	    
+	    saveAndCLose.addActionListener(new ActionListener()
+	    {
+	      public void actionPerformed(ActionEvent e)
+	      {
+	    	  
+	    	  if (allBox.isSelected()) {
+	    		  c.setAllCheckBox(true);
+	    	  }  else if(!allBox.isSelected()){
+	    		  c.setAllCheckBox(false);
+	    	  }
+	    	  
+	    	  
+	    	  if (nullBox.isSelected()) {
+	    		  c.setNullCheckBox(true);
+	    	  }  else if(!nullBox.isSelected()){
+	    		  c.setNullCheckBox(false);
+	    	  }
+	    	  
+	    	  
+	    	  
+	    	  if (failedBox.isSelected()) {
+	    		  c.setFailedCheckBox(true);
+	    	  }  else if(!failedBox.isSelected()){
+	    		  c.setFailedCheckBox(false);
+	    	  }
+	    	  
+	    	  
+	    	  
+	    	  if (domBox.isSelected()) {
+	    		  c.setDomesticCheckBox(true);
+	    	  }  else if(!domBox.isSelected()){
+	    		  c.setDomesticCheckBox(false);
+	    	  }
+	    	  
+	    	  
+	    	  
+	    	  if (internationalBox.isSelected()) {
+	    		  c.setInternationalCheckBox(true);
+	    	  }  else if(!internationalBox.isSelected()){
+	    		  c.setInternationalCheckBox(false);
+	    	  }
+	    	  
+	    	  
+	    	  
+	    	  
+	    	  
+	    	  if (expressBox.isSelected()) {
+	    		  c.setExpressCheckBox(true);
+	    	  }
+	    	  else if(!expressBox.isSelected()){
+	    		  c.setExpressCheckBox(false);
+	    	  }
+	    	  
+	    	  
+	    	  if (groundBox.isSelected()) {
+	    		  c.setGroundCheckBox(true);
+	    	  }
+	    	  else if(!groundBox.isSelected()){
+	    		  c.setGroundCheckBox(false);
+	    	  }
+	    	  
+	    	  
+ frame.setVisible(false);
+	      }
+	    });
+	    
 	}
 	
-		private void l2RadioButtonActionPerformed(java.awt.event.ActionEvent evt) { 
-			System.out.println("L2 RADIO");
-			if (l3RadioButton.isSelected()){
-				l3RadioButton.setSelected(false);
-		        }
-			c.setLevel("2");
-	}
-		private void l3RadioButtonActionPerformed(java.awt.event.ActionEvent evt) {   
-			System.out.println("L3 RADIO");
-			if (l2RadioButton.isSelected()){
-				l2RadioButton.setSelected(false);
-		        }
-			c.setLevel("3");
-		}
 }

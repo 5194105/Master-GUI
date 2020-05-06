@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -109,7 +110,18 @@ public class testngRebillSlow {
 	String cm4;
 	int totalMod;
 	String level;
-		
+	
+	Boolean allCheckBox;
+	Boolean nullCheckBox;
+	Boolean failedCheckBox;
+	Boolean domesticCheckBox;
+	Boolean internationalCheckBox;
+	Boolean expressCheckBox;
+	Boolean groundCheckBox;
+	
+	String source;
+	
+	String databaseSqlQuery,databaseSqlCount;
 	
 	
 	@BeforeClass
@@ -137,7 +149,19 @@ public class testngRebillSlow {
         	c=new config();
         	browser="2";
         	level="2";
+        	
         	excelVar = new excel(homePath+"\\test data\\rebill.xlsx");
+        	
+        	source="db";
+        	 allCheckBox=false;
+        	 nullCheckBox=true;
+        	 failedCheckBox=true;
+        	 domesticCheckBox=true;
+        	 internationalCheckBox=false;
+        	 expressCheckBox=false;
+        	 groundCheckBox=true;
+        	
+        	
         }
         else {
         	/* ENABLE IF TESTING IS OFF!!!!!!!!
@@ -149,17 +173,23 @@ public class testngRebillSlow {
         }
         
         
+       
     	homePath=System.getProperty("user.dir");
     	System.out.println("homePath" +System.getProperty("user.dir"));
     	
-    	
+    	if(source.contentEquals("excel")) {
     	excelVar.setUpExcelWorkbook();
     	excelVar.setUpExcelSheet(0);
     	excelVar.setRowCountAutomatically(2);
     	excelVar.setColCountAutomatically(0);
     	rowCount=excelVar.getRowCount();
     	colCount=excelVar.getColCount()+1;
+    	}
+    	else if(source.contentEquals("db")) {
     	
+    		rowCount=getDbCount();
+    	
+    	}
     	total= rowCount/4;
     	totalMod=rowCount%4;
     	totalRows1=total;
@@ -182,8 +212,7 @@ public class testngRebillSlow {
 	    		break;
     	
     	}	
-    	
-    	
+
     	
         if (level.equals("2"))
     	{
@@ -197,6 +226,81 @@ public class testngRebillSlow {
     	}
        
     	
+	}
+	
+	
+	
+	
+	public int getDbCount() {
+		Connection GTMcon=null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		int total=0;
+    	try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
+			
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+    	
+      	 allCheckBox=false;
+    	 nullCheckBox=true;
+    	 failedCheckBox=true;
+    	 domesticCheckBox=true;
+    	 internationalCheckBox=false;
+    	 expressCheckBox=false;
+    	 groundCheckBox=true;
+    	 
+    	 databaseSqlCount="select count(*) as total from rebill regression ";
+    	
+    	if (allCheckBox==false) {
+    		databaseSqlCount+="where ";
+    	}
+    	if (nullCheckBox==true && failedCheckBox==true) {
+    		databaseSqlCount+=" (result is null or result ='failed') ";
+    	}
+    	if (nullCheckBox==true && failedCheckBox==false) {
+    		databaseSqlCount+="result is null ";
+    	}
+    	if (nullCheckBox==false && failedCheckBox==true) {
+    		databaseSqlCount+="result ='failed' ";
+    	}
+    	if (domesticCheckBox==true) {
+    		databaseSqlCount+="and rs_type='DM' ";
+    	}
+    	if (internationalCheckBox==true) {
+    		databaseSqlCount+="and rs_type='IL' ";
+    	}
+    	if (expressCheckBox==true) {
+    		databaseSqlCount+="and company='EP' ";
+    	}
+    	if (groundCheckBox==true) {
+    		databaseSqlCount+="and rs_type='GD' ";
+    	}
+    	
+    	
+
+    	try {
+        //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
+    		 stmt = GTMcon.createStatement();
+        	 rs = stmt.executeQuery(databaseSqlCount);
+        	 
+        	 while(rs.next()) {
+        		 System.out.println(rs.getInt("total"));
+        		 total=rs.getInt("total");
+        	 }
+        
+    	}
+    	catch(Exception e) {
+    		System.out.println(e);
+    	}
+		return total;
 	}
 	
 	

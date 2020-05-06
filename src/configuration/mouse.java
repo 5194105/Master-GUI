@@ -34,6 +34,7 @@ import guis.gui;
 import guis.guiBase;
 import guis.instantInvoiceAutomationGui;
 import guis.prerateAutomationGui;
+import guis.rebillAutomationExtendGUI;
 import guis.rebillAutomationGui;
 import guis.rerateAutomationGui;
 import guis.udAutomation;
@@ -105,6 +106,7 @@ public class mouse {
      String dbPicSelected="databaseSelected.png";
      String excelPic="excel.png";
      String excelPicSelected="excelSelect.png";
+     String moreOptionsPic="moreOptions.png";
      
      Boolean excelBoolean=false;
      Boolean databaseBoolean=false;
@@ -344,6 +346,29 @@ public void addExecute(JLabel jlabel) {
 }
 
 
+public void addMoreOptions(JLabel jlabel) {
+	
+	try {
+	
+	    img = ImageIO.read(new File(imagePath+"\\assets\\"+moreOptionsPic));
+		
+	
+
+	} catch (IOException e) {
+	    
+	    e.printStackTrace();
+	}
+		dimg = img.getScaledInstance(jlabel.getWidth(), jlabel.getHeight(),
+	        Image.SCALE_SMOOTH);
+	  imageIcon = new ImageIcon(dimg);
+	  jlabel.setIcon(imageIcon);
+	  
+	  frame.getContentPane().add(jlabel);
+	  jlabel.addMouseListener(m2);
+}
+
+
+
 
 public void addAkshayUDStuff(JLabel unixPath,JTextField unixPathText) {
 	
@@ -573,6 +598,27 @@ public void setupMouseListener() {
 						System.out.println("LABEL NAME : "+mouseLabel.getName());
 						
 
+						
+						
+						
+						
+						
+						
+						
+						//MoreOptions
+						if (mouseLabel.getName().equals("moreOptions")) {
+							if (obj.getClass().getCanonicalName().equals("guis.rebillAutomationGui")) {
+									rebillAutomationExtendGUI raeg= new rebillAutomationExtendGUI(g,c);
+							
+							}
+							}
+							
+						
+						
+						//Save and Close
+	
+							
+						
 				    		
 				    		//Excel
 				    		if (mouseLabel.getName().equals("excel")) {

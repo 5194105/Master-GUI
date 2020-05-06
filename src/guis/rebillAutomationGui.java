@@ -1,6 +1,8 @@
 package guis;
 import java.awt.EventQueue;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -11,6 +13,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -31,6 +34,7 @@ public class rebillAutomationGui {
      config c;
    
      private JLabel label;
+     private JLabel moreOptionsTextLabel;
      private JLabel lblSource;
      private JLabel executeLabel;
      private JRadioButton l2RadioButton;
@@ -39,6 +43,7 @@ public class rebillAutomationGui {
      private JLabel lblRebillAutomation;
      private JLabel excelLabel;
      private JLabel dbLabel;
+     private JLabel moreOptionsLabel;
      
      gui g;
      
@@ -78,11 +83,15 @@ public class rebillAutomationGui {
 	
 		dbLabel = new JLabel("New label");
 		dbLabel.setBounds(619, 332, 78, 56);
+		
+		moreOptionsLabel = new JLabel("New label");
+		moreOptionsLabel.setBounds(600, 450, 50, 30);
 
 		
 		excelLabel.setName("excel");
 		dbLabel.setName("db");
 		executeLabel.setName("execute");
+		moreOptionsLabel.setName("moreOptions");
 		
 		
 		lblRebillAutomation = new JLabel("Rebill Automation");
@@ -126,6 +135,14 @@ public class rebillAutomationGui {
 		label_2.setBounds(413, 405, 212, 29);
 		frame.getContentPane().add(label_2);
 		
+		moreOptionsTextLabel = new JLabel("Filter Options: ");
+		moreOptionsTextLabel.setForeground(Color.WHITE);
+		moreOptionsTextLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		moreOptionsTextLabel.setBounds(413, 450, 212, 29);
+		frame.getContentPane().add(moreOptionsTextLabel);
+		
+	
+		
 		JCheckBox checkBox = new JCheckBox("");
 		checkBox.setBounds(630, 405, 27, 29);
 		checkBox.setOpaque(false);
@@ -141,6 +158,7 @@ public class rebillAutomationGui {
 		m.addExcel(excelLabel);
 		m.addDb(dbLabel);
 		m.addExecute(executeLabel);
+		m.addMoreOptions(moreOptionsLabel);
 		m.setupBackground();
 		l2RadioButton.addMouseListener(m.m3);
 		l3RadioButton.addMouseListener(m.m3);
@@ -149,7 +167,25 @@ public class rebillAutomationGui {
 		c.setDriverType("2");
 		
 		
-	
+		JButton saveAndCLose =new JButton("Save and Close");  
+		saveAndCLose.setBounds(600, 489, 284, 41);  
+		frame.getContentPane().add(saveAndCLose);
+		 saveAndCLose.addActionListener(new ActionListener()
+		    {
+		      public void actionPerformed(ActionEvent e)
+		      {
+		    	  System.out.println(c.getAllCheckBox());
+		    	  System.out.println(c.getNullCheckBox());
+		    	  System.out.println(c.getFailedCheckBox());
+		    	  System.out.println(c.getDomesticCheckBox());
+		    	  System.out.println(c.getInternationalCheckBox());
+		    	  System.out.println(c.getExpressCheckBox());
+		    	  System.out.println(c.getGroundCheckBox());
+		    	  
+
+		      }
+		    });
+		    
 		
 		
 	    frame.setVisible(true);
