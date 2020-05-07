@@ -40,6 +40,7 @@ import guis.rerateAutomationGui;
 import guis.udAutomation;
 import prerate.prerateTestNGSlow;
 import rebill.rebillMain;
+import rebill.testngRebillSlow;
 import rebill_troubleshoot.rebillTroubleshoot;
 import rerate.abc;
 import testng.testingonly;
@@ -657,7 +658,7 @@ public void setupMouseListener() {
 		    		            excelBoolean=false;
 				    			addExcel(jLabelExcel);
 				    			System.out.println("SOURCE!!!!!!!");
-				    			c.setSource("");
+				    			c.setSource("db");
 				    			addRemoveAkshayUDStuff(false);
 				    			
 				    		}
@@ -671,7 +672,87 @@ public void setupMouseListener() {
 				    				if(c.getLevel()!=null && c.getSource()!=null) {
 				    					//JOptionPane.showMessageDialog(frame, "Started Rebill");
 				    					
-				    					rebillMain rm = new rebillMain(c);
+				    					//rebillMain rm = new rebillMain(c);
+				    					String filepath="";String broswer="";String compatibleMode="";
+				    					String source =c.getSource();
+				    					if (c.getSource().equals("db")) {
+				    						 filepath="";
+				    					}
+				    					else if (c.getSource().equals("excel")) {
+				    					 filepath=c.getExcelPath();
+				    					}
+					    				
+					    				
+				    					if (c.getDriverType()!=null) {
+				    						broswer=c.getDriverType();
+				    					}
+				    					if (c.getCompatibleMode()!=null) {
+				    						 compatibleMode=c.getCompatibleMode();
+				    					}
+					    				 
+					    				
+					    			
+					    				String level=c.getLevel();
+					    				String allCheckBox=c.getAllCheckBox();
+					    				String nullCheckBox=c.getNullCheckBox();
+					    				String failedCheckBox=c.getFailedCheckBox();
+					    				String domesticCheckBox=c.getDomesticCheckBox();
+					    				String internationalCheckBox=c.getInternationalCheckBox();
+					    				String expressCheckBox=c.getExpressCheckBox();
+					    				String groundCheckBox=c.getGroundCheckBox();
+					    				String normalCheckBox=c.getNormalCheckBox();
+					    				String mfRetireCheckBox=c.getMfRetireCheckBox();
+					    				
+					    				
+					    				System.out.println("filepath "+filepath);
+					    				System.out.println("level "+level);
+					    				System.out.println("browser "+broswer);
+					    				System.out.println("compatibleMode "+compatibleMode);
+					    				System.out.println("source "+source);
+					    				System.out.println("allCheckBox "+allCheckBox);
+					    				System.out.println("nullCheckBox "+nullCheckBox);
+					    				System.out.println("failedCheckBox "+failedCheckBox);
+					    				System.out.println("domesticCheckBox "+domesticCheckBox);
+					    				System.out.println("internationalCheckBox "+internationalCheckBox);
+					    				System.out.println("expressCheckBox "+expressCheckBox);
+					    				System.out.println("groundCheckBox "+groundCheckBox);
+					    				System.out.println("normalCheckBox "+normalCheckBox);
+					    				System.out.println("mfRetireCheckBox "+mfRetireCheckBox);
+					    				
+					    		        XmlSuite xmlSuite = new XmlSuite();
+					    		        xmlSuite.setName("Sample_Suite");
+					    		        Map<String, String> fieldValues = new HashMap<>();
+					    		        fieldValues.put("filepath", filepath);
+					    		        fieldValues.put("level", level);
+					    		        fieldValues.put("browser", "2");
+					    		        fieldValues.put("source", source);
+					    		        fieldValues.put("compatibleMode", "");
+					    		        fieldValues.put("allCheckBox", allCheckBox);
+					    		        fieldValues.put("nullCheckBox", nullCheckBox);
+					    		        fieldValues.put("failedCheckBox", failedCheckBox);
+					    		        fieldValues.put("domesticCheckBox", domesticCheckBox);
+					    		        fieldValues.put("internationalCheckBox", internationalCheckBox);
+					    		        fieldValues.put("expressCheckBox", expressCheckBox);
+					    		        fieldValues.put("groundCheckBox", groundCheckBox);
+					    		        fieldValues.put("normalCheckBox", normalCheckBox);
+					    		        fieldValues.put("mfRetireCheckBox",mfRetireCheckBox);
+					    		        
+					    		        xmlSuite.setParameters(fieldValues);
+					    		        XmlTest xmlTest = new XmlTest(xmlSuite);
+					    		        xmlTest.setName("Rebill Test");
+					    		        //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
+					    		        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testngRebillSlow.class)));
+					    		        xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
+					    		        TestNG tng = new TestNG();
+					    		        tng.setXmlSuites(Collections.singletonList(xmlSuite));
+					    		        tng.run();
+					    		        
+					    		        
+					    		        
+					    		        
+					    		        
+					    		        
+				    					
 				    				}
 				    				else {
 				    					JOptionPane.showMessageDialog(frame, "Please choose Level and Source");

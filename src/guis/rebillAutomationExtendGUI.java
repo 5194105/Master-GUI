@@ -27,7 +27,9 @@ public class rebillAutomationExtendGUI {
 	private JLabel internationalLabel;
 	private JLabel expressLabel;
 	private JLabel groundLabel;
-	
+	private JLabel functionLabel;
+	private JLabel normalLabel;
+	private JLabel mfRetireLabel;
 
     config c;
   
@@ -59,8 +61,44 @@ public class rebillAutomationExtendGUI {
 		
 		
 		saveAndCLose =new JButton("Save and Close");  
-		saveAndCLose.setBounds(413, 489, 284, 41);  
+		saveAndCLose.setBounds(450, 510, 284, 41);  
 		frame.getContentPane().add(saveAndCLose);
+		
+		
+		
+		functionLabel = new JLabel("Work Type");
+		functionLabel.setBounds(300, 440, 110, 31);
+		functionLabel.setForeground(Color.WHITE);
+		functionLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		frame.getContentPane().add(functionLabel);
+		
+		
+		normalLabel = new JLabel("Normal:");
+		normalLabel.setBounds(300, 480, 110, 31);
+		normalLabel.setForeground(Color.WHITE);
+		normalLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		frame.getContentPane().add(normalLabel);
+		
+		mfRetireLabel = new JLabel("MF Retire:");
+		mfRetireLabel.setBounds(300, 520, 110, 31);
+		mfRetireLabel.setForeground(Color.WHITE);
+		mfRetireLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		frame.getContentPane().add(mfRetireLabel);
+		
+		
+		
+		
+		JCheckBox normalBox = new JCheckBox("");
+		normalBox.setBounds(415, 480, 27, 29);
+		normalBox.setOpaque(false);
+		frame.getContentPane().add(normalBox);
+		
+		JCheckBox mfRetireBox = new JCheckBox("");
+		mfRetireBox.setBounds(415, 520, 27, 29);
+		mfRetireBox.setOpaque(false);
+		frame.getContentPane().add(mfRetireBox);
+		
+	
 		
 		
 		statusLabel = new JLabel("Status");
@@ -199,40 +237,40 @@ public class rebillAutomationExtendGUI {
 	      {
 	    	  
 	    	  if (allBox.isSelected()) {
-	    		  c.setAllCheckBox(true);
+	    		  c.setAllCheckBox("true");
 	    	  }  else if(!allBox.isSelected()){
-	    		  c.setAllCheckBox(false);
+	    		  c.setAllCheckBox("false");
 	    	  }
 	    	  
 	    	  
 	    	  if (nullBox.isSelected()) {
-	    		  c.setNullCheckBox(true);
+	    		  c.setNullCheckBox("true");
 	    	  }  else if(!nullBox.isSelected()){
-	    		  c.setNullCheckBox(false);
+	    		  c.setNullCheckBox("false");
 	    	  }
 	    	  
 	    	  
 	    	  
 	    	  if (failedBox.isSelected()) {
-	    		  c.setFailedCheckBox(true);
+	    		  c.setFailedCheckBox("true");
 	    	  }  else if(!failedBox.isSelected()){
-	    		  c.setFailedCheckBox(false);
+	    		  c.setFailedCheckBox("false");
 	    	  }
 	    	  
 	    	  
 	    	  
 	    	  if (domBox.isSelected()) {
-	    		  c.setDomesticCheckBox(true);
+	    		  c.setDomesticCheckBox("true");
 	    	  }  else if(!domBox.isSelected()){
-	    		  c.setDomesticCheckBox(false);
+	    		  c.setDomesticCheckBox("false");
 	    	  }
 	    	  
 	    	  
 	    	  
 	    	  if (internationalBox.isSelected()) {
-	    		  c.setInternationalCheckBox(true);
+	    		  c.setInternationalCheckBox("true");
 	    	  }  else if(!internationalBox.isSelected()){
-	    		  c.setInternationalCheckBox(false);
+	    		  c.setInternationalCheckBox("false");
 	    	  }
 	    	  
 	    	  
@@ -240,20 +278,37 @@ public class rebillAutomationExtendGUI {
 	    	  
 	    	  
 	    	  if (expressBox.isSelected()) {
-	    		  c.setExpressCheckBox(true);
+	    		  c.setExpressCheckBox("true");
 	    	  }
 	    	  else if(!expressBox.isSelected()){
-	    		  c.setExpressCheckBox(false);
+	    		  c.setExpressCheckBox("false");
 	    	  }
 	    	  
 	    	  
 	    	  if (groundBox.isSelected()) {
-	    		  c.setGroundCheckBox(true);
+	    		  c.setGroundCheckBox("true");
 	    	  }
 	    	  else if(!groundBox.isSelected()){
-	    		  c.setGroundCheckBox(false);
+	    		  c.setGroundCheckBox("false");
 	    	  }
 	    	  
+	    	  
+	    	  
+	    	  if (normalBox.isSelected()) {
+	    		  c.setNormalCheckBox("true");
+	    	  }
+	    	  else if(!normalBox.isSelected()){
+	    		  c.setNormalCheckBox("false");
+	    	  }
+	    	  
+	    	  
+	    	  
+	    	  if (mfRetireBox.isSelected()) {
+	    		  c.setMfRetireCheckBox("true");
+	    	  }
+	    	  else if(!mfRetireBox.isSelected()){
+	    		  c.setMfRetireCheckBox("false");
+	    	  }
 	    	  
  frame.setVisible(false);
 	      }

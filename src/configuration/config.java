@@ -26,14 +26,15 @@ public class config {
     String ciPassword;
     String ciDbString;
     String lparDate="";
-    Boolean allCheckBox;
-    Boolean nullCheckBox;
-    Boolean failedCheckBox;
-	Boolean domesticCheckBox;
-	Boolean internationalCheckBox;
-	Boolean expressCheckBox;
-	Boolean groundCheckBox;
-
+    String allCheckBox;
+    String nullCheckBox;
+    String failedCheckBox;
+    String domesticCheckBox;
+    String internationalCheckBox;
+    String expressCheckBox;
+    String groundCheckBox;
+    String normalCheckBox;
+    String mfRetireCheckBox;
 
 
     
@@ -582,13 +583,16 @@ public Connection getEcL3DbConnection() {
 public void setEraL2DbConnection() {
 	
 	try {
-		
-		eraL2Con=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/INVADJ_SVC_INT,cn=OracleContext,dc=ute,dc=fedex,dc=com","INVADJ_APP","apppwdli");
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		//eraL2Con=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/INVADJ_SVC_INT,cn=OracleContext,dc=ute,dc=fedex,dc=com","INVADJ_APP","apppwdli");
 		eraL2Con=DriverManager.getConnection("jdbc:oracle:thin:@//idb00270.ute.fedex.com:1526/IDB00270.ute.fedex.com","test_readonly", "perftest");
 		} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	}
+	} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
 }
 
@@ -652,34 +656,41 @@ public String getEndDate( ) {
 
 
 
-public void setAllCheckBox(Boolean allCheckBox) {
+public void setAllCheckBox(String allCheckBox) {
 	this.allCheckBox=allCheckBox;
 }
 
-public void setNullCheckBox(Boolean nullCheckBox) {
+public void setNullCheckBox(String nullCheckBox) {
 	this.nullCheckBox=nullCheckBox;
 }
 
-public void setFailedCheckBox(Boolean failedCheckBox) {
+public void setFailedCheckBox(String failedCheckBox) {
 	this.failedCheckBox=failedCheckBox;
 }
 
-public void setDomesticCheckBox(Boolean domesticCheckBox) {
+public void setDomesticCheckBox(String domesticCheckBox) {
 	this.domesticCheckBox=domesticCheckBox;
 }
 
-public void setInternationalCheckBox(Boolean internationalCheckBox) {
+public void setInternationalCheckBox(String internationalCheckBox) {
 	this.internationalCheckBox=internationalCheckBox;
 }
 
-public void setExpressCheckBox(Boolean expressCheckBox) {
+public void setExpressCheckBox(String expressCheckBox) {
 	this.expressCheckBox=expressCheckBox;
 }
 
-public void setGroundCheckBox(Boolean groundCheckBox) {
+public void setGroundCheckBox(String groundCheckBox) {
 	this.groundCheckBox=groundCheckBox;
 }
 
+public void setNormalCheckBox(String normalCheckBox) {
+	this.normalCheckBox=normalCheckBox;
+}
+
+public void setMfRetireCheckBox(String mfRetireCheckBox) {
+	this.mfRetireCheckBox=mfRetireCheckBox;
+}
 
 
 
@@ -691,32 +702,42 @@ public void setGroundCheckBox(Boolean groundCheckBox) {
 
 
 
-public Boolean getAllCheckBox() {
+
+public String getAllCheckBox() {
 	return allCheckBox;
 }
 
-public Boolean getNullCheckBox() {
+public String getNullCheckBox() {
 	return nullCheckBox;
 }
 
-public Boolean getFailedCheckBox() {
+public String getFailedCheckBox() {
 	return failedCheckBox;
 }
 
-public Boolean getDomesticCheckBox() {
+public String getDomesticCheckBox() {
 	return domesticCheckBox;
 }
 
-public Boolean getInternationalCheckBox() {
+public String getInternationalCheckBox() {
 	return internationalCheckBox;
 }
 
-public Boolean getExpressCheckBox() {
+public String getExpressCheckBox() {
 	return expressCheckBox;
 }
 
-public Boolean getGroundCheckBox() {
+public String getGroundCheckBox() {
 	return groundCheckBox;
+}
+
+
+public String getNormalCheckBox() {
+	return normalCheckBox;
+}
+
+public String getMfRetireCheckBox() {
+	return mfRetireCheckBox;
 }
 
 

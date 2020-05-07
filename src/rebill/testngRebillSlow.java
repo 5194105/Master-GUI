@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -42,7 +43,7 @@ public class testngRebillSlow {
 	
     //False = Running from xml only
 	//True = Running from GUI only
-	Boolean testingMode=true;
+	Boolean testingMode=false;
 	Boolean uploadTrkToDB=true;
 	
 	String tempFile,configFile;
@@ -72,7 +73,7 @@ public class testngRebillSlow {
 	boolean flag2 ;
 
 	Boolean isChecked1=false,isChecked2=false,isChecked3=false,isChecked4=false;
-    Boolean compatibleMode;
+    String compatibleMode;
     Boolean chrome;
     String  homePath=System.getProperty("user.dir");
     String browser;
@@ -111,24 +112,48 @@ public class testngRebillSlow {
 	int totalMod;
 	String level;
 	
-	Boolean allCheckBox;
-	Boolean nullCheckBox;
-	Boolean failedCheckBox;
-	Boolean domesticCheckBox;
-	Boolean internationalCheckBox;
-	Boolean expressCheckBox;
-	Boolean groundCheckBox;
-	
+	String allCheckBox;
+	String nullCheckBox;
+	String failedCheckBox;
+	String domesticCheckBox;
+	String internationalCheckBox;
+	String expressCheckBox;
+	String groundCheckBox;
+	String normalCheckBox;
+	String mfRetireCheckBox;
 	String source;
 	
 	String databaseSqlQuery,databaseSqlCount;
 	
 	
-	@BeforeClass
-	//@Parameters({"filepathExcelParameter","levelParameter","broswerParameter","compatibleModeParameter"})
-	//public void setupExcel(String filepathExcelParameter,String levelParameter,String broswerParameter,Boolean compatibleModeParameter) {
-	public void setupExcel() {
+	ArrayList<rebillData> rebillDataArray= new ArrayList<rebillData>();
+
 	
+	@BeforeClass
+	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox","normalCheckBox","mfRetireCheckBox"})
+	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String normalCheckBox,String mfRetireCheckBox) {
+	c=new config();
+	/*
+	@BeforeClass
+	public void setupExcel() {
+*/
+		/*
+		System.out.println("filepathExcelParameter "+filepathExcelParameter);
+		System.out.println("levelParameter "+levelParameter);
+		System.out.println("broswerParameter "+broswerParameter);
+		System.out.println("compatibleModeParameter "+compatibleModeParameter);
+		System.out.println("source "+source);
+		System.out.println("allCheckBox "+allCheckBox);
+		System.out.println("nullCheckBox "+nullCheckBox);
+		System.out.println("failedCheckBox "+failedCheckBox);
+		System.out.println("domesticCheckBox "+domesticCheckBox);
+		System.out.println("internationalCheckBox "+internationalCheckBox);
+		System.out.println("expressCheckBox "+expressCheckBox);
+		System.out.println("groundCheckBox "+groundCheckBox);
+		System.out.println("normalCheckBox "+normalCheckBox);
+		System.out.println("mfRetireCheckBox "+mfRetireCheckBox);
+	//public void setupExcel() {
+	*/
 		try {
 			Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe");
 		} catch (IOException e1) {
@@ -152,24 +177,39 @@ public class testngRebillSlow {
         	
         	excelVar = new excel(homePath+"\\test data\\rebill.xlsx");
         	
-        	source="db";
-        	 allCheckBox=false;
-        	 nullCheckBox=true;
-        	 failedCheckBox=true;
-        	 domesticCheckBox=true;
-        	 internationalCheckBox=false;
-        	 expressCheckBox=false;
-        	 groundCheckBox=true;
+        	 source="db";
+        	 allCheckBox="false";
+        	 nullCheckBox="true";
+        	 failedCheckBox="true";
+        	 domesticCheckBox="false";
+        	 internationalCheckBox="true";
+        	 expressCheckBox="false";
+        	 groundCheckBox="true";
+        	 normalCheckBox="true";
+        	 mfRetireCheckBox="false";
         	
         	
         }
         else {
-        	/* ENABLE IF TESTING IS OFF!!!!!!!!
-        	excelVar = new excel(filepathExcelParameter);
-        	browser=broswerParameter;
-        	level=levelParameter;
-        	compatibleMode=compatibleModeParameter;
-        	*/
+        	if (source.equals("db")) {}
+        	else if (source.equals("excel")) {
+        		excelVar = new excel(homePath+"\\test data\\rebill.xlsx");
+        	}
+        	
+        	this.browser=browser;
+        	this.level=level;
+        	this.compatibleMode=compatibleMode;
+        	this.source=source;
+        	this.allCheckBox=allCheckBox;
+			this.nullCheckBox=nullCheckBox;
+			this.failedCheckBox=failedCheckBox;
+			this.domesticCheckBox=domesticCheckBox;
+			this.internationalCheckBox=internationalCheckBox;
+			this.expressCheckBox=expressCheckBox;
+			this.groundCheckBox=groundCheckBox;
+			this.normalCheckBox=normalCheckBox;
+			this.mfRetireCheckBox=groundCheckBox;
+        	
         }
         
         
@@ -177,7 +217,7 @@ public class testngRebillSlow {
     	homePath=System.getProperty("user.dir");
     	System.out.println("homePath" +System.getProperty("user.dir"));
     	
-    	if(source.contentEquals("excel")) {
+    	if(source.equals("excel")) {
     	excelVar.setUpExcelWorkbook();
     	excelVar.setUpExcelSheet(0);
     	excelVar.setRowCountAutomatically(2);
@@ -185,9 +225,11 @@ public class testngRebillSlow {
     	rowCount=excelVar.getRowCount();
     	colCount=excelVar.getColCount()+1;
     	}
-    	else if(source.contentEquals("db")) {
+    	else if(source.equals("db")) {
     	
-    		rowCount=getDbCount();
+    		
+    		runDbQuery();;
+    		
     	
     	}
     	total= rowCount/4;
@@ -217,12 +259,12 @@ public class testngRebillSlow {
         if (level.equals("2"))
     	{
     		levelUrl="https://testsso.secure.fedex.com/L2/eRA/index.html";
-    		c.setEraL2DbConnection();
+    		//c.setEraL2DbConnection();
     	}
     	else if (level.equals("3"))
     	{
     		levelUrl="https://testsso.secure.fedex.com/L3/eRA/index.html";
-    		c.setEraL3DbConnection();
+    	//.setEraL3DbConnection();
     	}
        
     	
@@ -231,11 +273,16 @@ public class testngRebillSlow {
 	
 	
 	
-	public int getDbCount() {
+	public void runDbQuery() {
 		Connection GTMcon=null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		int total=0;
+		int[] total= new int[2];
+		
+	
+		String result, description, test_input_nbr, tin_count, trkngnbr, reason_code, rebill_acct,
+		 invoice_nbr_1, invoice_nbr_2, mig, region,  login,   password,  rsType, company, worktype;
+		
     	try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
@@ -248,72 +295,141 @@ public class testngRebillSlow {
 			e.printStackTrace();
 		}
 		
+  	 
+    	 databaseSqlCount="select result, description, test_input_nbr, tin_count, trkngnbr, reason_code, rebill_acct,invoice_nbr_1, invoice_nbr_2, mig, region,  login,   password,  rs_Type, company, worktype from rebill_regression ";
     	
-      	 allCheckBox=false;
-    	 nullCheckBox=true;
-    	 failedCheckBox=true;
-    	 domesticCheckBox=true;
-    	 internationalCheckBox=false;
-    	 expressCheckBox=false;
-    	 groundCheckBox=true;
-    	 
-    	 databaseSqlCount="select count(*) as total from rebill regression ";
-    	
-    	if (allCheckBox==false) {
+    	if (allCheckBox.equals("false")) {
     		databaseSqlCount+="where ";
     	}
-    	if (nullCheckBox==true && failedCheckBox==true) {
-    		databaseSqlCount+=" (result is null or result ='failed') ";
+    	if (nullCheckBox.equals("true") && failedCheckBox.equals("true")) {
+    		databaseSqlCount+="(result is null or result ='fail') ";
     	}
-    	if (nullCheckBox==true && failedCheckBox==false) {
+    	if (nullCheckBox.equals("true") && failedCheckBox.equals("false")) {
     		databaseSqlCount+="result is null ";
     	}
-    	if (nullCheckBox==false && failedCheckBox==true) {
+    	if (nullCheckBox.equals("false") && failedCheckBox.equals("true")) {
     		databaseSqlCount+="result ='failed' ";
     	}
-    	if (domesticCheckBox==true) {
+    	if (domesticCheckBox.equals("true")) {
     		databaseSqlCount+="and rs_type='DM' ";
     	}
-    	if (internationalCheckBox==true) {
+    	if (internationalCheckBox.equals("true")) {
     		databaseSqlCount+="and rs_type='IL' ";
     	}
-    	if (expressCheckBox==true) {
+    	if (expressCheckBox.equals("true")) {
     		databaseSqlCount+="and company='EP' ";
     	}
-    	if (groundCheckBox==true) {
-    		databaseSqlCount+="and rs_type='GD' ";
+    	if (groundCheckBox.equals("true")) {
+    		databaseSqlCount+="and company='GD' ";
     	}
+       	if (normalCheckBox.equals("true") && mfRetireCheckBox.equals("false")) {
+    		databaseSqlCount+="and worktype='NORMAL' ";
+    	}
+       	if (mfRetireCheckBox.equals("true") && normalCheckBox.equals("false")) {
+    		databaseSqlCount+="and worktype='MFRETIRE' ";
+    	}
+       	if (mfRetireCheckBox.equals("true") && normalCheckBox.equals("true")) {
+    		databaseSqlCount+="and worktype in ('MFRETIRE','NORMAL') ";
+    	}
+       	
     	
     	
 
     	try {
         //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
     		 stmt = GTMcon.createStatement();
+    		 System.out.println(databaseSqlCount);
         	 rs = stmt.executeQuery(databaseSqlCount);
         	 
         	 while(rs.next()) {
-        		 System.out.println(rs.getInt("total"));
-        		 total=rs.getInt("total");
+        		 rowCount++;
+        		 rebillDataArray.add(new rebillData(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16)));
         	 }
-        
+        	 colCount=17;
     	}
     	catch(Exception e) {
     		System.out.println(e);
     	}
-		return total;
+
+    	for (int i=0;i<rebillDataArray.size();i++) {
+    		System.out.println(rebillDataArray.get(i).getString());
+    	
+    	}
+    	
 	}
 	
 	
 	
     @DataProvider(name = "data-provider1")
     public synchronized Object[][] dataProviderMethod1() { 
+    	Object [][] obj= new Object[totalRows1][colCount];;
+try {
     	String tempString="";
-    	Object [][] obj = new Object[totalRows1][colCount];
+    	
     	int objCount=0;
     	for(int i=1;i<=rowCount;i+=4) {
     		for(int j=0;j<colCount-1;j++) {
+    				if(source.equals("excel")) {
     				tempString=excelVar.getCellData(i, j);
-    					if (tempString.equals("null")){
+    				}
+    				else if (source.equals("db")) {
+    					
+    					
+    					switch(j) {
+    					case 0:
+    					tempString=rebillDataArray.get(i-1).getResult();
+    					break;
+    					case 1:
+        					tempString=rebillDataArray.get(i-1).getDescription();
+        					break;
+    					case 2:
+        					tempString=rebillDataArray.get(i-1).getTest_input_nbr();
+        					break;
+    					case 3:
+        					tempString=rebillDataArray.get(i-1).getTin_count();
+        					break;
+    					case 4:
+        					tempString=rebillDataArray.get(i-1).getTrkngnbr();
+        					break;
+    					case 5:
+        					tempString=rebillDataArray.get(i-1).getReason_code();
+        					break;
+    					case 6:
+        					tempString=rebillDataArray.get(i-1).getRebill_acct();
+        					break;
+    					case 7:
+        					tempString=rebillDataArray.get(i-1).getInvoice_nbr_1();
+        					break;
+    					case 8:
+        					tempString=rebillDataArray.get(i-1).getInvoice_nbr_2();
+        					break;
+    					case 9:
+        					tempString=rebillDataArray.get(i-1).getMig();
+        					break;
+    					case 10:
+        					tempString=rebillDataArray.get(i-1).getRegion();
+        					break;
+    					case 11:
+        					tempString=rebillDataArray.get(i-1).getLogin();
+        					break;
+    					case 12:
+        					tempString=rebillDataArray.get(i-1).getPassword();
+        					break;
+    					case 13:
+        					tempString=rebillDataArray.get(i-1).getRsType();
+        					break;
+    					case 14:
+        					tempString=rebillDataArray.get(i-1).getCompany();
+        					break;
+    					case 15:
+        					tempString=rebillDataArray.get(i-1).getWorktype();
+        					break;
+    					
+    					}
+    				
+    				
+    				}
+    					if (tempString == null || tempString.equals("null")){
     						tempString="";
     					}
     				obj[objCount][j]=tempString;
@@ -321,10 +437,12 @@ public class testngRebillSlow {
     		}
     		obj[objCount][colCount-1]=i;
     		objCount++;
-    	}
-
+    	}  	
+}catch(Exception e) {
+	System.out.println(e);
+}
     	return obj;
-    
+
     }
     
     
@@ -343,8 +461,67 @@ public class testngRebillSlow {
     	int objCount=0;
     	for(int i=2;i<=rowCount;i+=4) {
     		for(int j=0;j<colCount-1;j++) {	
-				tempString=excelVar.getCellData(i, j);
-					if (tempString.equals("null")){
+    			if(source.equals("excel")) {
+    				tempString=excelVar.getCellData(i, j);
+    				}
+    				else if (source.equals("db")) {
+    					
+    					
+    					switch(j) {
+    					case 0:
+    					tempString=rebillDataArray.get(i-1).getResult();
+    					break;
+    					case 1:
+        					tempString=rebillDataArray.get(i-1).getDescription();
+        					break;
+    					case 2:
+        					tempString=rebillDataArray.get(i-1).getTest_input_nbr();
+        					break;
+    					case 3:
+        					tempString=rebillDataArray.get(i-1).getTin_count();
+        					break;
+    					case 4:
+        					tempString=rebillDataArray.get(i-1).getTrkngnbr();
+        					break;
+    					case 5:
+        					tempString=rebillDataArray.get(i-1).getReason_code();
+        					break;
+    					case 6:
+        					tempString=rebillDataArray.get(i-1).getRebill_acct();
+        					break;
+    					case 7:
+        					tempString=rebillDataArray.get(i-1).getInvoice_nbr_1();
+        					break;
+    					case 8:
+        					tempString=rebillDataArray.get(i-1).getInvoice_nbr_2();
+        					break;
+    					case 9:
+        					tempString=rebillDataArray.get(i-1).getMig();
+        					break;
+    					case 10:
+        					tempString=rebillDataArray.get(i-1).getRegion();
+        					break;
+    					case 11:
+        					tempString=rebillDataArray.get(i-1).getLogin();
+        					break;
+    					case 12:
+        					tempString=rebillDataArray.get(i-1).getPassword();
+        					break;
+    					case 13:
+        					tempString=rebillDataArray.get(i-1).getRsType();
+        					break;
+    					case 14:
+        					tempString=rebillDataArray.get(i-1).getCompany();
+        					break;
+    					case 15:
+        					tempString=rebillDataArray.get(i-1).getWorktype();
+        					break;
+    					
+    					}
+    				
+    				
+    				}
+					if (tempString == null || tempString.equals("null")){
 						tempString="";
 					}
 				obj[objCount][j]=tempString;
@@ -364,8 +541,67 @@ public class testngRebillSlow {
     	int objCount=0;
     	for(int i=3;i<=rowCount;i+=4) {
     		for(int j=0;j<colCount-1;j++) {
-				tempString=excelVar.getCellData(i, j);
-					if (tempString.equals("null")){
+    			if(source.equals("excel")) {
+    				tempString=excelVar.getCellData(i, j);
+    				}
+    				else if (source.equals("db")) {
+    					
+    					
+    					switch(j) {
+    					case 0:
+    					tempString=rebillDataArray.get(i-1).getResult();
+    					break;
+    					case 1:
+        					tempString=rebillDataArray.get(i-1).getDescription();
+        					break;
+    					case 2:
+        					tempString=rebillDataArray.get(i-1).getTest_input_nbr();
+        					break;
+    					case 3:
+        					tempString=rebillDataArray.get(i-1).getTin_count();
+        					break;
+    					case 4:
+        					tempString=rebillDataArray.get(i-1).getTrkngnbr();
+        					break;
+    					case 5:
+        					tempString=rebillDataArray.get(i-1).getReason_code();
+        					break;
+    					case 6:
+        					tempString=rebillDataArray.get(i-1).getRebill_acct();
+        					break;
+    					case 7:
+        					tempString=rebillDataArray.get(i-1).getInvoice_nbr_1();
+        					break;
+    					case 8:
+        					tempString=rebillDataArray.get(i-1).getInvoice_nbr_2();
+        					break;
+    					case 9:
+        					tempString=rebillDataArray.get(i-1).getMig();
+        					break;
+    					case 10:
+        					tempString=rebillDataArray.get(i-1).getRegion();
+        					break;
+    					case 11:
+        					tempString=rebillDataArray.get(i-1).getLogin();
+        					break;
+    					case 12:
+        					tempString=rebillDataArray.get(i-1).getPassword();
+        					break;
+    					case 13:
+        					tempString=rebillDataArray.get(i-1).getRsType();
+        					break;
+    					case 14:
+        					tempString=rebillDataArray.get(i-1).getCompany();
+        					break;
+    					case 15:
+        					tempString=rebillDataArray.get(i-1).getWorktype();
+        					break;
+    					
+    					}
+    				
+    				
+    				}
+					if (tempString == null || tempString.equals("null")){
 						tempString="";
 					}
 				obj[objCount][j]=tempString;
@@ -385,8 +621,67 @@ public class testngRebillSlow {
     	int objCount=0;
     	for(int i=4;i<=rowCount;i+=4) {
     		for(int j=0;j<colCount-1;j++) {
-				tempString=excelVar.getCellData(i, j);
-					if (tempString.equals("null")){
+    			if(source.equals("excel")) {
+    				tempString=excelVar.getCellData(i, j);
+    				}
+    				else if (source.equals("db")) {
+    					
+    					
+    					switch(j) {
+    					case 0:
+    					tempString=rebillDataArray.get(i-1).getResult();
+    					break;
+    					case 1:
+        					tempString=rebillDataArray.get(i-1).getDescription();
+        					break;
+    					case 2:
+        					tempString=rebillDataArray.get(i-1).getTest_input_nbr();
+        					break;
+    					case 3:
+        					tempString=rebillDataArray.get(i-1).getTin_count();
+        					break;
+    					case 4:
+        					tempString=rebillDataArray.get(i-1).getTrkngnbr();
+        					break;
+    					case 5:
+        					tempString=rebillDataArray.get(i-1).getReason_code();
+        					break;
+    					case 6:
+        					tempString=rebillDataArray.get(i-1).getRebill_acct();
+        					break;
+    					case 7:
+        					tempString=rebillDataArray.get(i-1).getInvoice_nbr_1();
+        					break;
+    					case 8:
+        					tempString=rebillDataArray.get(i-1).getInvoice_nbr_2();
+        					break;
+    					case 9:
+        					tempString=rebillDataArray.get(i-1).getMig();
+        					break;
+    					case 10:
+        					tempString=rebillDataArray.get(i-1).getRegion();
+        					break;
+    					case 11:
+        					tempString=rebillDataArray.get(i-1).getLogin();
+        					break;
+    					case 12:
+        					tempString=rebillDataArray.get(i-1).getPassword();
+        					break;
+    					case 13:
+        					tempString=rebillDataArray.get(i-1).getRsType();
+        					break;
+    					case 14:
+        					tempString=rebillDataArray.get(i-1).getCompany();
+        					break;
+    					case 15:
+        					tempString=rebillDataArray.get(i-1).getWorktype();
+        					break;
+    					
+    					}
+    				
+    				
+    				}
+					if (tempString == null || tempString.equals("null")){
 						tempString="";
 					}
 				obj[objCount][j]=tempString;
@@ -412,9 +707,10 @@ public class testngRebillSlow {
     	//Will Check if Trk is already successful;
   	  String[] resultArray = validateResults(trk);
   	  if ( resultArray[0].equals("pass")){
-       	 
+       	 if(source.equals("excel")) {
        	 writeToExcel(rowNumber, 0,"pass");
        	 writeToExcel(rowNumber, 1,"completed");
+       	 }
        	 return;
         }
     	
@@ -466,9 +762,10 @@ public class testngRebillSlow {
     	//Will Check if Trk is already successful;
   	  String[] resultArray = validateResults(trk);
   	  if ( resultArray[0].equals("pass")){
-       	 
+  		 if(source.equals("excel")) {
        	 writeToExcel(rowNumber, 0,"pass");
        	 writeToExcel(rowNumber, 1,"completed");
+  		 }
        	 return;
         }
   	  
@@ -516,9 +813,10 @@ public class testngRebillSlow {
     	//Will Check if Trk is already successful;
   	  String[] resultArray = validateResults(trk);
   	  if ( resultArray[0].equals("pass")){
-       	 
+  		 if(source.equals("excel")) {
        	 writeToExcel(rowNumber, 0,"pass");
        	 writeToExcel(rowNumber, 1,"completed");
+  		 }
        	 return;
         }
     	try { 
@@ -569,9 +867,10 @@ public class testngRebillSlow {
     	//Will Check if Trk is already successful;
     	  String[] resultArray = validateResults(trk);
     	  if ( resultArray[0].equals("pass")){
-         	 
+    			 if(source.equals("excel")) {
          	 writeToExcel(rowNumber, 0,"pass");
          	 writeToExcel(rowNumber, 1,"completed");
+    			 }
          	 return;
           }
     	try { 
@@ -1006,9 +1305,10 @@ public class testngRebillSlow {
              
              
              if ( resultArray[0].equals("pass")){
-            	 
+            	 if(source.equals("excel")) {
             	 writeToExcel(rowNumber, 0,"pass");
             	 writeToExcel(rowNumber, 1,"completed");
+            	 }
             	 if(uploadTrkToDB==true) {
                  	  writeToDB(testInputNbr,tinCount,trk,resultArray);
                  	 }
@@ -1064,16 +1364,19 @@ public class testngRebillSlow {
             	
             	  try {
             	  if (resultArray[0].equals("pass")){
-                 	 
+            			 if(source.equals("excel")) {
                  	 writeToExcel(rowNumber, 0,"pass");
                  	 writeToExcel(rowNumber, 1,"completed");
+            			 }
                 	 if(uploadTrkToDB==true) {
                      	  writeToDB(testInputNbr,tinCount,trk,resultArray);
                      	 }
                   }
                   if (resultArray[0].equals("fail")) {
+                		 if(source.equals("excel")) {
                 	  writeToExcel(rowNumber, 0,"fail");
                   	  writeToExcel(rowNumber, 1,resultArray[1]);
+                		 }
                   	 if(uploadTrkToDB==true) {
                   	  writeToDB(testInputNbr,tinCount,trk,resultArray);
                   	 }
@@ -1151,10 +1454,11 @@ public class testngRebillSlow {
     	try {
     	
     		if (level.equals("2")){
-       		 
-       		 con=c.getEraL2DbConnection();
+    			 c.setEraL2DbConnection();
+       		     con=c.getEraL2DbConnection();
        	 }
        	 else if (level.equals("3")){
+       		 	c.setEraL3DbConnection();
        		 con=c.getEraL3DbConnection();
        	 	}
     	

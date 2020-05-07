@@ -1,5 +1,8 @@
 package testingonly;
 import configuration.config;
+import rebill.rebillData;
+import rebill.testngRebillSlow;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.sql.Connection;
@@ -8,6 +11,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.testng.TestNG;
+import org.testng.xml.XmlClass;
+import org.testng.xml.XmlSuite;
+import org.testng.xml.XmlTest;
 
 public class Highest {
 
@@ -31,138 +43,97 @@ public class Highest {
 	static String source;
 	static int totalMod;
 	static String databaseSqlQuery,databaseSqlCount;
-	
+	static ArrayList<rebillData> rebillDataArray= new ArrayList<rebillData>();
     public static void main(String[] args) {
-     
-     source="db";
-   	 allCheckBox=false;
-   	 nullCheckBox=true;
-   	 failedCheckBox=true;
-   	 domesticCheckBox=true;
-   	 internationalCheckBox=false;
-   	 expressCheckBox=false;
-   	 groundCheckBox=true;
-   	 
-   	 
-   	 
-  	if(source.contentEquals("excel")) {
-    	
-    	}
-    	else if(source.contentEquals("db")) {
-    	
-    		rowCount=getDbCount();
-    	
-    	}
-    	total= rowCount/4;
-    	totalMod=rowCount%4;
-    	totalRows1=total;
-    	totalRows2=total;
-    	totalRows3=total;
-    	totalRows4=total;
-    	
-    	switch(totalMod) {
-	    	case 1:
-	    		totalRows1++;
-	    		break;
-	    	case 2 :
-	    		totalRows1++;
-	    		totalRows2++;
-	    		break;
-	    	case 3:
-	    		totalRows1++;
-	    		totalRows2++;
-	    		totalRows3++;
-	    		break;
-    	
-    	}	
-
-    	
-        if (level.equals("2"))
-    	{
-    		//levelUrl="https://testsso.secure.fedex.com/L2/eRA/index.html";
-    		//c.setEraL2DbConnection();
-    	}
-    	else if (level.equals("3"))
-    	{
-    		//levelUrl="https://testsso.secure.fedex.com/L3/eRA/index.html";
-    		//c.setEraL3DbConnection();
-    	}
-        
-        
-        
-       
-    }
-    
-    public static int getDbCount() {
-		Connection GTMcon=null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		int total=0;
-    	try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
-			
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+     try {
+    	config c = new config();
+    	//rebillMain rm = new rebillMain(c);
+		String filepath;
+		c.setSource("db");
+		String source =c.getSource();
+		if (c.getSource().equals("db")) {
+			 filepath="";
 		}
+		else if (c.getSource().equals("excel")) {
+		 filepath=c.getExcelPath();
+		}
+		c.setLevel("2");
+		String level=c.getLevel();
+		String broswer=c.getDriverType();
+		String compatibleMode=c.getCompatibleMode();
+	
 		
-    	
-      	 allCheckBox=false;
-    	 nullCheckBox=true;
-    	 failedCheckBox=true;
-    	 domesticCheckBox=true;
-    	 internationalCheckBox=false;
-    	 expressCheckBox=false;
-    	 groundCheckBox=true;
-    	 
-    	 databaseSqlCount="select count(*) as total from rebill regression ";
-    	
-    	if (allCheckBox==false) {
-    		databaseSqlCount+="where ";
-    	}
-    	if (nullCheckBox==true && failedCheckBox==true) {
-    		databaseSqlCount+=" (result is null or result ='failed') ";
-    	}
-    	if (nullCheckBox==true && failedCheckBox==false) {
-    		databaseSqlCount+="result is null ";
-    	}
-    	if (nullCheckBox==false && failedCheckBox==true) {
-    		databaseSqlCount+="result ='failed' ";
-    	}
-    	if (domesticCheckBox==true) {
-    		databaseSqlCount+="and rs_type='DM' ";
-    	}
-    	if (internationalCheckBox==true) {
-    		databaseSqlCount+="and rs_type='IL' ";
-    	}
-    	if (expressCheckBox==true) {
-    		databaseSqlCount+="and company='EP' ";
-    	}
-    	if (groundCheckBox==true) {
-    		databaseSqlCount+="and rs_type='GD' ";
-    	}
-    	
-    	
-
-    	try {
-        //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
-    		 stmt = GTMcon.createStatement();
-        	 rs = stmt.executeQuery(databaseSqlCount);
-        	 
-        	 while(rs.next()) {
-        		 System.out.println(rs.getInt("total"));
-        		 total=rs.getInt("total");
-        	 }
+		c.setAllCheckBox("false");
+		c.setNullCheckBox("true");
+		c.setFailedCheckBox("true");
+		c.setDomesticCheckBox("true");
+		c.setInternationalCheckBox("false");
+		c.setExpressCheckBox("false");
+		c.setGroundCheckBox("true");
+		c.setNormalCheckBox("true");
+		c.setMfRetireCheckBox("false");
+		
+		String allCheckBox=c.getAllCheckBox();
+		String nullCheckBox=c.getNullCheckBox();
+		String failedCheckBox=c.getFailedCheckBox();
+		String domesticCheckBox=c.getDomesticCheckBox();
+		String internationalCheckBox=c.getInternationalCheckBox();
+		String expressCheckBox=c.getExpressCheckBox();
+		String groundCheckBox=c.getGroundCheckBox();
+		String normalCheckBox=c.getNormalCheckBox();
+		String mfRetireCheckBox=c.getMfRetireCheckBox();
+		
+        XmlSuite xmlSuite = new XmlSuite();
+        xmlSuite.setName("Sample_Suite");
+        Map<String, String> fieldValues = new HashMap<>();
+       
+        fieldValues.put("filepath", "");  
+        fieldValues.put("level", level);
+        fieldValues.put("browser", "2");
+        fieldValues.put("source", source);
+        fieldValues.put("compatibleMode", "");
+        fieldValues.put("allCheckBox", allCheckBox);
+        fieldValues.put("nullCheckBox", nullCheckBox);
+        fieldValues.put("failedCheckBox", failedCheckBox);
+        fieldValues.put("domesticCheckBox", domesticCheckBox);
+        fieldValues.put("internationalCheckBox", internationalCheckBox);
+        fieldValues.put("expressCheckBox", expressCheckBox);
+        fieldValues.put("groundCheckBox", groundCheckBox);
+        fieldValues.put("normalCheckBox", normalCheckBox);
+        fieldValues.put("mfRetireCheckBox",mfRetireCheckBox);
         
-    	}
-    	catch(Exception e) {
-    		System.out.println(e);
-    	}
-		return total;
+        /*
+        fieldValues.put("filepath", "");
+        fieldValues.put("level", "");
+        fieldValues.put("broswer", "");
+        fieldValues.put("source", "");
+        fieldValues.put("compatibleMode", "");
+        fieldValues.put("allCheckBox", "");
+        fieldValues.put("nullCheckBox", "");
+        fieldValues.put("failedCheckBox", "");
+        fieldValues.put("domesticCheckBox", "");
+        fieldValues.put("internationalCheckBox", "");
+        fieldValues.put("expressCheckBox", "");
+        fieldValues.put("groundCheckBox", "");
+        fieldValues.put("normalCheckBox", "");
+        fieldValues.put("mfRetireCheckBox","");
+        
+        */
+        xmlSuite.setParameters(fieldValues);
+        XmlTest xmlTest = new XmlTest(xmlSuite);
+        xmlTest.setName("Rebill Test");
+        //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
+        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testngRebillSlow.class)));
+        xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
+        TestNG tng = new TestNG();
+        tng.setXmlSuites(Collections.singletonList(xmlSuite));
+        tng.run();
+     }
+     catch(Exception e) {
+    	 System.out.println(e);
+     }
+    	
+    	
 	}
 
 }

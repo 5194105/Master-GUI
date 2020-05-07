@@ -38,6 +38,15 @@ public class rebillData {
          this.worktype=worktype;
 	}
 	
+	
+	public String getMig() {
+        return mig;
+    }
+
+    public void setMig(String mig) {
+        this.mig = mig;
+    }
+	
 	public String getResult() {
         return result;
     }
