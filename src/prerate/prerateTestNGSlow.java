@@ -7,7 +7,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -31,8 +33,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import configuration.config;
 import configuration.excel;
+
 
 public class prerateTestNGSlow {
   
@@ -50,7 +52,7 @@ public class prerateTestNGSlow {
 	Object o;
 	WebDriverWait wait1,wait2,wait3,wait4;
 	
-	config c;
+	
 	int count1,count2,count3,count4 ;
 	String  sh1;
 	String filepath;
@@ -68,7 +70,7 @@ public class prerateTestNGSlow {
 	boolean flag2 ;
 
 	Boolean isChecked1=false,isChecked2=false,isChecked3=false,isChecked4=false;
-    Boolean compatibleMode;
+    String compatibleMode;
     Boolean chrome;
     String  homePath=System.getProperty("user.dir");
     String browser;
@@ -106,23 +108,46 @@ public class prerateTestNGSlow {
 	String cm4;
 	int totalMod;
 	String level;
-		
-
-	/*
-	@BeforeClass
-	@Parameters({"filepathExcelParameter","levelParameter","broswerParameter","compatibleModeParameter"})
-	public void setupExcel(String filepathExcelParameter,String levelParameter,String broswerParameter,Boolean compatibleModeParameter) {
-  */
+	
+	String allCheckBox;
+	String nullCheckBox;
+	String failedCheckBox;
+	String domesticCheckBox;
+	String internationalCheckBox;
+	String expressCheckBox;
+	String groundCheckBox;
+	String normalCheckBox;
+	String mfRetireCheckBox;
+	String source;
+	
+	String[][] allData;
 	
 	@BeforeClass
+	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox"})
+	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox) {
+		this.filepath=filepath;
+		this.level=level;
+		this.browser=browser;
+		this.compatibleMode=compatibleMode;
+		this.source=source;
+		this.allCheckBox=allCheckBox;
+		this.nullCheckBox=nullCheckBox;
+		this.failedCheckBox=failedCheckBox;
+	/*
+	@BeforeClass
 	public void setupExcel() {
-		testingMode=true;
+	*/
+		testingMode=false;
 		homeComputer=false;
 		if (testingMode==true) {
-		c = new config();
-		c.setEcL2DbConnection();
-		c.setEcL3DbConnection();
+		
 		}
+		
+		
+		
+		
+		
+		
 		
 		try {
 			Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe");
@@ -138,31 +163,45 @@ public class prerateTestNGSlow {
 			e.printStackTrace();
 		}
         
-        if (testingMode==true){
+        if (testingMode==true && source.equals("excel")){
         	browser="2";
         	level="2";
         	excelVar = new excel(homePath+"\\test data\\PRERATE_UPDATE.xlsx");
         }
-        else {
-        	/*
-        	excelVar = new excel(filepathExcelParameter);
-        	browser=broswerParameter;
-        	level=levelParameter;
-        	compatibleMode=compatibleModeParameter;
-        	*/
-        }
+	  
+    else {
+    	if (source.equals("db")) {}
+    	else if (source.equals("excel")) {
+    		excelVar = new excel(filepath);
+    	}
+    	
+    	this.browser=browser;
+    	this.level=level;
+    	this.compatibleMode=compatibleMode;
+    	this.source=source;
+    	this.allCheckBox=allCheckBox;
+		this.nullCheckBox=nullCheckBox;
+		this.failedCheckBox=failedCheckBox;
+	
+    	
+    }
+        
         
         
     	homePath=System.getProperty("user.dir");
     	System.out.println("homePath" +System.getProperty("user.dir"));
     	
-    	
+    	if (source.equals("excel")) {
     	excelVar.setUpExcelWorkbook();
     	excelVar.setUpExcelSheet(0);
     	excelVar.setRowCountAutomatically(0);
     	excelVar.setColCountAutomatically(0);
     	rowCount=excelVar.getRowCount();
     	colCount=excelVar.getColCount()+1;
+    	}
+    	else if (source.equals("db")) {
+    		runDbQuery();
+    	}
     	total= rowCount/4;
     	totalMod=rowCount%4;
     	totalRows1=total;
@@ -203,6 +242,102 @@ public class prerateTestNGSlow {
 	
 	
 	
+	
+	public void runDbQuery() {
+		Connection GTMcon=null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		 ResultSetMetaData rsmd=null;
+
+	
+    	try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
+			
+			
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+  	 String databaseSqlCount="select count(*) as total from prerate_view ";
+  	 String databaseSqlQuery="select PRE_RATE_TYPE_CD, DESCRIPTION,POD_SCAN ,TIN_COUNT ,TEST_INPUT_NBR ,TRKNGNBR ,PRERATE_AMT, CURRENCY_CD, APPROVER_ID ,CHRG_CD1 ,CHRG_AMT1 ,CHRG_CD2 ,CHRG_AMT2 ,CHRG_CD3, CHRG_AMT3, CHRG_CD4, CHRG_AMT4 from prerate_view ";
+    
+    	if (allCheckBox.equals("false")) {
+    		databaseSqlCount+="where trkngnbr is not null and ";
+    		databaseSqlQuery+="where trkngnbr is not null and ";
+    	}
+    
+    	 if (allCheckBox.equals("true")) {
+     		databaseSqlCount+="where trkngnbr is not null  ";
+     		databaseSqlQuery+="where trkngnbr is not null   ";
+     	}
+    	if (nullCheckBox.equals("true") && failedCheckBox.equals("true")) {
+    		databaseSqlCount+="(result is null or result ='fail') ";
+    		databaseSqlQuery+="(result is null or result ='fail') ";
+    	}
+    	if (nullCheckBox.equals("true") && failedCheckBox.equals("false")) {
+    		databaseSqlCount+="result is null ";
+    		databaseSqlQuery+="result is null ";
+    	}
+    	if (nullCheckBox.equals("false") && failedCheckBox.equals("true")) {
+    		databaseSqlCount+="result ='fail' ";
+    		databaseSqlQuery+="result ='fail' ";
+    
+    	}
+       	
+    	
+    	
+
+    	try {
+        //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
+    		
+    		stmt = GTMcon.createStatement();
+    		System.out.println(databaseSqlCount);
+        	rs = stmt.executeQuery(databaseSqlCount);
+        	rs.next();
+        	rowCount=rs.getInt("total");
+        	stmt.close();
+        	rs.close();
+        	
+        	stmt = GTMcon.createStatement();
+    		System.out.println(databaseSqlQuery);
+        	rs = stmt.executeQuery(databaseSqlQuery);
+        	rsmd = rs.getMetaData();
+        	colCount = rsmd.getColumnCount()+1;
+        	int rowCountTemp=0;
+        	allData = new String[rowCount][colCount+1];
+        	 
+        	 while(rs.next()) {
+        	//	 rowCount++;
+        		// rebillDataArray.add(new rebillData(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16)));
+        		 for (int i=1;i<colCount;i++) {
+        			System.out.println(rs.getString(i));
+        			if (rs.getString(i)==null) {
+        				allData[rowCountTemp][i-1]="";
+        			}
+        			else {
+        			 allData[rowCountTemp][i-1]=rs.getString(i);
+        			}
+        		 }
+        		 rowCountTemp++; 
+        	 }
+        	 //colCount=17;
+    	}
+    	catch(Exception e) {
+    		System.out.println(e);
+    	}
+
+    	
+	}
+	
+	
+	
+	
+	
     @DataProvider(name = "data-provider1")
     public synchronized Object[][] dataProviderMethod1() { 
     	String tempString="";
@@ -210,7 +345,13 @@ public class prerateTestNGSlow {
     	int objCount=0;
     	for(int i=1;i<=rowCount;i+=4) {
     		for(int j=0;j<colCount-1;j++) {
-    				tempString=excelVar.getCellData(i, j);
+    			if (source.equals("excel")) {	
+    			tempString=excelVar.getCellData(i, j);
+    			}
+    			else if (source.equals("db")) {
+    				tempString=allData[i-1][j];
+    			}
+    			
     					if (tempString.equals("null")){
     						tempString="";
     					}
@@ -241,7 +382,12 @@ public class prerateTestNGSlow {
     	int objCount=0;
     	for(int i=2;i<=rowCount;i+=4) {
     		for(int j=0;j<colCount-1;j++) {	
-				tempString=excelVar.getCellData(i, j);
+    			if (source.equals("excel")) {	
+        			tempString=excelVar.getCellData(i, j);
+        			}
+        			else if (source.equals("db")) {
+        				tempString=allData[i-1][j];
+        			}
 					if (tempString.equals("null")){
 						tempString="";
 					}
@@ -262,7 +408,12 @@ public class prerateTestNGSlow {
     	int objCount=0;
     	for(int i=3;i<=rowCount;i+=4) {
     		for(int j=0;j<colCount-1;j++) {
-				tempString=excelVar.getCellData(i, j);
+    			if (source.equals("excel")) {	
+        			tempString=excelVar.getCellData(i, j);
+        			}
+        			else if (source.equals("db")) {
+        				tempString=allData[i-1][j];
+        			}
 					if (tempString.equals("null")){
 						tempString="";
 					}
@@ -283,7 +434,12 @@ public class prerateTestNGSlow {
     	int objCount=0;
     	for(int i=4;i<=rowCount;i+=4) {
     		for(int j=0;j<colCount-1;j++) {
-				tempString=excelVar.getCellData(i, j);
+    			if (source.equals("excel")) {	
+        			tempString=excelVar.getCellData(i, j);
+        			}
+        			else if (source.equals("db")) {
+        				tempString=allData[i-1][j];
+        			}
 					if (tempString.equals("null")){
 						tempString="";
 					}
@@ -308,7 +464,9 @@ public class prerateTestNGSlow {
     	System.out.println();
     	 try {
       	  if (validateEC(trk)==true){
-      		 writeToExcel(rowNumber,1, "pass");
+      		if (source.equals("excel")) {
+      		  writeToExcel(rowNumber,1, "pass");
+      		}
       		 String[] resultArray = new String[2];
 			 resultArray[0]="pass";
 			 resultArray[1]="completed";
@@ -329,7 +487,7 @@ public class prerateTestNGSlow {
 		  
 	  }
     	if (browser.equals("1")) {
-    		if (c.getCompatibleMode().equals("true")) {	
+    		if (compatibleMode.equals("true")) {	
     			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
     		    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
     		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
@@ -386,7 +544,7 @@ public class prerateTestNGSlow {
 	  }
 	  
     	if (browser.equals("1")) {
-    		if (c.getCompatibleMode().equals("true")) {	
+    		if (compatibleMode.equals("true")) {	
     			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
     		    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
     		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
@@ -440,7 +598,7 @@ public class prerateTestNGSlow {
 	  }
 	  
     	if (browser.equals("1")) {
-    		if (c.getCompatibleMode().equals("true")) {	
+    		if (compatibleMode.equals("true")) {	
     			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
     		    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
     		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
@@ -500,7 +658,7 @@ public class prerateTestNGSlow {
 	  }
 	  
     	if (browser.equals("1")) {
-    		if (c.getCompatibleMode().equals("true")) {	
+    		if (compatibleMode.equals("true")) {	
     			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
     		    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
     		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
@@ -737,29 +895,19 @@ public class prerateTestNGSlow {
 				 resultArray[0]="fail";
 				 resultArray[1]=errorMessage;
 				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-				Assert.fail(errorMessage);
+				 Assert.fail(errorMessage);
 				}
 			catch(Exception ee) {
 				System.out.println("Didnt find error message from dropdown menu...");
-				driver.findElement(By.xpath("//button[@id='preRateEntryForm:PreRateEntrySubmit_button']")).click();
-				writeToExcel(rowNumber,1, "Failed selecting dropdown menu...");
-				Assert.fail("Failed selecting dropdown menu...");
+				//driver.findElement(By.xpath("//button[@id='preRateEntryForm:PreRateEntrySubmit_button']")).click();
+					writeToExcel(rowNumber,1, "Failed selecting dropdown menu...");
+					String[] resultArray = new String[2];
+					resultArray[0]="fail";
+					resultArray[1]="Failed selecting dropdown menu...";
+					writeToDB(testInputNbr,tinCount,trk,resultArray);
+					Assert.fail("Failed selecting dropdown menu...");
 			}
-			/*
-			driver.findElement(By.xpath("//button[@id='preRateEntryForm:PreRateEntrySubmit_button']")).click();
-			writeToExcel(rowNumber,1, "Failed selecting dropdown menu...");
 			
-			 if (validateEC(trk)==true && homeComputer==false) {
-				 writeToExcel(rowNumber,1, "Passed");
-				 String[] resultArray = new String[2];
-				 resultArray[0]="pass";
-				 resultArray[1]="completed";
-				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-				 return;
-			 }
-			 
-			Assert.fail("Failed selecting dropdown menu...");
-			*/
 		}
 		
 		try {
@@ -914,14 +1062,18 @@ public class prerateTestNGSlow {
 			webElementTemp=By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[6]/td/table/tbody/tr[2]/td/span/span/span/span[2]");
 			errorMessage=driver.findElement(webElementTemp).getText();
 			 if (validateEC(trk)==true && homeComputer==false) {
+				
 				 writeToExcel(rowNumber,1, "pass");
+				 
 				 String[] resultArray = new String[2];
 				 resultArray[0]="pass";
 				 resultArray[1]="completed";
 				 writeToDB(testInputNbr,tinCount,trk,resultArray);
 				 return;
 			 }
-			writeToExcel(rowNumber,1, errorMessage);
+			 
+			 writeToExcel(rowNumber,1, errorMessage);
+			 
 			 String[] resultArray = new String[2];
 			 resultArray[0]="fail";
 			 resultArray[1]=errorMessage;
@@ -942,14 +1094,18 @@ public class prerateTestNGSlow {
 			webElementTemp=By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[4]/td/span/div/div[1]/div[2]/div/table[2]/tbody/tr/td/span/span/span/span[2]");
 			errorMessage=driver.findElement(webElementTemp).getText();
 			 if (validateEC(trk)==true && homeComputer==false) {
+				
 				 writeToExcel(rowNumber,1, "pass");
+				 
 				 String[] resultArray = new String[2];
 				 resultArray[0]="pass";
 				 resultArray[1]="completed";
 				 writeToDB(testInputNbr,tinCount,trk,resultArray);
 				 return;
 			 }
-			writeToExcel(rowNumber,1, errorMessage);
+			 
+			 writeToExcel(rowNumber,1, errorMessage);
+			 
 			 String[] resultArray = new String[2];
 			 resultArray[0]="fail";
 			 resultArray[1]=errorMessage;
@@ -965,15 +1121,18 @@ public class prerateTestNGSlow {
 		
 		try {
 			//Actually Should not reach here.
-			 if (validateEC(trk)==true && homeComputer==false) {
-				 writeToExcel(rowNumber,1, "Passed");
+			
+			if (validateEC(trk)==true && homeComputer==false) {
+				
+				writeToExcel(rowNumber,1, "Passed");
+				
 				 String[] resultArray = new String[2];
 				 resultArray[0]="pass";
 				 resultArray[1]="completed";
 				 writeToDB(testInputNbr,tinCount,trk,resultArray);
 				 return;
 			 }
-			writeToExcel(rowNumber,1,"Failed Somewhere... No Error Found Tho");
+			 writeToExcel(rowNumber,1,"Failed Somewhere... No Error Found Tho");
 			 String[] resultArray = new String[2];
 			 resultArray[0]="fail";
 			 resultArray[1]="Failed Somewhere... No Error Found Tho";
@@ -990,9 +1149,10 @@ public class prerateTestNGSlow {
     
     
 	public synchronized void writeToExcel(int rowCountExcel,int colCountExcel,String outputString){
-		
+		if (source.equals("excel")) {
 		excelVar.setCellData(rowCountExcel, colCountExcel, outputString);
 		excelVar.writeCellData();
+		}
 	}
 	
 	
@@ -1064,19 +1224,28 @@ public class prerateTestNGSlow {
 	
 public  Boolean validateEC(String trkngnbr){
 	Boolean result=null;
-	Connection con = null;
+	
 	PreparedStatement ps = null;
+	Connection ecCon= null;
  if (level.equals("2")){
        // con=c.getOreL2DbConnection();
-        con=c.getEcL2DbConnection();
+       // con=c.getEcL2DbConnection();
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			ecCon=DriverManager.getConnection("jdbc:oracle:thin:@//idb00271.ute.fedex.com:1526/IE2VD991","test_readonly", "perftest");
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
  }
  else if  (level.equals("3")){
 	// con=c.getOreL2DbConnection();
-	 con=c.getEcL3DbConnection();
+	// con=c.getEcL3DbConnection();
 }
 
 try {
-	ps = con.prepareStatement("select * from ec_intl_schema.ec_pre_rate_history where pkg_trkng_nbr =?");
+	ps = ecCon.prepareStatement("select * from ec_intl_schema.ec_pre_rate_history where pkg_trkng_nbr =?");
 } catch (SQLException e) {
 	// TODO Auto-generated catch block
 	System.out.println(e);
@@ -1153,13 +1322,17 @@ try {
 				try {
 					driver.manage().timeouts().implicitlyWait(waitTimeShort,TimeUnit.SECONDS);
 					oldString=driver.findElement(elementOld).getText();
+				
 					writeToExcel(rowNumber,1, oldString);
+				
 					Assert.fail(oldString);
 				
 				}
 				catch(Exception e) {
 					System.out.println("Could not find prerate input page...");
+					if (source.equals("excel")) {
 					writeToExcel(rowNumber,1, "Unknown Error... Could not find prerate input page or Not Eligible Shipment Error");
+					}
 					Assert.fail("Unknown Error... Could not find prerate input page or Not Eligible Shipment Error");
 					}
 			}
@@ -1179,7 +1352,9 @@ try {
 						Assert.assertTrue(true);
 					}
 					*/
+					
 					writeToExcel(rowNumber,1, "Passed");
+					
 					Assert.assertTrue(true);
 					skip=true;
 				}
@@ -1193,7 +1368,9 @@ try {
 			try {
 				driver.manage().timeouts().implicitlyWait(waitTimeShort,TimeUnit.SECONDS);
 				oldString=driver.findElement(elementOld).getText();
+				
 				writeToExcel(rowNumber,1, oldString);
+				
 				Assert.fail(oldString);
 			}
 			catch(Exception e) {
@@ -1223,7 +1400,9 @@ try {
 			try {
 				driver.manage().timeouts().implicitlyWait(waitTimeShort,TimeUnit.SECONDS);
 				oldString=driver.findElement(elementOld).getText();
+				
 				writeToExcel(rowNumber,1, "Passed");
+				
 				Assert.fail(oldString);
 			}
 			catch(Exception e) {

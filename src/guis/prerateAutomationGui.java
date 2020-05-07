@@ -27,6 +27,8 @@ import configuration.mouse;
 public class prerateAutomationGui {
 
 	private JFrame frame;
+    private JLabel moreOptionsLabel;
+    private JLabel moreOptionsTextLabel;
 	    private JLabel label;
 	    private JLabel lblSource;
 	    private JLabel executeLabel;
@@ -68,7 +70,8 @@ public class prerateAutomationGui {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
-		
+		moreOptionsLabel = new JLabel("New label");
+		moreOptionsLabel.setBounds(650, 450, 50, 30);
 		
 		excelLabel = new JLabel("New label");
 		excelLabel.setBounds(300, 350, 78, 56);
@@ -82,7 +85,7 @@ public class prerateAutomationGui {
 		excelLabel.setName("excel");
 		dbLabel.setName("db");
 		executeLabel.setName("execute");
-		
+		moreOptionsLabel.setName("moreOptions");
 		
 		lblRerateAutomation = new JLabel("Prerate Automation");
 		lblRerateAutomation.setForeground(Color.WHITE);
@@ -170,6 +173,14 @@ public class prerateAutomationGui {
 		rdbtnHold.setBounds(610, 410, 150, 29);
 		frame.getContentPane().add(rdbtnHold);
 		
+		
+		moreOptionsTextLabel = new JLabel("Filter Options: ");
+		moreOptionsTextLabel.setForeground(Color.WHITE);
+		moreOptionsTextLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		moreOptionsTextLabel.setBounds(480, 450, 212, 29);
+		frame.getContentPane().add(moreOptionsTextLabel);
+		
+		
 		guiBase gb = new guiBase();
 		mouse m = new mouse(gb,g,c,this,frame);
 		m.setFrame(frame);
@@ -177,6 +188,7 @@ public class prerateAutomationGui {
 		m.addExcel(excelLabel);
 		m.addDb(dbLabel);
 		m.addExecute(executeLabel);
+		m.addMoreOptions(moreOptionsLabel);
 		m.setupBackground();
 
 		
@@ -189,7 +201,7 @@ public class prerateAutomationGui {
 		if (ie.isSelected()==true) {
 			c.setDriverType("1");
 		}
-		if (chrome.isSelected()==true) {
+		if (ie.isSelected()==true) {
 			c.setDriverType("2");
 		} 
 

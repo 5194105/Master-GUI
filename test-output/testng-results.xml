@@ -1,52 +1,397 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="0" passed="0">
+<testng-results skipped="0" failed="2" ignored="0" total="3" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="35" started-at="2020-05-07T03:48:47Z" finished-at="2020-05-07T03:48:47Z">
+  <suite name="Sample_Suite" duration-ms="47023" started-at="2020-05-07T19:07:57Z" finished-at="2020-05-07T19:08:44Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="35" started-at="2020-05-07T03:48:47Z" finished-at="2020-05-07T03:48:47Z">
-      <class name="rebill.testngRebillSlow">
-        <test-method status="FAIL" signature="setupExcel(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:rebill.testngRebillSlow@2f8f11]" name="setupExcel" is-config="true" duration-ms="0" started-at="2020-05-06T22:48:47Z" finished-at="2020-05-06T22:48:47Z">
-          <exception class="org.testng.TestNGException">
-            <message>
-              <![CDATA[
-Parameter 'filepath' is required by BeforeClass on method setupExcel but has not been marked @Optional or defined
-in C:\Users\FedExUser\AppData\Local\Temp\testng-eclipse-1995074512\testng-customsuite.xml]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.testng.TestNGException: 
-Parameter 'filepath' is required by BeforeClass on method setupExcel but has not been marked @Optional or defined
-in C:\Users\FedExUser\AppData\Local\Temp\testng-eclipse-1995074512\testng-customsuite.xml
-	at org.testng.internal.Parameters.createParameters(Parameters.java:199)
-	at org.testng.internal.Parameters.createParameters(Parameters.java:443)
-	at org.testng.internal.Parameters.createConfigurationParameters(Parameters.java:118)
-	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:206)
-	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:146)
-	at org.testng.internal.TestMethodWorker.invokeBeforeClassMethods(TestMethodWorker.java:166)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:105)
-	at org.testng.TestRunner.privateRun(TestRunner.java:744)
-	at org.testng.TestRunner.run(TestRunner.java:602)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
-	at org.testng.TestNG.runSuites(TestNG.java:1144)
-	at org.testng.TestNG.run(TestNG.java:1115)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.testng.TestNGException -->
+    <test name="Prerate Test" duration-ms="47023" started-at="2020-05-07T19:07:57Z" finished-at="2020-05-07T19:08:44Z">
+      <class name="prerate.prerateTestNGSlow">
+        <test-method status="PASS" signature="setupExcel(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:prerate.prerateTestNGSlow@aaffe9]" name="setupExcel" is-config="true" duration-ms="12810" started-at="2020-05-07T14:07:57Z" finished-at="2020-05-07T14:08:10Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[2]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[2]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[db]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupExcel -->
-      </class> <!-- rebill.testngRebillSlow -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+        <test-method status="FAIL" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@aaffe9]" name="testMethod1" duration-ms="33619" started-at="2020-05-07T14:08:10Z" data-provider="data-provider1" finished-at="2020-05-07T14:08:43Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ADDR CHANGE FEE]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[188106]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[794823155303]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[200]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[USD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[910808]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Failed selecting dropdown menu...]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Failed selecting dropdown menu...
+	at org.testng.Assert.fail(Assert.java:93)
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:908)
+	at prerate.prerateTestNGSlow.testMethod1(prerateTestNGSlow.java:510)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="PASS" signature="testMethod2(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@aaffe9]" name="testMethod2" duration-ms="1204" started-at="2020-05-07T14:08:10Z" data-provider="data-provider2" finished-at="2020-05-07T14:08:11Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ADDR CHANGE FEE]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[2]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[188762]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[459436646470]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[200]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[USD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[910808]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[2]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod2 -->
+        <test-method status="FAIL" signature="testMethod3(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@aaffe9]" name="testMethod3" duration-ms="34152" started-at="2020-05-07T14:08:10Z" data-provider="data-provider3" finished-at="2020-05-07T14:08:44Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ADDR CHANGE FEE]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[188805]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[459443895535]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[200]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[USD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[910808]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[3]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Failed selecting dropdown menu...]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Failed selecting dropdown menu...
+	at org.testng.Assert.fail(Assert.java:93)
+	at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:908)
+	at prerate.prerateTestNGSlow.testMethod3(prerateTestNGSlow.java:621)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod3 -->
+      </class> <!-- prerate.prerateTestNGSlow -->
+    </test> <!-- Prerate Test -->
+  </suite> <!-- Sample_Suite -->
 </testng-results>

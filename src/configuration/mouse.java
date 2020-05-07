@@ -24,6 +24,7 @@ import javax.swing.JTextField;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.TestNG;
+import org.testng.annotations.Parameters;
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
@@ -33,6 +34,7 @@ import guis.datapopAutomationGui;
 import guis.gui;
 import guis.guiBase;
 import guis.instantInvoiceAutomationGui;
+import guis.prerateAutomationExtendedGui;
 import guis.prerateAutomationGui;
 import guis.rebillAutomationExtendGUI;
 import guis.rebillAutomationGui;
@@ -612,6 +614,10 @@ public void setupMouseListener() {
 									rebillAutomationExtendGUI raeg= new rebillAutomationExtendGUI(g,c);
 							
 							}
+							if (obj.getClass().getCanonicalName().equals("guis.prerateAutomationGui")) {
+								prerateAutomationExtendedGui raeg= new prerateAutomationExtendedGui(g,c);
+						
+						}
 							}
 							
 						
@@ -864,21 +870,56 @@ public void setupMouseListener() {
 				    				JOptionPane.showMessageDialog(frame, "Started Prerate");
 				    				String filepath=c.getExcelPath();
 				    				String level=c.getLevel();
-				    				String broswer=c.getDriverType();
-				    				
+				    				String browser=c.getDriverType();
 				    				String compatibleMode=c.getCompatibleMode();
+				    				String source = c.getSource();
+				    				String allCheckBox=c.getAllCheckBox();
+				    				String nullCheckBox=c.getNullCheckBox();
+				    				String failedCheckBox=c.getFailedCheckBox();
+				    				
 				    				System.out.println("filepath"+" "+filepath);
 				    				System.out.println("level"+" "+level);
-				    				System.out.println("broswer"+" "+broswer);
+				    				System.out.println("broswer"+" "+browser);
 				    				System.out.println("compatibleMode"+" "+compatibleMode);
+				    				System.out.println("source"+" "+source);
+				    				System.out.println("allCheckBox"+" "+allCheckBox);
+				    				System.out.println("nullCheckBox"+" "+nullCheckBox);
+				    				System.out.println("failedCheckBox"+" "+failedCheckBox);
 				    			
+				    				if(filepath==null) {
+				    					filepath="";
+				    				}
+				    				if(level==null) {
+				    					level="";
+				    				}
+				    				if(browser==null) {
+				    					browser="";
+				    				}
+				    				if(compatibleMode==null) {
+				    					compatibleMode="";
+				    				}
+				    				if(allCheckBox==null) {
+				    					allCheckBox="";
+				    				}
+				    				if(nullCheckBox==null) {
+				    					nullCheckBox="";
+				    				}
+				    				if(failedCheckBox==null) {
+				    					failedCheckBox="";
+				    				}
+				    				
+				    				
 				    		        XmlSuite xmlSuite = new XmlSuite();
 				    		        xmlSuite.setName("Sample_Suite");
 				    		        Map<String, String> fieldValues = new HashMap<>();
-				    		        fieldValues.put("filepathExcelParameter", filepath);
-				    		        fieldValues.put("levelParameter", level);
-				    		        fieldValues.put("broswerParameter", broswer);
-				    		        fieldValues.put("compatibleModeParameter", compatibleMode);
+				    		        fieldValues.put("filepath", filepath);
+				    		        fieldValues.put("level", level);
+				    		        fieldValues.put("browser", browser);
+				    		        fieldValues.put("compatibleMode", compatibleMode);
+				    		        fieldValues.put("source", source);
+				    		        fieldValues.put("allCheckBox", allCheckBox);
+				    		        fieldValues.put("nullCheckBox", nullCheckBox);
+				    		        fieldValues.put("failedCheckBox", failedCheckBox);
 				    		        
 				    		        xmlSuite.setParameters(fieldValues);
 				    		        XmlTest xmlTest = new XmlTest(xmlSuite);

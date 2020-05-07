@@ -308,7 +308,7 @@ public class testngRebillSlow {
     		databaseSqlCount+="result is null ";
     	}
     	if (nullCheckBox.equals("false") && failedCheckBox.equals("true")) {
-    		databaseSqlCount+="result ='failed' ";
+    		databaseSqlCount+="result ='fail' ";
     	}
     	if (domesticCheckBox.equals("true")) {
     		databaseSqlCount+="and rs_type='DM' ";
