@@ -79,7 +79,6 @@ public class testngRebillSlow {
     String browser;
     String chromeSetProperty="webdriver.chrome.driver";
 	String ieSetProperty="webdriver.ie.driver";
-	//String firefoxSetProperty="";
 	
 	int k;
 	boolean sel;

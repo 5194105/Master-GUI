@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 
 import configuration.config;
@@ -32,7 +33,9 @@ public class rebillAutomationExtendGUI {
 	private JLabel mfRetireLabel;
 
     config c;
-  
+    Boolean checkList=true;
+    
+    
     private JLabel saveAndClose;
  
     
@@ -61,13 +64,13 @@ public class rebillAutomationExtendGUI {
 		
 		
 		saveAndCLose =new JButton("Save and Close");  
-		saveAndCLose.setBounds(450, 510, 284, 41);  
+		saveAndCLose.setBounds(450, 550, 284, 41);  
 		frame.getContentPane().add(saveAndCLose);
 		
 		
 		
 		functionLabel = new JLabel("Work Type");
-		functionLabel.setBounds(300, 440, 110, 31);
+		functionLabel.setBounds(300, 440, 150, 31);
 		functionLabel.setForeground(Color.WHITE);
 		functionLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
 		frame.getContentPane().add(functionLabel);
@@ -235,7 +238,7 @@ public class rebillAutomationExtendGUI {
 	    {
 	      public void actionPerformed(ActionEvent e)
 	      {
-	    	  
+	    	  checkList=true;
 	    	  if (allBox.isSelected()) {
 	    		  c.setAllCheckBox("true");
 	    	  }  else if(!allBox.isSelected()){
@@ -310,7 +313,40 @@ public class rebillAutomationExtendGUI {
 	    		  c.setMfRetireCheckBox("false");
 	    	  }
 	    	  
- frame.setVisible(false);
+	    	  String errorList="";
+	    	  if (allBox.isSelected()==true && (nullBox.isSelected()==true || failedBox.isSelected()==true)) {
+	    		  checkList=false;
+	    		  errorList+="Cannot Select All and Another Option\n";
+	    		  System.out.println("Cannot Select All and Another Option");
+	    	  }
+	    	  if (allBox.isSelected()==false && nullBox.isSelected()==false && failedBox.isSelected()==false) {
+	    		  checkList=false;
+	    		  errorList+="Must Select a Status\n";
+	    		  System.out.println("Must Select a Status");
+		    	  
+	    	  }
+	    	  
+	    	  if (expressBox.isSelected()==false && groundBox.isSelected()==false && domBox.isSelected()==false && internationalBox.isSelected()==false) {
+	    		  checkList=false;
+	    		  errorList+="Must Select a Flavor\n";
+	    		  System.out.println("Must Select a Flavor");
+		    	  
+	    	  }
+    		 
+	    	  
+	    	  if (mfRetireBox.isSelected()==false && normalBox.isSelected()==false) {
+	    		  checkList=false;
+	    		  errorList+="Must Select a Function\n";
+	    		  System.out.println("Must Select a Function");
+		    	  
+	    	  }
+	    	  
+	    	  if (checkList==true) {
+	    		  frame.setVisible(false);
+	    	  }
+	    	  else if (checkList==false){
+	    		JOptionPane.showMessageDialog(frame, errorList);
+	    	  }
 	      }
 	    });
 	    
