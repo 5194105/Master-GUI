@@ -193,7 +193,8 @@ public class testngRebillSlow {
         else {
         	if (source.equals("db")) {}
         	else if (source.equals("excel")) {
-        		excelVar = new excel(homePath+"\\test data\\rebill.xlsx");
+        		//excelVar = new excel(homePath+"\\test data\\rebill.xlsx");
+        		excelVar = new excel(filepath);
         	}
         	
         	this.browser=browser;

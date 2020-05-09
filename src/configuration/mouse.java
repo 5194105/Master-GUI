@@ -678,27 +678,11 @@ public void setupMouseListener() {
 				    				if(c.getLevel()!=null && c.getSource()!=null) {
 				    					//JOptionPane.showMessageDialog(frame, "Started Rebill");
 				    					
-				    					//rebillMain rm = new rebillMain(c);
-				    					String filepath="";String broswer="";String compatibleMode="";
-				    					String source =c.getSource();
-				    					if (c.getSource().equals("db")) {
-				    						 filepath="";
-				    					}
-				    					else if (c.getSource().equals("excel")) {
-				    					 filepath=c.getExcelPath();
-				    					}
-					    				
-					    				
-				    					if (c.getDriverType()!=null) {
-				    						broswer=c.getDriverType();
-				    					}
-				    					if (c.getCompatibleMode()!=null) {
-				    						 compatibleMode=c.getCompatibleMode();
-				    					}
-					    				 
-					    				
-					    			
+				    					String filepath=c.getExcelPath();
 					    				String level=c.getLevel();
+					    				String browser=c.getDriverType();
+					    				String compatibleMode=c.getCompatibleMode();
+					    				String source = c.getSource();
 					    				String allCheckBox=c.getAllCheckBox();
 					    				String nullCheckBox=c.getNullCheckBox();
 					    				String failedCheckBox=c.getFailedCheckBox();
@@ -712,7 +696,7 @@ public void setupMouseListener() {
 					    				
 					    				System.out.println("filepath "+filepath);
 					    				System.out.println("level "+level);
-					    				System.out.println("browser "+broswer);
+					    				System.out.println("browser "+browser);
 					    				System.out.println("compatibleMode "+compatibleMode);
 					    				System.out.println("source "+source);
 					    				System.out.println("allCheckBox "+allCheckBox);
@@ -724,6 +708,51 @@ public void setupMouseListener() {
 					    				System.out.println("groundCheckBox "+groundCheckBox);
 					    				System.out.println("normalCheckBox "+normalCheckBox);
 					    				System.out.println("mfRetireCheckBox "+mfRetireCheckBox);
+					    				
+					    				
+					    				if(filepath==null) {
+					    					filepath="";
+					    				}
+					    				if(level==null) {
+					    					level="";
+					    				}
+					    				if(browser==null) {
+					    					browser="";
+					    				}
+					    				if(compatibleMode==null) {
+					    					compatibleMode="";
+					    				}
+					    				if(allCheckBox==null) {
+					    					allCheckBox="";
+					    				}
+					    				if(nullCheckBox==null) {
+					    					nullCheckBox="";
+					    				}
+					    				if(failedCheckBox==null) {
+					    					failedCheckBox="";
+					    				}
+					    				if(domesticCheckBox==null) {
+					    					domesticCheckBox="";
+					    				}
+					    				if(internationalCheckBox==null) {
+					    					internationalCheckBox="";
+					    				}
+					    				if(expressCheckBox==null) {
+					    					expressCheckBox="";
+					    				}
+					    				if(groundCheckBox==null) {
+					    					groundCheckBox="";
+					    				}
+					    				if(normalCheckBox==null) {
+					    					normalCheckBox="";
+					    				}
+					    				if(mfRetireCheckBox==null) {
+					    					mfRetireCheckBox="";
+					    				}
+				    					
+					    			
+					    			
+
 					    				
 					    		        XmlSuite xmlSuite = new XmlSuite();
 					    		        xmlSuite.setName("Sample_Suite");

@@ -167,24 +167,7 @@ public class rebillAutomationGui {
 		c.setDriverType("2");
 		
 		
-		JButton saveAndCLose =new JButton("Save and Close");  
-		saveAndCLose.setBounds(600, 489, 284, 41);  
-		frame.getContentPane().add(saveAndCLose);
-		 saveAndCLose.addActionListener(new ActionListener()
-		    {
-		      public void actionPerformed(ActionEvent e)
-		      {
-		    	  System.out.println(c.getAllCheckBox());
-		    	  System.out.println(c.getNullCheckBox());
-		    	  System.out.println(c.getFailedCheckBox());
-		    	  System.out.println(c.getDomesticCheckBox());
-		    	  System.out.println(c.getInternationalCheckBox());
-		    	  System.out.println(c.getExpressCheckBox());
-		    	  System.out.println(c.getGroundCheckBox());
-		    	  
-
-		      }
-		    });
+		
 		    
 		
 		

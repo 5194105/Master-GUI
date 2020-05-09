@@ -41,10 +41,7 @@ public class prerateAutomationGui {
 	    private JLabel browser;
 	    private JRadioButton ie;
 	    private JRadioButton chrome;
-	    private JLabel startDateLabel;
-	    private JLabel endDateLabel;
-	    private JTextField startDate;
-	    private JTextField endDate;
+
 	    private JLabel lblPrerate;
 	    private JRadioButton rdbtnUpdate;
 	    private JRadioButton rdbtnHold;
