@@ -35,7 +35,7 @@ public class config {
     String groundCheckBox;
     String normalCheckBox;
     String mfRetireCheckBox;
-
+    String sessionCount;
 
     
     String cycle;
@@ -51,6 +51,16 @@ public class config {
 	public config() {
 		
 	}
+	
+	public void setSessionCount(String sessionCount) {
+		
+		this.sessionCount=sessionCount;
+	}
+	
+	public String getSessionCount() {
+	
+	return sessionCount;
+}
 	
 	public void setChromeProperty(String chromeSetProperty) {
 		

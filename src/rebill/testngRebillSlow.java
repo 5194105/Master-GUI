@@ -121,38 +121,22 @@ public class testngRebillSlow {
 	String normalCheckBox;
 	String mfRetireCheckBox;
 	String source;
-	
+	String sessionCount;
 	String databaseSqlQuery,databaseSqlCount;
-	
+	int sessionCountInt;
 	
 	ArrayList<rebillData> rebillDataArray= new ArrayList<rebillData>();
-
 	
 	@BeforeClass
-	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox","normalCheckBox","mfRetireCheckBox"})
-	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String normalCheckBox,String mfRetireCheckBox) {
+	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox","normalCheckBox","mfRetireCheckBox","sessionCount"})
+	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String normalCheckBox,String mfRetireCheckBox,String sessionCount) {
 	c=new config();
 	/*
 	@BeforeClass
 	public void setupExcel() {
 */
-		/*
-		System.out.println("filepathExcelParameter "+filepathExcelParameter);
-		System.out.println("levelParameter "+levelParameter);
-		System.out.println("broswerParameter "+broswerParameter);
-		System.out.println("compatibleModeParameter "+compatibleModeParameter);
-		System.out.println("source "+source);
-		System.out.println("allCheckBox "+allCheckBox);
-		System.out.println("nullCheckBox "+nullCheckBox);
-		System.out.println("failedCheckBox "+failedCheckBox);
-		System.out.println("domesticCheckBox "+domesticCheckBox);
-		System.out.println("internationalCheckBox "+internationalCheckBox);
-		System.out.println("expressCheckBox "+expressCheckBox);
-		System.out.println("groundCheckBox "+groundCheckBox);
-		System.out.println("normalCheckBox "+normalCheckBox);
-		System.out.println("mfRetireCheckBox "+mfRetireCheckBox);
-	//public void setupExcel() {
-	*/
+		
+		//Kill all running chromedrivers leftover from previous sessions
 		try {
 			Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe");
 		} catch (IOException e1) {
@@ -160,80 +144,66 @@ public class testngRebillSlow {
 			e1.printStackTrace();
 		}
 		
-				
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
+		homePath=System.getProperty("user.dir");
+    	
+		
         if (testingMode==true){
-        	c=new config();
         	browser="2";
         	level="2";
-        	
-        	excelVar = new excel(homePath+"\\test data\\rebill.xlsx");
-        	
-        	 source="db";
-        	 allCheckBox="false";
-        	 nullCheckBox="true";
-        	 failedCheckBox="true";
-        	 domesticCheckBox="false";
-        	 internationalCheckBox="true";
-        	 expressCheckBox="false";
-        	 groundCheckBox="true";
-        	 normalCheckBox="true";
-        	 mfRetireCheckBox="false";
-        	
+        	filepath=homePath+"\\test data\\rebill.xlsx";
+        	source="db";
+        	allCheckBox="false";
+        	nullCheckBox="true";
+        	failedCheckBox="true";
+        	domesticCheckBox="false";
+        	internationalCheckBox="true";
+        	expressCheckBox="false";
+        	groundCheckBox="true";
+        	normalCheckBox="true";
+        	mfRetireCheckBox="false";
+        	sessionCountInt=4;
         	
         }
         else {
-        	if (source.equals("db")) {}
-        	else if (source.equals("excel")) {
-        		//excelVar = new excel(homePath+"\\test data\\rebill.xlsx");
-        		excelVar = new excel(filepath);
+        	if (source.equals("excel")) {
+        			excelVar = new excel(filepath);
         	}
         	
-        	this.browser=browser;
-        	this.level=level;
-        	this.compatibleMode=compatibleMode;
-        	this.source=source;
-        	this.allCheckBox=allCheckBox;
-			this.nullCheckBox=nullCheckBox;
-			this.failedCheckBox=failedCheckBox;
-			this.domesticCheckBox=domesticCheckBox;
-			this.internationalCheckBox=internationalCheckBox;
-			this.expressCheckBox=expressCheckBox;
-			this.groundCheckBox=groundCheckBox;
-			this.normalCheckBox=normalCheckBox;
-			this.mfRetireCheckBox=groundCheckBox;
-        	
+	        	this.browser=browser;
+	        	this.level=level;
+	        	this.compatibleMode=compatibleMode;
+	        	this.source=source;
+	        	this.allCheckBox=allCheckBox;
+				this.nullCheckBox=nullCheckBox;
+				this.failedCheckBox=failedCheckBox;
+				this.domesticCheckBox=domesticCheckBox;
+				this.internationalCheckBox=internationalCheckBox;
+				this.expressCheckBox=expressCheckBox;
+				this.groundCheckBox=groundCheckBox;
+				this.normalCheckBox=normalCheckBox;
+				this.mfRetireCheckBox=groundCheckBox;
+	        	this.sessionCount=sessionCount;
+	        	sessionCountInt=Integer.parseInt(sessionCount);
         }
         
-        
        
-    	homePath=System.getProperty("user.dir");
-    	System.out.println("homePath" +System.getProperty("user.dir"));
     	
     	if(source.equals("excel")) {
-    	excelVar.setUpExcelWorkbook();
-    	excelVar.setUpExcelSheet(0);
-    	excelVar.setRowCountAutomatically(2);
-    	excelVar.setColCountAutomatically(0);
-    	rowCount=excelVar.getRowCount();
-    	colCount=excelVar.getColCount()+1;
+	    	excelVar.setUpExcelWorkbook();
+	    	excelVar.setUpExcelSheet(0);
+	    	excelVar.setRowCountAutomatically(2);
+	    	excelVar.setColCountAutomatically(0);
+	    	rowCount=excelVar.getRowCount();
+	    	colCount=excelVar.getColCount()+1;
+	    	
     	}
+    	
     	else if(source.equals("db")) {
-    	
-    		
-    		runDbQuery();;
-    		
-    	
+    		runDbQuery();
     	}
-    	total= rowCount/4;
-    	totalMod=rowCount%4;
+    	
+    	total= rowCount/sessionCountInt;
+    	totalMod=rowCount%sessionCountInt;
     	totalRows1=total;
     	totalRows2=total;
     	totalRows3=total;
@@ -259,12 +229,12 @@ public class testngRebillSlow {
         if (level.equals("2"))
     	{
     		levelUrl="https://testsso.secure.fedex.com/L2/eRA/index.html";
-    		//c.setEraL2DbConnection();
+    		
     	}
     	else if (level.equals("3"))
     	{
     		levelUrl="https://testsso.secure.fedex.com/L3/eRA/index.html";
-    	//.setEraL3DbConnection();
+    	
     	}
        
     	
@@ -277,12 +247,8 @@ public class testngRebillSlow {
 		Connection GTMcon=null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		int[] total= new int[2];
 		
-	
-		String result, description, test_input_nbr, tin_count, trkngnbr, reason_code, rebill_acct,
-		 invoice_nbr_1, invoice_nbr_2, mig, region,  login,   password,  rsType, company, worktype;
-		
+		//Change to L3
     	try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
@@ -296,7 +262,7 @@ public class testngRebillSlow {
 		}
 		
   	 
-    	 databaseSqlCount="select result, description, test_input_nbr, tin_count, trkngnbr, reason_code, rebill_acct,invoice_nbr_1, invoice_nbr_2, mig, region,  login,   password,  rs_Type, company, worktype from rebill_regression ";
+    	databaseSqlCount="select result, description, test_input_nbr, tin_count, trkngnbr, reason_code, rebill_acct,invoice_nbr_1, invoice_nbr_2, mig, region,  login,   password,  rs_Type, company, worktype from rebill_regression ";
     	
     	if (allCheckBox.equals("false")) {
     		databaseSqlCount+="where ";
@@ -336,8 +302,7 @@ public class testngRebillSlow {
     	
 
     	try {
-        //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
-    		 stmt = GTMcon.createStatement();
+        	 stmt = GTMcon.createStatement();
     		 System.out.println(databaseSqlCount);
         	 rs = stmt.executeQuery(databaseSqlCount);
         	 
@@ -362,12 +327,15 @@ public class testngRebillSlow {
 	
     @DataProvider(name = "data-provider1")
     public synchronized Object[][] dataProviderMethod1() { 
-    	Object [][] obj= new Object[totalRows1][colCount];;
-try {
-    	String tempString="";
+    	Object [][] obj=null;
+    	if (sessionCountInt>=1) {
+    	
+    	 obj= new Object[totalRows1][colCount];;
+    	try {
+    		String tempString="";
     	
     	int objCount=0;
-    	for(int i=1;i<=rowCount;i+=4) {
+    	for(int i=1;i<=rowCount;i+=sessionCountInt) {
     		for(int j=0;j<colCount-1;j++) {
     				if(source.equals("excel")) {
     				tempString=excelVar.getCellData(i, j);
@@ -441,8 +409,9 @@ try {
 }catch(Exception e) {
 	System.out.println(e);
 }
+    	}
     	return obj;
-
+    	
     }
     
     
@@ -454,12 +423,15 @@ try {
     
     @DataProvider(name = "data-provider2")
     public synchronized Object[][] dataProviderMethod2() { 
-    	
+    	Object [][] obj=null;
+    	if (sessionCountInt>=2) {
+        	
+       	 
     
     	String tempString="";
-    	Object [][] obj = new Object[totalRows2][colCount];
+    	obj = new Object[totalRows2][colCount];
     	int objCount=0;
-    	for(int i=2;i<=rowCount;i+=4) {
+    	for(int i=2;i<=rowCount;i+=sessionCountInt) {
     		for(int j=0;j<colCount-1;j++) {	
     			if(source.equals("excel")) {
     				tempString=excelVar.getCellData(i, j);
@@ -529,17 +501,21 @@ try {
     		obj[objCount][colCount-1]=i;
     		objCount++;
     	}
-
+    }
     	return obj;
     
     }
     
     @DataProvider(name = "data-provider3")
     public synchronized Object[][] dataProviderMethod3() { 
+    	Object [][] obj=null;
+    	if (sessionCountInt>=3) {
+        	
+       	 
     	String tempString="";
-    	Object [][] obj = new Object[totalRows3][colCount];
+    	obj = new Object[totalRows3][colCount];
     	int objCount=0;
-    	for(int i=3;i<=rowCount;i+=4) {
+    	for(int i=3;i<=rowCount;i+=sessionCountInt) {
     		for(int j=0;j<colCount-1;j++) {
     			if(source.equals("excel")) {
     				tempString=excelVar.getCellData(i, j);
@@ -609,17 +585,21 @@ try {
     		obj[objCount][colCount-1]=i;
     		objCount++;
     	}
-
+    }
     	return obj;
     
     }
     
     @DataProvider(name = "data-provider4")
     public synchronized Object[][] dataProviderMethod4() { 
+    	Object [][] obj=null;
+    	if (sessionCountInt>=4) {
+        	
+       	 
     	String tempString="";
-    	Object [][] obj = new Object[totalRows4][colCount];
+    	obj = new Object[totalRows4][colCount];
     	int objCount=0;
-    	for(int i=4;i<=rowCount;i+=4) {
+    	for(int i=4;i<=rowCount;i+=sessionCountInt) {
     		for(int j=0;j<colCount-1;j++) {
     			if(source.equals("excel")) {
     				tempString=excelVar.getCellData(i, j);
@@ -689,7 +669,7 @@ try {
     		obj[objCount][colCount-1]=i;
     		objCount++;
     	}
-
+    }
     	return obj;
     
     }
@@ -704,8 +684,11 @@ try {
     public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber) {
      
     	System.out.println("Instance: 1");
+    	readTrk(trk);
     	//Will Check if Trk is already successful;
-  	  String[] resultArray = validateResults(trk);
+  	  
+    	/*
+    	String[] resultArray = validateResults(trk);
   	  if ( resultArray[0].equals("pass")){
        	 if(source.equals("excel")) {
        	 writeToExcel(rowNumber, 0,"pass");
@@ -751,7 +734,7 @@ try {
 			e.printStackTrace();
 		}
 	    
-    
+    */
     
     }
    
@@ -759,6 +742,8 @@ try {
     public void testMethod2( String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber) {
      
     	System.out.println("Instance: 2");
+    	readTrk(trk);
+    	/*
     	//Will Check if Trk is already successful;
   	  String[] resultArray = validateResults(trk);
   	  if ( resultArray[0].equals("pass")){
@@ -803,13 +788,15 @@ try {
 			e.printStackTrace();
 		}
 	    
-    
+    */
     
     }
     @Test(dataProvider="data-provider3",retryAnalyzer = Retry.class)
     public void testMethod3( String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber) {
     	System.out.println("Instance: 3");
+    	readTrk(trk);
     	
+    	/*
     	//Will Check if Trk is already successful;
   	  String[] resultArray = validateResults(trk);
   	  if ( resultArray[0].equals("pass")){
@@ -853,6 +840,7 @@ try {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+	*/
     }
     
     
@@ -865,7 +853,9 @@ try {
     public void testMethod4(String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber) {
     	System.out.println("Instance: 4");
     	//Will Check if Trk is already successful;
-    	  String[] resultArray = validateResults(trk);
+    	readTrk(trk);
+    	/*
+    	String[] resultArray = validateResults(trk);
     	  if ( resultArray[0].equals("pass")){
     			 if(source.equals("excel")) {
          	 writeToExcel(rowNumber, 0,"pass");
@@ -907,7 +897,7 @@ try {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-    
+    */
     }
     
     
@@ -1520,6 +1510,10 @@ public synchronized void writeToExcel(int rowCountExcel,int colCountExcel,String
 		excelVar.setCellData(rowCountExcel, colCountExcel, outputString);
 		excelVar.writeCellData();
 	}
+
+public void readTrk(String trk) {
+	System.out.println(trk);
+}
     }
     
 

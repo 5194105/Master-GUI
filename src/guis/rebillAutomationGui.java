@@ -25,6 +25,7 @@ import configuration.mouse;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 
 public class rebillAutomationGui {
@@ -44,7 +45,8 @@ public class rebillAutomationGui {
      private JLabel excelLabel;
      private JLabel dbLabel;
      private JLabel moreOptionsLabel;
-     
+     JLabel sessionLabel;
+     JTextField	sessionTextField;
      gui g;
      
      mouse m;
@@ -74,8 +76,9 @@ public class rebillAutomationGui {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 	
+		
 		executeLabel = new JLabel("New label");
-		executeLabel.setBounds(413, 489, 284, 41);
+		executeLabel.setBounds(413, 530, 284, 41);
 		
 		
 		excelLabel = new JLabel("New label");
@@ -92,6 +95,9 @@ public class rebillAutomationGui {
 		dbLabel.setName("db");
 		executeLabel.setName("execute");
 		moreOptionsLabel.setName("moreOptions");
+		
+		
+		
 		
 		
 		lblRebillAutomation = new JLabel("Rebill Automation");
@@ -142,6 +148,18 @@ public class rebillAutomationGui {
 		frame.getContentPane().add(moreOptionsTextLabel);
 		
 	
+		sessionLabel = new JLabel("Parallel Sessions");
+		sessionLabel.setForeground(Color.WHITE);
+		sessionLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		sessionLabel.setBounds(413, 475, 386, 64);
+		frame.getContentPane().add(sessionLabel);
+		
+		sessionTextField= new JTextField(2);
+		sessionTextField.setText("1");
+		sessionTextField.setBounds(600, 500, 20, 20);
+		frame.getContentPane().add(sessionTextField);
+		
+		
 		
 		JCheckBox checkBox = new JCheckBox("");
 		checkBox.setBounds(630, 405, 27, 29);
@@ -165,14 +183,22 @@ public class rebillAutomationGui {
 		
 		//Sets Driver to Chrome
 		c.setDriverType("2");
-		
+	    c.setSessionCount(sessionTextField.getText());
+	    
 		
 		
 		    
 		
 		
 	    frame.setVisible(true);
-        
+      
+	    
+	    sessionTextField.addActionListener(new java.awt.event.ActionListener() {
+	    	  public void actionPerformed(ActionEvent event) {
+	    	    c.setSessionCount(sessionTextField.getText());
+	    	    System.out.println(c.getSessionCount());
+	    	  }
+	    	});
 	    
 	    l2RadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

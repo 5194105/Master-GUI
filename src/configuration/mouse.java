@@ -692,7 +692,7 @@ public void setupMouseListener() {
 					    				String groundCheckBox=c.getGroundCheckBox();
 					    				String normalCheckBox=c.getNormalCheckBox();
 					    				String mfRetireCheckBox=c.getMfRetireCheckBox();
-					    				
+					    				String sessionCount=c.getSessionCount();
 					    				
 					    				System.out.println("filepath "+filepath);
 					    				System.out.println("level "+level);
@@ -708,6 +708,7 @@ public void setupMouseListener() {
 					    				System.out.println("groundCheckBox "+groundCheckBox);
 					    				System.out.println("normalCheckBox "+normalCheckBox);
 					    				System.out.println("mfRetireCheckBox "+mfRetireCheckBox);
+					    				System.out.println("sessionCount "+sessionCount);
 					    				
 					    				
 					    				if(filepath==null) {
@@ -749,7 +750,10 @@ public void setupMouseListener() {
 					    				if(mfRetireCheckBox==null) {
 					    					mfRetireCheckBox="";
 					    				}
-				    					
+					    				if(sessionCount==null) {
+					    					sessionCount="";
+					    				}
+					    				
 					    			
 					    			
 
@@ -771,6 +775,7 @@ public void setupMouseListener() {
 					    		        fieldValues.put("groundCheckBox", groundCheckBox);
 					    		        fieldValues.put("normalCheckBox", normalCheckBox);
 					    		        fieldValues.put("mfRetireCheckBox",mfRetireCheckBox);
+					    		        fieldValues.put("sessionCount",sessionCount);
 					    		        
 					    		        xmlSuite.setParameters(fieldValues);
 					    		        XmlTest xmlTest = new XmlTest(xmlSuite);

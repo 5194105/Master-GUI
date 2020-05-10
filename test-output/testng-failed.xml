@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Sample_Suite]">
-  <parameter name="nullCheckBox" value="true"/>
-  <parameter name="allCheckBox" value="false"/>
-  <parameter name="filepath" value=""/>
+  <parameter name="nullCheckBox" value=""/>
   <parameter name="level" value="2"/>
-  <parameter name="failedCheckBox" value="false"/>
+  <parameter name="failedCheckBox" value=""/>
+  <parameter name="groundCheckBox" value=""/>
+  <parameter name="source" value="excel"/>
+  <parameter name="compatibleMode" value=""/>
+  <parameter name="mfRetireCheckBox" value=""/>
+  <parameter name="expressCheckBox" value=""/>
+  <parameter name="allCheckBox" value=""/>
+  <parameter name="filepath" value="C:\Users\theth\OneDrive\Documents\rebill.xlsx"/>
+  <parameter name="normalCheckBox" value=""/>
+  <parameter name="sessionCount" value="3"/>
+  <parameter name="domesticCheckBox" value=""/>
   <parameter name="browser" value="2"/>
-  <parameter name="source" value="db"/>
-  <parameter name="compatibleMode" value="false"/>
-  <test name="Prerate Test(failed)" parallel="methods">
+  <parameter name="internationalCheckBox" value=""/>
+  <test name="Rebill Test(failed)" parallel="methods">
     <classes>
-      <class name="prerate.prerateTestNGSlow">
+      <class name="rebill.testngRebillSlow">
         <methods>
-          <include name="testMethod1" invocation-numbers="0"/>
-          <include name="testMethod3" invocation-numbers="0"/>
+          <include name="testMethod4"/>
           <include name="setupExcel"/>
         </methods>
-      </class> <!-- prerate.prerateTestNGSlow -->
+      </class> <!-- rebill.testngRebillSlow -->
     </classes>
-  </test> <!-- Prerate Test(failed) -->
+  </test> <!-- Rebill Test(failed) -->
 </suite> <!-- Failed suite [Sample_Suite] -->
