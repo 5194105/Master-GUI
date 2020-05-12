@@ -10,9 +10,9 @@
   <parameter name="mfRetireCheckBox" value=""/>
   <parameter name="expressCheckBox" value=""/>
   <parameter name="allCheckBox" value=""/>
-  <parameter name="filepath" value="C:\Users\theth\OneDrive\Documents\rebill.xlsx"/>
+  <parameter name="filepath" value="C:\Users\FedExUser\Documents\rebilldemotest.xlsx"/>
   <parameter name="normalCheckBox" value=""/>
-  <parameter name="sessionCount" value="3"/>
+  <parameter name="sessionCount" value="1"/>
   <parameter name="domesticCheckBox" value=""/>
   <parameter name="browser" value="2"/>
   <parameter name="internationalCheckBox" value=""/>
@@ -20,8 +20,11 @@
     <classes>
       <class name="rebill.testngRebillSlow">
         <methods>
+          <include name="testMethod1"/>
+          <include name="testMethod2"/>
           <include name="testMethod4"/>
           <include name="setupExcel"/>
+          <include name="testMethod3"/>
         </methods>
       </class> <!-- rebill.testngRebillSlow -->
     </classes>

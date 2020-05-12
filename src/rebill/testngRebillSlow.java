@@ -687,7 +687,7 @@ public class testngRebillSlow {
     	readTrk(trk);
     	//Will Check if Trk is already successful;
   	  
-    	/*
+    	
     	String[] resultArray = validateResults(trk);
   	  if ( resultArray[0].equals("pass")){
        	 if(source.equals("excel")) {
@@ -734,7 +734,7 @@ public class testngRebillSlow {
 			e.printStackTrace();
 		}
 	    
-    */
+    
     
     }
    
@@ -743,7 +743,7 @@ public class testngRebillSlow {
      
     	System.out.println("Instance: 2");
     	readTrk(trk);
-    	/*
+    	
     	//Will Check if Trk is already successful;
   	  String[] resultArray = validateResults(trk);
   	  if ( resultArray[0].equals("pass")){
@@ -788,7 +788,7 @@ public class testngRebillSlow {
 			e.printStackTrace();
 		}
 	    
-    */
+    
     
     }
     @Test(dataProvider="data-provider3",retryAnalyzer = Retry.class)
@@ -796,7 +796,7 @@ public class testngRebillSlow {
     	System.out.println("Instance: 3");
     	readTrk(trk);
     	
-    	/*
+    	
     	//Will Check if Trk is already successful;
   	  String[] resultArray = validateResults(trk);
   	  if ( resultArray[0].equals("pass")){
@@ -840,7 +840,7 @@ public class testngRebillSlow {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	*/
+	
     }
     
     
@@ -854,7 +854,7 @@ public class testngRebillSlow {
     	System.out.println("Instance: 4");
     	//Will Check if Trk is already successful;
     	readTrk(trk);
-    	/*
+    	
     	String[] resultArray = validateResults(trk);
     	  if ( resultArray[0].equals("pass")){
     			 if(source.equals("excel")) {
@@ -897,7 +897,7 @@ public class testngRebillSlow {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-    */
+    
     }
     
     
