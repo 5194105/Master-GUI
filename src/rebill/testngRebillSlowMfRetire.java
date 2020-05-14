@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ import org.testng.annotations.Test;
 import configuration.config;
 import configuration.excel;
 
-public class testngRebillSlow {
+public class testngRebillSlowMfRetire {
 
 	
 	
@@ -122,10 +123,11 @@ public class testngRebillSlow {
 	String mfRetireCheckBox;
 	String source;
 	String sessionCount;
-	String databaseSqlQuery,databaseSqlCount;
+	
 	int sessionCountInt;
 	
 	ArrayList<rebillData> rebillDataArray= new ArrayList<rebillData>();
+	String[][] allData;
 	
 	@BeforeClass
 	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox","normalCheckBox","mfRetireCheckBox","sessionCount"})
@@ -247,7 +249,7 @@ public class testngRebillSlow {
 		Connection GTMcon=null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		
+		ResultSetMetaData rsmd=null;
 		//Change to L3
     	try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -261,74 +263,107 @@ public class testngRebillSlow {
 			e.printStackTrace();
 		}
 		
-  	 
-    	databaseSqlCount="select result, description, test_input_nbr, tin_count, trkngnbr, reason_code, rebill_acct,invoice_nbr_1, invoice_nbr_2, mig, region,  login,   password,  rs_Type, company, worktype from rebill_regression ";
+    	String databaseSqlCount="select count(*) as total from rebill_regression ";
+    	String databaseSqlQuery="select result, description, test_input_nbr, tin_count, trkngnbr, reason_code, rebill_acct,invoice_nbr_1, invoice_nbr_2, mig, region,  login,   password,  rs_Type, company, worktype, ORIGIN_LOC,DEST_LOC,DIM_VOL,SHIPPER_REF,RECP_ADDRESS,SHIPPER_ADDRESS,ACC_NBR_DEL_STATUS,SVC_BASE, CREDIT_CARD_DTL,PRE_RATE_SCENARIOS,EXP_Pieces,EXP_ACTUAL_Weight,EXP_Adj_Weight,CREDIT_CARD_DT from rebill_regression ";
+    	
     	
     	if (allCheckBox.equals("false")) {
     		databaseSqlCount+="where ";
+    		databaseSqlQuery+="where ";
     	}
     	if (nullCheckBox.equals("true") && failedCheckBox.equals("true")) {
     		databaseSqlCount+="(result is null or result ='fail') ";
+    		databaseSqlQuery+="(result is null or result ='fail') ";
     	}
     	if (nullCheckBox.equals("true") && failedCheckBox.equals("false")) {
     		databaseSqlCount+="result is null ";
+    		databaseSqlQuery+="result is null ";
     	}
     	if (nullCheckBox.equals("false") && failedCheckBox.equals("true")) {
     		databaseSqlCount+="result ='fail' ";
+    		databaseSqlQuery+="result ='fail' ";
     	}
     	if (domesticCheckBox.equals("true") && internationalCheckBox.equals("false")) {
     		databaseSqlCount+="and rs_type='DM' ";
+    		databaseSqlQuery+="and rs_type='DM' ";
     	}
     	if (internationalCheckBox.equals("true") && domesticCheckBox.equals("false")) {
     		databaseSqlCount+="and rs_type='IL' ";
+    		databaseSqlQuery+="and rs_type='IL' ";
     	}
     	if (internationalCheckBox.equals("true") && domesticCheckBox.equals("true")) {
-        		databaseSqlCount+="and rs_type in ('DM','IL')";
+    		databaseSqlCount+="and rs_type in ('DM','IL')";
+    		databaseSqlQuery+="and rs_type in ('DM','IL')";
     	}
     	
     	if (expressCheckBox.equals("true") && groundCheckBox.equals("false")) {
     		databaseSqlCount+="and company='EP' ";
+    		databaseSqlQuery+="and company='EP' ";
     	}
     	if (groundCheckBox.equals("true") && expressCheckBox.equals("false")) {
     		databaseSqlCount+="and company='GD' ";
+    		databaseSqlQuery+="and company='GD' ";
     	}
     	
     	if (groundCheckBox.equals("true") && expressCheckBox.equals("true")) {
     		databaseSqlCount+="and company in ('GD',EP') ";
+    		databaseSqlQuery+="and company in ('GD',EP') ";
     	}
     	
        	if (normalCheckBox.equals("true") && mfRetireCheckBox.equals("false")) {
-    		databaseSqlCount+="and worktype='NORMAL' ";
+       		databaseSqlCount+="and worktype='NORMAL' ";
+       		databaseSqlQuery+="and worktype='NORMAL' ";
     	}
        	if (mfRetireCheckBox.equals("true") && normalCheckBox.equals("false")) {
-    		databaseSqlCount+="and worktype='MFRETIRE' ";
+       		databaseSqlCount+="and worktype='MFRETIRE' ";
+       		databaseSqlQuery+="and worktype='MFRETIRE' ";
     	}
        	if (mfRetireCheckBox.equals("true") && normalCheckBox.equals("true")) {
-    		databaseSqlCount+="and worktype in ('MFRETIRE','NORMAL') ";
+       		databaseSqlCount+="and worktype in ('MFRETIRE','NORMAL') ";
+       		databaseSqlQuery+="and worktype in ('MFRETIRE','NORMAL') ";
     	}
        	
     	
     	
 
-    	try {
-        	 stmt = GTMcon.createStatement();
-    		 System.out.println(databaseSqlCount);
-        	 rs = stmt.executeQuery(databaseSqlCount);
-        	 
-        	 while(rs.next()) {
-        		 rowCount++;
-        		 rebillDataArray.add(new rebillData(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16)));
-        	 }
-        	 colCount=17;
-    	}
-    	catch(Exception e) {
-    		System.out.println(e);
-    	}
-
-    	for (int i=0;i<rebillDataArray.size();i++) {
-    		System.out.println(rebillDataArray.get(i).getString());
-    	
-    	}
+       	try {
+            //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
+        		
+        		stmt = GTMcon.createStatement();
+        		System.out.println(databaseSqlCount);
+            	rs = stmt.executeQuery(databaseSqlCount);
+            	rs.next();
+            	rowCount=rs.getInt("total");
+            	stmt.close();
+            	rs.close();
+            	
+            	stmt = GTMcon.createStatement();
+        		System.out.println(databaseSqlQuery);
+            	rs = stmt.executeQuery(databaseSqlQuery);
+            	rsmd = rs.getMetaData();
+            	colCount = rsmd.getColumnCount()+1;
+            	int rowCountTemp=0;
+            	allData = new String[rowCount][colCount+1];
+            	 
+            	 while(rs.next()) {
+            	//	 rowCount++;
+            		// rebillDataArray.add(new rebillData(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16)));
+            		 for (int i=1;i<colCount;i++) {
+            			System.out.println(rs.getString(i));
+            			if (rs.getString(i)==null) {
+            				allData[rowCountTemp][i-1]="";
+            			}
+            			else {
+            			 allData[rowCountTemp][i-1]=rs.getString(i);
+            			}
+            		 }
+            		 rowCountTemp++; 
+            	 }
+            	 //colCount=17;
+        	}
+        	catch(Exception e) {
+        		System.out.println(e);
+        	}
     	
 	}
 	
@@ -350,61 +385,7 @@ public class testngRebillSlow {
     				tempString=excelVar.getCellData(i, j);
     				}
     				else if (source.equals("db")) {
-    					
-    					
-    					switch(j) {
-    					case 0:
-    					tempString=rebillDataArray.get(i-1).getResult();
-    					break;
-    					case 1:
-        					tempString=rebillDataArray.get(i-1).getDescription();
-        					break;
-    					case 2:
-        					tempString=rebillDataArray.get(i-1).getTest_input_nbr();
-        					break;
-    					case 3:
-        					tempString=rebillDataArray.get(i-1).getTin_count();
-        					break;
-    					case 4:
-        					tempString=rebillDataArray.get(i-1).getTrkngnbr();
-        					break;
-    					case 5:
-        					tempString=rebillDataArray.get(i-1).getReason_code();
-        					break;
-    					case 6:
-        					tempString=rebillDataArray.get(i-1).getRebill_acct();
-        					break;
-    					case 7:
-        					tempString=rebillDataArray.get(i-1).getInvoice_nbr_1();
-        					break;
-    					case 8:
-        					tempString=rebillDataArray.get(i-1).getInvoice_nbr_2();
-        					break;
-    					case 9:
-        					tempString=rebillDataArray.get(i-1).getMig();
-        					break;
-    					case 10:
-        					tempString=rebillDataArray.get(i-1).getRegion();
-        					break;
-    					case 11:
-        					tempString=rebillDataArray.get(i-1).getLogin();
-        					break;
-    					case 12:
-        					tempString=rebillDataArray.get(i-1).getPassword();
-        					break;
-    					case 13:
-        					tempString=rebillDataArray.get(i-1).getRsType();
-        					break;
-    					case 14:
-        					tempString=rebillDataArray.get(i-1).getCompany();
-        					break;
-    					case 15:
-        					tempString=rebillDataArray.get(i-1).getWorktype();
-        					break;
-    					
-    					}
-    				
-    				
+    					tempString=allData[i-1][j];
     				}
     					if (tempString == null || tempString.equals("null")){
     						tempString="";
@@ -446,60 +427,7 @@ public class testngRebillSlow {
     				tempString=excelVar.getCellData(i, j);
     				}
     				else if (source.equals("db")) {
-    					
-    					
-    					switch(j) {
-    					case 0:
-    					tempString=rebillDataArray.get(i-1).getResult();
-    					break;
-    					case 1:
-        					tempString=rebillDataArray.get(i-1).getDescription();
-        					break;
-    					case 2:
-        					tempString=rebillDataArray.get(i-1).getTest_input_nbr();
-        					break;
-    					case 3:
-        					tempString=rebillDataArray.get(i-1).getTin_count();
-        					break;
-    					case 4:
-        					tempString=rebillDataArray.get(i-1).getTrkngnbr();
-        					break;
-    					case 5:
-        					tempString=rebillDataArray.get(i-1).getReason_code();
-        					break;
-    					case 6:
-        					tempString=rebillDataArray.get(i-1).getRebill_acct();
-        					break;
-    					case 7:
-        					tempString=rebillDataArray.get(i-1).getInvoice_nbr_1();
-        					break;
-    					case 8:
-        					tempString=rebillDataArray.get(i-1).getInvoice_nbr_2();
-        					break;
-    					case 9:
-        					tempString=rebillDataArray.get(i-1).getMig();
-        					break;
-    					case 10:
-        					tempString=rebillDataArray.get(i-1).getRegion();
-        					break;
-    					case 11:
-        					tempString=rebillDataArray.get(i-1).getLogin();
-        					break;
-    					case 12:
-        					tempString=rebillDataArray.get(i-1).getPassword();
-        					break;
-    					case 13:
-        					tempString=rebillDataArray.get(i-1).getRsType();
-        					break;
-    					case 14:
-        					tempString=rebillDataArray.get(i-1).getCompany();
-        					break;
-    					case 15:
-        					tempString=rebillDataArray.get(i-1).getWorktype();
-        					break;
-    					
-    					}
-    				
+    					tempString=allData[i-1][j];
     				
     				}
 					if (tempString == null || tempString.equals("null")){
@@ -530,61 +458,7 @@ public class testngRebillSlow {
     				tempString=excelVar.getCellData(i, j);
     				}
     				else if (source.equals("db")) {
-    					
-    					
-    					switch(j) {
-    					case 0:
-    					tempString=rebillDataArray.get(i-1).getResult();
-    					break;
-    					case 1:
-        					tempString=rebillDataArray.get(i-1).getDescription();
-        					break;
-    					case 2:
-        					tempString=rebillDataArray.get(i-1).getTest_input_nbr();
-        					break;
-    					case 3:
-        					tempString=rebillDataArray.get(i-1).getTin_count();
-        					break;
-    					case 4:
-        					tempString=rebillDataArray.get(i-1).getTrkngnbr();
-        					break;
-    					case 5:
-        					tempString=rebillDataArray.get(i-1).getReason_code();
-        					break;
-    					case 6:
-        					tempString=rebillDataArray.get(i-1).getRebill_acct();
-        					break;
-    					case 7:
-        					tempString=rebillDataArray.get(i-1).getInvoice_nbr_1();
-        					break;
-    					case 8:
-        					tempString=rebillDataArray.get(i-1).getInvoice_nbr_2();
-        					break;
-    					case 9:
-        					tempString=rebillDataArray.get(i-1).getMig();
-        					break;
-    					case 10:
-        					tempString=rebillDataArray.get(i-1).getRegion();
-        					break;
-    					case 11:
-        					tempString=rebillDataArray.get(i-1).getLogin();
-        					break;
-    					case 12:
-        					tempString=rebillDataArray.get(i-1).getPassword();
-        					break;
-    					case 13:
-        					tempString=rebillDataArray.get(i-1).getRsType();
-        					break;
-    					case 14:
-        					tempString=rebillDataArray.get(i-1).getCompany();
-        					break;
-    					case 15:
-        					tempString=rebillDataArray.get(i-1).getWorktype();
-        					break;
-    					
-    					}
-    				
-    				
+    					tempString=allData[i-1][j];
     				}
 					if (tempString == null || tempString.equals("null")){
 						tempString="";
@@ -615,59 +489,7 @@ public class testngRebillSlow {
     				}
     				else if (source.equals("db")) {
     					
-    					
-    					switch(j) {
-    					case 0:
-    					tempString=rebillDataArray.get(i-1).getResult();
-    					break;
-    					case 1:
-        					tempString=rebillDataArray.get(i-1).getDescription();
-        					break;
-    					case 2:
-        					tempString=rebillDataArray.get(i-1).getTest_input_nbr();
-        					break;
-    					case 3:
-        					tempString=rebillDataArray.get(i-1).getTin_count();
-        					break;
-    					case 4:
-        					tempString=rebillDataArray.get(i-1).getTrkngnbr();
-        					break;
-    					case 5:
-        					tempString=rebillDataArray.get(i-1).getReason_code();
-        					break;
-    					case 6:
-        					tempString=rebillDataArray.get(i-1).getRebill_acct();
-        					break;
-    					case 7:
-        					tempString=rebillDataArray.get(i-1).getInvoice_nbr_1();
-        					break;
-    					case 8:
-        					tempString=rebillDataArray.get(i-1).getInvoice_nbr_2();
-        					break;
-    					case 9:
-        					tempString=rebillDataArray.get(i-1).getMig();
-        					break;
-    					case 10:
-        					tempString=rebillDataArray.get(i-1).getRegion();
-        					break;
-    					case 11:
-        					tempString=rebillDataArray.get(i-1).getLogin();
-        					break;
-    					case 12:
-        					tempString=rebillDataArray.get(i-1).getPassword();
-        					break;
-    					case 13:
-        					tempString=rebillDataArray.get(i-1).getRsType();
-        					break;
-    					case 14:
-        					tempString=rebillDataArray.get(i-1).getCompany();
-        					break;
-    					case 15:
-        					tempString=rebillDataArray.get(i-1).getWorktype();
-        					break;
-    					
-    					}
-    				
+    					tempString=allData[i-1][j];
     				
     				}
 					if (tempString == null || tempString.equals("null")){
@@ -690,13 +512,45 @@ public class testngRebillSlow {
     
     
     @Test(dataProvider="data-provider1",retryAnalyzer = Retry.class)
-    public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber) {
+    public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt,int rowNumber) {
      
     	System.out.println("Instance: 1");
-    	readTrk(trk);
+    	
+    	System.out.println(result);
+    	System.out.println(descripiton);
+    	System.out.println(testInputNbr);
+    	System.out.println(tinCount);
+    	System.out.println(trk);
+    	System.out.println(reasonCode);
+    	System.out.println(rebillAccount);
+    	System.out.println(invoiceNbr1);
+    	System.out.println(invoiceNbr2);
+    	System.out.println(mig);
+    	System.out.println(region);
+    	System.out.println(login);
+    	System.out.println(password);
+    	System.out.println(rsType);
+    	System.out.println(company);
+    	System.out.println(worktype);
+    	System.out.println(originLoc);
+    	System.out.println(destLoc);
+    	System.out.println(dimVol);
+    	System.out.println(shipperRef);
+    	System.out.println(recpAddress);
+    	System.out.println(shipperAddress);
+    	System.out.println(acctNbrDelStatus);
+    	System.out.println(svcBase);
+    	System.out.println(creditCardDtl);
+    	System.out.println(preRateScenarios);
+    	System.out.println(expPieces);
+    	System.out.println(expActualWeight);
+    	System.out.println(expAdjWeight);
+    	System.out.println(creditCardDt);
+    	System.out.println(rowNumber);
+    	
     	//Will Check if Trk is already successful;
   	  
-    	
+    	/*
     	String[] resultArray = validateResults(trk);
   	  if ( resultArray[0].equals("pass")){
        	 if(source.equals("excel")) {
@@ -737,18 +591,18 @@ public class testngRebillSlow {
 	    	
 	    
 	        
-			doRebill(driver1,wait1, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber,1);
+			doRebill(driver1,wait1, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber, originLoc, destLoc, dimVol, shipperRef, recpAddress, shipperAddress, acctNbrDelStatus, svcBase,  creditCardDtl, preRateScenarios, expPieces, expActualWeight, expAdjWeight, creditCardDt,1);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	    
     
-    
+    */
     }
    
     @Test(dataProvider="data-provider2",retryAnalyzer = Retry.class)
-    public void testMethod2( String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber) {
+    public void testMethod2( String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt,int rowNumber) {
      
     	System.out.println("Instance: 2");
     	readTrk(trk);
@@ -791,7 +645,7 @@ public class testngRebillSlow {
     	 wait2 = new WebDriverWait(driver2,20);
     	login(driver2,wait2,login,password);
 	    try {
-	    	doRebill(driver2,wait2, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber,2);
+	    	doRebill(driver2,wait2, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber, originLoc, destLoc, dimVol, shipperRef, recpAddress, shipperAddress, acctNbrDelStatus, svcBase,  creditCardDtl, preRateScenarios, expPieces, expActualWeight, expAdjWeight, creditCardDt,2);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -801,7 +655,7 @@ public class testngRebillSlow {
     
     }
     @Test(dataProvider="data-provider3",retryAnalyzer = Retry.class)
-    public void testMethod3( String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber) {
+    public void testMethod3( String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt,int rowNumber) {
     	System.out.println("Instance: 3");
     	readTrk(trk);
     	
@@ -844,7 +698,7 @@ public class testngRebillSlow {
     	 wait3 = new WebDriverWait(driver3,20);
     login(driver3,wait3,login,password);
     try {
-    	doRebill(driver3,wait3, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber,3);
+    	doRebill(driver3,wait3, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber, originLoc, destLoc, dimVol, shipperRef, recpAddress, shipperAddress, acctNbrDelStatus, svcBase,  creditCardDtl, preRateScenarios, expPieces, expActualWeight, expAdjWeight, creditCardDt,3);
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -859,7 +713,7 @@ public class testngRebillSlow {
     
     
     @Test(dataProvider="data-provider4",retryAnalyzer = Retry.class)
-    public void testMethod4(String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber) {
+    public void testMethod4(String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt,int rowNumber) {
     	System.out.println("Instance: 4");
     	//Will Check if Trk is already successful;
     	readTrk(trk);
@@ -901,7 +755,7 @@ public class testngRebillSlow {
     	 wait4 = new WebDriverWait(driver4,20);
     login(driver4,wait4,login,password);
     try {
-    	doRebill(driver4,wait4, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber,4);
+    	doRebill(driver4,wait4, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber, originLoc, destLoc, dimVol, shipperRef, recpAddress, shipperAddress, acctNbrDelStatus, svcBase,  creditCardDtl, preRateScenarios, expPieces, expActualWeight, expAdjWeight, creditCardDt,4);
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -929,7 +783,7 @@ public class testngRebillSlow {
     }
     
     
-    public void doRebill(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber, int instanceNumber) throws InterruptedException {
+    public void doRebill(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt, int instanceNumber) throws InterruptedException {
     
     	JavascriptExecutor js= (JavascriptExecutor) driver;
     	By tempElement;
@@ -1111,7 +965,7 @@ public class testngRebillSlow {
               	case "RRA" :
               		//reasonCodeDropDown.selectByValue("RRA - REBILL RECIP ACCT");
                          		
-              			driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[14]")).click();
+              			driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[15]")).click();
                      break;
                  case "RSA" :
                  //	reasonCodeDropDown.selectByValue("RSA - REBILL SHIPPER ACCT");
@@ -1279,6 +1133,72 @@ public class testngRebillSlow {
                         break;
                     }
 
+             
+             
+             if(worktype.equals("MFRETIRE")) {
+           /*
+            	 String originLoc,
+            	 String destLoc,
+            	 String dimVol,
+            	 String shipperRef,
+            	 String recpAddress,
+            	 String shipperAddress,
+            	 String acctNbrDelStatus,
+            	 String svcBase, 
+            	 String creditCardDtl,
+            	 String preRateScenarios,
+            	 String expPieces,
+            	 String expActualWeight,
+            	 String expAdjWeight,
+            	 String creditCardDt,
+            	 */
+            	 
+            	 if (!originLoc.equals("")) {
+            		 	driver.findElement(By.xpath("//*[@id=\"origin\"]")).sendKeys(originLoc);
+            		 
+            	 }
+            	 if (!destLoc.equals("")) {
+            		 driver.findElement(By.xpath("//*[@id=\"destination\"]")).sendKeys(destLoc);
+            	 }
+            	 if (!dimVol.equals("")) {
+            		 driver.findElement(By.xpath("//*[@id=\"rb_volume\"]")).sendKeys(dimVol);
+            	 }
+            	 if (!shipperRef.equals("")) {
+            		 driver.findElement(By.xpath("//*[@id=\"reference_notes\"]")).sendKeys(shipperRef);
+            	 }
+            	 if (!recpAddress.equals("")) {
+            		 driver.findElement(By.xpath("//*[@id=\"reciptacct_number\"]")).sendKeys(recpAddress);
+            	 }
+            	 if (!shipperAddress.equals("")) {
+            		 driver.findElement(By.xpath("//*[@id=\"shipacct_number\"]")).sendKeys(shipperAddress);
+            	 }
+            	 if (!acctNbrDelStatus.equals("")) {
+            		// driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")).sendKeys(arg0);
+            	 }
+            	 if (!svcBase.equals("")) {
+            		 driver.findElement(By.xpath("//*[@id=\"service_base\"]")).sendKeys(svcBase);
+            	 }
+            	 if (!creditCardDtl.equals("")) {
+            		 String[] splitCC = creditCardDtl.split(" ");
+            		 driver.findElement(By.xpath("//*[@id=\"cc_num1\"]")).sendKeys(splitCC[0]);
+            		 driver.findElement(By.xpath("//*[@id=\"cc_num2\"]")).sendKeys(splitCC[1]);
+            		 driver.findElement(By.xpath("//*[@id=\"cc_num3\"]")).sendKeys(splitCC[2]);
+            		 driver.findElement(By.xpath("//*[@id=\"cc_num4\"]")).sendKeys(splitCC[3]);
+            	 }
+            	 if (!expPieces.equals("")) {
+            		 driver.findElement(By.xpath("//*[@id=\"rb_totalEXPPIECES\"]")).sendKeys(expPieces);
+            	 }
+            	 if (!expActualWeight.equals("")) {
+            		 driver.findElement(By.xpath("//*[@id=\"rb_totalEXPweight\"]")).sendKeys(expActualWeight);
+            	 }
+            	 if (!expAdjWeight.equals("")) {
+            		 driver.findElement(By.xpath("//*[@id=\"rb_totalEXPADJWeight\"]")).sendKeys(expAdjWeight);
+            	 }
+            	 if (!creditCardDt.equals("")) {
+            		 driver.findElement(By.xpath("//*[@id=\"exp_date\"]")).sendKeys(creditCardDt);
+            	 }
+             }
+             
              	driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")).click();
              	Thread.sleep(15000);
              	}
