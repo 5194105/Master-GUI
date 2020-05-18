@@ -152,7 +152,7 @@ public class testngRebillSlowMfRetire {
         if (testingMode==true){
         	browser="2";
         	level="2";
-        	filepath=homePath+"\\test data\\rebill.xlsx";
+        	//filepath=homePath+"\\test data\\rebill.xlsx";
         	source="db";
         	allCheckBox="false";
         	nullCheckBox="true";
@@ -168,7 +168,8 @@ public class testngRebillSlowMfRetire {
         }
         else {
         	if (source.equals("excel")) {
-        			excelVar = new excel(filepath);
+        		this.filepath=filepath;	
+        		excelVar = new excel(filepath);
         	}
         	
 	        	this.browser=browser;
@@ -264,7 +265,7 @@ public class testngRebillSlowMfRetire {
 		}
 		
     	String databaseSqlCount="select count(*) as total from rebill_regression ";
-    	String databaseSqlQuery="select result, description, test_input_nbr, tin_count, trkngnbr, reason_code, rebill_acct,invoice_nbr_1, invoice_nbr_2, mig, region,  login,   password,  rs_Type, company, worktype, ORIGIN_LOC,DEST_LOC,DIM_VOL,SHIPPER_REF,RECP_ADDRESS,SHIPPER_ADDRESS,ACC_NBR_DEL_STATUS,SVC_BASE, CREDIT_CARD_DTL,PRE_RATE_SCENARIOS,EXP_Pieces,EXP_ACTUAL_Weight,EXP_Adj_Weight,CREDIT_CARD_DT from rebill_regression ";
+    	String databaseSqlQuery="select result, description, test_input_nbr, tin_count, trkngnbr, reason_code, rebill_acct,invoice_nbr_1, invoice_nbr_2, mig, region,  login,   password,  rs_Type, company, worktype, ORIGIN_LOC,DEST_LOC,DIM_VOL,SHIPPER_REF,RECP_ADDRESS,SHIPPER_ADDRESS,ACC_NBR_DEL_STATUS,SVC_BASE, CREDIT_CARD_DTL,PRE_RATE_SCENARIOS,EXP_Pieces,EXP_ACTUAL_Weight,EXP_Adj_Weight,CREDIT_CARD_DTL from rebill_regression ";
     	
     	
     	if (allCheckBox.equals("false")) {
@@ -550,7 +551,7 @@ public class testngRebillSlowMfRetire {
     	
     	//Will Check if Trk is already successful;
   	  
-    	/*
+    	
     	String[] resultArray = validateResults(trk);
   	  if ( resultArray[0].equals("pass")){
        	 if(source.equals("excel")) {
@@ -598,7 +599,7 @@ public class testngRebillSlowMfRetire {
 		}
 	    
     
-    */
+    
     }
    
     @Test(dataProvider="data-provider2",retryAnalyzer = Retry.class)
@@ -965,7 +966,7 @@ public class testngRebillSlowMfRetire {
               	case "RRA" :
               		//reasonCodeDropDown.selectByValue("RRA - REBILL RECIP ACCT");
                          		
-              			driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[15]")).click();
+              			driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[14]")).click();
                      break;
                  case "RSA" :
                  //	reasonCodeDropDown.selectByValue("RSA - REBILL SHIPPER ACCT");
@@ -1032,15 +1033,49 @@ public class testngRebillSlowMfRetire {
          			 String tempError= driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[1]/h4")).getText();
          			 if (tempError.equals("Trying To Rebill A Partial Amount")) {
          				 System.out.println(tempError);
-         				 //Assert Fail
+         				 if(source.equals("excel")) {
+         	               	 writeToExcel(rowNumber, 0,"fail");
+         	               	 writeToExcel(rowNumber, 1,"Trying To Rebill A Partial Amount");
+         	               	 }
+         	   				 if(uploadTrkToDB==true) {
+                 	   			 String[] resultArray = new String[2];
+                 	   			 	resultArray[0]="fail";
+                 	   				resultArray[1]="Trying To Rebill A Partial Amount";
+                 	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                                	 }
          		}
          		 driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/button[1]")).click();
          		 System.out.println("Found Pop Up");
          		
+         		 
+         		 try {
+         		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/label[1]")));
+         		 }
+         		 catch(Exception e3) {
+         			 
+         			 tempError= driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[1]/h4")).getText();
+         			 if (tempError.indexOf("interline")!=-1) {
+         				 System.out.println(tempError);
+         				 driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/button[1]")).click();
+         			 }
+         		 }
+         			 
+         			 
+         			 try {
+                 		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/label[1]")));
+                 		 }
+                 		 catch(Exception e4) {
+                 			 
+                 			 tempError= driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[1]/h4")).getText();
+                 			 if (tempError.indexOf("specialist")!=-1) {
+                 				 System.out.println(tempError);
+                 				 driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/button[1]")).click();
+                 }
+                 		 }
          	}
-         	catch(Exception e2) {
-         		System.out.println("Could Not find Popup"+e2);
-         		 Assert.fail(e2 +" Could Not find Popup");
+         	catch(Exception e5) {
+         		System.out.println("Could Not find Popup"+e5);
+         		 Assert.fail(e5 +" Could Not find Popup");
          	}
         } 
          		 
@@ -1076,13 +1111,33 @@ public class testngRebillSlowMfRetire {
          	   				String tempError= driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/div[1]/h4")).getText();
          	   				if (tempError.indexOf("Management approval")!=-1) {
          	   					System.out.println(tempError);
-         	   					//Assert Fail
+         	   				 if(source.equals("excel")) {
+         	               	 writeToExcel(rowNumber, 0,"fail");
+         	               	 writeToExcel(rowNumber, 1,"Management approval");
+         	               	 }
+         	   				 if(uploadTrkToDB==true) {
+                 	   			 String[] resultArray = new String[2];
+                 	   			 	resultArray[0]="fail";
+                 	   				resultArray[1]="Management approval";
+                 	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                                	 }
+         	   			 Assert.fail("Management approval");
          	   					}
          	   				driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/button[1]")).click();
          	   				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")));
          	   				}
          	   				catch(Exception ee) {
-         	   					System.out.println(ee+"Could Not Get to Rebill Screen");
+         	   				 System.out.println(ee+"Could Not Get to Rebill Screen");
+         	   			 if(uploadTrkToDB==true) {
+         	   			 String[] resultArray = new String[2];
+         	   			 	resultArray[0]="fail";
+         	   				resultArray[1]="Could Not Get to Rebill Screen";
+         	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                        	 }
+         	   		 if(source.equals("excel")) {
+     	               	 writeToExcel(rowNumber, 0,"fail");
+     	               	 writeToExcel(rowNumber, 1,"Could Not Get to Rebill Screen");
+     	               	 }
          	   				 Assert.fail(ee+" Could Not Get to Rebill Screen");
          	   				}
          	   			}
@@ -1134,7 +1189,7 @@ public class testngRebillSlowMfRetire {
                     }
 
              
-             
+             System.out.println("MF TEST");
              if(worktype.equals("MFRETIRE")) {
            /*
             	 String originLoc,
@@ -1152,6 +1207,13 @@ public class testngRebillSlowMfRetire {
             	 String expAdjWeight,
             	 String creditCardDt,
             	 */
+            	 
+            	
+            	 if (!preRateScenarios.equals("")) {
+         		 	//driver.findElement(By.xpath("//*[@id=\"origin\"]")).sendKeys(originLoc);
+            		  System.out.println("Prerate TEst");
+            		 return;
+         	 }
             	 
             	 if (!originLoc.equals("")) {
             		 	driver.findElement(By.xpath("//*[@id=\"origin\"]")).sendKeys(originLoc);
@@ -1198,7 +1260,7 @@ public class testngRebillSlowMfRetire {
             		 driver.findElement(By.xpath("//*[@id=\"exp_date\"]")).sendKeys(creditCardDt);
             	 }
              }
-             
+             Thread.sleep(2000);
              	driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")).click();
              	Thread.sleep(15000);
              	}

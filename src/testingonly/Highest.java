@@ -37,17 +37,17 @@ public class Highest {
     	c.setDriverType("2");
     	c.setDriverType("2");
     	c.setCompatibleMode("false");
-    	c.setSource("db");
+    	c.setSource("excel");
     	c.setAllCheckBox("false");
     	c.setNullCheckBox("true");
-    	c.setFailedCheckBox("true");
+    	c.setFailedCheckBox("false");
   
 		c.setDomesticCheckBox("false");
 		c.setInternationalCheckBox("true");
 		c.setExpressCheckBox("true");
 		c.setGroundCheckBox("false");
-		c.setNormalCheckBox("false");
-		c.setMfRetireCheckBox("true");
+		c.setNormalCheckBox("true");
+		c.setMfRetireCheckBox("false");
 		c.setSessionCount("1");
     	
     	String filepath=c.getExcelPath();
