@@ -1,17 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
-  <test name="Default test(failed)">
+<suite name="Failed suite [Sample_Suite]">
+  <parameter name="nullCheckBox" value="true"/>
+  <parameter name="level" value="2"/>
+  <parameter name="failedCheckBox" value="false"/>
+  <parameter name="groundCheckBox" value="false"/>
+  <parameter name="source" value="excel"/>
+  <parameter name="compatibleMode" value=""/>
+  <parameter name="mfRetireCheckBox" value="false"/>
+  <parameter name="expressCheckBox" value="true"/>
+  <parameter name="allCheckBox" value="false"/>
+  <parameter name="filepath" value="C:\Users\FedExUser\Documents\rebill.xlsx"/>
+  <parameter name="normalCheckBox" value="true"/>
+  <parameter name="sessionCount" value="1"/>
+  <parameter name="domesticCheckBox" value="false"/>
+  <parameter name="browser" value="2"/>
+  <parameter name="internationalCheckBox" value="true"/>
+  <test name="Rebill Test(failed)" parallel="methods">
     <classes>
       <class name="rebill.testngRebillSlowMfRetire">
         <methods>
           <include name="testMethod2"/>
           <include name="testMethod4"/>
-          <include name="testMethod1"/>
+          <include name="testMethod1" invocation-numbers="0 0 0 1 1 2 2 4 4 7 7 8 8 9 9 11 11 12 12 13 13"/>
           <include name="testMethod3"/>
           <include name="setupExcel"/>
         </methods>
       </class> <!-- rebill.testngRebillSlowMfRetire -->
     </classes>
-  </test> <!-- Default test(failed) -->
-</suite> <!-- Failed suite [Default suite] -->
+  </test> <!-- Rebill Test(failed) -->
+</suite> <!-- Failed suite [Sample_Suite] -->
