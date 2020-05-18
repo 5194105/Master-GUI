@@ -36,7 +36,7 @@ public class config {
     String normalCheckBox;
     String mfRetireCheckBox;
     String sessionCount;
-
+    String prerateType;
     
     String cycle;
     String homePath;
@@ -649,6 +649,19 @@ public void setStartDate(String startDate) {
 public void setEndDate(String endDate) {
 	this.endDate=endDate;
 }
+
+
+
+public void setPrerateType(String prerateType) {
+	this.prerateType=prerateType;
+}
+public String getPrerateType() {
+	return prerateType;
+}
+
+
+
+
 
 public String getStartDate( ) {
 	

@@ -47,7 +47,8 @@ public class prerateAutomationGui {
 	    private JRadioButton rdbtnHold;
 	    gui g;
 	    config c;
-	
+	     JLabel sessionLabel;
+	     JTextField	sessionTextField;	
 	public prerateAutomationGui( gui g,config c) {
 		this.g=g;
 		this.c=c;
@@ -77,7 +78,7 @@ public class prerateAutomationGui {
 		dbLabel.setBounds(375, 350, 78, 56);
 
 		executeLabel = new JLabel("New label");
-		executeLabel.setBounds(375, 515, 284, 41);
+		executeLabel.setBounds(413, 530, 284, 41);
 		
 		excelLabel.setName("excel");
 		dbLabel.setName("db");
@@ -178,6 +179,18 @@ public class prerateAutomationGui {
 		frame.getContentPane().add(moreOptionsTextLabel);
 		
 		
+		sessionLabel = new JLabel("Parallel Sessions");
+		sessionLabel.setForeground(Color.WHITE);
+		sessionLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		sessionLabel.setBounds(413, 475, 386, 64);
+		frame.getContentPane().add(sessionLabel);
+		
+		sessionTextField= new JTextField(2);
+		sessionTextField.setText("1");
+		sessionTextField.setBounds(600, 500, 20, 20);
+		frame.getContentPane().add(sessionTextField);
+
+		
 		guiBase gb = new guiBase();
 		mouse m = new mouse(gb,g,c,this,frame);
 		m.setFrame(frame);
@@ -191,6 +204,8 @@ public class prerateAutomationGui {
 		
 		l2RadioButton.addMouseListener(m.m3);
 		l3RadioButton.addMouseListener(m.m3);
+		rdbtnUpdate.addMouseListener(m.m3);
+		rdbtnHold.addMouseListener(m.m3);
 		
 		
 		
@@ -244,10 +259,38 @@ public class prerateAutomationGui {
         });
 		
 	    
+
+		
+	    rdbtnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	rdbtnUpdateActionPerformed(evt);
+            }
+        });
 	    
+	    rdbtnHold.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	rdbtnHoldActionPerformed(evt);
+            }
+        });
 		
 	}
 	
+		private void rdbtnUpdateActionPerformed(java.awt.event.ActionEvent evt) { 
+			System.out.println("UPDATE");
+			if (rdbtnHold.isSelected()){
+				rdbtnHold.setSelected(false);
+		        }
+			c.setPrerateType("update");
+	}
+		private void rdbtnHoldActionPerformed(java.awt.event.ActionEvent evt) {   
+			System.out.println("HOLD");
+			if (rdbtnUpdate.isSelected()){
+				rdbtnUpdate.setSelected(false);
+		        }
+			c.setPrerateType("hold");
+		}
+	
+		
 		private void l2RadioButtonActionPerformed(java.awt.event.ActionEvent evt) { 
 			System.out.println("L2 RADIO");
 			if (l3RadioButton.isSelected()){
@@ -262,8 +305,6 @@ public class prerateAutomationGui {
 		        }
 			c.setLevel("3");
 		}
-	
-		
 		
 	
 	

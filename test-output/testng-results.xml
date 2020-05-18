@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testng-results skipped="3" failed="21" ignored="0" total="29" passed="5">
+=======
+<testng-results skipped="0" failed="3" ignored="0" total="12" passed="9">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
   <reporter-output>
   </reporter-output>
+<<<<<<< HEAD
   <suite name="Sample_Suite" duration-ms="2206225" started-at="2020-05-15T21:13:56Z" finished-at="2020-05-15T21:50:43Z">
+=======
+  <suite name="Sample_Suite" duration-ms="11582" started-at="2020-05-15T11:16:59 CDT" finished-at="2020-05-15T11:17:11 CDT">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
     <groups>
     </groups>
+<<<<<<< HEAD
     <test name="Rebill Test" duration-ms="2206225" started-at="2020-05-15T21:13:56Z" finished-at="2020-05-15T21:50:43Z">
       <class name="rebill.testngRebillSlowMfRetire">
         <test-method status="PASS" signature="setupExcel(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:rebill.testngRebillSlowMfRetire@104a311]" name="setupExcel" is-config="true" duration-ms="888" started-at="2020-05-15T16:13:56Z" finished-at="2020-05-15T16:13:57Z">
@@ -80,6 +89,53 @@
               </value>
             </param>
             <param index="14">
+=======
+    <test name="Rebill Test" duration-ms="11582" started-at="2020-05-15T11:16:59 CDT" finished-at="2020-05-15T11:17:11 CDT">
+      <class name="prerate.prerateHoldTestNGSlow">
+        <test-method status="PASS" signature="setupExcel(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="setupExcel" is-config="true" duration-ms="3632" started-at="2020-05-15T11:16:59 CDT" finished-at="2020-05-15T11:17:03 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[C:\Users\FedExUser\Documents\rebill.xlsx]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[3]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[2]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[db]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[false]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+            <param index="8">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
               <value>
                 <![CDATA[1]]>
               </value>
@@ -88,14 +144,65 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupExcel -->
+<<<<<<< HEAD
         <test-method status="FAIL" signature="testMethod2(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rebill.testngRebillSlowMfRetire@104a311]" name="testMethod2" duration-ms="0" started-at="2020-05-15T16:13:57Z" data-provider="data-provider2" finished-at="2020-05-15T16:13:57Z">
+=======
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod1" duration-ms="1029" started-at="2020-05-15T11:17:03 CDT" data-provider="data-provider1" finished-at="2020-05-15T11:17:04 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Y]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[149818]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[794968528905]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[ON_HOLD]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="FAIL" signature="testMethod2(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod2" duration-ms="0" started-at="2020-05-15T11:17:03 CDT" data-provider="data-provider2" finished-at="2020-05-15T11:17:03 CDT">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
           <exception class="org.testng.TestNGException">
             <message>
               <![CDATA[
-Data Provider public synchronized java.lang.Object[][] rebill.testngRebillSlowMfRetire.dataProviderMethod2() must return either Object[][] or Iterator<Object>[], not class [[Ljava.lang.Object;]]>
+Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod2() returned a null value]]>
             </message>
             <full-stacktrace>
               <![CDATA[org.testng.TestNGException: 
+<<<<<<< HEAD
 Data Provider public synchronized java.lang.Object[][] rebill.testngRebillSlowMfRetire.dataProviderMethod2() must return either Object[][] or Iterator<Object>[], not class [[Ljava.lang.Object;
 	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
 	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
@@ -107,20 +214,40 @@ Data Provider public synchronized java.lang.Object[][] rebill.testngRebillSlowMf
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
 	at java.lang.Thread.run(Unknown Source)
+=======
+Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod2() returned a null value
+at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:150)
+at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
+at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
+at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
+at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:788)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+at java.lang.Thread.run(Thread.java:748)
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 ]]>
             </full-stacktrace>
           </exception> <!-- org.testng.TestNGException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod2 -->
+<<<<<<< HEAD
         <test-method status="FAIL" signature="testMethod3(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rebill.testngRebillSlowMfRetire@104a311]" name="testMethod3" duration-ms="0" started-at="2020-05-15T16:13:57Z" data-provider="data-provider3" finished-at="2020-05-15T16:13:57Z">
+=======
+        <test-method status="FAIL" signature="testMethod3(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod3" duration-ms="0" started-at="2020-05-15T11:17:03 CDT" data-provider="data-provider3" finished-at="2020-05-15T11:17:03 CDT">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
           <exception class="org.testng.TestNGException">
             <message>
               <![CDATA[
-Data Provider public synchronized java.lang.Object[][] rebill.testngRebillSlowMfRetire.dataProviderMethod3() must return either Object[][] or Iterator<Object>[], not class [[Ljava.lang.Object;]]>
+Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod3() returned a null value]]>
             </message>
             <full-stacktrace>
               <![CDATA[org.testng.TestNGException: 
+<<<<<<< HEAD
 Data Provider public synchronized java.lang.Object[][] rebill.testngRebillSlowMfRetire.dataProviderMethod3() must return either Object[][] or Iterator<Object>[], not class [[Ljava.lang.Object;
 	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
 	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
@@ -132,20 +259,40 @@ Data Provider public synchronized java.lang.Object[][] rebill.testngRebillSlowMf
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
 	at java.lang.Thread.run(Unknown Source)
+=======
+Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod3() returned a null value
+at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:150)
+at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
+at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
+at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
+at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:788)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+at java.lang.Thread.run(Thread.java:748)
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 ]]>
             </full-stacktrace>
           </exception> <!-- org.testng.TestNGException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod3 -->
+<<<<<<< HEAD
         <test-method status="FAIL" signature="testMethod4(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rebill.testngRebillSlowMfRetire@104a311]" name="testMethod4" duration-ms="0" started-at="2020-05-15T16:13:57Z" data-provider="data-provider4" finished-at="2020-05-15T16:13:57Z">
+=======
+        <test-method status="FAIL" signature="testMethod4(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod4" duration-ms="0" started-at="2020-05-15T11:17:03 CDT" data-provider="data-provider4" finished-at="2020-05-15T11:17:03 CDT">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
           <exception class="org.testng.TestNGException">
             <message>
               <![CDATA[
-Data Provider public synchronized java.lang.Object[][] rebill.testngRebillSlowMfRetire.dataProviderMethod4() must return either Object[][] or Iterator<Object>[], not class [[Ljava.lang.Object;]]>
+Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod4() returned a null value]]>
             </message>
             <full-stacktrace>
               <![CDATA[org.testng.TestNGException: 
+<<<<<<< HEAD
 Data Provider public synchronized java.lang.Object[][] rebill.testngRebillSlowMfRetire.dataProviderMethod4() must return either Object[][] or Iterator<Object>[], not class [[Ljava.lang.Object;
 	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
 	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
@@ -157,12 +304,28 @@ Data Provider public synchronized java.lang.Object[][] rebill.testngRebillSlowMf
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
 	at java.lang.Thread.run(Unknown Source)
+=======
+Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod4() returned a null value
+at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:150)
+at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
+at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
+at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
+at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:788)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+at java.lang.Thread.run(Thread.java:748)
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 ]]>
             </full-stacktrace>
           </exception> <!-- org.testng.TestNGException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod4 -->
+<<<<<<< HEAD
         <test-method status="SKIP" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rebill.testngRebillSlowMfRetire@104a311]" name="testMethod1" duration-ms="135744" started-at="2020-05-15T16:13:59Z" data-provider="data-provider1" finished-at="2020-05-15T16:16:14Z">
           <params>
             <param index="0">
@@ -5018,6 +5181,377 @@ Session ID: 2b293b57b643b4695eafcf46c9714d68
           </reporter-output>
         </test-method> <!-- testMethod1 -->
       </class> <!-- rebill.testngRebillSlowMfRetire -->
+=======
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod1" duration-ms="863" started-at="2020-05-15T11:17:04 CDT" data-provider="data-provider1" finished-at="2020-05-15T11:17:05 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[Y]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[227394]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[794968568460]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[ON_HOLD]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[2]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod1" duration-ms="880" started-at="2020-05-15T11:17:05 CDT" data-provider="data-provider1" finished-at="2020-05-15T11:17:06 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[178364]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[794968546834]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[ON_HOLD]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[3]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod1" duration-ms="881" started-at="2020-05-15T11:17:06 CDT" data-provider="data-provider1" finished-at="2020-05-15T11:17:07 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[228011]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[794968568806]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[ON_HOLD]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[4]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod1" duration-ms="820" started-at="2020-05-15T11:17:07 CDT" data-provider="data-provider1" finished-at="2020-05-15T11:17:08 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[177948]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[583167322039]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[ON_HOLD]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[5]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod1" duration-ms="851" started-at="2020-05-15T11:17:08 CDT" data-provider="data-provider1" finished-at="2020-05-15T11:17:08 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[131901]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[794968516257]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[ON_HOLD]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[6]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod1" duration-ms="892" started-at="2020-05-15T11:17:08 CDT" data-provider="data-provider1" finished-at="2020-05-15T11:17:09 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[131901]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[2]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[582421564578]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[REMOVE]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[7]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod1" duration-ms="827" started-at="2020-05-15T11:17:09 CDT" data-provider="data-provider1" finished-at="2020-05-15T11:17:10 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[146352]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[794968527449]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[ON_HOLD]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[8]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod1" duration-ms="855" started-at="2020-05-15T11:17:10 CDT" data-provider="data-provider1" finished-at="2020-05-15T11:17:11 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[177376]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[794968545996]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[ON_HOLD]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[9]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+      </class> <!-- prerate.prerateHoldTestNGSlow -->
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
     </test> <!-- Rebill Test -->
   </suite> <!-- Sample_Suite -->
 </testng-results>
