@@ -45,6 +45,7 @@ public class testngRebillSlowMfRetire {
     //False = Running from xml only
 	//True = Running from GUI only
 	Boolean testingMode=false;
+	Boolean testingDB=true;
 	Boolean uploadTrkToDB=true;
 	
 	String tempFile,configFile;
@@ -307,8 +308,8 @@ public class testngRebillSlowMfRetire {
     	}
     	
     	if (groundCheckBox.equals("true") && expressCheckBox.equals("true")) {
-    		databaseSqlCount+="and company in ('GD',EP') ";
-    		databaseSqlQuery+="and company in ('GD',EP') ";
+    		databaseSqlCount+="and company in ('GD','EP') ";
+    		databaseSqlQuery+="and company in ('GD','EP') ";
     	}
     	
        	if (normalCheckBox.equals("true") && mfRetireCheckBox.equals("false")) {
@@ -550,16 +551,30 @@ public class testngRebillSlowMfRetire {
     	System.out.println(rowNumber);
     	
     	//Will Check if Trk is already successful;
-  	  
-    	
-    	String[] resultArray = validateResults(trk);
+  	  try {
+    	if (testingDB==true) {
+    
+  		  String[] resultArray = validateResults(trk);
   	  if ( resultArray[0].equals("pass")){
        	 if(source.equals("excel")) {
        	 writeToExcel(rowNumber, 0,"pass");
        	 writeToExcel(rowNumber, 1,"completed");
+       	
        	 }
+       	 writeToDB(testInputNbr,tinCount,trk,resultArray);
+       	 
+       	 	writeToDB(testInputNbr,tinCount,trk,resultArray);
        	 return;
-        }
+  	  
+  	  }
+  	  }
+  	  }
+    	//}
+  	  catch(Exception e) {
+  		System.out.println(e);  
+  	  }
+  	  
+        
     	
     	try { 
     		driver1.quit();
@@ -609,14 +624,29 @@ public class testngRebillSlowMfRetire {
     	readTrk(trk);
     	
     	//Will Check if Trk is already successful;
-  	  String[] resultArray = validateResults(trk);
-  	  if ( resultArray[0].equals("pass")){
-  		 if(source.equals("excel")) {
-       	 writeToExcel(rowNumber, 0,"pass");
-       	 writeToExcel(rowNumber, 1,"completed");
-  		 }
-       	 return;
-        }
+  	 
+  	 try {
+     	if (testingDB==true) {
+     
+   		  String[] resultArray = validateResults(trk);
+   	  if ( resultArray[0].equals("pass")){
+        	 if(source.equals("excel")) {
+        	 writeToExcel(rowNumber, 0,"pass");
+        	 writeToExcel(rowNumber, 1,"completed");
+        	
+        	 }
+        	 writeToDB(testInputNbr,tinCount,trk,resultArray);
+        	 
+        	 	writeToDB(testInputNbr,tinCount,trk,resultArray);
+        	 return;
+   	  
+   	  }
+   	  }
+   	  }
+     	//}
+   	  catch(Exception e) {
+   		System.out.println(e);  
+   	  }
   	  
     	try { 
     		driver2.quit();
@@ -662,14 +692,28 @@ public class testngRebillSlowMfRetire {
     	
     	
     	//Will Check if Trk is already successful;
-  	  String[] resultArray = validateResults(trk);
-  	  if ( resultArray[0].equals("pass")){
-  		 if(source.equals("excel")) {
-       	 writeToExcel(rowNumber, 0,"pass");
-       	 writeToExcel(rowNumber, 1,"completed");
-  		 }
-       	 return;
-        }
+    	 try {
+    	    	if (testingDB==true) {
+    	    
+    	  		  String[] resultArray = validateResults(trk);
+    	  	  if ( resultArray[0].equals("pass")){
+    	       	 if(source.equals("excel")) {
+    	       	 writeToExcel(rowNumber, 0,"pass");
+    	       	 writeToExcel(rowNumber, 1,"completed");
+    	       	
+    	       	 }
+    	       	 writeToDB(testInputNbr,tinCount,trk,resultArray);
+    	       	 
+    	       	 	writeToDB(testInputNbr,tinCount,trk,resultArray);
+    	       	 return;
+    	  	  
+    	  	  }
+    	  	  }
+    	  	  }
+    	    	//}
+    	  	  catch(Exception e) {
+    	  		System.out.println(e);  
+    	  	  }
     	try { 
     		driver3.quit();
 	  }
@@ -719,14 +763,28 @@ public class testngRebillSlowMfRetire {
     	//Will Check if Trk is already successful;
     	readTrk(trk);
     	
-    	String[] resultArray = validateResults(trk);
-    	  if ( resultArray[0].equals("pass")){
-    			 if(source.equals("excel")) {
-         	 writeToExcel(rowNumber, 0,"pass");
-         	 writeToExcel(rowNumber, 1,"completed");
-    			 }
-         	 return;
-          }
+    	 try {
+    	    	if (testingDB==true) {
+    	    
+    	  		  String[] resultArray = validateResults(trk);
+    	  	  if ( resultArray[0].equals("pass")){
+    	       	 if(source.equals("excel")) {
+    	       	 writeToExcel(rowNumber, 0,"pass");
+    	       	 writeToExcel(rowNumber, 1,"completed");
+    	       	
+    	       	 }
+    	       	 writeToDB(testInputNbr,tinCount,trk,resultArray);
+    	       	 
+    	       	 	writeToDB(testInputNbr,tinCount,trk,resultArray);
+    	       	 return;
+    	  	  
+    	  	  }
+    	  	  }
+    	  	  }
+    	    	//}
+    	  	  catch(Exception e) {
+    	  		System.out.println(e);  
+    	  	  }
     	try { 
     		driver4.quit();
 	  }
@@ -794,7 +852,20 @@ public class testngRebillSlowMfRetire {
     	Boolean packageTab=false;
     	wait=new WebDriverWait(driver,20);
     	driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
-
+    	if(preRateScenarios.equals("")) {
+    		 if(source.equals("excel")) {
+	               	 writeToExcel(rowNumber, 0,"fail");
+	               	 writeToExcel(rowNumber, 1,"Prerate Code Not Added Yet");
+	               	 }
+	   				 if(uploadTrkToDB==true) {
+     	   			 String[] resultArray = new String[2];
+     	   			 	resultArray[0]="fail";
+     	   				resultArray[1]="Prerate Code Not Added Yet";
+     	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                    	 }
+    	return;	
+    	}
+    	
     	
     	
     	try {
