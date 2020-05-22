@@ -1,4 +1,6 @@
-package testingonly;
+package rebill;
+
+
 import configuration.config;
 import prerate.prerateTestNGSlow;
 import rebill.rebillData;
@@ -25,7 +27,7 @@ import org.testng.xml.XmlClass;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
-public class Highest {
+public class rebillManualClass {
 
 	 
 
@@ -37,17 +39,17 @@ public class Highest {
     	c.setDriverType("2");
     	c.setDriverType("2");
     	c.setCompatibleMode("false");
-    	c.setSource("excel");
+    	c.setSource("db");
     	c.setAllCheckBox("false");
     	c.setNullCheckBox("true");
     	c.setFailedCheckBox("false");
   
-		c.setDomesticCheckBox("false");
+		c.setDomesticCheckBox("true");
 		c.setInternationalCheckBox("true");
 		c.setExpressCheckBox("true");
-		c.setGroundCheckBox("false");
+		c.setGroundCheckBox("true");
 		c.setNormalCheckBox("true");
-		c.setMfRetireCheckBox("false");
+		c.setMfRetireCheckBox("true");
 		c.setSessionCount("1");
     	
     	String filepath=c.getExcelPath();

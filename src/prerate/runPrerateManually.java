@@ -1,53 +1,40 @@
-package testingonly;
-import configuration.config;
-import prerate.prerateTestNGSlow;
-import rebill.rebillData;
-import rebill.testngRebillSlow;
-import rebill.testngRebillSlowMfRetire;
+package prerate;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.testng.TestNG;
-import org.testng.annotations.Parameters;
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
-public class Highest {
+import configuration.config;
+import rebill.rebillData;
+import rebill.testngRebillSlowMfRetire;
 
-	 
+public class runPrerateManually {
 
 	static ArrayList<rebillData> rebillDataArray= new ArrayList<rebillData>();
     public static void main(String[] args) {
     	config c = new config();
        	c.setExcelPath("C:\\Users\\FedExUser\\Documents\\rebill.xlsx");
-    	c.setLevel("2");
+    	c.setLevel("3");
     	c.setDriverType("2");
     	c.setDriverType("2");
     	c.setCompatibleMode("false");
-    	c.setSource("excel");
+    	c.setSource("db");
     	c.setAllCheckBox("false");
     	c.setNullCheckBox("true");
-    	c.setFailedCheckBox("false");
+    	c.setFailedCheckBox("true");
   
 		c.setDomesticCheckBox("false");
 		c.setInternationalCheckBox("true");
 		c.setExpressCheckBox("true");
 		c.setGroundCheckBox("false");
-		c.setNormalCheckBox("true");
-		c.setMfRetireCheckBox("false");
+		c.setNormalCheckBox("false");
+		c.setMfRetireCheckBox("true");
 		c.setSessionCount("1");
     	
     	String filepath=c.getExcelPath();
@@ -153,7 +140,7 @@ public class Highest {
         XmlTest xmlTest = new XmlTest(xmlSuite);
         xmlTest.setName("Rebill Test");
         //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
-        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testngRebillSlowMfRetire.class)));
+        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(prerateHoldTestNGSlow.class)));
         xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
         TestNG tng = new TestNG();
         tng.setXmlSuites(Collections.singletonList(xmlSuite));
@@ -161,7 +148,3 @@ public class Highest {
         
 	}
 }
-
-
- 
-

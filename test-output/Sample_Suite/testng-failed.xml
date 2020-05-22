@@ -3,14 +3,14 @@
 <suite name="Failed suite [Sample_Suite]">
   <parameter name="nullCheckBox" value="true"/>
   <parameter name="level" value="2"/>
-  <parameter name="failedCheckBox" value="true"/>
-  <parameter name="groundCheckBox" value="false"/>
+  <parameter name="failedCheckBox" value="false"/>
+  <parameter name="groundCheckBox" value="true"/>
   <parameter name="source" value="db"/>
   <parameter name="compatibleMode" value=""/>
-  <parameter name="mfRetireCheckBox" value="false"/>
+  <parameter name="mfRetireCheckBox" value="true"/>
   <parameter name="expressCheckBox" value="true"/>
   <parameter name="allCheckBox" value="false"/>
-  <parameter name="filepath" value=""/>
+  <parameter name="filepath" value="C:\Users\FedExUser\Documents\rebill.xlsx"/>
   <parameter name="normalCheckBox" value="true"/>
   <parameter name="sessionCount" value="1"/>
   <parameter name="domesticCheckBox" value="true"/>
@@ -18,15 +18,14 @@
   <parameter name="internationalCheckBox" value="true"/>
   <test name="Rebill Test(failed)" parallel="methods">
     <classes>
-      <class name="rebill.testngRebillSlow">
+      <class name="rebill.testngRebillSlowMfRetire">
         <methods>
-          <include name="testMethod1" invocation-numbers="0 0 0 0 1 1 2 2 3 3 4 4 5 5 6 6 7 7 8 8 19 19 23 23 24 24 25 25 26 26 27 27 28 28 29 29 30 30 31 31 32 32 33 33 34 34 35 35 36 36 37 37 38 38 39 39 43 43 44 44 45 45 46 46 49 49 50 50 57 57 61 61 62 62 63 63 64 64 69 69 70 70 71 71 72 72 87 87 90 90 109 109 111 111 114 117 117 121 121 123 123 130 147 159 165 165 183 183 188 188 197 197 200 200 201 201 202 202 203 203 204 204 205 205 206 206 207 207 208 208 209 209 210 210 211 211 212 212 214 214 217 217 218 218 219 219 220 220 221 221 222 222"/>
           <include name="testMethod2"/>
           <include name="testMethod4"/>
-          <include name="setupExcel"/>
           <include name="testMethod3"/>
+          <include name="setupExcel"/>
         </methods>
-      </class> <!-- rebill.testngRebillSlow -->
+      </class> <!-- rebill.testngRebillSlowMfRetire -->
     </classes>
   </test> <!-- Rebill Test(failed) -->
 </suite> <!-- Failed suite [Sample_Suite] -->

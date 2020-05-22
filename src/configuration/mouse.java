@@ -42,6 +42,7 @@ import guis.rebillAutomationExtendGUI;
 import guis.rebillAutomationGui;
 import guis.rerateAutomationGui;
 import guis.udAutomation;
+import prerate.prerateHoldTestNGSlow;
 import prerate.prerateTestNGSlow;
 import rebill.rebillMain;
 import rebill.testngRebillSlow;
@@ -922,6 +923,8 @@ public void setupMouseListener() {
 				    				String allCheckBox=c.getAllCheckBox();
 				    				String nullCheckBox=c.getNullCheckBox();
 				    				String failedCheckBox=c.getFailedCheckBox();
+				    				String prerateType=c.getPrerateType();
+				    				String sessionCount=c.getSessionCount();
 				    				
 				    				System.out.println("filepath"+" "+filepath);
 				    				System.out.println("level"+" "+level);
@@ -931,7 +934,14 @@ public void setupMouseListener() {
 				    				System.out.println("allCheckBox"+" "+allCheckBox);
 				    				System.out.println("nullCheckBox"+" "+nullCheckBox);
 				    				System.out.println("failedCheckBox"+" "+failedCheckBox);
-				    			
+				    				System.out.println("prerateType"+" "+prerateType);
+				    				System.out.println("sessionCount"+" "+sessionCount);
+				    				
+				    				
+				    				if(prerateType==null) {
+				    					prerateType="";
+				    				}
+				    				
 				    				if(filepath==null) {
 				    					filepath="";
 				    				}
@@ -953,6 +963,9 @@ public void setupMouseListener() {
 				    				if(failedCheckBox==null) {
 				    					failedCheckBox="";
 				    				}
+				    				if(sessionCount==null) {
+				    					sessionCount="";
+				    				}
 				    				
 				    				
 				    		        XmlSuite xmlSuite = new XmlSuite();
@@ -966,12 +979,18 @@ public void setupMouseListener() {
 				    		        fieldValues.put("allCheckBox", allCheckBox);
 				    		        fieldValues.put("nullCheckBox", nullCheckBox);
 				    		        fieldValues.put("failedCheckBox", failedCheckBox);
-				    		        
+				    		        fieldValues.put("sessionCount", sessionCount);
 				    		        xmlSuite.setParameters(fieldValues);
 				    		        XmlTest xmlTest = new XmlTest(xmlSuite);
 				    		        xmlTest.setName("Prerate Test");
 				    		        //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
+				    		        if (prerateType.equals("update")) {
 				    		        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(prerateTestNGSlow.class)));
+				    		        }
+				    		        else  if (prerateType.equals("hold")) {
+					    		        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(prerateHoldTestNGSlow.class)));
+					    		        }
+				    		        
 				    		        xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
 				    		        TestNG tng = new TestNG();
 				    		        tng.setXmlSuites(Collections.singletonList(xmlSuite));

@@ -35,7 +35,7 @@ import org.testng.annotations.Test;
 import configuration.excel;
 
 
-public class prerateTestNGSlow {
+public class prerateHoldTestNGSlow {
   
     //False = Running from xml only
 	//True = Running from GUI only
@@ -120,12 +120,8 @@ public class prerateTestNGSlow {
 	String source;
 	String sessionCount;
 	String[][] allData;
-<<<<<<< HEAD
-	/*
-=======
 	int sessionCountInt;
 	
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 	@BeforeClass
 	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","sessionCount"})
 	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String sessionCount) {
@@ -137,23 +133,12 @@ public class prerateTestNGSlow {
 		this.allCheckBox=allCheckBox;
 		this.nullCheckBox=nullCheckBox;
 		this.failedCheckBox=failedCheckBox;
-<<<<<<< HEAD
-		*/
-	
-=======
 		this.sessionCount=sessionCount;
 		sessionCountInt=Integer.parseInt(sessionCount);
 		System.out.println(sessionCountInt);
 	/*
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 	@BeforeClass
 	public void setupExcel() {
-<<<<<<< HEAD
-	
-		testingMode=true;
-		testingDB=false;
-	
-=======
 	*/
 		testingMode=false;
 		testingDB=true;
@@ -168,18 +153,9 @@ public class prerateTestNGSlow {
 			failedCheckBox="false";
 			sessionCountInt=1;
 		}
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 		
 		
-		filepath=homePath+"\\test data\\prerate_update_pc.xlsx";
-		level="3";
-		browser="2";
-		compatibleMode="false";
-		source="excel";
-		allCheckBox="false";
-		nullCheckBox="false";
-		failedCheckBox="false";
-    	excelVar = new excel(filepath);
+		
 		
 		
 		
@@ -199,7 +175,9 @@ public class prerateTestNGSlow {
 		}
         
         if (testingMode==true && source.equals("excel")){
-
+        	browser="2";
+        	level="2";
+        	excelVar = new excel(homePath+"\\test data\\PRERATE_UPDATE.xlsx");
         }
 	  
     else {
@@ -297,8 +275,8 @@ public class prerateTestNGSlow {
 			e.printStackTrace();
 		}
 		
-  	 String databaseSqlCount="select count(*) as total from prerate_view ";
-  	 String databaseSqlQuery="select PRE_RATE_TYPE_CD, DESCRIPTION,POD_SCAN ,TIN_COUNT ,TEST_INPUT_NBR ,TRKNGNBR ,PRERATE_AMT, CURRENCY_CD, APPROVER_ID ,CHRG_CD1 ,CHRG_AMT1 ,CHRG_CD2 ,CHRG_AMT2 ,CHRG_CD3, CHRG_AMT3, CHRG_CD4, CHRG_AMT4 from prerate_view ";
+  	 String databaseSqlCount="select count(*) as total from prerate_hold_view ";
+  	 String databaseSqlQuery="select RESULT, DESCRIPTION,POD_SCAN,TEST_INPUT_NBR,TIN_COUNT,TRKNGNBR,TIN_COMMENT from prerate_hold_view ";
     
     	if (allCheckBox.equals("false")) {
     		databaseSqlCount+="where trkngnbr is not null and ";
@@ -497,15 +475,14 @@ public class prerateTestNGSlow {
     
     
     
-    
-    
+  
     
     
     @Test(dataProvider="data-provider1")
-    public void testMethod1( String type, String comment,String podScan,String tinCount,String testInputNbr,String trk,String amount,String currcode,String approverID,String cc1,String cm1,String cc2 ,String cm2 ,String cc3,String cm3 ,String cc4 ,String cm4,int rowNumber) {
+    public void testMethod1( String result, String description,String podScan,String testInputNbr,String tinCount,String trk,String tinComment,int rowNumber) {
     	if (testingDB==true) {
     	 try {
-      	  if (validateEC(trk)==true){
+      	  if (validateEC(trk,tinComment)==true){
       		if (source.equals("excel")) {
       		  writeToExcel(rowNumber,1, "pass");
       		}
@@ -549,7 +526,7 @@ public class prerateTestNGSlow {
 	    login(driver1,wait1);
 	  
 	    try {
-			doPrerate(driver1,wait1,type, comment,podScan,tinCount, testInputNbr, trk, amount, currcode, approverID, cc1, cm1, cc2 , cm2 , cc3, cm3 , cc4 , cm4, rowNumber,1);
+			doPrerate(driver1,wait1,result, description,podScan,testInputNbr, tinCount, trk, tinComment, rowNumber,1);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -560,10 +537,10 @@ public class prerateTestNGSlow {
     }
    
     @Test(dataProvider="data-provider2")
-    public void testMethod2( String type, String comment,String podScan,String tinCount,String testInputNbr,String trk,String amount,String currcode,String approverID,String cc1,String cm1,String cc2 ,String cm2 ,String cc3,String cm3 ,String cc4 ,String cm4,int rowNumber) {
+    public void testMethod2(String result, String description,String podScan,String testInputNbr,String tinCount,String trk,String tinComment,int rowNumber) {
     	if (testingDB==true) {
     	try {
-         	  if (validateEC(trk)==true){
+         	  if (validateEC(trk,tinComment)==true){
          		 writeToExcel(rowNumber,1, "pass");
          		 String[] resultArray = new String[2];
    			 resultArray[0]="pass";
@@ -605,7 +582,7 @@ public class prerateTestNGSlow {
     	}
 	    login(driver2,wait2);
 	    try {
-			doPrerate(driver2,wait2,type, comment,podScan,tinCount, testInputNbr, trk, amount, currcode, approverID, cc1, cm1, cc2 , cm2 , cc3, cm3 , cc4 , cm4, rowNumber,2);
+			doPrerate(driver2,wait2,result, description,podScan,testInputNbr, tinCount, trk, tinComment,rowNumber,2);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -615,10 +592,10 @@ public class prerateTestNGSlow {
     
     }
     @Test(dataProvider="data-provider3")
-    public void testMethod3( String type, String comment,String podScan,String tinCount,String testInputNbr,String trk,String amount,String currcode,String approverID,String cc1,String cm1,String cc2 ,String cm2 ,String cc3,String cm3 ,String cc4 ,String cm4,int rowNumber) {
+    public void testMethod3(String result, String description,String podScan,String testInputNbr,String tinCount,String trk,String tinComment,int rowNumber) {
     	if (testingDB==true) {
     	try {
-      		 if (validateEC(trk)==true){
+      		 if (validateEC(trk,tinComment)==true){
          		 writeToExcel(rowNumber,1, "pass");
          		 String[] resultArray = new String[2];
    			 resultArray[0]="pass";
@@ -662,7 +639,7 @@ public class prerateTestNGSlow {
     	
     login(driver3,wait3);
     try {
-		doPrerate(driver3,wait3,type, comment,podScan,tinCount, testInputNbr, trk, amount, currcode, approverID, cc1, cm1, cc2 , cm2 , cc3, cm3 , cc4 , cm4, rowNumber,3);
+		doPrerate(driver3,wait3,result, description,podScan,testInputNbr, tinCount, trk, tinComment,rowNumber,3);
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -676,10 +653,10 @@ public class prerateTestNGSlow {
     
     
     @Test(dataProvider="data-provider4")
-    public void testMethod4( String type, String comment,String podScan,String tinCount,String testInputNbr,String trk,String amount,String currcode,String approverID,String cc1,String cm1,String cc2 ,String cm2 ,String cc3,String cm3 ,String cc4 ,String cm4,int rowNumber) {
+    public void testMethod4(String result, String description,String podScan,String testInputNbr,String tinCount,String trk,String tinComment,int rowNumber) {
     	if (testingDB==true) {
     	try {
-         	  if (validateEC(trk)==true){
+         	  if (validateEC(trk,tinComment)==true){
          		 writeToExcel(rowNumber,1, "pass");
          		 String[] resultArray = new String[2];
    			 resultArray[0]="pass";
@@ -723,7 +700,7 @@ public class prerateTestNGSlow {
     	
     login(driver4,wait4);
     try {
-		doPrerate(driver4,wait4,type, comment,podScan,tinCount, testInputNbr, trk, amount, currcode, approverID, cc1, cm1, cc2 , cm2 , cc3, cm3 , cc4 , cm4, rowNumber,4);
+		doPrerate(driver4,wait4,result, description,podScan,testInputNbr, tinCount, trk, tinComment, rowNumber,4);
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -817,20 +794,13 @@ public class prerateTestNGSlow {
     
     
     
-    public void doPrerate(WebDriver driver,WebDriverWait wait, String type, String comment,String podScan,String tinCount,String testInputNbr,String trk,String amount,String currcode,String approverID,String cc1,String cm1,String cc2 ,String cm2 ,String cc3,String cm3 ,String cc4 ,String cm4,int rowNumber, int instanceNumber) throws InterruptedException {
+    public void doPrerate(WebDriver driver,WebDriverWait wait, String result, String description,String podScan,String testInputNbr,String tinCount,String trk,String tinComment,int rowNumber, int instanceNumber) throws InterruptedException {
     	
     	WebElement element;
     	JavascriptExecutor Executor;
-    	JavascriptExecutor Executor1;
-    	JavascriptExecutor Executor2;
-    	JavascriptExecutor Executor3;
-    	JavascriptExecutor Executor4;
-    	WebElement element1;
-    	WebElement element2;
-    	WebElement element3;
-    	WebElement element4;
+ 
     	
-    	By webElementTemp;
+    	
     	String errorMessage;
     	wait = new WebDriverWait(driver,10);
     	
@@ -856,47 +826,22 @@ public class prerateTestNGSlow {
 		
     	try{
 			
-		
+    	
 		//Fast way to move to next screen... fails if prerate input not there.
+    		if (tinComment.equals("ON_HOLD")){
 		driver.findElement(By.xpath("//a[@id='preRateEntryForm:actionId_link']")).click();
-		element = driver.findElement(By.xpath("//div[@id='preRateEntryForm:actionId_div']/div/div[2]/span[2]"));
+		element = driver.findElement(By.xpath("//div[@id='preRateEntryForm:actionId_div']/div/div[3]/span[2]"));
 		Executor = (JavascriptExecutor)driver;
 		Executor.executeScript("arguments[0].click();", element);
-	
-		if (type.equals("ADDR CHANGE FEE")){
-			driver.findElement(By.xpath("//a[@id='preRateEntryForm:preRateTypeCd_link']")).click();
-			element1 = driver.findElement(By.xpath("//div[@id='preRateEntryForm:preRateTypeCd_div']/div/div[2]/span[2]"));
-			Executor1 = (JavascriptExecutor)driver;
-			Executor1.executeScript("arguments[0].click();", element1);
-		}
-		else if(type.equals("COLD CHAIN")){
-			driver.findElement(By.xpath("//a[@id='preRateEntryForm:preRateTypeCd_link']")).click();
-			element2 = driver.findElement(By.xpath("//div[@id='preRateEntryForm:preRateTypeCd_div']/div/div[4]/span[2]"));
-			Executor2 = (JavascriptExecutor)driver;
-			Executor2.executeScript("arguments[0].click();", element2);
-		}
-		else if(type.equals("Trucking Fees")){
-			driver.findElement(By.xpath("//a[@id='preRateEntryForm:preRateTypeCd_link']")).click();
-			element3 = driver.findElement(By.xpath("//div[@id='preRateEntryForm:preRateTypeCd_div']/div/div[3]/span[2]"));
-			Executor3 = (JavascriptExecutor)driver;
-			Executor3.executeScript("arguments[0].click();", element3);
-		}
-		else if(type.equals("PH LPC")){
-			if(level.contentEquals("2")){
-				//L2 PHLPC=12 and L3 PHLPC=8
-				driver.findElement(By.xpath("//a[@id='preRateEntryForm:preRateTypeCd_link']")).click();
-				element4 = driver.findElement(By.xpath("//div[@id='preRateEntryForm:preRateTypeCd_div']/div/div[12]/span[2]"));
-				Executor4 = (JavascriptExecutor)driver;
-				Executor4.executeScript("arguments[0].click();", element4);
-			}
-			else if (level.contentEquals("3")){
-				driver.findElement(By.xpath("//a[@id='preRateEntryForm:preRateTypeCd_link']")).click();
-				element4 = driver.findElement(By.xpath("//div[@id='preRateEntryForm:preRateTypeCd_div']/div/div[8]/span[2]"));
-				Executor4 = (JavascriptExecutor)driver;
-				Executor4.executeScript("arguments[0].click();", element4);
-
-			}
-		}
+    		}
+    		else if(tinComment.equals("REMOVE")){
+    			driver.findElement(By.xpath("//a[@id='preRateEntryForm:actionId_link']")).click();
+    			element = driver.findElement(By.xpath("//div[@id='preRateEntryForm:actionId_div']/div/div[5]/span[2]"));
+    			Executor = (JavascriptExecutor)driver;
+    			Executor.executeScript("arguments[0].click();", element);
+    		}
+    		driver.findElement(By.xpath("//button[@id='preRateEntryForm:PreRateEntrySubmit_button']")).click();
+    		
 		} catch(Exception e) {
 			try{
 				String errorMessageDropdown;
@@ -924,261 +869,11 @@ public class prerateTestNGSlow {
 					}
 					Assert.fail("Failed selecting dropdown menu...");
 			}
+		}
 			
-		}
-		
-		try {
-	
-
-		driver.findElement(By.xpath("//input[@id='preRateEntryForm:paymentComponent:amountId:pymt_amnt_input']")).clear();
-		driver.findElement(By.xpath("//input[@id='preRateEntryForm:paymentComponent:amountId:pymt_amnt_input']")).sendKeys(amount);
-		driver.findElement(By.xpath("//input[@id='preRateEntryForm:paymentComponent:currCodeId:cuu_code_input']")).clear();
-		driver.findElement(By.xpath("//input[@id='preRateEntryForm:paymentComponent:currCodeId:cuu_code_input']")).sendKeys(currcode);
-		driver.findElement(By.xpath("//input[@id='preRateEntryForm:paymentComponent:rateApprover_input']")).clear();
-		driver.findElement(By.xpath("//input[@id='preRateEntryForm:paymentComponent:rateApprover_input']")).sendKeys(approverID);
-		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde1_input']")).clear();
-		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde1_input']")).sendKeys(cc1);
-		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt1_input']")).clear();
-		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt1_input']")).sendKeys(cm1);
-		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde2_input']")).clear();
-		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde2_input']")).sendKeys(cc2);
-		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt2_input']")).clear();
-		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt2_input']")).sendKeys(cm2);
-		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde3_input']")).clear();
-		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde3_input']")).sendKeys(cc3);
-		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt3_input']")).clear();
-		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt3_input']")).sendKeys(cm3);
-		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde4_input']")).clear();
-		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:ccde4_input']")).sendKeys(cc4);
-		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt4_input']")).clear();
-		driver.findElement(By.xpath("//input[@id='preRateEntryForm:PreRateChargeDetailCompnent:amt4_input']")).sendKeys(cm4);
-
-
-		//ENABLE THIS TO SUBMIT!!!!!!
-		driver.findElement(By.xpath("//button[@id='preRateEntryForm:PreRateEntrySubmit_button']")).click();
-	
-		}
-		catch(Exception e) {
-			if (testingDB==true) {
-			 if (validateEC(trk)==true) {
-				 writeToExcel(rowNumber,1, "pass");
-				 String[] resultArray = new String[2];
-				 resultArray[0]="pass";
-				 resultArray[1]="completed";
-				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-				 return;
-			 }
-			 writeToExcel(rowNumber,1, "Failed on the input menu...");
-			 String[] resultArray = new String[2];
-			 resultArray[0]="fail";
-			 resultArray[1]="Failed on the input menu...";
-			 writeToDB(testInputNbr,tinCount,trk,resultArray);
-			 Assert.fail("Failed on the input menu...");
-		}
-		}
-		
-		//Tries to see if back to homepage indicating success
-		try {
-			/*
-				webElementTemp=By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]");
-				if (driver.findElement(webElementTemp).getText().equals("Shipment Selection for Pre-Rate Entry")) {
-					 writeToExcel(rowNumber,1, "Passed");
-					 return;
-				}
-				*/
-			 Thread.sleep(10000);
-			
-			
-			 wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]")), "Shipment Selection for Pre-Rate Entry"));
-			 if (testingDB==true) {
-				 if (validateEC(trk)==true) {
-				 writeToExcel(rowNumber,1, "pass");
-				 String[] resultArray = new String[2];
-				 resultArray[0]="pass";
-				 resultArray[1]="completed";
-				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-				 return;
-			 }
-			 }
-			 else {
-				 System.out.println("Could not find in EC DB...");
-			 }
-		}
-		catch(Exception e) {
-				System.out.println("Did Not Find Prerate Home Page First Time Around");	
-				System.out.println(e);	
-			}
-			
-
+	}
 		
 		
-		
-		
-		try{
-			Thread.sleep(2000);
-			count=(driver.findElements(By.xpath("//input[@type='checkbox']")).size());
-			//System.out.println(count);
-			for( k=2;k<count;k++){
-				sel=driver.findElements(By.xpath("//input[@type='checkbox']")).get(k).isEnabled();
-				if(sel==true){
-					driver.findElements(By.xpath("//input[@type='checkbox']")).get(k).click();
-				}
-				else {
-					if (testingDB==true) {
-					 if (validateEC(trk)==true) {
-						 writeToExcel(rowNumber,1, "pass");
-						 String[] resultArray = new String[2];
-						 resultArray[0]="pass";
-						 resultArray[1]="completed";
-						 writeToDB(testInputNbr,tinCount,trk,resultArray);
-						Assert.fail("Override Disabled.");
-						 return;
-					 }
-					writeToExcel(rowNumber,1, "Override Disabled.");
-					 String[] resultArray = new String[2];
-					 resultArray[0]="fail";
-					 resultArray[1]="Override Disabled";
-					 writeToDB(testInputNbr,tinCount,trk,resultArray);
-					Assert.fail("Override Disabled.");
-					break;
-				}
-				}
-			}
-			driver.findElement(By.xpath("//button[@id='preRateEntryForm:PreRateEntrySubmit_button']")).click();
-			
-		}
-		catch (NoSuchElementException a){
-			//System.out.println("just proceed further");
-		
-		}
-	
-
-		
-		   
-		//Check again for success
-		try{
-			Thread.sleep(10000);
-			wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]")), "Shipment Selection for Pre-Rate Entry"));
-			if (testingDB==true) {
-			if (validateEC(trk)==true) {
-				 writeToExcel(rowNumber,1, "pass");
-				 String[] resultArray = new String[2];
-				 resultArray[0]="pass";
-				 resultArray[1]="completed";
-				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-				 return;
-		}
-			}
-			 else {
-					 System.out.println("Could not find in EC DB...");
-				 }
-		}
-			catch(Exception e) {
-				System.out.println("Did not find homepage after trying to enable stat codes");	
-				System.out.println(e);	
-			}
-			
-			
-		
-		
-		//Check either upper or lower error
-		try{
-			webElementTemp=By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[6]/td/table/tbody/tr[2]/td/span/span/span/span[2]");
-			errorMessage=driver.findElement(webElementTemp).getText();
-			if (testingDB==true) {
-			if (validateEC(trk)==true) {
-				
-				 writeToExcel(rowNumber,1, "pass");
-				 
-				 String[] resultArray = new String[2];
-				 resultArray[0]="pass";
-				 resultArray[1]="completed";
-				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-				 return;
-			 }
-			 
-			}
-			 writeToExcel(rowNumber,1, errorMessage);
-			 
-			 String[] resultArray = new String[2];
-			 resultArray[0]="fail";
-			 resultArray[1]=errorMessage;
-			 if (testingDB==true) {
-			 writeToDB(testInputNbr,tinCount,trk,resultArray);
-			 }
-			Assert.fail(errorMessage);
-
-		}
-			catch(Exception e) {
-				System.out.println("Did not find either upper or lower error");	
-				System.out.println(e);	
-			}
-					
-			
-		
-		
-		//Check either upper or lower error
-		try{
-			webElementTemp=By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[4]/td/span/div/div[1]/div[2]/div/table[2]/tbody/tr/td/span/span/span/span[2]");
-			errorMessage=driver.findElement(webElementTemp).getText();
-			if (testingDB==true) {
-			 if (validateEC(trk)==true ) {
-				
-				 writeToExcel(rowNumber,1, "pass");
-				 
-				 String[] resultArray = new String[2];
-				 resultArray[0]="pass";
-				 resultArray[1]="completed";
-				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-				 return;
-			 }
-			}
-			 writeToExcel(rowNumber,1, errorMessage);
-			 
-			 String[] resultArray = new String[2];
-			 resultArray[0]="fail";
-			 resultArray[1]=errorMessage;
-			 if (testingDB==true) {
-			 writeToDB(testInputNbr,tinCount,trk,resultArray);
-			 }
-			Assert.fail(errorMessage);
-		}
-			catch(Exception e) {
-				System.out.println("Did not find either upper or lower error");	
-				System.out.println(e);	
-			}
-
-		
-		
-		try {
-			//Actually Should not reach here.
-			if (testingDB==true) {
-			if (validateEC(trk)==true) {
-				
-				writeToExcel(rowNumber,1, "Passed");
-				
-				 String[] resultArray = new String[2];
-				 resultArray[0]="pass";
-				 resultArray[1]="completed";
-				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-				 return;
-			 }
-			}
-			 writeToExcel(rowNumber,1,"Failed Somewhere... No Error Found Tho");
-			 String[] resultArray = new String[2];
-			 resultArray[0]="fail";
-			 resultArray[1]="Failed Somewhere... No Error Found Tho";
-			 if (testingDB==true) {
-			 writeToDB(testInputNbr,tinCount,trk,resultArray);
-			 }
-			Assert.fail("No Error Found, but still failed");
-		
-		}
-		catch (NoSuchElementException a){
-		
-		}
-
-}
     	
     
     
@@ -1215,12 +910,13 @@ public class prerateTestNGSlow {
 		try {
 	    //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
 		//stmt=GTMcon.prepareStatement("insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values (?,?,?,?,?)");  
-		stmt=GTMcon.prepareStatement("insert into gtm_rev_tools.prerate_results (test_input_nbr,tin_count,trkngnbr,result,description) values (?,?,?,?,?)");  
+		stmt=GTMcon.prepareStatement("insert into gtm_rev_tools.prerate_results (test_input_nbr,tin_count,trkngnbr,result,description,hold) values (?,?,?,?,?,?)");  
 		stmt.setString(1,testInputNbr);  
 		stmt.setString(2,tinCount);  
 		stmt.setString(3,trk);  
 		stmt.setString(4,resultArray[0]);  
 		stmt.setString(5,resultArray[1]);  
+		stmt.setString(6,"Y");  
 
 		stmt.executeUpdate();
 		}
@@ -1231,11 +927,12 @@ public class prerateTestNGSlow {
 		try {
 		//	update gtm_rev_tools.rebill_results set result='fail',description='6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables' where trkngnbr='566166113544';
 	//	stmt=GTMcon.prepareStatement("update rebill_results set result=?,description=? where trkngnbr=?"); 
-		stmt=GTMcon.prepareStatement("update prerate_results set result=?,description=? where trkngnbr=?");
+		stmt=GTMcon.prepareStatement("update prerate_results set result=?,description=?,hold=? where trkngnbr=?");
 		
 		stmt.setString(1,resultArray[0]);  
 		stmt.setString(2,resultArray[1]); 
-		stmt.setString(3,trk); 
+		stmt.setString(3,"Y"); 
+		stmt.setString(4,trk); 
 		stmt.executeUpdate();
 		
 	}
@@ -1256,7 +953,7 @@ public class prerateTestNGSlow {
 	
 	
 	
-public  Boolean validateEC(String trkngnbr){
+public  Boolean validateEC(String trkngnbr,String tinComment){
 	Boolean result=null;
 	
 	PreparedStatement ps = null;
@@ -1288,7 +985,7 @@ public  Boolean validateEC(String trkngnbr){
 }
 
 try {
-	ps = ecCon.prepareStatement("select * from ec_intl_schema.ec_pre_rate_history where pkg_trkng_nbr =?");
+	ps = ecCon.prepareStatement("select * from ec_intl_schema.ec_pre_rate_history where pkg_trkng_nbr =? and EVENT_TYPE_CD_DESC=?");
 } catch (SQLException e) {
 	// TODO Auto-generated catch block
 	System.out.println(e);
@@ -1299,6 +996,7 @@ try {
    
        try {
 		ps.setString(1,trkngnbr);
+		ps.setString(2,tinComment);
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
