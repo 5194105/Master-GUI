@@ -40,6 +40,7 @@ public class guiBase {
     prerateAutomationGui prerate;
     instantInvoiceAutomationGui instantInvoice;
     datapopAutomationGui datapop;
+    eraRerateAutomationGui eraRerate;
 	Object obj;
     
 
@@ -51,10 +52,7 @@ public class guiBase {
      public Image dimg;
      public ImageIcon imageIcon;
 
-     public  JLabel lblNewLabel_1;
-     public  JLabel lblNewLabel_2;
-     public  JLabel lblNewLabel_3;
-     public  JLabel lblNewLabel_4;
+
      public String menuDefault="options.png";
      public String menuAlt="darkoptions.png";
      public String dbDefault="db.png";
@@ -66,26 +64,10 @@ public class guiBase {
      public  String backDefault="back.png";
      public  String backAlt="darkBack.png";
      
-     public String selectionBar="selectionbar.png";
-     public String rebillPic="rebill.png";
-     public String reratePic="rerate.png";
-     public  String instantPic="instant.png";
-     public String datapopPic="datapop.png";
-     public String udPic="ud.png";
-     public String preratePic="prerate.png";
-     public String rebillPicHighlight="rebillHighlight.png";
-     public String reratePicHighlight="rerateHighlight.png";
-     public String instantPicHighlight="instantHighlight.png";
-     public String datapopPicHighlight="datapopHighlight.png";
-     public String udPicHighlight="udHighlight.png";
-     public String preratePicHighlight="prerateHighlight.png";
 
      public  String backgroundDefault="default_template.png";
      
-     public String rebillTroubleshootPic="rebillTroubleshootPic.png";
-     public String rebillTroubleshootPicHighlight="rebillTroubleshootPicHighlight.png";
 
-	
 
 	
 	public guiBase() {

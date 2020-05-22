@@ -31,6 +31,8 @@ import org.testng.xml.XmlTest;
 
 import UD.UdExecution;
 import guis.datapopAutomationGui;
+import guis.eraRerateAutomationExtendGui;
+import guis.eraRerateAutomationGui;
 import guis.gui;
 import guis.guiBase;
 import guis.instantInvoiceAutomationGui;
@@ -60,6 +62,7 @@ public class mouse {
     instantInvoiceAutomationGui instantInvoice;
     datapopAutomationGui datapop;
     rebillTroubleshoot rt;
+     
 	 
     
 
@@ -168,7 +171,7 @@ public class mouse {
 	JFrame currentFrame;
 	JFrame infoPane;  
 	
-	
+	eraRerateAutomationGui eraRerate;
 	
     public rerateAutomationGui rag;
 	
@@ -493,8 +496,11 @@ public void setupMouseListener() {
 			    		if (mouseLabel.getName().equals("ud")) {
 			    			ud= new udAutomation(g,c);
 			    		}
-			    		if (mouseLabel.getName().equals("datapop")) {
-			    			datapop = new datapopAutomationGui(g,c);
+			    		//if (mouseLabel.getName().equals("datapop")) {
+			    			//datapop = new datapopAutomationGui(g,c);
+			    		//}
+			    		if (mouseLabel.getName().equals("eraRerate")) {
+			    			eraRerate = new eraRerateAutomationGui(g,c);
 			    		}
 			    		
 			    		if (mouseLabel.getName().equals("rebillTroubleshoot")) {
@@ -618,6 +624,12 @@ public void setupMouseListener() {
 								prerateAutomationExtendedGui raeg= new prerateAutomationExtendedGui(g,c);
 						
 						}
+							
+							if (obj.getClass().getCanonicalName().equals("guis.eraRerateAutomationGui")) {
+								eraRerateAutomationExtendGui erae= new eraRerateAutomationExtendGui(g,c);
+						
+						}
+							
 							}
 							
 						

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="3" passed="3">
+<testng-results skipped="0" failed="3" ignored="0" total="3" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="310455" started-at="2020-05-12T15:32:24 EDT" finished-at="2020-05-12T15:37:34 EDT">
+  <suite name="Default suite" duration-ms="256900" started-at="2020-05-21T10:09:07 EDT" finished-at="2020-05-21T10:13:24 EDT">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="310455" started-at="2020-05-12T15:32:24 EDT" finished-at="2020-05-12T15:37:34 EDT">
+    <test name="Default test" duration-ms="256900" started-at="2020-05-21T10:09:07 EDT" finished-at="2020-05-21T10:13:24 EDT">
       <class name="testng.testingonly">
-        <test-method status="PASS" signature="setupExcel()[pri:0, instance:testng.testingonly@33d512c1]" name="setupExcel" is-config="true" duration-ms="7554" started-at="2020-05-12T15:32:24 EDT" finished-at="2020-05-12T15:32:31 EDT">
+        <test-method status="PASS" signature="setupExcel()[pri:0, instance:testng.testingonly@49fc609f]" name="setupExcel" is-config="true" duration-ms="487" started-at="2020-05-21T10:09:07 EDT" finished-at="2020-05-21T10:09:07 EDT">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupExcel -->
-        <test-method status="PASS" signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.testingonly@33d512c1]" name="testMethod" duration-ms="114904" started-at="2020-05-12T15:32:37 EDT" data-provider="data-provider1" finished-at="2020-05-12T15:34:32 EDT">
+        <test-method status="FAIL" signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.testingonly@49fc609f]" name="testMethod" duration-ms="92424" started-at="2020-05-21T10:09:07 EDT" data-provider="data-provider1" finished-at="2020-05-21T10:10:40 EDT">
           <params>
             <param index="0">
               <value>
@@ -84,10 +84,63 @@
               </value>
             </param>
           </params>
+          <exception class="org.apache.poi.openxml4j.exceptions.OpenXML4JRuntimeException">
+            <message>
+              <![CDATA[Fail to save: an error occurs while saving the package : null]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.apache.poi.openxml4j.exceptions.OpenXML4JRuntimeException: Fail to save: an error occurs while saving the package : null
+at org.apache.poi.openxml4j.opc.ZipPackage.saveImpl(ZipPackage.java:602)
+at org.apache.poi.openxml4j.opc.OPCPackage.save(OPCPackage.java:1557)
+at org.apache.poi.POIXMLDocument.write(POIXMLDocument.java:248)
+at configuration.excel.writeCellData(excel.java:174)
+at testng.testingonly.writeToExcel(testingonly.java:1042)
+at testng.testingonly.getRerateId(testingonly.java:1033)
+at testng.testingonly.thirdPage(testingonly.java:928)
+at testng.testingonly.doWork(testingonly.java:404)
+at testng.testingonly.testMethod(testingonly.java:279)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+at java.lang.reflect.Method.invoke(Unknown Source)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:584)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:172)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:804)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:145)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.util.ArrayList.forEach(Unknown Source)
+at org.testng.TestRunner.privateRun(TestRunner.java:770)
+at org.testng.TestRunner.run(TestRunner.java:591)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:402)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:396)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:355)
+at org.testng.SuiteRunner.run(SuiteRunner.java:304)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1180)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1102)
+at org.testng.TestNG.runSuites(TestNG.java:1032)
+at org.testng.TestNG.run(TestNG.java:1000)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: java.lang.NullPointerException
+at java.util.zip.DeflaterOutputStream.<init>(Unknown Source)
+at java.util.zip.DeflaterOutputStream.<init>(Unknown Source)
+at java.util.zip.ZipOutputStream.<init>(Unknown Source)
+at java.util.zip.ZipOutputStream.<init>(Unknown Source)
+at org.apache.poi.openxml4j.opc.ZipPackage.saveImpl(ZipPackage.java:531)
+... 36 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.apache.poi.openxml4j.exceptions.OpenXML4JRuntimeException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod -->
-        <test-method status="PASS" signature="testMethod2(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.testingonly@33d512c1]" name="testMethod2" duration-ms="80646" started-at="2020-05-12T15:34:32 EDT" data-provider="data-provider2" finished-at="2020-05-12T15:35:53 EDT">
+        <test-method status="FAIL" signature="testMethod2(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.testingonly@49fc609f]" name="testMethod2" duration-ms="80892" started-at="2020-05-21T10:10:40 EDT" data-provider="data-provider2" finished-at="2020-05-21T10:12:01 EDT">
           <params>
             <param index="0">
               <value>
@@ -160,10 +213,62 @@
               </value>
             </param>
           </params>
+          <exception class="org.apache.poi.openxml4j.exceptions.OpenXML4JRuntimeException">
+            <message>
+              <![CDATA[Fail to save: an error occurs while saving the package : null]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.apache.poi.openxml4j.exceptions.OpenXML4JRuntimeException: Fail to save: an error occurs while saving the package : null
+at org.apache.poi.openxml4j.opc.ZipPackage.saveImpl(ZipPackage.java:602)
+at org.apache.poi.openxml4j.opc.OPCPackage.save(OPCPackage.java:1557)
+at org.apache.poi.POIXMLDocument.write(POIXMLDocument.java:248)
+at configuration.excel.writeCellData(excel.java:174)
+at testng.testingonly.writeToExcel(testingonly.java:1042)
+at testng.testingonly.thirdPage(testingonly.java:1002)
+at testng.testingonly.doWork(testingonly.java:404)
+at testng.testingonly.testMethod2(testingonly.java:307)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+at java.lang.reflect.Method.invoke(Unknown Source)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:584)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:172)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:804)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:145)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.util.ArrayList.forEach(Unknown Source)
+at org.testng.TestRunner.privateRun(TestRunner.java:770)
+at org.testng.TestRunner.run(TestRunner.java:591)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:402)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:396)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:355)
+at org.testng.SuiteRunner.run(SuiteRunner.java:304)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1180)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1102)
+at org.testng.TestNG.runSuites(TestNG.java:1032)
+at org.testng.TestNG.run(TestNG.java:1000)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: java.lang.NullPointerException
+at java.util.zip.DeflaterOutputStream.<init>(Unknown Source)
+at java.util.zip.DeflaterOutputStream.<init>(Unknown Source)
+at java.util.zip.ZipOutputStream.<init>(Unknown Source)
+at java.util.zip.ZipOutputStream.<init>(Unknown Source)
+at org.apache.poi.openxml4j.opc.ZipPackage.saveImpl(ZipPackage.java:531)
+... 35 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.apache.poi.openxml4j.exceptions.OpenXML4JRuntimeException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod2 -->
-        <test-method status="PASS" signature="testMethod3(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.testingonly@33d512c1]" name="testMethod3" duration-ms="101522" started-at="2020-05-12T15:35:53 EDT" data-provider="data-provider3" finished-at="2020-05-12T15:37:34 EDT">
+        <test-method status="FAIL" signature="testMethod3(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:testng.testingonly@49fc609f]" name="testMethod3" duration-ms="83065" started-at="2020-05-21T10:12:01 EDT" data-provider="data-provider3" finished-at="2020-05-21T10:13:24 EDT">
           <params>
             <param index="0">
               <value>
@@ -236,6 +341,59 @@
               </value>
             </param>
           </params>
+          <exception class="org.apache.poi.openxml4j.exceptions.OpenXML4JRuntimeException">
+            <message>
+              <![CDATA[Fail to save: an error occurs while saving the package : null]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.apache.poi.openxml4j.exceptions.OpenXML4JRuntimeException: Fail to save: an error occurs while saving the package : null
+at org.apache.poi.openxml4j.opc.ZipPackage.saveImpl(ZipPackage.java:602)
+at org.apache.poi.openxml4j.opc.OPCPackage.save(OPCPackage.java:1557)
+at org.apache.poi.POIXMLDocument.write(POIXMLDocument.java:248)
+at configuration.excel.writeCellData(excel.java:174)
+at testng.testingonly.writeToExcel(testingonly.java:1042)
+at testng.testingonly.getRerateId(testingonly.java:1033)
+at testng.testingonly.thirdPage(testingonly.java:928)
+at testng.testingonly.doWork(testingonly.java:404)
+at testng.testingonly.testMethod3(testingonly.java:331)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+at java.lang.reflect.Method.invoke(Unknown Source)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:584)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:172)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:804)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:145)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.util.ArrayList.forEach(Unknown Source)
+at org.testng.TestRunner.privateRun(TestRunner.java:770)
+at org.testng.TestRunner.run(TestRunner.java:591)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:402)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:396)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:355)
+at org.testng.SuiteRunner.run(SuiteRunner.java:304)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1180)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1102)
+at org.testng.TestNG.runSuites(TestNG.java:1032)
+at org.testng.TestNG.run(TestNG.java:1000)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: java.lang.NullPointerException
+at java.util.zip.DeflaterOutputStream.<init>(Unknown Source)
+at java.util.zip.DeflaterOutputStream.<init>(Unknown Source)
+at java.util.zip.ZipOutputStream.<init>(Unknown Source)
+at java.util.zip.ZipOutputStream.<init>(Unknown Source)
+at org.apache.poi.openxml4j.opc.ZipPackage.saveImpl(ZipPackage.java:531)
+... 36 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.apache.poi.openxml4j.exceptions.OpenXML4JRuntimeException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod3 -->

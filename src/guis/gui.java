@@ -66,6 +66,7 @@ public class gui {
      String datapopDefault="datapop.png";
      String udDefault="ud.png";
      String prerateDefault="prerate.png";
+     String eraRerateDefault="eraRerate.png";
      
      String rebillAlt="rebillHighlight.png";
      String rerateAlt="rerateHighlight.png";
@@ -73,7 +74,10 @@ public class gui {
      String datapopAlt="datapopHighlight.png";
      String udAlt="udHighlight.png";
      String prerateAlt="prerateHighlight.png";
-     
+     String eraRerateAlt="eraRerateHighlight.png";
+    
+   
+    
      public String rebillTroubleshootPic="rebillTroubleshootPic.png";
      public String rebillTroubleshootAlt="rebillTroubleshootPicHighlight.png";
 
@@ -102,7 +106,8 @@ public class gui {
      prerateAutomationGui prerate;
      instantInvoiceAutomationGui instantInvoice;
      datapopAutomationGui datapop;
-     
+     eraRerateAutomationGui eraRerate;
+  
      
      
      Object obj;
@@ -114,7 +119,7 @@ public class gui {
 	String udUsername,udPassword;
 
 	
-	JLabel rebillGUI,rerateGUI,prerateGUI,instantInvoiceGUI,udAutomationGUI,datapopGUI,background,rebillTroubleShootGUI;
+	JLabel rebillGUI,rerateGUI,prerateGUI,instantInvoiceGUI,udAutomationGUI,datapopGUI,background,rebillTroubleShootGUI,eraRerateGUI;
 	
 	/**
 	 * Launch the application.
@@ -199,9 +204,9 @@ public class gui {
 		udAutomationGUI.setBounds(561, 389, 338, 58);
 		udAutomationGUI.setName("ud");
 				
-		datapopGUI = new JLabel("New label");
-		datapopGUI.setBounds(561, 463, 338, 54);
-		datapopGUI.setName("datapop");
+		eraRerateGUI = new JLabel("New label");
+		eraRerateGUI.setBounds(561, 463, 338, 54);
+		eraRerateGUI.setName("eraRerate");
 		
 		
 		
@@ -247,7 +252,9 @@ public class gui {
 		m.addIconWithMouse(prerateGUI,"prerate",prerateDefault,prerateAlt);
 		m.addIconWithMouse(instantInvoiceGUI,"instant",instantDefault,instantAlt);
 		m.addIconWithMouse(udAutomationGUI,"ud",udDefault,udAlt);
-		m.addIconWithMouse(datapopGUI,"datapop",datapopDefault,datapopAlt);	
+		m.addIconWithMouse(eraRerateGUI,"eraRerate",eraRerateDefault,eraRerateAlt);	
+		//m.addIconWithMouse(datapopGUI,"datapop",datapopDefault,datapopAlt);	
+
 		m.addIconWithMouse(rebillTroubleShootGUI,"rebillTroubleshoot",rebillTroubleshootPic,rebillTroubleshootAlt);	
 		
 		m.setupBackground();
