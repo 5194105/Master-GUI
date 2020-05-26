@@ -120,12 +120,10 @@ public class prerateTestNGSlow {
 	String source;
 	String sessionCount;
 	String[][] allData;
-<<<<<<< HEAD
-	/*
-=======
+
 	int sessionCountInt;
 	
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+
 	@BeforeClass
 	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","sessionCount"})
 	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String sessionCount) {
@@ -137,24 +135,19 @@ public class prerateTestNGSlow {
 		this.allCheckBox=allCheckBox;
 		this.nullCheckBox=nullCheckBox;
 		this.failedCheckBox=failedCheckBox;
-<<<<<<< HEAD
-		*/
-	
-=======
 		this.sessionCount=sessionCount;
 		sessionCountInt=Integer.parseInt(sessionCount);
 		System.out.println(sessionCountInt);
-	/*
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+	}
+
 	@BeforeClass
 	public void setupExcel() {
-<<<<<<< HEAD
+
 	
 		testingMode=true;
 		testingDB=false;
 	
-=======
-	*/
+
 		testingMode=false;
 		testingDB=true;
 		if (testingMode==true) {
@@ -168,7 +161,7 @@ public class prerateTestNGSlow {
 			failedCheckBox="false";
 			sessionCountInt=1;
 		}
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+
 		
 		
 		filepath=homePath+"\\test data\\prerate_update_pc.xlsx";

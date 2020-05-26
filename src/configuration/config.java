@@ -616,8 +616,13 @@ public void setEraL3DbConnection() {
 	
 	try {
 		
-		
-		eraL3Con=DriverManager.getConnection("jdbc:oracle:thin:@//idb00270.ute.fedex.com:1526/IDB00270.ute.fedex.com","test_readonly", "perftest");
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		eraL3Con=DriverManager.getConnection("jdbc:oracle:thin:@//sdb00325.ute.fedex.com:1526/SDB00325.ute.fedex.com","test_readonly", "perftest");
 		} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

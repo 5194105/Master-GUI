@@ -46,6 +46,7 @@ import prerate.prerateHoldTestNGSlow;
 import prerate.prerateTestNGSlow;
 import rebill.rebillMain;
 import rebill.testngRebillSlow;
+import rebill.testngRebillSlowMfRetire;
 import rebill_troubleshoot.rebillTroubleshoot;
 import rerate.abc;
 import testng.testingonly;
@@ -794,7 +795,7 @@ public void setupMouseListener() {
 					    		        XmlTest xmlTest = new XmlTest(xmlSuite);
 					    		        xmlTest.setName("Rebill Test");
 					    		        //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
-					    		        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testngRebillSlow.class)));
+					    		        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testngRebillSlowMfRetire.class)));
 					    		        xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
 					    		        TestNG tng = new TestNG();
 					    		        tng.setXmlSuites(Collections.singletonList(xmlSuite));

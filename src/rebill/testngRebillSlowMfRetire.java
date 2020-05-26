@@ -852,7 +852,7 @@ public class testngRebillSlowMfRetire {
     	Boolean packageTab=false;
     	wait=new WebDriverWait(driver,20);
     	driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
-    	if(preRateScenarios.equals("")) {
+    	if(!preRateScenarios.equals("")) {
     		 if(source.equals("excel")) {
 	               	 writeToExcel(rowNumber, 0,"fail");
 	               	 writeToExcel(rowNumber, 1,"Prerate Code Not Added Yet");
@@ -1511,7 +1511,7 @@ public class testngRebillSlowMfRetire {
        	 }
        	 else if (level.equals("3")){
        		 	c.setEraL3DbConnection();
-       		 con=c.getEraL3DbConnection();
+       		 	con=c.getEraL3DbConnection();
        	 	}
     	
     	}

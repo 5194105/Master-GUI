@@ -262,8 +262,9 @@ public class eraRerateTestNGSlow {
 			e.printStackTrace();
 		}
 		
-    	String databaseSqlCount="select count(*) as total from rebill_regression ";
-    	String databaseSqlQuery="select result, description, test_input_nbr, tin_count, trkngnbr, reason_code, rebill_acct,invoice_nbr_1, invoice_nbr_2, mig, region,  login,   password,  rs_Type, company, worktype, ORIGIN_LOC,DEST_LOC,DIM_VOL,SHIPPER_REF,RECP_ADDRESS,SHIPPER_ADDRESS,ACC_NBR_DEL_STATUS,SVC_BASE, CREDIT_CARD_DTL,PRE_RATE_SCENARIOS,EXP_Pieces,EXP_ACTUAL_Weight,EXP_Adj_Weight,CREDIT_CARD_DT from rebill_regression ";
+    	
+    	String databaseSqlCount="select count(*) as total from era_rerate_view where trkngnbr is not null ";
+    	String databaseSqlQuery="select result, description, test_input_nbr, tin_count, trkngnbr, invoice_nbr_1,invoice_nbr_2,SVC_CHANGED, SVC_CHANGED,ACT_WEIGHT, CUST_WEIGHT, RERATE_COMMENTS, region,  USERNAME,   password from era_rerate_view ";
     	
     	
     	if (allCheckBox.equals("false")) {
@@ -282,45 +283,8 @@ public class eraRerateTestNGSlow {
     		databaseSqlCount+="result ='fail' ";
     		databaseSqlQuery+="result ='fail' ";
     	}
-    	if (domesticCheckBox.equals("true") && internationalCheckBox.equals("false")) {
-    		databaseSqlCount+="and rs_type='DM' ";
-    		databaseSqlQuery+="and rs_type='DM' ";
-    	}
-    	if (internationalCheckBox.equals("true") && domesticCheckBox.equals("false")) {
-    		databaseSqlCount+="and rs_type='IL' ";
-    		databaseSqlQuery+="and rs_type='IL' ";
-    	}
-    	if (internationalCheckBox.equals("true") && domesticCheckBox.equals("true")) {
-    		databaseSqlCount+="and rs_type in ('DM','IL')";
-    		databaseSqlQuery+="and rs_type in ('DM','IL')";
-    	}
     	
-    	if (expressCheckBox.equals("true") && groundCheckBox.equals("false")) {
-    		databaseSqlCount+="and company='EP' ";
-    		databaseSqlQuery+="and company='EP' ";
-    	}
-    	if (groundCheckBox.equals("true") && expressCheckBox.equals("false")) {
-    		databaseSqlCount+="and company='GD' ";
-    		databaseSqlQuery+="and company='GD' ";
-    	}
     	
-    	if (groundCheckBox.equals("true") && expressCheckBox.equals("true")) {
-    		databaseSqlCount+="and company in ('GD',EP') ";
-    		databaseSqlQuery+="and company in ('GD',EP') ";
-    	}
-    	
-       	if (normalCheckBox.equals("true") && mfRetireCheckBox.equals("false")) {
-       		databaseSqlCount+="and worktype='NORMAL' ";
-       		databaseSqlQuery+="and worktype='NORMAL' ";
-    	}
-       	if (mfRetireCheckBox.equals("true") && normalCheckBox.equals("false")) {
-       		databaseSqlCount+="and worktype='MFRETIRE' ";
-       		databaseSqlQuery+="and worktype='MFRETIRE' ";
-    	}
-       	if (mfRetireCheckBox.equals("true") && normalCheckBox.equals("true")) {
-       		databaseSqlCount+="and worktype in ('MFRETIRE','NORMAL') ";
-       		databaseSqlQuery+="and worktype in ('MFRETIRE','NORMAL') ";
-    	}
        	
     	
     	
@@ -508,10 +472,9 @@ public class eraRerateTestNGSlow {
     
     
     
-    
-    
+     
     @Test(dataProvider="data-provider1",retryAnalyzer = Retry.class)
-    public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt,int rowNumber) {
+    public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String svcChanged,String dimDetails,String actWeight,String custWeight,String rerateComments,String region ,String login ,String password,int rowNumber) {
      
     	System.out.println("Instance: 1");
     	
@@ -520,31 +483,11 @@ public class eraRerateTestNGSlow {
     	System.out.println(testInputNbr);
     	System.out.println(tinCount);
     	System.out.println(trk);
-    	System.out.println(reasonCode);
-    	System.out.println(rebillAccount);
-    	System.out.println(invoiceNbr1);
-    	System.out.println(invoiceNbr2);
-    	System.out.println(mig);
+    
     	System.out.println(region);
     	System.out.println(login);
     	System.out.println(password);
-    	System.out.println(rsType);
-    	System.out.println(company);
-    	System.out.println(worktype);
-    	System.out.println(originLoc);
-    	System.out.println(destLoc);
-    	System.out.println(dimVol);
-    	System.out.println(shipperRef);
-    	System.out.println(recpAddress);
-    	System.out.println(shipperAddress);
-    	System.out.println(acctNbrDelStatus);
-    	System.out.println(svcBase);
-    	System.out.println(creditCardDtl);
-    	System.out.println(preRateScenarios);
-    	System.out.println(expPieces);
-    	System.out.println(expActualWeight);
-    	System.out.println(expAdjWeight);
-    	System.out.println(creditCardDt);
+ 
     	System.out.println(rowNumber);
     	
     	//Will Check if Trk is already successful;
@@ -590,7 +533,7 @@ public class eraRerateTestNGSlow {
 	    	
 	    
 	        
-			doRebill(driver1,wait1, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber, originLoc, destLoc, dimVol, shipperRef, recpAddress, shipperAddress, acctNbrDelStatus, svcBase,  creditCardDtl, preRateScenarios, expPieces, expActualWeight, expAdjWeight, creditCardDt,1);
+			doRebill(driver1,wait1, result,  descripiton, testInputNbr, tinCount, trk,invoiceNbr1,invoiceNbr2, svcChanged, dimDetails, actWeight, custWeight, rerateComments, region , login , password,1);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -601,7 +544,7 @@ public class eraRerateTestNGSlow {
     }
    
     @Test(dataProvider="data-provider2",retryAnalyzer = Retry.class)
-    public void testMethod2( String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt,int rowNumber) {
+    public void testMethod2( String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String svcChanged,String dimDetails,String actWeight,String custWeight,String rerateComments,String region ,String login ,String password,int rowNumber) {
      
     	System.out.println("Instance: 2");
     	readTrk(trk);
@@ -644,7 +587,7 @@ public class eraRerateTestNGSlow {
     	 wait2 = new WebDriverWait(driver2,20);
     	login(driver2,wait2,login,password);
 	    try {
-	    	doRebill(driver2,wait2, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber, originLoc, destLoc, dimVol, shipperRef, recpAddress, shipperAddress, acctNbrDelStatus, svcBase,  creditCardDtl, preRateScenarios, expPieces, expActualWeight, expAdjWeight, creditCardDt,2);
+	    	doRebill(driver2,wait2, result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1,invoiceNbr2,svcChanged, dimDetails, actWeight, custWeight, rerateComments, region , login , password,2);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -654,7 +597,7 @@ public class eraRerateTestNGSlow {
     
     }
     @Test(dataProvider="data-provider3",retryAnalyzer = Retry.class)
-    public void testMethod3( String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt,int rowNumber) {
+    public void testMethod3( String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String svcChanged,String dimDetails,String actWeight,String custWeight,String rerateComments,String region ,String login ,String password,int rowNumber) {
     	System.out.println("Instance: 3");
     	readTrk(trk);
     	
@@ -697,7 +640,7 @@ public class eraRerateTestNGSlow {
     	 wait3 = new WebDriverWait(driver3,20);
     login(driver3,wait3,login,password);
     try {
-    	doRebill(driver3,wait3, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber, originLoc, destLoc, dimVol, shipperRef, recpAddress, shipperAddress, acctNbrDelStatus, svcBase,  creditCardDtl, preRateScenarios, expPieces, expActualWeight, expAdjWeight, creditCardDt,3);
+    	doRebill(driver3,wait3, result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1,invoiceNbr2,svcChanged, dimDetails, actWeight, custWeight, rerateComments, region , login , password,3);
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -712,7 +655,7 @@ public class eraRerateTestNGSlow {
     
     
     @Test(dataProvider="data-provider4",retryAnalyzer = Retry.class)
-    public void testMethod4(String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt,int rowNumber) {
+    public void testMethod4(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String svcChanged,String dimDetails,String actWeight,String custWeight,String rerateComments,String region ,String login ,String password,int rowNumber) {
     	System.out.println("Instance: 4");
     	//Will Check if Trk is already successful;
     	readTrk(trk);
@@ -754,7 +697,8 @@ public class eraRerateTestNGSlow {
     	 wait4 = new WebDriverWait(driver4,20);
     login(driver4,wait4,login,password);
     try {
-    	doRebill(driver4,wait4, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber, originLoc, destLoc, dimVol, shipperRef, recpAddress, shipperAddress, acctNbrDelStatus, svcBase,  creditCardDtl, preRateScenarios, expPieces, expActualWeight, expAdjWeight, creditCardDt,4);
+    	
+    	doRebill(driver4,wait4, result,  descripiton, testInputNbr, tinCount, trk,invoiceNbr1,invoiceNbr2, svcChanged, dimDetails, actWeight, custWeight, rerateComments, region , login , password, 4);
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -782,7 +726,7 @@ public class eraRerateTestNGSlow {
     }
     
     
-    public void doRebill(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt, int instanceNumber) throws InterruptedException {
+    public void doRebill(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String svcChanged,String dimDetails,String actWeight,String custWeight,String rerateComments,String region ,String login ,String password,int rowNumber) throws InterruptedException {
     
     	JavascriptExecutor js= (JavascriptExecutor) driver;
     	By tempElement;
@@ -1331,12 +1275,13 @@ public class eraRerateTestNGSlow {
 
     	try {
         //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
-    	stmt=GTMcon.prepareStatement("insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values (?,?,?,?,?)");  
+    	stmt=GTMcon.prepareStatement("insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description,era_rerate) values (?,?,?,?,?,?)");  
 		stmt.setString(1,testInputNbr);  
 		stmt.setString(2,tinCount);  
 		stmt.setString(3,trk);  
 		stmt.setString(4,resultArray[0]);  
-		stmt.setString(5,resultArray[1]);  
+		stmt.setString(5,resultArray[1]); 
+		stmt.setString(6,"Y");  
 	
 		stmt.executeUpdate();
     	}
