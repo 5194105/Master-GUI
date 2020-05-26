@@ -952,7 +952,7 @@ public void setupMouseListener() {
 				    					failedCheckBox="";
 				    				}
 				    				if(sessionCount==null) {
-				    					sessionCount="";
+				    					sessionCount="1";
 				    				}
 				    				
 				    				

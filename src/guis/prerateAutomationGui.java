@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -229,10 +230,15 @@ public class prerateAutomationGui {
 		
 
 		
-		
+		 c.setSessionCount(sessionTextField.getText());
 	    frame.setVisible(true);
 	    
-	    
+	    sessionTextField.addActionListener(new java.awt.event.ActionListener() {
+	    	  public void actionPerformed(ActionEvent event) {
+	    	    c.setSessionCount(sessionTextField.getText());
+	    	    System.out.println(c.getSessionCount());
+	    	  }
+	    	});
 		
 	    l2RadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

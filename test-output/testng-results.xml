@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="3" ignored="0" total="12" passed="9">
+<testng-results skipped="0" failed="5" ignored="0" total="27" passed="22">
   <reporter-output>
   </reporter-output>
-  <suite name="Sample_Suite" duration-ms="11582" started-at="2020-05-15T11:16:59 CDT" finished-at="2020-05-15T11:17:11 CDT">
+  <suite name="Sample_Suite" duration-ms="1077049" started-at="2020-05-18T10:04:04 CDT" finished-at="2020-05-18T10:22:01 CDT">
     <groups>
     </groups>
-    <test name="Rebill Test" duration-ms="11582" started-at="2020-05-15T11:16:59 CDT" finished-at="2020-05-15T11:17:11 CDT">
-      <class name="prerate.prerateHoldTestNGSlow">
-        <test-method status="PASS" signature="setupExcel(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="setupExcel" is-config="true" duration-ms="3632" started-at="2020-05-15T11:16:59 CDT" finished-at="2020-05-15T11:17:03 CDT">
+    <test name="Prerate Test" duration-ms="1077049" started-at="2020-05-18T10:04:04 CDT" finished-at="2020-05-18T10:22:01 CDT">
+      <class name="prerate.prerateTestNGSlow">
+        <test-method status="PASS" signature="setupExcel(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="setupExcel" is-config="true" duration-ms="6537" started-at="2020-05-18T10:04:04 CDT" finished-at="2020-05-18T10:04:11 CDT">
           <params>
             <param index="0">
               <value>
-                <![CDATA[C:\Users\FedExUser\Documents\rebill.xlsx]]>
+                <![CDATA[]]>
               </value>
             </param>
             <param index="1">
@@ -26,7 +26,7 @@
             </param>
             <param index="3">
               <value>
-                <![CDATA[]]>
+                <![CDATA[false]]>
               </value>
             </param>
             <param index="4">
@@ -46,7 +46,7 @@
             </param>
             <param index="7">
               <value>
-                <![CDATA[true]]>
+                <![CDATA[false]]>
               </value>
             </param>
             <param index="8">
@@ -58,88 +58,15 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupExcel -->
-        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod1" duration-ms="1029" started-at="2020-05-15T11:17:03 CDT" data-provider="data-provider1" finished-at="2020-05-15T11:17:04 CDT">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[Y]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[149818]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[1]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[794968528905]]>
-              </value>
-            </param>
-            <param index="6">
-              <value>
-                <![CDATA[ON_HOLD]]>
-              </value>
-            </param>
-            <param index="7">
-              <value>
-                <![CDATA[1]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testMethod1 -->
-        <test-method status="FAIL" signature="testMethod2(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod2" duration-ms="0" started-at="2020-05-15T11:17:03 CDT" data-provider="data-provider2" finished-at="2020-05-15T11:17:03 CDT">
+        <test-method status="FAIL" signature="testMethod3(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod3" duration-ms="0" started-at="2020-05-18T10:04:11 CDT" data-provider="data-provider3" finished-at="2020-05-18T10:04:11 CDT">
           <exception class="org.testng.TestNGException">
             <message>
               <![CDATA[
-Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod2() returned a null value]]>
+Data Provider public synchronized java.lang.Object[][] prerate.prerateTestNGSlow.dataProviderMethod3() returned a null value]]>
             </message>
             <full-stacktrace>
               <![CDATA[org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod2() returned a null value
-at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:150)
-at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
-at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
-at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
-at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:788)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-at java.lang.Thread.run(Thread.java:748)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.testng.TestNGException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testMethod2 -->
-        <test-method status="FAIL" signature="testMethod3(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod3" duration-ms="0" started-at="2020-05-15T11:17:03 CDT" data-provider="data-provider3" finished-at="2020-05-15T11:17:03 CDT">
-          <exception class="org.testng.TestNGException">
-            <message>
-              <![CDATA[
-Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod3() returned a null value]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod3() returned a null value
+Data Provider public synchronized java.lang.Object[][] prerate.prerateTestNGSlow.dataProviderMethod3() returned a null value
 at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:150)
 at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
 at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
@@ -158,15 +85,15 @@ at java.lang.Thread.run(Thread.java:748)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod3 -->
-        <test-method status="FAIL" signature="testMethod4(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod4" duration-ms="0" started-at="2020-05-15T11:17:03 CDT" data-provider="data-provider4" finished-at="2020-05-15T11:17:03 CDT">
+        <test-method status="FAIL" signature="testMethod4(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod4" duration-ms="0" started-at="2020-05-18T10:04:11 CDT" data-provider="data-provider4" finished-at="2020-05-18T10:04:11 CDT">
           <exception class="org.testng.TestNGException">
             <message>
               <![CDATA[
-Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod4() returned a null value]]>
+Data Provider public synchronized java.lang.Object[][] prerate.prerateTestNGSlow.dataProviderMethod4() returned a null value]]>
             </message>
             <full-stacktrace>
               <![CDATA[org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod4() returned a null value
+Data Provider public synchronized java.lang.Object[][] prerate.prerateTestNGSlow.dataProviderMethod4() returned a null value
 at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:150)
 at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
 at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
@@ -185,57 +112,11 @@ at java.lang.Thread.run(Thread.java:748)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod4 -->
-        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod1" duration-ms="863" started-at="2020-05-15T11:17:04 CDT" data-provider="data-provider1" finished-at="2020-05-15T11:17:05 CDT">
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="57243" started-at="2020-05-18T10:04:11 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:05:08 CDT">
           <params>
             <param index="0">
               <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[Y]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[227394]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[1]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[794968568460]]>
-              </value>
-            </param>
-            <param index="6">
-              <value>
-                <![CDATA[ON_HOLD]]>
-              </value>
-            </param>
-            <param index="7">
-              <value>
-                <![CDATA[2]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testMethod1 -->
-        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod1" duration-ms="880" started-at="2020-05-15T11:17:05 CDT" data-provider="data-provider1" finished-at="2020-05-15T11:17:06 CDT">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[]]>
+                <![CDATA[ADDR CHANGE FEE]]>
               </value>
             </param>
             <param index="1">
@@ -250,25 +131,294 @@ at java.lang.Thread.run(Thread.java:748)
             </param>
             <param index="3">
               <value>
-                <![CDATA[178364]]>
+                <![CDATA[1]]>
               </value>
             </param>
             <param index="4">
               <value>
-                <![CDATA[1]]>
+                <![CDATA[103842]]>
               </value>
             </param>
             <param index="5">
               <value>
-                <![CDATA[794968546834]]>
+                <![CDATA[794969208485]]>
               </value>
             </param>
             <param index="6">
               <value>
-                <![CDATA[ON_HOLD]]>
+                <![CDATA[55000]]>
               </value>
             </param>
             <param index="7">
+              <value>
+                <![CDATA[CNY]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[910808]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[20000]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[20000]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[001]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[15000]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="FAIL" signature="testMethod2(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod2" duration-ms="0" started-at="2020-05-18T10:04:11 CDT" data-provider="data-provider2" finished-at="2020-05-18T10:04:11 CDT">
+          <exception class="org.testng.TestNGException">
+            <message>
+              <![CDATA[
+Data Provider public synchronized java.lang.Object[][] prerate.prerateTestNGSlow.dataProviderMethod2() returned a null value]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] prerate.prerateTestNGSlow.dataProviderMethod2() returned a null value
+at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:150)
+at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
+at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
+at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
+at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:788)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+at java.lang.Thread.run(Thread.java:748)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.TestNGException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod2 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="57181" started-at="2020-05-18T10:05:08 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:06:05 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ADDR CHANGE FEE]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[103849]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[582587068624]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[376.04]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[USD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[5056981]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[53.26]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[292.78]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[012]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[30]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[2]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="53993" started-at="2020-05-18T10:06:05 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:06:59 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ADDR CHANGE FEE]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[112309]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[582587068738]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[1443.2]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[GBP]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[910808]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[1000]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[443.2]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
               <value>
                 <![CDATA[3]]>
               </value>
@@ -277,11 +427,11 @@ at java.lang.Thread.run(Thread.java:748)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod1 -->
-        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod1" duration-ms="881" started-at="2020-05-15T11:17:06 CDT" data-provider="data-provider1" finished-at="2020-05-15T11:17:07 CDT">
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="39920" started-at="2020-05-18T10:06:59 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:07:39 CDT">
           <params>
             <param index="0">
               <value>
-                <![CDATA[]]>
+                <![CDATA[ADDR CHANGE FEE]]>
               </value>
             </param>
             <param index="1">
@@ -296,25 +446,75 @@ at java.lang.Thread.run(Thread.java:748)
             </param>
             <param index="3">
               <value>
-                <![CDATA[228011]]>
+                <![CDATA[1]]>
               </value>
             </param>
             <param index="4">
               <value>
-                <![CDATA[1]]>
+                <![CDATA[123625]]>
               </value>
             </param>
             <param index="5">
               <value>
-                <![CDATA[794968568806]]>
+                <![CDATA[582422824925]]>
               </value>
             </param>
             <param index="6">
               <value>
-                <![CDATA[ON_HOLD]]>
+                <![CDATA[2039.28]]>
               </value>
             </param>
             <param index="7">
+              <value>
+                <![CDATA[USD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[5071714]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[2000]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[39.28]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
               <value>
                 <![CDATA[4]]>
               </value>
@@ -323,11 +523,11 @@ at java.lang.Thread.run(Thread.java:748)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod1 -->
-        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod1" duration-ms="820" started-at="2020-05-15T11:17:07 CDT" data-provider="data-provider1" finished-at="2020-05-15T11:17:08 CDT">
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="56175" started-at="2020-05-18T10:07:39 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:08:35 CDT">
           <params>
             <param index="0">
               <value>
-                <![CDATA[]]>
+                <![CDATA[ADDR CHANGE FEE]]>
               </value>
             </param>
             <param index="1">
@@ -342,25 +542,75 @@ at java.lang.Thread.run(Thread.java:748)
             </param>
             <param index="3">
               <value>
-                <![CDATA[177948]]>
+                <![CDATA[1]]>
               </value>
             </param>
             <param index="4">
               <value>
-                <![CDATA[1]]>
+                <![CDATA[126322]]>
               </value>
             </param>
             <param index="5">
               <value>
-                <![CDATA[583167322039]]>
+                <![CDATA[582587069815]]>
               </value>
             </param>
             <param index="6">
               <value>
-                <![CDATA[ON_HOLD]]>
+                <![CDATA[450]]>
               </value>
             </param>
             <param index="7">
+              <value>
+                <![CDATA[USD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[910808]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[400]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[50]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
               <value>
                 <![CDATA[5]]>
               </value>
@@ -369,11 +619,11 @@ at java.lang.Thread.run(Thread.java:748)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod1 -->
-        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod1" duration-ms="851" started-at="2020-05-15T11:17:08 CDT" data-provider="data-provider1" finished-at="2020-05-15T11:17:08 CDT">
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="52642" started-at="2020-05-18T10:08:35 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:09:28 CDT">
           <params>
             <param index="0">
               <value>
-                <![CDATA[]]>
+                <![CDATA[ADDR CHANGE FEE]]>
               </value>
             </param>
             <param index="1">
@@ -388,25 +638,75 @@ at java.lang.Thread.run(Thread.java:748)
             </param>
             <param index="3">
               <value>
-                <![CDATA[131901]]>
+                <![CDATA[1]]>
               </value>
             </param>
             <param index="4">
               <value>
-                <![CDATA[1]]>
+                <![CDATA[138145]]>
               </value>
             </param>
             <param index="5">
               <value>
-                <![CDATA[794968516257]]>
+                <![CDATA[794969211963]]>
               </value>
             </param>
             <param index="6">
               <value>
-                <![CDATA[ON_HOLD]]>
+                <![CDATA[2035.50]]>
               </value>
             </param>
             <param index="7">
+              <value>
+                <![CDATA[EUR]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[5056981]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[2000]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[35.5]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
               <value>
                 <![CDATA[6]]>
               </value>
@@ -415,11 +715,11 @@ at java.lang.Thread.run(Thread.java:748)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod1 -->
-        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod1" duration-ms="892" started-at="2020-05-15T11:17:08 CDT" data-provider="data-provider1" finished-at="2020-05-15T11:17:09 CDT">
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="31590" started-at="2020-05-18T10:09:28 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:10:00 CDT">
           <params>
             <param index="0">
               <value>
-                <![CDATA[]]>
+                <![CDATA[ADDR CHANGE FEE]]>
               </value>
             </param>
             <param index="1">
@@ -434,25 +734,75 @@ at java.lang.Thread.run(Thread.java:748)
             </param>
             <param index="3">
               <value>
-                <![CDATA[131901]]>
+                <![CDATA[1]]>
               </value>
             </param>
             <param index="4">
               <value>
-                <![CDATA[2]]>
+                <![CDATA[138309]]>
               </value>
             </param>
             <param index="5">
               <value>
-                <![CDATA[582421564578]]>
+                <![CDATA[582921312763]]>
               </value>
             </param>
             <param index="6">
               <value>
-                <![CDATA[REMOVE]]>
+                <![CDATA[151.06]]>
               </value>
             </param>
             <param index="7">
+              <value>
+                <![CDATA[CAD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[5056981]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[51.06]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
               <value>
                 <![CDATA[7]]>
               </value>
@@ -461,11 +811,11 @@ at java.lang.Thread.run(Thread.java:748)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod1 -->
-        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod1" duration-ms="827" started-at="2020-05-15T11:17:09 CDT" data-provider="data-provider1" finished-at="2020-05-15T11:17:10 CDT">
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="51591" started-at="2020-05-18T10:10:00 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:10:51 CDT">
           <params>
             <param index="0">
               <value>
-                <![CDATA[]]>
+                <![CDATA[ADDR CHANGE FEE]]>
               </value>
             </param>
             <param index="1">
@@ -480,25 +830,75 @@ at java.lang.Thread.run(Thread.java:748)
             </param>
             <param index="3">
               <value>
-                <![CDATA[146352]]>
+                <![CDATA[1]]>
               </value>
             </param>
             <param index="4">
               <value>
-                <![CDATA[1]]>
+                <![CDATA[138361]]>
               </value>
             </param>
             <param index="5">
               <value>
-                <![CDATA[794968527449]]>
+                <![CDATA[794969395627]]>
               </value>
             </param>
             <param index="6">
               <value>
-                <![CDATA[ON_HOLD]]>
+                <![CDATA[426.72]]>
               </value>
             </param>
             <param index="7">
+              <value>
+                <![CDATA[USD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[5071714]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[237.53]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[39.19]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[012]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[25]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[001]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[125]]>
+              </value>
+            </param>
+            <param index="17">
               <value>
                 <![CDATA[8]]>
               </value>
@@ -507,11 +907,11 @@ at java.lang.Thread.run(Thread.java:748)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod1 -->
-        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@16e8792]" name="testMethod1" duration-ms="855" started-at="2020-05-15T11:17:10 CDT" data-provider="data-provider1" finished-at="2020-05-15T11:17:11 CDT">
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="53664" started-at="2020-05-18T10:10:51 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:11:45 CDT">
           <params>
             <param index="0">
               <value>
-                <![CDATA[]]>
+                <![CDATA[ADDR CHANGE FEE]]>
               </value>
             </param>
             <param index="1">
@@ -526,25 +926,75 @@ at java.lang.Thread.run(Thread.java:748)
             </param>
             <param index="3">
               <value>
-                <![CDATA[177376]]>
+                <![CDATA[1]]>
               </value>
             </param>
             <param index="4">
               <value>
-                <![CDATA[1]]>
+                <![CDATA[145441]]>
               </value>
             </param>
             <param index="5">
               <value>
-                <![CDATA[794968545996]]>
+                <![CDATA[794969396005]]>
               </value>
             </param>
             <param index="6">
               <value>
-                <![CDATA[ON_HOLD]]>
+                <![CDATA[704.1]]>
               </value>
             </param>
             <param index="7">
+              <value>
+                <![CDATA[MXN]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[910808]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[400]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[304.1]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
               <value>
                 <![CDATA[9]]>
               </value>
@@ -553,7 +1003,1501 @@ at java.lang.Thread.run(Thread.java:748)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod1 -->
-      </class> <!-- prerate.prerateHoldTestNGSlow -->
-    </test> <!-- Rebill Test -->
+        <test-method status="FAIL" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="42134" started-at="2020-05-18T10:11:45 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:12:27 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ADDR CHANGE FEE]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[149310]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[794969219964]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[300]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[USD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[5080136]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[976]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[10]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Override Disabled.]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Override Disabled.
+at org.testng.Assert.fail(Assert.java:97)
+at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:1020)
+at prerate.prerateTestNGSlow.testMethod1(prerateTestNGSlow.java:530)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:135)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:174)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:821)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+at java.lang.Thread.run(Thread.java:748)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="837" started-at="2020-05-18T10:12:27 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:12:28 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ADDR CHANGE FEE]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[149353]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[583081319125]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[650]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[USD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[910808]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[300]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[350]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[11]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="FAIL" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="42981" started-at="2020-05-18T10:12:28 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:13:11 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ADDR CHANGE FEE]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[167694]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[794969396050]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[145.89]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[CAD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[5071714]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[81.97]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[38.3]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[012]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[4.92]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[001]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[20.70]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[12]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Override Disabled.]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Override Disabled.
+at org.testng.Assert.fail(Assert.java:97)
+at prerate.prerateTestNGSlow.doPrerate(prerateTestNGSlow.java:1020)
+at prerate.prerateTestNGSlow.testMethod1(prerateTestNGSlow.java:530)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:135)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:174)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:821)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+at java.lang.Thread.run(Thread.java:748)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="53135" started-at="2020-05-18T10:13:11 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:14:04 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ADDR CHANGE FEE]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[168617]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[794969223511]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[594.9]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[AUD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[5056981]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[251.6]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[39]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[012]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[304.3]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[13]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="55404" started-at="2020-05-18T10:14:04 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:14:59 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ADDR CHANGE FEE]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[177611]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[794969358986]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[300]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[USD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[5056981]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[150]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[012]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[50]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[14]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="52395" started-at="2020-05-18T10:14:59 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:15:52 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ADDR CHANGE FEE]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[177803]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[583081320107]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[300]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[USD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[910808]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[200]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[15]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="51310" started-at="2020-05-18T10:15:52 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:16:43 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ADDR CHANGE FEE]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[179712]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[794969432474]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[120]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[USD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[910808]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[40]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[80]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[16]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="50579" started-at="2020-05-18T10:16:43 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:17:34 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ADDR CHANGE FEE]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[188067]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[794969396347]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[200]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[USD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[910808]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[17]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="51230" started-at="2020-05-18T10:17:34 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:18:25 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ADDR CHANGE FEE]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[188177]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[582910813516]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[200]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[USD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[910808]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[18]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="54919" started-at="2020-05-18T10:18:25 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:19:20 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ADDR CHANGE FEE]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[188762]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[582952313405]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[200]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[USD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[910808]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[19]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="49092" started-at="2020-05-18T10:19:20 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:20:09 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ADDR CHANGE FEE]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[188771]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[794969359868]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[200]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[USD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[910808]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[20]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="28157" started-at="2020-05-18T10:20:09 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:20:37 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ADDR CHANGE FEE]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[189183]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[582616080257]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[200]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[USD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[910808]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[21]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="28438" started-at="2020-05-18T10:20:37 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:21:05 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ADDR CHANGE FEE]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[460]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[582579067354]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[300]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[USD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[910808]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[200]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[22]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="27863" started-at="2020-05-18T10:21:05 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:21:33 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ADDR CHANGE FEE]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[86011]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[582587071540]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[239.61]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[CAD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[910808]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[200]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[39.61]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[23]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateTestNGSlow@174e09b]" name="testMethod1" duration-ms="27972" started-at="2020-05-18T10:21:33 CDT" data-provider="data-provider1" finished-at="2020-05-18T10:22:01 CDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[ADDR CHANGE FEE]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[97683]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[582422831055]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[78.63]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[USD]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[5056981]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[050]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[40]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[010]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[38.63]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[24]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+      </class> <!-- prerate.prerateTestNGSlow -->
+    </test> <!-- Prerate Test -->
   </suite> <!-- Sample_Suite -->
 </testng-results>
