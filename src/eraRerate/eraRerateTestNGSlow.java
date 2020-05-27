@@ -858,81 +858,11 @@ public class eraRerateTestNGSlow {
         	 System.out.println("Inside getDetails");
 	         //Getting Action Dropdown. Will RB everytime.
 	         Select actionDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"pkgaction\"]")));
-	         actionDropDown.selectByValue("RB");
- 
-	         //Setting up the reasonCode Dropdown.
-	         Select  reasonCodeDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select")));
-	       
-	         /*******************************************************/
-	         List<WebElement> options = driver.findElements(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select"));
-	    	 int counter=0;
-	         for (WebElement option : options) {
-	        	 
-	    		 System.out.println(counter +":" +option.getText());
-	    		 counter++;
-	             }
-	       
+	         actionDropDown.selectByValue("RT");
+	         Thread.sleep(5000);
+      		 driver.findElement(By.xpath("//*[@id=\"viewInvBtn\"]")).click();
+      		 Thread.sleep(2000);
 	         
-	         /***************************************************************************/
-	         
-	         //For domestic.
-	         if (login.equals("5194105") || login.equals("584168")){
-	             switch (reasonCode){
-         
-                 case "RRA" :
-                	
-                 	//reasonCodeDropDown.selectByValue("RRA - REBILL RECIP ACCT   ");
-                 								
-                    driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[2]")).click();
-                     break;
-                 case "RSA" :
-                
-        	        
-                 //	reasonCodeDropDown.selectByVisibleText("RSA - REBILL SHIPPER ACCT ");
-                    driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[3]")).click();
-                     break;
-                 case "RTA" :
-                
-                 //	reasonCodeDropDown.selectByValue("RTA - REBILL THIRD PARTY  ");
-                     driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[4]")).click();
-                	 break;
-                 case "RBS" :  
-                
-                 //	reasonCodeDropDown.selectByValue("RBS - REBILL SAME ACCOUNT");
-                 	break;
-                 }
-             }
-	         else {
-              switch (reasonCode){
-               
-              	case "RRA" :
-              		//reasonCodeDropDown.selectByValue("RRA - REBILL RECIP ACCT");
-                         		
-              			driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[15]")).click();
-                     break;
-                 case "RSA" :
-                 //	reasonCodeDropDown.selectByValue("RSA - REBILL SHIPPER ACCT");
-                 	driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[17]")).click();
-                     break;
-                 case "RTA" :
-                 //	reasonCodeDropDown.selectByValue("RTA - S,R INCORRECT BILLING-REBILL TO 3RD PART");
-                 	driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[21]")).click();
-                     break;
-                 case "KPR" :
-                 //	reasonCodeDropDown.selectByValue("KPR - MANIFEST KEYPUNCH ERROR-ACCT NO/BILL OPT");
-                    //driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[21]")).click();
-                     break;
-                 case "RSD" :
-                 //	reasonCodeDropDown.selectByValue("RRSD - SHIPPER DECLINES-BILL RECIPIENT 3RD PART");
-                    driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[18]")).click();
-                     break;
-                 case "RBS" :  
-                // 	reasonCodeDropDown.selectByValue("RBS - REBILL SAME ACCOUNT");
-                 	  driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select/option[6]")).click();
-                    								  
-                 	break;
-                 }
-	         }
          }
       
       catch(Exception e) {
@@ -945,221 +875,75 @@ public class eraRerateTestNGSlow {
         
          
          
+     
+         		 
+     
+              
+              
          
-    	 /*
-    	 *****************************************************************************
-    	 *
-    	 *Getting to phone detail screen
-    	 *
-    	 *
-    	 ****************************************************************************
-    	 */
-         
+     //    String svcChanged,String dimDetails,String actWeight,String custWeight,String rerateComments
+
         
-         	try {
-         		//tHIS BUTTON IS BUGGY!!!! click many times!!!!!!!!
-         		 Thread.sleep(5000);
-         		// driver.findElement(By.xpath("//*[@id=\"viewInvBtn\"]")).click();
-         		// driver.findElement(By.xpath("//*[@id=\"viewInvBtn\"]")).click();
-         		// driver.findElement(By.xpath("//*[@id=\"viewInvBtn\"]")).click();
-         		 driver.findElement(By.xpath("//*[@id=\"viewInvBtn\"]")).click();
-         		 Thread.sleep(2000);
-                 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/label[1]")));
-                 
-         }
-         	catch(Exception e1) {
-	
-         		System.out.println("Could Not Click Rebill After Action Code");
-         		 try {
-         			 Thread.sleep(1000);
-         			 String tempError= driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[1]/h4")).getText();
-         			 if (tempError.equals("Trying To Rebill A Partial Amount")) {
-         				 System.out.println(tempError);
-         				 //Assert Fail
-         		}
-         		 driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/button[1]")).click();
-         		 System.out.println("Found Pop Up");
-         		
-         	}
-         	catch(Exception e2) {
-         		System.out.println("Could Not find Popup"+e2);
-         		 Assert.fail(e2 +" Could Not find Popup");
-         	}
-        } 
-         		 
-         		 
-         	
-         		 
-         		 /*
-             	 *****************************************************************************
-             	 *
-             	 *Getting to phone detail
-             	 *
-             	 *
-             	 ****************************************************************************
-             	 */
-         		 
-         		 
-      //   js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-             try{
-            	 //Click on rebill RPI Complete, Phone, and Continue
-                  if (login.equals("5194105")|| login.equals("584168")){
-                	  driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/label[1]")).click();
-                  }
-              
-                  
-               Select contactMethodDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"rmrks\"]")));
-               contactMethodDropDown.selectByValue("phone");  
-         	   driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).click();
-         	   wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")));
-             	}
-         	   		catch(Exception e) {
-         	   			try {
-         	   				System.out.println("Could not select phone or click RPI..");
-         	   				String tempError= driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/div[1]/h4")).getText();
-         	   				if (tempError.indexOf("Management approval")!=-1) {
-         	   					System.out.println(tempError);
-         	   					//Assert Fail
-         	   					}
-         	   				driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/button[1]")).click();
-         	   				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")));
-         	   				}
-         	   				catch(Exception ee) {
-         	   					System.out.println(ee+"Could Not Get to Rebill Screen");
-         	   				 Assert.fail(ee+" Could Not Get to Rebill Screen");
-         	   				}
-         	   			}
-         	   		
-             
-             
-             
-             
-             
-             			/*
-                     	 *****************************************************************************
-                     	 *
-                     	 *Rebill Screen
-                     	 *
-                     	 *
-                     	 ****************************************************************************
-                     	 */	
-         	   			
-         	   			
-         	   			
-            
-              
-              
-         
-        	
-             Boolean validated;
-             try{    
             	
-             switch (reasonCode){
-             		case "RRA" :
-                       wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"reciptacct_number\"]")));
-                       driver.findElement(By.xpath("//*[@id=\"reciptacct_number\"]")).clear();
-                       driver.findElement(By.xpath("//*[@id=\"reciptacct_number\"]")).sendKeys(rebillAccount);
-                       break;
-                    case "RSA" :
-                       //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[7]/di[1]/label")));
-                       //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[7]/div[1]/label")));
-                       //*[@id="shipacct_number"] 
-                       //TESTING PURPOSE ONLY! DELETE WHEN RUNNING.
-                       //driver.findElement(By.xpath("//*[@id=\"shipacct_number\"]")).clear();
-                       //driver.findElement(By.xpath("//*[@id=\"shipacct_number\"]")).sendKeys("39466825");
-                       //Thread.sleep(2000);
-                        break;
-                    case "RTA" :
-                        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"thirdacct_number\"]")));
-                        driver.findElement(By.xpath("//*[@id=\"thirdacct_number\"]")).clear();
-                        driver.findElement(By.xpath("//*[@id=\"thirdacct_number\"]")).sendKeys(rebillAccount);
-                        break;
-                    }
-
-             
-             
-             if(worktype.equals("MFRETIRE")) {
-           /*
-            	 String originLoc,
-            	 String destLoc,
-            	 String dimVol,
-            	 String shipperRef,
-            	 String recpAddress,
-            	 String shipperAddress,
-            	 String acctNbrDelStatus,
-            	 String svcBase, 
-            	 String creditCardDtl,
-            	 String preRateScenarios,
-            	 String expPieces,
-            	 String expActualWeight,
-            	 String expAdjWeight,
-            	 String creditCardDt,
+            	 
+            	 if (!svcChanged.equals("")) {
+            		  Select svcDropDown = new Select (driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div[2]/div/div/div/select")));
+            		 	driver.findElement(By.xpath("//*[@id=\"origin\"]")).sendKeys(svcChanged);
+            		 	switch(svcChanged) {
+            		 	
+            		 	case "Express Saver":
+            		 		svcDropDown.selectByValue("string:Express Saver");
+            		 		break;
+            		 	case "Fedex Economy":
+            		 		svcDropDown.selectByValue("string:Fedex Economy");
+            		 		break;
+            		 	case "Fedex Freight":
+            		 		svcDropDown.selectByValue("string:Fedex Freight");
+            		 		break;
+            		 	case "First Overnight":
+            		 		svcDropDown.selectByValue("string:First Overnight");
+            		 		break;
+            		 	case "Priority Overnight":
+            		 		svcDropDown.selectByValue("string:Priority Overnight");
+            		 		break;
+            		 	case "Service":
+            		 		svcDropDown.selectByValue("string:Service");
+            		 		break;
+            		 	case "Standard Overnight":
+            		 		svcDropDown.selectByValue("string:Standard Overnight");
+            		 		break;
+            		 	}
+           
+            	 }
+            	 
+            	 
+            	 
+            	 if (!dimDetails.equals("")) {
+            		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[4]/div[5]/div/div/input")).sendKeys(dimDetails);
+            	 }
+            	/*
+            	 if (!actWeight.equals("")) {
+            		 driver.findElement(By.xpath("//*[@id=\"rb_volume\"]")).sendKeys(actWeight);
+            	 }
             	 */
-            	 
-            	 if (!originLoc.equals("")) {
-            		 	driver.findElement(By.xpath("//*[@id=\"origin\"]")).sendKeys(originLoc);
-            		 
+            	 if (!custWeight.equals("")) {
+            		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[2]/div[2]/div/div/input")).sendKeys(custWeight);
             	 }
-            	 if (!destLoc.equals("")) {
-            		 driver.findElement(By.xpath("//*[@id=\"destination\"]")).sendKeys(destLoc);
-            	 }
-            	 if (!dimVol.equals("")) {
-            		 driver.findElement(By.xpath("//*[@id=\"rb_volume\"]")).sendKeys(dimVol);
-            	 }
-            	 if (!shipperRef.equals("")) {
-            		 driver.findElement(By.xpath("//*[@id=\"reference_notes\"]")).sendKeys(shipperRef);
-            	 }
-            	 if (!recpAddress.equals("")) {
-            		 driver.findElement(By.xpath("//*[@id=\"reciptacct_number\"]")).sendKeys(recpAddress);
-            	 }
-            	 if (!shipperAddress.equals("")) {
-            		 driver.findElement(By.xpath("//*[@id=\"shipacct_number\"]")).sendKeys(shipperAddress);
-            	 }
-            	 if (!acctNbrDelStatus.equals("")) {
-            		// driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")).sendKeys(arg0);
-            	 }
-            	 if (!svcBase.equals("")) {
-            		 driver.findElement(By.xpath("//*[@id=\"service_base\"]")).sendKeys(svcBase);
-            	 }
-            	 if (!creditCardDtl.equals("")) {
-            		 String[] splitCC = creditCardDtl.split(" ");
-            		 driver.findElement(By.xpath("//*[@id=\"cc_num1\"]")).sendKeys(splitCC[0]);
-            		 driver.findElement(By.xpath("//*[@id=\"cc_num2\"]")).sendKeys(splitCC[1]);
-            		 driver.findElement(By.xpath("//*[@id=\"cc_num3\"]")).sendKeys(splitCC[2]);
-            		 driver.findElement(By.xpath("//*[@id=\"cc_num4\"]")).sendKeys(splitCC[3]);
-            	 }
-            	 if (!expPieces.equals("")) {
-            		 driver.findElement(By.xpath("//*[@id=\"rb_totalEXPPIECES\"]")).sendKeys(expPieces);
-            	 }
-            	 if (!expActualWeight.equals("")) {
-            		 driver.findElement(By.xpath("//*[@id=\"rb_totalEXPweight\"]")).sendKeys(expActualWeight);
-            	 }
-            	 if (!expAdjWeight.equals("")) {
-            		 driver.findElement(By.xpath("//*[@id=\"rb_totalEXPADJWeight\"]")).sendKeys(expAdjWeight);
-            	 }
-            	 if (!creditCardDt.equals("")) {
-            		 driver.findElement(By.xpath("//*[@id=\"exp_date\"]")).sendKeys(creditCardDt);
-            	 }
-             }
-             
-             	driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")).click();
-             	Thread.sleep(15000);
-             	}
-             	catch(Exception e) {
-             		System.out.println("Failed Trying to Rebill..");
-             		 Assert.fail("Failed Trying to Rebill..");
-             	}
-
+            	
+            	 driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[4]/div/button[1]")).click();
+            	
             
-             try {
+            	 //This is the popup for rerate
+            	// driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[3]/button[1]")).click();
+            	
             	 
-            //Check For Validation
-             }
-             catch (Exception e) {
-            	 System.out.println("Failed Validating in DB");
-            	 Assert.fail("Failed Validating in DB");
-             }
-            
+            	 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[4]/div/button[3]")).click();
+             	
+            	 Thread.sleep(5000);
+          		 driver.findElement(By.xpath("//*[@id=\"viewInvBtn\"]")).click();
+          		 Thread.sleep(2000);
+            	 
+            	 
              //If False.. think maybe there is stat codes to select.
             
              String[] resultArray = validateResults(trk);
