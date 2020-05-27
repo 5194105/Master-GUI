@@ -31,6 +31,8 @@ import org.testng.xml.XmlTest;
 
 import UD.UdExecution;
 import guis.datapopAutomationGui;
+import guis.eraRerateAutomationExtendGui;
+import guis.eraRerateAutomationGui;
 import guis.gui;
 import guis.guiBase;
 import guis.instantInvoiceAutomationGui;
@@ -44,6 +46,7 @@ import prerate.prerateHoldTestNGSlow;
 import prerate.prerateTestNGSlow;
 import rebill.rebillMain;
 import rebill.testngRebillSlow;
+import rebill.testngRebillSlowMfRetire;
 import rebill_troubleshoot.rebillTroubleshoot;
 import rerate.abc;
 import testng.testingonly;
@@ -61,6 +64,7 @@ public class mouse {
     instantInvoiceAutomationGui instantInvoice;
     datapopAutomationGui datapop;
     rebillTroubleshoot rt;
+     
 	 
     
 
@@ -169,7 +173,7 @@ public class mouse {
 	JFrame currentFrame;
 	JFrame infoPane;  
 	
-	
+	eraRerateAutomationGui eraRerate;
 	
     public rerateAutomationGui rag;
 	
@@ -494,8 +498,11 @@ public void setupMouseListener() {
 			    		if (mouseLabel.getName().equals("ud")) {
 			    			ud= new udAutomation(g,c);
 			    		}
-			    		if (mouseLabel.getName().equals("datapop")) {
-			    			datapop = new datapopAutomationGui(g,c);
+			    		//if (mouseLabel.getName().equals("datapop")) {
+			    			//datapop = new datapopAutomationGui(g,c);
+			    		//}
+			    		if (mouseLabel.getName().equals("eraRerate")) {
+			    			eraRerate = new eraRerateAutomationGui(g,c);
 			    		}
 			    		
 			    		if (mouseLabel.getName().equals("rebillTroubleshoot")) {
@@ -619,6 +626,12 @@ public void setupMouseListener() {
 								prerateAutomationExtendedGui raeg= new prerateAutomationExtendedGui(g,c);
 						
 						}
+							
+							if (obj.getClass().getCanonicalName().equals("guis.eraRerateAutomationGui")) {
+								eraRerateAutomationExtendGui erae= new eraRerateAutomationExtendGui(g,c);
+						
+						}
+							
 							}
 							
 						
@@ -782,7 +795,7 @@ public void setupMouseListener() {
 					    		        XmlTest xmlTest = new XmlTest(xmlSuite);
 					    		        xmlTest.setName("Rebill Test");
 					    		        //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
-					    		        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testngRebillSlow.class)));
+					    		        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testngRebillSlowMfRetire.class)));
 					    		        xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
 					    		        TestNG tng = new TestNG();
 					    		        tng.setXmlSuites(Collections.singletonList(xmlSuite));

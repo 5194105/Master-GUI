@@ -120,8 +120,10 @@ public class prerateTestNGSlow {
 	String source;
 	String sessionCount;
 	String[][] allData;
+
 	int sessionCountInt;
 	
+
 	@BeforeClass
 	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","sessionCount"})
 	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String sessionCount) {
@@ -136,10 +138,6 @@ public class prerateTestNGSlow {
 		this.sessionCount=sessionCount;
 		sessionCountInt=Integer.parseInt(sessionCount);
 		System.out.println(sessionCountInt);
-	/*
-	@BeforeClass
-	public void setupExcel() {
-	*/
 		testingMode=false;
 		testingDB=true;
 		if (testingMode==true) {
@@ -152,10 +150,20 @@ public class prerateTestNGSlow {
 			nullCheckBox="false";
 			failedCheckBox="false";
 			sessionCountInt=1;
+			//filepath=homePath+"\\test data\\prerate_update_pc.xlsx";
+			level="3";
+			browser="2";
+			compatibleMode="false";
+			source="excel";
+			allCheckBox="false";
+			nullCheckBox="false";
+			failedCheckBox="false";
+	    	excelVar = new excel(filepath);
 		}
+
 		
 		
-		
+
 		
 		
 		
@@ -175,9 +183,7 @@ public class prerateTestNGSlow {
 		}
         
         if (testingMode==true && source.equals("excel")){
-        	browser="2";
-        	level="2";
-        	excelVar = new excel(homePath+"\\test data\\PRERATE_UPDATE.xlsx");
+
         }
 	  
     else {

@@ -1,4 +1,6 @@
-package testingonly;
+package rebill;
+
+
 import configuration.config;
 import prerate.prerateTestNGSlow;
 import rebill.rebillData;
@@ -25,7 +27,7 @@ import org.testng.xml.XmlClass;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
-public class Highest {
+public class rebillManualClass {
 
 	 
 
@@ -33,19 +35,19 @@ public class Highest {
     public static void main(String[] args) {
     	config c = new config();
        	c.setExcelPath("C:\\Users\\FedExUser\\Documents\\rebill.xlsx");
-    	c.setLevel("2");
+    	c.setLevel("3");
     	c.setDriverType("2");
     	c.setDriverType("2");
     	c.setCompatibleMode("false");
-    	c.setSource("excel");
+    	c.setSource("db");
     	c.setAllCheckBox("false");
     	c.setNullCheckBox("true");
-    	c.setFailedCheckBox("false");
+    	c.setFailedCheckBox("true");
   
-		c.setDomesticCheckBox("false");
+		c.setDomesticCheckBox("true");
 		c.setInternationalCheckBox("true");
-		c.setExpressCheckBox("true");
-		c.setGroundCheckBox("false");
+		c.setExpressCheckBox("false");
+		c.setGroundCheckBox("true");
 		c.setNormalCheckBox("true");
 		c.setMfRetireCheckBox("false");
 		c.setSessionCount("1");
