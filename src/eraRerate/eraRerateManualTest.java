@@ -1,35 +1,22 @@
-package rebill;
+package eraRerate;
 
 
-import configuration.config;
-import prerate.prerateTestNGSlow;
-import rebill.rebillData;
-import rebill.testngRebillSlow;
-import rebill.testngRebillSlowMfRetire;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.testng.TestNG;
-import org.testng.annotations.Parameters;
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
-public class rebillManualClass {
+import configuration.config;
+import rebill.rebillData;
+import rebill.testngRebillSlowMfRetire;
 
-	 
+public class eraRerateManualTest {
 
 	static ArrayList<rebillData> rebillDataArray= new ArrayList<rebillData>();
     public static void main(String[] args) {
@@ -43,13 +30,12 @@ public class rebillManualClass {
     	c.setAllCheckBox("false");
     	c.setNullCheckBox("true");
     	c.setFailedCheckBox("true");
-  
-		c.setDomesticCheckBox("true");
+		c.setDomesticCheckBox("false");
 		c.setInternationalCheckBox("true");
 		c.setExpressCheckBox("true");
 		c.setGroundCheckBox("false");
-		c.setNormalCheckBox("true");
-		c.setMfRetireCheckBox("false");
+		c.setNormalCheckBox("false");
+		c.setMfRetireCheckBox("true");
 		c.setSessionCount("1");
     	
     	String filepath=c.getExcelPath();
@@ -143,19 +129,13 @@ public class rebillManualClass {
         fieldValues.put("allCheckBox", allCheckBox);
         fieldValues.put("nullCheckBox", nullCheckBox);
         fieldValues.put("failedCheckBox", failedCheckBox);
-        fieldValues.put("domesticCheckBox", domesticCheckBox);
-        fieldValues.put("internationalCheckBox", internationalCheckBox);
-        fieldValues.put("expressCheckBox", expressCheckBox);
-        fieldValues.put("groundCheckBox", groundCheckBox);
-        fieldValues.put("normalCheckBox", normalCheckBox);
-        fieldValues.put("mfRetireCheckBox",mfRetireCheckBox);
         fieldValues.put("sessionCount",sessionCount);
         
         xmlSuite.setParameters(fieldValues);
         XmlTest xmlTest = new XmlTest(xmlSuite);
         xmlTest.setName("Rebill Test");
         //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
-        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testngRebillSlowMfRetire.class)));
+        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(eraRerateTestNGSlow.class)));
         xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
         TestNG tng = new TestNG();
         tng.setXmlSuites(Collections.singletonList(xmlSuite));
@@ -163,7 +143,3 @@ public class rebillManualClass {
         
 	}
 }
-
-
- 
-
