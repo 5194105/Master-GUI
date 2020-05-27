@@ -2,13 +2,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Sample_Suite]">
   <parameter name="nullCheckBox" value="true"/>
-  <parameter name="level" value="2"/>
-  <parameter name="failedCheckBox" value="false"/>
+  <parameter name="level" value="3"/>
+  <parameter name="failedCheckBox" value="true"/>
   <parameter name="groundCheckBox" value="true"/>
   <parameter name="source" value="db"/>
   <parameter name="compatibleMode" value=""/>
-  <parameter name="mfRetireCheckBox" value="true"/>
-  <parameter name="expressCheckBox" value="true"/>
+  <parameter name="mfRetireCheckBox" value="false"/>
+  <parameter name="expressCheckBox" value="false"/>
   <parameter name="allCheckBox" value="false"/>
   <parameter name="filepath" value="C:\Users\FedExUser\Documents\rebill.xlsx"/>
   <parameter name="normalCheckBox" value="true"/>
@@ -22,6 +22,7 @@
         <methods>
           <include name="testMethod2"/>
           <include name="testMethod4"/>
+          <include name="testMethod1" invocation-numbers="0 0 0 0"/>
           <include name="testMethod3"/>
           <include name="setupExcel"/>
         </methods>
