@@ -983,12 +983,13 @@ public class testngRebillSlowMfRetire {
     	 */
     	 
      	
-         try{
-        	 System.out.println("Inside getDetails");
-	         //Getting Action Dropdown. Will RB everytime.
-	         Select actionDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"pkgaction\"]")));
-	         actionDropDown.selectByValue("RB");
- 
+        
+    	     try{
+    	 System.out.println("Inside getDetails");
+         //Getting Action Dropdown. Will RB everytime.
+         Select actionDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"pkgaction\"]")));
+         actionDropDown.selectByValue("RB");
+     
 	         //Setting up the reasonCode Dropdown.
 	         Select  reasonCodeDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select")));
 	       
@@ -1067,6 +1068,18 @@ public class testngRebillSlowMfRetire {
       catch(Exception e) {
     	  
     	  System.out.println("Failed at Drop Down");
+    	  if(source.equals("excel")) {
+            	 writeToExcel(rowNumber, 0,"fail");
+            	 writeToExcel(rowNumber, 1,"Could Not Find Rebill Dropdown");
+            	return;
+            	 }
+				 if(uploadTrkToDB==true) {
+	   			 String[] resultArray = new String[2];
+	   			 	resultArray[0]="fail";
+	   				resultArray[1]="Could Not Find Rebill Dropdown";
+	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+	   				
+             	 } 
     	  Assert.fail("Failed at Drop Down");
       }
    

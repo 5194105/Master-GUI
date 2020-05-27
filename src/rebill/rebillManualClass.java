@@ -46,8 +46,8 @@ public class rebillManualClass {
   
 		c.setDomesticCheckBox("true");
 		c.setInternationalCheckBox("true");
-		c.setExpressCheckBox("false");
-		c.setGroundCheckBox("true");
+		c.setExpressCheckBox("true");
+		c.setGroundCheckBox("false");
 		c.setNormalCheckBox("true");
 		c.setMfRetireCheckBox("false");
 		c.setSessionCount("1");
