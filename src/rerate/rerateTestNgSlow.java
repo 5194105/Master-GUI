@@ -2,6 +2,7 @@ package rerate;
 
 
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import configuration.excel;
@@ -39,7 +40,7 @@ import configuration.config;
 public class rerateTestNgSlow {
 	  
 	String tempFile,configFile;
-	excel e;
+	excel excelVar;
 	 Boolean isPresent=false;
 	int retryCounter=0;
 	int i=0;
@@ -47,7 +48,7 @@ public class rerateTestNgSlow {
 	WebDriverWait wait1,wait2,wait3,wait4;
 	config c;
 	
-	Boolean level;
+
 	long serviceLong1,serviceLong2;
 	long invoiceLong1,invoiceLong2;
 	long acctLong1,acctLong2;
@@ -60,7 +61,7 @@ public class rerateTestNgSlow {
 	String  sh1;
 	String filepath;
 	String d="04/20/2020";
-	String d2="05/12/2020";
+	String d2="05/27/2020";
 	static XSSFWorkbook wb;
 	static XSSFSheet sheet;
 	static XSSFRow row;
@@ -91,7 +92,7 @@ public class rerateTestNgSlow {
 	 ArrayList<String> cc42 = new ArrayList<String>();
 	 Alert alert1,alert2,alert3,alert4;
 	 Boolean isChecked1=false,isChecked2=false,isChecked3=false,isChecked4=false;
-        Boolean compatibleMode;
+        
         Boolean chrome;
         
         
@@ -122,40 +123,61 @@ public class rerateTestNgSlow {
 		int testCounter1,testCounter2,testCounter3,testCounter4;
 		int totalMod;
 		
-	
-	
-    
-
-		
+		String filepathExcel;
+		String startDateText;
+		String endDateText;
+		String broswer;
+		String compatibleMode;
+		String sessionCount;
+		String source;
+		String level;
+		int sessionCountInt;
+		String[][] allData;
 		
 		@BeforeClass
-		//@Parameters("filepathExcel")
-	//	public void setupExcel(String filepathExcel) {
-		public void setupExcel() {
+		@Parameters({"filepathExcel","startDateText","endDateText","broswer","compatibleMode","source","level","sessionCount"})
+		public void setupExcel(String filepathExcel,String startDateText,String endDateText,String broswer,String compatibleMode,String source,String level,String sessionCount ) {
+	//	public void setupExcel() {
 			//or from eclipse.
+			
+			this.filepathExcel=filepathExcel;
+			this.startDateText=startDateText;
+			this.endDateText=endDateText;
+			this.broswer=broswer;
+			this.compatibleMode=compatibleMode;
+			this.source=source;
+			this.level=level;
+			this.sessionCount=sessionCount;
+			sessionCountInt=Integer.parseInt(sessionCount);
 	    	homePath=System.getProperty("user.dir");
 	    	System.out.println("homePath" +System.getProperty("user.dir"));
 	    
-	    	//e = new excel(homePath+"\\test data\\rerate2.xlsx");
-	    	e = new excel("C:\\Users\\theth\\Documents\\rerate_l2c2.xlsx");
 	    	
-	    	//e = new excel(filepathExcel);
-	    	e.setUpExcelWorkbook();
-	    	e.setUpExcelSheet(0);
-	    	e.setRowCountAutomatically(0);
-	    	e.setColCountAutomatically(0);
-	    	rowCount=e.getRowCount();
-	    	colCount=e.getColCount()-1;
-	    	System.out.println("ROW COUNT "+rowCount);
-	    	total= rowCount/4;
-	    	System.out.println(total);
+	    	if (source.equals("excel")) {
+	    		excelVar = new excel(filepathExcel);
+	    		excelVar.setUpExcelWorkbook();
+	    		excelVar.setUpExcelSheet(0);
+	    		excelVar.setRowCountAutomatically(0);
+	    		excelVar.setColCountAutomatically(0);
+		    	rowCount=excelVar.getRowCount();
+		    	colCount=excelVar.getColCount()+1;
+		    	
+	    	}
 	    	
+	    	else if(source.equals("db")) {
+	    	//	runDbQuery();
+	    	}
 	    	
-	    	totalMod=rowCount%4;
+	    	total= rowCount/sessionCountInt;
+	    	totalMod=rowCount%sessionCountInt;
 	    	totalRows1=total;
 	    	totalRows2=total;
 	    	totalRows3=total;
 	    	totalRows4=total;
+	    	
+	    	
+	    	
+	    	
 	    	System.out.println(totalMod);
 	    	switch(totalMod) {
 	    	case 1:
@@ -178,21 +200,37 @@ public class rerateTestNgSlow {
 	    @DataProvider(name = "data-provider1")
 	    public synchronized Object[][] dataProviderMethod1() { 
 	   	
-    	 
-	
-	    	Object [][] obj = new Object[totalRows1][colCount];
+	    	Object [][] obj=null;
+	    	if (sessionCountInt>=1) {
+	    	
+	    	 obj= new Object[totalRows1][colCount];;
+	    	try {
+	    		String tempString="";
+	    	
 	    	int objCount=0;
-	    	for(int i=1;i<=rowCount;i+=4) {
-	    		for(int j=0;j<colCount;j++) {
-	    			System.out.println(e.getCellData(i, j));
-	    				obj[objCount][j]=e.getCellData(i, j);
+	    	for(int i=1;i<=rowCount;i+=sessionCountInt) {
+	    		for(int j=0;j<colCount-1;j++) {
+	    				if(source.equals("excel")) {
+	    				tempString=excelVar.getCellData(i, j);
+	    				}
+	    				else if (source.equals("db")) {
+	    					tempString=allData[i-1][j];
+	    				}
+	    					if (tempString == null || tempString.equals("null")){
+	    						tempString="";
+	    					}
+	    				obj[objCount][j]=tempString;
 	    			
 	    		}
 	    		obj[objCount][colCount-1]=i;
 	    		objCount++;
+	    	}  	
+	}catch(Exception e) {
+		System.out.println(e);
+	}
 	    	}
-
 	    	return obj;
+	    	
 	    
 	    }
 	    
@@ -206,54 +244,110 @@ public class rerateTestNgSlow {
 	    @DataProvider(name = "data-provider2")
 	    public synchronized Object[][] dataProviderMethod2() { 
 	    
-	  
-	    	 
-	    	Object [][] obj = new Object[totalRows2][colCount];
+	    	Object [][] obj=null;
+	    	if (sessionCountInt>=1) {
+	    	
+	    	 obj= new Object[totalRows1][colCount];;
+	    	try {
+	    		String tempString="";
+	    	
 	    	int objCount=0;
-	    	for(int i=2;i<=rowCount;i+=4) {
-	    		for(int j=0;j<colCount;j++) {
-	    			obj[objCount][j]=e.getCellData(i, j);
+	    	for(int i=1;i<=rowCount;i+=sessionCountInt) {
+	    		for(int j=0;j<colCount-1;j++) {
+	    				if(source.equals("excel")) {
+	    				tempString=excelVar.getCellData(i, j);
+	    				}
+	    				else if (source.equals("db")) {
+	    					tempString=allData[i-1][j];
+	    				}
+	    					if (tempString == null || tempString.equals("null")){
+	    						tempString="";
+	    					}
+	    				obj[objCount][j]=tempString;
+	    			
 	    		}
 	    		obj[objCount][colCount-1]=i;
 	    		objCount++;
+	    	}  	
+	}catch(Exception e) {
+		System.out.println(e);
+	}
 	    	}
-
 	    	return obj;
+	    	
 	    
 	    }
 	    
 	    @DataProvider(name = "data-provider3")
 	    public synchronized Object[][] dataProviderMethod3() { 
-	    
-	    	Object [][] obj = new Object[totalRows3][colCount];
+	    	Object [][] obj=null;
+	    	if (sessionCountInt>=1) {
+	    	
+	    	 obj= new Object[totalRows1][colCount];;
+	    	try {
+	    		String tempString="";
+	    	
 	    	int objCount=0;
-	    	for(int i=3;i<=rowCount;i+=4) {
-	    		for(int j=0;j<colCount;j++) {
-	    			obj[objCount][j]=e.getCellData(i, j);
+	    	for(int i=1;i<=rowCount;i+=sessionCountInt) {
+	    		for(int j=0;j<colCount-1;j++) {
+	    				if(source.equals("excel")) {
+	    				tempString=excelVar.getCellData(i, j);
+	    				}
+	    				else if (source.equals("db")) {
+	    					tempString=allData[i-1][j];
+	    				}
+	    					if (tempString == null || tempString.equals("null")){
+	    						tempString="";
+	    					}
+	    				obj[objCount][j]=tempString;
+	    			
 	    		}
 	    		obj[objCount][colCount-1]=i;
 	    		objCount++;
+	    	}  	
+	}catch(Exception e) {
+		System.out.println(e);
+	}
 	    	}
-
 	    	return obj;
+	    	
 	    
 	    }
 	    
 	    @DataProvider(name = "data-provider4")
 	    public synchronized Object[][] dataProviderMethod4() { 
 	    	
-	    	Object [][] obj = new Object[totalRows4][colCount];
+	    	Object [][] obj=null;
+	    	if (sessionCountInt>=1) {
+	    	
+	    	 obj= new Object[totalRows1][colCount];;
+	    	try {
+	    		String tempString="";
+	    	
 	    	int objCount=0;
-	    	for(int i=4;i<=rowCount;i+=4) {
-	    		for(int j=0;j<colCount;j++) {
-	    			obj[objCount][j]=e.getCellData(i, j);
+	    	for(int i=1;i<=rowCount;i+=sessionCountInt) {
+	    		for(int j=0;j<colCount-1;j++) {
+	    				if(source.equals("excel")) {
+	    				tempString=excelVar.getCellData(i, j);
+	    				}
+	    				else if (source.equals("db")) {
+	    					tempString=allData[i-1][j];
+	    				}
+	    					if (tempString == null || tempString.equals("null")){
+	    						tempString="";
+	    					}
+	    				obj[objCount][j]=tempString;
+	    			
 	    		}
 	    		obj[objCount][colCount-1]=i;
 	    		objCount++;
+	    	}  	
+	}catch(Exception e) {
+		System.out.println(e);
+	}
 	    	}
-
 	    	return obj;
-	    
+	    	
 	    }
 
 	    
@@ -366,7 +460,7 @@ public class rerateTestNgSlow {
 	  public void doWork(WebDriver driver, WebDriverWait wait,Select CEDropDown,Alert alert,Robot r,ArrayList<String> cc1,ArrayList<String> cc2, List<WebElement> comboBoxesHandling, Boolean isChecked,int count,String testInputNbr,String tinCount,String acct1,String acct2,String trkng1,String trkng2,String inv1,String inv2,String service1,String service2,String rerateType,String acctType,String name,int testCounter) {
 	//      Assert.assertTrue(false,"Failed at Login");
 		  String requestId;
-		  driver.get("https://devsso.secure.fedex.com/L2/PRSApps/");
+		  driver.get("https://testsso.secure.fedex.com/L3/PRSApps/");
 		  driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 		  wait = new WebDriverWait( driver,10);
 		  
@@ -416,7 +510,7 @@ public class rerateTestNgSlow {
 
 
 			  //TEST ONLY
-			  level=false;
+			  level="3";
 			  System.out.println("Hello 2");
 			  
 				 //	driver.get(levelUrl);
@@ -436,11 +530,11 @@ public class rerateTestNgSlow {
 				driver.findElement(By.id("submit")).click();
 
 			  
-				if (level==false)
+				if (level.equals("2"))
 				{                                                   
 					driver.get("https://devsso.secure.fedex.com/L2/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10");
 				}
-				else if (level==true)
+				else if (level.equals("3"))
 				{
 					driver.get("https://testsso.secure.fedex.com/L3/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10");
 				}
@@ -452,7 +546,7 @@ public class rerateTestNgSlow {
 				
 				catch(Exception e) {
 					driver.quit();
-					driver.get("testsso.secure.fedex.com/L3/PRSApps/");	
+					driver.get("https://testsso.secure.fedex.com/L3/PRSApps/");	
 					driver.manage().window().maximize();     
 					
 					try {
@@ -465,11 +559,11 @@ public class rerateTestNgSlow {
 					driver.findElement(By.id("username")).sendKeys("477023");
 					driver.findElement(By.id("password")).sendKeys("477023");
 					driver.findElement(By.id("submit")).click();
-					if (level==false)
+					if (level.equals("2"))
 					{                                                   
 						driver.get("https://devsso.secure.fedex.com/L2/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10");
 					}
-					else if (level==true)
+					else if (level.equals("3"))
 					{
 						driver.get("https://testsso.secure.fedex.com/L3/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10");
 					}
@@ -563,8 +657,8 @@ public class rerateTestNgSlow {
 					driver.findElement(By.name("pricingType")).click();
 				}
 				
-				driver.findElement(By.name("beginDate")).sendKeys(d);
-				driver.findElement(By.name("RCDate")).sendKeys(d2);
+				driver.findElement(By.name("beginDate")).sendKeys(startDateText);
+				driver.findElement(By.name("RCDate")).sendKeys(endDateText);
 				driver.findElement(By.name("probDesc")).sendKeys("BST Test");
 				driver.findElement(By.name("qED")).click();
 				driver.findElement(By.id("Next_Down")).click();
@@ -834,7 +928,7 @@ Thread.sleep(2000);
 				driver.switchTo().alert().accept();
 				Thread.sleep(2000);
 				driver.findElement(By.xpath("/html/body/table/tbody/tr/td/form/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr[3]/td/table/tbody/tr[12]/td[2]/font[1]/input")).sendKeys("12/01/2001");
-				driver.findElement(By.xpath("/html/body/table/tbody/tr/td/form/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr[3]/td/table/tbody/tr[13]/td[2]/font[1]/input")).sendKeys(d2);
+				driver.findElement(By.xpath("/html/body/table/tbody/tr/td/form/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr[3]/td/table/tbody/tr[13]/td[2]/font[1]/input")).sendKeys(endDateText);
 				driver.findElement(By.xpath("/html/body/table/tbody/tr/td/form/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr[4]/td/div/input[4]")).click();	
 			}
 			
@@ -911,11 +1005,11 @@ Thread.sleep(2000);
 			try {
 			
 			String requestId;
-			if (level==false)
+			if (level.equals("2"))
 			{
 				driver.get("https://devsso.secure.fedex.com/L2/PRSApps/inbox/inbox_router.jsp?inbox_id=11");
 			}
-			else if (level==true)
+			else if (level.equals("3"))
 			{
 				driver.get("https://testsso.secure.fedex.com/L3/PRSApps/inbox/inbox_router.jsp?inbox_id=11");
 			}
@@ -924,7 +1018,7 @@ Thread.sleep(2000);
 			  
 	
 			
-			
+			Thread.sleep(15000);
 			
 			int count = getRerateId(driver,name,testCounter);
 			driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[1]/input")).get(count-1).click();
@@ -1039,8 +1133,8 @@ Thread.sleep(2000);
 	  
 	public synchronized void writeToExcel(int rowCountExcel,int colCountExcel,String outputString){
 		
-		e.setCellData(rowCountExcel, colCountExcel, outputString);
-		e.writeCellData();
+		excelVar.setCellData(rowCountExcel, colCountExcel, outputString);
+		excelVar.writeCellData();
 	}
 	   
 }

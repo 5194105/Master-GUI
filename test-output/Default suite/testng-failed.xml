@@ -3,29 +3,15 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-<<<<<<< HEAD
-      <class name="testng.testingonly">
-=======
-      <class name="prerate.prerateTestNGSlow">
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+      <class name="rerate.rerateTestNgSlow">
         <methods>
-<<<<<<< HEAD
-          <include name="testMethod3" invocation-numbers="0"/>
-=======
-          <include name="testMethod2"/>
-          <include name="testMethod1"/>
-          <include name="testMethod3"/>
-          <include name="testMethod4"/>
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+          <include name="testMethod2" invocation-numbers="10 17"/>
+          <include name="testMethod" invocation-numbers="8 12 14 17"/>
+          <include name="testMethod4" invocation-numbers="13 16 17"/>
           <include name="setupExcel"/>
-          <include name="testMethod" invocation-numbers="0"/>
-          <include name="testMethod2" invocation-numbers="0"/>
+          <include name="testMethod3" invocation-numbers="1 11 16"/>
         </methods>
-<<<<<<< HEAD
-      </class> <!-- testng.testingonly -->
-=======
-      </class> <!-- prerate.prerateTestNGSlow -->
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+      </class> <!-- rerate.rerateTestNgSlow -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

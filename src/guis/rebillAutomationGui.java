@@ -45,6 +45,7 @@ public class rebillAutomationGui {
      private JLabel excelLabel;
      private JLabel dbLabel;
      private JLabel moreOptionsLabel;
+     JLabel uploadResult;
      JLabel sessionLabel;
      JTextField	sessionTextField;
      gui g;
@@ -89,12 +90,16 @@ public class rebillAutomationGui {
 		
 		moreOptionsLabel = new JLabel("New label");
 		moreOptionsLabel.setBounds(600, 450, 50, 30);
+		
+		uploadResult = new JLabel("New label");
+		uploadResult.setBounds(700, 500, 50, 30);
 
 		
 		excelLabel.setName("excel");
 		dbLabel.setName("db");
 		executeLabel.setName("execute");
 		moreOptionsLabel.setName("moreOptions");
+		uploadResult.setName("uploadResult");
 		
 		
 		
@@ -177,6 +182,7 @@ public class rebillAutomationGui {
 		m.addDb(dbLabel);
 		m.addExecute(executeLabel);
 		m.addMoreOptions(moreOptionsLabel);
+		m.adduploadResult(uploadResult);
 		m.setupBackground();
 		l2RadioButton.addMouseListener(m.m3);
 		l3RadioButton.addMouseListener(m.m3);

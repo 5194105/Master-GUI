@@ -1,32 +1,38 @@
-package prerate;
+package rebill;
 
-import java.util.ArrayList;
+
+import configuration.config;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.testng.TestNG;
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
-import configuration.config;
-import rebill.rebillData;
-import rebill.testngRebillSlowMfRetire;
+public class rebillPlcManualClass {
 
-public class runPrerateManually {
+	 
 
-	static ArrayList<rebillData> rebillDataArray= new ArrayList<rebillData>();
+	
     public static void main(String[] args) {
     	config c = new config();
        	c.setExcelPath("C:\\Users\\FedExUser\\Documents\\rebill.xlsx");
     	c.setLevel("3");
+    	c.setDriverType("2");
     	c.setDriverType("2");
     	c.setCompatibleMode("false");
     	c.setSource("db");
     	c.setAllCheckBox("false");
     	c.setNullCheckBox("true");
     	c.setFailedCheckBox("true");
+  
+		c.setDomesticCheckBox("true");
+		c.setInternationalCheckBox("true");
+		c.setExpressCheckBox("true");
+		c.setGroundCheckBox("false");
+		c.setNormalCheckBox("false");
+		c.setMfRetireCheckBox("false");
 		c.setSessionCount("1");
     	
     	String filepath=c.getExcelPath();
@@ -37,6 +43,12 @@ public class runPrerateManually {
 		String allCheckBox=c.getAllCheckBox();
 		String nullCheckBox=c.getNullCheckBox();
 		String failedCheckBox=c.getFailedCheckBox();
+		String domesticCheckBox=c.getDomesticCheckBox();
+		String internationalCheckBox=c.getInternationalCheckBox();
+		String expressCheckBox=c.getExpressCheckBox();
+		String groundCheckBox=c.getGroundCheckBox();
+		String normalCheckBox=c.getNormalCheckBox();
+		String mfRetireCheckBox=c.getMfRetireCheckBox();
 		String sessionCount=c.getSessionCount();
 		
 		System.out.println("filepath "+filepath);
@@ -47,6 +59,12 @@ public class runPrerateManually {
 		System.out.println("allCheckBox "+allCheckBox);
 		System.out.println("nullCheckBox "+nullCheckBox);
 		System.out.println("failedCheckBox "+failedCheckBox);
+		System.out.println("domesticCheckBox "+domesticCheckBox);
+		System.out.println("internationalCheckBox "+internationalCheckBox);
+		System.out.println("expressCheckBox "+expressCheckBox);
+		System.out.println("groundCheckBox "+groundCheckBox);
+		System.out.println("normalCheckBox "+normalCheckBox);
+		System.out.println("mfRetireCheckBox "+mfRetireCheckBox);
 		System.out.println("sessionCount "+sessionCount);
 		
 		
@@ -71,10 +89,31 @@ public class runPrerateManually {
 		if(failedCheckBox==null) {
 			failedCheckBox="";
 		}
-		
+		if(domesticCheckBox==null) {
+			domesticCheckBox="";
+		}
+		if(internationalCheckBox==null) {
+			internationalCheckBox="";
+		}
+		if(expressCheckBox==null) {
+			expressCheckBox="";
+		}
+		if(groundCheckBox==null) {
+			groundCheckBox="";
+		}
+		if(normalCheckBox==null) {
+			normalCheckBox="";
+		}
+		if(mfRetireCheckBox==null) {
+			mfRetireCheckBox="";
+		}
 		if(sessionCount==null) {
 			sessionCount="";
 		}
+		
+	
+	
+
 		
         XmlSuite xmlSuite = new XmlSuite();
         xmlSuite.setName("Sample_Suite");
@@ -82,18 +121,24 @@ public class runPrerateManually {
         fieldValues.put("filepath", filepath);
         fieldValues.put("level", level);
         fieldValues.put("browser", "2");
-        fieldValues.put("compatibleMode", "");
         fieldValues.put("source", source);
+        fieldValues.put("compatibleMode", "");
         fieldValues.put("allCheckBox", allCheckBox);
         fieldValues.put("nullCheckBox", nullCheckBox);
-        fieldValues.put("failedCheckBox", failedCheckBox); 
+        fieldValues.put("failedCheckBox", failedCheckBox);
+        fieldValues.put("domesticCheckBox", domesticCheckBox);
+        fieldValues.put("internationalCheckBox", internationalCheckBox);
+        fieldValues.put("expressCheckBox", expressCheckBox);
+        fieldValues.put("groundCheckBox", groundCheckBox);
+        fieldValues.put("normalCheckBox", normalCheckBox);
+        fieldValues.put("mfRetireCheckBox",mfRetireCheckBox);
         fieldValues.put("sessionCount",sessionCount);
         
         xmlSuite.setParameters(fieldValues);
         XmlTest xmlTest = new XmlTest(xmlSuite);
         xmlTest.setName("Rebill Test");
         //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
-        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(prerateTestNGSlow.class)));
+        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testngRebillSlowPlc.class)));
         xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
         TestNG tng = new TestNG();
         tng.setXmlSuites(Collections.singletonList(xmlSuite));
@@ -101,3 +146,7 @@ public class runPrerateManually {
         
 	}
 }
+
+
+ 
+

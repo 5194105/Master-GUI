@@ -47,8 +47,10 @@ import prerate.prerateTestNGSlow;
 import rebill.rebillMain;
 import rebill.testngRebillSlow;
 import rebill.testngRebillSlowMfRetire;
+import rebill.updateRebillDb;
 import rebill_troubleshoot.rebillTroubleshoot;
 import rerate.abc;
+import rerate.rerateTestNgSlow;
 import testng.testingonly;
 public class mouse {
 	
@@ -115,7 +117,7 @@ public class mouse {
      String excelPic="excel.png";
      String excelPicSelected="excelSelect.png";
      String moreOptionsPic="moreOptions.png";
-     
+     String uploadResultPic="uploadResultPic.png";
      Boolean excelBoolean=false;
      Boolean databaseBoolean=false;
      
@@ -376,6 +378,28 @@ public void addMoreOptions(JLabel jlabel) {
 }
 
 
+public void adduploadResult(JLabel jlabel) {
+	
+	try {
+	
+	    img = ImageIO.read(new File(imagePath+"\\assets\\"+uploadResultPic));
+		
+	
+
+	} catch (IOException e) {
+	    
+	    e.printStackTrace();
+	}
+		dimg = img.getScaledInstance(jlabel.getWidth(), jlabel.getHeight(),
+	        Image.SCALE_SMOOTH);
+	  imageIcon = new ImageIcon(dimg);
+	  jlabel.setIcon(imageIcon);
+	  
+	  frame.getContentPane().add(jlabel);
+	  jlabel.addMouseListener(m2);
+}
+
+
 
 
 public void addAkshayUDStuff(JLabel unixPath,JTextField unixPathText) {
@@ -606,7 +630,7 @@ public void setupMouseListener() {
 			  {
 					try {
 						mouseLabel = (JLabel)e.getSource();  
-						System.out.println("LABEL NAME : "+mouseLabel.getName());
+						System.out.println("LABEL NAME HERE: "+mouseLabel.getName());
 						
 
 						
@@ -633,7 +657,17 @@ public void setupMouseListener() {
 						}
 							
 							}
-							
+						
+						if (mouseLabel.getName().equals("uploadResult")) {
+							if (obj.getClass().getCanonicalName().equals("guis.rebillAutomationGui")) {
+								if (c.getLevel()==null) {
+									JOptionPane.showMessageDialog(frame, "Must Select A Level");
+								}
+								else {
+									updateRebillDb urd= new updateRebillDb(c);
+								}
+							}
+						}
 						
 						
 						//Save and Close
@@ -854,47 +888,27 @@ public void setupMouseListener() {
 				    				System.out.println("Booleans "+c.getLevel()+"      "+c.getSource());
 				    				
 				    				if(c.getLevel()!=null && c.getSource()!=null) {
-				    				JOptionPane.showMessageDialog(frame, "Started Rerates");
-				    				String filepath=c.getExcelPath();
-				    				String startDateText=c.getStartDate();
-				    				String endDateText=c.getEndDate();
-				    				String level=c.getLevel();
-				    				String broswer=c.getDriverType();
-				    				String compatibleMode=c.getCompatibleMode();
-				    				
-				    			//	c.setStartDate(rag.startDate.getText());
-				    				//c.setEndDate(rag.endDate.getText());
-				    				
-				    				/*
-				    				System.out.println(filepath);
-				    				System.out.println(startDateText);
-				    				System.out.println(endDateText);
-				    				System.out.println(level);
-				    				System.out.println(broswer);
-				    				System.out.println(compatibleMode);
-				    				abc rerate = new abc (filepath, startDateText,endDateText, level, broswer,compatibleMode, c);
-				    				
-				    				*/
-				    				
-				    		        XmlSuite xmlSuite = new XmlSuite();
-				    		        xmlSuite.setName("Sample_Suite");
-				    		        Map<String, String> fieldValues = new HashMap<>();
-				    		        fieldValues.put("filepathExcel", filepath);
-				    		        fieldValues.put("startDateText", startDateText);
-				    		        fieldValues.put("endDateText", endDateText);
-				    		        fieldValues.put("broswer", "true");
-				    		        fieldValues.put("compatibleMode", "false");
-				    		        xmlSuite.setParameters(fieldValues);
-				    		        XmlTest xmlTest = new XmlTest(xmlSuite);
-				    		        xmlTest.setName("Rerate Test");
-				    		        //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
-				    		        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testingonly.class)));
-				    		        xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
-				    		        TestNG tng = new TestNG();
-				    		        tng.setXmlSuites(Collections.singletonList(xmlSuite));
-				    		        tng.run();
-					    			
-				    				}
+				    					  XmlSuite xmlSuite = new XmlSuite();
+				    					    xmlSuite.setName("Sample_Suite");
+				    					    Map<String, String> fieldValues = new HashMap<>();
+				    					    fieldValues.put("filepathExcel", c.getExcelPath());
+				    					    fieldValues.put("startDateText", c.getStartDate());
+				    					    fieldValues.put("endDateText", c.getEndDate());
+				    					    fieldValues.put("broswer", c.getDriverType());
+				    					    fieldValues.put("compatibleMode", c.getCompatibleMode());
+				    					    fieldValues.put("source", c.getSource());
+				    					    fieldValues.put("level", c.getLevel());
+				    					    fieldValues.put("sessionCount", c.getSessionCount());
+				    					    xmlSuite.setParameters(fieldValues);
+				    					    XmlTest xmlTest = new XmlTest(xmlSuite);
+				    					    xmlTest.setName("Rerate Test");
+				    					    //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
+				    					    xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(rerateTestNgSlow.class)));
+				    					    xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
+				    					    TestNG tng = new TestNG();
+				    					    tng.setXmlSuites(Collections.singletonList(xmlSuite));
+				    					    tng.run();
+				    					}
 				    				
 				    				
 					    				}

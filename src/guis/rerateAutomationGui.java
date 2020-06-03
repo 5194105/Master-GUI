@@ -217,10 +217,10 @@ public class rerateAutomationGui {
 		
 		
 		if (checkBox.isSelected()==true) {
-			c.setCompatibleMode(true);
+			c.setCompatibleMode("true");
 		}
 		else if (checkBox.isSelected()==false) {
-			c.setCompatibleMode(false);
+			c.setCompatibleMode("false");
 		}
 
 		
