@@ -49,7 +49,7 @@ public class rebillManualClass {
 		c.setExpressCheckBox("true");
 		c.setGroundCheckBox("false");
 		c.setNormalCheckBox("true");
-		c.setMfRetireCheckBox("false");
+		c.setMfRetireCheckBox("true");
 		c.setSessionCount("1");
     	
     	String filepath=c.getExcelPath();
