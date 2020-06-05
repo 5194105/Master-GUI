@@ -37,7 +37,7 @@ public class rebillManualClass {
        	c.setExcelPath("C:\\Users\\FedExUser\\Documents\\rebill.xlsx");
     	c.setLevel("3");
     	c.setDriverType("2");
-    	c.setDriverType("2");
+    	
     	c.setCompatibleMode("false");
     	c.setSource("db");
     	c.setAllCheckBox("false");

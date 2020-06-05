@@ -38,7 +38,7 @@ import org.testng.annotations.Test;
 import configuration.config;
 import configuration.excel;
 
-public class testngRebillSlow {
+public class testngRebillSlowPlc {
 
 	
 	
@@ -265,13 +265,13 @@ public class testngRebillSlow {
 			e.printStackTrace();
 		}
 		
-    	String databaseSqlCount="select count(*) as total from rebill_regression ";
-    	String databaseSqlQuery="select result, description, test_input_nbr, tin_count, trkngnbr, reason_code, rebill_acct,invoice_nbr_1, invoice_nbr_2, mig, region,  login,   password,  rs_Type, company, worktype, ORIGIN_LOC,DEST_LOC,DIM_VOL,SHIPPER_REF,RECP_ADDRESS,SHIPPER_ADDRESS,ACC_NBR_DEL_STATUS,SVC_BASE, CREDIT_CARD_DTL,PRE_RATE_SCENARIOS,EXP_Pieces,EXP_ACTUAL_Weight,EXP_Adj_Weight,CREDIT_CARD_DTL from rebill_regression ";
+    	String databaseSqlCount="select count(*) as total from rebill_regression_plc ";
+    	String databaseSqlQuery="select  result, description,TEST_ID_PLC,TEST_INPUT_NBR_PLC,TIN_COUNT_PLC,trkngnbr,invoice_nbr_1,invoice_nbr_2,TEST_NAME_PLC,BILL_ACCT_NBR_PLC,PROTECTED_ACCT_PLC,NON_PROTECTED_ACCT_PLC,REBILL_TO_PLC,ACTUAL_WGT_PLC,CUSTOM_WGT_PLC,WGT_TYPE_PLC,HEIGHT_PLC,CUSTOM_LENGHT_PLC,CUSTOM_WIDTH_PLC,SIZE_TYPE_PLC,PMTTYPCD_PLC,SHIPWGT_PLC,PROTECTED_THIRD_ACCT_WGT_PLC,SHIP_LS_PLC,PROTECTED_THIRD_ACCT_LS_PLC,REBILL_COUNTRY_PLC,MISC_PLC,REASON_CODE_PLC,ACTUAL_LENGTH_PLC,login,password,region from rebill_regression_PLC ";
     	
     	
     	if (allCheckBox.equals("false")) {
-    		databaseSqlCount+="where ";
-    		databaseSqlQuery+="where ";
+    		databaseSqlCount+="where workable='Y' and ";
+    		databaseSqlQuery+="where workable='Y' and ";
     	}
     	if (nullCheckBox.equals("true") && failedCheckBox.equals("true")) {
     		databaseSqlCount+="(result is null or result ='fail') ";
@@ -514,9 +514,12 @@ public class testngRebillSlow {
     
     
     @Test(dataProvider="data-provider1",retryAnalyzer = Retry.class)
-    public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt,int rowNumber) {
-     
-    	System.out.println("Instance: 1");
+ //   public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt,int rowNumber) {
+     //TEST_ID_PLC	,TEST_INPUT_NBR_PLC,TIN_COUNT_PLC,trkngnbr,TEST_NAME_PLC,BILL_ACCT_NBR_PLC,PROTECTED_ACCT_PLC,NON_PROTECTED_ACCT_PLC,REBILL_TO_PLC,ACTUAL_WGT_PLC,CUSTOM_WGT_PLC,WGT_TYPE_PLC,HEIGHT_PLC,CUSTOM_LENGHT_PLC,CUSTOM_WIDTH_PLC,SIZE_TYPE_PLC,PMTTYPCD_PLC,SHIPWGT_PLC,PROTECTED_THIRD_ACCT_WGT_PLC,SHIP_LS_PLC,PROTECTED_THIRD_ACCT_LS_PLC,REBILL_COUNTRY_PLC,MISC_PLC,REASON_CODE_PLC,ACTUAL_LENGTH_PLC,login,password,region
+   
+    public void testMethod1(String result, String descripiton,String TEST_ID_PLC,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String testNamePlc,String BILLAcctNbrPlc,String protectedAcctPlc,String protectedNonAcctPlc,String rebillAccount,String expActualWeight ,String customweight ,String weightTypePlc,String heightPlc ,String customLengthPlc ,String customwidthPlc,String sizeTypePlc,String pmtTypeCd,String shipWgtPlc,String protectedThirdAcctWgtPlc,String ShipLsPlc,String protectedThirdAcctLsPlc,String rebillCountryPlc,String miscPlc,String reasonCode,String actualLengthPlc,String login,String password,String region,int rowNumber) {
+        
+    System.out.println("Instance: 1");
     	
     	System.out.println(result);
     	System.out.println(descripiton);
@@ -527,27 +530,12 @@ public class testngRebillSlow {
     	System.out.println(rebillAccount);
     	System.out.println(invoiceNbr1);
     	System.out.println(invoiceNbr2);
-    	System.out.println(mig);
+    	
     	System.out.println(region);
     	System.out.println(login);
     	System.out.println(password);
-    	System.out.println(rsType);
-    	System.out.println(company);
-    	System.out.println(worktype);
-    	System.out.println(originLoc);
-    	System.out.println(destLoc);
-    	System.out.println(dimVol);
-    	System.out.println(shipperRef);
-    	System.out.println(recpAddress);
-    	System.out.println(shipperAddress);
-    	System.out.println(acctNbrDelStatus);
-    	System.out.println(svcBase);
-    	System.out.println(creditCardDtl);
-    	System.out.println(preRateScenarios);
-    	System.out.println(expPieces);
-    	System.out.println(expActualWeight);
-    	System.out.println(expAdjWeight);
-    	System.out.println(creditCardDt);
+    	
+    	
     	System.out.println(rowNumber);
     	
     	//Will Check if Trk is already successful;
@@ -563,7 +551,7 @@ public class testngRebillSlow {
        	 }
        	 writeToDB(testInputNbr,tinCount,trk,resultArray);
        	 
-       	 	writeToDB(testInputNbr,tinCount,trk,resultArray);
+       	 	
        	 return;
   	  
   	  }
@@ -605,9 +593,8 @@ public class testngRebillSlow {
 	  
 	    try {
 	    	
-	    
-	        
-			doRebill(driver1,wait1, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber, originLoc, destLoc, dimVol, shipperRef, recpAddress, shipperAddress, acctNbrDelStatus, svcBase,  creditCardDtl, preRateScenarios, expPieces, expActualWeight, expAdjWeight, creditCardDt,1);
+	       
+			doRebill(driver1,wait1,  result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2, testNamePlc, BILLAcctNbrPlc, protectedAcctPlc, protectedNonAcctPlc, rebillAccount, expActualWeight , customweight , weightTypePlc, heightPlc , customLengthPlc , customwidthPlc, sizeTypePlc, pmtTypeCd, shipWgtPlc, protectedThirdAcctWgtPlc, ShipLsPlc, protectedThirdAcctLsPlc, rebillCountryPlc, miscPlc, reasonCode, actualLengthPlc, login, password, region,rowNumber,1);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -618,7 +605,7 @@ public class testngRebillSlow {
     }
    
     @Test(dataProvider="data-provider2",retryAnalyzer = Retry.class)
-    public void testMethod2( String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt,int rowNumber) {
+    public void testMethod2( String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String testNamePlc,String BILLAcctNbrPlc,String protectedAcctPlc,String protectedNonAcctPlc,String rebillAccount,String expActualWeight ,String customweight ,String weightTypePlc,String heightPlc ,String customLengthPlc ,String customwidthPlc,String sizeTypePlc,String pmtTypeCd,String shipWgtPlc,String protectedThirdAcctWgtPlc,String ShipLsPlc,String protectedThirdAcctLsPlc,String rebillCountryPlc,String miscPlc,String reasonCode,String actualLengthPlc,String login,String password,String region,int rowNumber) {
      
     	System.out.println("Instance: 2");
     	readTrk(trk);
@@ -676,7 +663,7 @@ public class testngRebillSlow {
     	 wait2 = new WebDriverWait(driver2,20);
     	login(driver2,wait2,login,password);
 	    try {
-	    	doRebill(driver2,wait2, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber, originLoc, destLoc, dimVol, shipperRef, recpAddress, shipperAddress, acctNbrDelStatus, svcBase,  creditCardDtl, preRateScenarios, expPieces, expActualWeight, expAdjWeight, creditCardDt,2);
+	    	doRebill(driver2,wait2, result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2, testNamePlc, BILLAcctNbrPlc, protectedAcctPlc, protectedNonAcctPlc, rebillAccount, expActualWeight , customweight , weightTypePlc, heightPlc , customLengthPlc , customwidthPlc, sizeTypePlc, pmtTypeCd, shipWgtPlc, protectedThirdAcctWgtPlc, ShipLsPlc, protectedThirdAcctLsPlc, rebillCountryPlc, miscPlc, reasonCode, actualLengthPlc, login, password, region,rowNumber,2);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -686,7 +673,7 @@ public class testngRebillSlow {
     
     }
     @Test(dataProvider="data-provider3",retryAnalyzer = Retry.class)
-    public void testMethod3( String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt,int rowNumber) {
+    public void testMethod3( String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String testNamePlc,String BILLAcctNbrPlc,String protectedAcctPlc,String protectedNonAcctPlc,String rebillAccount,String expActualWeight ,String customweight ,String weightTypePlc,String heightPlc ,String customLengthPlc ,String customwidthPlc,String sizeTypePlc,String pmtTypeCd,String shipWgtPlc,String protectedThirdAcctWgtPlc,String ShipLsPlc,String protectedThirdAcctLsPlc,String rebillCountryPlc,String miscPlc,String reasonCode,String actualLengthPlc,String login,String password,String region,int rowNumber) {
     	System.out.println("Instance: 3");
     	readTrk(trk);
     	
@@ -743,7 +730,7 @@ public class testngRebillSlow {
     	 wait3 = new WebDriverWait(driver3,20);
     login(driver3,wait3,login,password);
     try {
-    	doRebill(driver3,wait3, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber, originLoc, destLoc, dimVol, shipperRef, recpAddress, shipperAddress, acctNbrDelStatus, svcBase,  creditCardDtl, preRateScenarios, expPieces, expActualWeight, expAdjWeight, creditCardDt,3);
+    	doRebill(driver3,wait3, result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2, testNamePlc, BILLAcctNbrPlc, protectedAcctPlc, protectedNonAcctPlc, rebillAccount, expActualWeight , customweight , weightTypePlc, heightPlc , customLengthPlc , customwidthPlc, sizeTypePlc, pmtTypeCd, shipWgtPlc, protectedThirdAcctWgtPlc, ShipLsPlc, protectedThirdAcctLsPlc, rebillCountryPlc, miscPlc, reasonCode, actualLengthPlc, login, password, region,rowNumber,3);
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -758,7 +745,7 @@ public class testngRebillSlow {
     
     
     @Test(dataProvider="data-provider4",retryAnalyzer = Retry.class)
-    public void testMethod4(String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt,int rowNumber) {
+    public void testMethod4(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String testNamePlc,String BILLAcctNbrPlc,String protectedAcctPlc,String protectedNonAcctPlc,String rebillAccount,String expActualWeight ,String customweight ,String weightTypePlc,String heightPlc ,String customLengthPlc ,String customwidthPlc,String sizeTypePlc,String pmtTypeCd,String shipWgtPlc,String protectedThirdAcctWgtPlc,String ShipLsPlc,String protectedThirdAcctLsPlc,String rebillCountryPlc,String miscPlc,String reasonCode,String actualLengthPlc,String login,String password,String region,int rowNumber) {
     	System.out.println("Instance: 4");
     	//Will Check if Trk is already successful;
     	readTrk(trk);
@@ -814,7 +801,7 @@ public class testngRebillSlow {
     	 wait4 = new WebDriverWait(driver4,20);
     login(driver4,wait4,login,password);
     try {
-    	doRebill(driver4,wait4, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber, originLoc, destLoc, dimVol, shipperRef, recpAddress, shipperAddress, acctNbrDelStatus, svcBase,  creditCardDtl, preRateScenarios, expPieces, expActualWeight, expAdjWeight, creditCardDt,4);
+    	doRebill(driver4,wait4, result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2, testNamePlc, BILLAcctNbrPlc, protectedAcctPlc, protectedNonAcctPlc, rebillAccount, expActualWeight , customweight , weightTypePlc, heightPlc , customLengthPlc , customwidthPlc, sizeTypePlc, pmtTypeCd, shipWgtPlc, protectedThirdAcctWgtPlc, ShipLsPlc, protectedThirdAcctLsPlc, rebillCountryPlc, miscPlc, reasonCode, actualLengthPlc, login, password, region,rowNumber,4);
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -842,7 +829,7 @@ public class testngRebillSlow {
     }
     
     
-    public void doRebill(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt, int instanceNumber) throws InterruptedException {
+    public void doRebill(WebDriver driver,WebDriverWait wait,String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String testNamePlc,String BILLAcctNbrPlc,String protectedAcctPlc,String protectedNonAcctPlc,String rebillAccount,String expActualWeight ,String customweight ,String weightTypePlc,String heightPlc ,String customLengthPlc ,String customwidthPlc,String sizeTypePlc,String pmtTypeCd,String shipWgtPlc,String protectedThirdAcctWgtPlc,String ShipLsPlc,String protectedThirdAcctLsPlc,String rebillCountryPlc,String miscPlc,String reasonCode,String actualLengthPlc,String login,String password,String region, int rowNumber,int instanceNumber) throws InterruptedException {
     
     	JavascriptExecutor js= (JavascriptExecutor) driver;
     	By tempElement;
@@ -852,6 +839,44 @@ public class testngRebillSlow {
     	Boolean packageTab=false;
     	wait=new WebDriverWait(driver,20);
     	driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+    	
+    	
+    	
+    	
+    		System.out.println(result);
+    		System.out.println(descripiton);
+    		System.out.println(testInputNbr);
+    		System.out.println(tinCount);
+    		System.out.println(trk);
+    		System.out.println(invoiceNbr1);
+    		System.out.println(invoiceNbr2);
+    		System.out.println(testNamePlc);
+    		System.out.println(BILLAcctNbrPlc);
+    		System.out.println(protectedAcctPlc);
+    		System.out.println(protectedNonAcctPlc);
+    		System.out.println(rebillAccount);
+    		System.out.println(expActualWeight);
+    		System.out.println(customweight);
+    		System.out.println(weightTypePlc);
+    		System.out.println(heightPlc);
+    		System.out.println(customLengthPlc);
+    		System.out.println(customwidthPlc);
+    		System.out.println(sizeTypePlc);
+    		System.out.println(pmtTypeCd);
+    		System.out.println(shipWgtPlc);
+    		System.out.println(protectedThirdAcctWgtPlc);
+    		System.out.println(protectedThirdAcctLsPlc);
+    		System.out.println(rebillCountryPlc);
+    		System.out.println(miscPlc);
+    		System.out.println(reasonCode);
+    		System.out.println(actualLengthPlc);
+    		System.out.println(login);
+    		System.out.println(region);
+    
+    	
+    	
+    	
+    	/*
     	if(!preRateScenarios.equals("")) {
     		 if(source.equals("excel")) {
 	               	 writeToExcel(rowNumber, 0,"fail");
@@ -865,7 +890,7 @@ public class testngRebillSlow {
                     	 }
     	return;	
     	}
-    	
+    	*/
     	
     	
     	try {
@@ -1274,23 +1299,107 @@ public class testngRebillSlow {
 
              
              System.out.println("MF TEST");
+             
+             
+             /*
+expActualWeight = /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[7]/div[4]/input
+customweight = /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[2]/div[2]/input
+weightTypePlc -- LB = /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[3]/div[1]/label[1]/input
+weightTypePlc -- KG = /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[3]/div[1]/label[2]/input
+heightPlc = /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[3]/input
+customLengthPlc = /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[1]/input
+customwidthPlc = /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[2]/input
+sizeTypePlc -- IN = /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[10]/div/label[1]/input
+sizeTypePlc -- CM = /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[10]/div/label[2]/input
+pmtTypeCd = ?
+shipWgtPlc = /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[2]/div[2]/input
+protectedThirdAcctWgtPlc = /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[2]/div[2]/input
+ShipLsPlc  = NO ACTION
+protectedThirdAcctLsPlc = /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[1]/input
+rebillCountryPlc  = ?
+miscPlc  = ? 
+actualLengthPlc  = NO ACTION
+              */
+             
+             
+             //No Need to change actual weight?
+             /*
+             if (!expActualWeight.equals("")) {
+            	 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[7]/div[4]/input")).clear();
+         		 
+            	 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[7]/div[4]/input")).sendKeys(expActualWeight);
+     		 
+     	 }
+             
+             
+             
+             if (!customweight.equals("")) {
+     		 	driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[2]/div[2]/input")).clear();
+     			driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[2]/div[2]/input")).sendKeys(customweight);
+        		 
+     	 }
+             
+             if (!weightTypePlc.equals("")) {
+     		 	if (weightTypePlc.equals("LBS")) {
+     		 		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[3]/div[1]/label[2]/span	")).click();
+     		 	}
+     		 	else if (weightTypePlc.equals("KG")) {
+     	     		 		// driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[3]/div[1]/label[1]/input")).click();
+     		 				driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[3]/div[1]/label[2]/span	")).click();
+     		 								 
+     		 	}
+             }
+ 
+             
+             if (!heightPlc.equals("")) {
+     		 	driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[3]/input")).clear();
+     		 	driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[3]/input")).sendKeys(heightPlc);
+        		 
+     	 }
+             if (!customLengthPlc.equals("")) {
+     		 	driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[1]/input")).clear();
+     		 	driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[1]/input")).sendKeys(customLengthPlc);
+        		 
+     	 }
+             if (!customwidthPlc.equals("")) {
+     		 	driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[2]/input")).clear();
+     		 	driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[2]/input")).sendKeys(customwidthPlc);
+        		 
+     	 }
+             
+             if (!sizeTypePlc.equals("")) {
+      		 	if (weightTypePlc.equals("IN")) {
+      		 		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[10]/div/label[1]/span")).click();
+      		 	}
+      		 	else if (sizeTypePlc.equals("CM")) {
+      	     		 		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[10]/div/label[2]/span")).click();
+      	     		 	}
+              }
+             
+             
+             if (!shipWgtPlc.equals("")) {
+     		 	driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[2]/div[2]/input")).clear();
+     		 	driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[2]/div[2]/input")).sendKeys(shipWgtPlc);
+        		 
+     	 }
+     	 
+             if (!protectedThirdAcctWgtPlc.equals("")) {
+     		 	driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[2]/div[2]/input")).clear();
+     		 	driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[2]/div[2]/input")).sendKeys(protectedThirdAcctWgtPlc);
+        		 
+     	 }
+             if (!protectedThirdAcctLsPlc.equals("")) {
+     		 	driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[1]/input")).clear();
+     		 	driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[1]/input")).sendKeys(protectedThirdAcctLsPlc);
+        		 
+     	 }
+             */
+             
+             
+             /*
              if(worktype.equals("MFRETIRE")) {
-           /*
-            	 String originLoc,
-            	 String destLoc,
-            	 String dimVol,
-            	 String shipperRef,
-            	 String recpAddress,
-            	 String shipperAddress,
-            	 String acctNbrDelStatus,
-            	 String svcBase, 
-            	 String creditCardDtl,
-            	 String preRateScenarios,
-            	 String expPieces,
-            	 String expActualWeight,
-            	 String expAdjWeight,
-            	 String creditCardDt,
-            	 */
+          
+          
             	 
             	
             	 if (!preRateScenarios.equals("")) {
@@ -1344,6 +1453,7 @@ public class testngRebillSlow {
             		 driver.findElement(By.xpath("//*[@id=\"exp_date\"]")).sendKeys(creditCardDt);
             	 }
              }
+             */
              Thread.sleep(2000);
              	driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")).click();
              	Thread.sleep(15000);
@@ -1478,13 +1588,13 @@ public class testngRebillSlow {
 
     	try {
         //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
-    	stmt=GTMcon.prepareStatement("insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values (?,?,?,?,?)");  
+    	stmt=GTMcon.prepareStatement("insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description,era_rebill_plc) values (?,?,?,?,?,?)");  
 		stmt.setString(1,testInputNbr);  
 		stmt.setString(2,tinCount);  
 		stmt.setString(3,trk);  
 		stmt.setString(4,resultArray[0]);  
 		stmt.setString(5,resultArray[1]);  
-	
+		stmt.setString(6,"Y"); 
 		stmt.executeUpdate();
     	}
     	catch(Exception e) {
