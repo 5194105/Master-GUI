@@ -22,7 +22,7 @@ public class rerateManualTest {
 	config c = new config();
    	c.setExcelPath("C:\\Users\\FedExUser\\Documents\\rebill.xlsx");
 	c.setLevel("3");
-	c.setDriverType("1");
+	c.setDriverType("3");
 	c.setCompatibleMode("true");
 	c.setSource("db");
 	c.setAllCheckBox("false");

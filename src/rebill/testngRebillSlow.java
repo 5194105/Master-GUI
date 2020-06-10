@@ -24,7 +24,10 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -595,11 +598,32 @@ public class testngRebillSlow {
     		System.setProperty(ieSetProperty, ieDriverPath);
     		driver1 =  new InternetExplorerDriver();
     	}
+    	
+    	
     	else if (browser.equals("2")) {
     	 
     		System.setProperty(chromeSetProperty,chromePath);
     		driver1 = new ChromeDriver();
     	}
+    	
+    	
+    	else if (browser.equals("3")) {
+       	 
+    		
+        	
+        	FirefoxProfile profile = new FirefoxProfile(); 
+        	profile.setPreference("capability.policy.default.Window.QueryInterface", "allAccess");
+        	profile.setPreference("capability.policy.default.Window.frameElement.get","allAccess");
+        	profile.setAcceptUntrustedCertificates(true); profile.setAssumeUntrustedCertificateIssuer(true);
+        	DesiredCapabilities capabilities = new DesiredCapabilities(); 
+        	capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+        	System.setProperty("webdriver.gecko.driver",  homePath+"\\drivers\\geckodriver.exe");
+        	driver1 = new FirefoxDriver(capabilities);
+    	}
+    	
+    	
+    	
+    	
     	wait1 = new WebDriverWait(driver1,20);
 	    login(driver1,wait1,login,password);
 	  

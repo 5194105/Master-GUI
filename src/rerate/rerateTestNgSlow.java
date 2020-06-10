@@ -35,7 +35,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -522,6 +525,19 @@ public class rerateTestNgSlow {
 	    		System.setProperty(chromeSetProperty,chromePath);
 	    		driver1 = new ChromeDriver();
 	    	}
+	     	else if (browser.equals("3")) {
+	         	 
+	    		
+	        	
+	        	FirefoxProfile profile = new FirefoxProfile(); 
+	        	profile.setPreference("capability.policy.default.Window.QueryInterface", "allAccess");
+	        	profile.setPreference("capability.policy.default.Window.frameElement.get","allAccess");
+	        	profile.setAcceptUntrustedCertificates(true); profile.setAssumeUntrustedCertificateIssuer(true);
+	        	DesiredCapabilities capabilities = new DesiredCapabilities(); 
+	        	capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+	        	System.setProperty("webdriver.gecko.driver",  homePath+"\\drivers\\geckodriver.exe");
+	        	driver1 = new FirefoxDriver(capabilities);
+	    	}
   	    
   	 
 
@@ -567,7 +583,7 @@ public class rerateTestNgSlow {
 		System.setProperty(chromeSetProperty,chromePath);
 		driver2 = new ChromeDriver();
 	}
-  	    
+
   	    
  
 			System.out.println("Hello 2");
@@ -710,12 +726,7 @@ public class rerateTestNgSlow {
 		  		wait = new WebDriverWait( driver,10);
 		  		driver.manage().window().maximize();     
 				
-				try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				
 			//	/html/body/div/div/form/div/div[1]/fieldset/label[1]/input
 				driver.findElement(By.id("username")).sendKeys("477023");
 				driver.findElement(By.id("password")).sendKeys("477023");
@@ -1182,7 +1193,7 @@ Thread.sleep(2000);
 					}
 				}
 
-			Thread.sleep(15000);
+			
 			
 
 			
@@ -1230,8 +1241,8 @@ Thread.sleep(2000);
 			
 			  
 	
+			wait = new WebDriverWait( driver,30);
 			
-			Thread.sleep(30000);
 			
 			count = getRerateId(driver,name,testCounter);
 			driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[1]/input")).get(count-1).click();
@@ -1240,6 +1251,7 @@ Thread.sleep(2000);
 			Thread.sleep(1000);
 			driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]")).get(count-1).click();
 			Thread.sleep(2000);
+			wait = new WebDriverWait( driver,10);
 			driver.findElement(By.xpath("//input[@name='pa_actn_cd']/following-sibling::input[1]")).click();
 			Select dr1 = new Select(driver.findElement(By.name("root_cause")));
 			dr1.selectByVisibleText("Sales Caused");
@@ -1257,6 +1269,7 @@ Thread.sleep(2000);
 			driver.findElement(By.name("RV01")).sendKeys("0000");
 			Select dr7 = new Select(driver.findElement(By.name("prc_exp_grnd_ind")));
 			Thread.sleep(3000);
+			
 			if(express==true) {
 				dr7.selectByValue("E");
 				
