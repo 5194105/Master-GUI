@@ -29,6 +29,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -187,7 +188,7 @@ public class rerateTestNgSlow {
 	    		excelVar.setRowCountAutomatically(0);
 	    		excelVar.setColCountAutomatically(0);
 		    	rowCount=excelVar.getRowCount();
-		    	colCount=excelVar.getColCount()+1;
+		    	colCount=excelVar.getColCount()-1;
 		    	
 	    	}
 	    	
@@ -295,7 +296,7 @@ public class rerateTestNgSlow {
 	    	
 
 	       	try {
-	            //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
+	            //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015Â Â  : Â  A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
 	        		
 	        		stmt = GTMcon.createStatement();
 	        		System.out.println(databaseSqlCount);
@@ -500,20 +501,22 @@ public class rerateTestNgSlow {
 	        
 		  
 		  if (browser.equals("1")) {
-	    		/*
+			  DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
 			  if (compatibleMode.equals("true")) {	
-	    			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+	    			
 	    		    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
 	    		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
 	    		    capabilities.setCapability("ignoreZoomSetting", true);
 	    		    capabilities.setCapability("ignoreProtectedModeSettings", true);
 	    		    capabilities.setCapability("initialBrowserUrl",levelUrl);
+	    		   // capabilities.setCapability("nativeEvents",false);
+	    		 
 	    		}
-	    		*/
+	    		
 	    	//System.setProperty(ieSetProperty, ieDriverPath);
-	    		System.setProperty("webdriver.ie.driver", "C:\\Users\\FedExUser\\git\\MasterGUI\\drivers\\IEDriverServer2.exe");
+	    		System.setProperty("webdriver.ie.driver", homePath+"\\drivers\\IEDriverServer.exe");
 	    		try {
-	    		driver1 =  new InternetExplorerDriver();
+	    		driver1 =  new InternetExplorerDriver(capabilities);
 	    		
 	    		}
 	    		catch(Exception e) {
@@ -721,7 +724,8 @@ public class rerateTestNgSlow {
 	  public void login(WebDriver driver,WebDriverWait wait) {
 
 		  try {
-				driver.get(levelUrl);
+
+			  driver.get(levelUrl);
 		  		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 		  		wait = new WebDriverWait( driver,10);
 		  		driver.manage().window().maximize();     
@@ -1140,7 +1144,9 @@ Thread.sleep(2000);
 			//Date Range
 			if (rerateType.equals("Date Range")) {
 				Thread.sleep(2000);
-				driver.findElement(By.xpath("//*[@name='accType'][@value='A']")).click();
+				driver.findElement(By.xpath("/html/body/table/tbody/tr/td/form/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr[3]/td/table/tbody/tr[7]/td/font/input")).click();
+				
+				//driver.findElement(By.xpath("//*[@name='accType'][@value='A']")).click();
 				driver.switchTo().alert().accept();
 				Thread.sleep(2000);
 				driver.findElement(By.xpath("/html/body/table/tbody/tr/td/form/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr[3]/td/table/tbody/tr[12]/td[2]/font[1]/input")).sendKeys("12/01/2001");
@@ -1241,12 +1247,35 @@ Thread.sleep(2000);
 			
 			  
 	
-			wait = new WebDriverWait( driver,30);
+			wait = new WebDriverWait( driver,60);
 			
 			
 			count = getRerateId(driver,name,testCounter);
-			driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[1]/input")).get(count-1).click();
+			JavascriptExecutor js = ((JavascriptExecutor) driver);
+			js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 			Thread.sleep(1000);
+			
+			//driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[1]/input")).get(count-1).sendKeys(r.keyPress(KeyEvent.VK_ENTER));
+			driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[1]/input")).get(count-1).click();
+			int counter=0;
+			
+			//added this code because IE SUCKS!!!!!!
+			while (true) {
+				if (counter==10){
+					break;
+				}
+				if (driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[1]/input")).get(count-1).isSelected()==true) {
+					break;
+				}
+					else {
+						driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[1]/input")).get(count-1).click();
+						
+					}
+				}
+			
+			
+			
+				Thread.sleep(1000);
 			driver.findElement(By.name("btnAcceptTask")).click();
 			Thread.sleep(1000);
 			driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]")).get(count-1).click();
@@ -1399,10 +1428,13 @@ Thread.sleep(2000);
 	public synchronized int getRerateId(WebDriver driver, String name,int testCounter) {
 		int count;
 		String requestId;
+		//System.out.println()
 		driver.findElement(By.xpath("//a[contains(text(),'"+name+"')]")).getText();
 		count = driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]")).size();
 		requestId = driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[3]/font")).get(count-1).getText();
+		 if(source.equals("excel")) {
 		writeToExcel(testCounter,13,requestId);
+		 }
 		return count;
 		
 	}
@@ -1430,7 +1462,7 @@ Thread.sleep(2000);
 	    	
 
 	    	try {
-	        //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
+	        //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015Â Â  : Â  A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
 	    	stmt=GTMcon.prepareStatement("insert into rerate_results (test_input_nbr,tin_count,trkngnbr,request_id,result,description) values (?,?,?,?,?,?)");  
 			stmt.setString(1,testInputNbr);  
 			stmt.setString(2,tinCount);  
@@ -1447,7 +1479,7 @@ Thread.sleep(2000);
 	    	
 	    	
 	    	try {
-			//	update gtm_rev_tools.rebill_results set result='fail',description='6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables' where trkngnbr='566166113544';
+			//	update gtm_rev_tools.rebill_results set result='fail',description='6015Â Â  : Â  A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables' where trkngnbr='566166113544';
 			stmt=GTMcon.prepareStatement("update rerate_results set result=?,description=? where trkngnbr=?");  
 			
 			stmt.setString(1,resultArray[0]);  

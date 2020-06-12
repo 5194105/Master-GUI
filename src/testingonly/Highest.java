@@ -50,19 +50,18 @@ public class Highest {
 	    capabilities.setCapability("ignoreZoomSetting", true);
 	    capabilities.setCapability("ignoreProtectedModeSettings", true);
 	    capabilities.setCapability("initialBrowserUrl","https://testsso.secure.fedex.com/L3/PRSApps");
-	   	InternetExplorerOptions io = new InternetExplorerOptions(capabilities);
-    	System.setProperty("webdriver.ie.driver", "C:\\Users\\FedExUser\\git\\MasterGUI\\drivers\\IEDriverServer2.exe");
+	    
+    	System.setProperty("webdriver.ie.driver", "C:\\Users\\FedExUser\\git\\MasterGUI\\drivers\\IEDriverServer.exe");
     	
-    	WebDriver driver =  new InternetExplorerDriver(io);
+    	WebDriver driver =  new InternetExplorerDriver(capabilities);
     	
     	driver.get("https://testsso.secure.fedex.com/L3/PRSApps");
     	
     	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
   	  	driver.manage().window().maximize();     
 		
-  
-	 
-
+	
+	//	/html/body/div/div/form/div/div[1]/fieldset/label[1]/input
 		driver.findElement(By.id("username")).sendKeys("477023");
 		driver.findElement(By.id("password")).sendKeys("477023");
 		driver.findElement(By.id("submit")).click();

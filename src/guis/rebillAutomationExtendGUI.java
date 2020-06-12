@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 
 import configuration.config;
 import configuration.mouse;
@@ -31,6 +32,9 @@ public class rebillAutomationExtendGUI {
 	private JLabel functionLabel;
 	private JLabel normalLabel;
 	private JLabel mfRetireLabel;
+	private JLabel tipLabel;
+	
+	JTextField	customQueryTextField;
 
     config c;
     Boolean checkList=true;
@@ -64,18 +68,38 @@ public class rebillAutomationExtendGUI {
 		
 		
 		saveAndCLose =new JButton("Save and Close");  
-		saveAndCLose.setBounds(450, 550, 284, 41);  
+		saveAndCLose.setBounds(425, 550, 200, 41);  
 		frame.getContentPane().add(saveAndCLose);
 		
 		
 		
-		functionLabel = new JLabel("Work Type");
-		functionLabel.setBounds(300, 440, 150, 31);
+		functionLabel = new JLabel("Custom Query: ");
+		functionLabel.setBounds(300, 440, 200, 31);
 		functionLabel.setForeground(Color.WHITE);
 		functionLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
 		frame.getContentPane().add(functionLabel);
 		
+		JCheckBox customBox = new JCheckBox("");
+		customBox.setBounds(475, 443, 27, 29);
+		customBox.setOpaque(false);
+		frame.getContentPane().add(customBox);
 		
+		
+		
+		
+		tipLabel = new JLabel("* Enter Where Clause Only. Example: test_input_nbr='12345' *");
+		tipLabel.setBounds(300, 470, 500, 31);
+		tipLabel.setForeground(Color.WHITE);
+		tipLabel.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		frame.getContentPane().add(tipLabel);
+		
+		customQueryTextField= new JTextField(2);
+		customQueryTextField.setText("");
+		customQueryTextField.setBounds(300, 500, 500, 20);
+		frame.getContentPane().add(customQueryTextField);
+		
+		
+		/*
 		normalLabel = new JLabel("Normal:");
 		normalLabel.setBounds(300, 480, 110, 31);
 		normalLabel.setForeground(Color.WHITE);
@@ -87,10 +111,11 @@ public class rebillAutomationExtendGUI {
 		mfRetireLabel.setForeground(Color.WHITE);
 		mfRetireLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
 		frame.getContentPane().add(mfRetireLabel);
+		*/
 		
 		
 		
-		
+		/*
 		JCheckBox normalBox = new JCheckBox("");
 		normalBox.setBounds(415, 480, 27, 29);
 		normalBox.setOpaque(false);
@@ -101,10 +126,10 @@ public class rebillAutomationExtendGUI {
 		mfRetireBox.setOpaque(false);
 		frame.getContentPane().add(mfRetireBox);
 		
-	
+	*/
 		
 		
-		statusLabel = new JLabel("Status");
+		statusLabel = new JLabel("<HTML><U>Status<HTML><U>");
 		statusLabel.setBounds(300, 280, 78, 31);
 		statusLabel.setForeground(Color.WHITE);
 		statusLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
@@ -131,7 +156,7 @@ public class rebillAutomationExtendGUI {
 		
 		
 		
-		flavorLabel = new JLabel("Flavor");
+		flavorLabel = new JLabel("<HTML><U>Flavor<HTML><U>");
 		flavorLabel.setBounds(600, 280, 100, 31);
 		flavorLabel.setForeground(Color.WHITE);
 		flavorLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
@@ -297,22 +322,24 @@ public class rebillAutomationExtendGUI {
 	    	  
 	    	  
 	    	  
-	    	  if (normalBox.isSelected()) {
-	    		  c.setNormalCheckBox("true");
+	    	  if (customBox.isSelected()) {
+	    		  c.setCustomCheckBox("true");
+	    		  c.setCustomString(customBox.getText());
 	    	  }
-	    	  else if(!normalBox.isSelected()){
-	    		  c.setNormalCheckBox("false");
+	    	  else if(!customBox.isSelected()){
+	    		  c.setCustomCheckBox("false");
+	    		  c.setCustomString("");
 	    	  }
 	    	  
 	    	  
-	    	  
+	    	  /*
 	    	  if (mfRetireBox.isSelected()) {
 	    		  c.setMfRetireCheckBox("true");
 	    	  }
 	    	  else if(!mfRetireBox.isSelected()){
 	    		  c.setMfRetireCheckBox("false");
 	    	  }
-	    	  
+	    	  */
 	    	  String errorList="";
 	    	  if (allBox.isSelected()==true && (nullBox.isSelected()==true || failedBox.isSelected()==true)) {
 	    		  checkList=false;
@@ -332,7 +359,7 @@ public class rebillAutomationExtendGUI {
 	    		  System.out.println("Must Select a Flavor");
 		    	  
 	    	  }
-    		 
+    		 /*
 	    	  
 	    	  if (mfRetireBox.isSelected()==false && normalBox.isSelected()==false) {
 	    		  checkList=false;
@@ -340,7 +367,7 @@ public class rebillAutomationExtendGUI {
 	    		  System.out.println("Must Select a Function");
 		    	  
 	    	  }
-	    	  
+	    	  */
 	    	  if (checkList==true) {
 	    		  frame.setVisible(false);
 	    	  }

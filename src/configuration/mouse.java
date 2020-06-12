@@ -121,8 +121,11 @@ public class mouse {
      String uploadResultPic="uploadResultPic.png";
      Boolean excelBoolean=false;
      Boolean databaseBoolean=false;
+     Boolean ieBoolean=false;
+     Boolean firefoxBoolean=false;
+     Boolean chromeBoolean=false;
      
-     Boolean c1=false,c2=false;
+     Boolean c1=false,c2=false,b1=false,b2=false,b3=false;;
    
     
      String selectionBar="selectionbar.png";
@@ -138,8 +141,15 @@ public class mouse {
      String datapopPicHighlight="datapopHighlight.png";
      String udPicHighlight="udHighlight.png";
      String preratePicHighlight="prerateHighlight.png";
+     String iePic="ie.png";
+     String iePicSelected="ieselected.png";
+     String firefoxPic="firefox.png";
+     String firefoxPicSelected="firefoxselected.png";
+     String chromePic="chrome.png";
+     String chromePicSelected="chromeselected.png";
+   
      
-     JLabel jLabelExcel,jLabelDatabase;
+     JLabel jLabelExcel,jLabelDatabase,jLabelIe,jLabelFirefox,jLabelChrome;
      
 
      String backgroundPic="default_template.png";
@@ -334,6 +344,123 @@ public void addDb(JLabel jlabel) {
 	  }
 	  
 }
+
+
+
+public void addFirefox(JLabel jlabel) {
+	jLabelFirefox=jlabel;
+	try {
+		
+		if(firefoxBoolean==false) {
+	    img = ImageIO.read(new File(imagePath+"\\assets\\"+firefoxPic));
+		}
+		else {
+			 img = ImageIO.read(new File(imagePath+"\\assets\\"+firefoxPicSelected));
+			
+		}
+	} catch (IOException e) {
+	    
+	    e.printStackTrace();
+	}
+		dimg = img.getScaledInstance(jLabelFirefox.getWidth(), jLabelFirefox.getHeight(),
+	        Image.SCALE_SMOOTH);
+	  imageIcon = new ImageIcon(dimg);
+	  jlabel.setIcon(imageIcon);
+	  
+	  frame.getContentPane().add(jLabelFirefox);
+	 
+	  
+	  jLabelFirefox.getParent(). setComponentZOrder(
+			  jLabelFirefox, 0);
+	  
+	  
+	  
+	  
+	  
+	  if (b1==false) {
+		  jLabelFirefox.addMouseListener(m2);
+	  b1=true;
+	  
+	  }
+	  
+}
+
+public void addIe(JLabel jlabel) {
+	jLabelIe=jlabel;
+	try {
+		
+		if(ieBoolean==false) {
+	    img = ImageIO.read(new File(imagePath+"\\assets\\"+iePic));
+		}
+		else {
+			 img = ImageIO.read(new File(imagePath+"\\assets\\"+iePicSelected));
+			
+		}
+	} catch (IOException e) {
+	    
+	    e.printStackTrace();
+	}
+		dimg = img.getScaledInstance(jLabelIe.getWidth(), jLabelIe.getHeight(),
+	        Image.SCALE_SMOOTH);
+	  imageIcon = new ImageIcon(dimg);
+	  jlabel.setIcon(imageIcon);
+	  
+	  frame.getContentPane().add(jLabelIe);
+	 
+	  
+	  jLabelIe.getParent(). setComponentZOrder(
+			  jLabelIe, 0);
+	  
+	  jLabelIe.addMouseListener(m2);
+	 
+	  if (b2==false) {
+		  jLabelIe.addMouseListener(m2);
+	  b2=true;
+	  
+	  }
+}
+
+public void addChrome(JLabel jlabel) {
+	jLabelChrome=jlabel;
+	try {
+		
+		if(chromeBoolean==false) {
+	    img = ImageIO.read(new File(imagePath+"\\assets\\"+chromePic));
+		}
+		else {
+			 img = ImageIO.read(new File(imagePath+"\\assets\\"+chromePicSelected));
+			
+		}
+	} catch (IOException e) {
+	    
+	    e.printStackTrace();
+	}
+		dimg = img.getScaledInstance(jLabelChrome.getWidth(), jLabelChrome.getHeight(),
+	        Image.SCALE_SMOOTH);
+	  imageIcon = new ImageIcon(dimg);
+	  jlabel.setIcon(imageIcon);
+	  
+	  frame.getContentPane().add(jLabelChrome);
+	 
+	  
+	  jLabelChrome.getParent(). setComponentZOrder(
+			  jLabelChrome, 0);
+	  
+	  
+	 
+	  jLabelChrome.addMouseListener(m2);
+	  
+	  if (b3==false) {
+		  jLabelChrome.addMouseListener(m2);
+		  b3=true;
+	  
+	  }
+}
+
+
+
+
+
 
 public void addExecute(JLabel jlabel) {
 	
@@ -710,6 +837,9 @@ public void setupMouseListener() {
 				    		
 				    		
 				    		
+				    
+				    		
+				    		
 				    		//Database
 				    		if (mouseLabel.getName().equals("db")) {
 				    			databaseBoolean=true;
@@ -718,9 +848,51 @@ public void setupMouseListener() {
 				    			addExcel(jLabelExcel);
 				    			System.out.println("SOURCE!!!!!!!");
 				    			c.setSource("db");
-				    			addRemoveAkshayUDStuff(false);
+				    			//addRemoveAkshayUDStuff(false);
 				    			
 				    		}
+				    		
+				    		
+				    		
+				    		
+				    		
+				    		if (mouseLabel.getName().equals("ie")) {
+				    			ieBoolean=true;
+				    			addIe(mouseLabel);
+		    		            firefoxBoolean=false;
+		    		            chromeBoolean=false;
+				    			addChrome(jLabelChrome);
+				    			addFirefox(jLabelFirefox);
+				    			c.setDriverType("1");
+				    			
+				    			
+				    		}
+				    		
+				    		if (mouseLabel.getName().equals("firefox")) {
+				    			firefoxBoolean=true;
+				    			addFirefox(mouseLabel);
+		    		            ieBoolean=false;
+		    		            chromeBoolean=false;
+				    			addChrome(jLabelChrome);
+				    			addIe(jLabelIe);
+				    			c.setDriverType("2");
+				    			
+				    			
+				    		}
+				    		
+				    		if (mouseLabel.getName().equals("chrome")) {
+				    			chromeBoolean=true;
+				    			addChrome(mouseLabel);
+		    		            firefoxBoolean=false;
+		    		            ieBoolean=false;
+				    			addIe(jLabelIe);
+				    			addFirefox(jLabelFirefox);
+				    			c.setDriverType("3");
+				    			
+				    			
+				    		}
+				    		
+				    		
 				    		
 				    		//Execute
 				    		

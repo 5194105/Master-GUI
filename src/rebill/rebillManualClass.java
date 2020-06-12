@@ -48,8 +48,12 @@ public class rebillManualClass {
 		c.setInternationalCheckBox("true");
 		c.setExpressCheckBox("true");
 		c.setGroundCheckBox("false");
-		c.setNormalCheckBox("true");
-		c.setMfRetireCheckBox("true");
+		
+		c.setDatabaseDisabled("false");
+		c.setCustomCheckBox("false");
+		c.setCustomString("");
+		//c.setNormalCheckBox("true");
+		//c.setMfRetireCheckBox("true");
 		c.setSessionCount("1");
     	
     	String filepath=c.getExcelPath();
@@ -64,9 +68,13 @@ public class rebillManualClass {
 		String internationalCheckBox=c.getInternationalCheckBox();
 		String expressCheckBox=c.getExpressCheckBox();
 		String groundCheckBox=c.getGroundCheckBox();
-		String normalCheckBox=c.getNormalCheckBox();
-		String mfRetireCheckBox=c.getMfRetireCheckBox();
+	//	String normalCheckBox=c.getNormalCheckBox();
+	//	String mfRetireCheckBox=c.getMfRetireCheckBox();
 		String sessionCount=c.getSessionCount();
+		
+	String databaseDisabled=	c.getDatabaseDisabled();
+	String	customCheckBox= c.getCustomCheckBox();
+	String	customString= c.getCustomString();
 		
 		System.out.println("filepath "+filepath);
 		System.out.println("level "+level);
@@ -80,9 +88,12 @@ public class rebillManualClass {
 		System.out.println("internationalCheckBox "+internationalCheckBox);
 		System.out.println("expressCheckBox "+expressCheckBox);
 		System.out.println("groundCheckBox "+groundCheckBox);
-		System.out.println("normalCheckBox "+normalCheckBox);
-		System.out.println("mfRetireCheckBox "+mfRetireCheckBox);
+		//System.out.println("normalCheckBox "+normalCheckBox);
+		//System.out.println("mfRetireCheckBox "+mfRetireCheckBox);
 		System.out.println("sessionCount "+sessionCount);
+		System.out.println("customString "+customString);
+		System.out.println("customCheckBox "+customCheckBox);
+		System.out.println("databaseSetting "+databaseDisabled);
 		
 		
 		if(filepath==null) {
@@ -118,16 +129,28 @@ public class rebillManualClass {
 		if(groundCheckBox==null) {
 			groundCheckBox="";
 		}
+		/*
 		if(normalCheckBox==null) {
 			normalCheckBox="";
 		}
 		if(mfRetireCheckBox==null) {
 			mfRetireCheckBox="";
 		}
+		*/
 		if(sessionCount==null) {
 			sessionCount="";
 		}
 		
+		
+		if(customString==null) {
+			customString="";
+		}
+		if(customCheckBox==null) {
+			customCheckBox="";
+		}
+		if(databaseDisabled==null) {
+			databaseDisabled="";
+		}
 	
 	
 
@@ -147,9 +170,12 @@ public class rebillManualClass {
         fieldValues.put("internationalCheckBox", internationalCheckBox);
         fieldValues.put("expressCheckBox", expressCheckBox);
         fieldValues.put("groundCheckBox", groundCheckBox);
-        fieldValues.put("normalCheckBox", normalCheckBox);
-        fieldValues.put("mfRetireCheckBox",mfRetireCheckBox);
+      //  fieldValues.put("normalCheckBox", normalCheckBox);
+      //  fieldValues.put("mfRetireCheckBox",mfRetireCheckBox);
         fieldValues.put("sessionCount",sessionCount);
+        fieldValues.put("customString",customString);
+        fieldValues.put("customCheckBox",customCheckBox);
+        fieldValues.put("databaseSetting",databaseDisabled);
         
         xmlSuite.setParameters(fieldValues);
         XmlTest xmlTest = new XmlTest(xmlSuite);
