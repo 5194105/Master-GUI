@@ -3,15 +3,15 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="rerate.rerateTestNgSlow">
+      <class name="rebill.testngRebillSlow">
         <methods>
+          <include name="testMethod1"/>
           <include name="testMethod2"/>
-          <include name="testMethod"/>
           <include name="testMethod4"/>
           <include name="setupExcel"/>
           <include name="testMethod3"/>
         </methods>
-      </class> <!-- rerate.rerateTestNgSlow -->
+      </class> <!-- rebill.testngRebillSlow -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
