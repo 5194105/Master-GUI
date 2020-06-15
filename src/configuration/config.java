@@ -37,6 +37,8 @@ public class config {
     String mfRetireCheckBox;
     String sessionCount;
     String prerateType;
+    String customCheckBox;
+    String customString;
     
     String cycle;
     String homePath;
@@ -47,6 +49,8 @@ public class config {
     String compatible;
     
     String level,source;
+    
+    String databaseDisabled;
 	
 	public config() {
 		
@@ -665,6 +669,15 @@ public String getPrerateType() {
 }
 
 
+public void setDatabaseDisabled(String databaseDisabled) {
+	
+	this.databaseDisabled=databaseDisabled;
+}
+
+public String getDatabaseDisabled() {
+	
+	return databaseDisabled;
+}
 
 
 
@@ -766,6 +779,23 @@ public String getNormalCheckBox() {
 
 public String getMfRetireCheckBox() {
 	return mfRetireCheckBox;
+}
+
+
+public void setCustomCheckBox(String customCheckBox){
+	this.customCheckBox=customCheckBox;
+}
+public void setCustomString(String customString){
+	this.customString=customString;
+
+
+	
+}
+public String getCustomCheckBox(){
+	return customCheckBox;
+}
+public String getCustomString(){
+	return customString;
 }
 
 

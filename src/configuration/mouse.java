@@ -38,6 +38,7 @@ import guis.guiBase;
 import guis.instantInvoiceAutomationGui;
 import guis.prerateAutomationExtendedGui;
 import guis.prerateAutomationGui;
+import guis.prsRerateAutomationExtendGui;
 import guis.rebillAutomationExtendGUI;
 import guis.rebillAutomationGui;
 import guis.rerateAutomationGui;
@@ -47,8 +48,10 @@ import prerate.prerateTestNGSlow;
 import rebill.rebillMain;
 import rebill.testngRebillSlow;
 import rebill.testngRebillSlowMfRetire;
+import rebill.updateRebillDb;
 import rebill_troubleshoot.rebillTroubleshoot;
 import rerate.abc;
+import rerate.rerateTestNgSlow;
 import testng.testingonly;
 public class mouse {
 	
@@ -115,11 +118,14 @@ public class mouse {
      String excelPic="excel.png";
      String excelPicSelected="excelSelect.png";
      String moreOptionsPic="moreOptions.png";
-     
+     String uploadResultPic="uploadResultPic.png";
      Boolean excelBoolean=false;
      Boolean databaseBoolean=false;
+     Boolean ieBoolean=false;
+     Boolean firefoxBoolean=false;
+     Boolean chromeBoolean=false;
      
-     Boolean c1=false,c2=false;
+     Boolean c1=false,c2=false,b1=false,b2=false,b3=false;;
    
     
      String selectionBar="selectionbar.png";
@@ -135,8 +141,15 @@ public class mouse {
      String datapopPicHighlight="datapopHighlight.png";
      String udPicHighlight="udHighlight.png";
      String preratePicHighlight="prerateHighlight.png";
+     String iePic="ie.png";
+     String iePicSelected="ieselected.png";
+     String firefoxPic="firefox.png";
+     String firefoxPicSelected="firefoxselected.png";
+     String chromePic="chrome.png";
+     String chromePicSelected="chromeselected.png";
+   
      
-     JLabel jLabelExcel,jLabelDatabase;
+     JLabel jLabelExcel,jLabelDatabase,jLabelIe,jLabelFirefox,jLabelChrome;
      
 
      String backgroundPic="default_template.png";
@@ -332,6 +345,123 @@ public void addDb(JLabel jlabel) {
 	  
 }
 
+
+
+public void addFirefox(JLabel jlabel) {
+	jLabelFirefox=jlabel;
+	try {
+		
+		if(firefoxBoolean==false) {
+	    img = ImageIO.read(new File(imagePath+"\\assets\\"+firefoxPic));
+		}
+		else {
+			 img = ImageIO.read(new File(imagePath+"\\assets\\"+firefoxPicSelected));
+			
+		}
+	} catch (IOException e) {
+	    
+	    e.printStackTrace();
+	}
+		dimg = img.getScaledInstance(jLabelFirefox.getWidth(), jLabelFirefox.getHeight(),
+	        Image.SCALE_SMOOTH);
+	  imageIcon = new ImageIcon(dimg);
+	  jlabel.setIcon(imageIcon);
+	  
+	  frame.getContentPane().add(jLabelFirefox);
+	 
+	  
+	  jLabelFirefox.getParent(). setComponentZOrder(
+			  jLabelFirefox, 0);
+	  
+	  
+	  
+	  
+	  
+	  if (b1==false) {
+		  jLabelFirefox.addMouseListener(m2);
+	  b1=true;
+	  
+	  }
+	  
+}
+
+public void addIe(JLabel jlabel) {
+	jLabelIe=jlabel;
+	try {
+		
+		if(ieBoolean==false) {
+	    img = ImageIO.read(new File(imagePath+"\\assets\\"+iePic));
+		}
+		else {
+			 img = ImageIO.read(new File(imagePath+"\\assets\\"+iePicSelected));
+			
+		}
+	} catch (IOException e) {
+	    
+	    e.printStackTrace();
+	}
+		dimg = img.getScaledInstance(jLabelIe.getWidth(), jLabelIe.getHeight(),
+	        Image.SCALE_SMOOTH);
+	  imageIcon = new ImageIcon(dimg);
+	  jlabel.setIcon(imageIcon);
+	  
+	  frame.getContentPane().add(jLabelIe);
+	 
+	  
+	  jLabelIe.getParent(). setComponentZOrder(
+			  jLabelIe, 0);
+	  
+	  jLabelIe.addMouseListener(m2);
+	 
+	  if (b2==false) {
+		  jLabelIe.addMouseListener(m2);
+	  b2=true;
+	  
+	  }
+}
+
+public void addChrome(JLabel jlabel) {
+	jLabelChrome=jlabel;
+	try {
+		
+		if(chromeBoolean==false) {
+	    img = ImageIO.read(new File(imagePath+"\\assets\\"+chromePic));
+		}
+		else {
+			 img = ImageIO.read(new File(imagePath+"\\assets\\"+chromePicSelected));
+			
+		}
+	} catch (IOException e) {
+	    
+	    e.printStackTrace();
+	}
+		dimg = img.getScaledInstance(jLabelChrome.getWidth(), jLabelChrome.getHeight(),
+	        Image.SCALE_SMOOTH);
+	  imageIcon = new ImageIcon(dimg);
+	  jlabel.setIcon(imageIcon);
+	  
+	  frame.getContentPane().add(jLabelChrome);
+	 
+	  
+	  jLabelChrome.getParent(). setComponentZOrder(
+			  jLabelChrome, 0);
+	  
+	  
+	 
+	  jLabelChrome.addMouseListener(m2);
+	  
+	  if (b3==false) {
+		  jLabelChrome.addMouseListener(m2);
+		  b3=true;
+	  
+	  }
+}
+
+
+
+
+
+
 public void addExecute(JLabel jlabel) {
 	
 	try {
@@ -359,6 +489,28 @@ public void addMoreOptions(JLabel jlabel) {
 	try {
 	
 	    img = ImageIO.read(new File(imagePath+"\\assets\\"+moreOptionsPic));
+		
+	
+
+	} catch (IOException e) {
+	    
+	    e.printStackTrace();
+	}
+		dimg = img.getScaledInstance(jlabel.getWidth(), jlabel.getHeight(),
+	        Image.SCALE_SMOOTH);
+	  imageIcon = new ImageIcon(dimg);
+	  jlabel.setIcon(imageIcon);
+	  
+	  frame.getContentPane().add(jlabel);
+	  jlabel.addMouseListener(m2);
+}
+
+
+public void adduploadResult(JLabel jlabel) {
+	
+	try {
+	
+	    img = ImageIO.read(new File(imagePath+"\\assets\\"+uploadResultPic));
 		
 	
 
@@ -606,7 +758,7 @@ public void setupMouseListener() {
 			  {
 					try {
 						mouseLabel = (JLabel)e.getSource();  
-						System.out.println("LABEL NAME : "+mouseLabel.getName());
+						System.out.println("LABEL NAME HERE: "+mouseLabel.getName());
 						
 
 						
@@ -631,9 +783,23 @@ public void setupMouseListener() {
 								eraRerateAutomationExtendGui erae= new eraRerateAutomationExtendGui(g,c);
 						
 						}
+							if (obj.getClass().getCanonicalName().equals("guis.rerateAutomationGui")) {
+								prsRerateAutomationExtendGui prae= new prsRerateAutomationExtendGui(g,c);
+						
+						}
 							
 							}
-							
+						
+						if (mouseLabel.getName().equals("uploadResult")) {
+							if (obj.getClass().getCanonicalName().equals("guis.rebillAutomationGui")) {
+								if (c.getLevel()==null) {
+									JOptionPane.showMessageDialog(frame, "Must Select A Level");
+								}
+								else {
+									updateRebillDb urd= new updateRebillDb(c);
+								}
+							}
+						}
 						
 						
 						//Save and Close
@@ -671,6 +837,9 @@ public void setupMouseListener() {
 				    		
 				    		
 				    		
+				    
+				    		
+				    		
 				    		//Database
 				    		if (mouseLabel.getName().equals("db")) {
 				    			databaseBoolean=true;
@@ -679,9 +848,51 @@ public void setupMouseListener() {
 				    			addExcel(jLabelExcel);
 				    			System.out.println("SOURCE!!!!!!!");
 				    			c.setSource("db");
-				    			addRemoveAkshayUDStuff(false);
+				    			//addRemoveAkshayUDStuff(false);
 				    			
 				    		}
+				    		
+				    		
+				    		
+				    		
+				    		
+				    		if (mouseLabel.getName().equals("ie")) {
+				    			ieBoolean=true;
+				    			addIe(mouseLabel);
+		    		            firefoxBoolean=false;
+		    		            chromeBoolean=false;
+				    			addChrome(jLabelChrome);
+				    			addFirefox(jLabelFirefox);
+				    			c.setDriverType("1");
+				    			
+				    			
+				    		}
+				    		
+				    		if (mouseLabel.getName().equals("firefox")) {
+				    			firefoxBoolean=true;
+				    			addFirefox(mouseLabel);
+		    		            ieBoolean=false;
+		    		            chromeBoolean=false;
+				    			addChrome(jLabelChrome);
+				    			addIe(jLabelIe);
+				    			c.setDriverType("2");
+				    			
+				    			
+				    		}
+				    		
+				    		if (mouseLabel.getName().equals("chrome")) {
+				    			chromeBoolean=true;
+				    			addChrome(mouseLabel);
+		    		            firefoxBoolean=false;
+		    		            ieBoolean=false;
+				    			addIe(jLabelIe);
+				    			addFirefox(jLabelFirefox);
+				    			c.setDriverType("3");
+				    			
+				    			
+				    		}
+				    		
+				    		
 				    		
 				    		//Execute
 				    		
@@ -854,47 +1065,27 @@ public void setupMouseListener() {
 				    				System.out.println("Booleans "+c.getLevel()+"      "+c.getSource());
 				    				
 				    				if(c.getLevel()!=null && c.getSource()!=null) {
-				    				JOptionPane.showMessageDialog(frame, "Started Rerates");
-				    				String filepath=c.getExcelPath();
-				    				String startDateText=c.getStartDate();
-				    				String endDateText=c.getEndDate();
-				    				String level=c.getLevel();
-				    				String broswer=c.getDriverType();
-				    				String compatibleMode=c.getCompatibleMode();
-				    				
-				    			//	c.setStartDate(rag.startDate.getText());
-				    				//c.setEndDate(rag.endDate.getText());
-				    				
-				    				/*
-				    				System.out.println(filepath);
-				    				System.out.println(startDateText);
-				    				System.out.println(endDateText);
-				    				System.out.println(level);
-				    				System.out.println(broswer);
-				    				System.out.println(compatibleMode);
-				    				abc rerate = new abc (filepath, startDateText,endDateText, level, broswer,compatibleMode, c);
-				    				
-				    				*/
-				    				
-				    		        XmlSuite xmlSuite = new XmlSuite();
-				    		        xmlSuite.setName("Sample_Suite");
-				    		        Map<String, String> fieldValues = new HashMap<>();
-				    		        fieldValues.put("filepathExcel", filepath);
-				    		        fieldValues.put("startDateText", startDateText);
-				    		        fieldValues.put("endDateText", endDateText);
-				    		        fieldValues.put("broswer", "true");
-				    		        fieldValues.put("compatibleMode", "false");
-				    		        xmlSuite.setParameters(fieldValues);
-				    		        XmlTest xmlTest = new XmlTest(xmlSuite);
-				    		        xmlTest.setName("Rerate Test");
-				    		        //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
-				    		        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testingonly.class)));
-				    		        xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
-				    		        TestNG tng = new TestNG();
-				    		        tng.setXmlSuites(Collections.singletonList(xmlSuite));
-				    		        tng.run();
-					    			
-				    				}
+				    					  XmlSuite xmlSuite = new XmlSuite();
+				    					    xmlSuite.setName("Sample_Suite");
+				    					    Map<String, String> fieldValues = new HashMap<>();
+				    					    fieldValues.put("filepathExcel", c.getExcelPath());
+				    					    fieldValues.put("startDateText", c.getStartDate());
+				    					    fieldValues.put("endDateText", c.getEndDate());
+				    					    fieldValues.put("broswer", c.getDriverType());
+				    					    fieldValues.put("compatibleMode", c.getCompatibleMode());
+				    					    fieldValues.put("source", c.getSource());
+				    					    fieldValues.put("level", c.getLevel());
+				    					    fieldValues.put("sessionCount", c.getSessionCount());
+				    					    xmlSuite.setParameters(fieldValues);
+				    					    XmlTest xmlTest = new XmlTest(xmlSuite);
+				    					    xmlTest.setName("Rerate Test");
+				    					    //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
+				    					    xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(rerateTestNgSlow.class)));
+				    					    xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
+				    					    TestNG tng = new TestNG();
+				    					    tng.setXmlSuites(Collections.singletonList(xmlSuite));
+				    					    tng.run();
+				    					}
 				    				
 				    				
 					    				}

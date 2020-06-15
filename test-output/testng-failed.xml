@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Sample_Suite]">
   <parameter name="nullCheckBox" value="true"/>
@@ -11,16 +12,34 @@
   <parameter name="source" value="db"/>
   <parameter name="compatibleMode" value="false"/>
   <test thread-count="5" name="Prerate Test(failed)" parallel="methods">
+=======
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
     <classes>
+<<<<<<< HEAD
       <class name="prerate.prerateTestNGSlow">
+=======
+      <class name="rebill.testngRebillSlow">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
         <methods>
+          <include name="testMethod1"/>
           <include name="testMethod2"/>
+<<<<<<< HEAD
           <include name="testMethod1" invocation-numbers="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16"/>
           <include name="testMethod3"/>
+=======
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
           <include name="testMethod4"/>
           <include name="setupExcel"/>
+          <include name="testMethod3"/>
         </methods>
+<<<<<<< HEAD
       </class> <!-- prerate.prerateTestNGSlow -->
+=======
+      </class> <!-- rebill.testngRebillSlow -->
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
     </classes>
-  </test> <!-- Prerate Test(failed) -->
-</suite> <!-- Failed suite [Sample_Suite] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

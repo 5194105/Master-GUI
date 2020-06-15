@@ -2,6 +2,7 @@ package rerate;
 
 
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import configuration.excel;
@@ -14,6 +15,13 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -21,12 +29,18 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -39,7 +53,7 @@ import configuration.config;
 public class rerateTestNgSlow {
 	  
 	String tempFile,configFile;
-	excel e;
+	excel excelVar;
 	 Boolean isPresent=false;
 	int retryCounter=0;
 	int i=0;
@@ -47,7 +61,7 @@ public class rerateTestNgSlow {
 	WebDriverWait wait1,wait2,wait3,wait4;
 	config c;
 	
-	Boolean level;
+
 	long serviceLong1,serviceLong2;
 	long invoiceLong1,invoiceLong2;
 	long acctLong1,acctLong2;
@@ -60,7 +74,7 @@ public class rerateTestNgSlow {
 	String  sh1;
 	String filepath;
 	String d="04/20/2020";
-	String d2="05/12/2020";
+	String d2="06/05/2020";
 	static XSSFWorkbook wb;
 	static XSSFSheet sheet;
 	static XSSFRow row;
@@ -91,71 +105,107 @@ public class rerateTestNgSlow {
 	 ArrayList<String> cc42 = new ArrayList<String>();
 	 Alert alert1,alert2,alert3,alert4;
 	 Boolean isChecked1=false,isChecked2=false,isChecked3=false,isChecked4=false;
-        Boolean compatibleMode;
+        
         Boolean chrome;
         
         
         WebElement element;
 	
       String  homePath=System.getProperty("user.dir");
-       String browser="2";
+       String browser;
         String chromeSetProperty="webdriver.chrome.driver";
 		String ieSetProperty="webdriver.ie.driver";
-		//String firefoxSetProperty="";
-		
-
-		
 		String chromePath=homePath+"\\drivers\\chromedriver.exe";
-	
-		
-	//	String chromePath="C:\\Users\\theth\\git\\Master-GUI\\drivers\\chromedriver.exe";
 		String ieDriverPath=homePath+"\\drivers\\IEDriverServer.exe";
         
-	//	String levelUrl="https://testsso.secure.fedex.com/L3/PRSApps";
-		String levelUrl="https://testsso.secure.fedex.com/L2/PRSApps";
+
 		
 		
-	
+	String levelUrl;
 		int rowCount;
 		int colCount;
 		int total;
 		int testCounter1,testCounter2,testCounter3,testCounter4;
 		int totalMod;
 		
-	
-	
-    
-
+		String filepathExcel;
+		String startDateText;
+		String endDateText;
+		String broswer;
+		String compatibleMode;
+		String sessionCount;
+		String source;
+		String level;
+		int sessionCountInt;
+		String[][] allData;
+		String allCheckBox,nullCheckBox,failedCheckBox,domesticCheckBox,internationalCheckBox,expressCheckBox,groundCheckBox,normalCheckBox,mfRetireCheckBox;
 		
 		
-		@BeforeClass
-		//@Parameters("filepathExcel")
-	//	public void setupExcel(String filepathExcel) {
-		public void setupExcel() {
-			//or from eclipse.
-	    	homePath=System.getProperty("user.dir");
-	    	System.out.println("homePath" +System.getProperty("user.dir"));
+		
+	
 	    
-	    	//e = new excel(homePath+"\\test data\\rerate2.xlsx");
-	    	e = new excel("C:\\Users\\theth\\Documents\\rerate_l2c2.xlsx");
+		@BeforeClass
+		@Parameters({"filepath","level","browser","source","compatibleMode","allCheckBox","nullCheckBox","failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox","sessionCount","startDateText","endDateText"})
+		public void setupExcel(String filepath,String level,String browser,String source,String compatibleMode,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String sessionCount,String startDateText,String endDateText) {
+			//public void setupExcel() {
+			//or from eclipse.
+			
+		
+        	
+        	
+	        	this.browser=browser;
+	        	this.level=level;
+	        	this.compatibleMode=compatibleMode;
+	        	this.source=source;
+	        	this.allCheckBox=allCheckBox;
+				this.nullCheckBox=nullCheckBox;
+				this.failedCheckBox=failedCheckBox;
+				this.domesticCheckBox=domesticCheckBox;
+				this.internationalCheckBox=internationalCheckBox;
+				this.expressCheckBox=expressCheckBox;
+				this.groundCheckBox=groundCheckBox;
+	        	this.sessionCount=sessionCount;
+	        	this.startDateText=startDateText;
+	        	this.endDateText=endDateText;
+	        	sessionCountInt=Integer.parseInt(sessionCount);
+	        	homePath=System.getProperty("user.dir");
+	        	System.out.println("homePath" +System.getProperty("user.dir"));
+	   		
+	        	if(level.equals("2")) {
+	        		levelUrl="https://devsso.secure.fedex.com/L2/PRSApps";
+	        	}
+	        	else if (level.equals("3")){
+	        		levelUrl="https://testsso.secure.fedex.com/L3/PRSApps";
+	        	}
+	        
 	    	
-	    	//e = new excel(filepathExcel);
-	    	e.setUpExcelWorkbook();
-	    	e.setUpExcelSheet(0);
-	    	e.setRowCountAutomatically(0);
-	    	e.setColCountAutomatically(0);
-	    	rowCount=e.getRowCount();
-	    	colCount=e.getColCount()-1;
-	    	System.out.println("ROW COUNT "+rowCount);
-	    	total= rowCount/4;
-	    	System.out.println(total);
+	    	if (source.equals("excel")) {
+	    		
+	    		this.filepath=filepath;	
+        		excelVar = new excel(filepath);
+	    		excelVar.setUpExcelWorkbook();
+	    		excelVar.setUpExcelSheet(0);
+	    		excelVar.setRowCountAutomatically(0);
+	    		excelVar.setColCountAutomatically(0);
+		    	rowCount=excelVar.getRowCount();
+		    	colCount=excelVar.getColCount()-1;
+		    	
+	    	}
 	    	
+	    	else if(source.equals("db")) {
+	    		runDbQuery();
+	    	}
 	    	
-	    	totalMod=rowCount%4;
+	    	total= rowCount/sessionCountInt;
+	    	totalMod=rowCount%sessionCountInt;
 	    	totalRows1=total;
 	    	totalRows2=total;
 	    	totalRows3=total;
 	    	totalRows4=total;
+	    	
+	    	
+	    	
+	    	
 	    	System.out.println(totalMod);
 	    	switch(totalMod) {
 	    	case 1:
@@ -175,25 +225,151 @@ public class rerateTestNgSlow {
 		
 		
 		
+		
+		public void runDbQuery() {
+			Connection GTMcon=null;
+			Statement stmt = null;
+			ResultSet rs = null;
+			ResultSetMetaData rsmd=null;
+			//Change to L3
+	    	try {
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+				GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
+				
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+	    	String databaseSqlCount="select count(*) as total from (select * from rerate_master where trk_no1 is not null and acct2 is null union all select * from rerate_master where trk_no1 is not null and trk_no2 is not null and acct2 is not null)";
+	    	String databaseSqlQuery="select TEST_INPUT_NBR	,TIN_COUNT	,ACCT1,	ACCT2,	TRK_NO1,	TRK_NO2	,INVOICE_NBR_1,	INV_NO2,	SERVICE1,	SERVICE2,	REQUEST_TYPE,	ACCT_TYPE,	ACCNAME from (select * from rerate_master where trk_no1 is not null and acct2 is null union all select * from rerate_master where trk_no1 is not null and trk_no2 is not null and acct2 is not null)";
+	    	
+	    	
+	    	if (allCheckBox.equals("false")) {
+	    		databaseSqlCount+="where ";
+	    		databaseSqlQuery+="where ";
+	    	}
+	    	if (nullCheckBox.equals("true") && failedCheckBox.equals("true")) {
+	    		databaseSqlCount+="(result is null or result ='fail') ";
+	    		databaseSqlQuery+="(result is null or result ='fail') ";
+	    	}
+	    	if (nullCheckBox.equals("true") && failedCheckBox.equals("false")) {
+	    		databaseSqlCount+="result is null ";
+	    		databaseSqlQuery+="result is null ";
+	    	}
+	    	if (nullCheckBox.equals("false") && failedCheckBox.equals("true")) {
+	    		databaseSqlCount+="result ='fail' ";
+	    		databaseSqlQuery+="result ='fail' ";
+	    	}
+	    	/*
+	    	if (domesticCheckBox.equals("true") && internationalCheckBox.equals("false")) {
+	    		databaseSqlCount+="and rs_type='DM' ";
+	    		databaseSqlQuery+="and rs_type='DM' ";
+	    	}
+	    	if (internationalCheckBox.equals("true") && domesticCheckBox.equals("false")) {
+	    		databaseSqlCount+="and rs_type='IL' ";
+	    		databaseSqlQuery+="and rs_type='IL' ";
+	    	}
+	    	if (internationalCheckBox.equals("true") && domesticCheckBox.equals("true")) {
+	    		databaseSqlCount+="and rs_type in ('DM','IL')";
+	    		databaseSqlQuery+="and rs_type in ('DM','IL')";
+	    	}
+	    	
+	    	if (expressCheckBox.equals("true") && groundCheckBox.equals("false")) {
+	    		databaseSqlCount+="and company='EP' ";
+	    		databaseSqlQuery+="and company='EP' ";
+	    	}
+	    	if (groundCheckBox.equals("true") && expressCheckBox.equals("false")) {
+	    		databaseSqlCount+="and company='GD' ";
+	    		databaseSqlQuery+="and company='GD' ";
+	    	}
+	    	
+	    	if (groundCheckBox.equals("true") && expressCheckBox.equals("true")) {
+	    		databaseSqlCount+="and service1 in ('GD','EP') ";
+	    		databaseSqlQuery+="and service1 in ('GD','EP') ";
+	    	}
+	       	*/
+	    	
+	    	
+
+	       	try {
+	            //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
+	        		
+	        		stmt = GTMcon.createStatement();
+	        		System.out.println(databaseSqlCount);
+	            	rs = stmt.executeQuery(databaseSqlCount);
+	            	rs.next();
+	            	rowCount=rs.getInt("total");
+	            	stmt.close();
+	            	rs.close();
+	            	
+	            	stmt = GTMcon.createStatement();
+	        		System.out.println(databaseSqlQuery);
+	            	rs = stmt.executeQuery(databaseSqlQuery);
+	            	rsmd = rs.getMetaData();
+	            	colCount = rsmd.getColumnCount()+1;
+	            	int rowCountTemp=0;
+	            	allData = new String[rowCount][colCount+1];
+	            	 
+	            	 while(rs.next()) {
+	            	//	 rowCount++;
+	            		// rebillDataArray.add(new rebillData(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16)));
+	            		 for (int i=1;i<colCount;i++) {
+	            			System.out.println(rs.getString(i));
+	            			if (rs.getString(i)==null) {
+	            				allData[rowCountTemp][i-1]="";
+	            			}
+	            			else {
+	            			 allData[rowCountTemp][i-1]=rs.getString(i);
+	            			}
+	            		 }
+	            		 rowCountTemp++; 
+	            	 }
+	            	 //colCount=17;
+	        	}
+	        	catch(Exception e) {
+	        		System.out.println(e);
+	        	}
+		}
+		
+		
+		
 	    @DataProvider(name = "data-provider1")
 	    public synchronized Object[][] dataProviderMethod1() { 
-	   	
-    	 
-	
-	    	Object [][] obj = new Object[totalRows1][colCount];
+	    	Object [][] obj=null;
+	    	if (sessionCountInt>=1) {
+	    	
+	    	 obj= new Object[totalRows1][colCount];;
+	    	try {
+	    		String tempString="";
+	    	
 	    	int objCount=0;
-	    	for(int i=1;i<=rowCount;i+=4) {
-	    		for(int j=0;j<colCount;j++) {
-	    			System.out.println(e.getCellData(i, j));
-	    				obj[objCount][j]=e.getCellData(i, j);
+	    	for(int i=1;i<=rowCount;i+=sessionCountInt) {
+	    		for(int j=0;j<colCount-1;j++) {
+	    				if(source.equals("excel")) {
+	    				tempString=excelVar.getCellData(i, j);
+	    				}
+	    				else if (source.equals("db")) {
+	    					tempString=allData[i-1][j];
+	    				}
+	    					if (tempString == null || tempString.equals("null")){
+	    						tempString="";
+	    					}
+	    				obj[objCount][j]=tempString;
 	    			
 	    		}
 	    		obj[objCount][colCount-1]=i;
 	    		objCount++;
+	    	}  	
+	}catch(Exception e) {
+		System.out.println(e);
+	}
 	    	}
-
 	    	return obj;
-	    
+	    	
 	    }
 	    
 	    
@@ -206,55 +382,106 @@ public class rerateTestNgSlow {
 	    @DataProvider(name = "data-provider2")
 	    public synchronized Object[][] dataProviderMethod2() { 
 	    
-	  
-	    	 
-	    	Object [][] obj = new Object[totalRows2][colCount];
+	    	Object [][] obj=null;
+	    	if (sessionCountInt>=2) {
+	        	
+	       	 
+	    
+	    	String tempString="";
+	    	obj = new Object[totalRows2][colCount];
 	    	int objCount=0;
-	    	for(int i=2;i<=rowCount;i+=4) {
-	    		for(int j=0;j<colCount;j++) {
-	    			obj[objCount][j]=e.getCellData(i, j);
+	    	for(int i=2;i<=rowCount;i+=sessionCountInt) {
+	    		for(int j=0;j<colCount-1;j++) {	
+	    			if(source.equals("excel")) {
+	    				tempString=excelVar.getCellData(i, j);
+	    				}
+	    				else if (source.equals("db")) {
+	    					tempString=allData[i-1][j];
+	    				
+	    				}
+						if (tempString == null || tempString.equals("null")){
+							tempString="";
+						}
+					obj[objCount][j]=tempString;
 	    		}
 	    		obj[objCount][colCount-1]=i;
 	    		objCount++;
 	    	}
-
+	    }
 	    	return obj;
 	    
 	    }
+	    
+	    
+	    
 	    
 	    @DataProvider(name = "data-provider3")
 	    public synchronized Object[][] dataProviderMethod3() { 
-	    
-	    	Object [][] obj = new Object[totalRows3][colCount];
+	    	Object [][] obj=null;
+	    	if (sessionCountInt>=3) {
+	        	
+	       	 
+	    	String tempString="";
+	    	obj = new Object[totalRows3][colCount];
 	    	int objCount=0;
-	    	for(int i=3;i<=rowCount;i+=4) {
-	    		for(int j=0;j<colCount;j++) {
-	    			obj[objCount][j]=e.getCellData(i, j);
+	    	for(int i=3;i<=rowCount;i+=sessionCountInt) {
+	    		for(int j=0;j<colCount-1;j++) {
+	    			if(source.equals("excel")) {
+	    				tempString=excelVar.getCellData(i, j);
+	    				}
+	    				else if (source.equals("db")) {
+	    					tempString=allData[i-1][j];
+	    				}
+						if (tempString == null || tempString.equals("null")){
+							tempString="";
+						}
+					obj[objCount][j]=tempString;
 	    		}
 	    		obj[objCount][colCount-1]=i;
 	    		objCount++;
 	    	}
-
+	    }
 	    	return obj;
 	    
 	    }
+	    
+	    
+	    
+	    
 	    
 	    @DataProvider(name = "data-provider4")
 	    public synchronized Object[][] dataProviderMethod4() { 
-	    	
-	    	Object [][] obj = new Object[totalRows4][colCount];
+	    	Object [][] obj=null;
+	    	if (sessionCountInt>=4) {
+	        	
+	       	 
+	    	String tempString="";
+	    	obj = new Object[totalRows4][colCount];
 	    	int objCount=0;
-	    	for(int i=4;i<=rowCount;i+=4) {
-	    		for(int j=0;j<colCount;j++) {
-	    			obj[objCount][j]=e.getCellData(i, j);
+	    	for(int i=4;i<=rowCount;i+=sessionCountInt) {
+	    		for(int j=0;j<colCount-1;j++) {
+	    			if(source.equals("excel")) {
+	    				tempString=excelVar.getCellData(i, j);
+	    				}
+	    				else if (source.equals("db")) {
+	    					
+	    					tempString=allData[i-1][j];
+	    				
+	    				}
+						if (tempString == null || tempString.equals("null")){
+							tempString="";
+						}
+					obj[objCount][j]=tempString;
 	    		}
 	    		obj[objCount][colCount-1]=i;
 	    		objCount++;
 	    	}
-
+	    }
 	    	return obj;
 	    
 	    }
+	    
+	    
 
 	    
 	  @Test(dataProvider="data-provider1")
@@ -270,9 +497,50 @@ public class rerateTestNgSlow {
 			  
 		  }
 		  
-  	    System.setProperty(chromeSetProperty,chromePath);
-  	    driver1 = new ChromeDriver();
-  	    System.out.println(trkng1);
+		 
+	        
+		  
+		  if (browser.equals("1")) {
+			  DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+			  if (compatibleMode.equals("true")) {	
+	    			
+	    		    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
+	    		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
+	    		    capabilities.setCapability("ignoreZoomSetting", true);
+	    		    capabilities.setCapability("ignoreProtectedModeSettings", true);
+	    		    capabilities.setCapability("initialBrowserUrl",levelUrl);
+	    		   // capabilities.setCapability("nativeEvents",false);
+	    		 
+	    		}
+	    		
+	    	//System.setProperty(ieSetProperty, ieDriverPath);
+	    		System.setProperty("webdriver.ie.driver", homePath+"\\drivers\\IEDriverServer.exe");
+	    		try {
+	    		driver1 =  new InternetExplorerDriver(capabilities);
+	    		
+	    		}
+	    		catch(Exception e) {
+	    			System.out.println(e);
+	    		}
+	    	}
+	    	else if (browser.equals("2")) {
+	    	 
+	    		System.setProperty(chromeSetProperty,chromePath);
+	    		driver1 = new ChromeDriver();
+	    	}
+	     	else if (browser.equals("3")) {
+	         	 
+	    		
+	        	
+	        	FirefoxProfile profile = new FirefoxProfile(); 
+	        	profile.setPreference("capability.policy.default.Window.QueryInterface", "allAccess");
+	        	profile.setPreference("capability.policy.default.Window.frameElement.get","allAccess");
+	        	profile.setAcceptUntrustedCertificates(true); profile.setAssumeUntrustedCertificateIssuer(true);
+	        	DesiredCapabilities capabilities = new DesiredCapabilities(); 
+	        	capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+	        	System.setProperty("webdriver.gecko.driver",  homePath+"\\drivers\\geckodriver.exe");
+	        	driver1 = new FirefoxDriver(capabilities);
+	    	}
   	    
   	 
 
@@ -298,10 +566,27 @@ public class rerateTestNgSlow {
 			  
 		  }
 		  
-  	    System.setProperty(chromeSetProperty,chromePath);
-  	    driver2 = new ChromeDriver();
-  	    System.out.println(trkng1);
-  	    
+ if (browser.equals("1")) {
+		
+	 if (compatibleMode.equals("true")) {	
+			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+		    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
+		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
+		    capabilities.setCapability("ignoreZoomSetting", true);
+		    capabilities.setCapability("ignoreProtectedModeSettings", true);
+		    capabilities.setCapability("initialBrowserUrl",levelUrl);
+		}
+		
+		System.setProperty(ieSetProperty, ieDriverPath);
+		//System.setProperty("webdriver.ie.driver", "C:\\Users\\FedExUser\\git\\MasterGUI\\drivers\\IEDriverServer.exe");
+		driver2 =  new InternetExplorerDriver();
+	}
+	else if (browser.equals("2")) {
+	 
+		System.setProperty(chromeSetProperty,chromePath);
+		driver2 = new ChromeDriver();
+	}
+
   	    
  
 			System.out.println("Hello 2");
@@ -323,9 +608,23 @@ public class rerateTestNgSlow {
 			  
 		  }
 		  
-  	    System.setProperty(chromeSetProperty,chromePath);
-  	    driver3 = new ChromeDriver();
-  	    System.out.println(trkng1);
+ if (browser.equals("1")) {
+		if (compatibleMode.equals("true")) {	
+			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+		    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
+		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
+		    capabilities.setCapability("ignoreZoomSetting", true);
+		    capabilities.setCapability("ignoreProtectedModeSettings", true);
+		    capabilities.setCapability("initialBrowserUrl",levelUrl);
+		}
+		System.setProperty(ieSetProperty, ieDriverPath);
+		driver3 =  new InternetExplorerDriver();
+	}
+	else if (browser.equals("2")) {
+	 
+		System.setProperty(chromeSetProperty,chromePath);
+		driver3 = new ChromeDriver();
+	}
   	    
  
 			System.out.println("Hello 3");
@@ -350,11 +649,23 @@ public class rerateTestNgSlow {
 			  System.out.println(eee);
 			  
 		  }
-		  
-  	    System.setProperty(chromeSetProperty,chromePath);
-  	    driver4 = new ChromeDriver();
-  	    System.out.println(trkng1);
-  	    
+		  if (browser.equals("1")) {
+	    		if (compatibleMode.equals("true")) {	
+	    			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+	    		    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
+	    		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
+	    		    capabilities.setCapability("ignoreZoomSetting", true);
+	    		    capabilities.setCapability("ignoreProtectedModeSettings", true);
+	    		    capabilities.setCapability("initialBrowserUrl",levelUrl);
+	    		}
+	    		System.setProperty(ieSetProperty, ieDriverPath);
+	    		driver4 =  new InternetExplorerDriver();
+	    	}
+	    	else if (browser.equals("2")) {
+	    	 
+	    		System.setProperty(chromeSetProperty,chromePath);
+	    		driver4 = new ChromeDriver();
+	    	}
   	    
   	
 
@@ -365,10 +676,8 @@ public class rerateTestNgSlow {
 	  
 	  public void doWork(WebDriver driver, WebDriverWait wait,Select CEDropDown,Alert alert,Robot r,ArrayList<String> cc1,ArrayList<String> cc2, List<WebElement> comboBoxesHandling, Boolean isChecked,int count,String testInputNbr,String tinCount,String acct1,String acct2,String trkng1,String trkng2,String inv1,String inv2,String service1,String service2,String rerateType,String acctType,String name,int testCounter) {
 	//      Assert.assertTrue(false,"Failed at Login");
-		  String requestId;
-		  driver.get("https://devsso.secure.fedex.com/L2/PRSApps/");
-		  driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-		  wait = new WebDriverWait( driver,10);
+		
+		  
 		  
 		  Boolean ground=false;
 		  Boolean express=false;
@@ -400,9 +709,9 @@ public class rerateTestNgSlow {
 				
 		  
 		  login(driver,wait);
-		  firstPage(driver,CEDropDown,r,alert,name,acct1,acct2,acctType,d,d2);
-		  secondPage(driver,cc1,cc2,comboBoxesHandling,service1, service2, rerateType, trkng1, trkng2, inv1, inv2, acct1,  acct2);
-		  thirdPage(driver,wait,testCounter,name,express,ground,combo);
+		  firstPage(driver,CEDropDown,r,alert,name,acct1,acct2,acctType,d,d2,testCounter, testInputNbr, tinCount, trkng1);
+		  secondPage(driver,cc1,cc2,comboBoxesHandling,service1, service2, rerateType, trkng1, trkng2, inv1, inv2, acct1,  acct2,testCounter, testInputNbr, tinCount);
+		  thirdPage(driver,wait,testCounter,name,express,ground,combo, testInputNbr, tinCount, trkng1);
 
 		  
 		 
@@ -414,33 +723,25 @@ public class rerateTestNgSlow {
 	  
 	  public void login(WebDriver driver,WebDriverWait wait) {
 
+		  try {
 
-			  //TEST ONLY
-			  level=false;
-			  System.out.println("Hello 2");
-			  
-				 //	driver.get(levelUrl);
-			 	
-	
-				driver.manage().window().maximize();     
+			  driver.get(levelUrl);
+		  		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+		  		wait = new WebDriverWait( driver,10);
+		  		driver.manage().window().maximize();     
 				
-				try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-					
+				
+			//	/html/body/div/div/form/div/div[1]/fieldset/label[1]/input
 				driver.findElement(By.id("username")).sendKeys("477023");
 				driver.findElement(By.id("password")).sendKeys("477023");
 				driver.findElement(By.id("submit")).click();
 
 			  
-				if (level==false)
+				if (level.equals("2"))
 				{                                                   
 					driver.get("https://devsso.secure.fedex.com/L2/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10");
 				}
-				else if (level==true)
+				else if (level.equals("3"))
 				{
 					driver.get("https://testsso.secure.fedex.com/L3/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10");
 				}
@@ -452,7 +753,7 @@ public class rerateTestNgSlow {
 				
 				catch(Exception e) {
 					driver.quit();
-					driver.get("testsso.secure.fedex.com/L3/PRSApps/");	
+					driver.get(levelUrl);	
 					driver.manage().window().maximize();     
 					
 					try {
@@ -465,18 +766,22 @@ public class rerateTestNgSlow {
 					driver.findElement(By.id("username")).sendKeys("477023");
 					driver.findElement(By.id("password")).sendKeys("477023");
 					driver.findElement(By.id("submit")).click();
-					if (level==false)
+					if (level.equals("2"))
 					{                                                   
 						driver.get("https://devsso.secure.fedex.com/L2/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10");
 					}
-					else if (level==true)
+					else if (level.equals("3"))
 					{
 						driver.get("https://testsso.secure.fedex.com/L3/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10");
 					}
 				}
 				
 				Assert.assertTrue(isPresent,"Failed at Login");
-				//Assert.assertTrue(false,"Failed at Login");
+		  }
+		  catch(Exception e) {
+			  System.out.println(e);
+			  
+		  }
 				
 	  }
 	  
@@ -502,7 +807,7 @@ public class rerateTestNgSlow {
 	  
 	  
 	  
-	  public void firstPage(WebDriver driver,Select CEDropDown,Robot r,Alert alert,String name,String acct1,String acct2,String acctType,String d,String d2) {
+	  public void firstPage(WebDriver driver,Select CEDropDown,Robot r,Alert alert,String name,String acct1,String acct2,String acctType,String d,String d2,int testCounter,String  testInputNbr,String  tinCount,String  trk) {
 		  
 		  
 		  
@@ -563,8 +868,8 @@ public class rerateTestNgSlow {
 					driver.findElement(By.name("pricingType")).click();
 				}
 				
-				driver.findElement(By.name("beginDate")).sendKeys(d);
-				driver.findElement(By.name("RCDate")).sendKeys(d2);
+				driver.findElement(By.name("beginDate")).sendKeys(startDateText);
+				driver.findElement(By.name("RCDate")).sendKeys(endDateText);
 				driver.findElement(By.name("probDesc")).sendKeys("BST Test");
 				driver.findElement(By.name("qED")).click();
 				driver.findElement(By.id("Next_Down")).click();
@@ -631,7 +936,16 @@ if (!acctType.equals("CE Level")) {
  catch (Exception e) {
 	 
 	System.out.println(e);
+	 if(source.equals("excel")) {
+       	 writeToExcel(testCounter, 14,"Failed During First Page");
+       	 }
+  	String[] resultArray = new String[2];
+  	resultArray[0]="fail";
+  	resultArray[1]="Failed During First Page";
+  	writeToDB(testInputNbr,tinCount,trk,0,resultArray);
+  
 	softAssertion.assertTrue(false,"Failed during first page.");
+	
  		}
  }
 
@@ -654,7 +968,7 @@ if (!acctType.equals("CE Level")) {
 	  
 
 				
-		public void secondPage(WebDriver driver,ArrayList<String>cc1,ArrayList<String>cc2, List<WebElement> comboBoxesHandling,String service1,String service2,String rerateType,String trkng1,String trkng2,String inv1,String inv2,String acct1, String acct2) {
+		public void secondPage(WebDriver driver,ArrayList<String>cc1,ArrayList<String>cc2, List<WebElement> comboBoxesHandling,String service1,String service2,String rerateType,String trkng1,String trkng2,String inv1,String inv2,String acct1, String acct2,int testCounter,String  testInputNbr,String  tinCount) {
 			
 			try {
 			Thread.sleep(10000);				
@@ -830,11 +1144,13 @@ Thread.sleep(2000);
 			//Date Range
 			if (rerateType.equals("Date Range")) {
 				Thread.sleep(2000);
-				driver.findElement(By.xpath("//*[@name='accType'][@value='A']")).click();
+				driver.findElement(By.xpath("/html/body/table/tbody/tr/td/form/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr[3]/td/table/tbody/tr[7]/td/font/input")).click();
+				
+				//driver.findElement(By.xpath("//*[@name='accType'][@value='A']")).click();
 				driver.switchTo().alert().accept();
 				Thread.sleep(2000);
 				driver.findElement(By.xpath("/html/body/table/tbody/tr/td/form/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr[3]/td/table/tbody/tr[12]/td[2]/font[1]/input")).sendKeys("12/01/2001");
-				driver.findElement(By.xpath("/html/body/table/tbody/tr/td/form/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr[3]/td/table/tbody/tr[13]/td[2]/font[1]/input")).sendKeys(d2);
+				driver.findElement(By.xpath("/html/body/table/tbody/tr/td/form/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr[3]/td/table/tbody/tr[13]/td[2]/font[1]/input")).sendKeys(endDateText);
 				driver.findElement(By.xpath("/html/body/table/tbody/tr/td/form/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr[4]/td/div/input[4]")).click();	
 			}
 			
@@ -883,7 +1199,7 @@ Thread.sleep(2000);
 					}
 				}
 
-			Thread.sleep(15000);
+			
 			
 
 			
@@ -892,6 +1208,14 @@ Thread.sleep(2000);
 		catch(Exception e) {
 			
 			System.out.println(e);
+			 if(source.equals("excel")) {
+		       	 writeToExcel(testCounter, 14,"Failed During Second Page");
+		       	 }
+		  	String[] resultArray = new String[2];
+		  	resultArray[0]="fail";
+		  	resultArray[1]="Failed During Second Page";
+		  	writeToDB(testInputNbr,tinCount,trkng1,0,resultArray);
+		  
 			softAssertion.assertTrue(false,"Failed During Second Page");
 		}
 		}
@@ -905,17 +1229,17 @@ Thread.sleep(2000);
 		
 		
 		
-		public void thirdPage(WebDriver driver,WebDriverWait wait,int testCounter,String name,Boolean express,Boolean ground,Boolean combo) {
+		public void thirdPage(WebDriver driver,WebDriverWait wait,int testCounter,String name,Boolean express,Boolean ground,Boolean combo,String testInputNbr,String tinCount,String trk) {
 
-			
+			int count=0;
 			try {
 			
 			String requestId;
-			if (level==false)
+			if (level.equals("2"))
 			{
 				driver.get("https://devsso.secure.fedex.com/L2/PRSApps/inbox/inbox_router.jsp?inbox_id=11");
 			}
-			else if (level==true)
+			else if (level.equals("3"))
 			{
 				driver.get("https://testsso.secure.fedex.com/L3/PRSApps/inbox/inbox_router.jsp?inbox_id=11");
 			}
@@ -923,16 +1247,40 @@ Thread.sleep(2000);
 			
 			  
 	
+			wait = new WebDriverWait( driver,60);
 			
 			
-			
-			int count = getRerateId(driver,name,testCounter);
-			driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[1]/input")).get(count-1).click();
+			count = getRerateId(driver,name,testCounter);
+			JavascriptExecutor js = ((JavascriptExecutor) driver);
+			js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 			Thread.sleep(1000);
+			
+			//driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[1]/input")).get(count-1).sendKeys(r.keyPress(KeyEvent.VK_ENTER));
+			driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[1]/input")).get(count-1).click();
+			int counter=0;
+			
+			//added this code because IE SUCKS!!!!!!
+			while (true) {
+				if (counter==10){
+					break;
+				}
+				if (driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[1]/input")).get(count-1).isSelected()==true) {
+					break;
+				}
+					else {
+						driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[1]/input")).get(count-1).click();
+						
+					}
+				}
+			
+			
+			
+				Thread.sleep(1000);
 			driver.findElement(By.name("btnAcceptTask")).click();
 			Thread.sleep(1000);
 			driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]")).get(count-1).click();
 			Thread.sleep(2000);
+			wait = new WebDriverWait( driver,10);
 			driver.findElement(By.xpath("//input[@name='pa_actn_cd']/following-sibling::input[1]")).click();
 			Select dr1 = new Select(driver.findElement(By.name("root_cause")));
 			dr1.selectByVisibleText("Sales Caused");
@@ -950,6 +1298,7 @@ Thread.sleep(2000);
 			driver.findElement(By.name("RV01")).sendKeys("0000");
 			Select dr7 = new Select(driver.findElement(By.name("prc_exp_grnd_ind")));
 			Thread.sleep(3000);
+			
 			if(express==true) {
 				dr7.selectByValue("E");
 				
@@ -970,8 +1319,20 @@ Thread.sleep(2000);
 		//	sheet.getRow(i).createCell(14).setCellValue("Processed");
 		//	fout = new FileOutputStream(new File(filepath));
 		//	wb.write(fout);	
-			writeToExcel(testCounter,14,"Processed");
-			Assert.assertTrue(true,"Test Case Completed.");
+
+		  	 if(source.equals("excel")) {
+		       	 writeToExcel(testCounter, 14,"Processed");
+		       	 }
+		  	String[] resultArray = new String[2];
+		  	resultArray[0]="pass";
+		  	resultArray[1]="processed";
+		  	writeToDB(testInputNbr,tinCount,trk,count,resultArray);
+		    Assert.assertTrue(true,"Test Case Completed.");
+		       	 	
+		       	 return;
+		  	  
+		  	  
+			
 		}
 	
 		catch (NoSuchElementException e)
@@ -983,7 +1344,16 @@ Thread.sleep(2000);
 				
 				System.out.println("NoSuchElementException "+e);
 	
-				writeToExcel(testCounter,14,"Try This Manually");
+				
+				
+				 if(source.equals("excel")) {
+			       	 writeToExcel(testCounter, 14,"NoSuchElementException on third page");
+			       	 }
+			  	String[] resultArray = new String[2];
+			  	resultArray[0]="fail";
+			  	resultArray[1]="Try This Manually";
+			  	writeToDB(testInputNbr,tinCount,trk,count,resultArray);
+			    Assert.assertTrue(true,"NoSuchElementException on third page");
 			
 			}
 			else
@@ -991,8 +1361,15 @@ Thread.sleep(2000);
 				
 				System.out.println("NoSuchElementException "+e);
 			
-				writeToExcel(testCounter,14,"Try This Manually");
-				softAssertion.assertTrue(false,"Failed During Third Page");
+				 if(source.equals("excel")) {
+			       	 writeToExcel(testCounter, 14,"NoSuchElementException on third page");
+			       	 }
+			  	String[] resultArray = new String[2];
+			  	resultArray[0]="fail";
+			  	resultArray[1]="NoSuchElementException on third page";
+			  	writeToDB(testInputNbr,tinCount,trk,count,resultArray);
+			    Assert.assertTrue(true,"NoSuchElementException on third page");
+				softAssertion.assertTrue(false,"NoSuchElementException on third page");
 			}
 		}
 		catch (WebDriverException h)
@@ -1000,18 +1377,41 @@ Thread.sleep(2000);
 		
 			System.out.println("WebDriverException "+h);
 	
-			writeToExcel(testCounter,14,"Try This Manually");
-			softAssertion.assertTrue(false,"Failed During Third Page");
+			 if(source.equals("excel")) {
+		       	 writeToExcel(testCounter, 14,"Try This Manually");
+		       	 }
+		  	String[] resultArray = new String[2];
+		  	resultArray[0]="fail";
+		  	resultArray[1]="WebDriverException on third page";
+		  	writeToDB(testInputNbr,tinCount,trk,count,resultArray);
+		    Assert.assertTrue(true,"WebDriverException on third page");
+			softAssertion.assertTrue(false,"WebDriverException on third page");
 		}
 
 		catch(NullPointerException k)
 		{
 			System.out.println("STEPHEN "+k);
-			softAssertion.assertTrue(false,"Failed During Third Page");
+			 if(source.equals("excel")) {
+		       	 writeToExcel(testCounter, 14,"NullPointerException on third page");
+		       	 }
+		  	String[] resultArray = new String[2];
+		  	resultArray[0]="fail";
+		  	resultArray[1]="NullPointerException on third page";
+		  	writeToDB(testInputNbr,tinCount,trk,count,resultArray);
+		    Assert.assertTrue(true,"NullPointerException on third page");
+			softAssertion.assertTrue(false,"NullPointerException on third page");
 		
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			System.out.println("InterruptedException "+e);
+			 if(source.equals("excel")) {
+		       	 writeToExcel(testCounter, 14,"InterruptedException on third page");
+		       	 }
+		  	String[] resultArray = new String[2];
+		  	resultArray[0]="fail";
+		  	resultArray[1]="InterruptedException on third page";
+		  	writeToDB(testInputNbr,tinCount,trk,count,resultArray);
+		    Assert.assertTrue(true,"InterruptedException on third page");
 			softAssertion.assertTrue(false,"Failed During Third Page");
 			//e.printStackTrace();
 		}
@@ -1028,19 +1428,77 @@ Thread.sleep(2000);
 	public synchronized int getRerateId(WebDriver driver, String name,int testCounter) {
 		int count;
 		String requestId;
+		//System.out.println()
 		driver.findElement(By.xpath("//a[contains(text(),'"+name+"')]")).getText();
 		count = driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]")).size();
 		requestId = driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[3]/font")).get(count-1).getText();
+		 if(source.equals("excel")) {
 		writeToExcel(testCounter,13,requestId);
+		 }
 		return count;
 		
 	}
 	  
+	
+	
+	
+	
+	 public synchronized void writeToDB(String testInputNbr,String tinCount,String trk,int rerateRequest, String[] resultArray) {
+	    	Connection GTMcon=null;
+	    	String rerateRequestString = Integer.toString(rerateRequest);
+	    	try {
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+				GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
+				
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+	    	PreparedStatement stmt = null;
+	    	
+
+	    	try {
+	        //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
+	    	stmt=GTMcon.prepareStatement("insert into rerate_results (test_input_nbr,tin_count,trkngnbr,request_id,result,description) values (?,?,?,?,?,?)");  
+			stmt.setString(1,testInputNbr);  
+			stmt.setString(2,tinCount);  
+			stmt.setString(3,trk);  
+			stmt.setString(4,rerateRequestString); 
+			stmt.setString(5,resultArray[0]);  
+			stmt.setString(6,resultArray[1]);  
+			stmt.executeUpdate();
+	    	}
+	    	catch(Exception e) {
+	    		System.out.println(e);
+	    	}
+			
+	    	
+	    	
+	    	try {
+			//	update gtm_rev_tools.rebill_results set result='fail',description='6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables' where trkngnbr='566166113544';
+			stmt=GTMcon.prepareStatement("update rerate_results set result=?,description=? where trkngnbr=?");  
+			
+			stmt.setString(1,resultArray[0]);  
+			stmt.setString(2,resultArray[1]); 
+			stmt.setString(3,trk); 
+			stmt.executeUpdate();
+			
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+
+	    	
+	    }
 	  
 	public synchronized void writeToExcel(int rowCountExcel,int colCountExcel,String outputString){
 		
-		e.setCellData(rowCountExcel, colCountExcel, outputString);
-		e.writeCellData();
+		excelVar.setCellData(rowCountExcel, colCountExcel, outputString);
+		excelVar.writeCellData();
 	}
 	   
 }
