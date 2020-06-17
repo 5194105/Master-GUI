@@ -573,6 +573,7 @@ public class testngRebillSlow {
     	
     	try { 
     		driver1.quit();
+    		driver1.close();
 	  }
 	  catch(Exception eee) {
 		  System.out.println(eee);

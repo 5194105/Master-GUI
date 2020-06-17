@@ -3,15 +3,15 @@
 <suite name="Failed suite [Sample_Suite]">
   <parameter name="nullCheckBox" value="true"/>
   <parameter name="level" value="3"/>
-  <parameter name="failedCheckBox" value="true"/>
+  <parameter name="failedCheckBox" value="false"/>
   <parameter name="groundCheckBox" value="false"/>
   <parameter name="source" value="excel"/>
-  <parameter name="endDateText" value="06/11/2020"/>
+  <parameter name="endDateText" value="06/15/2020"/>
   <parameter name="compatibleMode" value="true"/>
   <parameter name="expressCheckBox" value="true"/>
   <parameter name="allCheckBox" value="false"/>
   <parameter name="startDateText" value="01/01/2020"/>
-  <parameter name="filepath" value="C:\Users\FedExUser\Desktop\stephen\R66\L3C3\Rerate\rerate2.xlsx"/>
+  <parameter name="filepath" value="C:\Users\FedExUser\Desktop\stephen\R66\L3C4\Rerate\rerate.xlsx"/>
   <parameter name="sessionCount" value="1"/>
   <parameter name="domesticCheckBox" value="true"/>
   <parameter name="browser" value="1"/>
@@ -21,6 +21,7 @@
       <class name="rerate.rerateTestNgSlow">
         <methods>
           <include name="testMethod2"/>
+          <include name="testMethod" invocation-numbers="0"/>
           <include name="testMethod4"/>
           <include name="setupExcel"/>
           <include name="testMethod3"/>

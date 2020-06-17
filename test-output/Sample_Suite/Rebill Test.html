@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Rebill Test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>5/3/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>4/4/0</td>
 </tr><tr>
-<td>Started on:</td><td>Fri Jun 12 08:35:02 CDT 2020</td>
+<td>Started on:</td><td>Wed Jun 17 11:01:35 CDT 2020</td>
 </tr>
-<tr><td>Total time:</td><td>2822 seconds (2822496 ms)</td>
+<tr><td>Total time:</td><td>599 seconds (599275 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -75,14 +75,45 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
+<td title='rerate.rerateTestNgSlow.testMethod()'><b>testMethod</b><br>Test class: rerate.rerateTestNgSlow<br>Parameters: 112166, 1, 700075591, , 273585535080, , 421470999, , Express Domestic, , Invoice, Express 9-digit, Archive Test 1, 1</td>
+<td><div><pre>java.lang.AssertionError: Failed during first page.
+	at rerate.rerateTestNgSlow.firstPage(rerateTestNgSlow.java:959)
+	at rerate.rerateTestNgSlow.doWork(rerateTestNgSlow.java:723)
+	at rerate.rerateTestNgSlow.testMethod(rerateTestNgSlow.java:557)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 11 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace30938129", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace30938129'><pre>java.lang.AssertionError: Failed during first page.
+	at org.testng.Assert.fail(Assert.java:93)
+	at rerate.rerateTestNgSlow.firstPage(rerateTestNgSlow.java:959)
+	at rerate.rerateTestNgSlow.doWork(rerateTestNgSlow.java:723)
+	at rerate.rerateTestNgSlow.testMethod(rerateTestNgSlow.java:557)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>22</td>
+<td>rerate.rerateTestNgSlow@3e4790</td></tr>
+<tr>
 <td title='rerate.rerateTestNgSlow.testMethod2()'><b>testMethod2</b><br>Test class: rerate.rerateTestNgSlow</td>
 <td><div><pre>org.testng.TestNGException: 
 Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod2() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
 	at java.lang.Thread.run(Unknown Source)
-... Removed 7 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace24390676", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace24390676'><pre>org.testng.TestNGException: 
+... Removed 7 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace8995386", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace8995386'><pre>org.testng.TestNGException: 
 Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod2() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
 	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
 	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
@@ -104,8 +135,8 @@ Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.d
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
 	at java.lang.Thread.run(Unknown Source)
-... Removed 7 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace19252082", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace19252082'><pre>org.testng.TestNGException: 
+... Removed 7 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace20920969", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace20920969'><pre>org.testng.TestNGException: 
 Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod3() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
 	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
 	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
@@ -127,8 +158,8 @@ Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.d
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
 	at java.lang.Thread.run(Unknown Source)
-... Removed 7 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace18548201", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace18548201'><pre>org.testng.TestNGException: 
+... Removed 7 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace13081867", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace13081867'><pre>org.testng.TestNGException: 
 Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod4() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
 	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
 	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
@@ -152,29 +183,24 @@ Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.d
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='rerate.rerateTestNgSlow.testMethod()'><b>testMethod</b><br>Test class: rerate.rerateTestNgSlow<br>Parameters: 94772, 1, 128599983, , 931499738600, , 421465131, , Express Domestic, , Tracking Number, Express 9-digit, 5194105 T1, 1</td>
+<td title='rerate.rerateTestNgSlow.testMethod()'><b>testMethod</b><br>Test class: rerate.rerateTestNgSlow<br>Parameters: 100365, 1, 450312398, , 302975535080, , 120279590, , Express Domestic, , Tracking Number, Express 9-digit, Archive Test 2, 2</td>
 <td></td>
-<td>150</td>
+<td>145</td>
 <td>rerate.rerateTestNgSlow@3e4790</td></tr>
 <tr>
-<td title='rerate.rerateTestNgSlow.testMethod()'><b>testMethod</b><br>Test class: rerate.rerateTestNgSlow<br>Parameters: 94772, 1, 128599983, , 931499738600, , 421465131, , Express Domestic, , Tracking Number, Express 9-digit, 5194105 T2, 2</td>
+<td title='rerate.rerateTestNgSlow.testMethod()'><b>testMethod</b><br>Test class: rerate.rerateTestNgSlow<br>Parameters: 126610, 1, 450312851, , 602383600640, , 421468884, , Express Domestic, , Tracking Number, Express 9-digit, Archive Test 3, 3</td>
 <td></td>
-<td>692</td>
+<td>145</td>
 <td>rerate.rerateTestNgSlow@3e4790</td></tr>
 <tr>
-<td title='rerate.rerateTestNgSlow.testMethod()'><b>testMethod</b><br>Test class: rerate.rerateTestNgSlow<br>Parameters: 94772, 1, 128599983, , 931499738600, , 421465131, , Express Domestic, , Tracking Number, Express 9-digit, 5194105 T3, 3</td>
+<td title='rerate.rerateTestNgSlow.testMethod()'><b>testMethod</b><br>Test class: rerate.rerateTestNgSlow<br>Parameters: 71041, 1, 701220552, , 794972263420, , 421469310, , Express Domestic, , Tracking Number, Express 9-digit, Archive Test 4, 4</td>
 <td></td>
-<td>700</td>
+<td>148</td>
 <td>rerate.rerateTestNgSlow@3e4790</td></tr>
 <tr>
-<td title='rerate.rerateTestNgSlow.testMethod()'><b>testMethod</b><br>Test class: rerate.rerateTestNgSlow<br>Parameters: 94772, 1, 128599983, , 931499738600, , 421465131, , Express Domestic, , Tracking Number, Express 9-digit, 5194105 T4, 4</td>
+<td title='rerate.rerateTestNgSlow.testMethod()'><b>testMethod</b><br>Test class: rerate.rerateTestNgSlow<br>Parameters: 85537, 1, 222326460, , 582838834812, , 421472025, , Express Domestic, , Tracking Number, CE Level, Archive Test 5, 5</td>
 <td></td>
-<td>704</td>
-<td>rerate.rerateTestNgSlow@3e4790</td></tr>
-<tr>
-<td title='rerate.rerateTestNgSlow.testMethod()'><b>testMethod</b><br>Test class: rerate.rerateTestNgSlow<br>Parameters: 94772, 1, 128599983, , 931499738600, , 421465131, , Express Domestic, , Tracking Number, Express 9-digit, 5194105 T5, 5</td>
-<td></td>
-<td>573</td>
+<td>136</td>
 <td>rerate.rerateTestNgSlow@3e4790</td></tr>
 </table><p>
 </body>
