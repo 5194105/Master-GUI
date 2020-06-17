@@ -134,8 +134,8 @@ public class testngRebillSlow {
 	String[][] allData;
 	
 	@BeforeClass
-	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox","normalCheckBox","mfRetireCheckBox","sessionCount","customString","customCheckBox","databaseDisabled"})
-	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String normalCheckBox,String mfRetireCheckBox,String sessionCount,String customString,String customCheckBox,String databaseDisabled) {
+	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox","sessionCount","customString","customCheckBox","databaseDisabled"})
+	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String sessionCount,String customString,String customCheckBox,String databaseDisabled) {
 	c=new config();
 	/*
 	@BeforeClass
@@ -169,8 +169,7 @@ public class testngRebillSlow {
 				this.internationalCheckBox=internationalCheckBox;
 				this.expressCheckBox=expressCheckBox;
 				this.groundCheckBox=groundCheckBox;
-				this.normalCheckBox=normalCheckBox;
-				this.mfRetireCheckBox=mfRetireCheckBox;
+				
 	        	this.sessionCount=sessionCount;
 	        	sessionCountInt=Integer.parseInt(sessionCount);
 	        	this.customString=customString;
@@ -235,6 +234,7 @@ public class testngRebillSlow {
 	
 	
 	public void runDbQuery() {
+		try {
 		Connection GTMcon=null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -257,13 +257,21 @@ public class testngRebillSlow {
     	
     	String databaseSqlQuery="select result, description, test_input_nbr, tin_count, trkngnbr, reason_code, rebill_acct,invoice_nbr_1, invoice_nbr_2, mig, region,  login,   password,  rs_Type, company, worktype, ORIGIN_LOC,DEST_LOC,DIM_VOL,SHIPPER_REF,RECP_ADDRESS,SHIPPER_ADDRESS,ACC_NBR_DEL_STATUS,SVC_BASE, CREDIT_CARD_DTL,PRE_RATE_SCENARIOS,EXP_Pieces,EXP_ACTUAL_Weight,EXP_Adj_Weight,CREDIT_CARD_DTL from rebill_regression ";
     	
+    	if (allCheckBox.equals("true")) {
+    		databaseSqlCount+="where trkngnbr is not null";
+    		databaseSqlQuery+="where trkngnbr is not null ";
+    	}
+    	
     	
     	if (customCheckBox.equals("false")) {
     	
     	if (allCheckBox.equals("false")) {
     		databaseSqlCount+="where ";
     		databaseSqlQuery+="where ";
-    	}
+    	
+    	
+    	
+    	
     	if (nullCheckBox.equals("true") && failedCheckBox.equals("true")) {
     		databaseSqlCount+="(result is null or result ='fail') ";
     		databaseSqlQuery+="(result is null or result ='fail') ";
@@ -302,7 +310,7 @@ public class testngRebillSlow {
     		databaseSqlCount+="and company in ('GD','EP') ";
     		databaseSqlQuery+="and company in ('GD','EP') ";
     	}
-    	
+    	/*
        	if (normalCheckBox.equals("true") && mfRetireCheckBox.equals("false")) {
        		databaseSqlCount+="and worktype='NORMAL' ";
        		databaseSqlQuery+="and worktype='NORMAL' ";
@@ -315,12 +323,13 @@ public class testngRebillSlow {
        		databaseSqlCount+="and worktype in ('MFRETIRE','NORMAL') ";
        		databaseSqlQuery+="and worktype in ('MFRETIRE','NORMAL') ";
     	}
+    	*/
     	}
     	else if (customCheckBox.equals("false")){
     		databaseSqlCount+=customString;
     		databaseSqlQuery+=customString;
     	}
-    	
+    	}
     	
 
        	try {
@@ -361,7 +370,10 @@ public class testngRebillSlow {
         	catch(Exception e) {
         		System.out.println(e);
         	}
-    	
+		}
+    	catch(Exception ee) {
+    		System.out.println(ee);
+    	}
 	}
 	
 	
