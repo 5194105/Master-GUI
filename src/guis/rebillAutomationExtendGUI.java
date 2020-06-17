@@ -353,7 +353,7 @@ public class rebillAutomationExtendGUI {
 		    	  
 	    	  }
 	    	  
-	    	  if (expressBox.isSelected()==false && groundBox.isSelected()==false && domBox.isSelected()==false && internationalBox.isSelected()==false) {
+	    	  if (expressBox.isSelected()==false && groundBox.isSelected()==false && domBox.isSelected()==false && internationalBox.isSelected()==false && allBox.isSelected()==false) {
 	    		  checkList=false;
 	    		  errorList+="Must Select a Flavor\n";
 	    		  System.out.println("Must Select a Flavor");
