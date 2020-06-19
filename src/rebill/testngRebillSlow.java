@@ -169,7 +169,6 @@ public class testngRebillSlow {
 				this.internationalCheckBox=internationalCheckBox;
 				this.expressCheckBox=expressCheckBox;
 				this.groundCheckBox=groundCheckBox;
-				
 	        	this.sessionCount=sessionCount;
 	        	sessionCountInt=Integer.parseInt(sessionCount);
 	        	this.customString=customString;
@@ -585,6 +584,7 @@ public class testngRebillSlow {
     	
     	try { 
     		driver1.quit();
+    		driver1.close();
 	  }
 	  catch(Exception eee) {
 		  System.out.println(eee);

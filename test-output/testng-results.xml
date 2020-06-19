@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testng-results skipped="0" failed="27" ignored="0" retried="72" total="102" passed="3">
+=======
+<testng-results skipped="0" failed="3" ignored="0" total="4" passed="1">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
   <reporter-output>
   </reporter-output>
+<<<<<<< HEAD
   <suite name="Sample_Suite" duration-ms="3603545" started-at="2020-06-19T02:51:33 CDT" finished-at="2020-06-19T03:51:37 CDT">
+=======
+  <suite name="Sample_Suite" duration-ms="8755" started-at="2020-06-18T20:43:55Z" finished-at="2020-06-18T20:44:04Z">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
     <groups>
     </groups>
+<<<<<<< HEAD
     <test name="Rebill Test" duration-ms="3603545" started-at="2020-06-19T02:51:33 CDT" finished-at="2020-06-19T03:51:37 CDT">
       <class name="rebill.testngRebillSlow">
         <test-method status="PASS" signature="setupExcel(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:rebill.testngRebillSlow@20bd12]" name="setupExcel" is-config="true" duration-ms="16997" started-at="2020-06-19T02:51:33 CDT" finished-at="2020-06-19T02:51:50 CDT">
+=======
+    <test name="Rebill Test" duration-ms="8755" started-at="2020-06-18T20:43:55Z" finished-at="2020-06-18T20:44:04Z">
+      <class name="prerate.prerateHoldTestNGSlow">
+        <test-method status="PASS" signature="setupExcel(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:prerate.prerateHoldTestNGSlow@17c0f21]" name="setupExcel" is-config="true" duration-ms="7739" started-at="2020-06-18T15:43:55Z" finished-at="2020-06-18T15:44:03Z">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
           <params>
             <param index="0">
               <value>
-                <![CDATA[]]>
+                <![CDATA[C:\Users\FedExUser\Documents\rebill.xlsx]]>
               </value>
             </param>
             <param index="1">
@@ -26,7 +40,7 @@
             </param>
             <param index="3">
               <value>
-                <![CDATA[]]>
+                <![CDATA[false]]>
               </value>
             </param>
             <param index="4">
@@ -46,7 +60,7 @@
             </param>
             <param index="7">
               <value>
-                <![CDATA[false]]>
+                <![CDATA[true]]>
               </value>
             </param>
             <param index="8">
@@ -56,12 +70,12 @@
             </param>
             <param index="9">
               <value>
-                <![CDATA[true]]>
+                <![CDATA[false]]>
               </value>
             </param>
             <param index="10">
               <value>
-                <![CDATA[true]]>
+                <![CDATA[false]]>
               </value>
             </param>
             <param index="11">
@@ -93,6 +107,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupExcel -->
+<<<<<<< HEAD
         <test-method status="SKIP" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rebill.testngRebillSlow@20bd12]" name="testMethod1" duration-ms="54988" retried="true" started-at="2020-06-19T02:51:50 CDT" data-provider="data-provider1" finished-at="2020-06-19T02:52:45 CDT">
           <params>
             <param index="0">
@@ -18626,6 +18641,130 @@ at java.lang.Thread.run(Thread.java:748)
           </reporter-output>
         </test-method> <!-- testMethod1 -->
       </class> <!-- rebill.testngRebillSlow -->
+=======
+        <test-method status="PASS" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@17c0f21]" name="testMethod1" duration-ms="968" started-at="2020-06-18T15:44:03Z" data-provider="data-provider1" finished-at="2020-06-18T15:44:04Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[N]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[176660]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[2]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[583167347179]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[ON_HOLD]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method status="FAIL" signature="testMethod3(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@17c0f21]" name="testMethod3" duration-ms="0" started-at="2020-06-18T15:44:03Z" data-provider="data-provider3" finished-at="2020-06-18T15:44:03Z">
+          <exception class="org.testng.TestNGException">
+            <message>
+              <![CDATA[
+Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod3() must return either Object[][] or Iterator<Object>[], not class [[Ljava.lang.Object;]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod3() must return either Object[][] or Iterator<Object>[], not class [[Ljava.lang.Object;
+	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
+	at org.testng.internal.Invoker.handleParameters(Invoker.java:1308)
+	at org.testng.internal.Invoker.createParameters(Invoker.java:1036)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1126)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.TestNGException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod3 -->
+        <test-method status="FAIL" signature="testMethod2(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@17c0f21]" name="testMethod2" duration-ms="0" started-at="2020-06-18T15:44:03Z" data-provider="data-provider2" finished-at="2020-06-18T15:44:03Z">
+          <exception class="org.testng.TestNGException">
+            <message>
+              <![CDATA[
+Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod2() must return either Object[][] or Iterator<Object>[], not class [[Ljava.lang.Object;]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod2() must return either Object[][] or Iterator<Object>[], not class [[Ljava.lang.Object;
+	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
+	at org.testng.internal.Invoker.handleParameters(Invoker.java:1308)
+	at org.testng.internal.Invoker.createParameters(Invoker.java:1036)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1126)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.TestNGException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod2 -->
+        <test-method status="FAIL" signature="testMethod4(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:prerate.prerateHoldTestNGSlow@17c0f21]" name="testMethod4" duration-ms="0" started-at="2020-06-18T15:44:03Z" data-provider="data-provider4" finished-at="2020-06-18T15:44:03Z">
+          <exception class="org.testng.TestNGException">
+            <message>
+              <![CDATA[
+Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod4() must return either Object[][] or Iterator<Object>[], not class [[Ljava.lang.Object;]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod4() must return either Object[][] or Iterator<Object>[], not class [[Ljava.lang.Object;
+	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
+	at org.testng.internal.Invoker.handleParameters(Invoker.java:1308)
+	at org.testng.internal.Invoker.createParameters(Invoker.java:1036)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1126)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.TestNGException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod4 -->
+      </class> <!-- prerate.prerateHoldTestNGSlow -->
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
     </test> <!-- Rebill Test -->
   </suite> <!-- Sample_Suite -->
 </testng-results>

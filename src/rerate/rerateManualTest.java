@@ -19,21 +19,25 @@ public class rerateManualTest {
 
 	
 	public static void main(String[] args) {
+	
+		
+		
+		
 	config c = new config();
-   	c.setExcelPath("C:\\Users\\FedExUser\\Desktop\\stephen\\R66\\L3C3\\Rerate\\rerate3.xlsx");
+   	c.setExcelPath("C:\\Users\\FedExUser\\Desktop\\stephen\\R66\\L3C4\\Rerate\\rerate.xlsx");
 	c.setLevel("3");
 	c.setDriverType("1");
 	c.setCompatibleMode("true");
 	c.setSource("excel");
 	c.setAllCheckBox("false");
 	c.setNullCheckBox("true");
-	c.setFailedCheckBox("true");
+	c.setFailedCheckBox("false");
 	c.setDomesticCheckBox("true");
 	c.setInternationalCheckBox("true");
 	c.setExpressCheckBox("true");
 	c.setGroundCheckBox("false");
 	c.setStartDate("01/01/2020");
-	c.setEndDate("06/11/2020");
+	c.setEndDate("06/15/2020");
 
 	c.setSessionCount("1");
 	

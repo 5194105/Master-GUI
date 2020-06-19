@@ -22,7 +22,10 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -39,7 +42,7 @@ public class prerateHoldTestNGSlow {
   
     //False = Running from xml only
 	//True = Running from GUI only
-	Boolean testingMode,testingDB;
+	
 	
 	
 	String tempFile,configFile;
@@ -121,45 +124,13 @@ public class prerateHoldTestNGSlow {
 	String sessionCount;
 	String[][] allData;
 	int sessionCountInt;
-	
+    String customString;
+    String customCheckBox;
+    String databaseDisabled;
+    
 	@BeforeClass
-	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","sessionCount"})
-	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String sessionCount) {
-		this.filepath=filepath;
-		this.level=level;
-		this.browser=browser;
-		this.compatibleMode=compatibleMode;
-		this.source=source;
-		this.allCheckBox=allCheckBox;
-		this.nullCheckBox=nullCheckBox;
-		this.failedCheckBox=failedCheckBox;
-		this.sessionCount=sessionCount;
-		sessionCountInt=Integer.parseInt(sessionCount);
-		System.out.println(sessionCountInt);
-	/*
-	@BeforeClass
-	public void setupExcel() {
-	*/
-		testingMode=false;
-		testingDB=true;
-		if (testingMode==true) {
-			filepath=homePath+"\\test data\\PRERATE_UPDATE.xlsx";
-			level="3";
-			browser="2";
-			compatibleMode="false";
-			source="excel";
-			allCheckBox="false";
-			nullCheckBox="false";
-			failedCheckBox="false";
-			sessionCountInt=1;
-		}
-		
-		
-		
-		
-		
-		
-		
+	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox","sessionCount","customString","customCheckBox","databaseDisabled"})
+	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String sessionCount,String customString,String customCheckBox,String databaseDisabled) {
 		try {
 			Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe");
 		} catch (IOException e1) {
@@ -167,33 +138,37 @@ public class prerateHoldTestNGSlow {
 			e1.printStackTrace();
 		}
 		
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
-        if (testingMode==true && source.equals("excel")){
-        	browser="2";
-        	level="2";
-        	excelVar = new excel(homePath+"\\test data\\PRERATE_UPDATE.xlsx");
-        }
-	  
-    else {
-    	if (source.equals("db")) {}
-    	else if (source.equals("excel")) {
-    		excelVar = new excel(filepath);
-    	}
+		homePath=System.getProperty("user.dir");
     	
-    	this.browser=browser;
-    	this.level=level;
-    	this.compatibleMode=compatibleMode;
-    	this.source=source;
-    	this.allCheckBox=allCheckBox;
-		this.nullCheckBox=nullCheckBox;
-		this.failedCheckBox=failedCheckBox;
 	
+        	if (source.equals("excel")) {
+        		this.filepath=filepath;	
+        		excelVar = new excel(filepath);
+        	}
+        	
+	        	this.browser=browser;
+	        	this.level=level;
+	        	this.compatibleMode=compatibleMode;
+	        	this.source=source;
+	        	this.allCheckBox=allCheckBox;
+				this.nullCheckBox=nullCheckBox;
+				this.failedCheckBox=failedCheckBox;
+				this.domesticCheckBox=domesticCheckBox;
+				this.internationalCheckBox=internationalCheckBox;
+				this.expressCheckBox=expressCheckBox;
+				this.groundCheckBox=groundCheckBox;
+	        	this.sessionCount=sessionCount;
+	        	sessionCountInt=Integer.parseInt(sessionCount);
+	        	this.customString=customString;
+	        	this.customCheckBox=customCheckBox;
+	        	this.databaseDisabled=databaseDisabled;
+
+try {
+	Class.forName("oracle.jdbc.driver.OracleDriver");
+} catch (ClassNotFoundException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+
     	
     }
         
@@ -262,10 +237,10 @@ public class prerateHoldTestNGSlow {
 
 	
     	try {
-    		if (testingDB==true) {
+    	
     			Class.forName("oracle.jdbc.driver.OracleDriver");
     			GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
-    		}
+    		
 			
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
@@ -303,7 +278,7 @@ public class prerateHoldTestNGSlow {
        	
     	
     	
-    	if (testingDB==true) {
+    	
     	try {
         //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
     		
@@ -343,7 +318,7 @@ public class prerateHoldTestNGSlow {
     		System.out.println(e);
     	}
 
-    	}
+    	
 	}
 	
 	
@@ -480,7 +455,7 @@ public class prerateHoldTestNGSlow {
     
     @Test(dataProvider="data-provider1")
     public void testMethod1( String result, String description,String podScan,String testInputNbr,String tinCount,String trk,String tinComment,int rowNumber) {
-    	if (testingDB==true) {
+    	
     	 try {
       	  if (validateEC(trk,tinComment)==true){
       		if (source.equals("excel")) {
@@ -496,7 +471,7 @@ public class prerateHoldTestNGSlow {
     	 catch(Exception e) {
     		 System.out.println(e);
     	 }
-    	}
+    	
       	  
     	try { 
     		driver1.quit();
@@ -505,23 +480,49 @@ public class prerateHoldTestNGSlow {
 		  System.out.println(eee);
 		  
 	  }
-    	if (browser.equals("1")) {
-    		if (compatibleMode.equals("true")) {	
-    			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-    		    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
-    		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
-    		    capabilities.setCapability("ignoreZoomSetting", true);
-    		    capabilities.setCapability("ignoreProtectedModeSettings", true);
-    		    capabilities.setCapability("initialBrowserUrl",levelUrl);
-    		}
-    		System.setProperty(ieSetProperty, ieDriverPath);
-    		driver1 =  new InternetExplorerDriver();
-    	}
-    	else if (browser.equals("2")) {
-    	 
-    		System.setProperty(chromeSetProperty,chromePath);
-    		driver1 = new ChromeDriver();
-    	}
+		  
+		  if (browser.equals("1")) {
+			  DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+			  if (compatibleMode.equals("true")) {	
+	    			
+	    		    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
+	    		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
+	    		    capabilities.setCapability("ignoreZoomSetting", true);
+	    		    capabilities.setCapability("ignoreProtectedModeSettings", true);
+	    		    capabilities.setCapability("initialBrowserUrl",levelUrl);
+	    		   // capabilities.setCapability("nativeEvents",false);
+	    		 
+	    		}
+	    		
+	    	//System.setProperty(ieSetProperty, ieDriverPath);
+	    		System.setProperty("webdriver.ie.driver", homePath+"\\drivers\\IEDriverServer.exe");
+	    		try {
+	    			driver1 =  new InternetExplorerDriver(capabilities);
+	    		
+	    		}
+	    		catch(Exception e) {
+	    			System.out.println(e);
+	    		}
+	    	}
+	    	else if (browser.equals("2")) {
+	    	 
+	    		System.setProperty(chromeSetProperty,chromePath);
+	    		driver1 = new ChromeDriver();
+	    	}
+	     	else if (browser.equals("3")) {
+	         	 
+	    		
+	        	
+	        	FirefoxProfile profile = new FirefoxProfile(); 
+	        	profile.setPreference("capability.policy.default.Window.QueryInterface", "allAccess");
+	        	profile.setPreference("capability.policy.default.Window.frameElement.get","allAccess");
+	        	profile.setAcceptUntrustedCertificates(true); profile.setAssumeUntrustedCertificateIssuer(true);
+	        	DesiredCapabilities capabilities = new DesiredCapabilities(); 
+	        	capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+	        	System.setProperty("webdriver.gecko.driver",  homePath+"\\drivers\\geckodriver.exe");
+	        	driver1 = new FirefoxDriver(capabilities);
+	    	}
+	    
     	
 	    login(driver1,wait1);
 	  
@@ -538,7 +539,7 @@ public class prerateHoldTestNGSlow {
    
     @Test(dataProvider="data-provider2")
     public void testMethod2(String result, String description,String podScan,String testInputNbr,String tinCount,String trk,String tinComment,int rowNumber) {
-    	if (testingDB==true) {
+    	
     	try {
          	  if (validateEC(trk,tinComment)==true){
          		 writeToExcel(rowNumber,1, "pass");
@@ -552,7 +553,7 @@ public class prerateHoldTestNGSlow {
        	 catch(Exception e) {
        		 System.out.println(e);
        	 }
-    	}
+    	
       	 
       	 
     	try { 
@@ -563,23 +564,49 @@ public class prerateHoldTestNGSlow {
 		  
 	  }
 	  
-    	if (browser.equals("1")) {
-    		if (compatibleMode.equals("true")) {	
-    			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-    		    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
-    		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
-    		    capabilities.setCapability("ignoreZoomSetting", true);
-    		    capabilities.setCapability("ignoreProtectedModeSettings", true);
-    		    capabilities.setCapability("initialBrowserUrl",levelUrl);
-    		}
-    		System.setProperty(ieSetProperty, ieDriverPath);
-    		driver2 =  new InternetExplorerDriver();
-    	}
-    	else if (browser.equals("2")) {
-    	 
-    		System.setProperty(chromeSetProperty,chromePath);
-    		driver2 = new ChromeDriver();
-    	}
+		  
+		  if (browser.equals("1")) {
+			  DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+			  if (compatibleMode.equals("true")) {	
+	    			
+	    		    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
+	    		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
+	    		    capabilities.setCapability("ignoreZoomSetting", true);
+	    		    capabilities.setCapability("ignoreProtectedModeSettings", true);
+	    		    capabilities.setCapability("initialBrowserUrl",levelUrl);
+	    		   // capabilities.setCapability("nativeEvents",false);
+	    		 
+	    		}
+	    		
+	    	//System.setProperty(ieSetProperty, ieDriverPath);
+	    		System.setProperty("webdriver.ie.driver", homePath+"\\drivers\\IEDriverServer.exe");
+	    		try {
+	    			driver2 =  new InternetExplorerDriver(capabilities);
+	    		
+	    		}
+	    		catch(Exception e) {
+	    			System.out.println(e);
+	    		}
+	    	}
+	    	else if (browser.equals("2")) {
+	    	 
+	    		System.setProperty(chromeSetProperty,chromePath);
+	    		driver2 = new ChromeDriver();
+	    	}
+	     	else if (browser.equals("3")) {
+	         	 
+	    		
+	        	
+	        	FirefoxProfile profile = new FirefoxProfile(); 
+	        	profile.setPreference("capability.policy.default.Window.QueryInterface", "allAccess");
+	        	profile.setPreference("capability.policy.default.Window.frameElement.get","allAccess");
+	        	profile.setAcceptUntrustedCertificates(true); profile.setAssumeUntrustedCertificateIssuer(true);
+	        	DesiredCapabilities capabilities = new DesiredCapabilities(); 
+	        	capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+	        	System.setProperty("webdriver.gecko.driver",  homePath+"\\drivers\\geckodriver.exe");
+	        	driver2 = new FirefoxDriver(capabilities);
+	    	}
+	    
 	    login(driver2,wait2);
 	    try {
 			doPrerate(driver2,wait2,result, description,podScan,testInputNbr, tinCount, trk, tinComment,rowNumber,2);
@@ -593,7 +620,7 @@ public class prerateHoldTestNGSlow {
     }
     @Test(dataProvider="data-provider3")
     public void testMethod3(String result, String description,String podScan,String testInputNbr,String tinCount,String trk,String tinComment,int rowNumber) {
-    	if (testingDB==true) {
+    	
     	try {
       		 if (validateEC(trk,tinComment)==true){
          		 writeToExcel(rowNumber,1, "pass");
@@ -607,7 +634,7 @@ public class prerateHoldTestNGSlow {
        	 catch(Exception e) {
        		 System.out.println(e);
        	 }
-    	}
+    	
       	 
       	 
     	try { 
@@ -618,24 +645,49 @@ public class prerateHoldTestNGSlow {
 		  
 	  }
 	  
-    	if (browser.equals("1")) {
-    		if (compatibleMode.equals("true")) {	
-    			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-    		    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
-    		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
-    		    capabilities.setCapability("ignoreZoomSetting", true);
-    		    capabilities.setCapability("ignoreProtectedModeSettings", true);
-    		    capabilities.setCapability("initialBrowserUrl",levelUrl);
-    		}
-    		System.setProperty(ieSetProperty, ieDriverPath);
-    		driver3 =  new InternetExplorerDriver();
-    	}
-    	else if (browser.equals("2")) {
-    	 
-    		System.setProperty(chromeSetProperty,chromePath);
-    		driver3 = new ChromeDriver();
-    	}
-    	
+		  
+		  if (browser.equals("1")) {
+			  DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+			  if (compatibleMode.equals("true")) {	
+	    			
+	    		    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
+	    		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
+	    		    capabilities.setCapability("ignoreZoomSetting", true);
+	    		    capabilities.setCapability("ignoreProtectedModeSettings", true);
+	    		    capabilities.setCapability("initialBrowserUrl",levelUrl);
+	    		   // capabilities.setCapability("nativeEvents",false);
+	    		 
+	    		}
+	    		
+	    	//System.setProperty(ieSetProperty, ieDriverPath);
+	    		System.setProperty("webdriver.ie.driver", homePath+"\\drivers\\IEDriverServer.exe");
+	    		try {
+	    			driver3 =  new InternetExplorerDriver(capabilities);
+	    		
+	    		}
+	    		catch(Exception e) {
+	    			System.out.println(e);
+	    		}
+	    	}
+	    	else if (browser.equals("2")) {
+	    	 
+	    		System.setProperty(chromeSetProperty,chromePath);
+	    		driver3 = new ChromeDriver();
+	    	}
+	     	else if (browser.equals("3")) {
+	         	 
+	    		
+	        	
+	        	FirefoxProfile profile = new FirefoxProfile(); 
+	        	profile.setPreference("capability.policy.default.Window.QueryInterface", "allAccess");
+	        	profile.setPreference("capability.policy.default.Window.frameElement.get","allAccess");
+	        	profile.setAcceptUntrustedCertificates(true); profile.setAssumeUntrustedCertificateIssuer(true);
+	        	DesiredCapabilities capabilities = new DesiredCapabilities(); 
+	        	capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+	        	System.setProperty("webdriver.gecko.driver",  homePath+"\\drivers\\geckodriver.exe");
+	        	driver3 = new FirefoxDriver(capabilities);
+	    	}
+	    
     	
     login(driver3,wait3);
     try {
@@ -654,7 +706,7 @@ public class prerateHoldTestNGSlow {
     
     @Test(dataProvider="data-provider4")
     public void testMethod4(String result, String description,String podScan,String testInputNbr,String tinCount,String trk,String tinComment,int rowNumber) {
-    	if (testingDB==true) {
+    	
     	try {
          	  if (validateEC(trk,tinComment)==true){
          		 writeToExcel(rowNumber,1, "pass");
@@ -667,7 +719,7 @@ public class prerateHoldTestNGSlow {
        	 }
        	 catch(Exception e) {
        		 System.out.println(e);
-       	 }
+       	 
     	}
       	 
       	 
@@ -679,23 +731,49 @@ public class prerateHoldTestNGSlow {
 		  
 	  }
 	  
-    	if (browser.equals("1")) {
-    		if (compatibleMode.equals("true")) {	
-    			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-    		    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
-    		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
-    		    capabilities.setCapability("ignoreZoomSetting", true);
-    		    capabilities.setCapability("ignoreProtectedModeSettings", true);
-    		    capabilities.setCapability("initialBrowserUrl",levelUrl);
-    		}
-    		System.setProperty(ieSetProperty, ieDriverPath);
-    		driver4 =  new InternetExplorerDriver();
-    	}
-    	else if (browser.equals("2")) {
-    	 
-    		System.setProperty(chromeSetProperty,chromePath);
-    		driver4 = new ChromeDriver();
-    	}
+		  
+		  if (browser.equals("1")) {
+			  DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+			  if (compatibleMode.equals("true")) {	
+	    			
+	    		    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
+	    		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
+	    		    capabilities.setCapability("ignoreZoomSetting", true);
+	    		    capabilities.setCapability("ignoreProtectedModeSettings", true);
+	    		    capabilities.setCapability("initialBrowserUrl",levelUrl);
+	    		   // capabilities.setCapability("nativeEvents",false);
+	    		 
+	    		}
+	    		
+	    	//System.setProperty(ieSetProperty, ieDriverPath);
+	    		System.setProperty("webdriver.ie.driver", homePath+"\\drivers\\IEDriverServer.exe");
+	    		try {
+	    			driver4 =  new InternetExplorerDriver(capabilities);
+	    		
+	    		}
+	    		catch(Exception e) {
+	    			System.out.println(e);
+	    		}
+	    	}
+	    	else if (browser.equals("2")) {
+	    	 
+	    		System.setProperty(chromeSetProperty,chromePath);
+	    		driver4 = new ChromeDriver();
+	    	}
+	     	else if (browser.equals("3")) {
+	         	 
+	    		
+	        	
+	        	FirefoxProfile profile = new FirefoxProfile(); 
+	        	profile.setPreference("capability.policy.default.Window.QueryInterface", "allAccess");
+	        	profile.setPreference("capability.policy.default.Window.frameElement.get","allAccess");
+	        	profile.setAcceptUntrustedCertificates(true); profile.setAssumeUntrustedCertificateIssuer(true);
+	        	DesiredCapabilities capabilities = new DesiredCapabilities(); 
+	        	capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+	        	System.setProperty("webdriver.gecko.driver",  homePath+"\\drivers\\geckodriver.exe");
+	        	driver4 = new FirefoxDriver(capabilities);
+	    	}
+	    
     	
     	
     login(driver4,wait4);
@@ -812,14 +890,18 @@ public class prerateHoldTestNGSlow {
 			System.out.println("Instance :"+instanceNumber+" Tracking Number: "+trk);
 			driver.findElement(By.xpath("//input[@id='preRateEntrySelForm:trackingNo_input']")).sendKeys(trk);
 			driver.findElement(By.xpath("//button[@id='preRateEntrySelForm:search_button']")).click();
+			Thread.sleep(5000);
     		}
     	catch(Exception e){
     		
     		System.out.println("Failed on Home Page");
     		System.out.println(e);
-    		String[] resultArray = new String[2];
-			 resultArray[0]="fail";
-			 resultArray[1]="Failed on Home Page";
+			 String[] resultArray =checkFailure(trk);
+				if (resultArray[1].equals("")) {
+					 resultArray[1]="Failed Somewhere... No Error Found Tho";
+				}
+		
+		
 			 writeToDB(testInputNbr,tinCount,trk,resultArray);
     		Assert.fail("Failed on Home Page");
     		}
@@ -840,7 +922,26 @@ public class prerateHoldTestNGSlow {
     			Executor = (JavascriptExecutor)driver;
     			Executor.executeScript("arguments[0].click();", element);
     		}
+    		Thread.sleep(2000);
     		driver.findElement(By.xpath("//button[@id='preRateEntryForm:PreRateEntrySubmit_button']")).click();
+    		
+    		Thread.sleep(5000);
+    		
+    		try {
+           	  if (validateEC(trk,tinComment)==true){
+           		 writeToExcel(rowNumber,1, "pass");
+           		 String[] resultArray = new String[2];
+     			 resultArray[0]="pass";
+     			 resultArray[1]="completed";
+     			 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                	 return;
+                 }
+         	 }
+         	 catch(Exception e) {
+         		 System.out.println(e);
+         	 
+      	}
+        	 
     		
 		} catch(Exception e) {
 			try{
@@ -849,24 +950,29 @@ public class prerateHoldTestNGSlow {
 				dropDownError=By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[5]/td/span/div/div/table/tbody/tr/td/div/div/div/div[2]/table/tbody/tr/td[3]/div/span");
 				errorMessage=driver.findElement(dropDownError).getText();
 				writeToExcel(rowNumber,1, errorMessage);
-				 String[] resultArray = new String[2];
-				 resultArray[0]="fail";
-				 resultArray[1]=errorMessage;
-				 if (testingDB==true) {
+				 String[] resultArray =checkFailure(trk);
+					if (resultArray[1].equals("")) {
+						 resultArray[1]="Failed Somewhere... No Error Found Tho";
+					}
+			
+			
 				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-				 }
+				
+				
+				 
 				 Assert.fail(errorMessage);
 				}
 			catch(Exception ee) {
 				System.out.println("Didnt find error message from dropdown menu...");
 				//driver.findElement(By.xpath("//button[@id='preRateEntryForm:PreRateEntrySubmit_button']")).click();
 					writeToExcel(rowNumber,1, "Failed selecting dropdown menu...");
-					String[] resultArray = new String[2];
-					resultArray[0]="fail";
-					resultArray[1]="Failed selecting dropdown menu...";
-					if (testingDB==true) {
-					writeToDB(testInputNbr,tinCount,trk,resultArray);
-					}
+					 String[] resultArray =checkFailure(trk);
+						if (resultArray[1].equals("")) {
+							 resultArray[1]="Failed Somewhere... No Error Found Tho";
+						}
+				
+				
+					 writeToDB(testInputNbr,tinCount,trk,resultArray);
 					Assert.fail("Failed selecting dropdown menu...");
 			}
 		}
@@ -1167,6 +1273,154 @@ try {
 	
 	
 	
+	public  String[] checkFailure(String trkngnbr){
+		String[] resultArray = new String[2];
+		
+		/*
+		I look to see if it was eligible:
+			Not Eligible for Pre-Rate Even if a transaction follows the GREEN flow, it will not be eligible for pre-rate application if:
+			• It’s a child package of a multi-piece shipment (MPS) – only the master is eligible for pre-rate.  – IS MASTER  (MPS_PKG_TYPE_CD -- INTL_EXPRS_ONLN_SCHEMA.intl_package)
+			• It’s a child package and a Direct Distribution service was used – i.e. IPD, IED, or IDF. NOTE: IPD = FedEx Intl Priority Direct Distribution®, IED = FedEx Intl Economy Distribution®, and IDF = FedEx IP Direct Distribution Freight®  -- SVC CD = 70 , PKG_CD =01, FORM_ID=0430
+			• The transaction is billed to a city center number – not a FedEx account number.  – 318844186 (Not city account)
+			• The payment method is external credit card (04) or cash (05).  – is cash tho.. (PYMT_MTHD_CD  -- INTL_EXPRS_ONLN_SCHEMA.intl_online_revenue_item  )
+			• The service type is FedEx International Mail Service (FIMS)  31 21. (SVC_BASE_CD -- INTL_EXPRS_ONLN_SCHEMA.intl_online_shipment)  
+			• The transaction has reached the Earned revenue stage. (ITEM_PRCS_CD  -- INTL_EXPRS_ONLN_SCHEMA.intl_online_revenue_item  )
+			
+*/
+		/*
+		 * 
+		 * select MPS_PKG_TYPE_CD,PYMT_MTHD_CD,SVC_BASE_CD,item_prcs_cd
+from INTL_EXPRS_ONLN_SCHEMA.intl_package a
+join INTL_EXPRS_ONLN_SCHEMA.intl_online_revenue_item b
+on a.ONLN_REV_ITEM_ID =b.ONLN_REV_ITEM_ID 
+join INTL_EXPRS_ONLN_SCHEMA.intl_online_shipment c
+on a.ONLN_REV_ITEM_ID =c.ONLN_REV_ITEM_ID 
+where pkg_trkng_nbr ='582838858029';
+		 * 
+		 */
+		
+		
+		
+	
+		
+		PreparedStatement ps = null;
+		Connection oreCon= null;
+		Boolean oreError=false;
+		String resultString="";
+	 if (level.equals("2")){
+	    
+			try {
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+				oreCon=DriverManager.getConnection("jdbc:oracle:thin:@//idb00248.ute.fedex.com:1526/IE2VD925","test_readonly", "perftest");
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+	 }
+	 else if  (level.equals("3")){
+		 	try {
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+				oreCon=DriverManager.getConnection("jdbc:oracle:thin:@//sdb00261.ute.fedex.com:1526/PT1VD925","test_readonly", "perftest");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+	}
+
+	try {
+		ps = oreCon.prepareStatement(" select MPS_PKG_TYPE_CD,PYMT_MTHD_CD,SVC_BASE_CD,item_prcs_cd from INTL_EXPRS_ONLN_SCHEMA.intl_package a join INTL_EXPRS_ONLN_SCHEMA.intl_online_revenue_item b on a.ONLN_REV_ITEM_ID =b.ONLN_REV_ITEM_ID join INTL_EXPRS_ONLN_SCHEMA.intl_online_shipment c on a.ONLN_REV_ITEM_ID =c.ONLN_REV_ITEM_ID where pkg_trkng_nbr =?");
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		System.out.println(e);
+		e.printStackTrace();
+	}
+	        //   "select * from INTL_EXPRS_ONLN_SCHEMA.intl_package");
+
+	   
+	       try {
+			ps.setString(1,trkngnbr);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	       ResultSet rs = null;
+		try {
+			rs = ps.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	       try {
+			if (rs.next()==false){
+			      System.out.println("Is NULL");
+			      resultArray[0]="fail"; 
+			      resultArray[1]="Could Not Find in IORE";
+			}
+			   else{
+			      
+				   
+				   System.out.println("IS NOT NULL");
+			    
+				   
+				   if (rs.getString(1)!=null) {
+					   System.out.println("Child MPS Shipment");
+					   resultString+="Child MPS Shipment ";
+					   oreError=true;
+				   }
+				   if (rs.getString(2).equals("04")) {
+					   System.out.println("PMNT_MTD is 04 ");
+					   resultString+="PMNT_MTD is 04 ";
+					   oreError=true;
+				   }
+				   if (rs.getString(2).equals("05")) {
+					   System.out.println("PMNT_MTD is 05 ");
+					   resultString+="PMNT_MTD is 05 ";
+					   oreError=true;
+				   }
+				   if (rs.getString(3).equals("31")) {
+					   System.out.println("SVC_TPY_CD is 31 ");
+					   resultString+="SVC_TPY_CD is 31 ";
+					   oreError=true;
+				   }
+				   if (rs.getString(3).equals("21")) {
+					   System.out.println("SVC_TPY_CD is 21");
+					   resultString+="SVC_TPY_CD is 21 ";
+					   oreError=true;
+				   }
+				   if (!rs.getString(4).equals("OR")) {
+					   System.out.println("ITEM_PRCS_CD is "+rs.getString(4));
+					   resultString+="ITEM_PRCS_CD is "+rs.getString(4);
+					   
+					  
+				   }
+				   
+				   
+				   	  resultArray[0]="fail"; 
+				   	  if (resultString.equals("")) {
+				      resultArray[1]="";
+				   	  }
+				   	  else	if (!resultString.equals("")) {
+					      resultArray[1]=resultString;
+					   	  }
+				   
+			      
+			   }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	       
+	      
+		
+		return resultArray;
+	}
+	
+
 	
 	
 	
