@@ -121,8 +121,11 @@ public class mouse {
      String uploadResultPic="uploadResultPic.png";
      Boolean excelBoolean=false;
      Boolean databaseBoolean=false;
+     Boolean ieBoolean=false;
+     Boolean firefoxBoolean=false;
+     Boolean chromeBoolean=false;
      
-     Boolean c1=false,c2=false;
+     Boolean c1=false,c2=false,b1=false,b2=false,b3=false;;
    
     
      String selectionBar="selectionbar.png";
@@ -138,8 +141,15 @@ public class mouse {
      String datapopPicHighlight="datapopHighlight.png";
      String udPicHighlight="udHighlight.png";
      String preratePicHighlight="prerateHighlight.png";
+     String iePic="ie.png";
+     String iePicSelected="ieselected.png";
+     String firefoxPic="firefox.png";
+     String firefoxPicSelected="firefoxselected.png";
+     String chromePic="chrome.png";
+     String chromePicSelected="chromeselected.png";
+   
      
-     JLabel jLabelExcel,jLabelDatabase;
+     JLabel jLabelExcel,jLabelDatabase,jLabelIe,jLabelFirefox,jLabelChrome;
      
 
      String backgroundPic="default_template.png";
@@ -334,6 +344,123 @@ public void addDb(JLabel jlabel) {
 	  }
 	  
 }
+
+
+
+public void addFirefox(JLabel jlabel) {
+	jLabelFirefox=jlabel;
+	try {
+		
+		if(firefoxBoolean==false) {
+	    img = ImageIO.read(new File(imagePath+"\\assets\\"+firefoxPic));
+		}
+		else {
+			 img = ImageIO.read(new File(imagePath+"\\assets\\"+firefoxPicSelected));
+			
+		}
+	} catch (IOException e) {
+	    
+	    e.printStackTrace();
+	}
+		dimg = img.getScaledInstance(jLabelFirefox.getWidth(), jLabelFirefox.getHeight(),
+	        Image.SCALE_SMOOTH);
+	  imageIcon = new ImageIcon(dimg);
+	  jlabel.setIcon(imageIcon);
+	  
+	  frame.getContentPane().add(jLabelFirefox);
+	 
+	  
+	  jLabelFirefox.getParent(). setComponentZOrder(
+			  jLabelFirefox, 0);
+	  
+	  
+	  
+	  
+	  
+	  if (b1==false) {
+		  jLabelFirefox.addMouseListener(m2);
+	  b1=true;
+	  
+	  }
+	  
+}
+
+public void addIe(JLabel jlabel) {
+	jLabelIe=jlabel;
+	try {
+		
+		if(ieBoolean==false) {
+	    img = ImageIO.read(new File(imagePath+"\\assets\\"+iePic));
+		}
+		else {
+			 img = ImageIO.read(new File(imagePath+"\\assets\\"+iePicSelected));
+			
+		}
+	} catch (IOException e) {
+	    
+	    e.printStackTrace();
+	}
+		dimg = img.getScaledInstance(jLabelIe.getWidth(), jLabelIe.getHeight(),
+	        Image.SCALE_SMOOTH);
+	  imageIcon = new ImageIcon(dimg);
+	  jlabel.setIcon(imageIcon);
+	  
+	  frame.getContentPane().add(jLabelIe);
+	 
+	  
+	  jLabelIe.getParent(). setComponentZOrder(
+			  jLabelIe, 0);
+	  
+	  jLabelIe.addMouseListener(m2);
+	 
+	  if (b2==false) {
+		  jLabelIe.addMouseListener(m2);
+	  b2=true;
+	  
+	  }
+}
+
+public void addChrome(JLabel jlabel) {
+	jLabelChrome=jlabel;
+	try {
+		
+		if(chromeBoolean==false) {
+	    img = ImageIO.read(new File(imagePath+"\\assets\\"+chromePic));
+		}
+		else {
+			 img = ImageIO.read(new File(imagePath+"\\assets\\"+chromePicSelected));
+			
+		}
+	} catch (IOException e) {
+	    
+	    e.printStackTrace();
+	}
+		dimg = img.getScaledInstance(jLabelChrome.getWidth(), jLabelChrome.getHeight(),
+	        Image.SCALE_SMOOTH);
+	  imageIcon = new ImageIcon(dimg);
+	  jlabel.setIcon(imageIcon);
+	  
+	  frame.getContentPane().add(jLabelChrome);
+	 
+	  
+	  jLabelChrome.getParent(). setComponentZOrder(
+			  jLabelChrome, 0);
+	  
+	  
+	 
+	  jLabelChrome.addMouseListener(m2);
+	  
+	  if (b3==false) {
+		  jLabelChrome.addMouseListener(m2);
+		  b3=true;
+	  
+	  }
+}
+
+
+
+
+
 
 public void addExecute(JLabel jlabel) {
 	
@@ -710,6 +837,9 @@ public void setupMouseListener() {
 				    		
 				    		
 				    		
+				    
+				    		
+				    		
 				    		//Database
 				    		if (mouseLabel.getName().equals("db")) {
 				    			databaseBoolean=true;
@@ -718,9 +848,51 @@ public void setupMouseListener() {
 				    			addExcel(jLabelExcel);
 				    			System.out.println("SOURCE!!!!!!!");
 				    			c.setSource("db");
-				    			addRemoveAkshayUDStuff(false);
+				    			//addRemoveAkshayUDStuff(false);
 				    			
 				    		}
+				    		
+				    		
+				    		
+				    		
+				    		
+				    		if (mouseLabel.getName().equals("ie")) {
+				    			ieBoolean=true;
+				    			addIe(mouseLabel);
+		    		            firefoxBoolean=false;
+		    		            chromeBoolean=false;
+				    			addChrome(jLabelChrome);
+				    			addFirefox(jLabelFirefox);
+				    			c.setDriverType("1");
+				    			
+				    			
+				    		}
+				    		
+				    		if (mouseLabel.getName().equals("firefox")) {
+				    			firefoxBoolean=true;
+				    			addFirefox(mouseLabel);
+		    		            ieBoolean=false;
+		    		            chromeBoolean=false;
+				    			addChrome(jLabelChrome);
+				    			addIe(jLabelIe);
+				    			c.setDriverType("3");
+				    			
+				    			
+				    		}
+				    		
+				    		if (mouseLabel.getName().equals("chrome")) {
+				    			chromeBoolean=true;
+				    			addChrome(mouseLabel);
+		    		            firefoxBoolean=false;
+		    		            ieBoolean=false;
+				    			addIe(jLabelIe);
+				    			addFirefox(jLabelFirefox);
+				    			c.setDriverType("2");
+				    			
+				    			
+				    		}
+				    		
+				    		
 				    		
 				    		//Execute
 				    		
@@ -731,115 +903,145 @@ public void setupMouseListener() {
 				    				if(c.getLevel()!=null && c.getSource()!=null) {
 				    					//JOptionPane.showMessageDialog(frame, "Started Rebill");
 				    					
-				    					String filepath=c.getExcelPath();
-					    				String level=c.getLevel();
-					    				String browser=c.getDriverType();
-					    				String compatibleMode=c.getCompatibleMode();
-					    				String source = c.getSource();
-					    				String allCheckBox=c.getAllCheckBox();
-					    				String nullCheckBox=c.getNullCheckBox();
-					    				String failedCheckBox=c.getFailedCheckBox();
-					    				String domesticCheckBox=c.getDomesticCheckBox();
-					    				String internationalCheckBox=c.getInternationalCheckBox();
-					    				String expressCheckBox=c.getExpressCheckBox();
-					    				String groundCheckBox=c.getGroundCheckBox();
-					    				String normalCheckBox=c.getNormalCheckBox();
-					    				String mfRetireCheckBox=c.getMfRetireCheckBox();
-					    				String sessionCount=c.getSessionCount();
-					    				
-					    				System.out.println("filepath "+filepath);
-					    				System.out.println("level "+level);
-					    				System.out.println("browser "+browser);
-					    				System.out.println("compatibleMode "+compatibleMode);
-					    				System.out.println("source "+source);
-					    				System.out.println("allCheckBox "+allCheckBox);
-					    				System.out.println("nullCheckBox "+nullCheckBox);
-					    				System.out.println("failedCheckBox "+failedCheckBox);
-					    				System.out.println("domesticCheckBox "+domesticCheckBox);
-					    				System.out.println("internationalCheckBox "+internationalCheckBox);
-					    				System.out.println("expressCheckBox "+expressCheckBox);
-					    				System.out.println("groundCheckBox "+groundCheckBox);
-					    				System.out.println("normalCheckBox "+normalCheckBox);
-					    				System.out.println("mfRetireCheckBox "+mfRetireCheckBox);
-					    				System.out.println("sessionCount "+sessionCount);
-					    				
-					    				
-					    				if(filepath==null) {
-					    					filepath="";
-					    				}
-					    				if(level==null) {
-					    					level="";
-					    				}
-					    				if(browser==null) {
-					    					browser="";
-					    				}
-					    				if(compatibleMode==null) {
-					    					compatibleMode="";
-					    				}
-					    				if(allCheckBox==null) {
-					    					allCheckBox="";
-					    				}
-					    				if(nullCheckBox==null) {
-					    					nullCheckBox="";
-					    				}
-					    				if(failedCheckBox==null) {
-					    					failedCheckBox="";
-					    				}
-					    				if(domesticCheckBox==null) {
-					    					domesticCheckBox="";
-					    				}
-					    				if(internationalCheckBox==null) {
-					    					internationalCheckBox="";
-					    				}
-					    				if(expressCheckBox==null) {
-					    					expressCheckBox="";
-					    				}
-					    				if(groundCheckBox==null) {
-					    					groundCheckBox="";
-					    				}
-					    				if(normalCheckBox==null) {
-					    					normalCheckBox="";
-					    				}
-					    				if(mfRetireCheckBox==null) {
-					    					mfRetireCheckBox="";
-					    				}
-					    				if(sessionCount==null) {
-					    					sessionCount="";
-					    				}
-					    				
-					    			
-					    			
 
-					    				
-					    		        XmlSuite xmlSuite = new XmlSuite();
-					    		        xmlSuite.setName("Sample_Suite");
-					    		        Map<String, String> fieldValues = new HashMap<>();
-					    		        fieldValues.put("filepath", filepath);
-					    		        fieldValues.put("level", level);
-					    		        fieldValues.put("browser", "2");
-					    		        fieldValues.put("source", source);
-					    		        fieldValues.put("compatibleMode", "");
-					    		        fieldValues.put("allCheckBox", allCheckBox);
-					    		        fieldValues.put("nullCheckBox", nullCheckBox);
-					    		        fieldValues.put("failedCheckBox", failedCheckBox);
-					    		        fieldValues.put("domesticCheckBox", domesticCheckBox);
-					    		        fieldValues.put("internationalCheckBox", internationalCheckBox);
-					    		        fieldValues.put("expressCheckBox", expressCheckBox);
-					    		        fieldValues.put("groundCheckBox", groundCheckBox);
-					    		        fieldValues.put("normalCheckBox", normalCheckBox);
-					    		        fieldValues.put("mfRetireCheckBox",mfRetireCheckBox);
-					    		        fieldValues.put("sessionCount",sessionCount);
-					    		        
-					    		        xmlSuite.setParameters(fieldValues);
-					    		        XmlTest xmlTest = new XmlTest(xmlSuite);
-					    		        xmlTest.setName("Rebill Test");
-					    		        //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
-					    		        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testngRebillSlowMfRetire.class)));
-					    		        xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
-					    		        TestNG tng = new TestNG();
-					    		        tng.setXmlSuites(Collections.singletonList(xmlSuite));
-					    		        tng.run();
-					    		        
+				    			    	String filepath=c.getExcelPath();
+				    					String level=c.getLevel();
+				    					String browser=c.getDriverType();
+				    					String compatibleMode=c.getCompatibleMode();
+				    					String source = c.getSource();
+				    					String allCheckBox=c.getAllCheckBox();
+				    					String nullCheckBox=c.getNullCheckBox();
+				    					String failedCheckBox=c.getFailedCheckBox();
+				    					String domesticCheckBox=c.getDomesticCheckBox();
+				    					String internationalCheckBox=c.getInternationalCheckBox();
+				    					String expressCheckBox=c.getExpressCheckBox();
+				    					String groundCheckBox=c.getGroundCheckBox();
+				    				//	String normalCheckBox=c.getNormalCheckBox();
+				    				//	String mfRetireCheckBox=c.getMfRetireCheckBox();
+				    					String sessionCount=c.getSessionCount();
+				    					
+				    				String databaseDisabled=	c.getDatabaseDisabled();
+				    				String	customCheckBox= c.getCustomCheckBox();
+				    				String	customString= c.getCustomString();
+				    					
+				    		
+				    				
+				    				System.out.println("filepath "+filepath);
+				    				System.out.println("level "+level);
+				    				System.out.println("browser "+browser);
+				    				System.out.println("compatibleMode "+compatibleMode);
+				    				System.out.println("source "+source);
+				    				System.out.println("allCheckBox "+allCheckBox);
+				    				System.out.println("nullCheckBox "+nullCheckBox);
+				    				System.out.println("failedCheckBox "+failedCheckBox);
+				    				System.out.println("domesticCheckBox "+domesticCheckBox);
+				    				System.out.println("internationalCheckBox "+internationalCheckBox);
+				    				System.out.println("expressCheckBox "+expressCheckBox);
+				    				System.out.println("groundCheckBox "+groundCheckBox);
+				    			
+				    				System.out.println("sessionCount "+sessionCount);
+				    				System.out.println("customString "+customString);
+				    				System.out.println("customCheckBox "+customCheckBox);
+				    				System.out.println("databaseDisabled "+databaseDisabled);
+				    				
+				    				
+				    				if(filepath==null) {
+				    					filepath="";
+				    				}
+				    				if(level==null) {
+				    					level="";
+				    				}
+				    				if(browser==null) {
+				    					browser="";
+				    				}
+				    				if(compatibleMode==null) {
+				    					compatibleMode="";
+				    				}
+				    				if(allCheckBox==null) {
+				    					allCheckBox="";
+				    				}
+				    				if(nullCheckBox==null) {
+				    					nullCheckBox="";
+				    				}
+				    				if(failedCheckBox==null) {
+				    					failedCheckBox="";
+				    				}
+				    				if(domesticCheckBox==null) {
+				    					domesticCheckBox="";
+				    				}
+				    				if(internationalCheckBox==null) {
+				    					internationalCheckBox="";
+				    				}
+				    				if(expressCheckBox==null) {
+				    					expressCheckBox="";
+				    				}
+				    				if(groundCheckBox==null) {
+				    					groundCheckBox="";
+				    				}
+				    				/*
+				    				if(normalCheckBox==null) {
+				    					normalCheckBox="";
+				    				}
+				    				if(mfRetireCheckBox==null) {
+				    					mfRetireCheckBox="";
+				    				}
+				    				*/
+				    				if(sessionCount==null) {
+				    					sessionCount="";
+				    				}
+				    				
+				    				
+				    				if(customString==null) {
+				    					customString="";
+				    				}
+				    				if(customCheckBox==null) {
+				    					customCheckBox="";
+				    				}
+				    				if(databaseDisabled==null) {
+				    					databaseDisabled="";
+				    				}
+				    			
+				    			
+				    		/*
+				    				@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox",
+				    				"failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox",
+				    				"sessionCount","customString","customCheckBox","databaseDisabled"})
+				    			
+				    				public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,
+				    				String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,
+				    				String sessionCount,String customString,String customCheckBox,String databaseDisabled) {
+				    				
+				    					*/
+				    		        XmlSuite xmlSuite = new XmlSuite();
+				    		        xmlSuite.setName("Sample_Suite");
+				    		        Map<String, String> fieldValues = new HashMap<>();
+				    		        fieldValues.put("filepath", filepath);
+				    		        fieldValues.put("level", level);
+				    		        fieldValues.put("browser", "2");
+				    		        fieldValues.put("compatibleMode", "");
+				    		        fieldValues.put("source", source);
+				    		        fieldValues.put("allCheckBox", allCheckBox);
+				    		        fieldValues.put("nullCheckBox", nullCheckBox);
+				    		        fieldValues.put("failedCheckBox", failedCheckBox);
+				    		        fieldValues.put("domesticCheckBox", domesticCheckBox);
+				    		        fieldValues.put("internationalCheckBox", internationalCheckBox);
+				    		        fieldValues.put("expressCheckBox", expressCheckBox);
+				    		        fieldValues.put("groundCheckBox", groundCheckBox);
+				    		        fieldValues.put("sessionCount",sessionCount);
+				    		        fieldValues.put("customString",customString);
+				    		        fieldValues.put("customCheckBox",customCheckBox);
+				    		        fieldValues.put("databaseDisabled",databaseDisabled);
+				    		        
+				    		        xmlSuite.setParameters(fieldValues);
+				    		        XmlTest xmlTest = new XmlTest(xmlSuite);
+				    		        xmlTest.setName("Rebill Test");
+				    		        //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
+				    		        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testngRebillSlow.class)));
+				    		        xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
+				    		        TestNG tng = new TestNG();
+				    		        tng.setXmlSuites(Collections.singletonList(xmlSuite));
+				    		        tng.run();
+				    		        
 					    		        
 					    		        
 					    		        
@@ -932,35 +1134,50 @@ public void setupMouseListener() {
 				    			
 				    			
 				    			if (obj.getClass().getCanonicalName().equals("guis.prerateAutomationGui")) {
-				    				System.out.println("Booleans "+c.getLevel()+"      "+c.getSource());		    				
+				    				System.out.println("Booleans "+c.getLevel()+"      "+c.getSource());
 				    				if(c.getLevel()!=null && c.getSource()!=null) {
-				    				JOptionPane.showMessageDialog(frame, "Started Prerate");
-				    				String filepath=c.getExcelPath();
-				    				String level=c.getLevel();
-				    				String browser=c.getDriverType();
-				    				String compatibleMode=c.getCompatibleMode();
-				    				String source = c.getSource();
-				    				String allCheckBox=c.getAllCheckBox();
-				    				String nullCheckBox=c.getNullCheckBox();
-				    				String failedCheckBox=c.getFailedCheckBox();
-				    				String prerateType=c.getPrerateType();
-				    				String sessionCount=c.getSessionCount();
+				    					//JOptionPane.showMessageDialog(frame, "Started Rebill");
+				    					
+
+				    			    	String filepath=c.getExcelPath();
+				    					String level=c.getLevel();
+				    					String browser=c.getDriverType();
+				    					String compatibleMode=c.getCompatibleMode();
+				    					String source = c.getSource();
+				    					String allCheckBox=c.getAllCheckBox();
+				    					String nullCheckBox=c.getNullCheckBox();
+				    					String failedCheckBox=c.getFailedCheckBox();
+				    					String domesticCheckBox=c.getDomesticCheckBox();
+				    					String internationalCheckBox=c.getInternationalCheckBox();
+				    					String expressCheckBox=c.getExpressCheckBox();
+				    					String groundCheckBox=c.getGroundCheckBox();
+				    			
+				    					String sessionCount=c.getSessionCount();
+				    					
+				    				String databaseDisabled=	c.getDatabaseDisabled();
+				    				String	customCheckBox= c.getCustomCheckBox();
+				    				String	customString= c.getCustomString();
+				    					
+				    		
 				    				
-				    				System.out.println("filepath"+" "+filepath);
-				    				System.out.println("level"+" "+level);
-				    				System.out.println("broswer"+" "+browser);
-				    				System.out.println("compatibleMode"+" "+compatibleMode);
-				    				System.out.println("source"+" "+source);
-				    				System.out.println("allCheckBox"+" "+allCheckBox);
-				    				System.out.println("nullCheckBox"+" "+nullCheckBox);
-				    				System.out.println("failedCheckBox"+" "+failedCheckBox);
-				    				System.out.println("prerateType"+" "+prerateType);
-				    				System.out.println("sessionCount"+" "+sessionCount);
+				    				System.out.println("filepath "+filepath);
+				    				System.out.println("level "+level);
+				    				System.out.println("browser "+browser);
+				    				System.out.println("compatibleMode "+compatibleMode);
+				    				System.out.println("source "+source);
+				    				System.out.println("allCheckBox "+allCheckBox);
+				    				System.out.println("nullCheckBox "+nullCheckBox);
+				    				System.out.println("failedCheckBox "+failedCheckBox);
+				    				System.out.println("domesticCheckBox "+domesticCheckBox);
+				    				System.out.println("internationalCheckBox "+internationalCheckBox);
+				    				System.out.println("expressCheckBox "+expressCheckBox);
+				    				System.out.println("groundCheckBox "+groundCheckBox);
+				    			
+				    				System.out.println("sessionCount "+sessionCount);
+				    				System.out.println("customString "+customString);
+				    				System.out.println("customCheckBox "+customCheckBox);
+				    				System.out.println("databaseDisabled "+databaseDisabled);
 				    				
-				    				
-				    				if(prerateType==null) {
-				    					prerateType="";
-				    				}
 				    				
 				    				if(filepath==null) {
 				    					filepath="";
@@ -983,11 +1200,72 @@ public void setupMouseListener() {
 				    				if(failedCheckBox==null) {
 				    					failedCheckBox="";
 				    				}
+				    				if(domesticCheckBox==null) {
+				    					domesticCheckBox="";
+				    				}
+				    				if(internationalCheckBox==null) {
+				    					internationalCheckBox="";
+				    				}
+				    				if(expressCheckBox==null) {
+				    					expressCheckBox="";
+				    				}
+				    				if(groundCheckBox==null) {
+				    					groundCheckBox="";
+				    				}
+				    			
 				    				if(sessionCount==null) {
-				    					sessionCount="1";
+				    					sessionCount="";
 				    				}
 				    				
 				    				
+				    				if(customString==null) {
+				    					customString="";
+				    				}
+				    				if(customCheckBox==null) {
+				    					customCheckBox="";
+				    				}
+				    				if(databaseDisabled==null) {
+				    					databaseDisabled="";
+				    				}
+				    			
+				    			/*
+				    				@Parameters({
+				    					"filepath",
+				    					"level",
+				    					"browser",
+				    					"compatibleMode",
+				    					"source",
+				    					"allCheckBox",
+				    					"nullCheckBox",
+				    					"failedCheckBox",
+				    					"domesticCheckBox",
+				    					"internationalCheckBox",
+				    					"expressCheckBox",
+				    					"groundCheckBox",
+				    					"sessionCount",
+				    					"customString",
+				    					"customCheckBox",
+				    					"databaseDisabled"})
+				    				}
+				    				public void setupExcel(
+				    						String filepath,
+				    						String level,
+				    						String browser,
+				    						String compatibleMode,
+				    						String source,
+				    						String allCheckBox,
+				    						String nullCheckBox,
+				    						String failedCheckBox,
+				    						String domesticCheckBox,
+				    						String internationalCheckBox,
+				    						String expressCheckBox,
+				    						String groundCheckBox,
+				    						String sessionCount,
+				    						String customString,
+				    						String customCheckBox,
+				    						String databaseDisabled) {
+				    				
+				    					*/
 				    		        XmlSuite xmlSuite = new XmlSuite();
 				    		        xmlSuite.setName("Sample_Suite");
 				    		        Map<String, String> fieldValues = new HashMap<>();
@@ -999,22 +1277,31 @@ public void setupMouseListener() {
 				    		        fieldValues.put("allCheckBox", allCheckBox);
 				    		        fieldValues.put("nullCheckBox", nullCheckBox);
 				    		        fieldValues.put("failedCheckBox", failedCheckBox);
-				    		        fieldValues.put("sessionCount", sessionCount);
+				    		        fieldValues.put("domesticCheckBox", domesticCheckBox);
+				    		        fieldValues.put("internationalCheckBox", internationalCheckBox);
+				    		        fieldValues.put("expressCheckBox", expressCheckBox);
+				    		        fieldValues.put("groundCheckBox", groundCheckBox);
+				    		        fieldValues.put("sessionCount",sessionCount);
+				    		        fieldValues.put("customString",customString);
+				    		        fieldValues.put("customCheckBox",customCheckBox);
+				    		        fieldValues.put("databaseDisabled",databaseDisabled);
+				    		        
 				    		        xmlSuite.setParameters(fieldValues);
 				    		        XmlTest xmlTest = new XmlTest(xmlSuite);
-				    		        xmlTest.setName("Prerate Test");
+				    		        xmlTest.setName("Rebill Test");
 				    		        //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
-				    		        if (prerateType.equals("update")) {
+				    		        if (c.getPrerateType().equals("update")) {
 				    		        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(prerateTestNGSlow.class)));
 				    		        }
-				    		        else  if (prerateType.equals("hold")) {
-					    		        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(prerateHoldTestNGSlow.class)));
-					    		        }
-				    		        
+				    		        else if (c.getPrerateType().equals("hold")) {
+				    		        	  xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(prerateHoldTestNGSlow.class)));
+				    		        }
 				    		        xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
 				    		        TestNG tng = new TestNG();
 				    		        tng.setXmlSuites(Collections.singletonList(xmlSuite));
 				    		        tng.run();
+				    		        
+					    		        
 					    			
 				    				}
 				    				

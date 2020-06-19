@@ -45,11 +45,21 @@ public class rebillManualClass {
     	c.setFailedCheckBox("true");
   
 		c.setDomesticCheckBox("true");
-		c.setInternationalCheckBox("true");
+		c.setInternationalCheckBox("false");
 		c.setExpressCheckBox("true");
+<<<<<<< HEAD
 		c.setGroundCheckBox("true");
 		c.setNormalCheckBox("true");
 		c.setMfRetireCheckBox("true");
+=======
+		c.setGroundCheckBox("false");
+		
+		c.setDatabaseDisabled("false");
+		c.setCustomCheckBox("false");
+		c.setCustomString("");
+		//c.setNormalCheckBox("true");
+		//c.setMfRetireCheckBox("true");
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 		c.setSessionCount("1");
     	
     	String filepath=c.getExcelPath();
@@ -64,9 +74,12 @@ public class rebillManualClass {
 		String internationalCheckBox=c.getInternationalCheckBox();
 		String expressCheckBox=c.getExpressCheckBox();
 		String groundCheckBox=c.getGroundCheckBox();
-		String normalCheckBox=c.getNormalCheckBox();
-		String mfRetireCheckBox=c.getMfRetireCheckBox();
+
 		String sessionCount=c.getSessionCount();
+		
+	String databaseDisabled=	c.getDatabaseDisabled();
+	String	customCheckBox= c.getCustomCheckBox();
+	String	customString= c.getCustomString();
 		
 		System.out.println("filepath "+filepath);
 		System.out.println("level "+level);
@@ -80,9 +93,11 @@ public class rebillManualClass {
 		System.out.println("internationalCheckBox "+internationalCheckBox);
 		System.out.println("expressCheckBox "+expressCheckBox);
 		System.out.println("groundCheckBox "+groundCheckBox);
-		System.out.println("normalCheckBox "+normalCheckBox);
-		System.out.println("mfRetireCheckBox "+mfRetireCheckBox);
+	
 		System.out.println("sessionCount "+sessionCount);
+		System.out.println("customString "+customString);
+		System.out.println("customCheckBox "+customCheckBox);
+		System.out.println("databaseDisabled "+databaseDisabled);
 		
 		
 		if(filepath==null) {
@@ -118,28 +133,48 @@ public class rebillManualClass {
 		if(groundCheckBox==null) {
 			groundCheckBox="";
 		}
+		/*
 		if(normalCheckBox==null) {
 			normalCheckBox="";
 		}
 		if(mfRetireCheckBox==null) {
 			mfRetireCheckBox="";
 		}
+		*/
 		if(sessionCount==null) {
 			sessionCount="";
 		}
 		
-	
-	
-
 		
+		if(customString==null) {
+			customString="";
+		}
+		if(customCheckBox==null) {
+			customCheckBox="";
+		}
+		if(databaseDisabled==null) {
+			databaseDisabled="";
+		}
+	
+	
+/*
+		@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox",
+		"failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox",
+		"sessionCount","customString","customCheckBox","databaseDisabled"})
+	
+		public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,
+		String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,
+		String sessionCount,String customString,String customCheckBox,String databaseDisabled) {
+		
+			*/
         XmlSuite xmlSuite = new XmlSuite();
         xmlSuite.setName("Sample_Suite");
         Map<String, String> fieldValues = new HashMap<>();
         fieldValues.put("filepath", filepath);
         fieldValues.put("level", level);
         fieldValues.put("browser", "2");
-        fieldValues.put("source", source);
         fieldValues.put("compatibleMode", "");
+        fieldValues.put("source", source);
         fieldValues.put("allCheckBox", allCheckBox);
         fieldValues.put("nullCheckBox", nullCheckBox);
         fieldValues.put("failedCheckBox", failedCheckBox);
@@ -147,15 +182,16 @@ public class rebillManualClass {
         fieldValues.put("internationalCheckBox", internationalCheckBox);
         fieldValues.put("expressCheckBox", expressCheckBox);
         fieldValues.put("groundCheckBox", groundCheckBox);
-        fieldValues.put("normalCheckBox", normalCheckBox);
-        fieldValues.put("mfRetireCheckBox",mfRetireCheckBox);
         fieldValues.put("sessionCount",sessionCount);
+        fieldValues.put("customString",customString);
+        fieldValues.put("customCheckBox",customCheckBox);
+        fieldValues.put("databaseDisabled",databaseDisabled);
         
         xmlSuite.setParameters(fieldValues);
         XmlTest xmlTest = new XmlTest(xmlSuite);
         xmlTest.setName("Rebill Test");
         //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
-        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testngRebillSlowMfRetire.class)));
+        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testngRebillSlow.class)));
         xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
         TestNG tng = new TestNG();
         tng.setXmlSuites(Collections.singletonList(xmlSuite));
