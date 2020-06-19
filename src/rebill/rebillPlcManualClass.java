@@ -30,7 +30,7 @@ public class rebillPlcManualClass {
 		c.setDomesticCheckBox("true");
 		c.setInternationalCheckBox("true");
 		c.setExpressCheckBox("true");
-		c.setGroundCheckBox("false");
+		c.setGroundCheckBox("true");
 		c.setNormalCheckBox("false");
 		c.setMfRetireCheckBox("false");
 		c.setSessionCount("1");

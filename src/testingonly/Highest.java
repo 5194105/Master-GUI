@@ -18,7 +18,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.TestNG;
 import org.testng.annotations.Parameters;
 import org.testng.xml.XmlClass;
@@ -30,135 +36,29 @@ public class Highest {
 	 
 
 	static ArrayList<rebillData> rebillDataArray= new ArrayList<rebillData>();
-    public static void main(String[] args) {
-    	config c = new config();
-       	c.setExcelPath("C:\\Users\\FedExUser\\Documents\\rebill.xlsx");
-    	c.setLevel("2");
-    	c.setDriverType("2");
-    	c.setDriverType("2");
-    	c.setCompatibleMode("false");
-    	c.setSource("excel");
-    	c.setAllCheckBox("false");
-    	c.setNullCheckBox("true");
-    	c.setFailedCheckBox("false");
-  
-		c.setDomesticCheckBox("false");
-		c.setInternationalCheckBox("true");
-		c.setExpressCheckBox("true");
-		c.setGroundCheckBox("false");
-		c.setNormalCheckBox("true");
-		c.setMfRetireCheckBox("false");
-		c.setSessionCount("1");
+    public static void main(String[] args) throws InterruptedException {
+   
+    	DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+	    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
+	    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
+	    capabilities.setCapability("ignoreZoomSetting", true);
+	    capabilities.setCapability("ignoreProtectedModeSettings", true);
+	    capabilities.setCapability("initialBrowserUrl","https://testsso.secure.fedex.com/L3/PRSApps");
+    	System.setProperty("webdriver.ie.driver", "C:\\Users\\FedExUser\\git\\MasterGUI\\drivers\\IEDriverServer.exe");
     	
-    	String filepath=c.getExcelPath();
-		String level=c.getLevel();
-		String browser=c.getDriverType();
-		String compatibleMode=c.getCompatibleMode();
-		String source = c.getSource();
-		String allCheckBox=c.getAllCheckBox();
-		String nullCheckBox=c.getNullCheckBox();
-		String failedCheckBox=c.getFailedCheckBox();
-		String domesticCheckBox=c.getDomesticCheckBox();
-		String internationalCheckBox=c.getInternationalCheckBox();
-		String expressCheckBox=c.getExpressCheckBox();
-		String groundCheckBox=c.getGroundCheckBox();
-		String normalCheckBox=c.getNormalCheckBox();
-		String mfRetireCheckBox=c.getMfRetireCheckBox();
-		String sessionCount=c.getSessionCount();
-		
-		System.out.println("filepath "+filepath);
-		System.out.println("level "+level);
-		System.out.println("browser "+browser);
-		System.out.println("compatibleMode "+compatibleMode);
-		System.out.println("source "+source);
-		System.out.println("allCheckBox "+allCheckBox);
-		System.out.println("nullCheckBox "+nullCheckBox);
-		System.out.println("failedCheckBox "+failedCheckBox);
-		System.out.println("domesticCheckBox "+domesticCheckBox);
-		System.out.println("internationalCheckBox "+internationalCheckBox);
-		System.out.println("expressCheckBox "+expressCheckBox);
-		System.out.println("groundCheckBox "+groundCheckBox);
-		System.out.println("normalCheckBox "+normalCheckBox);
-		System.out.println("mfRetireCheckBox "+mfRetireCheckBox);
-		System.out.println("sessionCount "+sessionCount);
-		
-		
-		if(filepath==null) {
-			filepath="";
-		}
-		if(level==null) {
-			level="";
-		}
-		if(browser==null) {
-			browser="";
-		}
-		if(compatibleMode==null) {
-			compatibleMode="";
-		}
-		if(allCheckBox==null) {
-			allCheckBox="";
-		}
-		if(nullCheckBox==null) {
-			nullCheckBox="";
-		}
-		if(failedCheckBox==null) {
-			failedCheckBox="";
-		}
-		if(domesticCheckBox==null) {
-			domesticCheckBox="";
-		}
-		if(internationalCheckBox==null) {
-			internationalCheckBox="";
-		}
-		if(expressCheckBox==null) {
-			expressCheckBox="";
-		}
-		if(groundCheckBox==null) {
-			groundCheckBox="";
-		}
-		if(normalCheckBox==null) {
-			normalCheckBox="";
-		}
-		if(mfRetireCheckBox==null) {
-			mfRetireCheckBox="";
-		}
-		if(sessionCount==null) {
-			sessionCount="";
-		}
-		
+    	WebDriver driver =  new InternetExplorerDriver();
+    	
+    	driver.get("https://testsso.secure.fedex.com/L3/PRSApps");
+    	Thread.sleep(5000);
+    	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+  	  	//driver.manage().window().maximize();     
+		Thread.sleep(5000);
 	
-	
+	//	/html/body/div/div/form/div/div[1]/fieldset/label[1]/input
+		driver.findElement(By.id("username")).sendKeys("477023");
+		driver.findElement(By.id("password")).sendKeys("477023");
+		driver.findElement(By.id("submit")).click();
 
-		
-        XmlSuite xmlSuite = new XmlSuite();
-        xmlSuite.setName("Sample_Suite");
-        Map<String, String> fieldValues = new HashMap<>();
-        fieldValues.put("filepath", filepath);
-        fieldValues.put("level", level);
-        fieldValues.put("browser", "2");
-        fieldValues.put("source", source);
-        fieldValues.put("compatibleMode", "");
-        fieldValues.put("allCheckBox", allCheckBox);
-        fieldValues.put("nullCheckBox", nullCheckBox);
-        fieldValues.put("failedCheckBox", failedCheckBox);
-        fieldValues.put("domesticCheckBox", domesticCheckBox);
-        fieldValues.put("internationalCheckBox", internationalCheckBox);
-        fieldValues.put("expressCheckBox", expressCheckBox);
-        fieldValues.put("groundCheckBox", groundCheckBox);
-        fieldValues.put("normalCheckBox", normalCheckBox);
-        fieldValues.put("mfRetireCheckBox",mfRetireCheckBox);
-        fieldValues.put("sessionCount",sessionCount);
-        
-        xmlSuite.setParameters(fieldValues);
-        XmlTest xmlTest = new XmlTest(xmlSuite);
-        xmlTest.setName("Rebill Test");
-        //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
-        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testngRebillSlowMfRetire.class)));
-        xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
-        TestNG tng = new TestNG();
-        tng.setXmlSuites(Collections.singletonList(xmlSuite));
-        tng.run();
-        
 	}
 }
 

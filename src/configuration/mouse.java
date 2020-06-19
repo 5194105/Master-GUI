@@ -38,6 +38,7 @@ import guis.guiBase;
 import guis.instantInvoiceAutomationGui;
 import guis.prerateAutomationExtendedGui;
 import guis.prerateAutomationGui;
+import guis.prsRerateAutomationExtendGui;
 import guis.rebillAutomationExtendGUI;
 import guis.rebillAutomationGui;
 import guis.rerateAutomationGui;
@@ -653,6 +654,10 @@ public void setupMouseListener() {
 							
 							if (obj.getClass().getCanonicalName().equals("guis.eraRerateAutomationGui")) {
 								eraRerateAutomationExtendGui erae= new eraRerateAutomationExtendGui(g,c);
+						
+						}
+							if (obj.getClass().getCanonicalName().equals("guis.rerateAutomationGui")) {
+								prsRerateAutomationExtendGui prae= new prsRerateAutomationExtendGui(g,c);
 						
 						}
 							

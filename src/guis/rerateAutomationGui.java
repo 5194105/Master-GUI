@@ -31,7 +31,7 @@ public class rerateAutomationGui {
 	private JFrame frame;
 
 	 
-
+	  private JLabel moreOptionsTextLabel;
     private JLabel label;
     private JLabel lblSource;
     private JLabel executeLabel;
@@ -48,6 +48,7 @@ public class rerateAutomationGui {
     private JLabel endDateLabel;
     public JTextField startDate;
     public JTextField endDate;
+    private JLabel moreOptionsLabel;
     gui g;
     config c;
 	/**
@@ -85,10 +86,13 @@ public class rerateAutomationGui {
 		executeLabel = new JLabel("New label");
 		executeLabel.setBounds(375, 515, 284, 41);
 		
+		moreOptionsLabel = new JLabel("New label");
+		moreOptionsLabel.setBounds(350, 450, 50, 30);
+		
 		excelLabel.setName("excel");
 		dbLabel.setName("db");
 		executeLabel.setName("execute");
-		
+		moreOptionsLabel.setName("moreOptions");
 		
 		lblRerateAutomation = new JLabel("Rerate Automation");
 		lblRerateAutomation.setForeground(Color.WHITE);
@@ -127,12 +131,12 @@ public class rerateAutomationGui {
 		label_2 = new JLabel("Compatible Mode: ");
 		label_2.setForeground(Color.WHITE);
 		label_2.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		label_2.setBounds(192, 444, 212, 29);
+		label_2.setBounds(501, 400, 212, 29);
 		frame.getContentPane().add(label_2);
 		
 		JCheckBox checkBox = new JCheckBox("");
 		checkBox.setOpaque(false);
-		checkBox.setBounds(392, 444, 27, 29);
+		checkBox.setBounds(710, 402, 27, 29);
 		frame.getContentPane().add(checkBox);
 		
 		browser = new JLabel("Browser:");
@@ -177,6 +181,12 @@ public class rerateAutomationGui {
 		endDate.setBounds(617, 355, 170, 31);
 		frame.getContentPane().add(endDate);
 		
+		moreOptionsTextLabel = new JLabel("Filter Options: ");
+		moreOptionsTextLabel.setForeground(Color.WHITE);
+		moreOptionsTextLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		moreOptionsTextLabel.setBounds(192, 450, 212, 29);
+		frame.getContentPane().add(moreOptionsTextLabel);
+		
 		executeLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -198,6 +208,7 @@ public class rerateAutomationGui {
 		m.addExcel(excelLabel);
 		m.addDb(dbLabel);
 		m.addExecute(executeLabel);
+		m.addMoreOptions(moreOptionsLabel);
 		m.setupBackground();
 		
 		

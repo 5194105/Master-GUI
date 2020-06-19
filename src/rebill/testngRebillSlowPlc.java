@@ -270,8 +270,8 @@ public class testngRebillSlowPlc {
     	
     	
     	if (allCheckBox.equals("false")) {
-    		databaseSqlCount+="where ";
-    		databaseSqlQuery+="where ";
+    		databaseSqlCount+="where workable='Y' and ";
+    		databaseSqlQuery+="where workable='Y' and ";
     	}
     	if (nullCheckBox.equals("true") && failedCheckBox.equals("true")) {
     		databaseSqlCount+="(result is null or result ='fail') ";
@@ -551,7 +551,7 @@ public class testngRebillSlowPlc {
        	 }
        	 writeToDB(testInputNbr,tinCount,trk,resultArray);
        	 
-       	 	writeToDB(testInputNbr,tinCount,trk,resultArray);
+       	 	
        	 return;
   	  
   	  }
@@ -839,6 +839,42 @@ public class testngRebillSlowPlc {
     	Boolean packageTab=false;
     	wait=new WebDriverWait(driver,20);
     	driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+    	
+    	
+    	
+    	
+    		System.out.println(result);
+    		System.out.println(descripiton);
+    		System.out.println(testInputNbr);
+    		System.out.println(tinCount);
+    		System.out.println(trk);
+    		System.out.println(invoiceNbr1);
+    		System.out.println(invoiceNbr2);
+    		System.out.println(testNamePlc);
+    		System.out.println(BILLAcctNbrPlc);
+    		System.out.println(protectedAcctPlc);
+    		System.out.println(protectedNonAcctPlc);
+    		System.out.println(rebillAccount);
+    		System.out.println(expActualWeight);
+    		System.out.println(customweight);
+    		System.out.println(weightTypePlc);
+    		System.out.println(heightPlc);
+    		System.out.println(customLengthPlc);
+    		System.out.println(customwidthPlc);
+    		System.out.println(sizeTypePlc);
+    		System.out.println(pmtTypeCd);
+    		System.out.println(shipWgtPlc);
+    		System.out.println(protectedThirdAcctWgtPlc);
+    		System.out.println(protectedThirdAcctLsPlc);
+    		System.out.println(rebillCountryPlc);
+    		System.out.println(miscPlc);
+    		System.out.println(reasonCode);
+    		System.out.println(actualLengthPlc);
+    		System.out.println(login);
+    		System.out.println(region);
+    
+    	
+    	
     	
     	/*
     	if(!preRateScenarios.equals("")) {
@@ -1286,13 +1322,16 @@ actualLengthPlc  = NO ACTION
               */
              
              
-             
+             //No Need to change actual weight?
+             /*
              if (!expActualWeight.equals("")) {
             	 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[7]/div[4]/input")).clear();
          		 
             	 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[7]/div[4]/input")).sendKeys(expActualWeight);
      		 
      	 }
+             
+             
              
              if (!customweight.equals("")) {
      		 	driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[2]/div[2]/input")).clear();
@@ -1343,6 +1382,7 @@ actualLengthPlc  = NO ACTION
      		 	driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[2]/div[2]/input")).sendKeys(shipWgtPlc);
         		 
      	 }
+     	 
              if (!protectedThirdAcctWgtPlc.equals("")) {
      		 	driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[2]/div[2]/input")).clear();
      		 	driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[2]/div[2]/input")).sendKeys(protectedThirdAcctWgtPlc);
@@ -1353,7 +1393,7 @@ actualLengthPlc  = NO ACTION
      		 	driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[1]/input")).sendKeys(protectedThirdAcctLsPlc);
         		 
      	 }
-             
+             */
              
              
              /*
