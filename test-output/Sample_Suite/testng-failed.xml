@@ -1,46 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Sample_Suite]">
   <parameter name="nullCheckBox" value="true"/>
   <parameter name="level" value="3"/>
-  <parameter name="failedCheckBox" value="false"/>
-<<<<<<< HEAD
+  <parameter name="failedCheckBox" value="true"/>
   <parameter name="groundCheckBox" value="false"/>
-  <parameter name="source" value="excel"/>
-  <parameter name="endDateText" value="06/15/2020"/>
-  <parameter name="compatibleMode" value="true"/>
-=======
-  <parameter name="groundCheckBox" value="true"/>
   <parameter name="source" value="db"/>
-  <parameter name="compatibleMode" value=""/>
+  <parameter name="compatibleMode" value="false"/>
   <parameter name="customCheckBox" value="false"/>
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
-  <parameter name="expressCheckBox" value="true"/>
+  <parameter name="expressCheckBox" value="false"/>
   <parameter name="allCheckBox" value="false"/>
-<<<<<<< HEAD
-  <parameter name="startDateText" value="01/01/2020"/>
-  <parameter name="filepath" value="C:\Users\FedExUser\Desktop\stephen\R66\L3C4\Rerate\rerate.xlsx"/>
-=======
-  <parameter name="filepath" value=""/>
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+  <parameter name="filepath" value="C:\Users\FedExUser\Documents\rebill.xlsx"/>
   <parameter name="sessionCount" value="1"/>
   <parameter name="domesticCheckBox" value="false"/>
   <parameter name="browser" value="2"/>
   <parameter name="databaseDisabled" value="false"/>
-  <parameter name="internationalCheckBox" value="true"/>
+  <parameter name="internationalCheckBox" value="false"/>
   <parameter name="customString" value=""/>
-  <test thread-count="5" name="Rebill Test(failed)" parallel="methods">
+  <test name="Rebill Test(failed)" parallel="methods">
     <classes>
-      <class name="rebill.testngRebillSlow">
+      <class name="prerate.prerateHoldTestNGSlow">
         <methods>
-          <include name="testMethod1" invocation-numbers="3 3 3 4 4 4 5 5 5 7 7 7 7 8 8 8 8 13 13 13 13 14 18 18 18 18 21 21 22 22 22 30 30 31 31 31 31 32 32 32 32 33 33 34 38 38 38 38 39 39 40 40 42 42 46 47 47 47 47 48 48 48 48 52 52 52 53 57 57 57 58 63 65 65 66 68 73 73 73 73 74 74 74 75 76 78 78 82 87 87 88 88 90 91 91 97 97 98 98 98 99 99 99 101 101 101 101 102 102 102 102 103 103 103 103 104 104 104 104 105 105 109 109 109 110 110 110 110 111 111 111 111 118 118 118 118 122 124 126 126 126 126 127 127 127 127 128 128 128 128 129 131 132 132 133 133 133 138 145 145 145 145 146 146 146 146 147 150 150 151 160 161 161 162 162 162 162 163 163 163 163 166 167 167 167 167 168 168 168 168 169 169 170 170 171 173 173 173 176 176 176 182 182 182 182 183 183 184 184 184 184 185 185 185 186 187 187 187 187 194 194 194 194 195 195 195 195 196 196 196 196 197 201 201 201 201 202 204"/>
-          <include name="testMethod2"/>
-          <include name="testMethod" invocation-numbers="0"/>
           <include name="testMethod4"/>
           <include name="setupExcel"/>
           <include name="testMethod3"/>
+          <include name="testMethod2"/>
         </methods>
-      </class> <!-- rebill.testngRebillSlow -->
+      </class> <!-- prerate.prerateHoldTestNGSlow -->
     </classes>
   </test> <!-- Rebill Test(failed) -->
 </suite> <!-- Failed suite [Sample_Suite] -->

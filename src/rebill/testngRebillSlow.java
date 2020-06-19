@@ -169,7 +169,6 @@ public class testngRebillSlow {
 				this.internationalCheckBox=internationalCheckBox;
 				this.expressCheckBox=expressCheckBox;
 				this.groundCheckBox=groundCheckBox;
-				
 	        	this.sessionCount=sessionCount;
 	        	sessionCountInt=Integer.parseInt(sessionCount);
 	        	this.customString=customString;
