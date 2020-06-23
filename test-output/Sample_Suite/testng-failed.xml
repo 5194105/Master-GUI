@@ -2,102 +2,32 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Sample_Suite]">
   <parameter name="nullCheckBox" value="true"/>
-<<<<<<< HEAD
-=======
   <parameter name="level" value="3"/>
-<<<<<<< HEAD
-  <parameter name="failedCheckBox" value="false"/>
-=======
   <parameter name="failedCheckBox" value="true"/>
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
-  <parameter name="groundCheckBox" value="false"/>
+  <parameter name="groundCheckBox" value="true"/>
   <parameter name="source" value="db"/>
-<<<<<<< HEAD
-  <parameter name="endDateText" value="06/05/2020"/>
-  <parameter name="compatibleMode" value="true"/>
-  <parameter name="expressCheckBox" value="true"/>
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
-=======
-  <parameter name="compatibleMode" value="false"/>
+  <parameter name="compatibleMode" value=""/>
   <parameter name="customCheckBox" value="false"/>
   <parameter name="expressCheckBox" value="false"/>
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
   <parameter name="allCheckBox" value="false"/>
-<<<<<<< HEAD
-<<<<<<< HEAD
-  <parameter name="filepath" value=""/>
-  <parameter name="level" value="3"/>
-=======
-  <parameter name="startDateText" value="01/01/2020"/>
-=======
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
   <parameter name="filepath" value="C:\Users\FedExUser\Documents\rebill.xlsx"/>
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
   <parameter name="sessionCount" value="1"/>
-<<<<<<< HEAD
-<<<<<<< HEAD
-  <parameter name="failedCheckBox" value="true"/>
-  <parameter name="browser" value="2"/>
-  <parameter name="source" value="db"/>
-  <parameter name="compatibleMode" value="false"/>
-  <test thread-count="5" name="Prerate Test(failed)" parallel="methods">
-=======
   <parameter name="domesticCheckBox" value="true"/>
-  <parameter name="browser" value="1"/>
-  <parameter name="internationalCheckBox" value="true"/>
-=======
-  <parameter name="domesticCheckBox" value="false"/>
   <parameter name="browser" value="2"/>
   <parameter name="databaseDisabled" value="false"/>
-  <parameter name="internationalCheckBox" value="false"/>
+  <parameter name="internationalCheckBox" value="true"/>
   <parameter name="customString" value=""/>
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
   <test name="Rebill Test(failed)" parallel="methods">
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
     <classes>
-<<<<<<< HEAD
-<<<<<<< HEAD
-      <class name="prerate.prerateTestNGSlow">
-=======
-      <class name="rerate.rerateTestNgSlow">
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
-=======
-      <class name="prerate.prerateHoldTestNGSlow">
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+      <class name="rebill.testngRebillSlow">
         <methods>
-<<<<<<< HEAD
-          <include name="testMethod1" invocation-numbers="0 0 0 0 1 1 1 1 2 2 2 2 3 3 3 3 4 4 4 4 5 5 5 5 6 6 6 6 7 7 7 7 8 8 8 8 9 9 9 9 10 10 10 10 12 12 12 12 13 13 13 13 14 14 14 14 15 15 15 15 16 16 16 16 18 18 18 18 19 19 19 19 20 20 20 20 21 21 21 21 22 22 22 22 23 23 23 23 25 25 25 25 26 26 26 26"/>
+          <include name="testMethod1" invocation-numbers="0 0 0 0 1 1 2 2 3 3 4 4 5 5 6 6 7 7 8 8 9 9 10 10 11 11 12 12 13 13 14 14 15 15 16 16 17 17 26 26 27 27 32 32 43 43 45 45 46 46 49 53 53 54 55 55 57 58 61 62 62 63 65 65 67 67 68 68 69 69 70 70 71 71 72 72 73 74 74 75 75 77 77 80 80 82 82 87 87"/>
           <include name="testMethod2"/>
-<<<<<<< HEAD
-<<<<<<< HEAD
-          <include name="testMethod1" invocation-numbers="0 1 5 6 7 8 15 17 19 20 21 22 23"/>
-          <include name="testMethod3"/>
-=======
-          <include name="testMethod" invocation-numbers="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99"/>
-=======
-=======
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
           <include name="testMethod4"/>
           <include name="setupExcel"/>
-<<<<<<< HEAD
-=======
           <include name="testMethod3"/>
-<<<<<<< HEAD
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
-=======
-          <include name="testMethod2"/>
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
         </methods>
-<<<<<<< HEAD
-<<<<<<< HEAD
-      </class> <!-- prerate.prerateTestNGSlow -->
-=======
-      </class> <!-- rerate.rerateTestNgSlow -->
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
-=======
-      </class> <!-- prerate.prerateHoldTestNGSlow -->
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+      </class> <!-- rebill.testngRebillSlow -->
     </classes>
-  </test> <!-- Prerate Test(failed) -->
+  </test> <!-- Rebill Test(failed) -->
 </suite> <!-- Failed suite [Sample_Suite] -->

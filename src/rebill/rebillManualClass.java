@@ -46,20 +46,18 @@ public class rebillManualClass {
   
 		c.setDomesticCheckBox("true");
 		c.setInternationalCheckBox("false");
-		c.setExpressCheckBox("true");
-<<<<<<< HEAD
+		c.setExpressCheckBox("false");
 		c.setGroundCheckBox("true");
 		c.setNormalCheckBox("true");
 		c.setMfRetireCheckBox("true");
-=======
-		c.setGroundCheckBox("false");
+
 		
 		c.setDatabaseDisabled("false");
 		c.setCustomCheckBox("false");
 		c.setCustomString("");
 		//c.setNormalCheckBox("true");
 		//c.setMfRetireCheckBox("true");
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+
 		c.setSessionCount("1");
     	
     	String filepath=c.getExcelPath();
