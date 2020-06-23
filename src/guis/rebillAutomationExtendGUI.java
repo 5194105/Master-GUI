@@ -263,6 +263,9 @@ public class rebillAutomationExtendGUI {
 	    {
 	      public void actionPerformed(ActionEvent e)
 	      {
+	    	  
+	    	  c.setCustomString(customQueryTextField.getText());
+	    	  System.out.println(c.getCustomString());
 	    	  checkList=true;
 	    	  if (allBox.isSelected()) {
 	    		  c.setAllCheckBox("true");
@@ -324,7 +327,7 @@ public class rebillAutomationExtendGUI {
 	    	  
 	    	  if (customBox.isSelected()) {
 	    		  c.setCustomCheckBox("true");
-	    		  c.setCustomString(customBox.getText());
+	    		  c.setCustomString(customQueryTextField.getText());
 	    	  }
 	    	  else if(!customBox.isSelected()){
 	    		  c.setCustomCheckBox("false");
@@ -341,6 +344,8 @@ public class rebillAutomationExtendGUI {
 	    	  }
 	    	  */
 	    	  String errorList="";
+	    	  
+	    	  if(customBox.isSelected()==false) {
 	    	  if (allBox.isSelected()==true && (nullBox.isSelected()==true || failedBox.isSelected()==true)) {
 	    		  checkList=false;
 	    		  errorList+="Cannot Select All and Another Option\n";
@@ -353,11 +358,11 @@ public class rebillAutomationExtendGUI {
 		    	  
 	    	  }
 	    	  
-	    	  if (expressBox.isSelected()==false && groundBox.isSelected()==false && domBox.isSelected()==false && internationalBox.isSelected()==false && allBox.isSelected()==false) {
+	    	  if (expressBox.isSelected()==false && groundBox.isSelected()==false && domBox.isSelected()==false && internationalBox.isSelected()==false && allBox.isSelected()==false ) {
 	    		  checkList=false;
 	    		  errorList+="Must Select a Flavor\n";
 	    		  System.out.println("Must Select a Flavor");
-		    	  
+	    	  }
 	    	  }
     		 /*
 	    	  

@@ -261,6 +261,8 @@ public class testngRebillSlow {
     		databaseSqlQuery+="where trkngnbr is not null ";
     	}
     	
+    	System.out.println(customCheckBox);
+    	System.out.println(customString);
     	
     	if (customCheckBox.equals("false")) {
     	
@@ -324,11 +326,12 @@ public class testngRebillSlow {
     	}
     	*/
     	}
-    	else if (customCheckBox.equals("false")){
-    		databaseSqlCount+=customString;
-    		databaseSqlQuery+=customString;
     	}
+    	else if (customCheckBox.equals("true")){
+    		databaseSqlCount+="where "+customString;
+    		databaseSqlQuery+="where "+customString;
     	}
+    	
     	
 
        	try {
