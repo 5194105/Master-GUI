@@ -33,18 +33,19 @@ import org.testng.xml.XmlTest;
 
 public class Highest {
 
-	 
+	static  String  homePath=System.getProperty("user.dir");
 
 	static ArrayList<rebillData> rebillDataArray= new ArrayList<rebillData>();
     public static void main(String[] args) throws InterruptedException {
-   
+   /*
     	DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
 	    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
 	    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
 	    capabilities.setCapability("ignoreZoomSetting", true);
 	    capabilities.setCapability("ignoreProtectedModeSettings", true);
 	    capabilities.setCapability("initialBrowserUrl","https://testsso.secure.fedex.com/L3/PRSApps");
-    	System.setProperty("webdriver.ie.driver", "C:\\Users\\FedExUser\\git\\MasterGUI\\drivers\\IEDriverServer.exe");
+    	*/
+    	System.setProperty("webdriver.ie.driver", homePath+"\\drivers\\IEDriverServer.exe");
     	
     	WebDriver driver =  new InternetExplorerDriver();
     	
