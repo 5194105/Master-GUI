@@ -15,6 +15,7 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -29,13 +30,17 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -134,19 +139,39 @@ public class rerateTestNgSlow {
 		String level;
 		int sessionCountInt;
 		String[][] allData;
-		String allCheckBox,nullCheckBox,failedCheckBox,domesticCheckBox,internationalCheckBox,expressCheckBox,groundCheckBox,normalCheckBox,mfRetireCheckBox;
+		String allCheckBox,nullCheckBox,failedCheckBox;
 		
+	    String ed1;
+	    String ei1;
+	    String gd1;
+	    String gi1;
+	    String nt1;
+	    String sp1;
+	    
+	    String ed2;
+	    String ei2;
+	    String gd2;
+	    String gi2;
+	    String nt2;
+	    String sp2;
 		
-		
+	    String databaseDisabled;
 	
 	    
 		@BeforeClass
-		@Parameters({"filepath","level","browser","source","compatibleMode","allCheckBox","nullCheckBox","failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox","sessionCount","startDateText","endDateText"})
-		public void setupExcel(String filepath,String level,String browser,String source,String compatibleMode,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String sessionCount,String startDateText,String endDateText) {
+		@Parameters({"filepath","level","browser","source","compatibleMode","allCheckBox","nullCheckBox","failedCheckBox","sessionCount","databaseDisabled","startDateText","endDateText","ed1","ei1","gd1","gi1","nt1","sp1","ed2","ei2","gd2","gi2","nt2","sp2"})
+		public void setupExcel(String filepath,String level,String browser,String source,String compatibleMode,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String sessionCount,String databaseDisabled,String startDateText,String endDateText,String ed1, String ei1,String gd1, String gi1,String nt1,String sp1,String ed2,String ei2, String gd2, String gi2,String nt2, String sp2) {
 			//public void setupExcel() {
 			//or from eclipse.
 			
-		
+			try {
+				Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe");
+				Runtime.getRuntime().exec("taskkill /F /IM IEDriverServer.exe");
+				Runtime.getRuntime().exec("taskkill /F /IM iexplore.exe");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
         	
         	
 	        	this.browser=browser;
@@ -156,13 +181,26 @@ public class rerateTestNgSlow {
 	        	this.allCheckBox=allCheckBox;
 				this.nullCheckBox=nullCheckBox;
 				this.failedCheckBox=failedCheckBox;
-				this.domesticCheckBox=domesticCheckBox;
-				this.internationalCheckBox=internationalCheckBox;
-				this.expressCheckBox=expressCheckBox;
-				this.groundCheckBox=groundCheckBox;
 	        	this.sessionCount=sessionCount;
 	        	this.startDateText=startDateText;
 	        	this.endDateText=endDateText;
+	        	this.databaseDisabled=databaseDisabled;
+	        	
+	        	
+	        	this.ed1=ed1;
+	     	    this.ei1=ei1;
+	     	    this.gd1=gd1;
+	     	    this.gi1=gi1;
+	     	    this.nt1=nt1;
+	     	    this.sp1=sp1;
+	     	    
+	     	    this.ed2=ed2;
+	     	    this.ei2=ei2;
+	     	    this.gd2=gd2;
+	     	    this.gi2=gi2;
+	     	    this.nt2=nt2;
+	     	    this.sp2=sp2;
+	        	
 	        	sessionCountInt=Integer.parseInt(sessionCount);
 	        	homePath=System.getProperty("user.dir");
 	        	System.out.println("homePath" +System.getProperty("user.dir"));
@@ -184,7 +222,7 @@ public class rerateTestNgSlow {
 	    		excelVar.setRowCountAutomatically(0);
 	    		excelVar.setColCountAutomatically(0);
 		    	rowCount=excelVar.getRowCount();
-		    	colCount=excelVar.getColCount()+1;
+		    	colCount=excelVar.getColCount()-1;
 		    	
 	    	}
 	    	
@@ -260,39 +298,83 @@ public class rerateTestNgSlow {
 	    		databaseSqlCount+="result ='fail' ";
 	    		databaseSqlQuery+="result ='fail' ";
 	    	}
-	    	/*
-	    	if (domesticCheckBox.equals("true") && internationalCheckBox.equals("false")) {
-	    		databaseSqlCount+="and rs_type='DM' ";
-	    		databaseSqlQuery+="and rs_type='DM' ";
+	    	
+	    	databaseSqlCount+="and service1 in (";
+    		databaseSqlQuery+="and service1 in (";
+	    	
+    	
+    		
+	    	if(ed1.equals("true")) { 
+	    		databaseSqlCount+="'Express Domestic',";
+	    		databaseSqlQuery+="'Express Domestic',";
+	    		
 	    	}
-	    	if (internationalCheckBox.equals("true") && domesticCheckBox.equals("false")) {
-	    		databaseSqlCount+="and rs_type='IL' ";
-	    		databaseSqlQuery+="and rs_type='IL' ";
+    		
+	    	if(ei1.equals("true")) { 
+	    		databaseSqlCount+="'Express International',";
+	    		databaseSqlQuery+="'Express International',";
 	    	}
-	    	if (internationalCheckBox.equals("true") && domesticCheckBox.equals("true")) {
-	    		databaseSqlCount+="and rs_type in ('DM','IL')";
-	    		databaseSqlQuery+="and rs_type in ('DM','IL')";
+	    	if(gd1.equals("true")) { 
+	    		databaseSqlCount+="'Ground Domestic',";
+	    		databaseSqlQuery+="'Ground Domestic',";
+	    	}
+	    	if(gi1.equals("true")) {
+	    		databaseSqlCount+="'Ground International',";
+	    		databaseSqlQuery+="'Ground International',";
+	    	}
+	    	if(nt1.equals("true")) { 
+	    		databaseSqlCount+="'NT',";
+	    		databaseSqlQuery+="'NT',";
+	    	}
+	    	if(sp1.equals("true")) {
+	    		databaseSqlCount+="'SmartPost',";
+	    		databaseSqlQuery+="'SmartPost',";
 	    	}
 	    	
-	    	if (expressCheckBox.equals("true") && groundCheckBox.equals("false")) {
-	    		databaseSqlCount+="and company='EP' ";
-	    		databaseSqlQuery+="and company='EP' ";
-	    	}
-	    	if (groundCheckBox.equals("true") && expressCheckBox.equals("false")) {
-	    		databaseSqlCount+="and company='GD' ";
-	    		databaseSqlQuery+="and company='GD' ";
-	    	}
-	    	
-	    	if (groundCheckBox.equals("true") && expressCheckBox.equals("true")) {
-	    		databaseSqlCount+="and service1 in ('GD','EP') ";
-	    		databaseSqlQuery+="and service1 in ('GD','EP') ";
-	    	}
-	       	*/
-	    	
-	    	
+	    	databaseSqlCount+=") ";
+	    	databaseSqlQuery+=") ";
 
+	    	if (ed2.equals("true") || ei2.equals("true") ||gd2.equals("true") ||gi2.equals("true") ||nt2.equals("true") ||sp2.equals("true") ) {
+	    		databaseSqlCount+="and service2 in (";
+	    		databaseSqlQuery+="and service2 in (";
+		    	
+	    		
+	    	if(ed2.equals("true")) { 
+	    		databaseSqlCount+="'Express Domestic',";
+	    		databaseSqlQuery+="'Express Domestic',";
+	    		
+	    	}
+    		
+	    	if(ei2.equals("true")) { 
+	    		databaseSqlCount+="'Express International',";
+	    		databaseSqlQuery+="'Express International',";
+	    	}
+	    	if(gd2.equals("true")) { 
+	    		databaseSqlCount+="'Ground Domestic',";
+	    		databaseSqlQuery+="'Ground Domestic',";
+	    	}
+	    	if(gi2.equals("true")) {
+	    		databaseSqlCount+="'Ground International',";
+	    		databaseSqlQuery+="'Ground International',";
+	    	}
+	    	if(nt2.equals("true")) { 
+	    		databaseSqlCount+="'NT',";
+	    		databaseSqlQuery+="'NT',";
+	    	}
+	    	if(sp2.equals("true")) {
+	    		databaseSqlCount+="'SmartPost',";
+	    		databaseSqlQuery+="'SmartPost',";
+	    	}
+	    	databaseSqlCount+=") ";
+	    	databaseSqlQuery+=") ";
+		}
+	    	
+	    	 databaseSqlCount = databaseSqlQuery.replace(",)",")");
+	    	 databaseSqlQuery = databaseSqlQuery.replace(",)",")");
+	    	 
+	    	
 	       	try {
-	            //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
+	            //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015Â Â  : Â  A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
 	        		
 	        		stmt = GTMcon.createStatement();
 	        		System.out.println(databaseSqlCount);
@@ -487,6 +569,7 @@ public class rerateTestNgSlow {
 		  try {
 			  
 			  driver1.quit();
+			  driver1.close();
 		  }
 		  catch(Exception eee) {
 			  System.out.println(eee);
@@ -497,20 +580,22 @@ public class rerateTestNgSlow {
 	        
 		  
 		  if (browser.equals("1")) {
-	    		/*
+			  DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
 			  if (compatibleMode.equals("true")) {	
-	    			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
+	    			
 	    		    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
 	    		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
 	    		    capabilities.setCapability("ignoreZoomSetting", true);
 	    		    capabilities.setCapability("ignoreProtectedModeSettings", true);
 	    		    capabilities.setCapability("initialBrowserUrl",levelUrl);
+	    		   // capabilities.setCapability("nativeEvents",false);
+	    		 
 	    		}
-	    		*/
+	    		
 	    	//System.setProperty(ieSetProperty, ieDriverPath);
-	    		System.setProperty("webdriver.ie.driver", "C:\\Users\\FedExUser\\git\\MasterGUI\\drivers\\IEDriverServer2.exe");
+	    		System.setProperty("webdriver.ie.driver", homePath+"\\drivers\\IEDriverServer.exe");
 	    		try {
-	    		driver1 =  new InternetExplorerDriver();
+	    		driver1 =  new InternetExplorerDriver(capabilities);
 	    		
 	    		}
 	    		catch(Exception e) {
@@ -521,6 +606,19 @@ public class rerateTestNgSlow {
 	    	 
 	    		System.setProperty(chromeSetProperty,chromePath);
 	    		driver1 = new ChromeDriver();
+	    	}
+	     	else if (browser.equals("3")) {
+	         	 
+	    		
+	        	
+	        	FirefoxProfile profile = new FirefoxProfile(); 
+	        	profile.setPreference("capability.policy.default.Window.QueryInterface", "allAccess");
+	        	profile.setPreference("capability.policy.default.Window.frameElement.get","allAccess");
+	        	profile.setAcceptUntrustedCertificates(true); profile.setAssumeUntrustedCertificateIssuer(true);
+	        	DesiredCapabilities capabilities = new DesiredCapabilities(); 
+	        	capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+	        	System.setProperty("webdriver.gecko.driver",  homePath+"\\drivers\\geckodriver.exe");
+	        	driver1 = new FirefoxDriver(capabilities);
 	    	}
   	    
   	 
@@ -567,7 +665,7 @@ public class rerateTestNgSlow {
 		System.setProperty(chromeSetProperty,chromePath);
 		driver2 = new ChromeDriver();
 	}
-  	    
+
   	    
  
 			System.out.println("Hello 2");
@@ -656,7 +754,7 @@ public class rerateTestNgSlow {
 	    }
 	  
 	  public void doWork(WebDriver driver, WebDriverWait wait,Select CEDropDown,Alert alert,Robot r,ArrayList<String> cc1,ArrayList<String> cc2, List<WebElement> comboBoxesHandling, Boolean isChecked,int count,String testInputNbr,String tinCount,String acct1,String acct2,String trkng1,String trkng2,String inv1,String inv2,String service1,String service2,String rerateType,String acctType,String name,int testCounter) {
-	//      Assert.assertTrue(false,"Failed at Login");
+	
 		
 		  
 		  
@@ -673,11 +771,13 @@ public class rerateTestNgSlow {
 					express=true;
 					}
 
-			if (!service2.equals("null")) {
+			if (!service2.equals("")) {
 				if (service2.equals("Ground International") || service2.equals("Ground Domestic") || service2.equals("SmartPost")) {
 					ground=true;
 				}
-				else {
+				
+				
+				else if (service2.equals("NT") || service2.equals("Express Domestic") || service2.equals("Express International")){
 					express=true;
 					}
 				}
@@ -705,17 +805,13 @@ public class rerateTestNgSlow {
 	  public void login(WebDriver driver,WebDriverWait wait) {
 
 		  try {
-				driver.get(levelUrl);
+
+			  driver.get(levelUrl);
 		  		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 		  		wait = new WebDriverWait( driver,10);
 		  		driver.manage().window().maximize();     
 				
-				try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				
 			//	/html/body/div/div/form/div/div[1]/fieldset/label[1]/input
 				driver.findElement(By.id("username")).sendKeys("477023");
 				driver.findElement(By.id("password")).sendKeys("477023");
@@ -761,7 +857,7 @@ public class rerateTestNgSlow {
 					}
 				}
 				
-				Assert.assertTrue(isPresent,"Failed at Login");
+			
 		  }
 		  catch(Exception e) {
 			  System.out.println(e);
@@ -881,6 +977,7 @@ if (!acctType.equals("CE Level")) {
 	{
 		try {
 			r = new Robot();
+
 			r.keyPress(KeyEvent.VK_ENTER);
 			r.keyRelease(KeyEvent.VK_ENTER);
 			Thread.sleep(3000);
@@ -913,7 +1010,7 @@ if (!acctType.equals("CE Level")) {
 		} catch (AWTException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Assert.assertTrue(false,"Failed during CE.");
+			 Assert.fail("Failed during CE.");
 			} 
 		}
 	}
@@ -927,9 +1024,10 @@ if (!acctType.equals("CE Level")) {
   	String[] resultArray = new String[2];
   	resultArray[0]="fail";
   	resultArray[1]="Failed During First Page";
-  	writeToDB(testInputNbr,tinCount,trk,0,resultArray);
-  
-	softAssertion.assertTrue(false,"Failed during first page.");
+  	if(databaseDisabled.contentEquals("false")) {
+  	writeToDB(testInputNbr,tinCount,trk,"ERROR",resultArray);
+  	}
+  	 Assert.fail("Failed during first page.");
 	
  		}
  }
@@ -973,22 +1071,26 @@ if (!acctType.equals("CE Level")) {
 			case "Express International":
 				
 				driver.findElement(By.xpath("//*[@name='svc'][@value='I']")).click();
-				comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='svc'][@value='I']")));
+				//comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='svc'][@value='I']")));
+				cc1.add("I");
 				Thread.sleep(1000);
 				driver.findElement(By.xpath("//*[@name='splHandle'][@value='I']")).click();
-				comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='I']")));
+				cc2.add("I");
+				//comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='I']")));
 				Thread.sleep(1000);
 				break;
 				
 			case "Ground Domestic":
 				driver.findElement(By.xpath("//*[@name='svc'][@value='G']")).click();
-				comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='svc'][@value='G']")));
+				//comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='svc'][@value='G']")));
+				cc1.add("G");
 				Thread.sleep(1000);
 				//driver.findElement(By.xpath("//*[@name='splHandle'][@value='D']")).click();
 				//comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='D']")));
 				Thread.sleep(1000);
 				driver.findElement(By.xpath("//*[@name='splHandle'][@value='G']")).click();
-				comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='G']")));
+				cc2.add("G");
+				//comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='G']")));
 				Thread.sleep(1000);
 				break;
 			
@@ -997,95 +1099,114 @@ if (!acctType.equals("CE Level")) {
 				driver.findElement(By.xpath("//*[@name='svc'][@value='N']")).click();
 				//comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='svc'][@value='N']")));
 				Thread.sleep(1000);
-				
+				cc1.add("N");
                                         //driver.findElement(By.xpath("//*[@name='splHandle'][@value='I']")).click();
 				//comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='I']")));
 				Thread.sleep(1000);
 				driver.findElement(By.xpath("//*[@name='splHandle'][@value='G']")).click();
-				comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='G']")));
+			//	comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='G']")));
+				
+				cc2.add("G");
 				Thread.sleep(1000);
 				break;
 			
 			case "SmartPost":
 				driver.findElement(By.xpath("//*[@name='svc'][@value='P']")).click();
-				comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='svc'][@value='P']")));
+				//comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='svc'][@value='P']")));
+				cc1.add("P");
 				Thread.sleep(1000);
 				driver.findElement(By.xpath("//*[@name='splHandle'][@value='P']")).click();
-				comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='P']")));
+				cc2.add("P");
+				//comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='P']")));
 				Thread.sleep(1000);
 				break;
 		
 			case "NT":
 				driver.findElement(By.xpath("//*[@name='svc'][@value='S']")).click();
-				comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='svc'][@value='S']")));
+				//comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='svc'][@value='S']")));
+				cc1.add("S");
 				Thread.sleep(1000);
 				driver.findElement(By.xpath("//*[@name='splHandle'][@value='D']")).click();
-				comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='D']")));
+				//comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='D']")));
+				cc2.add("D");
 				Thread.sleep(1000);
 				break;
 			}
 			Thread.sleep(5000);
 
 			//Determines which checkboxes to select for first trk.
-			if (service2!=null || service2 !="" ||service2.equals("")||service2.equals("null")) {
+			if (service2!=null || service2 !="" ||service2.equals("null")) {
 				switch(service2) {
 				case "Express Domestic":
 					
 					driver.findElement(By.xpath("//*[@name='svc'][@value='D']")).click();
-					comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='svc'][@value='D']")));
+					//comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='svc'][@value='D']")));
+					cc1.add("D");
+					
 					Thread.sleep(1000);
 					driver.findElement(By.xpath("//*[@name='splHandle'][@value='D']")).click();
-					comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='D']")));
+				//	comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='D']")));
+					cc2.add("D");
 					Thread.sleep(1000);
 					break;
 				case "Express International":
 					
 					driver.findElement(By.xpath("//*[@name='svc'][@value='I']")).click();
-					comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='svc'][@value='I']")));
+					//comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='svc'][@value='I']")));
+					cc1.add("I");
 					Thread.sleep(1000);
 					driver.findElement(By.xpath("//*[@name='splHandle'][@value='I']")).click();
-					comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='I']")));
+				//	comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='I']")));
+					cc2.add("I");
 					Thread.sleep(1000);
 					break;
 				
 				case "Ground Domestic":
 					driver.findElement(By.xpath("//*[@name='svc'][@value='G']")).click();
-					comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='svc'][@value='G']")));
+					//comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='svc'][@value='G']")));
+					cc1.add("G");
 					Thread.sleep(1000);
 				////	driver.findElement(By.xpath("//*[@name='splHandle'][@value='D']")).click();
 				//	comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='D']")));
 					Thread.sleep(1000);
 					driver.findElement(By.xpath("//*[@name='splHandle'][@value='G']")).click();
-					comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='G']")));
+				//	comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='G']")));
+					cc2.add("G");
 					Thread.sleep(1000);
 					break;
 				
 				case "Ground International":
 					driver.findElement(By.xpath("//*[@name='svc'][@value='N']")).click();
-					comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='svc'][@value='N']")));
+				//	comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='svc'][@value='N']")));
 					Thread.sleep(1000);
+					cc1.add("N");
 				//	driver.findElement(By.xpath("//*[@name='splHandle'][@value='I']")).click();
 				//	comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='I']")));
 					Thread.sleep(1000);
 					driver.findElement(By.xpath("//*[@name='splHandle'][@value='G']")).click();
-					comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='G']")));
+					//comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='G']")));
+					cc2.add("G");
 					Thread.sleep(1000);
 					break;
 				case "SmartPost":
 					driver.findElement(By.xpath("//*[@name='svc'][@value='P']")).click();
-					comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='svc'][@value='P']")));
+					//comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='svc'][@value='P']")));
+					cc1.add("P");
 					Thread.sleep(1000);
 					driver.findElement(By.xpath("//*[@name='splHandle'][@value='P']")).click();
-					comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='P']")));
+					//comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='P']")));
+					cc2.add("P");
 					Thread.sleep(1000);
 					break;
 			
 				case "NT":
 					driver.findElement(By.xpath("//*[@name='svc'][@value='S']")).click();
-					comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='svc'][@value='S']")));
+					//comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='svc'][@value='S']")));
+					cc1.add("S");
 					Thread.sleep(1000);
 					driver.findElement(By.xpath("//*[@name='splHandle'][@value='D']")).click();
-					comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='D']")));
+					//comboBoxesHandling.add(driver.findElement(By.xpath("//*[@name='splHandle'][@value='D']")));
+					cc2.add("D");
 					Thread.sleep(1000);
 					break;
 				}
@@ -1096,7 +1217,8 @@ if (!acctType.equals("CE Level")) {
 			
 					 isChecked=true;
 					for (int k=0;k<cc1.size();k++) {
-						System.out.println("BOOLEAN: ");
+						System.out.println("BOOLEAN: "+cc1.get(k));
+					//	driver.findElement(By.xpath("//*[@name='svc'][@value='S']")).click();
 						System.out.println("BOOLEAN: "+    driver.findElement(By.xpath("//*[@name='svc'][@value='"+cc1.get(k)+"']")).isSelected());
 							if(driver.findElement(By.xpath("//*[@name='svc'][@value='"+cc1.get(k)+"']")).isSelected()==false){
 								isChecked=false;
@@ -1129,7 +1251,9 @@ Thread.sleep(2000);
 			//Date Range
 			if (rerateType.equals("Date Range")) {
 				Thread.sleep(2000);
-				driver.findElement(By.xpath("//*[@name='accType'][@value='A']")).click();
+				driver.findElement(By.xpath("/html/body/table/tbody/tr/td/form/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr[3]/td/table/tbody/tr[7]/td/font/input")).click();
+				
+				//driver.findElement(By.xpath("//*[@name='accType'][@value='A']")).click();
 				driver.switchTo().alert().accept();
 				Thread.sleep(2000);
 				driver.findElement(By.xpath("/html/body/table/tbody/tr/td/form/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr[3]/td/table/tbody/tr[12]/td[2]/font[1]/input")).sendKeys("12/01/2001");
@@ -1182,7 +1306,7 @@ Thread.sleep(2000);
 					}
 				}
 
-			Thread.sleep(15000);
+			
 			
 
 			
@@ -1197,9 +1321,10 @@ Thread.sleep(2000);
 		  	String[] resultArray = new String[2];
 		  	resultArray[0]="fail";
 		  	resultArray[1]="Failed During Second Page";
-		  	writeToDB(testInputNbr,tinCount,trkng1,0,resultArray);
-		  
-			softAssertion.assertTrue(false,"Failed During Second Page");
+		  	if(databaseDisabled.contentEquals("false")) {
+		  	writeToDB(testInputNbr,tinCount,trkng1,"ERROR",resultArray);
+		  	}
+		  	 Assert.fail("Failed During Second Page");
 		}
 		}
 	  
@@ -1213,11 +1338,11 @@ Thread.sleep(2000);
 		
 		
 		public void thirdPage(WebDriver driver,WebDriverWait wait,int testCounter,String name,Boolean express,Boolean ground,Boolean combo,String testInputNbr,String tinCount,String trk) {
-
 			int count=0;
-			try {
+			String requestId="";
 			
-			String requestId;
+			try {
+		
 			if (level.equals("2"))
 			{
 				driver.get("https://devsso.secure.fedex.com/L2/PRSApps/inbox/inbox_router.jsp?inbox_id=11");
@@ -1230,16 +1355,51 @@ Thread.sleep(2000);
 			
 			  
 	
+			wait = new WebDriverWait( driver,60);
 			
-			Thread.sleep(30000);
 			
-			count = getRerateId(driver,name,testCounter);
-			driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[1]/input")).get(count-1).click();
+		//	count = getRerateId(driver,name,testCounter);
+			
+		
+			
+			//System.out.println()
+			driver.findElement(By.xpath("//a[contains(text(),'"+name+"')]")).getText();
+			count = driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]")).size();
+			requestId = driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[3]/font")).get(count-1).getText();
+			
+			 
+		
+			
+			JavascriptExecutor js = ((JavascriptExecutor) driver);
+			js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 			Thread.sleep(1000);
+			
+			//driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[1]/input")).get(count-1).sendKeys(r.keyPress(KeyEvent.VK_ENTER));
+			driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[1]/input")).get(count-1).click();
+			int counter=0;
+			
+			//added this code because IE SUCKS!!!!!!
+			while (true) {
+				if (counter==10){
+					break;
+				}
+				if (driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[1]/input")).get(count-1).isSelected()==true) {
+					break;
+				}
+					else {
+						driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[1]/input")).get(count-1).click();
+						
+					}
+				}
+			
+			
+			
+				Thread.sleep(1000);
 			driver.findElement(By.name("btnAcceptTask")).click();
 			Thread.sleep(1000);
 			driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]")).get(count-1).click();
 			Thread.sleep(2000);
+			wait = new WebDriverWait( driver,10);
 			driver.findElement(By.xpath("//input[@name='pa_actn_cd']/following-sibling::input[1]")).click();
 			Select dr1 = new Select(driver.findElement(By.name("root_cause")));
 			dr1.selectByVisibleText("Sales Caused");
@@ -1257,6 +1417,7 @@ Thread.sleep(2000);
 			driver.findElement(By.name("RV01")).sendKeys("0000");
 			Select dr7 = new Select(driver.findElement(By.name("prc_exp_grnd_ind")));
 			Thread.sleep(3000);
+			
 			if(express==true) {
 				dr7.selectByValue("E");
 				
@@ -1279,12 +1440,15 @@ Thread.sleep(2000);
 		//	wb.write(fout);	
 
 		  	 if(source.equals("excel")) {
+		  		writeToExcel(testCounter,13,requestId);
 		       	 writeToExcel(testCounter, 14,"Processed");
 		       	 }
 		  	String[] resultArray = new String[2];
 		  	resultArray[0]="pass";
 		  	resultArray[1]="processed";
-		  	writeToDB(testInputNbr,tinCount,trk,count,resultArray);
+		  	if(databaseDisabled.contentEquals("false")) {
+		  	writeToDB(testInputNbr,tinCount,trk,requestId,resultArray);
+		  	}
 		    Assert.assertTrue(true,"Test Case Completed.");
 		       	 	
 		       	 return;
@@ -1296,7 +1460,7 @@ Thread.sleep(2000);
 		catch (NoSuchElementException e)
 		{
 			System.out.println(e);
-			softAssertion.assertTrue(false,"Failed During Third Page");
+			
 			if(url1.contentEquals("https://testsso.secure.fedex.com/L3/PRSApps/rerate/iscreen/rrAERerateMain.jsp")||url2.contentEquals("https://destsso.secure.fedex.com/L2/PRSApps/rerate/iscreen/rrAERerateMain.jsp"))
 			{
 				
@@ -1310,8 +1474,9 @@ Thread.sleep(2000);
 			  	String[] resultArray = new String[2];
 			  	resultArray[0]="fail";
 			  	resultArray[1]="Try This Manually";
-			  	writeToDB(testInputNbr,tinCount,trk,count,resultArray);
-			    Assert.assertTrue(true,"NoSuchElementException on third page");
+			  	if(databaseDisabled.contentEquals("false")) {
+			  	writeToDB(testInputNbr,tinCount,trk,requestId,resultArray);
+			  	}
 			
 			}
 			else
@@ -1325,10 +1490,11 @@ Thread.sleep(2000);
 			  	String[] resultArray = new String[2];
 			  	resultArray[0]="fail";
 			  	resultArray[1]="NoSuchElementException on third page";
-			  	writeToDB(testInputNbr,tinCount,trk,count,resultArray);
-			    Assert.assertTrue(true,"NoSuchElementException on third page");
-				softAssertion.assertTrue(false,"NoSuchElementException on third page");
+			  	if(databaseDisabled.contentEquals("false")) {
+			  	writeToDB(testInputNbr,tinCount,trk,requestId,resultArray);
+			  	}
 			}
+			 Assert.fail("Failed During Third Page");
 		}
 		catch (WebDriverException h)
 		{
@@ -1341,9 +1507,10 @@ Thread.sleep(2000);
 		  	String[] resultArray = new String[2];
 		  	resultArray[0]="fail";
 		  	resultArray[1]="WebDriverException on third page";
-		  	writeToDB(testInputNbr,tinCount,trk,count,resultArray);
-		    Assert.assertTrue(true,"WebDriverException on third page");
-			softAssertion.assertTrue(false,"WebDriverException on third page");
+		  	if(databaseDisabled.contentEquals("false")) {
+		  	writeToDB(testInputNbr,tinCount,trk,requestId,resultArray);
+		  	}
+		  	 Assert.fail("Failed During Third Page");
 		}
 
 		catch(NullPointerException k)
@@ -1355,9 +1522,10 @@ Thread.sleep(2000);
 		  	String[] resultArray = new String[2];
 		  	resultArray[0]="fail";
 		  	resultArray[1]="NullPointerException on third page";
-		  	writeToDB(testInputNbr,tinCount,trk,count,resultArray);
-		    Assert.assertTrue(true,"NullPointerException on third page");
-			softAssertion.assertTrue(false,"NullPointerException on third page");
+		  	if(databaseDisabled.contentEquals("false")) {
+		  	writeToDB(testInputNbr,tinCount,trk,requestId,resultArray);
+		  	}
+		  	 Assert.fail("Failed During Third Page");
 		
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -1368,10 +1536,10 @@ Thread.sleep(2000);
 		  	String[] resultArray = new String[2];
 		  	resultArray[0]="fail";
 		  	resultArray[1]="InterruptedException on third page";
-		  	writeToDB(testInputNbr,tinCount,trk,count,resultArray);
-		    Assert.assertTrue(true,"InterruptedException on third page");
-			softAssertion.assertTrue(false,"Failed During Third Page");
-			//e.printStackTrace();
+		  	if(databaseDisabled.contentEquals("false")) {
+		  	writeToDB(testInputNbr,tinCount,trk,requestId,resultArray);
+		  	}
+		  	 Assert.fail("Failed During Third Page");
 		}
 			
 		}
@@ -1386,10 +1554,14 @@ Thread.sleep(2000);
 	public synchronized int getRerateId(WebDriver driver, String name,int testCounter) {
 		int count;
 		String requestId;
+		//System.out.println()
 		driver.findElement(By.xpath("//a[contains(text(),'"+name+"')]")).getText();
 		count = driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]")).size();
 		requestId = driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[3]/font")).get(count-1).getText();
+		 if(source.equals("excel")) {
 		writeToExcel(testCounter,13,requestId);
+		 }
+		
 		return count;
 		
 	}
@@ -1398,9 +1570,9 @@ Thread.sleep(2000);
 	
 	
 	
-	 public synchronized void writeToDB(String testInputNbr,String tinCount,String trk,int rerateRequest, String[] resultArray) {
+	 public synchronized void writeToDB(String testInputNbr,String tinCount,String trk,String rerateRequest, String[] resultArray) {
 	    	Connection GTMcon=null;
-	    	String rerateRequestString = Integer.toString(rerateRequest);
+	    //	String rerateRequestString = Integer.toString(rerateRequest);
 	    	try {
 				Class.forName("oracle.jdbc.driver.OracleDriver");
 				GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
@@ -1417,12 +1589,12 @@ Thread.sleep(2000);
 	    	
 
 	    	try {
-	        //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
+	        //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015Â Â  : Â  A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
 	    	stmt=GTMcon.prepareStatement("insert into rerate_results (test_input_nbr,tin_count,trkngnbr,request_id,result,description) values (?,?,?,?,?,?)");  
 			stmt.setString(1,testInputNbr);  
 			stmt.setString(2,tinCount);  
 			stmt.setString(3,trk);  
-			stmt.setString(4,rerateRequestString); 
+			stmt.setString(4,rerateRequest); 
 			stmt.setString(5,resultArray[0]);  
 			stmt.setString(6,resultArray[1]);  
 			stmt.executeUpdate();
@@ -1434,12 +1606,15 @@ Thread.sleep(2000);
 	    	
 	    	
 	    	try {
-			//	update gtm_rev_tools.rebill_results set result='fail',description='6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables' where trkngnbr='566166113544';
-			stmt=GTMcon.prepareStatement("update rerate_results set result=?,description=? where trkngnbr=?");  
+			//	update gtm_rev_tools.rebill_results set result='fail',description='6015Â Â  : Â  A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables' where trkngnbr='566166113544';
+			
+	    		System.out.println("update rerate_results set result="+resultArray[0]+",description="+resultArray[1]+" where trkngnbr="+trk);
+	    		stmt=GTMcon.prepareStatement("update rerate_results set result=?,description=?,REQUEST_ID=? where trkngnbr=?");  
 			
 			stmt.setString(1,resultArray[0]);  
 			stmt.setString(2,resultArray[1]); 
-			stmt.setString(3,trk); 
+			stmt.setString(3,rerateRequest); 
+			stmt.setString(4,trk); 
 			stmt.executeUpdate();
 			
 		}

@@ -20,18 +20,32 @@ public class prsRerateAutomationExtendGui {
 	private JButton saveAndCLose;
 	
 	private JLabel statusLabel;
-	private JLabel allLabel;
-	private JLabel nullLabel;
-	private JLabel failedLabel;
-	private JLabel flavorLabel;
-	private JLabel domesticLabel;
-	private JLabel internationalLabel;
-	private JLabel expressLabel;
-	private JLabel groundLabel;
-	private JLabel functionLabel;
-	private JLabel normalLabel;
-	private JLabel mfRetireLabel;
 
+	private JLabel flavorLabel;
+
+	
+	private JLabel groundDomestic1;
+	private JLabel groundInternational1;
+	private JLabel n1;
+	private JLabel smartPost1;
+	private JLabel expressDomestic1;
+	private JLabel expressInternational1;
+	
+	
+	private JLabel groundDomestic2;
+	private JLabel groundInternational2;
+	private JLabel n2;
+	private JLabel smartPost2;
+	private JLabel expressDomestic2;
+	private JLabel expressInternational2;
+	
+	
+	private JLabel allLabel;
+	private JLabel failLabel;
+	private JLabel nullLabel;
+	
+	
+	
     config c;
     Boolean checkList=true;
     
@@ -69,148 +83,235 @@ public class prsRerateAutomationExtendGui {
 		
 		
 		
-		functionLabel = new JLabel("Work Type");
-		functionLabel.setBounds(300, 440, 150, 31);
-		functionLabel.setForeground(Color.WHITE);
-		functionLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		frame.getContentPane().add(functionLabel);
-		
-		
-		normalLabel = new JLabel("Normal:");
-		normalLabel.setBounds(300, 480, 110, 31);
-		normalLabel.setForeground(Color.WHITE);
-		normalLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		frame.getContentPane().add(normalLabel);
-		
-		mfRetireLabel = new JLabel("MF Retire:");
-		mfRetireLabel.setBounds(300, 520, 110, 31);
-		mfRetireLabel.setForeground(Color.WHITE);
-		mfRetireLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		frame.getContentPane().add(mfRetireLabel);
-		
-		
-		
-		
-		JCheckBox normalBox = new JCheckBox("");
-		normalBox.setBounds(415, 480, 27, 29);
-		normalBox.setOpaque(false);
-		frame.getContentPane().add(normalBox);
-		
-		JCheckBox mfRetireBox = new JCheckBox("");
-		mfRetireBox.setBounds(415, 520, 27, 29);
-		mfRetireBox.setOpaque(false);
-		frame.getContentPane().add(mfRetireBox);
 		
 	
 		
 		
-		statusLabel = new JLabel("Status");
-		statusLabel.setBounds(300, 280, 78, 31);
+		
+		
+	
+	
+		statusLabel = new JLabel("Service 1");
+		statusLabel.setBounds(190, 280, 200, 31);
 		statusLabel.setForeground(Color.WHITE);
-		statusLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		statusLabel.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		frame.getContentPane().add(statusLabel);
 		
 		
-		allLabel = new JLabel("All:");
-		allLabel.setBounds(300, 320, 78, 31);
-		allLabel.setForeground(Color.WHITE);
-		allLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		frame.getContentPane().add(allLabel);
-		
-		nullLabel = new JLabel("Null:");
-		nullLabel.setBounds(300, 360, 78, 31);
-		nullLabel.setForeground(Color.WHITE);
-		nullLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		frame.getContentPane().add(nullLabel);
-		
-		failedLabel = new JLabel("Failed:");
-		failedLabel.setBounds(300, 400, 78, 31);
-		failedLabel.setForeground(Color.WHITE);
-		failedLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		frame.getContentPane().add(failedLabel);
 		
 		
 		
-		flavorLabel = new JLabel("Flavor");
-		flavorLabel.setBounds(600, 280, 100, 31);
+	
+		
+		expressDomestic1 = new JLabel("Express Domestic:");
+		expressDomestic1.setBounds(190, 320, 200, 31);
+		expressDomestic1.setForeground(Color.WHITE);
+		expressDomestic1.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		frame.getContentPane().add(expressDomestic1);
+		
+		expressInternational1 = new JLabel("Express Intl:");
+		expressInternational1.setBounds(190, 360, 200, 31);
+		expressInternational1.setForeground(Color.WHITE);
+		expressInternational1.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		frame.getContentPane().add(expressInternational1);
+		
+		groundDomestic1 = new JLabel("Ground Domestic:");
+		groundDomestic1.setBounds(190, 400, 200, 31);
+		groundDomestic1.setForeground(Color.WHITE);
+		groundDomestic1.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		frame.getContentPane().add(groundDomestic1);
+		
+		groundInternational1 = new JLabel("Ground Intl:");
+		groundInternational1.setBounds(190, 440, 200, 31);
+		groundInternational1.setForeground(Color.WHITE);
+		groundInternational1.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		frame.getContentPane().add(groundInternational1);
+		
+		n1 = new JLabel("Non Transport:");
+		n1.setBounds(190, 480, 200, 31);
+		n1.setForeground(Color.WHITE);
+		n1.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		frame.getContentPane().add(n1);
+		
+		smartPost1 = new JLabel("SmartPost:");
+		smartPost1.setBounds(190, 520, 200, 31);
+		smartPost1.setForeground(Color.WHITE);
+		smartPost1.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		frame.getContentPane().add(smartPost1);
+		
+		
+		flavorLabel = new JLabel("Service 2");
+		flavorLabel.setBounds(460, 280, 100, 31);
 		flavorLabel.setForeground(Color.WHITE);
-		flavorLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		flavorLabel.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		frame.getContentPane().add(flavorLabel);
+
+		expressDomestic2 = new JLabel("Express Domestic:");
+		expressDomestic2.setBounds(460, 320, 200, 31);
+		expressDomestic2.setForeground(Color.WHITE);
+		expressDomestic2.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		frame.getContentPane().add(expressDomestic2);
+		
+		expressInternational2 = new JLabel("Express Intl:");
+		expressInternational2.setBounds(460, 360, 200, 31);
+		expressInternational2.setForeground(Color.WHITE);
+		expressInternational2.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		frame.getContentPane().add(expressInternational2);
+		
+		groundDomestic2 = new JLabel("Ground Domestic:");
+		groundDomestic2.setBounds(460, 400, 200, 31);
+		groundDomestic2.setForeground(Color.WHITE);
+		groundDomestic2.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		frame.getContentPane().add(groundDomestic2);
+		
+		groundInternational2 = new JLabel("Ground Intl:");
+		groundInternational2.setBounds(460, 440, 200, 31);
+		groundInternational2.setForeground(Color.WHITE);
+		groundInternational2.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		frame.getContentPane().add(groundInternational2);
+		
+		n2 = new JLabel("Non Transport:");
+		n2.setBounds(460, 480, 200, 31);
+		n2.setForeground(Color.WHITE);
+		n2.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		frame.getContentPane().add(n2);
+		
+		smartPost2 = new JLabel("SmartPost:");
+		smartPost2.setBounds(460, 520, 200, 31);
+		smartPost2.setForeground(Color.WHITE);
+		smartPost2.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		frame.getContentPane().add(smartPost2);
+		
+		
+		flavorLabel = new JLabel("Status");
+		flavorLabel.setBounds(725, 280, 100, 31);
+		flavorLabel.setForeground(Color.WHITE);
+		flavorLabel.setFont(new Font("Segoe UI", Font.BOLD, 20));
 		frame.getContentPane().add(flavorLabel);
 		
-		domesticLabel = new JLabel("Domestic:");
-		domesticLabel.setBounds(600, 320, 120, 31);
-		domesticLabel.setForeground(Color.WHITE);
-		domesticLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		frame.getContentPane().add(domesticLabel);
 		
-		internationalLabel = new JLabel("International:");
-		internationalLabel.setBounds(600, 360, 150, 31);
-		internationalLabel.setForeground(Color.WHITE);
-		internationalLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		frame.getContentPane().add(internationalLabel);
-		
-		expressLabel = new JLabel("Express:");
-		expressLabel.setBounds(600, 400, 120, 31);
-		expressLabel.setForeground(Color.WHITE);
-		expressLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		frame.getContentPane().add(expressLabel);
-		
-		groundLabel = new JLabel("Ground:");
-		groundLabel.setBounds(600, 440, 120, 31);
-		groundLabel.setForeground(Color.WHITE);
-		groundLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		frame.getContentPane().add(groundLabel);
-		
-		/*
-		JCheckBox checkBox = new JCheckBox("");
-		checkBox.setBounds(630, 405, 27, 29);
-		checkBox.setOpaque(false);
-		frame.getContentPane().add(checkBox);
-		*/
+		allLabel = new JLabel("All:");
+		allLabel.setBounds(725, 320, 100, 31);
+		allLabel.setForeground(Color.WHITE);
+		allLabel.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		frame.getContentPane().add(allLabel);
 		
 		
+		nullLabel = new JLabel("Null:");
+		nullLabel.setBounds(725, 360, 100, 31);
+		nullLabel.setForeground(Color.WHITE);
+		nullLabel.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		frame.getContentPane().add(nullLabel);
 		
-		JCheckBox allBox = new JCheckBox("");
-		allBox.setBounds(415, 320, 27, 29);
-		allBox.setOpaque(false);
-		frame.getContentPane().add(allBox);
 		
-		JCheckBox nullBox = new JCheckBox("");
-		nullBox.setBounds(415, 360, 27, 29);
-		nullBox.setOpaque(false);
-		frame.getContentPane().add(nullBox);
-		
-		JCheckBox failedBox = new JCheckBox("");
-		failedBox.setBounds(415, 400, 27, 29);
-		failedBox.setOpaque(false);
-		frame.getContentPane().add(failedBox);
+		failLabel = new JLabel("Failed:");
+		failLabel.setBounds(725, 400, 100, 31);
+		failLabel.setForeground(Color.WHITE);
+		failLabel.setFont(new Font("Segoe UI", Font.BOLD, 20));
+		frame.getContentPane().add(failLabel);
 		
 		
 		
 		
+		JCheckBox ed1 = new JCheckBox("");
+		ed1.setBounds(375,322, 27, 29);
+		ed1.setOpaque(false);
+		ed1.setSelected(true);
+		frame.getContentPane().add(ed1);
 		
-		JCheckBox domBox = new JCheckBox("");
-		domBox.setBounds(750, 320, 27, 29);
-		domBox.setOpaque(false);
-		frame.getContentPane().add(domBox);
+		
+		
+		JCheckBox ei1 = new JCheckBox("");
+		ei1.setBounds(375, 362, 27, 29);
+		ei1.setOpaque(false);
+		ei1.setSelected(true);
+		frame.getContentPane().add(ei1);
+		
+		JCheckBox gd1 = new JCheckBox("");
+		gd1.setBounds(375, 402, 27, 29);
+		gd1.setOpaque(false);
+		gd1.setSelected(true);
+		frame.getContentPane().add(gd1);
+		
+		JCheckBox gi1 = new JCheckBox("");
+		gi1.setBounds(375, 442, 27, 29);
+		gi1.setOpaque(false);
+		gi1.setSelected(true);
+		frame.getContentPane().add(gi1);
+		
+		JCheckBox nt1 = new JCheckBox("");
+		nt1.setBounds(375, 482, 27, 29);
+		nt1.setOpaque(false);
+		nt1.setSelected(true);
+		frame.getContentPane().add(nt1);
 
-		JCheckBox internationalBox = new JCheckBox("");
-		internationalBox.setBounds(750, 360, 27, 29);
-		internationalBox.setOpaque(false);
-		frame.getContentPane().add(internationalBox);
+		JCheckBox sp1 = new JCheckBox("");
+		sp1.setBounds(375, 522, 27, 29);
+		sp1.setOpaque(false);
+		sp1.setSelected(true);
+		frame.getContentPane().add(sp1);
 		
-		JCheckBox expressBox = new JCheckBox("");
-		expressBox.setBounds(750, 400, 27, 29);
-		expressBox.setOpaque(false);
-		frame.getContentPane().add(expressBox);
 		
-		JCheckBox groundBox = new JCheckBox("");
-		groundBox.setBounds(750, 440, 27, 29);
-		groundBox.setOpaque(false);
-		frame.getContentPane().add(groundBox);
+		
+		JCheckBox ed2 = new JCheckBox("");
+		ed2.setBounds(655, 322, 27, 29);
+		ed2.setOpaque(false);
+		ed2.setSelected(true);
+		frame.getContentPane().add(ed2);
+
+		JCheckBox ei2 = new JCheckBox("");
+		ei2.setBounds(655, 362, 27, 29);
+		ei2.setOpaque(false);
+		ei2.setSelected(true);
+		frame.getContentPane().add(ei2);
+		
+		JCheckBox gd2 = new JCheckBox("");
+		gd2.setBounds(655, 402, 27, 29);
+		gd2.setOpaque(false);
+		gd2.setSelected(true);
+		frame.getContentPane().add(gd2);
+		
+		JCheckBox gi2 = new JCheckBox("");
+		gi2.setBounds(655, 442, 27, 29);
+		gi2.setOpaque(false);
+		gi2.setSelected(true);
+		frame.getContentPane().add(gi2);
+		
+		JCheckBox nt2 = new JCheckBox("");
+		nt2.setBounds(655, 482, 27, 29);
+		nt2.setOpaque(false);
+		nt2.setSelected(true);
+		frame.getContentPane().add(nt2);
+
+		JCheckBox sp2 = new JCheckBox("");
+		sp2.setBounds(655, 522, 27, 29);
+		sp2.setOpaque(false);
+		sp2.setSelected(true);
+		frame.getContentPane().add(sp2);
+		
+		
+		
+		
 		
 
-	
+		JCheckBox allCheckBox = new JCheckBox("");
+		allCheckBox.setBounds(790, 322, 27, 29);
+		allCheckBox.setOpaque(false);
+		frame.getContentPane().add(allCheckBox);
+
+		JCheckBox nullCheckBox = new JCheckBox("");
+		nullCheckBox.setBounds(790, 362, 27, 29);
+		nullCheckBox.setOpaque(false);
+		nullCheckBox.setSelected(true);
+		frame.getContentPane().add(nullCheckBox);
+		
+		JCheckBox failCheckBox = new JCheckBox("");
+		failCheckBox.setBounds(790, 402, 27, 29);
+		failCheckBox.setOpaque(false);
+		failCheckBox.setSelected(true);
+		frame.getContentPane().add(failCheckBox);
+		
+		
 		
 		
 		guiBase gb = new guiBase();
@@ -239,115 +340,104 @@ public class prsRerateAutomationExtendGui {
 	      public void actionPerformed(ActionEvent e)
 	      {
 	    	  checkList=true;
-	    	  if (allBox.isSelected()) {
-	    		  c.setAllCheckBox("true");
-	    	  }  else if(!allBox.isSelected()){
-	    		  c.setAllCheckBox("false");
+	    	
+	    	  if(ed1.isSelected()) {
+	    		  c.setEd1("true");
+	    	  }
+	    	  else {
+	    		  c.setEd1("false");
 	    	  }
 	    	  
-	    	  
-	    	  if (nullBox.isSelected()) {
-	    		  c.setNullCheckBox("true");
-	    	  }  else if(!nullBox.isSelected()){
-	    		  c.setNullCheckBox("false");
+ if(ei1.isSelected()) {
+	  c.setEi1("true");
 	    	  }
+ else {
+	 c.setEi1("false");
+ }
+ if(gd1.isSelected()) {
+	  c.setGd1("true");
+ }
+ else {
+	  c.setGd1("false");
+ }
+ if(gi1.isSelected()) {
+	  c.setGi1("true");
+ }
+ else {
+	  c.setGi1("false");
+ }
+ if(nt1.isSelected()) {
+	  c.setNt1("true");
+ }
+ else {
+	  c.setNt1("false");
+ }
+ if(sp1.isSelected()) {
+	  c.setSp1("true");
+ }
+ else {
+	  c.setSp1("false");
+ }
+ if(ed2.isSelected()) {
+	  c.setEd2("true");
+ }
+ else {
+	  c.setEd2("false");
+ }
+if(ei2.isSelected()) {
+	  c.setEi2("true");
+ }
+else {
+	  c.setEi2("false");
+}
+if(gd2.isSelected()) {
+	  c.setGd2("true");
+}
+else {
+	c.setGd2("false");
+}
+if(gi2.isSelected()) {
+	  c.setGi2("true");
+}
+else {
+	  c.setGi2("false");
+}
+if(nt2.isSelected()) {
+	  c.setNt2("true");
+}
+else {
+	  c.setNt2("false");
+}
+
+if(sp2.isSelected()) {
+	  c.setSp2("true");
+}
+else {
+	c.setSp2("false");
+}
+
+if(allCheckBox.isSelected()) {
+c.setAllCheckBox("true");
+}
+else {
+	c.setAllCheckBox("false");
+}
+
+if(nullCheckBox.isSelected())  {
+	c.setNullCheckBox("true");
+	}
+	else {
+		c.setNullCheckBox("false");
+	}
+
+if(failCheckBox.isSelected())  {
+	c.setFailedCheckBox("true");
+	}
+	else {
+		c.setFailedCheckBox("false");
+	}
 	    	  
-	    	  
-	    	  
-	    	  if (failedBox.isSelected()) {
-	    		  c.setFailedCheckBox("true");
-	    	  }  else if(!failedBox.isSelected()){
-	    		  c.setFailedCheckBox("false");
-	    	  }
-	    	  
-	    	  
-	    	  
-	    	  if (domBox.isSelected()) {
-	    		  c.setDomesticCheckBox("true");
-	    	  }  else if(!domBox.isSelected()){
-	    		  c.setDomesticCheckBox("false");
-	    	  }
-	    	  
-	    	  
-	    	  
-	    	  if (internationalBox.isSelected()) {
-	    		  c.setInternationalCheckBox("true");
-	    	  }  else if(!internationalBox.isSelected()){
-	    		  c.setInternationalCheckBox("false");
-	    	  }
-	    	  
-	    	  
-	    	  
-	    	  
-	    	  
-	    	  if (expressBox.isSelected()) {
-	    		  c.setExpressCheckBox("true");
-	    	  }
-	    	  else if(!expressBox.isSelected()){
-	    		  c.setExpressCheckBox("false");
-	    	  }
-	    	  
-	    	  
-	    	  if (groundBox.isSelected()) {
-	    		  c.setGroundCheckBox("true");
-	    	  }
-	    	  else if(!groundBox.isSelected()){
-	    		  c.setGroundCheckBox("false");
-	    	  }
-	    	  
-	    	  
-	    	  
-	    	  if (normalBox.isSelected()) {
-	    		  c.setNormalCheckBox("true");
-	    	  }
-	    	  else if(!normalBox.isSelected()){
-	    		  c.setNormalCheckBox("false");
-	    	  }
-	    	  
-	    	  
-	    	  
-	    	  if (mfRetireBox.isSelected()) {
-	    		  c.setMfRetireCheckBox("true");
-	    	  }
-	    	  else if(!mfRetireBox.isSelected()){
-	    		  c.setMfRetireCheckBox("false");
-	    	  }
-	    	  
-	    	  String errorList="";
-	    	  if (allBox.isSelected()==true && (nullBox.isSelected()==true || failedBox.isSelected()==true)) {
-	    		  checkList=false;
-	    		  errorList+="Cannot Select All and Another Option\n";
-	    		  System.out.println("Cannot Select All and Another Option");
-	    	  }
-	    	  if (allBox.isSelected()==false && nullBox.isSelected()==false && failedBox.isSelected()==false) {
-	    		  checkList=false;
-	    		  errorList+="Must Select a Status\n";
-	    		  System.out.println("Must Select a Status");
-		    	  
-	    	  }
-	    	  
-	    	  if (expressBox.isSelected()==false && groundBox.isSelected()==false && domBox.isSelected()==false && internationalBox.isSelected()==false) {
-	    		  checkList=false;
-	    		  errorList+="Must Select a Flavor\n";
-	    		  System.out.println("Must Select a Flavor");
-		    	  
-	    	  }
-    		 
-	    	  
-	    	  if (mfRetireBox.isSelected()==false && normalBox.isSelected()==false) {
-	    		  checkList=false;
-	    		  errorList+="Must Select a Function\n";
-	    		  System.out.println("Must Select a Function");
-		    	  
-	    	  }
-	    	  
-	    	  if (checkList==true) {
-	    		  frame.setVisible(false);
-	    	  }
-	    	  else if (checkList==false){
-	    		JOptionPane.showMessageDialog(frame, errorList);
-	    	  }
-	      }
+      }
 	    });
 	    
 	}

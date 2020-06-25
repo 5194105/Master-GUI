@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <html>
 <head>
 <title>TestNG:  Default test</title>
@@ -79,6 +80,89 @@ function toggleAllBoxes() {
 <td><div><pre>org.testng.TestNGException: 
 Parameter &apos;filepath&apos; is required by BeforeClass on method setupExcel but has not been marked @Optional or defined
 in C:\Users\FedExUser\AppData\Local\Temp\testng-eclipse--238769163\testng-customsuite.xml
+=======
+<html>
+<head>
+<title>TestNG:  Default test</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>Default test</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>0/4/0</td>
+</tr><tr>
+<td>Started on:</td><td>Thu Jun 18 14:11:47 CDT 2020</td>
+</tr>
+<tr><td>Total time:</td><td>0 seconds (166 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED CONFIGURATIONS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='prerate.prerateHoldTestNGSlow.setupExcel()'><b>setupExcel</b><br>Test class: prerate.prerateHoldTestNGSlow</td>
+<td><div><pre>org.testng.TestNGException: 
+Parameter &apos;filepath&apos; is required by BeforeClass on method setupExcel but has not been marked @Optional or defined
+in C:\Users\FedExUser\AppData\Local\Temp\testng-eclipse--354444540\testng-customsuite.xml
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 	at org.testng.internal.Parameters.createParameters(Parameters.java:199)
 	at org.testng.internal.Parameters.createParameters(Parameters.java:443)
 	at org.testng.internal.Parameters.createConfigurationParameters(Parameters.java:118)
@@ -101,10 +185,17 @@ in C:\Users\FedExUser\AppData\Local\Temp\testng-eclipse--238769163\testng-custom
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+<<<<<<< HEAD
 </pre></div><a href='#' onClick='toggleBox("stack-trace14274861", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
 <div class='stack-trace' id='stack-trace14274861'><pre>org.testng.TestNGException: 
 Parameter &apos;filepath&apos; is required by BeforeClass on method setupExcel but has not been marked @Optional or defined
 in C:\Users\FedExUser\AppData\Local\Temp\testng-eclipse--238769163\testng-customsuite.xml
+=======
+</pre></div><a href='#' onClick='toggleBox("stack-trace30741185", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace30741185'><pre>org.testng.TestNGException: 
+Parameter &apos;filepath&apos; is required by BeforeClass on method setupExcel but has not been marked @Optional or defined
+in C:\Users\FedExUser\AppData\Local\Temp\testng-eclipse--354444540\testng-customsuite.xml
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 	at org.testng.internal.Parameters.createParameters(Parameters.java:199)
 	at org.testng.internal.Parameters.createParameters(Parameters.java:443)
 	at org.testng.internal.Parameters.createConfigurationParameters(Parameters.java:118)
@@ -127,6 +218,7 @@ in C:\Users\FedExUser\AppData\Local\Temp\testng-eclipse--238769163\testng-custom
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+<<<<<<< HEAD
 </pre></div></td>
 <td>0</td>
 <td>rerate.rerateTestNgSlow@1d8ba08</td></tr>
@@ -142,6 +234,23 @@ in C:\Users\FedExUser\AppData\Local\Temp\testng-eclipse--238769163\testng-custom
 <td title='rerate.rerateTestNgSlow.testMethod()'><b>testMethod</b><br>Test class: rerate.rerateTestNgSlow</td>
 <td><div><pre>org.testng.TestNGException: 
 Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod1() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
+=======
+</pre></div></td>
+<td>0</td>
+<td>prerate.prerateHoldTestNGSlow@6379eb</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='prerate.prerateHoldTestNGSlow.testMethod1()'><b>testMethod1</b><br>Test class: prerate.prerateHoldTestNGSlow</td>
+<td><div><pre>org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod1() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
 	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
 	at org.testng.internal.Invoker.handleParameters(Invoker.java:1308)
@@ -164,9 +273,15 @@ Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.d
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+<<<<<<< HEAD
 </pre></div><a href='#' onClick='toggleBox("stack-trace21226513", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
 <div class='stack-trace' id='stack-trace21226513'><pre>org.testng.TestNGException: 
 Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod1() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
+=======
+</pre></div><a href='#' onClick='toggleBox("stack-trace25607935", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace25607935'><pre>org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod1() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
 	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
 	at org.testng.internal.Invoker.handleParameters(Invoker.java:1308)
@@ -189,6 +304,7 @@ Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.d
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+<<<<<<< HEAD
 </pre></div></td>
 <td>0</td>
 <td>rerate.rerateTestNgSlow@1d8ba08</td></tr>
@@ -196,6 +312,15 @@ Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.d
 <td title='rerate.rerateTestNgSlow.testMethod2()'><b>testMethod2</b><br>Test class: rerate.rerateTestNgSlow</td>
 <td><div><pre>org.testng.TestNGException: 
 Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod2() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
+=======
+</pre></div></td>
+<td>0</td>
+<td>prerate.prerateHoldTestNGSlow@6379eb</td></tr>
+<tr>
+<td title='prerate.prerateHoldTestNGSlow.testMethod2()'><b>testMethod2</b><br>Test class: prerate.prerateHoldTestNGSlow</td>
+<td><div><pre>org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod2() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
 	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
 	at org.testng.internal.Invoker.handleParameters(Invoker.java:1308)
@@ -218,9 +343,15 @@ Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.d
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+<<<<<<< HEAD
 </pre></div><a href='#' onClick='toggleBox("stack-trace24857823", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
 <div class='stack-trace' id='stack-trace24857823'><pre>org.testng.TestNGException: 
 Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod2() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
+=======
+</pre></div><a href='#' onClick='toggleBox("stack-trace1422367", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1422367'><pre>org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod2() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
 	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
 	at org.testng.internal.Invoker.handleParameters(Invoker.java:1308)
@@ -243,6 +374,7 @@ Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.d
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+<<<<<<< HEAD
 </pre></div></td>
 <td>0</td>
 <td>rerate.rerateTestNgSlow@1d8ba08</td></tr>
@@ -250,6 +382,15 @@ Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.d
 <td title='rerate.rerateTestNgSlow.testMethod3()'><b>testMethod3</b><br>Test class: rerate.rerateTestNgSlow</td>
 <td><div><pre>org.testng.TestNGException: 
 Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod3() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
+=======
+</pre></div></td>
+<td>0</td>
+<td>prerate.prerateHoldTestNGSlow@6379eb</td></tr>
+<tr>
+<td title='prerate.prerateHoldTestNGSlow.testMethod3()'><b>testMethod3</b><br>Test class: prerate.prerateHoldTestNGSlow</td>
+<td><div><pre>org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod3() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
 	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
 	at org.testng.internal.Invoker.handleParameters(Invoker.java:1308)
@@ -272,9 +413,15 @@ Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.d
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+<<<<<<< HEAD
 </pre></div><a href='#' onClick='toggleBox("stack-trace22632649", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
 <div class='stack-trace' id='stack-trace22632649'><pre>org.testng.TestNGException: 
 Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod3() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
+=======
+</pre></div><a href='#' onClick='toggleBox("stack-trace24377852", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace24377852'><pre>org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod3() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
 	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
 	at org.testng.internal.Invoker.handleParameters(Invoker.java:1308)
@@ -297,6 +444,7 @@ Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.d
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+<<<<<<< HEAD
 </pre></div></td>
 <td>0</td>
 <td>rerate.rerateTestNgSlow@1d8ba08</td></tr>
@@ -304,6 +452,15 @@ Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.d
 <td title='rerate.rerateTestNgSlow.testMethod4()'><b>testMethod4</b><br>Test class: rerate.rerateTestNgSlow</td>
 <td><div><pre>org.testng.TestNGException: 
 Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod4() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
+=======
+</pre></div></td>
+<td>0</td>
+<td>prerate.prerateHoldTestNGSlow@6379eb</td></tr>
+<tr>
+<td title='prerate.prerateHoldTestNGSlow.testMethod4()'><b>testMethod4</b><br>Test class: prerate.prerateHoldTestNGSlow</td>
+<td><div><pre>org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod4() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
 	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
 	at org.testng.internal.Invoker.handleParameters(Invoker.java:1308)
@@ -326,9 +483,15 @@ Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.d
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+<<<<<<< HEAD
 </pre></div><a href='#' onClick='toggleBox("stack-trace12007611", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
 <div class='stack-trace' id='stack-trace12007611'><pre>org.testng.TestNGException: 
 Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod4() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
+=======
+</pre></div><a href='#' onClick='toggleBox("stack-trace12596885", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace12596885'><pre>org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] prerate.prerateHoldTestNGSlow.dataProviderMethod4() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
 	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
 	at org.testng.internal.Invoker.handleParameters(Invoker.java:1308)
@@ -351,9 +514,17 @@ Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.d
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:132)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:230)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:76)
+<<<<<<< HEAD
 </pre></div></td>
 <td>0</td>
 <td>rerate.rerateTestNgSlow@1d8ba08</td></tr>
 </table><p>
 </body>
+=======
+</pre></div></td>
+<td>0</td>
+<td>prerate.prerateHoldTestNGSlow@6379eb</td></tr>
+</table><p>
+</body>
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 </html>
