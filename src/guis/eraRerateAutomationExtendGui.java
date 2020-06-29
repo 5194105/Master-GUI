@@ -9,7 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 
 import configuration.config;
 import configuration.mouse;
@@ -22,10 +24,22 @@ public class eraRerateAutomationExtendGui {
 	private JLabel allLabel;
 	private JLabel nullLabel;
 	private JLabel failedLabel;
-
+	private JLabel flavorLabel;
+	private JLabel domesticLabel;
+	private JLabel internationalLabel;
+	private JLabel expressLabel;
+	private JLabel groundLabel;
+	private JLabel functionLabel;
+	private JLabel normalLabel;
+	private JLabel mfRetireLabel;
+	private JLabel tipLabel;
+	
+	JTextField	customQueryTextField;
 
     config c;
-  
+    Boolean checkList=true;
+    
+    
     private JLabel saveAndClose;
  
     
@@ -54,18 +68,38 @@ public class eraRerateAutomationExtendGui {
 		
 		
 		saveAndCLose =new JButton("Save and Close");  
-		saveAndCLose.setBounds(450, 510, 284, 41);  
+		saveAndCLose.setBounds(425, 550, 200, 41);  
 		frame.getContentPane().add(saveAndCLose);
 		
 		
-		/*
-		functionLabel = new JLabel("Work Type");
-		functionLabel.setBounds(300, 440, 110, 31);
+		
+		functionLabel = new JLabel("Custom Query: ");
+		functionLabel.setBounds(300, 440, 200, 31);
 		functionLabel.setForeground(Color.WHITE);
 		functionLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
 		frame.getContentPane().add(functionLabel);
 		
+		JCheckBox customBox = new JCheckBox("");
+		customBox.setBounds(475, 443, 27, 29);
+		customBox.setOpaque(false);
+		frame.getContentPane().add(customBox);
 		
+		
+		
+		
+		tipLabel = new JLabel("* Enter Where Clause Only. Example: test_input_nbr='12345' *");
+		tipLabel.setBounds(300, 470, 500, 31);
+		tipLabel.setForeground(Color.WHITE);
+		tipLabel.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		frame.getContentPane().add(tipLabel);
+		
+		customQueryTextField= new JTextField(2);
+		customQueryTextField.setText("");
+		customQueryTextField.setBounds(300, 500, 500, 20);
+		frame.getContentPane().add(customQueryTextField);
+		
+		
+		/*
 		normalLabel = new JLabel("Normal:");
 		normalLabel.setBounds(300, 480, 110, 31);
 		normalLabel.setForeground(Color.WHITE);
@@ -77,10 +111,11 @@ public class eraRerateAutomationExtendGui {
 		mfRetireLabel.setForeground(Color.WHITE);
 		mfRetireLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
 		frame.getContentPane().add(mfRetireLabel);
+		*/
 		
 		
 		
-		
+		/*
 		JCheckBox normalBox = new JCheckBox("");
 		normalBox.setBounds(415, 480, 27, 29);
 		normalBox.setOpaque(false);
@@ -94,7 +129,7 @@ public class eraRerateAutomationExtendGui {
 	*/
 		
 		
-		statusLabel = new JLabel("Status");
+		statusLabel = new JLabel("<HTML><U>Status<HTML><U>");
 		statusLabel.setBounds(300, 280, 78, 31);
 		statusLabel.setForeground(Color.WHITE);
 		statusLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
@@ -119,9 +154,9 @@ public class eraRerateAutomationExtendGui {
 		failedLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
 		frame.getContentPane().add(failedLabel);
 		
-		/*
 		
-		flavorLabel = new JLabel("Flavor");
+		
+		flavorLabel = new JLabel("<HTML><U>Flavor<HTML><U>");
 		flavorLabel.setBounds(600, 280, 100, 31);
 		flavorLabel.setForeground(Color.WHITE);
 		flavorLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
@@ -150,7 +185,7 @@ public class eraRerateAutomationExtendGui {
 		groundLabel.setForeground(Color.WHITE);
 		groundLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
 		frame.getContentPane().add(groundLabel);
-		*/
+		
 		/*
 		JCheckBox checkBox = new JCheckBox("");
 		checkBox.setBounds(630, 405, 27, 29);
@@ -176,7 +211,7 @@ public class eraRerateAutomationExtendGui {
 		frame.getContentPane().add(failedBox);
 		
 		
-		/*
+		
 		
 		
 		JCheckBox domBox = new JCheckBox("");
@@ -200,7 +235,7 @@ public class eraRerateAutomationExtendGui {
 		frame.getContentPane().add(groundBox);
 		
 
-	*/
+	
 		
 		
 		guiBase gb = new guiBase();
@@ -229,6 +264,9 @@ public class eraRerateAutomationExtendGui {
 	      public void actionPerformed(ActionEvent e)
 	      {
 	    	  
+	    	  c.setCustomString(customQueryTextField.getText());
+	    	  System.out.println(c.getCustomString());
+	    	  checkList=true;
 	    	  if (allBox.isSelected()) {
 	    		  c.setAllCheckBox("true");
 	    	  }  else if(!allBox.isSelected()){
@@ -251,7 +289,7 @@ public class eraRerateAutomationExtendGui {
 	    	  }
 	    	  
 	    	  
-	    	  /*
+	    	  
 	    	  if (domBox.isSelected()) {
 	    		  c.setDomesticCheckBox("true");
 	    	  }  else if(!domBox.isSelected()){
@@ -287,15 +325,17 @@ public class eraRerateAutomationExtendGui {
 	    	  
 	    	  
 	    	  
-	    	  if (normalBox.isSelected()) {
-	    		  c.setNormalCheckBox("true");
+	    	  if (customBox.isSelected()) {
+	    		  c.setCustomCheckBox("true");
+	    		  c.setCustomString(customQueryTextField.getText());
 	    	  }
-	    	  else if(!normalBox.isSelected()){
-	    		  c.setNormalCheckBox("false");
+	    	  else if(!customBox.isSelected()){
+	    		  c.setCustomCheckBox("false");
+	    		  c.setCustomString("");
 	    	  }
 	    	  
 	    	  
-	    	  
+	    	  /*
 	    	  if (mfRetireBox.isSelected()) {
 	    		  c.setMfRetireCheckBox("true");
 	    	  }
@@ -303,7 +343,42 @@ public class eraRerateAutomationExtendGui {
 	    		  c.setMfRetireCheckBox("false");
 	    	  }
 	    	  */
- frame.setVisible(false);
+	    	  String errorList="";
+	    	  
+	    	  if(customBox.isSelected()==false) {
+	    	  if (allBox.isSelected()==true && (nullBox.isSelected()==true || failedBox.isSelected()==true)) {
+	    		  checkList=false;
+	    		  errorList+="Cannot Select All and Another Option\n";
+	    		  System.out.println("Cannot Select All and Another Option");
+	    	  }
+	    	  if (allBox.isSelected()==false && nullBox.isSelected()==false && failedBox.isSelected()==false) {
+	    		  checkList=false;
+	    		  errorList+="Must Select a Status\n";
+	    		  System.out.println("Must Select a Status");
+		    	  
+	    	  }
+	    	  
+	    	  if (expressBox.isSelected()==false && groundBox.isSelected()==false && domBox.isSelected()==false && internationalBox.isSelected()==false && allBox.isSelected()==false ) {
+	    		  checkList=false;
+	    		  errorList+="Must Select a Flavor\n";
+	    		  System.out.println("Must Select a Flavor");
+	    	  }
+	    	  }
+    		 /*
+	    	  
+	    	  if (mfRetireBox.isSelected()==false && normalBox.isSelected()==false) {
+	    		  checkList=false;
+	    		  errorList+="Must Select a Function\n";
+	    		  System.out.println("Must Select a Function");
+		    	  
+	    	  }
+	    	  */
+	    	  if (checkList==true) {
+	    		  frame.setVisible(false);
+	    	  }
+	    	  else if (checkList==false){
+	    		JOptionPane.showMessageDialog(frame, errorList);
+	    	  }
 	      }
 	    });
 	    
