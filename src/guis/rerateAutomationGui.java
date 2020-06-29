@@ -18,92 +18,131 @@ import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 
 import org.openqa.selenium.WebDriver;
 
 import configuration.config;
 import configuration.mouse;
-
-import javax.swing.JTextField;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class rerateAutomationGui {
 
-	private JFrame frame;
-
-	 
-	  private JLabel moreOptionsTextLabel;
-    private JLabel label;
-    private JLabel lblSource;
-    private JLabel executeLabel;
-    private JRadioButton l2RadioButton;
-    private JRadioButton l3RadioButton;
-    private JLabel label_2;
-    private JLabel lblRerateAutomation;
-    private JLabel excelLabel;
-    private JLabel dbLabel;
-    private JLabel browser;
-    private JRadioButton ie;
-    private JRadioButton chrome;
-    private JLabel startDateLabel;
-    private JLabel endDateLabel;
-    public JTextField startDate;
-    public JTextField endDate;
-    private JLabel moreOptionsLabel;
-    gui g;
-    config c;
-	/**
-	 * Create the application.
-	 */
+	 JFrame frame;
+	  config c;
+	   
+	     JLabel label;
+	     JLabel moreOptionsTextLabel;
+	     JLabel lblSource;
+	     JLabel executeLabel;
+	     JRadioButton l2RadioButton;
+	     JRadioButton l3RadioButton;
+	     JLabel label_2;
+	     JLabel lblRebillAutomation;
+	     JLabel excelLabel;
+	     JLabel dbLabel;
+	     JLabel moreOptionsLabel;
+	     JLabel uploadResult;
+	     JLabel disableDatabase;
+	     JLabel sessionLabel;
+	     JLabel browserLabel;
+	     JTextField	sessionTextField;
+	     JCheckBox compatibleCheckBox;
+	     JCheckBox disableDatabaseCheckBox;
+	     gui g;
+	     JLabel ie,firefox,chrome;
+	     JTextField	startDateTextField;
+	     JTextField	endDateTextField;
+	     JLabel startLabel,endLabel;
+	     JRadioButton updateButton;
+	     JRadioButton holdButton;
+	     
+	     mouse m;
 	public rerateAutomationGui( gui g,config c) {
 		this.g=g;
 		this.c=c;
 		initialize();
 		
 	}
-
-	
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-
+	       
 		
-	        
-	        
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+		String strDate= formatter.format(date);
+		System.out.println(strDate);
+		
+		
+        
+		c.setCompatibleMode("false");
+		c.setDatabaseDisabled("false");
+     
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1005, 718);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+	
 		
-		
-		
+		executeLabel = new JLabel("New label");
+		executeLabel.setBounds(275, 550, 175, 41);
+		uploadResult = new JLabel("New label");
+		uploadResult.setBounds(575, 550, 175, 41);
 		
 		excelLabel = new JLabel("New label");
-		excelLabel.setBounds(300, 350, 78, 56);
+		excelLabel.setBounds(335, 340, 78, 56);
 	
 		dbLabel = new JLabel("New label");
-		dbLabel.setBounds(375, 350, 78, 56);
-
-		executeLabel = new JLabel("New label");
-		executeLabel.setBounds(375, 515, 284, 41);
+		dbLabel.setBounds(415, 340, 78, 56);
 		
 		moreOptionsLabel = new JLabel("New label");
-		moreOptionsLabel.setBounds(350, 450, 50, 30);
+		moreOptionsLabel.setBounds(725, 353, 50, 30);
+		
+		
+		ie = new JLabel("New label");
+		ie.setBounds(350, 500, 40, 40);
+		
+		firefox = new JLabel("New label");
+		firefox.setBounds(500, 500, 40, 40);
+		
+		chrome = new JLabel("New label");
+		chrome.setBounds(650, 500, 40, 40);
+		
+		
+
 		
 		excelLabel.setName("excel");
 		dbLabel.setName("db");
 		executeLabel.setName("execute");
 		moreOptionsLabel.setName("moreOptions");
+		uploadResult.setName("uploadResult");
 		
-		lblRerateAutomation = new JLabel("Rerate Automation");
-		lblRerateAutomation.setForeground(Color.WHITE);
-		lblRerateAutomation.setFont(new Font("Segoe UI", Font.BOLD, 42));
-		lblRerateAutomation.setBounds(353, 196, 386, 64);
-		frame.getContentPane().add(lblRerateAutomation);
-		frame.getContentPane().setLayout(null);
 		
+		ie.setName("ie");
+		firefox.setName("firefox");
+		chrome.setName("chrome");
+		
+		
+	
+	    
+	     
+	     
+	    
+		
+	     
+	     
+		
+		lblRebillAutomation = new JLabel("<HTML><U>Prerate Automation<HTML><U>");
+		lblRebillAutomation.setForeground(Color.WHITE);
+		lblRebillAutomation.setFont(new Font("Segoe UI", Font.BOLD, 42));
+		lblRebillAutomation.setBounds(353, 196, 400, 64);
+		frame.getContentPane().add(lblRebillAutomation);
 		
 		label = new JLabel("Level:");
-		label.setBounds(200, 281, 78, 31);
+		label.setBounds(250, 281, 78, 31);
 		label.setForeground(Color.WHITE);
 		label.setFont(new Font("Segoe UI", Font.BOLD, 23));
 		frame.getContentPane().add(label);
@@ -111,139 +150,168 @@ public class rerateAutomationGui {
 		lblSource = new JLabel("Source:");
 		lblSource.setForeground(Color.WHITE);
 		lblSource.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		lblSource.setBounds(192, 355, 99, 31);
+		lblSource.setBounds(250, 340, 99, 31);
 		frame.getContentPane().add(lblSource);
+		
+		disableDatabase = new JLabel("Disable Database:");
+		disableDatabase.setForeground(Color.WHITE);
+		disableDatabase.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		disableDatabase.setBounds(250, 410, 200, 31);
+		frame.getContentPane().add(disableDatabase);
+		
+	   
+		
+		browserLabel = new JLabel("Browser:");
+		browserLabel.setForeground(Color.WHITE);
+		browserLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		browserLabel.setBounds(250, 500, 200, 31);
+		frame.getContentPane().add(browserLabel);
+
+		
+		disableDatabaseCheckBox = new JCheckBox("");
+		disableDatabaseCheckBox.setBounds(460, 415, 27, 29);
+		disableDatabaseCheckBox.setOpaque(false);
+		frame.getContentPane().add(disableDatabaseCheckBox);
+		
+		
+		 startLabel = new JLabel("Start Date:");
+		 startLabel.setBounds(250, 455, 150, 31);
+		 startLabel.setForeground(Color.WHITE);
+		 startLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		 frame.getContentPane().add(startLabel);
+		 
+
+		 endLabel = new JLabel("End Date:");
+		 endLabel.setBounds(550, 455, 150, 31);
+		 endLabel.setForeground(Color.WHITE);
+		 endLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		 frame.getContentPane().add(endLabel);
+
+			
+		 startDateTextField= new JTextField(2);
+		 startDateTextField.setText("01/01/2000");
+		 startDateTextField.setBounds(375, 459, 100, 29);
+	     frame.getContentPane().add(startDateTextField);
+	     
+	     
+	     endDateTextField= new JTextField(2);
+	     endDateTextField.setText(strDate);
+	     endDateTextField.setBounds(660, 459, 100, 29);
+	     frame.getContentPane().add(endDateTextField);
+	     
+	     
+	     
+	     
+		 /*
+		  * 
+		 updateButton = new JRadioButton("Update");
+	     updateButton.setOpaque(false);
+	     updateButton.setForeground(Color.WHITE);
+	     updateButton.setFont(new Font("Segoe UI", Font.BOLD, 22));
+	     updateButton.setBounds(360, 459, 150, 29);
+	     updateButton.setName("update");
+	     frame.getContentPane().add(updateButton);
+		
+		
+		holdButton = new JRadioButton("Hold");
+		holdButton.setOpaque(false);
+		holdButton.setForeground(Color.WHITE);
+		holdButton.setFont(new Font("Segoe UI", Font.BOLD, 22));
+		holdButton.setBounds(485, 459, 150, 29);
+		holdButton.setName("hold");
+		frame.getContentPane().add(holdButton);
+		*/
 		
 		l2RadioButton = new JRadioButton("L2");
 		l2RadioButton.setOpaque(false);
 		l2RadioButton.setForeground(Color.WHITE);
 		l2RadioButton.setFont(new Font("Segoe UI", Font.BOLD, 22));
-		l2RadioButton.setBounds(275, 281, 69, 29);
+		l2RadioButton.setBounds(325, 283, 69, 29);
+		l2RadioButton.setName("l2");
 		frame.getContentPane().add(l2RadioButton);
+		
 		
 		l3RadioButton = new JRadioButton("L3");
 		l3RadioButton.setOpaque(false);
 		l3RadioButton.setForeground(Color.WHITE);
 		l3RadioButton.setFont(new Font("Segoe UI", Font.BOLD, 22));
-		l3RadioButton.setBounds(350, 282, 69, 29);
+		l3RadioButton.setBounds(390, 283, 69, 29);
+		l3RadioButton.setName("l3");
 		frame.getContentPane().add(l3RadioButton);
 		
 		label_2 = new JLabel("Compatible Mode: ");
 		label_2.setForeground(Color.WHITE);
 		label_2.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		label_2.setBounds(501, 400, 212, 29);
+		label_2.setBounds(550, 281, 212, 29);
 		frame.getContentPane().add(label_2);
-		
-		JCheckBox checkBox = new JCheckBox("");
-		checkBox.setOpaque(false);
-		checkBox.setBounds(710, 402, 27, 29);
-		frame.getContentPane().add(checkBox);
-		
-		browser = new JLabel("Browser:");
-		browser.setForeground(Color.WHITE);
-		browser.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		browser.setBounds(501, 444, 212, 29);
-		frame.getContentPane().add(browser);
-		
-		ie = new JRadioButton("IE");
-		ie.setOpaque(false);
-		ie.setForeground(Color.WHITE);
-		ie.setFont(new Font("Segoe UI", Font.BOLD, 22));
-		ie.setBounds(612, 444, 69, 29);
-		frame.getContentPane().add(ie);
-		
-		chrome = new JRadioButton("Chrome");
-		chrome.setOpaque(false);
-		chrome.setForeground(Color.WHITE);
-		chrome.setFont(new Font("Segoe UI", Font.BOLD, 22));
-		chrome.setBounds(671, 445, 150, 29);
-		frame.getContentPane().add(chrome);
-		
-		startDateLabel = new JLabel("Start Date:");
-		startDateLabel.setForeground(Color.WHITE);
-		startDateLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		startDateLabel.setBounds(499, 276, 150, 31);
-		frame.getContentPane().add(startDateLabel);
-		
-		endDateLabel = new JLabel("End Date:");
-		endDateLabel.setForeground(Color.WHITE);
-		endDateLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		endDateLabel.setBounds(499, 355, 113, 31);
-		frame.getContentPane().add(endDateLabel);
-		
-		startDate = new JTextField();
-		startDate.setBounds(617, 276, 170, 31);
-		frame.getContentPane().add(startDate);
-		startDate.setColumns(10);
-		
-		endDate = new JTextField();
-		endDate.setColumns(10);
-		endDate.setBounds(617, 355, 170, 31);
-		frame.getContentPane().add(endDate);
 		
 		moreOptionsTextLabel = new JLabel("Filter Options: ");
 		moreOptionsTextLabel.setForeground(Color.WHITE);
 		moreOptionsTextLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		moreOptionsTextLabel.setBounds(192, 450, 212, 29);
+		moreOptionsTextLabel.setBounds(550, 350, 212, 29);
 		frame.getContentPane().add(moreOptionsTextLabel);
 		
-		executeLabel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-               // System.out.println("Yay you clicked me");
-               // System.out.println(startDate.getText());
-               // System.out.println(endDate.getText());
-            	c.setStartDate(startDate.getText());
-        		c.setEndDate(endDate.getText());
-        		
-            	
-            }
-
-        });
+	
+		sessionLabel = new JLabel("Parallel Sessions:");
+		sessionLabel.setForeground(Color.WHITE);
+		sessionLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		sessionLabel.setBounds(550, 410,  250, 31);
+		frame.getContentPane().add(sessionLabel);
+		
+		sessionTextField= new JTextField(2);
+		sessionTextField.setText("1");
+		sessionTextField.setBounds(750, 418, 20, 20);
+		frame.getContentPane().add(sessionTextField);
+		
+		
+		
+		compatibleCheckBox = new JCheckBox("");
+		compatibleCheckBox.setBounds(750, 283, 27, 29);
+		compatibleCheckBox.setOpaque(false);
+		frame.getContentPane().add(compatibleCheckBox);
+		
+	
+		
 		
 		guiBase gb = new guiBase();
-		mouse m = new mouse(gb,g,c,this,this);
+		mouse m = new mouse(gb,g,c,this,frame);
 		m.setFrame(frame);
 		m.setupBaseIcons();
 		m.addExcel(excelLabel);
 		m.addDb(dbLabel);
 		m.addExecute(executeLabel);
 		m.addMoreOptions(moreOptionsLabel);
+		m.adduploadResult(uploadResult);
 		m.setupBackground();
 		
+		m.addIe(ie);
+		m.addFirefox(firefox);
+		m.addChrome(chrome);
 		
 		l2RadioButton.addMouseListener(m.m3);
 		l3RadioButton.addMouseListener(m.m3);
-		
-		
-		
+	
 		//Sets Driver to Chrome
-		if (ie.isSelected()==true) {
-			c.setDriverType("1");
-		}
-		if (chrome.isSelected()==true) {
-			c.setDriverType("2");
-		} 
-
-		
-		
-		if (checkBox.isSelected()==true) {
-			c.setCompatibleMode("true");
-		}
-		else if (checkBox.isSelected()==false) {
-			c.setCompatibleMode("false");
-		}
-
-		
-
-	    frame.setVisible(true);
+		c.setDriverType("2");
+	    c.setSessionCount(sessionTextField.getText());
 	    
+		
+		
+		    
+		
+		
+	    frame.setVisible(true);
+      
+	    
+	    sessionTextField.addActionListener(new java.awt.event.ActionListener() {
+	    	  public void actionPerformed(ActionEvent event) {
+	    	    c.setSessionCount(sessionTextField.getText());
+	    	    System.out.println(c.getSessionCount());
+	    	  }
+	    	});
 	    
 	
-
-		
-		
-		
+	    
 	    l2RadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
             	l2RadioButtonActionPerformed(evt);
@@ -256,22 +324,44 @@ public class rerateAutomationGui {
             }
         });
 	    
-		ie.addActionListener(new java.awt.event.ActionListener() {
+	    compatibleCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	ieActionPerformed(evt);
+            	compatibleCheckBoxActionPerformed(evt);
             }
         });
 	    
-	    chrome.addActionListener(new java.awt.event.ActionListener() {
+	    disableDatabaseCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	chromeActionPerformed(evt);
+            	disableDatabaseCheckBoxActionPerformed(evt);
             }
         });
-		
-	    
-	    
 		
 	}
+	
+	
+	
+	
+	private void disableDatabaseCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {    
+
+		if (disableDatabaseCheckBox.isSelected()) {
+			c.setDatabaseDisabled("true");
+		}
+		else {
+			c.setDatabaseDisabled("false");
+		}
+	}
+	
+	private void compatibleCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {    
+
+		if (compatibleCheckBox.isSelected()) {
+			c.setCompatibleMode("true");
+		}
+		else {
+			c.setCompatibleMode("false");
+		}
+
+}
+	
 	
 		private void l2RadioButtonActionPerformed(java.awt.event.ActionEvent evt) { 
 			System.out.println("L2 RADIO");
@@ -287,29 +377,6 @@ public class rerateAutomationGui {
 		        }
 			c.setLevel("3");
 		}
-	
 		
 		
-	
-	
-	
-		private void ieActionPerformed(java.awt.event.ActionEvent evt) { 
-			System.out.println("ie RADIO");
-			if (chrome.isSelected()){
-				chrome.setSelected(false);
-		        }
-			c.setDriverType("1");
-	}
-		private void chromeActionPerformed(java.awt.event.ActionEvent evt) {   
-			System.out.println("chrome RADIO");
-			if (ie.isSelected()){
-				ie.setSelected(false);
-		        }
-			c.setDriverType("2");
-		}
-
 }
-
-
-	
-

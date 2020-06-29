@@ -139,15 +139,28 @@ public class rerateTestNgSlow {
 		String level;
 		int sessionCountInt;
 		String[][] allData;
-		String allCheckBox,nullCheckBox,failedCheckBox,domesticCheckBox,internationalCheckBox,expressCheckBox,groundCheckBox,normalCheckBox,mfRetireCheckBox;
+		String allCheckBox,nullCheckBox,failedCheckBox;
 		
+	    String ed1;
+	    String ei1;
+	    String gd1;
+	    String gi1;
+	    String nt1;
+	    String sp1;
+	    
+	    String ed2;
+	    String ei2;
+	    String gd2;
+	    String gi2;
+	    String nt2;
+	    String sp2;
 		
-		
+	    String databaseDisabled;
 	
 	    
 		@BeforeClass
-		@Parameters({"filepath","level","browser","source","compatibleMode","allCheckBox","nullCheckBox","failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox","sessionCount","startDateText","endDateText"})
-		public void setupExcel(String filepath,String level,String browser,String source,String compatibleMode,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String sessionCount,String startDateText,String endDateText) {
+		@Parameters({"filepath","level","browser","source","compatibleMode","allCheckBox","nullCheckBox","failedCheckBox","sessionCount","databaseDisabled","startDateText","endDateText","ed1","ei1","gd1","gi1","nt1","sp1","ed2","ei2","gd2","gi2","nt2","sp2"})
+		public void setupExcel(String filepath,String level,String browser,String source,String compatibleMode,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String sessionCount,String databaseDisabled,String startDateText,String endDateText,String ed1, String ei1,String gd1, String gi1,String nt1,String sp1,String ed2,String ei2, String gd2, String gi2,String nt2, String sp2) {
 			//public void setupExcel() {
 			//or from eclipse.
 			
@@ -168,13 +181,26 @@ public class rerateTestNgSlow {
 	        	this.allCheckBox=allCheckBox;
 				this.nullCheckBox=nullCheckBox;
 				this.failedCheckBox=failedCheckBox;
-				this.domesticCheckBox=domesticCheckBox;
-				this.internationalCheckBox=internationalCheckBox;
-				this.expressCheckBox=expressCheckBox;
-				this.groundCheckBox=groundCheckBox;
 	        	this.sessionCount=sessionCount;
 	        	this.startDateText=startDateText;
 	        	this.endDateText=endDateText;
+	        	this.databaseDisabled=databaseDisabled;
+	        	
+	        	
+	        	this.ed1=ed1;
+	     	    this.ei1=ei1;
+	     	    this.gd1=gd1;
+	     	    this.gi1=gi1;
+	     	    this.nt1=nt1;
+	     	    this.sp1=sp1;
+	     	    
+	     	    this.ed2=ed2;
+	     	    this.ei2=ei2;
+	     	    this.gd2=gd2;
+	     	    this.gi2=gi2;
+	     	    this.nt2=nt2;
+	     	    this.sp2=sp2;
+	        	
 	        	sessionCountInt=Integer.parseInt(sessionCount);
 	        	homePath=System.getProperty("user.dir");
 	        	System.out.println("homePath" +System.getProperty("user.dir"));
@@ -272,37 +298,81 @@ public class rerateTestNgSlow {
 	    		databaseSqlCount+="result ='fail' ";
 	    		databaseSqlQuery+="result ='fail' ";
 	    	}
-	    	/*
-	    	if (domesticCheckBox.equals("true") && internationalCheckBox.equals("false")) {
-	    		databaseSqlCount+="and rs_type='DM' ";
-	    		databaseSqlQuery+="and rs_type='DM' ";
+	    	
+	    	databaseSqlCount+="and service1 in (";
+    		databaseSqlQuery+="and service1 in (";
+	    	
+    	
+    		
+	    	if(ed1.equals("true")) { 
+	    		databaseSqlCount+="'Express Domestic',";
+	    		databaseSqlQuery+="'Express Domestic',";
+	    		
 	    	}
-	    	if (internationalCheckBox.equals("true") && domesticCheckBox.equals("false")) {
-	    		databaseSqlCount+="and rs_type='IL' ";
-	    		databaseSqlQuery+="and rs_type='IL' ";
+    		
+	    	if(ei1.equals("true")) { 
+	    		databaseSqlCount+="'Express International',";
+	    		databaseSqlQuery+="'Express International',";
 	    	}
-	    	if (internationalCheckBox.equals("true") && domesticCheckBox.equals("true")) {
-	    		databaseSqlCount+="and rs_type in ('DM','IL')";
-	    		databaseSqlQuery+="and rs_type in ('DM','IL')";
+	    	if(gd1.equals("true")) { 
+	    		databaseSqlCount+="'Ground Domestic',";
+	    		databaseSqlQuery+="'Ground Domestic',";
+	    	}
+	    	if(gi1.equals("true")) {
+	    		databaseSqlCount+="'Ground International',";
+	    		databaseSqlQuery+="'Ground International',";
+	    	}
+	    	if(nt1.equals("true")) { 
+	    		databaseSqlCount+="'NT',";
+	    		databaseSqlQuery+="'NT',";
+	    	}
+	    	if(sp1.equals("true")) {
+	    		databaseSqlCount+="'SmartPost',";
+	    		databaseSqlQuery+="'SmartPost',";
 	    	}
 	    	
-	    	if (expressCheckBox.equals("true") && groundCheckBox.equals("false")) {
-	    		databaseSqlCount+="and company='EP' ";
-	    		databaseSqlQuery+="and company='EP' ";
-	    	}
-	    	if (groundCheckBox.equals("true") && expressCheckBox.equals("false")) {
-	    		databaseSqlCount+="and company='GD' ";
-	    		databaseSqlQuery+="and company='GD' ";
-	    	}
-	    	
-	    	if (groundCheckBox.equals("true") && expressCheckBox.equals("true")) {
-	    		databaseSqlCount+="and service1 in ('GD','EP') ";
-	    		databaseSqlQuery+="and service1 in ('GD','EP') ";
-	    	}
-	       	*/
-	    	
-	    	
+	    	databaseSqlCount+=") ";
+	    	databaseSqlQuery+=") ";
 
+	    	if (ed2.equals("true") || ei2.equals("true") ||gd2.equals("true") ||gi2.equals("true") ||nt2.equals("true") ||sp2.equals("true") ) {
+	    		databaseSqlCount+="and service2 in (";
+	    		databaseSqlQuery+="and service2 in (";
+		    	
+	    		
+	    	if(ed2.equals("true")) { 
+	    		databaseSqlCount+="'Express Domestic',";
+	    		databaseSqlQuery+="'Express Domestic',";
+	    		
+	    	}
+    		
+	    	if(ei2.equals("true")) { 
+	    		databaseSqlCount+="'Express International',";
+	    		databaseSqlQuery+="'Express International',";
+	    	}
+	    	if(gd2.equals("true")) { 
+	    		databaseSqlCount+="'Ground Domestic',";
+	    		databaseSqlQuery+="'Ground Domestic',";
+	    	}
+	    	if(gi2.equals("true")) {
+	    		databaseSqlCount+="'Ground International',";
+	    		databaseSqlQuery+="'Ground International',";
+	    	}
+	    	if(nt2.equals("true")) { 
+	    		databaseSqlCount+="'NT',";
+	    		databaseSqlQuery+="'NT',";
+	    	}
+	    	if(sp2.equals("true")) {
+	    		databaseSqlCount+="'SmartPost',";
+	    		databaseSqlQuery+="'SmartPost',";
+	    	}
+	    	databaseSqlCount+=") ";
+	    	databaseSqlQuery+=") ";
+		}
+	    	
+	    	 databaseSqlCount = databaseSqlQuery.replace(",)",")");
+	    	 databaseSqlQuery = databaseSqlQuery.replace(",)",")");
+	    	 
+	    	
 	       	try {
 	            //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
 	        		
@@ -954,8 +1024,9 @@ if (!acctType.equals("CE Level")) {
   	String[] resultArray = new String[2];
   	resultArray[0]="fail";
   	resultArray[1]="Failed During First Page";
+  	if(databaseDisabled.contentEquals("false")) {
   	writeToDB(testInputNbr,tinCount,trk,"ERROR",resultArray);
-  
+  	}
   	 Assert.fail("Failed during first page.");
 	
  		}
@@ -1067,7 +1138,11 @@ if (!acctType.equals("CE Level")) {
 			Thread.sleep(5000);
 
 			//Determines which checkboxes to select for first trk.
+<<<<<<< HEAD
 			if (service2!=null || service2 !="") {
+=======
+			if (service2!=null || service2 !="" ||service2.equals("null")) {
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 				switch(service2) {
 				case "Express Domestic":
 					
@@ -1253,8 +1328,9 @@ Thread.sleep(2000);
 		  	String[] resultArray = new String[2];
 		  	resultArray[0]="fail";
 		  	resultArray[1]="Failed During Second Page";
+		  	if(databaseDisabled.contentEquals("false")) {
 		  	writeToDB(testInputNbr,tinCount,trkng1,"ERROR",resultArray);
-		  
+		  	}
 		  	 Assert.fail("Failed During Second Page");
 		}
 		}
@@ -1377,7 +1453,9 @@ Thread.sleep(2000);
 		  	String[] resultArray = new String[2];
 		  	resultArray[0]="pass";
 		  	resultArray[1]="processed";
+		  	if(databaseDisabled.contentEquals("false")) {
 		  	writeToDB(testInputNbr,tinCount,trk,requestId,resultArray);
+		  	}
 		    Assert.assertTrue(true,"Test Case Completed.");
 		       	 	
 		       	 return;
@@ -1403,8 +1481,9 @@ Thread.sleep(2000);
 			  	String[] resultArray = new String[2];
 			  	resultArray[0]="fail";
 			  	resultArray[1]="Try This Manually";
+			  	if(databaseDisabled.contentEquals("false")) {
 			  	writeToDB(testInputNbr,tinCount,trk,requestId,resultArray);
-			 
+			  	}
 			
 			}
 			else
@@ -1418,8 +1497,9 @@ Thread.sleep(2000);
 			  	String[] resultArray = new String[2];
 			  	resultArray[0]="fail";
 			  	resultArray[1]="NoSuchElementException on third page";
+			  	if(databaseDisabled.contentEquals("false")) {
 			  	writeToDB(testInputNbr,tinCount,trk,requestId,resultArray);
-			   
+			  	}
 			}
 			 Assert.fail("Failed During Third Page");
 		}
@@ -1434,8 +1514,9 @@ Thread.sleep(2000);
 		  	String[] resultArray = new String[2];
 		  	resultArray[0]="fail";
 		  	resultArray[1]="WebDriverException on third page";
+		  	if(databaseDisabled.contentEquals("false")) {
 		  	writeToDB(testInputNbr,tinCount,trk,requestId,resultArray);
-		
+		  	}
 		  	 Assert.fail("Failed During Third Page");
 		}
 
@@ -1448,7 +1529,9 @@ Thread.sleep(2000);
 		  	String[] resultArray = new String[2];
 		  	resultArray[0]="fail";
 		  	resultArray[1]="NullPointerException on third page";
+		  	if(databaseDisabled.contentEquals("false")) {
 		  	writeToDB(testInputNbr,tinCount,trk,requestId,resultArray);
+		  	}
 		  	 Assert.fail("Failed During Third Page");
 		
 		} catch (InterruptedException e) {
@@ -1460,7 +1543,9 @@ Thread.sleep(2000);
 		  	String[] resultArray = new String[2];
 		  	resultArray[0]="fail";
 		  	resultArray[1]="InterruptedException on third page";
+		  	if(databaseDisabled.contentEquals("false")) {
 		  	writeToDB(testInputNbr,tinCount,trk,requestId,resultArray);
+		  	}
 		  	 Assert.fail("Failed During Third Page");
 		}
 			

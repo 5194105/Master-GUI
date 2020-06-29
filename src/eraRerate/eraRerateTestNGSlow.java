@@ -124,13 +124,18 @@ public class eraRerateTestNGSlow {
 	String mfRetireCheckBox;
 	String source;
 	String sessionCount;
+	String customString;
+    String customCheckBox;
+    String databaseDisabled;
 	
+    
+    
 	int sessionCountInt;
 	String[][] allData;
 	
 	@BeforeClass
-	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox","normalCheckBox","mfRetireCheckBox","sessionCount"})
-	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String normalCheckBox,String mfRetireCheckBox,String sessionCount) {
+	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","sessionCount","customString","customCheckBox","databaseDisabled"})
+	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String sessionCount,String customString,String customCheckBox,String databaseDisabled) {
 	c=new config();
 	/*
 	@BeforeClass
@@ -147,29 +152,10 @@ public class eraRerateTestNGSlow {
 		
 		homePath=System.getProperty("user.dir");
     	
-		
-        if (testingMode==true){
-        	browser="2";
-        	level="2";
-        	filepath=homePath+"\\test data\\rebill.xlsx";
-        	source="db";
-        	allCheckBox="false";
-        	nullCheckBox="true";
-        	failedCheckBox="true";
-        	domesticCheckBox="false";
-        	internationalCheckBox="true";
-        	expressCheckBox="false";
-        	groundCheckBox="true";
-        	normalCheckBox="true";
-        	mfRetireCheckBox="false";
-        	sessionCountInt=4;
-        	
-        }
-        else {
-        	if (source.equals("excel")) {
-        			excelVar = new excel(filepath);
+	
+        	if(source.equals("excel")) {
+        		excelVar = new excel(filepath);
         	}
-        	
 	        	this.browser=browser;
 	        	this.level=level;
 	        	this.compatibleMode=compatibleMode;
@@ -177,15 +163,11 @@ public class eraRerateTestNGSlow {
 	        	this.allCheckBox=allCheckBox;
 				this.nullCheckBox=nullCheckBox;
 				this.failedCheckBox=failedCheckBox;
-				this.domesticCheckBox=domesticCheckBox;
-				this.internationalCheckBox=internationalCheckBox;
-				this.expressCheckBox=expressCheckBox;
-				this.groundCheckBox=groundCheckBox;
-				this.normalCheckBox=normalCheckBox;
-				this.mfRetireCheckBox=mfRetireCheckBox;
-	        	this.sessionCount=sessionCount;
+				this.sessionCount=sessionCount;
+				this.customString=customString;
+	        	this.customCheckBox=customCheckBox;
 	        	sessionCountInt=Integer.parseInt(sessionCount);
-        }
+        
         
        
     	
@@ -264,12 +246,14 @@ public class eraRerateTestNGSlow {
 		
     	
     	String databaseSqlCount="select count(*) as total from era_rerate_view where trkngnbr is not null ";
-    	String databaseSqlQuery="select result, description, test_input_nbr, tin_count, trkngnbr, invoice_nbr_1,invoice_nbr_2,SVC_CHANGED, SVC_CHANGED,ACT_WEIGHT, CUST_WEIGHT, RERATE_COMMENTS, region,  USERNAME,   password from era_rerate_view ";
+    	String databaseSqlQuery="select result, description, test_input_nbr, tin_count, trkngnbr, invoice_nbr_1,invoice_nbr_2,SVC_CHANGED,ACT_Wgt, CUST_Wgt, RERATE_COMMENTS, region,  USERNAME,   password from era_rerate_view where trkngnbr is not null ";
     	
+    	
+    	if (customCheckBox.equals("false")) {
     	
     	if (allCheckBox.equals("false")) {
-    		databaseSqlCount+="where ";
-    		databaseSqlQuery+="where ";
+    		databaseSqlCount+="and ";
+    		databaseSqlQuery+="and ";
     	}
     	if (nullCheckBox.equals("true") && failedCheckBox.equals("true")) {
     		databaseSqlCount+="(result is null or result ='fail') ";
@@ -284,7 +268,11 @@ public class eraRerateTestNGSlow {
     		databaseSqlQuery+="result ='fail' ";
     	}
     	
-    	
+    	}
+    	else if (customCheckBox.equals("true")){
+    		databaseSqlCount+="and "+customString;
+    		databaseSqlQuery+="and "+customString;
+    	}
        	
     	
     	
@@ -474,7 +462,7 @@ public class eraRerateTestNGSlow {
     
      
     @Test(dataProvider="data-provider1",retryAnalyzer = Retry.class)
-    public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String svcChanged,String dimDetails,String actWeight,String custWeight,String rerateComments,String region ,String login ,String password,int rowNumber) {
+    public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String svcChanged,String actWeight,String custWeight,String rerateComments,String region ,String login ,String password,int rowNumber) {
      
     	System.out.println("Instance: 1");
     	
@@ -531,10 +519,17 @@ public class eraRerateTestNGSlow {
 	  
 	    try {
 	    	
-	    
+	    	
 	        
-			doRebill(driver1,wait1, result,  descripiton, testInputNbr, tinCount, trk,invoiceNbr1,invoiceNbr2, svcChanged, dimDetails, actWeight, custWeight, rerateComments, region , login , password,1);
-		} catch (InterruptedException e) {
+			doRebill(driver1,wait1, result,  descripiton, testInputNbr, tinCount, trk,invoiceNbr1,invoiceNbr2, svcChanged, actWeight, custWeight,rerateComments, region , login , password,1);
+	/*
+			 public void doRebill(WebDriver driver,WebDriverWait wait, String result, String descripiton,
+					 String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,
+					 String svcChanged,String actWeight,String custWeight,String rerateComments,String region ,
+					 String login ,String password,int rowNumber) throws InterruptedException {
+			*/	    
+	    
+	    } catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -726,7 +721,7 @@ public class eraRerateTestNGSlow {
     }
     
     
-    public void doRebill(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String svcChanged,String dimDetails,String actWeight,String custWeight,String rerateComments,String region ,String login ,String password,int rowNumber) throws InterruptedException {
+    public void doRebill(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String svcChanged,String actWeight,String custWeight,String rerateComments,String region ,String login ,String password,int rowNumber) throws InterruptedException {
     
     	JavascriptExecutor js= (JavascriptExecutor) driver;
     	By tempElement;
@@ -862,6 +857,27 @@ public class eraRerateTestNGSlow {
 	         Thread.sleep(5000);
       		 driver.findElement(By.xpath("//*[@id=\"viewInvBtn\"]")).click();
       		 Thread.sleep(2000);
+      		 
+      		 
+      		 try {
+        		 
+        		 String error = driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/h4")).getText();
+        		  String[] resultArray = new String[2];
+        		 resultArray[0]="fail";
+        		 resultArray[1]=error;
+        		 if(source.equals("excel")) {
+                	 writeToExcel(rowNumber, 0, resultArray[0]);
+                	 writeToExcel(rowNumber, 1, resultArray[1]);
+                	 }
+        		 writeToDB(testInputNbr,tinCount,trk,resultArray);
+        		 return;
+        		 
+        	 }
+        	 catch(Exception e) {
+        		 System.out.println("No Popup");
+        	 }
+      		 
+      		
 	         
          }
       
@@ -917,18 +933,35 @@ public class eraRerateTestNGSlow {
             	 }
             	 
             	 
-            	 
+            	 /*
             	 if (!dimDetails.equals("")) {
             		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[4]/div[5]/div/div/input")).sendKeys(dimDetails);
             	 }
-            	/*
+            	
             	 if (!actWeight.equals("")) {
             		 driver.findElement(By.xpath("//*[@id=\"rb_volume\"]")).sendKeys(actWeight);
             	 }
             	 */
             	 if (!custWeight.equals("")) {
-            		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[2]/div[2]/div/div/input")).sendKeys(custWeight);
-            	 }
+            		try {
+            		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[2]/div[2]/div/div/input")).clear();
+                 	 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[2]/div[2]/div/div/input")).sendKeys(custWeight);
+            		}
+            		catch(Exception e) {
+            			
+            		}
+            		try {
+                 
+            			 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[2]/div[3]/div/div/input")).clear();
+                     	 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[2]/div[3]/div/div/input")).sendKeys(custWeight);
+                	
+            		}
+                 	catch(Exception e) {
+            			
+            		}
+            		}
+            	 
+            	 
             	
             	 driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[4]/div/button[1]")).click();
             	
@@ -937,6 +970,26 @@ public class eraRerateTestNGSlow {
             	// driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[3]/button[1]")).click();
             	
             	 
+            	 try {
+            		 
+            		 String abc = driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/h4")).getText();
+            		 String error = driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/div/div/div[1]/div[2]/div/div/div/div[2]/div")).getText();
+            		 String[] resultArray = new String[2];
+            		 resultArray[0]="fail";
+            		 resultArray[1]=error;
+            		 if(source.equals("excel")) {
+                    	 writeToExcel(rowNumber, 0, resultArray[0]);
+                    	 writeToExcel(rowNumber, 1, resultArray[1]);
+                    	 }
+            		 writeToDB(testInputNbr,tinCount,trk,resultArray);
+            		 return;
+            		 
+            	 }
+            	 catch(Exception e) {
+            		 System.out.println("No Popup");
+            	 }
+            	 
+            	 
             	 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[4]/div/button[3]")).click();
              	
             	 Thread.sleep(5000);
@@ -944,6 +997,24 @@ public class eraRerateTestNGSlow {
           		 Thread.sleep(2000);
             	 
             	 
+          		 
+          		 
+          		  try{
+                 	 //Click on rebill RPI Complete, Phone, and Continue
+                       if (login.equals("5194105")|| login.equals("584168")){
+                     	  driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/label[1]")).click();
+                       }
+                   
+                       
+                    Select contactMethodDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"rmrks\"]")));
+                    contactMethodDropDown.selectByValue("phone");  
+              	    driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).click();
+              	//    wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")));
+                  	}
+              	   		catch(Exception e) {
+              	   			System.out.println("Phone Details Failure...");
+              	   		}
+          		 Thread.sleep(10000);
              //If False.. think maybe there is stat codes to select.
             
              String[] resultArray = validateResults(trk);
@@ -963,76 +1034,19 @@ public class eraRerateTestNGSlow {
              }
              if (resultArray[0].equals("fail")) {
             	 try {
-            		 //Sometimes just needs to click continue to rebill
-            		String tempString =  driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/h4")).getText();
-            		if (tempString.indexOf("Click Rebill to continue")!=-1) {
-             		   	driver.findElement(By.xpath("/html/body/div[6]/div/div/div[2]/button[1]")).click();
-             		   	driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")).click();    
-             		}
+            		 if(source.equals("excel")) {
+                    	 writeToExcel(rowNumber, 0,"fail");
+                    	 writeToExcel(rowNumber, 1,"Failed at Last Step");
+                    	 }
+                    	 if(uploadTrkToDB==true) {
+                         	  writeToDB(testInputNbr,tinCount,trk,resultArray);
+                         	 }
             	 }
             	 catch(Exception e) {
             		System.out.println("Did not find popup about continuing");
             		 
             	 }
             
-            //If Rebill Is Not Successful
-            
-            	 try {
-            		 Boolean overrideBoolean;
-            		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[6]/div/div/div[2]/div/label/span")));
-            		 List<WebElement> errorList;
-            		 errorList=driver.findElements(By.xpath("/html/body/div[6]/div/div/div[2]/div/label/span"));
-            		 int popupCounter=1;
-            	 for (WebElement ele: errorList){
-            		 if (popupCounter%2==1){
-                         System.out.println("This is checkbox");
-                         ele.click();
-                         if (ele.isSelected()){
-                        	 System.out.println("Could Click");
-                         	}
-                         else{
-                        	 System.out.println("Could Not Click");
-                        	 overrideBoolean=true;
-                       }
-            		 }
-            		 popupCounter++;
-            	 }
-            	 driver.findElement(By.xpath("/html/body/div[6]/div/div/div[3]/button[2]")).click();
-            } 
-            
-            catch(Exception e2) {
-            	System.out.println("Did not reach override errors or failed here");
-            	 Assert.fail("Faled At Last Rebill Screen: Did not reach override errors or failed here");
-            }
-            	 
-            	 //Check For Validation again and save result.
-            	  resultArray = validateResults(trk);
-            	
-            	  try {
-            	  if (resultArray[0].equals("pass")){
-            			 if(source.equals("excel")) {
-                 	 writeToExcel(rowNumber, 0,"pass");
-                 	 writeToExcel(rowNumber, 1,"completed");
-            			 }
-                	 if(uploadTrkToDB==true) {
-                     	  writeToDB(testInputNbr,tinCount,trk,resultArray);
-                     	 }
-                  }
-                  if (resultArray[0].equals("fail")) {
-                		 if(source.equals("excel")) {
-                	  writeToExcel(rowNumber, 0,"fail");
-                  	  writeToExcel(rowNumber, 1,resultArray[1]);
-                		 }
-                  	 if(uploadTrkToDB==true) {
-                  	  writeToDB(testInputNbr,tinCount,trk,resultArray);
-                  	 }
-                  	//  Assert.fail("Faled At Last Rebill Screen: "+resultArray[1]);
-                	  
-                  }
-            	  }
-            	  catch(Exception e) {
-            		  System.out.println("FAILED AT END?");
-            	  }
           }
              
              
@@ -1077,7 +1091,7 @@ public class eraRerateTestNGSlow {
     	
     	try {
 		//	update gtm_rev_tools.rebill_results set result='fail',description='6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables' where trkngnbr='566166113544';
-		stmt=GTMcon.prepareStatement("update rebill_results set result=?,description=? where trkngnbr=?");  
+		stmt=GTMcon.prepareStatement("update rebill_results set result=?,description=?,ERA_RERATE='Y' where trkngnbr=?");  
 		
 		stmt.setString(1,resultArray[0]);  
 		stmt.setString(2,resultArray[1]); 
@@ -1093,20 +1107,26 @@ public class eraRerateTestNGSlow {
     }
     
     public String[] validateResults(String trk) {
-    	
+
     	Boolean result=null;
     	Connection con = null;
     	String[] resultArray = new String[2];
     	
     	try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	try {
     	
     		if (level.equals("2")){
-    			 c.setEraL2DbConnection();
-       		     con=c.getEraL2DbConnection();
+    			con=DriverManager.getConnection("jdbc:oracle:thin:@//scd03051-vip.ute.fedex.com:1531/SCD0305","appsread", "appsread");
+    	    	
        	 }
        	 else if (level.equals("3")){
-       		 	c.setEraL3DbConnection();
-       		 con=c.getEraL3DbConnection();
+       		con=DriverManager.getConnection("jdbc:oracle:thin:@//scd03051-vip.ute.fedex.com:1531/SCD0305","appsread", "appsread");
+        	
        	 	}
     	
     	}
@@ -1120,7 +1140,7 @@ public class eraRerateTestNGSlow {
     	ResultSet rs = null;
     	try {
     		
-    		stmt=con.prepareStatement("select * from invadj_schema.rdt_rebill_request where airbill_nbr=?");  
+    		stmt=con.prepareStatement("select * from xxfdx.fdx_ar_adjustment_irdt where airbill_nbr=?");  
 			stmt.setString(1,trk);  
 			rs = stmt.executeQuery();
     	} catch (SQLException e) {
@@ -1142,25 +1162,19 @@ public class eraRerateTestNGSlow {
     			      resultArray[1]="Not In ERA Database";
     			}
     			   else{
-    				    String statusDesc = rs.getString("STATUS_DESC");
-    	                String errorDesc = rs.getString("ERROR_DESC"); 	    	                
-    	                System.out.println(statusDesc +"    "+errorDesc);
-    	              
-    	              if (statusDesc.equals("SUCCESS")) {
+    				  
+    	             
   	    			      resultArray[0]="pass";
   	    			      resultArray[1]="completed";
-    	              }
-    	              else {
-  	    			      resultArray[0]="fail";
-  	    			      resultArray[1]=errorDesc;
-    	              }
-    			   }
+    	              }   	          
+    			   
     		} catch (SQLException e) {
     			// TODO Auto-generated catch block
     			e.printStackTrace();
     		}
     	 return resultArray;      
-}    
+}   
+
     
 public synchronized void writeToExcel(int rowCountExcel,int colCountExcel,String outputString){
 		

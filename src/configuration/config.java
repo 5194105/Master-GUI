@@ -51,6 +51,8 @@ public class config {
     String level,source;
     
     String databaseDisabled;
+    
+    String ed1,ed2,ei1,ei2,gd1,gd2,gi1,gi2,nt1,nt2,sp1,sp2;
 	
 	public config() {
 		
@@ -797,6 +799,116 @@ public String getCustomCheckBox(){
 public String getCustomString(){
 	return customString;
 }
+
+
+
+
+
+public void setEd1(String ed1){
+	this.ed1=ed1;
+}
+
+public void setEi1(String ei1){
+	this.ei1=ei1;
+}
+
+public void setGd1(String gd1){
+	this.gd1=gd1;
+}
+
+public void setGi1(String gi1){
+	this.gi1=gi1;
+}
+
+public void setNt1(String nt1){
+	this.nt1=nt1;
+}
+
+public void setSp1(String sp1){
+	this.sp1=sp1;
+}
+
+
+public void setEd2(String ed2){
+	this.ed2=ed2;
+}
+
+public void setEi2(String ei2){
+	this.ei2=ei2;
+}
+
+public void setGd2(String gd2){
+	this.gd2=gd2;
+}
+
+public void setGi2(String gi2){
+	this.gi2=gi2;
+}
+
+public void setNt2(String nt2){
+	this.nt2=nt2;
+}
+
+public void setSp2(String sp2){
+	this.sp2=sp2;
+}
+
+
+
+public String getEd1String(){
+	return ed1;
+}
+
+public String getEi1String(){
+	return ei1;
+}
+
+public String getGd1String(){
+	return gd1;
+}
+
+public String getGi1String(){
+	return gi1;
+}
+
+public String getNt1String(){
+	return nt1;
+}
+
+public String getSp1String(){
+	return sp1;
+}
+
+
+
+public String getEd2String(){
+	return ed2;
+}
+
+public String getEi2String(){
+	return ei2;
+}
+
+public String getGd2String(){
+	return gd2;
+}
+
+public String getGi2String(){
+	return gi2;
+}
+
+public String getNt2String(){
+	return nt2;
+}
+
+public String getSp2String(){
+	return sp2;
+}
+
+
+
+
+
 
 
 }
