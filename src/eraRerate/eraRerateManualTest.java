@@ -29,7 +29,7 @@ public class eraRerateManualTest {
     	c.setSource("db");
     	c.setAllCheckBox("false");
     	c.setNullCheckBox("true");
-    	c.setFailedCheckBox("true");
+    	c.setFailedCheckBox("false");
 		c.setDomesticCheckBox("false");
 		c.setInternationalCheckBox("true");
 		c.setExpressCheckBox("true");
@@ -37,6 +37,9 @@ public class eraRerateManualTest {
 		c.setNormalCheckBox("false");
 		c.setMfRetireCheckBox("true");
 		c.setSessionCount("1");
+		c.setDatabaseDisabled("false");
+		c.setCustomCheckBox("true");
+		c.setCustomString("trkngnbr ='794974734599'");
     	
     	String filepath=c.getExcelPath();
 		String level=c.getLevel();
@@ -53,6 +56,10 @@ public class eraRerateManualTest {
 		String normalCheckBox=c.getNormalCheckBox();
 		String mfRetireCheckBox=c.getMfRetireCheckBox();
 		String sessionCount=c.getSessionCount();
+		String databaseDisabled=	c.getDatabaseDisabled();
+		String	customCheckBox= c.getCustomCheckBox();
+		String	customString= c.getCustomString();
+			
 		
 		System.out.println("filepath "+filepath);
 		System.out.println("level "+level);
@@ -69,6 +76,9 @@ public class eraRerateManualTest {
 		System.out.println("normalCheckBox "+normalCheckBox);
 		System.out.println("mfRetireCheckBox "+mfRetireCheckBox);
 		System.out.println("sessionCount "+sessionCount);
+		System.out.println("customString "+customString);
+		System.out.println("customCheckBox "+customCheckBox);
+		System.out.println("databaseDisabled "+databaseDisabled);
 		
 		
 		if(filepath==null) {
@@ -114,6 +124,15 @@ public class eraRerateManualTest {
 			sessionCount="";
 		}
 		
+		if(customString==null) {
+			customString="";
+		}
+		if(customCheckBox==null) {
+			customCheckBox="";
+		}
+		if(databaseDisabled==null) {
+			databaseDisabled="";
+		}
 	
 	
 
@@ -124,12 +143,16 @@ public class eraRerateManualTest {
         fieldValues.put("filepath", filepath);
         fieldValues.put("level", level);
         fieldValues.put("browser", "2");
-        fieldValues.put("source", source);
         fieldValues.put("compatibleMode", "");
+        fieldValues.put("source", source);
+       
         fieldValues.put("allCheckBox", allCheckBox);
         fieldValues.put("nullCheckBox", nullCheckBox);
         fieldValues.put("failedCheckBox", failedCheckBox);
         fieldValues.put("sessionCount",sessionCount);
+        fieldValues.put("customString",customString);
+        fieldValues.put("customCheckBox",customCheckBox);
+        fieldValues.put("databaseDisabled",databaseDisabled);
         
         xmlSuite.setParameters(fieldValues);
         XmlTest xmlTest = new XmlTest(xmlSuite);
