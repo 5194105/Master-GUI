@@ -37,21 +37,36 @@ import org.testng.xml.XmlTest;
 
 public class Highest {
 
+<<<<<<< HEAD
+	static  String  homePath=System.getProperty("user.dir");
+
+	static ArrayList<rebillData> rebillDataArray= new ArrayList<rebillData>();
+=======
 	 
 	static String  homePath=System.getProperty("user.dir");
 	
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
     public static void main(String[] args) throws InterruptedException {
+<<<<<<< HEAD
+   /*
+=======
    
  
     	
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
     	DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
 	    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
 	    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
 	    capabilities.setCapability("ignoreZoomSetting", true);
 	    capabilities.setCapability("ignoreProtectedModeSettings", true);
 	    capabilities.setCapability("initialBrowserUrl","https://testsso.secure.fedex.com/L3/PRSApps");
+<<<<<<< HEAD
+    	*/
+    	System.setProperty("webdriver.ie.driver", homePath+"\\drivers\\IEDriverServer.exe");
+=======
 	    
     	System.setProperty("webdriver.ie.driver", "C:\\Users\\FedExUser\\git\\MasterGUI\\drivers\\IEDriverServer.exe");
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
     	
     	WebDriver driver =  new InternetExplorerDriver(capabilities);
     	

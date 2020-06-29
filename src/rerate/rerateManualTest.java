@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 
 import org.testng.TestNG;
+import org.testng.annotations.Parameters;
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
@@ -24,7 +25,7 @@ public class rerateManualTest {
 		
 		
 	config c = new config();
-   	c.setExcelPath("C:\\Users\\FedExUser\\Desktop\\stephen\\R66\\L3C4\\Rerate\\rerate.xlsx");
+   	c.setExcelPath("C:\\Users\\FedExUser\\Documents\\rerate.xlsx");
 	c.setLevel("3");
 	c.setDriverType("1");
 	c.setCompatibleMode("true");
@@ -37,9 +38,25 @@ public class rerateManualTest {
 	c.setExpressCheckBox("true");
 	c.setGroundCheckBox("false");
 	c.setStartDate("01/01/2020");
-	c.setEndDate("06/15/2020");
-
+	c.setEndDate("06/25/2020");
 	c.setSessionCount("1");
+	c.setDatabaseDisabled("false");
+	c.setEd1("true");
+	c.setEi1("true");
+	c.setGd1("true");
+	c.setGi1("true");
+	c.setNt1("true");
+	c.setSp1("true");
+	c.setEd2("false");
+	c.setEi2("false");
+	c.setGd2("false");
+	c.setGi2("false");
+	c.setNt2("false");
+	c.setSp2("false");
+	
+	
+	
+	
 	
 	String filepath=c.getExcelPath();
 	String level=c.getLevel();
@@ -58,6 +75,21 @@ public class rerateManualTest {
 	String sessionCount=c.getSessionCount();
 	String startDateText=c.getStartDate();
 	String endDateText=c.getEndDate();
+	String databaseDisabled=c.getDatabaseDisabled();
+	
+	 String ed1=c.getEd1String();
+	 String ed2=c.getEd2String();
+	 String ei1=c.getEi1String();
+	 String ei2=c.getEi2String();
+	 String gd1=c.getGd1String();
+	 String gd2=c.getGd2String();
+	 String gi1=c.getGi1String();
+	 String gi2=c.getGi2String();
+	 String nt1=c.getNt1String();
+	 String nt2=c.getNt2String();
+	 String sp1=c.getSp1String();
+	 String sp2=c.getSp2String();
+		
 	
 	System.out.println("filepath "+filepath);
 	System.out.println("level "+level);
@@ -76,6 +108,23 @@ public class rerateManualTest {
 	System.out.println("sessionCount "+sessionCount);
 	System.out.println("startDateText "+startDateText);
 	System.out.println("endDate "+endDateText);
+	System.out.println("databaseDisabled "+databaseDisabled);
+
+	
+	System.out.println("ed1 "+ed1);
+	System.out.println("ei1 "+ei1);
+	System.out.println("gd1 "+gd1);
+	System.out.println("gi1 "+gi1);
+	System.out.println("nt1 "+nt1);
+	System.out.println("sp1 "+sp1);
+	
+	System.out.println("ed2 "+ed2);
+	System.out.println("ei2 "+ei2);
+	System.out.println("gd2 "+gd2);
+	System.out.println("gi2 "+gi2);
+	System.out.println("nt2 "+nt2);
+	System.out.println("sp2 "+sp2);
+	
 	
 	if(startDateText==null) {
 		startDateText="";
@@ -126,6 +175,108 @@ public class rerateManualTest {
 		sessionCount="";
 	}
 	
+	if(ed1==null) {
+		ed1="";
+	}
+	if(ei1==null) {
+		ei1="";
+	}
+	if(gd1==null) {
+		gd1="";
+	}
+	if(gi1==null) {
+		gi1="";
+	}
+	if(nt1==null) {
+		nt1="";
+	}
+	if(sp1==null) {
+		sp1="";
+	}
+	
+	if(ed2==null) {
+		ed2="";
+	}
+	if(ei2==null) {
+		ei2="";
+	}
+	if(gd2==null) {
+		gd2="";
+	}
+	if(gi2==null) {
+		gi2="";
+	}
+	if(nt2==null) {
+		nt2="";
+	}
+	if(sp2==null) {
+		sp2="";
+	}
+	
+
+	if(databaseDisabled==null) {
+		databaseDisabled="";
+	}
+	
+	
+	
+	
+	
+	/*
+	@Parameters({
+		"filepath",
+		"level",
+		"browser"
+		,"source",
+		"compatibleMode"
+		,"allCheckBox"
+		,"nullCheckBox",
+		"failedCheckBox",
+		"sessionCount",
+		"databaseDisabled"
+		,"startDateText",
+		"endDateText",
+		"ed1"
+		,"ei1"
+		,"gd1"
+		,"gi1"
+		,"nt1"
+		,"sp1"
+		,"ed2"
+		,"ei2"
+		,"gd2"
+		,"gi2"
+		,"nt2"
+		,"sp2"})
+	}
+	public void setupExcel(
+			String filepath,
+			String level,
+			String browser,
+			String source,
+			String compatibleMode
+			,String allCheckBox,
+			String nullCheckBox,
+			String failedCheckBox,
+	
+			String sessionCount,
+			String databaseDisabled,
+			String startDateText,
+			String endDateText,
+			String ed1, 
+			String ei1,
+			String gd1,
+			String gi1,
+			String nt1,
+			String sp1,
+			String ed2,
+			String ei2,
+			String gd2,
+			String gi2,
+			String nt2, 
+			String sp2) {
+	
+	*/
 	
     XmlSuite xmlSuite = new XmlSuite();
     xmlSuite.setName("Sample_Suite");
@@ -138,15 +289,24 @@ public class rerateManualTest {
     fieldValues.put("allCheckBox", allCheckBox);
     fieldValues.put("nullCheckBox", nullCheckBox);
     fieldValues.put("failedCheckBox", failedCheckBox);
-    fieldValues.put("domesticCheckBox", domesticCheckBox);
-    fieldValues.put("internationalCheckBox", internationalCheckBox);
-    fieldValues.put("expressCheckBox", expressCheckBox);
-    fieldValues.put("groundCheckBox", groundCheckBox);
     fieldValues.put("sessionCount",sessionCount);
+    fieldValues.put("databaseDisabled",databaseDisabled);
     fieldValues.put("startDateText", startDateText);
     fieldValues.put("endDateText",endDateText);
-  
     
+    fieldValues.put("ed1",ed1);
+    fieldValues.put("ei1",ei1);
+    fieldValues.put("gd1",gd1);
+    fieldValues.put("gi1",gi1);
+    fieldValues.put("nt1",nt1);
+    fieldValues.put("sp1",sp1);
+  
+    fieldValues.put("ed2",ed2);
+    fieldValues.put("ei2",ei2);
+    fieldValues.put("gd2",gd2);
+    fieldValues.put("gi2",gi2);
+    fieldValues.put("nt2",nt2);
+    fieldValues.put("sp2",sp2);
     
     xmlSuite.setParameters(fieldValues);
     XmlTest xmlTest = new XmlTest(xmlSuite);
