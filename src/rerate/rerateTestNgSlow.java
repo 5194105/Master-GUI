@@ -721,7 +721,7 @@ public class rerateTestNgSlow {
 		  
 		  login(driver,wait);
 		  firstPage(driver,CEDropDown,r,alert,name,acct1,acct2,acctType,d,d2,testCounter, testInputNbr, tinCount, trkng1);
-		  secondPage(driver,cc1,cc2,comboBoxesHandling,service1, service2, rerateType, trkng1, trkng2, inv1, inv2, acct1,  acct2,testCounter, testInputNbr, tinCount);
+		  secondPage(driver,comboBoxesHandling,service1, service2, rerateType, trkng1, trkng2, inv1, inv2, acct1,  acct2,testCounter, testInputNbr, tinCount);
 		  thirdPage(driver,wait,testCounter,name,express,ground,combo, testInputNbr, tinCount, trkng1);
 
 		  
@@ -980,7 +980,10 @@ if (!acctType.equals("CE Level")) {
 	  
 
 				
-		public void secondPage(WebDriver driver,ArrayList<String>cc1,ArrayList<String>cc2, List<WebElement> comboBoxesHandling,String service1,String service2,String rerateType,String trkng1,String trkng2,String inv1,String inv2,String acct1, String acct2,int testCounter,String  testInputNbr,String  tinCount) {
+		public void secondPage(WebDriver driver, List<WebElement> comboBoxesHandling,String service1,String service2,String rerateType,String trkng1,String trkng2,String inv1,String inv2,String acct1, String acct2,int testCounter,String  testInputNbr,String  tinCount) {
+			
+			ArrayList<String>cc1= new ArrayList<String>();
+			ArrayList<String>cc2 = new ArrayList<String>();
 			
 			try {
 			Thread.sleep(10000);				
@@ -1064,7 +1067,7 @@ if (!acctType.equals("CE Level")) {
 			Thread.sleep(5000);
 
 			//Determines which checkboxes to select for first trk.
-			if (service2!=null || service2 !="" ||service2.equals("")||service2.equals("null")) {
+			if (service2!=null || service2 !="") {
 				switch(service2) {
 				case "Express Domestic":
 					
