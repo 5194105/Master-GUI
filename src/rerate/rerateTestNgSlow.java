@@ -1138,11 +1138,9 @@ if (!acctType.equals("CE Level")) {
 			Thread.sleep(5000);
 
 			//Determines which checkboxes to select for first trk.
-<<<<<<< HEAD
+
 			if (service2!=null || service2 !="") {
-=======
-			if (service2!=null || service2 !="" ||service2.equals("null")) {
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+
 				switch(service2) {
 				case "Express Domestic":
 					
