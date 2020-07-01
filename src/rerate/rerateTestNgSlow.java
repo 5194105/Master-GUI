@@ -160,7 +160,7 @@ public class rerateTestNgSlow {
 	    
 		@BeforeClass
 		@Parameters({"filepath","level","browser","source","compatibleMode","allCheckBox","nullCheckBox","failedCheckBox","sessionCount","databaseDisabled","startDateText","endDateText","ed1","ei1","gd1","gi1","nt1","sp1","ed2","ei2","gd2","gi2","nt2","sp2"})
-		public void setupExcel(String filepath,String level,String browser,String source,String compatibleMode,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String sessionCount,String databaseDisabled,String startDateText,String endDateText,String ed1, String ei1,String gd1, String gi1,String nt1,String sp1,String ed2,String ei2, String gd2, String gi2,String nt2, String sp2) {
+		public void setupExcel(String filepath,String level,String browser,String source,String compatibleMode,String allCheckBox,String nullCheckBox,String failedCheckBox,String sessionCount,String databaseDisabled,String startDateText,String endDateText,String ed1, String ei1,String gd1, String gi1,String nt1,String sp1,String ed2,String ei2, String gd2, String gi2,String nt2, String sp2) {
 			//public void setupExcel() {
 			//or from eclipse.
 			
@@ -369,7 +369,7 @@ public class rerateTestNgSlow {
 	    	databaseSqlQuery+=") ";
 		}
 	    	
-	    	 databaseSqlCount = databaseSqlQuery.replace(",)",")");
+	    	 databaseSqlCount = databaseSqlCount.replace(",)",")");
 	    	 databaseSqlQuery = databaseSqlQuery.replace(",)",")");
 	    	 
 	    	
@@ -978,12 +978,13 @@ if (!acctType.equals("CE Level")) {
 		try {
 			r = new Robot();
 
+
 			r.keyPress(KeyEvent.VK_ENTER);
 			r.keyRelease(KeyEvent.VK_ENTER);
 			Thread.sleep(3000);
 			try {
 			driver.findElement(By.id("ceLevelAccountNumbersRadio")).click();
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 			}
 			catch(Exception eee) {
 				r.keyPress(KeyEvent.VK_ENTER);
@@ -1001,11 +1002,19 @@ if (!acctType.equals("CE Level")) {
 			driver.findElement(By.cssSelector("input[class='selecctall'][type='checkbox']")).click();
 			Thread.sleep(6000);
 			driver.findElement(By.id("Next_Down")).click();
-			Thread.sleep(2000);
+			Thread.sleep(5000);
 			if(driver.switchTo().alert() != null){
 				  r.keyPress(KeyEvent.VK_ENTER);
 				  r.keyRelease(KeyEvent.VK_ENTER);
 				}
+			Thread.sleep(5000);
+		
+				  r.keyPress(KeyEvent.VK_ENTER);
+				  r.keyRelease(KeyEvent.VK_ENTER);
+				  Thread.sleep(3000);
+				 // driver.findElement(By.cssSelector("input[type='button'][value='Lookup & Add']")).click();
+				  driver.findElement(By.cssSelector("input[type='button'][value='Lookup & Add']")).click();
+				
 		  Thread.sleep(15000);	  
 		} catch (AWTException e) {
 			// TODO Auto-generated catch block
@@ -1014,6 +1023,40 @@ if (!acctType.equals("CE Level")) {
 			} 
 		}
 	}
+
+
+Thread.sleep(5000);
+try {
+	JavascriptExecutor js= (JavascriptExecutor) driver;
+	js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+	String temp=driver.findElement(By.xpath("/html/body/table/tbody/tr/td/form/table/tbody/tr[3]/td/table[3]/tbody/tr/td/table/tbody/tr[4]/td/table/tbody/tr[5]/td/b/font")).getText();
+
+//	String temp=driver.findElement(By.xpath("/html/body/table/tbody/tr/td/form/table/tbody/tr[3]/td/table[3]/tbody/tr/td/table/tbody/tr[4]/td/table/tbody/tr[5]/td/b/font/text()[1]")).getText();
+//											 /html/body/table/tbody/tr/td/form/table/tbody/tr[3]/td/table[3]/tbody/tr/td/table/tbody/tr[4]/td/table/tbody/tr[5]/td/b/font/text()[1]
+	
+	//if (temp.equals("Please check the account number(s) entered. Following account number(s) is(are) not valid:")) {
+	 if(source.equals("excel")) {
+       	 writeToExcel(testCounter, 14,"Acct Error");
+       	 }
+		String[] resultArray = new String[2];
+	  	resultArray[0]="fail";
+	  	resultArray[1]="Acct Error";
+	  	if(databaseDisabled.contentEquals("false")) {
+	  	writeToDB(testInputNbr,tinCount,trk,"ERROR",resultArray);
+	  	}
+	  	 Assert.fail("Acct Error");
+	  	return;
+		
+	 		
+		
+	//}
+	
+}
+catch(Exception ee) {
+	
+	System.out.println("No Acct Error");
+}
+
 }
  catch (Exception e) {
 	 
@@ -1052,10 +1095,15 @@ if (!acctType.equals("CE Level")) {
 
 				
 		public void secondPage(WebDriver driver, List<WebElement> comboBoxesHandling,String service1,String service2,String rerateType,String trkng1,String trkng2,String inv1,String inv2,String acct1, String acct2,int testCounter,String  testInputNbr,String  tinCount) {
+<<<<<<< HEAD
+			ArrayList<String>cc1 = new ArrayList<String>();
+			ArrayList<String>cc2 = new ArrayList<String>();
+=======
 			
 			ArrayList<String>cc1= new ArrayList<String>();
 			ArrayList<String>cc2 = new ArrayList<String>();
 			
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 			try {
 			Thread.sleep(10000);				
 			//Determines which checkboxes to select for first trk.
@@ -1138,9 +1186,19 @@ if (!acctType.equals("CE Level")) {
 			Thread.sleep(5000);
 
 			//Determines which checkboxes to select for first trk.
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 			if (service2!=null || service2 !="") {
+<<<<<<< HEAD
 
+=======
+=======
+			if (service2!=null || service2 !="" ||service2.equals("null")) {
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 				switch(service2) {
 				case "Express Domestic":
 					

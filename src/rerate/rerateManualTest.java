@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 
 import org.testng.TestNG;
+import org.testng.annotations.Parameters;
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
@@ -31,7 +32,7 @@ public class rerateManualTest {
 	c.setSource("excel");
 	c.setAllCheckBox("false");
 	c.setNullCheckBox("true");
-	c.setFailedCheckBox("true");
+	c.setFailedCheckBox("false");
 	c.setDomesticCheckBox("true");
 	c.setInternationalCheckBox("true");
 	c.setExpressCheckBox("true");
@@ -48,12 +49,12 @@ public class rerateManualTest {
 	c.setGi1("true");
 	c.setNt1("true");
 	c.setSp1("true");
-	c.setEd2("true");
-	c.setEi2("true");
-	c.setGd2("true");
-	c.setGi2("true");
-	c.setNt2("true");
-	c.setSp2("true");
+	c.setEd2("false");
+	c.setEi2("false");
+	c.setGd2("false");
+	c.setGi2("false");
+	c.setNt2("false");
+	c.setSp2("false");
 	
 	
 	
@@ -218,6 +219,66 @@ public class rerateManualTest {
 	if(databaseDisabled==null) {
 		databaseDisabled="";
 	}
+	
+	
+	
+	
+	
+	/*
+	@Parameters({
+		"filepath",
+		"level",
+		"browser"
+		,"source",
+		"compatibleMode"
+		,"allCheckBox"
+		,"nullCheckBox",
+		"failedCheckBox",
+		"sessionCount",
+		"databaseDisabled"
+		,"startDateText",
+		"endDateText",
+		"ed1"
+		,"ei1"
+		,"gd1"
+		,"gi1"
+		,"nt1"
+		,"sp1"
+		,"ed2"
+		,"ei2"
+		,"gd2"
+		,"gi2"
+		,"nt2"
+		,"sp2"})
+	}
+	public void setupExcel(
+			String filepath,
+			String level,
+			String browser,
+			String source,
+			String compatibleMode
+			,String allCheckBox,
+			String nullCheckBox,
+			String failedCheckBox,
+	
+			String sessionCount,
+			String databaseDisabled,
+			String startDateText,
+			String endDateText,
+			String ed1, 
+			String ei1,
+			String gd1,
+			String gi1,
+			String nt1,
+			String sp1,
+			String ed2,
+			String ei2,
+			String gd2,
+			String gi2,
+			String nt2, 
+			String sp2) {
+	
+	*/
 	
     XmlSuite xmlSuite = new XmlSuite();
     xmlSuite.setName("Sample_Suite");

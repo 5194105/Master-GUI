@@ -6,15 +6,24 @@
 <<<<<<< HEAD
       <class name="rerate.rerateTestNgSlow">
 =======
+<<<<<<< HEAD
+      <class name="rerate.rerateTestNgSlow">
+=======
       <class name="rebill.testngRebillSlow">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
         <methods>
 <<<<<<< HEAD
           <include name="testMethod2"/>
           <include name="testMethod"/>
 =======
+<<<<<<< HEAD
+          <include name="testMethod2"/>
+          <include name="testMethod"/>
+=======
           <include name="testMethod1"/>
           <include name="testMethod2"/>
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
           <include name="testMethod4"/>
           <include name="setupExcel"/>
@@ -23,7 +32,11 @@
 <<<<<<< HEAD
       </class> <!-- rerate.rerateTestNgSlow -->
 =======
+<<<<<<< HEAD
+      </class> <!-- rerate.rerateTestNgSlow -->
+=======
       </class> <!-- rebill.testngRebillSlow -->
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
     </classes>
   </test> <!-- Default test(failed) -->
