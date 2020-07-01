@@ -43,9 +43,7 @@ public class rebillManualClass {
     	c.setAllCheckBox("false");
     	c.setNullCheckBox("true");
     	c.setFailedCheckBox("true");
-  
 		c.setDomesticCheckBox("true");
-
 		c.setInternationalCheckBox("true");
 		c.setExpressCheckBox("true");
 
