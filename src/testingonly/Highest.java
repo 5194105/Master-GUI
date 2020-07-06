@@ -1,6 +1,8 @@
 package testingonly;
 import configuration.config;
+import configuration.dataSetup;
 import prerate.prerateTestNGSlow;
+import rebill.Retry;
 import rebill.rebillData;
 import rebill.testngRebillSlow;
 import rebill.testngRebillSlowMfRetire;
@@ -36,34 +38,23 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.TestNG;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
 public class Highest {
 
-    public static void main(String[] args) throws InterruptedException {
-    	 String  homePath=System.getProperty("user.dir");
-    	String chromePath=homePath+"\\drivers\\chromedriver.exe";
-    	 String chromeSetProperty="webdriver.chrome.driver";
-    	System.setProperty(chromeSetProperty,chromePath);
-    	WebDriver driver = new ChromeDriver();
-    	WebDriverWait wait;
+  public Highest() {}
     	
-    	try {
-		    driver.get("https://testsso.secure.fedex.com/l3/instant-invoicing ");
-		    driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-			wait = new WebDriverWait(driver,10);
-			driver.manage().window().maximize();
-			driver.findElement(By.id("username")).sendKeys("5194105");
-			driver.findElement(By.id("password")).sendKeys("5194105");
-			driver.findElement(By.id("submit")).click();
-    	}
-    	catch(Exception e) {
-    		
-    		 Assert.fail("Could Not Login");
-    	}
+    
+    	
+    	 @Test(dataProvider="data-provider1",retryAnalyzer = Retry.class,dataProviderClass = dataSetup.class)
+    	    public void testMethod1(String result) {
+    		 System.out.println(result);
+    	 }
     	
     	
     	
@@ -72,40 +63,9 @@ public class Highest {
     	
     	
     	
-    	
-    	
-    	
-    	
-    	
-    	
-    	/*
-    	  driver.findElement(By.xpath("//input[@id='iiForm:fromDateII_input']")).click();
-
-    	//  driver.findElement(By.xpath("//input[@id='iiForm:fromDateII']")).click();
-    	  // driver.findElement(By.xpath("//input[@id='label_iiForm:fromDateII']")).click();
-       	
-    	 
-         //Will grab the calender and store as Element Select
-     
-    	   Select dropdown = new Select (driver.findElement(By.name("iiForm:fromDateII_input_sel_month")));   
-
-         //Just Choosing Jan. Will try this ten times before it ends.
-       int  attempts=0;
-         while (attempts<10){
-             try{
-                 dropdown.selectByVisibleText("Jan");
-                 driver.findElements(By.className("ui-state-default")).get(9).click();  
-                 break;
-                 }
-                 catch (Exception eee){
-                 System.out.println(eee);
-                 }
-                 attempts++;
-             }
-    */
     }
     
-    }
+    
 
 
  
