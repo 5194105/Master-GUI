@@ -209,7 +209,9 @@ public class rerateTestNgSlow {
 	        		levelUrl="https://devsso.secure.fedex.com/L2/PRSApps";
 	        	}
 	        	else if (level.equals("3")){
-	        		levelUrl="https://testsso.secure.fedex.com/L3/PRSApps";
+	        	//	levelUrl="https://testsso.secure.fedex.com/L3/PRSApps";
+	        		
+	        		levelUrl="https://testsso.secure.fedex.com/L3C/PRSApps/";
 	        	}
 	        
 	    	
@@ -566,10 +568,13 @@ public class rerateTestNgSlow {
 	  public void testMethod(String testInputNbr,String tinCount,String acct1,String acct2,String trkng1,String trkng2,String inv1,String inv2,String service1,String service2,String rerateType,String acctType,String name,int testCounter) {
 	   // @Test
 	  //  public void testMethod1() {
+		 
+		  WebDriver driver=null;
 		  try {
 			  
-			  driver1.quit();
-			  driver1.close();
+			  driver.quit();
+			  driver.close();
+			 
 		  }
 		  catch(Exception eee) {
 			  System.out.println(eee);
@@ -593,9 +598,9 @@ public class rerateTestNgSlow {
 	    		}
 	    		
 	    	//System.setProperty(ieSetProperty, ieDriverPath);
-	    		System.setProperty("webdriver.ie.driver", homePath+"\\drivers\\IEDriverServer.exe");
+	    		System.setProperty("webdriver.ie.driver", homePath+"\\drivers\\IEDriverServer2.exe");
 	    		try {
-	    		driver1 =  new InternetExplorerDriver(capabilities);
+	    			driver =  new InternetExplorerDriver(capabilities);
 	    		
 	    		}
 	    		catch(Exception e) {
@@ -624,7 +629,7 @@ public class rerateTestNgSlow {
   	 
 
 			System.out.println("Hello 1");
-			doWork(driver1,wait1,CEDropDown1,alert1,r1,cc11,cc12,comboBoxesHandling1,isChecked1,count1,testInputNbr, tinCount, acct1, acct2, trkng1, trkng2, inv1, inv2, service1, service2, rerateType, acctType, name,testCounter);
+			doWork(driver,wait1,CEDropDown1,alert1,r1,cc11,cc12,comboBoxesHandling1,isChecked1,count1,testInputNbr, tinCount, acct1, acct2, trkng1, trkng2, inv1, inv2, service1, service2, rerateType, acctType, name,testCounter);
 			
   	   
 	    }  
@@ -806,7 +811,7 @@ public class rerateTestNgSlow {
 
 		  try {
 
-			  driver.get(levelUrl);
+			    driver.get(levelUrl);
 		  		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 		  		wait = new WebDriverWait( driver,10);
 		  		driver.manage().window().maximize();     
@@ -824,7 +829,8 @@ public class rerateTestNgSlow {
 				}
 				else if (level.equals("3"))
 				{
-					driver.get("https://testsso.secure.fedex.com/L3/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10");
+
+					driver.get("https://testsso.secure.fedex.com/L3C/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10");
 				}
 				
 				try {
@@ -853,7 +859,7 @@ public class rerateTestNgSlow {
 					}
 					else if (level.equals("3"))
 					{
-						driver.get("https://testsso.secure.fedex.com/L3/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10");
+						driver.get("https://testsso.secure.fedex.com/L3C/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10");
 					}
 				}
 				
@@ -1044,6 +1050,8 @@ try {
 	  	if(databaseDisabled.contentEquals("false")) {
 	  	writeToDB(testInputNbr,tinCount,trk,"ERROR",resultArray);
 	  	}
+	  	driver.quit();
+		driver.close();
 	  	 Assert.fail("Acct Error");
 	  	return;
 		
@@ -1070,6 +1078,8 @@ catch(Exception ee) {
   	if(databaseDisabled.contentEquals("false")) {
   	writeToDB(testInputNbr,tinCount,trk,"ERROR",resultArray);
   	}
+  	driver.quit();
+	driver.close();
   	 Assert.fail("Failed during first page.");
 	
  		}
@@ -1095,15 +1105,10 @@ catch(Exception ee) {
 
 				
 		public void secondPage(WebDriver driver, List<WebElement> comboBoxesHandling,String service1,String service2,String rerateType,String trkng1,String trkng2,String inv1,String inv2,String acct1, String acct2,int testCounter,String  testInputNbr,String  tinCount) {
-<<<<<<< HEAD
+
 			ArrayList<String>cc1 = new ArrayList<String>();
 			ArrayList<String>cc2 = new ArrayList<String>();
-=======
-			
-			ArrayList<String>cc1= new ArrayList<String>();
-			ArrayList<String>cc2 = new ArrayList<String>();
-			
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+
 			try {
 			Thread.sleep(10000);				
 			//Determines which checkboxes to select for first trk.
@@ -1186,11 +1191,9 @@ catch(Exception ee) {
 			Thread.sleep(5000);
 
 			//Determines which checkboxes to select for first trk.
-<<<<<<< HEAD
+
 			if (service2!=null || service2 !="") {
-=======
-			if (service2!=null || service2 !="" ||service2.equals("null")) {
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+
 				switch(service2) {
 				case "Express Domestic":
 					
@@ -1379,6 +1382,8 @@ Thread.sleep(2000);
 		  	if(databaseDisabled.contentEquals("false")) {
 		  	writeToDB(testInputNbr,tinCount,trkng1,"ERROR",resultArray);
 		  	}
+		    driver.quit();
+			driver.close();
 		  	 Assert.fail("Failed During Second Page");
 		}
 		}
@@ -1404,7 +1409,7 @@ Thread.sleep(2000);
 			}
 			else if (level.equals("3"))
 			{
-				driver.get("https://testsso.secure.fedex.com/L3/PRSApps/inbox/inbox_router.jsp?inbox_id=11");
+				driver.get("https://testsso.secure.fedex.com/L3C/PRSApps/inbox/inbox_router.jsp?inbox_id=11");
 			}
 			
 			
@@ -1504,6 +1509,8 @@ Thread.sleep(2000);
 		  	if(databaseDisabled.contentEquals("false")) {
 		  	writeToDB(testInputNbr,tinCount,trk,requestId,resultArray);
 		  	}
+		  	driver.quit();
+			driver.close();
 		    Assert.assertTrue(true,"Test Case Completed.");
 		       	 	
 		       	 return;
@@ -1516,7 +1523,7 @@ Thread.sleep(2000);
 		{
 			System.out.println(e);
 			
-			if(url1.contentEquals("https://testsso.secure.fedex.com/L3/PRSApps/rerate/iscreen/rrAERerateMain.jsp")||url2.contentEquals("https://destsso.secure.fedex.com/L2/PRSApps/rerate/iscreen/rrAERerateMain.jsp"))
+			if(url1.contentEquals("https://testsso.secure.fedex.com/L3C/PRSApps/rerate/iscreen/rrAERerateMain.jsp")||url2.contentEquals("https://destsso.secure.fedex.com/L2/PRSApps/rerate/iscreen/rrAERerateMain.jsp"))
 			{
 				
 				System.out.println("NoSuchElementException "+e);
@@ -1549,6 +1556,8 @@ Thread.sleep(2000);
 			  	writeToDB(testInputNbr,tinCount,trk,requestId,resultArray);
 			  	}
 			}
+			driver.quit();
+			driver.close();
 			 Assert.fail("Failed During Third Page");
 		}
 		catch (WebDriverException h)
@@ -1580,6 +1589,8 @@ Thread.sleep(2000);
 		  	if(databaseDisabled.contentEquals("false")) {
 		  	writeToDB(testInputNbr,tinCount,trk,requestId,resultArray);
 		  	}
+		  	driver.quit();
+			driver.close();
 		  	 Assert.fail("Failed During Third Page");
 		
 		} catch (InterruptedException e) {
@@ -1594,6 +1605,8 @@ Thread.sleep(2000);
 		  	if(databaseDisabled.contentEquals("false")) {
 		  	writeToDB(testInputNbr,tinCount,trk,requestId,resultArray);
 		  	}
+		  	driver.quit();
+			driver.close();
 		  	 Assert.fail("Failed During Third Page");
 		}
 			

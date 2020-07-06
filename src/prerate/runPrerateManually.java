@@ -19,11 +19,11 @@ public class runPrerateManually {
 	static ArrayList<rebillData> rebillDataArray= new ArrayList<rebillData>();
     public static void main(String[] args) {
     	config c = new config();
-       	c.setExcelPath("C:\\Users\\FedExUser\\Documents\\rebill.xlsx");
+       	c.setExcelPath("C:\\Users\\FedExUser\\Documents\\PRERATE_UPDATE.xlsx");
     	c.setLevel("3");
     	c.setDriverType("2");
     	c.setCompatibleMode("false");
-    	c.setSource("db");
+    	c.setSource("excel");
     	c.setAllCheckBox("false");
     	c.setNullCheckBox("true");
     	c.setFailedCheckBox("true");
@@ -31,11 +31,11 @@ public class runPrerateManually {
 		c.setInternationalCheckBox("false");
 		c.setExpressCheckBox("false");
 		c.setGroundCheckBox("false");
-		c.setDatabaseDisabled("false");
+		c.setDatabaseDisabled("true");
 		c.setCustomCheckBox("false");
 		c.setCustomString("");
 		c.setSessionCount("1");
-		c.setPrerateType("hold");
+		c.setPrerateType("update");
 		
 		
     	String filepath=c.getExcelPath();
