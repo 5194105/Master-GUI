@@ -1105,10 +1105,23 @@ catch(Exception ee) {
 
 				
 		public void secondPage(WebDriver driver, List<WebElement> comboBoxesHandling,String service1,String service2,String rerateType,String trkng1,String trkng2,String inv1,String inv2,String acct1, String acct2,int testCounter,String  testInputNbr,String  tinCount) {
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 			ArrayList<String>cc1 = new ArrayList<String>();
 			ArrayList<String>cc2 = new ArrayList<String>();
+<<<<<<< HEAD
 
+=======
+=======
+			
+			ArrayList<String>cc1= new ArrayList<String>();
+			ArrayList<String>cc2 = new ArrayList<String>();
+			
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 			try {
 			Thread.sleep(10000);				
 			//Determines which checkboxes to select for first trk.
@@ -1191,9 +1204,25 @@ catch(Exception ee) {
 			Thread.sleep(5000);
 
 			//Determines which checkboxes to select for first trk.
+<<<<<<< HEAD
 
 			if (service2!=null || service2 !="") {
 
+=======
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+			if (service2!=null || service2 !="") {
+<<<<<<< HEAD
+
+=======
+=======
+			if (service2!=null || service2 !="" ||service2.equals("null")) {
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 				switch(service2) {
 				case "Express Domestic":
 					

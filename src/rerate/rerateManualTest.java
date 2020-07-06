@@ -37,8 +37,14 @@ public class rerateManualTest {
 	c.setInternationalCheckBox("true");
 	c.setExpressCheckBox("true");
 	c.setGroundCheckBox("true");
+<<<<<<< HEAD
 	c.setStartDate("01/01/2020");
 	c.setEndDate("07/01/2020");
+=======
+	c.setStartDate("01/01/2020");
+
+	c.setEndDate("06/25/2020");
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 
 	c.setSessionCount("1");
 	c.setDatabaseDisabled("false");
