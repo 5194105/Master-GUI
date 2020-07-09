@@ -1,41 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Sample_Suite]">
-  <parameter name="nullCheckBox" value="true"/>
-  <parameter name="level" value="3"/>
-  <parameter name="failedCheckBox" value="false"/>
-  <parameter name="nt1" value="true"/>
-  <parameter name="source" value="excel"/>
-  <parameter name="endDateText" value="07/06/2020"/>
-  <parameter name="ei1" value="true"/>
-  <parameter name="nt2" value="false"/>
-  <parameter name="compatibleMode" value="true"/>
-  <parameter name="gi1" value="true"/>
-  <parameter name="ei2" value="false"/>
-  <parameter name="gi2" value="false"/>
-  <parameter name="ed2" value="false"/>
-  <parameter name="allCheckBox" value="false"/>
-  <parameter name="startDateText" value="01/01/2020"/>
-  <parameter name="ed1" value="true"/>
-  <parameter name="filepath" value="C:\Users\FedExUser\Documents\rerate.xlsx"/>
-  <parameter name="gd2" value="false"/>
-  <parameter name="sp2" value="false"/>
-  <parameter name="sessionCount" value="1"/>
-  <parameter name="gd1" value="true"/>
-  <parameter name="sp1" value="true"/>
-  <parameter name="browser" value="1"/>
-  <parameter name="databaseDisabled" value="false"/>
-  <test name="Rebill Test(failed)" parallel="methods">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
     <classes>
-      <class name="rerate.rerateTestNgSlow">
+      <class name="rebill.testngRebillFast">
         <methods>
-          <include name="testMethod2"/>
-          <include name="testMethod" invocation-numbers="0 1 2 3"/>
-          <include name="testMethod4"/>
           <include name="setupExcel"/>
+          <include name="testMethod1"/>
+          <include name="testMethod2"/>
           <include name="testMethod3"/>
+          <include name="testMethod4"/>
         </methods>
-      </class> <!-- rerate.rerateTestNgSlow -->
+      </class> <!-- rebill.testngRebillFast -->
     </classes>
-  </test> <!-- Rebill Test(failed) -->
-</suite> <!-- Failed suite [Sample_Suite] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

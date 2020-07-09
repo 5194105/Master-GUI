@@ -20,6 +20,7 @@ import org.openqa.selenium.WebDriver;
 
 import UD.UdExecution;
 import configuration.config;
+import configuration.importData;
 import configuration.mouse;
 import configuration.testStuff;
 import rebill.rebillMain;
@@ -141,12 +142,7 @@ public class gui {
 	 * Create the application.
 	 */
 	public gui() {
-		try {
-			setUp();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}  
+		importData id = new importData(); 
 		initialize();
 		
 		  	
@@ -319,18 +315,16 @@ public class gui {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				*/
-				
+				*/		
 			}
 		});
-
 	}
 	
-
 	//Sets up config file
+	/*
 	public void setUp() throws ClassNotFoundException {
 		
-		
+	
 		 homePath=System.getProperty("user.dir");
 	      if (System.getProperty("user.dir").indexOf("dist")==-1){
 	    	  imagePath=System.getProperty("user.dir");
@@ -471,4 +465,5 @@ public class gui {
 		
 		
 	}
+	*/
 }

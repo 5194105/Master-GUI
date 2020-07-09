@@ -38,6 +38,7 @@ import org.testng.annotations.Test;
 
 import configuration.config;
 import configuration.excel;
+import configuration.importData;
 
 public class eraRerateTestNGSlow {
 
@@ -136,7 +137,8 @@ public class eraRerateTestNGSlow {
 	@BeforeClass
 	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","sessionCount","customString","customCheckBox","databaseDisabled"})
 	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String sessionCount,String customString,String customCheckBox,String databaseDisabled) {
-	c=new config();
+	importData id=new importData();
+		c=id.getConfig();
 	/*
 	@BeforeClass
 	public void setupExcel() {
@@ -211,12 +213,12 @@ public class eraRerateTestNGSlow {
     	
         if (level.equals("2"))
     	{
-    		levelUrl="https://testsso.secure.fedex.com/L2/eRA/index.html";
+    		levelUrl=c.getEraRerateL2Url();
     		
     	}
     	else if (level.equals("3"))
     	{
-    		levelUrl="https://testsso.secure.fedex.com/L3/eRA/index.html";
+    		levelUrl=c.getEraRerateL3Url();;
     	
     	}
        
@@ -233,16 +235,12 @@ public class eraRerateTestNGSlow {
 		ResultSetMetaData rsmd=null;
 		//Change to L3
     	try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
 			
+			GTMcon=c.getGtmRevToolsConnection();
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} 
 		
     	
     	String databaseSqlCount="select count(*) as total from era_rerate_view where trkngnbr is not null ";
@@ -1057,16 +1055,12 @@ public class eraRerateTestNGSlow {
     public synchronized void writeToDB(String testInputNbr,String tinCount,String trk,String[] resultArray) {
     	Connection GTMcon=null;
     	try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
 			
+			GTMcon=c.getGtmRevToolsConnection();
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} 
 		
     	PreparedStatement stmt = null;
     	
@@ -1121,11 +1115,11 @@ public class eraRerateTestNGSlow {
     	try {
     	
     		if (level.equals("2")){
-    			con=DriverManager.getConnection("jdbc:oracle:thin:@//scd03051-vip.ute.fedex.com:1531/SCD0305","appsread", "appsread");
+    		//	con=DriverManager.getConnection("jdbc:oracle:thin:@//scd03051-vip.ute.fedex.com:1531/SCD0305","appsread", "appsread");
     	    	
        	 }
        	 else if (level.equals("3")){
-       		con=DriverManager.getConnection("jdbc:oracle:thin:@//scd03051-vip.ute.fedex.com:1531/SCD0305","appsread", "appsread");
+       		//con=DriverManager.getConnection("jdbc:oracle:thin:@//scd03051-vip.ute.fedex.com:1531/SCD0305","appsread", "appsread");
         	
        	 	}
     	

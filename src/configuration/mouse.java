@@ -669,6 +669,15 @@ public void setupMouseListener() {
 			    			    JOptionPane.showMessageDialog(infoPane,"Hello from GTMC Revenue Execution Onlines Team!");  
 			    		}
 			    		
+			    		//Info Label
+			    		if (mouseLabel.getName().equals("link")) {		
+			    			// infoPane=new JFrame();  
+			    			 //   JOptionPane.showMessageDialog(infoPane,"Hello from GTMC Revenue Execution Onlines Team!");  
+			    			homePath=System.getProperty("user.dir");
+			    			ProcessBuilder pb = new ProcessBuilder("Notepad.exe", homePath+"\\config.txt");
+			    			pb.start();
+			    		}
+			    		
   		
 			    		//Excel
 			    		if (mouseLabel.getName().equals("excel")) {
@@ -923,7 +932,7 @@ public void setupMouseListener() {
 				    				String databaseDisabled=	c.getDatabaseDisabled();
 				    				String	customCheckBox= c.getCustomCheckBox();
 				    				String	customString= c.getCustomString();
-				    					
+				    				String headless=c.getHeadlessString();
 				    		
 				    				
 				    				System.out.println("filepath "+filepath);
@@ -943,6 +952,7 @@ public void setupMouseListener() {
 				    				System.out.println("customString "+customString);
 				    				System.out.println("customCheckBox "+customCheckBox);
 				    				System.out.println("databaseDisabled "+databaseDisabled);
+				    				System.out.println("headless "+headless);
 				    				
 				    				
 				    				if(filepath==null) {
@@ -1001,7 +1011,9 @@ public void setupMouseListener() {
 				    					databaseDisabled="";
 				    				}
 				    			
-				    			
+				    				if(headless==null) {
+				    					headless="";
+				    				}
 				    		/*
 				    				@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox",
 				    				"failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox",
@@ -1031,7 +1043,7 @@ public void setupMouseListener() {
 				    		        fieldValues.put("customString",customString);
 				    		        fieldValues.put("customCheckBox",customCheckBox);
 				    		        fieldValues.put("databaseDisabled",databaseDisabled);
-				    		        
+				    		        fieldValues.put("headless",headless);
 				    		        xmlSuite.setParameters(fieldValues);
 				    		        XmlTest xmlTest = new XmlTest(xmlSuite);
 				    		        xmlTest.setName("Rebill Test");
