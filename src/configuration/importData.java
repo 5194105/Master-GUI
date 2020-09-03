@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.sql.Connection;
 
 public class importData {
 	config c;
@@ -177,6 +178,9 @@ public class importData {
 	        	 case "UD Password" :
 	        		 c.setUdPassword(tempStringPostFix);
 	        		 break;
+	        	 case "Stephen Password" :
+	        		 c.setStephenPassword(tempStringPostFix);
+	        		 break;
 	        	 }
 	         }
 	     } catch(Exception e) {
@@ -195,6 +199,9 @@ public class importData {
 	     c.setEcL3DbConnection(c.getEcL3DbUsername(),c.getEcL3DbPassword());
 	     c.setEraL2DbConnection(c.getEraL2DbUsername(),c.getEraL2DbPassword());
 	     c.setEraL3DbConnection(c.getEraL3DbUsername(),c.getEraL3DbPassword());
+	
+	   
+	
 	}
 
 

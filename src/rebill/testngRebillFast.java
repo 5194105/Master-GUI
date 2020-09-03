@@ -354,10 +354,15 @@ public class testngRebillFast {
         	catch(Exception e) {
         		System.out.println(e);
         	}
+    	GTMcon.close();
+    	stmt.close();
+		rs.close();
 		}
     	catch(Exception ee) {
     		System.out.println(ee);
     	}
+		
+	
 	}
 	
 	
@@ -963,11 +968,11 @@ public class testngRebillFast {
     public void doRebill(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt, int instanceNumber) throws InterruptedException {
     	WebElement element=null;
     	JavascriptExecutor js= (JavascriptExecutor) driver;
-    	By tempElement;
+    	
     	int packageCounter=0;
     	Boolean exist;
     	WebElement scrollElement;
-    	Boolean packageTab=false;
+    	
     	wait=new WebDriverWait(driver,20);
     	driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
     
@@ -1431,6 +1436,7 @@ public class testngRebillFast {
                   
                Select contactMethodDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"rmrks\"]")));
                contactMethodDropDown.selectByValue("phone");  
+               Thread.sleep(1500);
          	   driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).click();
              }
              catch(Exception e1) {
@@ -1523,7 +1529,7 @@ public class testngRebillFast {
          
     	     wait=new WebDriverWait(driver,waitTime);
     	     driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
-             Boolean validated;
+          
              try{    
             	
              switch (reasonCode){
@@ -1685,7 +1691,7 @@ public class testngRebillFast {
             //If Rebill Is Not Successful
             
             	 try {
-            		 Boolean overrideBoolean;
+            		
             		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[6]/div/div/div[2]/div/label/span")));
             		 List<WebElement> errorList;
             		 errorList=driver.findElements(By.xpath("/html/body/div[6]/div/div/div[2]/div/label/span"));
@@ -1699,7 +1705,7 @@ public class testngRebillFast {
                          	}
                          else{
                         	 System.out.println("Could Not Click");
-                        	 overrideBoolean=true;
+                        	
                        }
             		 }
             		 popupCounter++;
@@ -1769,8 +1775,8 @@ public class testngRebillFast {
 		stmt.setString(3,trk);  
 		stmt.setString(4,resultArray[0]);  
 		stmt.setString(5,resultArray[1]);  
-	
 		stmt.executeUpdate();
+		stmt.close();
     	}
     	catch(Exception e) {
     		System.out.println(e);
@@ -1780,18 +1786,23 @@ public class testngRebillFast {
     	
     	try {
 		//	update gtm_rev_tools.rebill_results set result='fail',description='6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables' where trkngnbr='566166113544';
-		stmt=GTMcon.prepareStatement("update rebill_results set result=?,description=? where trkngnbr=?");  
-		
+    	stmt=GTMcon.prepareStatement("update rebill_results set result=?,description=? where trkngnbr=?");  
 		stmt.setString(1,resultArray[0]);  
 		stmt.setString(2,resultArray[1]); 
 		stmt.setString(3,trk); 
 		stmt.executeUpdate();
-		
+		stmt.close();
 	}
 	catch(Exception e) {
 		System.out.println(e);
 	}
-
+    	try {
+			GTMcon.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
     }
     
@@ -1861,6 +1872,15 @@ public class testngRebillFast {
     			// TODO Auto-generated catch block
     			e.printStackTrace();
     		}
+    	       try {
+				con.close();
+				stmt.close();
+	    	    rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	      
     	 return resultArray;      
 }    
     

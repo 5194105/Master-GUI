@@ -39,7 +39,7 @@ public class config {
     String prerateType;
     String customCheckBox;
     String customString;
-    
+    String whatever;
     String cycle;
     String homePath;
 
@@ -300,7 +300,15 @@ public void setEraRerateRetryAttempts(String eraRerateRetryAttempts) {
 	
 	
 	
+	public void setStephenPassword(String whatever) {
+		
+		this.whatever=whatever;
+	}
 	
+	public String getStephenPassword() {
+		
+		return whatever;
+	}
 	
 	
 	public void setRebillL2Url(String rebillL2Url) {

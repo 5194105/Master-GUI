@@ -783,6 +783,20 @@ public class testNgSlowInstantInvoice {
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public void doInstantInvoice(WebDriver driver,WebDriverWait wait, String testInputNbr,  String trk , String payorAcctNbr,String itemPrcsCd,String instntInvFlg,int rowNumber,int instance) {
     	
     	System.out.println("Made it to Instant.");

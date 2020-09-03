@@ -79,7 +79,7 @@ public class rebillAutomationGui {
 		c.setDatabaseDisabled("false");
         
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1005, 718);
+		frame.setBounds(100, 100, 985, 680);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 	

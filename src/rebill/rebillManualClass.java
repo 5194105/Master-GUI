@@ -44,15 +44,15 @@ public class rebillManualClass {
     	c.setNullCheckBox("true");
     	c.setFailedCheckBox("true");
 		c.setDomesticCheckBox("true");
-		 c.setInternationalCheckBox("true");
+		c.setInternationalCheckBox("true");
 		c.setExpressCheckBox("true");
 		c.setGroundCheckBox("true");
 		c.setDatabaseDisabled("false");
-		c.setCustomCheckBox("false");
-		c.setCustomString("TRKNGNBR='794975382048'");
-		c.setHeadlessString("true");
+		c.setCustomCheckBox("true");
+		c.setCustomString("trkngnbr in ('882553697362','590443411313')");
+		c.setHeadlessString("false");
 
-		c.setSessionCount("2");
+		c.setSessionCount("1");
     	
     	String filepath=c.getExcelPath();
 		String level=c.getLevel();
