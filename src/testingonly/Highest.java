@@ -1,6 +1,7 @@
 package testingonly;
 import configuration.config;
 import configuration.dataSetup;
+import configuration.importData;
 import prerate.prerateTestNGSlow;
 import rebill.Retry;
 import rebill.rebillData;
@@ -50,19 +51,16 @@ public class Highest {
   public Highest() {}
     	
     
-    	
-    	 @Test(dataProvider="data-provider1",retryAnalyzer = Retry.class,dataProviderClass = dataSetup.class)
-    	    public void testMethod1(String result) {
-    		 System.out.println(result);
-    	 }
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
+    	public static void main (String[] arg) {
+    		 List<String> list = new ArrayList<String>();
+    	  //   System.out.println("Hello");  
+    		 
+    	     while (1<2){
+    	            list.add("OutOfMemoryError soon");
+    	        }
+    	        
+    	}
+	
     }
     
     

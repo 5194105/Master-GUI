@@ -20,6 +20,7 @@ import org.openqa.selenium.WebDriver;
 
 import UD.UdExecution;
 import configuration.config;
+import configuration.importData;
 import configuration.mouse;
 import configuration.testStuff;
 import rebill.rebillMain;
@@ -141,12 +142,8 @@ public class gui {
 	 * Create the application.
 	 */
 	public gui() {
-		try {
-			setUp();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}  
+		importData id = new importData(); 
+		c=id.getConfig();
 		initialize();
 		
 		  	
@@ -158,7 +155,7 @@ public class gui {
 	private void initialize() {
 		
 		
-	      
+	      /*
 	      libDirectoryDB=homePath+"\\libs+\\DB";
 	      libDirectoryExcel=homePath+"\\libs+\\Excel";
 	      libDirectorySelenium=homePath+"\\libs+\\Selenium";
@@ -166,9 +163,9 @@ public class gui {
 	      System.out.println(homePath);
 	      System.out.println(imagePath);
 	        
-	        
+	        */
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1005, 718);
+		frame.setBounds(100, 100, 985, 680);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -214,29 +211,7 @@ public class gui {
 		
 		
 		
-		
-		JButton testButton = new JButton("Testing - Dont Click");
-		testButton.setBounds(740, 617, 207, 29);
-		frame.getContentPane().add(testButton);
-		
-		JButton btnRebillTroubleshoot = new JButton("Test Whatever");
-		btnRebillTroubleshoot.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				try {
-					//rebillTroubleshoot rt = new rebillTroubleshoot(c);
-				//	testStuff ts = new testStuff(c);
-					udcompare uc = new udcompare(c);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			}
-		});
-		btnRebillTroubleshoot.setBounds(64, 631, 153, 23);
-		frame.getContentPane().add(btnRebillTroubleshoot);
-		
+	
 		
 		
 		
@@ -260,77 +235,14 @@ public class gui {
 		m.setupBackground();
 	
 	    frame.setVisible(true);
-	    //
-	    
-		testButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			
-				
-				c.setDriverType("2");
-				c.setSource("excel");
-				c.setExcelPath(homePath+"\\test data\\rebill.xlsx");
-				c.setLevel("2");
-				try {
-					rebillMain rebill = new rebillMain(c);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			/*
-				
-				//You can give them manually here to just see if program runs... if you dont want to type in GUI everytime.
-				
-				//
-				
-				
-	//			c.setUdUsername(textField.getText());
-//				c.setUdPassword(textField_1.getText());
-				
-				
-				//level entry
-
-//				String level1,compatibleMode;
-//				
-//					c.setLevel(false);
-//					c.setLevel(true);
-//					c.setCompatibleMode(false);
-//					c.setCompatibleMode(true);
-//					c.setType("Domestic");
-//					c.setFlavour("NA");
-//				//	c.setFlavour("AB");
-//					//c.setFlavour("NT");
-//					//c.setFlavour("CCAR");
-//					//level1="L2";
-//					level1="L3";
-//					compatibleMode="RDP";
-//				//	compatibleMode="LOCAL";
-//					c.setUdUsername("5194105");
-//					c.setUdPassword("Online74");
-//					c.setUnixPath("/home/sqaatt/onlines/udpending");
-//					c.setExcelPath("C:\\Users\\FedExUser\\Desktop\\test.xlsx");
-//				c.setSource(false);;
-//				
-				
-				
-				try {
-					UdExecution ud=new UdExecution(c);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				*/
-				
-			}
-		});
 
 	}
 	
-
 	//Sets up config file
+	/*
 	public void setUp() throws ClassNotFoundException {
 		
-		
+	
 		 homePath=System.getProperty("user.dir");
 	      if (System.getProperty("user.dir").indexOf("dist")==-1){
 	    	  imagePath=System.getProperty("user.dir");
@@ -471,4 +383,5 @@ public class gui {
 		
 		
 	}
+	*/
 }

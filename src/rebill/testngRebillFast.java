@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -24,9 +23,11 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -39,10 +40,10 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import configuration.config;
-import configuration.dataSetup;
 import configuration.excel;
+import configuration.importData;
 
-public class dataSetupChange {
+public class testngRebillFast {
 
 	
 	
@@ -58,10 +59,10 @@ public class dataSetupChange {
 	Object o;
 	WebDriverWait wait1,wait2,wait3,wait4;
 	
-	config c;
+	
 	int count1,count2,count3,count4 ;
 	String  sh1;
-	String filePath;
+	String filepath;
 	static XSSFWorkbook wb;
 	static XSSFSheet sheet;
 	static XSSFRow row;
@@ -131,21 +132,28 @@ public class dataSetupChange {
 	
 	int sessionCountInt;
 	
+	String headless;
+	
 	ArrayList<rebillData> rebillDataArray= new ArrayList<rebillData>();
 	String[][] allData;
+	config c;
+	int waitTime;
+	
 	
 	@BeforeClass
-	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox","sessionCount","customString","customCheckBox","databaseDisabled"})
-	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String sessionCount,String customString,String customCheckBox,String databaseDisabled) {
-	c=new config();
-	/*
-	@BeforeClass
-	public void setupExcel() {
-*/
-		
+	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox","sessionCount","customString","customCheckBox","databaseDisabled","headless"})
+	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String sessionCount,String customString,String customCheckBox,String databaseDisabled,String headless) {
+	
+
+		try {
+	importData id = new importData();
+	c=id.getConfig();
+	waitTime=Integer.parseInt(c.getRebillSecondTimeout());
+	
 		//Kill all running chromedrivers leftover from previous sessions
 		try {
 			Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe");
+			Runtime.getRuntime().exec("taskkill /F /IM chrome.exe");
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -154,60 +162,354 @@ public class dataSetupChange {
 		homePath=System.getProperty("user.dir");
     	
 	
+        	if (source.equals("excel")) {
+        		this.filepath=filepath;	
+        		excelVar = new excel(filepath);
+        	}
         	
-        		
 	        	this.browser=browser;
 	        	this.level=level;
 	        	this.compatibleMode=compatibleMode;
 	        	this.source=source;
-
+	        	this.allCheckBox=allCheckBox;
+				this.nullCheckBox=nullCheckBox;
+				this.failedCheckBox=failedCheckBox;
+				this.domesticCheckBox=domesticCheckBox;
+				this.internationalCheckBox=internationalCheckBox;
+				this.expressCheckBox=expressCheckBox;
+				this.groundCheckBox=groundCheckBox;
+	        	this.sessionCount=sessionCount;
+	        	sessionCountInt=Integer.parseInt(sessionCount);
+	        	this.customString=customString;
+	        	this.customCheckBox=customCheckBox;
 	        	this.databaseDisabled=databaseDisabled;
-        
-	        	c.setFilePath(filepath);
-	        	c.setSessionCount(sessionCount);
-	        	c.setFilePath(filepath);
-	        	c.setAllCheckBox(allCheckBox);
-	        	c.setNullCheckBox(nullCheckBox);
-	        	c.setFailedCheckBox(failedCheckBox);
-	        	c.setDomesticCheckBox(domesticCheckBox);
-	        	c.setInternationalCheckBox(internationalCheckBox);
-	        	c.setExpressCheckBox(expressCheckBox);
-	        	c.setGroundCheckBox(groundCheckBox);
-	        	c.setCustomCheckBox(customCheckBox);
-	        	c.setCustomString(customString);
-	        	
+	        	this.headless=headless;
        
+    	
     	if(source.equals("excel")) {
-	    
-    		c.setSource("excel");
+	    	excelVar.setUpExcelWorkbook();
+	    	excelVar.setUpExcelSheet(0);
+	    	excelVar.setRowCountAutomatically(2);
+	    	excelVar.setColCountAutomatically(0);
+	    	rowCount=excelVar.getRowCount();
+	    	colCount=excelVar.getColCount()+1;
 	    	
     	}
     	
     	else if(source.equals("db")) {
-    		c.setSource("db");
-    		
+    		runDbQuery();
     	}
     	
-    	dataSetup ds = new dataSetup(c);
+    	total= rowCount/sessionCountInt;
+    	totalMod=rowCount%sessionCountInt;
+    	totalRows1=total;
+    	totalRows2=total;
+    	totalRows3=total;
+    	totalRows4=total;
+    	
+    	switch(totalMod) {
+	    	case 1:
+	    		totalRows1++;
+	    		break;
+	    	case 2 :
+	    		totalRows1++;
+	    		totalRows2++;
+	    		break;
+	    	case 3:
+	    		totalRows1++;
+	    		totalRows2++;
+	    		totalRows3++;
+	    		break;
+    	
+    	}	
 
     	
         if (level.equals("2"))
     	{
-    		levelUrl="https://testsso.secure.fedex.com/L2/eRA/index.html";
-    		
+    		levelUrl=c.getRebillL2Url();		
     	}
     	else if (level.equals("3"))
     	{
-    		levelUrl="https://testsso.secure.fedex.com/L3/eRA/index.html";
-    	
+    		levelUrl=c.getRebillL3Url();	   	
     	}
-       
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
     	
 	}
 	
 	
+	
+	
+	public void runDbQuery() {
+		try {
+		Connection GTMcon=c.getGtmRevToolsConnection();
+		Statement stmt = null;
+		ResultSet rs = null;
+		ResultSetMetaData rsmd=null;
 
-    @Test(dataProvider="data-provider1",retryAnalyzer = Retry.class, dataProviderClass = dataSetup.class)
+    	String databaseSqlCount="select count(*) as total from rebill_regression ";
+    	String databaseSqlQuery="select result, description, test_input_nbr, tin_count, trkngnbr, reason_code, rebill_acct,invoice_nbr_1, invoice_nbr_2, mig, region,  login,   password,  rs_Type, company, worktype, ORIGIN_LOC,DEST_LOC,DIM_VOL,SHIPPER_REF,RECP_ADDRESS,SHIPPER_ADDRESS,ACC_NBR_DEL_STATUS,SVC_BASE, CREDIT_CARD_DTL,PRE_RATE_SCENARIOS,EXP_Pieces,EXP_ACTUAL_Weight,EXP_Adj_Weight,CREDIT_CARD_DTL from rebill_regression ";
+    	
+    	if (allCheckBox.equals("true")) {
+    		databaseSqlCount+="where trkngnbr is not null";
+    		databaseSqlQuery+="where trkngnbr is not null ";
+    	}
+    	
+    	System.out.println(customCheckBox);
+    	System.out.println(customString);
+    	
+    	if (customCheckBox.equals("false")) {
+    	
+    	if (allCheckBox.equals("false")) {
+    		databaseSqlCount+="where ";
+    		databaseSqlQuery+="where ";
+    	
+    	
+    	
+    	
+    	if (nullCheckBox.equals("true") && failedCheckBox.equals("true")) {
+    		databaseSqlCount+="(result is null or result ='fail') ";
+    		databaseSqlQuery+="(result is null or result ='fail') ";
+    	}
+    	if (nullCheckBox.equals("true") && failedCheckBox.equals("false")) {
+    		databaseSqlCount+="result is null ";
+    		databaseSqlQuery+="result is null ";
+    	}
+    	if (nullCheckBox.equals("false") && failedCheckBox.equals("true")) {
+    		databaseSqlCount+="result ='fail' ";
+    		databaseSqlQuery+="result ='fail' ";
+    	}
+    	if (domesticCheckBox.equals("true") && internationalCheckBox.equals("false")) {
+    		databaseSqlCount+="and rs_type='DM' ";
+    		databaseSqlQuery+="and rs_type='DM' ";
+    	}
+    	if (internationalCheckBox.equals("true") && domesticCheckBox.equals("false")) {
+    		databaseSqlCount+="and rs_type='IL' ";
+    		databaseSqlQuery+="and rs_type='IL' ";
+    	}
+    	if (internationalCheckBox.equals("true") && domesticCheckBox.equals("true")) {
+    		databaseSqlCount+="and rs_type in ('DM','IL')";
+    		databaseSqlQuery+="and rs_type in ('DM','IL')";
+    	}
+    	
+    	if (expressCheckBox.equals("true") && groundCheckBox.equals("false")) {
+    		databaseSqlCount+="and company='EP' ";
+    		databaseSqlQuery+="and company='EP' ";
+    	}
+    	if (groundCheckBox.equals("true") && expressCheckBox.equals("false")) {
+    		databaseSqlCount+="and company='GD' ";
+    		databaseSqlQuery+="and company='GD' ";
+    	}
+    	
+    	if (groundCheckBox.equals("true") && expressCheckBox.equals("true")) {
+    		databaseSqlCount+="and company in ('GD','EP') ";
+    		databaseSqlQuery+="and company in ('GD','EP') ";
+    	}
+    		}
+    			}
+    	else if (customCheckBox.equals("true")){
+    		databaseSqlCount+="where trkngnbr is not null and "+customString;
+    		databaseSqlQuery+="where trkngnbr is not null and "+customString;
+    	}
+    	
+    	
+
+       	try {
+            //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
+        		
+        		stmt = GTMcon.createStatement();
+        		System.out.println(databaseSqlCount);
+            	rs = stmt.executeQuery(databaseSqlCount);
+            	rs.next();
+            	rowCount=rs.getInt("total");
+            	stmt.close();
+            	rs.close();
+            	
+            	stmt = GTMcon.createStatement();
+        		System.out.println(databaseSqlQuery);
+            	rs = stmt.executeQuery(databaseSqlQuery);
+            	rsmd = rs.getMetaData();
+            	colCount = rsmd.getColumnCount()+1;
+            	int rowCountTemp=0;
+            	allData = new String[rowCount][colCount+1];
+            	 
+            	 while(rs.next()) {
+            	//	 rowCount++;
+            		// rebillDataArray.add(new rebillData(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16)));
+            		 for (int i=1;i<colCount;i++) {
+            			System.out.println(rs.getString(i));
+            			if (rs.getString(i)==null) {
+            				allData[rowCountTemp][i-1]="";
+            			}
+            			else {
+            			 allData[rowCountTemp][i-1]=rs.getString(i);
+            			}
+            		 }
+            		 rowCountTemp++; 
+            	 }
+            	 //colCount=17;
+        	}
+        	catch(Exception e) {
+        		System.out.println(e);
+        	}
+    	GTMcon.close();
+    	stmt.close();
+		rs.close();
+		}
+    	catch(Exception ee) {
+    		System.out.println(ee);
+    	}
+		
+	
+	}
+	
+	
+	
+    @DataProvider(name = "data-provider1")
+    public synchronized Object[][] dataProviderMethod1() { 
+    	Object [][] obj=null;
+    	if (sessionCountInt>=1) {
+    	
+    	 obj= new Object[totalRows1][colCount];;
+    	try {
+    		String tempString="";
+    	
+    	int objCount=0;
+    	for(int i=1;i<=rowCount;i+=sessionCountInt) {
+    		for(int j=0;j<colCount-1;j++) {
+    				if(source.equals("excel")) {
+    				tempString=excelVar.getCellData(i, j);
+    				}
+    				else if (source.equals("db")) {
+    					tempString=allData[i-1][j];
+    				}
+    					if (tempString == null || tempString.equals("null")){
+    						tempString="";
+    					}
+    				obj[objCount][j]=tempString;
+    			
+    		}
+    		obj[objCount][colCount-1]=i;
+    		objCount++;
+    	}  	
+}catch(Exception e) {
+	System.out.println(e);
+}
+    	}
+    	return obj;
+    	
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    @DataProvider(name = "data-provider2")
+    public synchronized Object[][] dataProviderMethod2() { 
+    	Object [][] obj=null;
+    	if (sessionCountInt>=2) {
+        	
+       	 
+    
+    	String tempString="";
+    	obj = new Object[totalRows2][colCount];
+    	int objCount=0;
+    	for(int i=2;i<=rowCount;i+=sessionCountInt) {
+    		for(int j=0;j<colCount-1;j++) {	
+    			if(source.equals("excel")) {
+    				tempString=excelVar.getCellData(i, j);
+    				}
+    				else if (source.equals("db")) {
+    					tempString=allData[i-1][j];
+    				
+    				}
+					if (tempString == null || tempString.equals("null")){
+						tempString="";
+					}
+				obj[objCount][j]=tempString;
+    		}
+    		obj[objCount][colCount-1]=i;
+    		objCount++;
+    	}
+    }
+    	return obj;
+    
+    }
+    
+    @DataProvider(name = "data-provider3")
+    public synchronized Object[][] dataProviderMethod3() { 
+    	Object [][] obj=null;
+    	if (sessionCountInt>=3) {
+        	
+       	 
+    	String tempString="";
+    	obj = new Object[totalRows3][colCount];
+    	int objCount=0;
+    	for(int i=3;i<=rowCount;i+=sessionCountInt) {
+    		for(int j=0;j<colCount-1;j++) {
+    			if(source.equals("excel")) {
+    				tempString=excelVar.getCellData(i, j);
+    				}
+    				else if (source.equals("db")) {
+    					tempString=allData[i-1][j];
+    				}
+					if (tempString == null || tempString.equals("null")){
+						tempString="";
+					}
+				obj[objCount][j]=tempString;
+    		}
+    		obj[objCount][colCount-1]=i;
+    		objCount++;
+    	}
+    }
+    	return obj;
+    
+    }
+    
+    @DataProvider(name = "data-provider4")
+    public synchronized Object[][] dataProviderMethod4() { 
+    	Object [][] obj=null;
+    	if (sessionCountInt>=4) {
+        	
+       	 
+    	String tempString="";
+    	obj = new Object[totalRows4][colCount];
+    	int objCount=0;
+    	for(int i=4;i<=rowCount;i+=sessionCountInt) {
+    		for(int j=0;j<colCount-1;j++) {
+    			if(source.equals("excel")) {
+    				tempString=excelVar.getCellData(i, j);
+    				}
+    				else if (source.equals("db")) {
+    					
+    					tempString=allData[i-1][j];
+    				
+    				}
+					if (tempString == null || tempString.equals("null")){
+						tempString="";
+					}
+				obj[objCount][j]=tempString;
+    		}
+    		obj[objCount][colCount-1]=i;
+    		objCount++;
+    	}
+    }
+    	return obj;
+    
+    }
+    
+    
+    
+    
+    
+    
+    
+    @Test(dataProvider="data-provider1",retryAnalyzer = Retry.class)
     public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt,int rowNumber) {
      
     	System.out.println("Instance: 1");
@@ -256,20 +558,15 @@ public class dataSetupChange {
        	
        	 }
        	 writeToDB(testInputNbr,tinCount,trk,resultArray);
-       	 
-       	 	writeToDB(testInputNbr,tinCount,trk,resultArray);
        	 return;
   	  
+  	  			}
+    		}
   	  }
-  	  }
-  	  }
-    	//}
+    
   	  catch(Exception e) {
   		System.out.println(e);  
   	  }
-  	  
-        
-    	
     	try { 
     		driver1.quit();
     		driver1.close();
@@ -293,9 +590,17 @@ public class dataSetupChange {
     	
     	
     	else if (browser.equals("2")) {
-    	 
     		System.setProperty(chromeSetProperty,chromePath);
+    	if(headless.equals("true")) {
+    		ChromeOptions options = new ChromeOptions();
+    	    options.addArguments("headless");
+    	    options.addArguments("window-size=1200x600");
+    		driver1 = new ChromeDriver(options);
+    	}
+    	else {
     		driver1 = new ChromeDriver();
+    	}
+    		//driver1 = new ChromeDriver();
     	}
     	
     	
@@ -351,7 +656,7 @@ public class dataSetupChange {
         	 }
         	 writeToDB(testInputNbr,tinCount,trk,resultArray);
         	 
-        	 	writeToDB(testInputNbr,tinCount,trk,resultArray);
+        	
         	 return;
    	  
    	  }
@@ -383,9 +688,16 @@ public class dataSetupChange {
     		driver2 =  new InternetExplorerDriver();
     	}
     	else if (browser.equals("2")) {
-    	 
     		System.setProperty(chromeSetProperty,chromePath);
-    		driver2 = new ChromeDriver();
+        	if(headless.equals("true")) {
+        		ChromeOptions options = new ChromeOptions();
+        	    options.addArguments("headless");
+        	    options.addArguments("window-size=1200x600");
+        		driver2 = new ChromeDriver(options);
+        	}
+        	else {
+        		driver2 = new ChromeDriver();
+        	}
     	}
     	 wait2 = new WebDriverWait(driver2,20);
     	login(driver2,wait2,login,password);
@@ -418,7 +730,7 @@ public class dataSetupChange {
     	       	 }
     	       	 writeToDB(testInputNbr,tinCount,trk,resultArray);
     	       	 
-    	       	 	writeToDB(testInputNbr,tinCount,trk,resultArray);
+    	       	 
     	       	 return;
     	  	  
     	  	  }
@@ -449,9 +761,16 @@ public class dataSetupChange {
     		driver3 =  new InternetExplorerDriver();
     	}
     	else if (browser.equals("2")) {
-    	 
     		System.setProperty(chromeSetProperty,chromePath);
-    		driver3 = new ChromeDriver();
+        	if(headless.equals("true")) {
+        		ChromeOptions options = new ChromeOptions();
+        	    options.addArguments("headless");
+        	    options.addArguments("window-size=1200x600");
+        		driver3 = new ChromeDriver(options);
+        	}
+        	else {
+        		driver3 = new ChromeDriver();
+        	}
     	}
     	
     	 wait3 = new WebDriverWait(driver3,20);
@@ -462,8 +781,7 @@ public class dataSetupChange {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	
-    }
+    	}
     
     
     
@@ -489,7 +807,6 @@ public class dataSetupChange {
     	       	 }
     	       	 writeToDB(testInputNbr,tinCount,trk,resultArray);
     	       	 
-    	       	 	writeToDB(testInputNbr,tinCount,trk,resultArray);
     	       	 return;
     	  	  
     	  	  }
@@ -522,7 +839,15 @@ public class dataSetupChange {
     	else if (browser.equals("2")) {
     	 
     		System.setProperty(chromeSetProperty,chromePath);
-    		driver4 = new ChromeDriver();
+        	if(headless.equals("true")) {
+        		ChromeOptions options = new ChromeOptions();
+        	    options.addArguments("headless");
+        	    options.addArguments("window-size=1200x600");
+        		driver4 = new ChromeDriver(options);
+        	}
+        	else {
+        		driver4 = new ChromeDriver();
+        	}
     	}
     	
     	 wait4 = new WebDriverWait(driver4,20);
@@ -532,9 +857,93 @@ public class dataSetupChange {
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	}
-    
+		}
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -542,8 +951,8 @@ public class dataSetupChange {
     	
     	try {
 		    driver.get(levelUrl);
-		    driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-			wait = new WebDriverWait(driver,10);
+		    driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
+			wait = new WebDriverWait(driver,waitTime);
 			driver.manage().window().maximize();
 			driver.findElement(By.id("username")).sendKeys(login);
 			driver.findElement(By.id("password")).sendKeys(password);
@@ -557,16 +966,18 @@ public class dataSetupChange {
     
     
     public void doRebill(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt, int instanceNumber) throws InterruptedException {
-    
+    	WebElement element=null;
     	JavascriptExecutor js= (JavascriptExecutor) driver;
-    	By tempElement;
+    	
     	int packageCounter=0;
     	Boolean exist;
     	WebElement scrollElement;
-    	Boolean packageTab=false;
+    	
     	wait=new WebDriverWait(driver,20);
-    	driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
-    	if(!preRateScenarios.equals("")) {
+    	driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
+    
+    	  if(!preRateScenarios.equals("")) {
+    	 
     		 if(source.equals("excel")) {
 	               	 writeToExcel(rowNumber, 0,"fail");
 	               	 writeToExcel(rowNumber, 1,"Prerate Code Not Added Yet");
@@ -599,47 +1010,75 @@ public class dataSetupChange {
     	} 
     	catch(Exception e) {
     		System.out.println("Failed on Entering Tracking Number");
+   		 if(source.equals("excel")) {
+           	 writeToExcel(rowNumber, 0,"fail");
+           	 writeToExcel(rowNumber, 1,"Failed on Entering Tracking Number");
+           	 }
+				 if(databaseDisabled.equals("false")) {
+	   			 String[] resultArray = new String[2];
+	   			 	resultArray[0]="fail";
+	   				resultArray[1]="Failed on Entering Tracking Number";
+	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+            	 }
     		 Assert.fail("Failed on Entering Tracking Number");
     		
     	}
     	
     	//Try to Click Package Tab
+    	int counter1=0;
+    	String tempString1;
+    	driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS);
+    	while (counter1<10) {
     	try {  
-    		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div/div/div/div/div[2]/div")));
-    	//	/html/body/div[2]/div/div/div/div/div[1]/div[1]/div/div[2]/form/div[1]/div[1]/div/div[2]/div/input
-    		//WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a")));
-        	//element.click();
-    		WebElement element =driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a"));
-    		js.executeScript("arguments[0].click()", element);
-    		packageTab=true;
-        	//driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a")).click();
+    		counter1++;
+    		System.out.println("Trying to click package tab");
+    		element =driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a"));
+    		js.executeScript("arguments[0].click()", element);    
+    		tempString1=driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[2]/div[1]/div/div[2]/div[1]/div/div/div/div/div/div[1]/div/div[1]/span[1]")).getText();
+    		if(tempString1.equals("Charge Code Description")) {
+    			System.out.println("Found Code Desc");
+    			break;
+    		}
     	}
     	catch(Exception e) {
-    		System.out.println("Could Not Find PopUp..");
-    		
+    		try {  
+    			System.out.println("Trying to click popup");
+        		driver.findElement(By.xpath(" /html[1]/body[1]/div[6]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]/div[2]/div[1]/div[1]/input[1]")).sendKeys(invoiceNbr1);
+        		Thread.sleep(1000);
+        		driver.findElement(By.xpath("/html[1]/body[1]/div[6]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]")).click();
+        		driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/button[1]")).click();
+        		System.out.println("Found Pop Up");
+        		element =driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a"));
+            	js.executeScript("arguments[0].click()", element);
+        }	catch(Exception ee) {
+        	System.out.println("Could Not Find Pop Up Or Continue To Charge Code Screen");
+           // Assert.fail("Could Not Find Popup Or COntinue to Package Screen");
+        	}
+    	}
     	}
     	
-    	//Trying to find popup
-    	if (packageTab==false) {
-    	try {  
-    		driver.findElement(By.xpath(" /html[1]/body[1]/div[6]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]/div[2]/div[1]/div[1]/input[1]")).sendKeys(invoiceNbr1);
-    		Thread.sleep(1000);
-    		driver.findElement(By.xpath("/html[1]/body[1]/div[6]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]")).click();
-    		driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/button[1]")).click();
-    		System.out.println("Found Pop Up");
-    		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div/div/div/div/div[2]/div")));
-        		WebElement element =driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a"));
-        		js.executeScript("arguments[0].click()", element);
-        	
-
-    }	catch(Exception e) {
-        Assert.fail("Could Not Find Popup Or COntinue to Package Screen");
-    	}
-	}
+    	if(counter1>=10) {
+    		 if(source.equals("excel")) {
+               	 writeToExcel(rowNumber, 0,"fail");
+               	 writeToExcel(rowNumber, 1,"Could Not Get To Charge Code Details");
+               	 }
+    				 if(databaseDisabled.equals("false")) {
+    	   			 String[] resultArray = new String[2];
+    	   			 	resultArray[0]="fail";
+    	   				resultArray[1]="Could Not Get To Charge Code Details";
+    	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                	 }
+        		
+     		Assert.fail("Could Not Get To Charge Code Details");
+     	}
+    	
+    	
+ 
     	
     	
     	
     	//Getting all the charge codes..
+    	driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
     	try{
     		packageCounter=0;
                 while(true){
@@ -653,17 +1092,10 @@ public class dataSetupChange {
             catch(NoSuchElementException e){
                 System.out.println("No Such Element... Got all the counters for charge codes");
         }
-    	
-    	/*
-         catch(Exception e){
-        	 System.out.println("Failed at Getting Charge Code Count");
-        }
-    	 */
-    	
-    	
+     	
     	//Click on all Charge Codes
     	 try {
-    		 driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+    		 driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
              js.executeScript("window.scrollTo(0,500)");
              scrollElement =  driver.findElement(By.xpath("//*[@id=\"packageLevelServicegridCheckBox"+(packageCounter-1)+"\"]"));
              js.executeScript("arguments[0].scrollIntoView();", scrollElement);
@@ -699,15 +1131,17 @@ public class dataSetupChange {
      	
         
     	     try{
-    	 System.out.println("Inside getDetails");
-         //Getting Action Dropdown. Will RB everytime.
-         Select actionDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"pkgaction\"]")));
-         actionDropDown.selectByValue("RB");
+		    	 System.out.println("Inside getDetails");
+		         //Getting Action Dropdown. Will RB everytime.
+		         Select actionDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"pkgaction\"]")));
+		         actionDropDown.selectByValue("RB");
      
-	         //Setting up the reasonCode Dropdown.
+	       
+		         /*
+		         //Setting up the reasonCode Dropdown.
 	         Select  reasonCodeDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select")));
 	       
-	         /*******************************************************/
+	        
 	         List<WebElement> options = driver.findElements(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select"));
 	    	 int counter=0;
 	         for (WebElement option : options) {
@@ -717,8 +1151,9 @@ public class dataSetupChange {
 	             }
 	       
 	         
-	         /***************************************************************************/
-	         
+	         */
+		         
+		         
 	         //For domestic.
 	         if (login.equals("5194105") || login.equals("584168")){
 	             switch (reasonCode){
@@ -796,12 +1231,47 @@ public class dataSetupChange {
              	 } 
     	  Assert.fail("Failed at Drop Down");
       }
-   
-         
-        
-         
-         
-         
+    	     if(!preRateScenarios.equals("")) {
+         try {
+        	 
+    	     driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[9]/label[2]/span[1]")).click();
+    	     Thread.sleep(5000);
+    	     driver.findElement(By.xpath("//*[@id=\"viewInvBtn\"]")).click();
+     		 Thread.sleep(2000);
+    	     driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div/div/div[2]/label[2]/span")).click();
+    	     Thread.sleep(2000);
+    	   
+    	    /* 
+    	     Actions actions = new Actions(driver);
+    	     actions.moveToElement(driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div/div/div[3]/div[1]/div[1]/div/div[1]/div[2]/div/div[1]/div/div[3]/div")));
+    	     actions.click();
+    	     actions.sendKeys("100");
+    	     actions.build().perform();
+    	   
+    	   */
+    	  WebElement elementJS=  driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div/div/div[3]/div[1]/div[1]/div/div[1]/div[2]/div/div[1]/div/div[3]/div"));
+    	  elementJS.click();
+    	  elementJS.click();
+    	  System.out.println("plz");
+    	  js.executeScript("arguments[0].click()", elementJS);
+    	  js.executeScript("arguments[0].click()", elementJS);
+    	  
+    	  
+    	 // js.executeScript("arguments[0].setAttribute('value', arguments[1])", elementJS, "100");
+    	 //	js.executeScript("arguments[0].setAttribute('value', arguments[1])", elementJS, "100");
+    	   //  driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div/div/div[3]/div[1]/div[1]/div/div[1]/div[2]/div/div[1]/div/div[3]/div")).sendKeys("100");
+    	     							 //  /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div/div/div[3]/div[1]/div[1]/div/div[1]/div[2]/div/div[1]/div/div[3]/div	
+    	     							   ///html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div/div/div[3]/div[1]/div[1]/div/div[1]/div[2]/div/div[1]/div/div[1]/div
+       System.out.println("plz");
+         }
+         catch(Exception e) {
+        	 System.out.println(e);
+         }
+    	     }
+    	     
+    	     
+    	     
+    	     else {
     	 /*
     	 *****************************************************************************
     	 *
@@ -810,24 +1280,53 @@ public class dataSetupChange {
     	 *
     	 ****************************************************************************
     	 */
-         
         
+        
+    	    	 
+    	    	 
+    	    	 
+    	    	 
+    	    	 
+    	    	 
+    	    	 
+    	    	 
+    	    	 
+    	    	 
+    	    	 
+    	    	 
+    	    	 
+    	    	 
+    	    	 
+    	    	 
+    	    wait=new WebDriverWait(driver,1); 
+    	    driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS);
+
          	try {
          		//tHIS BUTTON IS BUGGY!!!! click many times!!!!!!!!
          		 Thread.sleep(5000);
-         		// driver.findElement(By.xpath("//*[@id=\"viewInvBtn\"]")).click();
-         		// driver.findElement(By.xpath("//*[@id=\"viewInvBtn\"]")).click();
-         		// driver.findElement(By.xpath("//*[@id=\"viewInvBtn\"]")).click();
-         		 driver.findElement(By.xpath("//*[@id=\"viewInvBtn\"]")).click();
-         		 Thread.sleep(2000);
-                 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/label[1]")));
-                 
+         		 driver.findElement(By.xpath("//*[@id=\"viewInvBtn\"]")).click();         	
+         		}
+         	catch(Exception e0) {
+         		System.out.println("Clould not click after dropdown");
+         		
+         	}
+         		
+         	
+         	
+         	
+         	
+         	counter1=0;
+         	while(counter1>10) {
+         	try { 
+         		counter1++;
+         		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/label[1]")));
+                break; 
          }
          	catch(Exception e1) {
 	
          		System.out.println("Could Not Click Rebill After Action Code");
          		 try {
-         			 Thread.sleep(1000);
+         			 
          			 String tempError= driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[1]/h4")).getText();
          			 if (tempError.equals("Trying To Rebill A Partial Amount")) {
          				 System.out.println(tempError);
@@ -841,43 +1340,80 @@ public class dataSetupChange {
                  	   				resultArray[1]="Trying To Rebill A Partial Amount";
                  	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
                                 	 }
+         	   			 Assert.fail("Trying To Rebill A Partial Amount");
          		}
+         			
+         				 if (tempError.indexOf("interline")==-1) {
+         				 System.out.println(tempError);
+         				 if(source.equals("excel")) {
+         	               	 writeToExcel(rowNumber, 0,"fail");
+         	               	 writeToExcel(rowNumber, 1,"interline acct");
+         	               	 }
+         	   				 if(databaseDisabled.equals("false")) {
+                 	   			 String[] resultArray = new String[2];
+                 	   			 	resultArray[0]="fail";
+                 	   				resultArray[1]="interline acct";
+                 	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                                	 }
+         	   			 Assert.fail("interline acct");
+         		} 
+         				 
+         				 if (tempError.indexOf("specialist")==-1) {
+             				 System.out.println(tempError);
+             				 if(source.equals("excel")) {
+             	               	 writeToExcel(rowNumber, 0,"fail");
+             	               	 writeToExcel(rowNumber, 1,"specialist error");
+             	               	 }
+             	   				 if(databaseDisabled.equals("false")) {
+                     	   			 String[] resultArray = new String[2];
+                     	   			 	resultArray[0]="fail";
+                     	   				resultArray[1]="specialist error";
+                     	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                                    	 }
+             	   			 Assert.fail("specialist error");
+             		} 
+ 
          		 driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/button[1]")).click();
          		 System.out.println("Found Pop Up");
-         		
-         		 
-         		 try {
-         		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/label[1]")));
-         		 }
-         		 catch(Exception e3) {
+         	    
+  
          			 
-         			 tempError= driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[1]/h4")).getText();
-         			 if (tempError.indexOf("interline")!=-1) {
-         				 System.out.println(tempError);
-         				 driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/button[1]")).click();
+         			
+         		 }
+         		 catch(Exception e) {
+         			 System.out.println("Could not move on past dropdown details");
          			 }
          		 }
-         			 
-         			 
-         			 try {
-                 		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/label[1]")));
-                 		 }
-                 		 catch(Exception e4) {
-                 			 
-                 			 tempError= driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[1]/h4")).getText();
-                 			 if (tempError.indexOf("specialist")!=-1) {
-                 				 System.out.println(tempError);
-                 				 driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/button[1]")).click();
-                 }
-                 		 }
          	}
-         	catch(Exception e5) {
-         		System.out.println("Could Not find Popup"+e5);
-         		 Assert.fail(e5 +" Could Not find Popup");
+         	if(counter1>=10) {
+         		 if(source.equals("excel")) {
+                	 writeToExcel(rowNumber, 0,"fail");
+                	 writeToExcel(rowNumber, 1,"Could Not go to phone detail screen");
+                	return;
+                	 }
+    				 if(databaseDisabled.equals("false")) {
+    	   			 String[] resultArray = new String[2];
+    	   			 	resultArray[0]="fail";
+    	   				resultArray[1]="Could Not go to phone detail screen";
+    	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+    	   				
+                 	 } 
+         		Assert.fail("Could Not go to phone detail screen");
          	}
-        } 
-         		 
-         		 
+         	
+         	
+         	
+         	
+         	
+         	
+         	
+         	
+         	
+         	
+         	
+         	wait=new WebDriverWait(driver,waitTime); 
+     	    driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
+	
          	
          		 
          		 /*
@@ -889,7 +1425,7 @@ public class dataSetupChange {
              	 ****************************************************************************
              	 */
          		 
-         		 
+         		 System.out.println("Phone Details");
       //   js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
              try{
             	 //Click on rebill RPI Complete, Phone, and Continue
@@ -900,9 +1436,39 @@ public class dataSetupChange {
                   
                Select contactMethodDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"rmrks\"]")));
                contactMethodDropDown.selectByValue("phone");  
+               Thread.sleep(1500);
          	   driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).click();
+             }
+             catch(Exception e1) {
+            	 System.out.println("Failed Selecting Contact Method and Clicking Continue");
+             
+            	 if(source.equals("excel")) {
+                	 writeToExcel(rowNumber, 0,"fail");
+                	 writeToExcel(rowNumber, 1,"Failed Selecting Contact Method and Clicking Continue");
+                	return;
+                	 }
+    				 if(databaseDisabled.equals("false")) {
+    	   			 String[] resultArray = new String[2];
+    	   			 	resultArray[0]="fail";
+    	   				resultArray[1]="Failed Selecting Contact Method and Clicking Continue";
+    	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+    	   				
+                 	 } 
+    				 Assert.fail("Failed Selecting Contact Method and Clicking Continue");
+             }
+         	   
+         	
+             wait=new WebDriverWait(driver,1);
+             driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS);
+             counter1=0;
+         	  
+             
+             while(counter1<=10) {   
+         	   counter1++;
+         	   try {
          	   wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")));
-             	}
+             	break;
+         	   }
          	   		catch(Exception e) {
          	   			try {
          	   				System.out.println("Could not select phone or click RPI..");
@@ -922,26 +1488,27 @@ public class dataSetupChange {
          	   			 Assert.fail("Management approval");
          	   					}
          	   				driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/button[1]")).click();
-         	   				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")));
-         	   				}
+         	   					}
          	   				catch(Exception ee) {
          	   				 System.out.println(ee+"Could Not Get to Rebill Screen");
-         	   			 if(databaseDisabled.equals("false")) {
-         	   			 String[] resultArray = new String[2];
-         	   			 	resultArray[0]="fail";
-         	   				resultArray[1]="Could Not Get to Rebill Screen";
-         	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-                        	 }
-         	   		 if(source.equals("excel")) {
-     	               	 writeToExcel(rowNumber, 0,"fail");
-     	               	 writeToExcel(rowNumber, 1,"Could Not Get to Rebill Screen");
-     	               	 }
-         	   				 Assert.fail(ee+" Could Not Get to Rebill Screen");
+         	   				
          	   				}
          	   			}
-         	   		
-             
-             
+             		}
+             if (counter1>=10){
+             if(databaseDisabled.equals("false")) {
+ 	   			 String[] resultArray = new String[2];
+ 	   			 	resultArray[0]="fail";
+ 	   				resultArray[1]="Could Not Get to Rebill Screen";
+ 	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                	 }
+ 	   		 if(source.equals("excel")) {
+	               	 writeToExcel(rowNumber, 0,"fail");
+	               	 writeToExcel(rowNumber, 1,"Could Not Get to Rebill Screen");
+	               	 }
+ 	   	 Assert.fail("Could Not Get to Rebill Screen");
+             }
+    	     }
              
              
              
@@ -960,8 +1527,9 @@ public class dataSetupChange {
               
               
          
-        	
-             Boolean validated;
+    	     wait=new WebDriverWait(driver,waitTime);
+    	     driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
+          
              try{    
             	
              switch (reasonCode){
@@ -971,13 +1539,6 @@ public class dataSetupChange {
                        driver.findElement(By.xpath("//*[@id=\"reciptacct_number\"]")).sendKeys(rebillAccount);
                        break;
                     case "RSA" :
-                       //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[7]/di[1]/label")));
-                       //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[7]/div[1]/label")));
-                       //*[@id="shipacct_number"] 
-                       //TESTING PURPOSE ONLY! DELETE WHEN RUNNING.
-                       //driver.findElement(By.xpath("//*[@id=\"shipacct_number\"]")).clear();
-                       //driver.findElement(By.xpath("//*[@id=\"shipacct_number\"]")).sendKeys("39466825");
-                       //Thread.sleep(2000);
                         break;
                     case "RTA" :
                         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"thirdacct_number\"]")));
@@ -1058,7 +1619,26 @@ public class dataSetupChange {
             		 driver.findElement(By.xpath("//*[@id=\"exp_date\"]")).sendKeys(creditCardDt);
             	 }
              }
+             
+             
+             
+             if(source.equals("excel")) {
+            	 writeToExcel(rowNumber, 0,"fail");
+            	 writeToExcel(rowNumber, 1,"Made it to the end test");
+            	return;
+            	 }
+				 if(databaseDisabled.equals("false")) {
+	   			 String[] resultArray = new String[2];
+	   			 	resultArray[0]="fail";
+	   				resultArray[1]="Made it to the end test";
+	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+	   				 System.out.println("Made it to the end.");
+	   			  Assert.fail("Made it to the end.");
+             	 } 
+           
+             
              Thread.sleep(2000);
+             
              	driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")).click();
              	Thread.sleep(15000);
              	}
@@ -1111,7 +1691,7 @@ public class dataSetupChange {
             //If Rebill Is Not Successful
             
             	 try {
-            		 Boolean overrideBoolean;
+            		
             		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[6]/div/div/div[2]/div/label/span")));
             		 List<WebElement> errorList;
             		 errorList=driver.findElements(By.xpath("/html/body/div[6]/div/div/div[2]/div/label/span"));
@@ -1125,7 +1705,7 @@ public class dataSetupChange {
                          	}
                          else{
                         	 System.out.println("Could Not Click");
-                        	 overrideBoolean=true;
+                        	
                        }
             		 }
             		 popupCounter++;
@@ -1175,17 +1755,14 @@ public class dataSetupChange {
     
     public synchronized void writeToDB(String testInputNbr,String tinCount,String trk,String[] resultArray) {
     	Connection GTMcon=null;
-    	try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
-			
+		try {
+			GTMcon = c.getGtmRevToolsConnection();
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+
+
 		
     	PreparedStatement stmt = null;
     	
@@ -1198,8 +1775,8 @@ public class dataSetupChange {
 		stmt.setString(3,trk);  
 		stmt.setString(4,resultArray[0]);  
 		stmt.setString(5,resultArray[1]);  
-	
 		stmt.executeUpdate();
+		stmt.close();
     	}
     	catch(Exception e) {
     		System.out.println(e);
@@ -1209,35 +1786,39 @@ public class dataSetupChange {
     	
     	try {
 		//	update gtm_rev_tools.rebill_results set result='fail',description='6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables' where trkngnbr='566166113544';
-		stmt=GTMcon.prepareStatement("update rebill_results set result=?,description=? where trkngnbr=?");  
-		
+    	stmt=GTMcon.prepareStatement("update rebill_results set result=?,description=? where trkngnbr=?");  
 		stmt.setString(1,resultArray[0]);  
 		stmt.setString(2,resultArray[1]); 
 		stmt.setString(3,trk); 
 		stmt.executeUpdate();
-		
+		stmt.close();
 	}
 	catch(Exception e) {
 		System.out.println(e);
 	}
-
+    	try {
+			GTMcon.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
     }
     
     public String[] validateResults(String trk) {
-    	
-    	Boolean result=null;
+    
     	Connection con = null;
     	String[] resultArray = new String[2];
     	
     	try {
     	
     		if (level.equals("2")){
-    			 c.setEraL2DbConnection();
+    			 
        		     con=c.getEraL2DbConnection();
        	 }
        	 else if (level.equals("3")){
-       		 	c.setEraL3DbConnection();
+       		 	
        		 	con=c.getEraL3DbConnection();
        	 	}
     	
@@ -1291,6 +1872,15 @@ public class dataSetupChange {
     			// TODO Auto-generated catch block
     			e.printStackTrace();
     		}
+    	       try {
+				con.close();
+				stmt.close();
+	    	    rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	      
     	 return resultArray;      
 }    
     

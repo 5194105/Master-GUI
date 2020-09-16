@@ -6,7 +6,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import configuration.excel;
-
+import configuration.importData;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -122,7 +122,7 @@ public class rerateTestNgSlow {
 
 		
 		
-	String levelUrl;
+	
 		int rowCount;
 		int colCount;
 		int total;
@@ -156,13 +156,19 @@ public class rerateTestNgSlow {
 	    String sp2;
 		
 	    String databaseDisabled;
-	
+	String prsMainUrl;
+	String prsCreateUrl;
+	String prsPaUrl;
 	    
 		@BeforeClass
 		@Parameters({"filepath","level","browser","source","compatibleMode","allCheckBox","nullCheckBox","failedCheckBox","sessionCount","databaseDisabled","startDateText","endDateText","ed1","ei1","gd1","gi1","nt1","sp1","ed2","ei2","gd2","gi2","nt2","sp2"})
 		public void setupExcel(String filepath,String level,String browser,String source,String compatibleMode,String allCheckBox,String nullCheckBox,String failedCheckBox,String sessionCount,String databaseDisabled,String startDateText,String endDateText,String ed1, String ei1,String gd1, String gi1,String nt1,String sp1,String ed2,String ei2, String gd2, String gi2,String nt2, String sp2) {
 			//public void setupExcel() {
 			//or from eclipse.
+			importData id = new importData();
+			c=id.getConfig();
+	
+			
 			
 			try {
 				Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe");
@@ -206,12 +212,14 @@ public class rerateTestNgSlow {
 	        	System.out.println("homePath" +System.getProperty("user.dir"));
 	   		
 	        	if(level.equals("2")) {
-	        		levelUrl="https://devsso.secure.fedex.com/L2/PRSApps";
+	        		prsMainUrl=c.getPrsRerateMainL2Url();
+	        		prsCreateUrl=c.getPrsRerateCreateL2Url();
+	        		prsPaUrl=c.getPrsReratePaL2Url();
 	        	}
-	        	else if (level.equals("3")){
-	        	//	levelUrl="https://testsso.secure.fedex.com/L3/PRSApps";
-	        		
-	        		levelUrl="https://testsso.secure.fedex.com/L3C/PRSApps/";
+	        	else if (level.equals("3")){   
+	        		prsMainUrl=c.getPrsRerateMainL3Url();
+	        		prsCreateUrl=c.getPrsRerateCreateL3Url();
+	        		prsPaUrl=c.getPrsReratePaL3Url();
 	        	}
 	        
 	    	
@@ -269,15 +277,11 @@ public class rerateTestNgSlow {
 			ResultSetMetaData rsmd=null;
 			//Change to L3
 	    	try {
-				Class.forName("oracle.jdbc.driver.OracleDriver");
-				GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
+			
+				GTMcon=c.getGtmRevToolsConnection();
 				
-			} catch (ClassNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (Exception e1) {
+			System.out.println(e1);
 			}
 			
 	    	String databaseSqlCount="select count(*) as total from (select * from rerate_master where trk_no1 is not null and acct2 is null union all select * from rerate_master where trk_no1 is not null and trk_no2 is not null and acct2 is not null)";
@@ -592,7 +596,7 @@ public class rerateTestNgSlow {
 	    		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
 	    		    capabilities.setCapability("ignoreZoomSetting", true);
 	    		    capabilities.setCapability("ignoreProtectedModeSettings", true);
-	    		    capabilities.setCapability("initialBrowserUrl",levelUrl);
+	    		    capabilities.setCapability("initialBrowserUrl",prsMainUrl);
 	    		   // capabilities.setCapability("nativeEvents",false);
 	    		 
 	    		}
@@ -658,7 +662,7 @@ public class rerateTestNgSlow {
 		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
 		    capabilities.setCapability("ignoreZoomSetting", true);
 		    capabilities.setCapability("ignoreProtectedModeSettings", true);
-		    capabilities.setCapability("initialBrowserUrl",levelUrl);
+		    capabilities.setCapability("initialBrowserUrl",prsMainUrl);
 		}
 		
 		System.setProperty(ieSetProperty, ieDriverPath);
@@ -699,7 +703,7 @@ public class rerateTestNgSlow {
 		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
 		    capabilities.setCapability("ignoreZoomSetting", true);
 		    capabilities.setCapability("ignoreProtectedModeSettings", true);
-		    capabilities.setCapability("initialBrowserUrl",levelUrl);
+		    capabilities.setCapability("initialBrowserUrl",prsMainUrl);
 		}
 		System.setProperty(ieSetProperty, ieDriverPath);
 		driver3 =  new InternetExplorerDriver();
@@ -740,7 +744,7 @@ public class rerateTestNgSlow {
 	    		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
 	    		    capabilities.setCapability("ignoreZoomSetting", true);
 	    		    capabilities.setCapability("ignoreProtectedModeSettings", true);
-	    		    capabilities.setCapability("initialBrowserUrl",levelUrl);
+	    		    capabilities.setCapability("initialBrowserUrl",prsMainUrl);
 	    		}
 	    		System.setProperty(ieSetProperty, ieDriverPath);
 	    		driver4 =  new InternetExplorerDriver();
@@ -811,7 +815,7 @@ public class rerateTestNgSlow {
 
 		  try {
 
-			    driver.get(levelUrl);
+			    driver.get(prsMainUrl);
 		  		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 		  		wait = new WebDriverWait( driver,10);
 		  		driver.manage().window().maximize();     
@@ -823,15 +827,9 @@ public class rerateTestNgSlow {
 				driver.findElement(By.id("submit")).click();
 
 			  
-				if (level.equals("2"))
-				{                                                   
-					driver.get("https://devsso.secure.fedex.com/L2/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10");
-				}
-				else if (level.equals("3"))
-				{
-
-					driver.get("https://testsso.secure.fedex.com/L3C/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10");
-				}
+				                                                  
+				driver.get(prsCreateUrl);
+			
 				
 				try {
 				isPresent = driver.findElements(By.xpath("//*[@id=\"form1\"]/table/tbody/tr[3]/td/table[3]/tbody/tr/td/table/tbody/tr[2]/td/table/tbody[1]/tr[1]/td[1]/b/font")).size() > 0;
@@ -840,7 +838,7 @@ public class rerateTestNgSlow {
 				
 				catch(Exception e) {
 					driver.quit();
-					driver.get(levelUrl);	
+					driver.get(prsMainUrl);	
 					driver.manage().window().maximize();     
 					
 					try {
@@ -853,14 +851,9 @@ public class rerateTestNgSlow {
 					driver.findElement(By.id("username")).sendKeys("477023");
 					driver.findElement(By.id("password")).sendKeys("477023");
 					driver.findElement(By.id("submit")).click();
-					if (level.equals("2"))
-					{                                                   
-						driver.get("https://devsso.secure.fedex.com/L2/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10");
-					}
-					else if (level.equals("3"))
-					{
-						driver.get("https://testsso.secure.fedex.com/L3C/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10");
-					}
+					                                                  
+					driver.get(prsCreateUrl);
+					
 				}
 				
 			
@@ -1404,14 +1397,9 @@ Thread.sleep(2000);
 			
 			try {
 		
-			if (level.equals("2"))
-			{
-				driver.get("https://devsso.secure.fedex.com/L2/PRSApps/inbox/inbox_router.jsp?inbox_id=11");
-			}
-			else if (level.equals("3"))
-			{
-				driver.get("https://testsso.secure.fedex.com/L3C/PRSApps/inbox/inbox_router.jsp?inbox_id=11");
-			}
+			
+				driver.get(prsPaUrl);
+		
 			
 			
 			  
@@ -1642,22 +1630,14 @@ Thread.sleep(2000);
 	 public synchronized void writeToDB(String testInputNbr,String tinCount,String trk,String rerateRequest, String[] resultArray) {
 	    	Connection GTMcon=null;
 	    //	String rerateRequestString = Integer.toString(rerateRequest);
-	    	try {
-				Class.forName("oracle.jdbc.driver.OracleDriver");
-				GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
+	    	
 				
-			} catch (ClassNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			
 	    	PreparedStatement stmt = null;
 	    	
 
 	    	try {
+	    	GTMcon=c.getGtmRevToolsConnection();
 	        //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
 	    	stmt=GTMcon.prepareStatement("insert into rerate_results (test_input_nbr,tin_count,trkngnbr,request_id,result,description) values (?,?,?,?,?,?)");  
 			stmt.setString(1,testInputNbr);  

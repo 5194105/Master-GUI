@@ -81,7 +81,7 @@ public class guiBase {
 	        }
 	      //Y,X,W,H
 	    menuLabel = new JLabel("menu");
-	  	menuLabel.setBounds(0, 0, 110, 64);
+	  	menuLabel.setBounds(0, 0, 500, 64);
 		databaseLabel = new JLabel("db");
 		databaseLabel.setBounds(0, 60, 105, 64);
 		linkLabel = new JLabel("link");

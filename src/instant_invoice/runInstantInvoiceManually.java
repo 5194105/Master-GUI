@@ -17,14 +17,13 @@ import rebill.rebillData;
 
 public class runInstantInvoiceManually {
 
-	static ArrayList<rebillData> rebillDataArray= new ArrayList<rebillData>();
-    public static void main(String[] args) {
+	 public static void main(String[] args) {
     	config c = new config();
-       	c.setExcelPath("C:\\Users\\FedExUser\\Documents\\rebill.xlsx");
+       	c.setExcelPath("C:\\Users\\FedExUser\\Desktop\\stephen\\R66\\L3C6\\instant_invoice.xlsx");
     	c.setLevel("3");
     	c.setDriverType("2");
     	c.setCompatibleMode("false");
-    	c.setSource("db");
+    	c.setSource("excel");
     	c.setAllCheckBox("false");
     	c.setNullCheckBox("true");
     	c.setFailedCheckBox("true");

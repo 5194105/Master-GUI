@@ -39,22 +39,12 @@ public class updateRebillDb {
 	
 	public synchronized void writeToDB(String testInputNbr,String tinCount,String trk,String[] resultArray) {
     	Connection GTMcon=null;
-    	try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
-			
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-    	PreparedStatement stmt = null;
-    	
 
+  	
+    	PreparedStatement stmt = null;
     	try {
+    	
+    	GTMcon=c.getGtmRevToolsConnection();
         //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
     	stmt=GTMcon.prepareStatement("insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description,ERA_REBILL) values (?,?,?,?,?,?)");  
 		stmt.setString(1,testInputNbr);  
@@ -97,11 +87,11 @@ public class updateRebillDb {
        	try {
        	
        		if (c.getLevel().equals("2")){
-       			 c.setEraL2DbConnection();
+       			
           		 con=c.getEraL2DbConnection();
           	 }
           	 else if (c.getLevel().equals("3")){
-          		 	c.setEraL3DbConnection();
+          		 
           		 	con=c.getEraL3DbConnection();
           	 	}
        	

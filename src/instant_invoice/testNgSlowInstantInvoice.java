@@ -12,7 +12,9 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -42,6 +44,7 @@ import org.testng.annotations.Test;
 
 import configuration.config;
 import configuration.excel;
+import configuration.importData;
 
 public class testNgSlowInstantInvoice {
 
@@ -137,7 +140,8 @@ public class testNgSlowInstantInvoice {
 	@BeforeClass
 	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","sessionCount","customString","customCheckBox","databaseDisabled"})
 	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox ,String sessionCount,String customString,String customCheckBox,String databaseDisabled) {
-	c=new config();
+		importData id = new importData();
+		c =id.getConfig();
 
 		
 		//Kill all running chromedrivers leftover from previous sessions
@@ -179,7 +183,7 @@ public class testNgSlowInstantInvoice {
 	    	excelVar.setRowCountAutomatically(2);
 	    	excelVar.setColCountAutomatically(0);
 	    	rowCount=excelVar.getRowCount();
-	    	colCount=excelVar.getColCount()+1;
+	    	colCount=excelVar.getColCount()-1;
 	    	
     	}
     	
@@ -491,8 +495,8 @@ public class testNgSlowInstantInvoice {
   		  String[] resultArray = validateResults(trk);
   	  if ( resultArray[0].equals("pass")){
        	 if(source.equals("excel")) {
-       	 writeToExcel(rowNumber, 0,"pass");
-       	 writeToExcel(rowNumber, 1,"completed");
+       	 writeToExcel(rowNumber, 5,"pass");
+       	 writeToExcel(rowNumber, 6,"completed");
        	
        	 }
        	 writeToDB(testInputNbr,tinCount,trk,resultArray);
@@ -578,8 +582,8 @@ public class testNgSlowInstantInvoice {
    		  String[] resultArray = validateResults(trk);
    	  if ( resultArray[0].equals("pass")){
         	 if(source.equals("excel")) {
-        	 writeToExcel(rowNumber, 0,"pass");
-        	 writeToExcel(rowNumber, 1,"completed");
+        	 writeToExcel(rowNumber, 5,"pass");
+        	 writeToExcel(rowNumber, 6,"completed");
         	
         	 }
         	 writeToDB(testInputNbr,tinCount,trk,resultArray);
@@ -642,8 +646,8 @@ public class testNgSlowInstantInvoice {
     	  		  String[] resultArray = validateResults(trk);
     	  	  if ( resultArray[0].equals("pass")){
     	       	 if(source.equals("excel")) {
-    	       	 writeToExcel(rowNumber, 0,"pass");
-    	       	 writeToExcel(rowNumber, 1,"completed");
+    	       	 writeToExcel(rowNumber, 5,"pass");
+    	       	 writeToExcel(rowNumber, 6,"completed");
     	       	
     	       	 }
     	       	 writeToDB(testInputNbr,tinCount,trk,resultArray);
@@ -709,8 +713,8 @@ public class testNgSlowInstantInvoice {
     	  		  String[] resultArray = validateResults(trk);
     	  	  if ( resultArray[0].equals("pass")){
     	       	 if(source.equals("excel")) {
-    	       	 writeToExcel(rowNumber, 0,"pass");
-    	       	 writeToExcel(rowNumber, 1,"completed");
+    	       	 writeToExcel(rowNumber, 5,"pass");
+    	       	 writeToExcel(rowNumber, 6,"completed");
     	       	
     	       	 }
     	       	 writeToDB(testInputNbr,tinCount,trk,resultArray);
@@ -779,6 +783,20 @@ public class testNgSlowInstantInvoice {
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public void doInstantInvoice(WebDriver driver,WebDriverWait wait, String testInputNbr,  String trk , String payorAcctNbr,String itemPrcsCd,String instntInvFlg,int rowNumber,int instance) {
     	
     	System.out.println("Made it to Instant.");
@@ -790,12 +808,193 @@ public class testNgSlowInstantInvoice {
     	System.out.println("instntInvFlg "+ instntInvFlg);
     	
     	
-    	driver.findElement(By.xpath("/html/body/form[1]/table[1]/tbody/tr[4]/td/div/div[2]/table/tbody/tr[1]/td[1]/span/span[1]/span[1]/input")).sendKeys(payorAcctNbr);
-    	driver.findElement(By.xpath("/html/body/form[1]/table[1]/tbody/tr[4]/td/div/div[2]/table/tbody/tr[2]/td[1]/span/span[1]/span[1]/input")).sendKeys(trk);
     	
     	
-    }
+    	
+    	try {				
+        	//  driver.navigate().refresh();
+          	  driver.switchTo().frame("content");
+        	//WebElement dateWidget = driver.findElement(By.id("iiForm:fromDateII_input"));
+        	//WebElement dateWidget = driver.findElement(By.xpath("/html/body/form[1]/table[1]/tbody/tr[4]/td/div/div[2]/table/tbody/tr[1]/td[2]/span"));
+          	 Date date = new Date();
+             SimpleDateFormat formatter = new SimpleDateFormat("dd");
+             String AB = formatter.format(date);
+             int tempInt=Integer.parseInt(AB)+8;
+        	
+        	//List<WebElement> columns=dateWidget.findElements(By.tagName("td"));
+        //	System.out.println("HERE");
+        	
+             driver.findElement(By.xpath("/html/body/form[1]/table[1]/tbody/tr[4]/td/div/div[2]/table/tbody/tr[1]/td[1]/span/span[1]/span[1]/input")).sendKeys(payorAcctNbr);
+         	driver.findElement(By.xpath("/html/body/form[1]/table[1]/tbody/tr[4]/td/div/div[2]/table/tbody/tr[2]/td[1]/span/span[1]/span[1]/input")).sendKeys(trk);
+         	
+         	
+         	
+            driver.findElement(By.xpath("//input[@id='iiForm:fromDateII_input']")).click();
+            Select dropdown = new Select (driver.findElement(By.name("iiForm:fromDateII_input_sel_month")));   
+
+            //Just Choosing Jan. Will try this ten times before it ends.
+          int  attempts=0;
+            while (attempts<10){
+                try{
+                    dropdown.selectByVisibleText("Jan");
+                    driver.findElements(By.className("ui-state-default")).get(9).click();  
+                    break;
+                    }
+                    catch (Exception eee){
+                    System.out.println(eee);
+                    }
+                    attempts++;
+                }
+        	
+        	
+Thread.sleep(3000);
+
+           
+            
+            //Getting the second date. Will try 10 times
+            attempts=0;
+            while (attempts<10){
+                try{  
+                  
+                    driver.findElement(By.xpath("//*[@id=\"iiForm:toDateII_input\"]")).click();
+                    break;
+                }
+                catch (Exception eee){
+                    System.out.println(eee);
+                }
+                attempts++;
+                }
+            
+            
+            attempts=0;
+            while (attempts<10){
+            try {
+            //Will grab the calender and every date in it.. by default it wil select current date.
+           
+            //Loop through each date.
+            int count = driver.findElements(By.className("ui-state-default")).size();
+            //Loops through the second date until hits date we want
+        
+                    Thread.sleep(1000);
+                   
+                    driver.findElements(By.className("ui-state-default")).get(tempInt).click();
+                    break;
+            }
+                  catch (Exception eee){
+                    System.out.println(eee);
+                }
+                attempts++;
+            }
+      
+        }
+        	catch(Exception e) {
+        		
+       		System.out.println(e);
+       	}
+    	System.out.println("STOP");
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	 try{
+             //Click on search button
+             driver.findElement(By.xpath("//button[@id='iiForm:search_button']")).click();
+
+             //Will this messages displays then no record is found.
              
+                 try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+                 if(driver.findElement(By.xpath("//*[@id='iiForm:messageId_msg']/span[2]")).isDisplayed())
+                 {
+                     //FAILED.. Will not progress any further.
+                     System.out.println("No Record found");
+                     return;
+                 }
+             }
+             catch(NoSuchElementException a){
+                     
+              System.out.println(a);   
+           
+             }
+             
+
+             
+             //If it has passed up to this point it will continue to keep going.
+             
+                  try{
+                     //Will see if there is a row visible for instant invoice. 
+                     //Find out if element is disabled or not. 
+                	 Boolean enabled = driver.findElement(By.xpath("//*[@id=\"iiForm:instantInvoiceDynTable:instantInvoiceTable:0:_t47\"]")).isEnabled(); 
+                     System.out.println(enabled);
+                     //If checkbox is enabled it will return true
+
+                     if (enabled == true){
+                         //Passed. Will click on checkbox and click on instant invoice. The program will now leave the if (res==true) condidition.
+                                                               
+                         driver.findElement(By.xpath("//*[@id='iiForm:instantInvoiceDynTable:instantInvoiceTable:_t44']")).click();
+                         Thread.sleep(2000);
+                         driver.findElement(By.xpath("//*[@id=\"iiForm:instanceInvoice_button\"]")).click();
+                         
+                     }                               
+                     //if Checkbox is false.
+                     else{
+                         //FAILED. Will set res as false to fail our trk.. maybe get the desc for failure
+                         System.out.println("Disabled");
+                         return;
+                       
+                         }
+                     }
+                     catch(Exception ee){
+                            
+                             System.out.println(ee);
+                             System.out.println("Could not submit");
+                             return;
+                           
+                         }
+                  
+                  
+                  
+                  String[] resultArray = validateResults(trk);
+                  
+                  
+                  
+                  if ( resultArray[0].equals("pass")){
+                 	 if(source.equals("excel")) {
+                 	 writeToExcel(rowNumber, 5,"pass");
+                 	 writeToExcel(rowNumber, 6,"completed");
+                 	 }
+                 	 if(databaseDisabled.equals("false")) {
+                      	 // writeToDB(testInputNbr,tinCount,trk,resultArray);
+                      	 }
+                 	 return;
+                 	 
+                  }
+                  else if ( resultArray[0].equals("fail"))
+                	  if(source.equals("excel")) {
+                       	 writeToExcel(rowNumber, 5,"pass");
+                       	 writeToExcel(rowNumber, 6,"completed");
+                       	 }
+                       	 if(databaseDisabled.equals("false")) {
+                            	  writeToDB(testInputNbr,tinCount,trk,resultArray);
+                            	 }
+                       	 return;
+                     }
+                  
+                 
+     // INSTANT INVOICE BUTTON XPATH               
+     //driver.findElement(By.xpath("//button[//*[@id='iiForm:instanceInvoice_button']")).click();
+    	
+  
         
     
     
@@ -819,35 +1018,18 @@ public class testNgSlowInstantInvoice {
 
     	try {
         //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
-    	stmt=GTMcon.prepareStatement("insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values (?,?,?,?,?)");  
-		stmt.setString(1,testInputNbr);  
-		stmt.setString(2,tinCount);  
-		stmt.setString(3,trk);  
-		stmt.setString(4,resultArray[0]);  
-		stmt.setString(5,resultArray[1]);  
+    //	stmt=GTMcon.prepareStatement("insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values (?,?,?,?,?)");  
+    		stmt=GTMcon.prepareStatement("update gtm_rev_tools.instant_invoice set INSTANT_INVOICE_COMMENTS=? where test_input_nbr=?");  
+    	
+		stmt.setString(1,resultArray[1]);  
+		stmt.setString(2,testInputNbr);  
+		 
 	
 		stmt.executeUpdate();
     	}
     	catch(Exception e) {
     		System.out.println(e);
     	}
-		
-    	
-    	
-    	try {
-		//	update gtm_rev_tools.rebill_results set result='fail',description='6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables' where trkngnbr='566166113544';
-		stmt=GTMcon.prepareStatement("update rebill_results set result=?,description=? where trkngnbr=?");  
-		
-		stmt.setString(1,resultArray[0]);  
-		stmt.setString(2,resultArray[1]); 
-		stmt.setString(3,trk); 
-		stmt.executeUpdate();
-		
-	}
-	catch(Exception e) {
-		System.out.println(e);
-	}
-
     	
     }
     
@@ -860,18 +1042,19 @@ public class testNgSlowInstantInvoice {
     	try {
     	
     		if (level.equals("2")){
-    			 c.setEraL2DbConnection();
-       		     con=c.getEraL2DbConnection();
+    			
+       		     con=c.getOreL2DbConnection();
        	 }
        	 else if (level.equals("3")){
-       		 	c.setEraL3DbConnection();
-       		 	con=c.getEraL3DbConnection();
+       		
+       		 	con=c.getOreL3DbConnection();
        	 	}
     	
     	}
     	catch(Exception e) {
     		
-    		System.out.println("Could Not Get ERA DB Connections");
+    		System.out.println("Could Not Get ORE DB Connections");
+    		System.out.println(e);
     	}
     	
 
@@ -879,7 +1062,7 @@ public class testNgSlowInstantInvoice {
     	ResultSet rs = null;
     	try {
     		
-    		stmt=con.prepareStatement("select * from invadj_schema.rdt_rebill_request where airbill_nbr=?");  
+    		stmt=con.prepareStatement("select * from INTL_EXPRS_ONLN_SCHEMA.intl_online_revenue_item a join INTL_EXPRS_ONLN_SCHEMA.intl_package b on a.ONLN_REV_ITEM_ID =b.ONLN_REV_ITEM_ID  where pkg_trkng_nbr=? and INSTNT_INV_FLG ='Y'");  
 			stmt.setString(1,trk);  
 			rs = stmt.executeQuery();
     	} catch (SQLException e) {
@@ -898,22 +1081,16 @@ public class testNgSlowInstantInvoice {
     			if (rs.next()==false){
     			      System.out.println("Is NULL");
     			      resultArray[0]="fail";
-    			      resultArray[1]="Not In ERA Database";
+    			      resultArray[1]="Not Instant Invoice in IORE";
+	    			    
     			}
     			   else{
-    				    String statusDesc = rs.getString("STATUS_DESC");
-    	                String errorDesc = rs.getString("ERROR_DESC"); 	    	                
-    	                System.out.println(statusDesc +"    "+errorDesc);
-    	              
-    	              if (statusDesc.equals("SUCCESS")) {
+    				  
   	    			      resultArray[0]="pass";
   	    			      resultArray[1]="completed";
     	              }
-    	              else {
-  	    			      resultArray[0]="fail";
-  	    			      resultArray[1]=errorDesc;
-    	              }
-    			   }
+    	            
+    			   
     		} catch (SQLException e) {
     			// TODO Auto-generated catch block
     			e.printStackTrace();
