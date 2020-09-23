@@ -20,7 +20,7 @@ public class updateRebillDb implements Runnable {
        String[][] allData;
        int rowCount;
        int colCount;
-       int total=0;
+       double total=0;
        int counter=1;
        String testInputNbr,tinCount,trkngnbr;
        config c;
@@ -42,31 +42,35 @@ public class updateRebillDb implements Runnable {
        	// TODO Auto-generated method stub.
     	   System.out.println("HELLO FROM RUN");
     	   
-
-    	   
-    	   
+    	   for (int i=0;i<500;i++) {
+	    	   iterate(i+1,500);
+    	   }
+       }
+    	   /*
     	   getData();
     	      for (int i=0;i<rowCount;i++) {
     	    	   iterate(i+1);
-                   testInputNbr=allData[i][0];
+                  
+    	    	   testInputNbr=allData[i][0];
                    tinCount=allData[i][1];
                    trkngnbr=allData[i][2];
                    resultArray=validateResults(trkngnbr);
                    writeToDB(testInputNbr,tinCount,trkngnbr,resultArray);
               }
               
-       }
+       }*/
         
-       public void iterate(int i){    
+       public void iterate(int counterTemp,int rowCountTemp){    
     	 
     	 System.out.println("HELLO FROM ITERATE");
-    	 System.out.println("i "+i);
-    	 System.out.println("rowcount "+rowCount);
-      	 total=(i/rowCount)*100;
+    	 System.out.println("i "+counterTemp);
+    	 System.out.println("rowcount "+rowCountTemp);
+      	 total=((double)counterTemp/(double)rowCountTemp)*100;
+      	 System.out.println("total" +total);
       	 
       	 //    frame.b.setValue(i);   
       		   
-      		   rag.getProgressBar().setValue(total);
+      		   rag.getProgressBar().setValue((int)total);
       		   rag.getProgressBar().repaint(); 
       	     try{Thread.sleep(150);}
       	     catch(Exception e){}  
