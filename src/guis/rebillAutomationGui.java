@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JProgressBar;
 
 import org.openqa.selenium.WebDriver;
 
@@ -56,6 +57,7 @@ public class rebillAutomationGui {
      JLabel ie,firefox,chrome;
      
      mouse m;
+     JProgressBar b ;
 	/**
 	 * Launch the application.
 	 */
@@ -212,7 +214,14 @@ public class rebillAutomationGui {
 		compatibleCheckBox.setOpaque(false);
 		frame.getContentPane().add(compatibleCheckBox);
 		
-	
+		b=new JProgressBar(0,100);   
+		
+		b.setBounds(275,574,50,30);
+        b.setValue(0);
+        b.setStringPainted(true);
+        b.setSize(475, 20);
+        b.setVisible(true);
+        frame.getContentPane().add(b);
 		
 		
 		guiBase gb = new guiBase();
@@ -319,4 +328,9 @@ public class rebillAutomationGui {
 		        }
 			c.setLevel("3");
 		}
+		
+		public JProgressBar getProgressBar() {
+			return b;
+		} 
+		
 }

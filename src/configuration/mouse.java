@@ -860,7 +860,10 @@ public void setupMouseListener() {
 									JOptionPane.showMessageDialog(frame, "Must Select A Level");
 								}
 								else {
-									updateRebillDb urd= new updateRebillDb(c);
+									updateRebillDb urd= new updateRebillDb(c,obj);
+									Thread t1 = new Thread(urd);
+									t1.start();
+								
 								}
 							}
 						}
