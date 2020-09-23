@@ -72,6 +72,10 @@ public class config {
     
     String headless;
     
+    Boolean rerateEnabled,rebillEnabled,prerateEnabled,eraRerateEnabled,instantInvoiceEnabled,udEnabled,rebillTroubleshootEnabled;
+    
+    Boolean fedexNetwork,admin;
+    
 	public config() {
 		
 	}
@@ -1382,13 +1386,80 @@ public int getRowCount() {
 }
 
 
-public void setColCount(int colCount) {
-	this.colCount=colCount;
+public void setFedexNetwork(Boolean fedexNetwork) {
+	this.fedexNetwork=fedexNetwork;
 }
 
-public int getColCount() {
-	return colCount;
+public Boolean getFedexNetwork() {
+	return fedexNetwork;
 }
+
+public void setAdmin(Boolean admin) {
+	this.admin=admin;
+}
+
+public Boolean getAdmin() {
+	return admin;
+}
+
+
+public void setRebillEnabled(Boolean rebillEnabled) {
+	this.rebillEnabled=rebillEnabled;
+}
+
+public Boolean getRebillEnabled() {
+	return rebillEnabled;
+}
+
+
+public void setPrerateEnabled(Boolean prerateEnabled) {
+	this.prerateEnabled=prerateEnabled;
+}
+
+public Boolean getPrerateEnabled() {
+	return prerateEnabled;
+}
+
+public void setEraRerateEnabled(Boolean eraRerateEnabled) {
+	this.eraRerateEnabled=eraRerateEnabled;
+}
+
+public Boolean getEraRerateEnabled() {
+	return eraRerateEnabled;
+}
+
+public void setInstantInvoiceEnabled(Boolean instantInvoiceEnabled) {
+	this.instantInvoiceEnabled=instantInvoiceEnabled;
+}
+
+public Boolean getInstantInvoiceEnabled() {
+	return instantInvoiceEnabled;
+}
+
+public void setUdEnabled(Boolean udEnabled) {
+	this.udEnabled=udEnabled;
+}
+
+public Boolean getUdEnabled() {
+	return udEnabled;
+}
+
+public void setRerateEnabled(Boolean rerateEnabled) {
+	this.rerateEnabled=rerateEnabled;
+}
+
+public Boolean getRerateEnabled() {
+	return rerateEnabled;
+}
+
+public void setRebillTroubleshootEnabled(Boolean rebillTroubleshootEnabled) {
+	this.rebillTroubleshootEnabled=rebillTroubleshootEnabled;
+}
+
+public Boolean getRebillTroubleshootEnabled() {
+	return rebillTroubleshootEnabled;
+}
+
 
 }
 

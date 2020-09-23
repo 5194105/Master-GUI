@@ -181,6 +181,38 @@ public class importData {
 	        	 case "Stephen Password" :
 	        		 c.setStephenPassword(tempStringPostFix);
 	        		 break;
+	        		 
+	        		 
+	        	 case "Fedex Network" :
+	        		 c.setFedexNetwork(covertBoolean(tempStringPostFix));
+	        		 break;
+	        	 case "Admin" :
+	        		 c.setAdmin(covertBoolean(tempStringPostFix));
+	        		 break;
+	        	 case "Rebill Enabled" :
+	        		 c.setRebillEnabled(covertBoolean(tempStringPostFix));
+	        		 break;
+	        	 case "Prerate Enabled" :
+	        		 c.setPrerateEnabled(covertBoolean(tempStringPostFix));
+	        		 break;
+	        	 case "Rerate Enabled" :
+	        		 c.setRerateEnabled(covertBoolean(tempStringPostFix));
+	        		 break;
+	        	 case "ERA Rerate Enabled" :
+	        		 c.setEraRerateEnabled(covertBoolean(tempStringPostFix));
+	        		 break;
+	        	 case "Instant Invoice Enabled" :
+	        		 c.setInstantInvoiceEnabled(covertBoolean(tempStringPostFix));
+	        		 break;
+	        	 case "UD Enabled" :
+	        		 c.setUdEnabled(covertBoolean(tempStringPostFix));
+	        		 break;
+	        	 case "Rebill Troubleshoot" :
+	        		 c.setRebillTroubleshootEnabled(covertBoolean(tempStringPostFix));
+	        		 break;
+	        		 
+	        		 
+	        		 
 	        	 }
 	         }
 	     } catch(Exception e) {
@@ -190,18 +222,27 @@ public class importData {
 	     
 	     //Setup DBs for use.
 	     
-	     
-	     c.setRtmDbConnection(c.getRtmDbUsername(),c.getRtmDbPassword());
-	     c.setGtmRevToolsConnection(c.getGtmDbUsername(),c.getGtmDbPassword());
-	     c.setOreL2DbConnection(c.getOreL2DbUsername(),c.getOreL2DbPassword());
-	     c.setOreL3DbConnection(c.getOreL3DbUsername(),c.getOreL3DbPassword());
-	     c.setEcL2DbConnection(c.getEcL2DbUsername(),c.getEcL2DbPassword());
-	     c.setEcL3DbConnection(c.getEcL3DbUsername(),c.getEcL3DbPassword());
-	     c.setEraL2DbConnection(c.getEraL2DbUsername(),c.getEraL2DbPassword());
-	     c.setEraL3DbConnection(c.getEraL3DbUsername(),c.getEraL3DbPassword());
-	
+	     if (c.getFedexNetwork()==true) {
+		     c.setRtmDbConnection(c.getRtmDbUsername(),c.getRtmDbPassword());
+		     c.setGtmRevToolsConnection(c.getGtmDbUsername(),c.getGtmDbPassword());
+		     c.setOreL2DbConnection(c.getOreL2DbUsername(),c.getOreL2DbPassword());
+		     c.setOreL3DbConnection(c.getOreL3DbUsername(),c.getOreL3DbPassword());
+		     c.setEcL2DbConnection(c.getEcL2DbUsername(),c.getEcL2DbPassword());
+		     c.setEcL3DbConnection(c.getEcL3DbUsername(),c.getEcL3DbPassword());
+		     c.setEraL2DbConnection(c.getEraL2DbUsername(),c.getEraL2DbPassword());
+		     c.setEraL3DbConnection(c.getEraL3DbUsername(),c.getEraL3DbPassword());
+	     }
 	   
 	
+	}
+	public Boolean covertBoolean(String tempBooleanString) {
+		if (tempBooleanString.equals("true")) {
+			return true; 
+			}
+			else {
+				return false;
+		}
+			
 	}
 
 

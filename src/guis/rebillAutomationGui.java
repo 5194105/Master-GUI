@@ -222,7 +222,9 @@ public class rebillAutomationGui {
 		m.addExcel(excelLabel);
 		m.addDb(dbLabel);
 		m.addExecute(executeLabel);
+		if(c.getAdmin()==true) {
 		m.addMoreOptions(moreOptionsLabel);
+		}
 		m.adduploadResult(uploadResult);
 		m.setupBackground();
 		

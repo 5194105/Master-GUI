@@ -68,6 +68,7 @@ public class gui {
      String udDefault="ud.png";
      String prerateDefault="prerate.png";
      String eraRerateDefault="eraRerate.png";
+     public String rebillTroubleshootPic="rebillTroubleshootPic.png";
      
      String rebillAlt="rebillHighlight.png";
      String rerateAlt="rerateHighlight.png";
@@ -76,12 +77,18 @@ public class gui {
      String udAlt="udHighlight.png";
      String prerateAlt="prerateHighlight.png";
      String eraRerateAlt="eraRerateHighlight.png";
-    
-   
-    
-     public String rebillTroubleshootPic="rebillTroubleshootPic.png";
      public String rebillTroubleshootAlt="rebillTroubleshootPicHighlight.png";
 
+     String rebillDisabled="rebillDisabled.png";
+     String rerateDisabled="rerateDisabled.png";
+     String instantDisabled="instantDisabled.png";
+     String datapopDisabled="datapopDisabled.png";
+     String udDisabled="udDisabled.png";
+     String prerateDisabled="prerateDisabled.png";
+     String eraRerateDisabled="eraRerateDisabled.png";
+     public String rebillTroubleshootDisabled="rebillTroubleshootPicDisabled.png";
+     										   
+     
      
      String libDirectoryDB,libDirectoryExcel,libDirectorySelenium;
      
@@ -222,15 +229,14 @@ public class gui {
 		m.setFrame(frame);
 		m.setupBaseIcons();
 		
-		m.addIconWithMouse(rebillGUI,"rebill",rebillDefault,rebillAlt);
-		m.addIconWithMouse(rerateGUI,"rerate",rerateDefault,rerateAlt);
-		m.addIconWithMouse(prerateGUI,"prerate",prerateDefault,prerateAlt);
-		m.addIconWithMouse(instantInvoiceGUI,"instant",instantDefault,instantAlt);
-		m.addIconWithMouse(udAutomationGUI,"ud",udDefault,udAlt);
-		m.addIconWithMouse(eraRerateGUI,"eraRerate",eraRerateDefault,eraRerateAlt);	
+		m.addIconWithMouse(rebillGUI,"rebill",rebillDefault,rebillAlt,rebillDisabled,c.getRebillEnabled());
+		m.addIconWithMouse(rerateGUI,"rerate",rerateDefault,rerateAlt,rerateDisabled,c.getRerateEnabled());
+		m.addIconWithMouse(prerateGUI,"prerate",prerateDefault,prerateAlt,prerateDisabled,c.getPrerateEnabled());
+		m.addIconWithMouse(instantInvoiceGUI,"instant",instantDefault,instantAlt,instantDisabled,c.getInstantInvoiceEnabled());
+		m.addIconWithMouse(udAutomationGUI,"ud",udDefault,udAlt,udDisabled,c.getUdEnabled());
+		m.addIconWithMouse(eraRerateGUI,"eraRerate",eraRerateDefault,eraRerateAlt,eraRerateDisabled,c.getEraRerateEnabled());	
 		//m.addIconWithMouse(datapopGUI,"datapop",datapopDefault,datapopAlt);	
-
-		m.addIconWithMouse(rebillTroubleShootGUI,"rebillTroubleshoot",rebillTroubleshootPic,rebillTroubleshootAlt);	
+		m.addIconWithMouse(rebillTroubleShootGUI,"rebillTroubleshoot",rebillTroubleshootPic,rebillTroubleshootAlt,rebillTroubleshootDisabled,c.getRebillTroubleshootEnabled());	
 		
 		m.setupBackground();
 	

@@ -235,11 +235,11 @@ public class mouse {
 	
 	public void setupBaseIcons() {
 		
-		addIconWithMouse(gb.menuLabel,"menu",gb.menuDefault,gb.menuAlt);
-		addIconWithMouse(gb.databaseLabel,"db",gb.dbDefault,gb.dbAlt);
-		addIconWithMouse(gb.linkLabel,"link",gb.linkDefault,gb.linkAlt);
-		addIconWithMouse(gb.infoLabel,"info",gb.infoDefault,gb.infoAlt);
-		addIconWithMouse(gb.backLabel,"back",gb.backDefault,gb.backAlt);	
+		addIconWithMouse(gb.menuLabel,"menu",gb.menuDefault,gb.menuAlt,"",true);
+		addIconWithMouse(gb.databaseLabel,"db",gb.dbDefault,gb.dbAlt,"",true);
+		addIconWithMouse(gb.linkLabel,"link",gb.linkDefault,gb.linkAlt,"",true);
+		addIconWithMouse(gb.infoLabel,"info",gb.infoDefault,gb.infoAlt,"",true);
+		addIconWithMouse(gb.backLabel,"back",gb.backDefault,gb.backAlt,"",true);	
 	}
 	
 	public void setupBackground() {
@@ -313,6 +313,7 @@ public void addExcel(JLabel jlabel) {
 
 public void addDb(JLabel jlabel) {
 	jLabelDatabase=jlabel;
+	if(c.getAdmin()==true) {
 	try {
 		
 		if(databaseBoolean==false) {
@@ -342,6 +343,10 @@ public void addDb(JLabel jlabel) {
 	  jLabelDatabase.addMouseListener(m2);
 	  c2=true;
 	  }
+	}
+	else {
+		JOptionPane.showMessageDialog(frame, "You Dont Have Admin Access. Certain Functionality Have Been Disabled.");
+	}
 	  
 }
 
@@ -562,9 +567,9 @@ public void addRemoveAkshayUDStuff(Boolean addRemove){
 
 
 
-	public void addIconWithMouse(JLabel jl,String name,String defaultPic,String altPic) {
+	public void addIconWithMouse(JLabel jl,String name,String defaultPic,String altPic,String disabledPic,Boolean enabled) {
 		
-		labelClassArray.add(new labelClass(jl,name,defaultPic,altPic));
+		labelClassArray.add(new labelClass(jl,name,defaultPic,altPic,disabledPic,enabled));
 		addIcon(jl,defaultPic);
 		jl.addMouseListener( ml );
 	}
@@ -593,7 +598,12 @@ public void setupMouseListener() {
 			        for (int i=0;i<labelClassArray.size();i++) {
 			    		if (labelClassArray.get(i).getName().equals(mouseLabel.getName())) {
 			    			 mouseLabelStringDark=labelClassArray.get(i).getDefaultPic();
-				        	 mouseLabelStringLight=labelClassArray.get(i).getAltPic();
+				        	if (labelClassArray.get(i).getEnabled()==true) {
+			    			 mouseLabelStringLight=labelClassArray.get(i).getAltPic();
+				        	}
+				        	else {
+				        		mouseLabelStringLight=labelClassArray.get(i).getDisabledPic();
+				        	}
 				        	  mouseImage = ImageIO.read(new File(imagePath+"\\assets\\"+mouseLabelStringLight));
 					            mouseDimg = mouseImage.getScaledInstance(mouseLabel.getWidth(), mouseLabel.getHeight(),
 					    		        Image.SCALE_SMOOTH);
@@ -636,32 +646,77 @@ public void setupMouseListener() {
 					System.out.println("LABEL NAME : "+mouseLabel.getName());
 					
 			    		if (mouseLabel.getName().equals("rebill")) {
+			    			if(c.getRebillEnabled()==true) {
 			    			rebill = new rebillAutomationGui(g,c);
+			    			}
+			    			else {
+			    				JOptionPane.showMessageDialog(frame, "You Do Not Have Access To This Section");
+			    			}
 			    		}
 			    		if (mouseLabel.getName().equals("rerate")) {
+			    			if(c.getRebillEnabled()==true) {
 			    			rerate = new rerateAutomationGui(g,c);
 			    		}
+		    			else {
+		    				JOptionPane.showMessageDialog(frame, "You Do Not Have Access To This Section");
+		    			}
+			    		}
 			    		if (mouseLabel.getName().equals("prerate")) {
+			    			if(c.getPrerateEnabled()==true) {
 			    			prerate = new prerateAutomationGui(g,c);
 			    		}
+		    			else {
+		    				JOptionPane.showMessageDialog(frame, "You Do Not Have Access To This Section");
+		    			}
+			    		}
 			    		if (mouseLabel.getName().equals("instant")) {
+			    			if(c.getInstantInvoiceEnabled()==true) {
 			    			instantInvoice = new instantInvoiceAutomationGui(g,c);
 			    		}
+		    			else {
+		    				JOptionPane.showMessageDialog(frame, "You Do Not Have Access To This Section");
+		    			}
+			    		}
 			    		if (mouseLabel.getName().equals("ud")) {
+			    			if(c.getUdEnabled()==true) {
 			    			ud= new udAutomation(g,c);
+			    		}
+		    			else {
+		    				JOptionPane.showMessageDialog(frame, "You Do Not Have Access To This Section");
+		    			}
 			    		}
 			    		//if (mouseLabel.getName().equals("datapop")) {
 			    			//datapop = new datapopAutomationGui(g,c);
 			    		//}
 			    		if (mouseLabel.getName().equals("eraRerate")) {
+			    			if(c.getEraRerateEnabled()==true) {
 			    			eraRerate = new eraRerateAutomationGui(g,c);
+			    		}
+		    			else {
+		    				JOptionPane.showMessageDialog(frame, "You Do Not Have Access To This Section");
+		    			}
 			    		}
 			    		
 			    		if (mouseLabel.getName().equals("rebillTroubleshoot")) {
+			    			if(c.getRebillTroubleshootEnabled()==true) {
 			    			JOptionPane.showMessageDialog(frame, "Started");
 			    			rt = new rebillTroubleshoot(c);
 			    			JOptionPane.showMessageDialog(frame, "Finished");
 			    		}
+			    			else {
+			    				JOptionPane.showMessageDialog(frame, "You Do Not Have Access To This Section");
+			    			}
+			    		}
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			
 			    		
 			    		//Info Label
 			    		if (mouseLabel.getName().equals("info")) {		
