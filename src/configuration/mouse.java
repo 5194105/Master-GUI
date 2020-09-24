@@ -721,7 +721,13 @@ public void setupMouseListener() {
 			    		//Info Label
 			    		if (mouseLabel.getName().equals("info")) {		
 			    			 infoPane=new JFrame();  
-			    			    JOptionPane.showMessageDialog(infoPane,"Hello from GTMC Revenue Execution Onlines Team!");  
+			    			 if (JOptionPane.showConfirmDialog(null, "Do You Want To Check For An Update?", "WARNING",
+			    				        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+			    				 updateVersion uv= new updateVersion(c);
+			    				    // yes option
+			    				} else {
+			    				    // no option
+			    				}
 			    		}
 			    		
 			    		//Info Label

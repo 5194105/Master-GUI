@@ -76,6 +76,10 @@ public class config {
     
     Boolean fedexNetwork,admin;
     
+    String version,updateUsername,updatePassword;
+    
+    String updateHostname,updatePath;
+    
 	public config() {
 		
 	}
@@ -1461,6 +1465,47 @@ public Boolean getRebillTroubleshootEnabled() {
 }
 
 
+public void setVersion(String version) {
+	this.version=version;
+}
+
+public String getVersion() {
+	return version;
+}
+
+
+public void setUpdateUser(String updateUser) {
+	this.updateUsername=updateUser;
+}
+
+public String getUpdateUser() {
+	return updateUsername;
+}
+
+public void setUpdatePassword(String updatePassword) {
+	this.updatePassword=updatePassword;
+}
+
+public String getUpdatePassword() {
+	return updatePassword;
+}
+
+
+public void setUpdateHostname(String updateHostname) {
+	this.updateHostname=updateHostname;
+}
+
+public String getUpdateHostname() {
+	return updateHostname;
+}
+
+public void setUpdatePath(String updatePath) {
+	this.updatePath=updatePath;
+}
+
+public String getUpdatePath() {
+	return updatePath;
+}
 }
 
 

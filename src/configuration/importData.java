@@ -211,7 +211,24 @@ public class importData {
 	        		 c.setRebillTroubleshootEnabled(covertBoolean(tempStringPostFix));
 	        		 break;
 	        		 
+	        	 case "Update Hostname" :
+	        		 c.setUpdateHostname(tempStringPostFix);
+	        		 break;
+	        	 case "Version" :
+	        		 c.setVersion(tempStringPostFix);
+	        		 break;
 	        		 
+	        	 case "Update Path" :
+	        		 c.setUpdatePath(tempStringPostFix);
+	        		 break;
+	        	 case "Update Username" :
+	        		 c.setUpdateUser(tempStringPostFix);
+	        		 break;
+	        	 case "Update Password" :
+	        		 c.setUpdatePassword(tempStringPostFix);
+	        		 break;
+	        		 
+	        		
 	        		 
 	        	 }
 	         }

@@ -40,16 +40,13 @@ public class updateRebillDb implements Runnable {
        @Override
        public void run() {
        	// TODO Auto-generated method stub.
-    	   System.out.println("HELLO FROM RUN");
+    	  // System.out.println("HELLO FROM RUN");
     	   
-    	   for (int i=0;i<500;i++) {
-	    	   iterate(i+1,500);
-    	   }
-       }
-    	   /*
+    
+    	   
     	   getData();
     	      for (int i=0;i<rowCount;i++) {
-    	    	   iterate(i+1);
+    	    	   iterate(i+1,rowCount);
                   
     	    	   testInputNbr=allData[i][0];
                    tinCount=allData[i][1];
@@ -58,15 +55,15 @@ public class updateRebillDb implements Runnable {
                    writeToDB(testInputNbr,tinCount,trkngnbr,resultArray);
               }
               
-       }*/
+       }
         
        public void iterate(int counterTemp,int rowCountTemp){    
     	 
-    	 System.out.println("HELLO FROM ITERATE");
-    	 System.out.println("i "+counterTemp);
-    	 System.out.println("rowcount "+rowCountTemp);
+    	// System.out.println("HELLO FROM ITERATE");
+    	// System.out.println("i "+counterTemp);
+    	// System.out.println("rowcount "+rowCountTemp);
       	 total=((double)counterTemp/(double)rowCountTemp)*100;
-      	 System.out.println("total" +total);
+      //	 System.out.println("total" +total);
       	 
       	 //    frame.b.setValue(i);   
       		   
@@ -99,7 +96,7 @@ public class updateRebillDb implements Runnable {
               stmt.executeUpdate();
        }
        catch(Exception e) {
-              System.out.println(e);
+            //  System.out.println(e);
        }
               
        
@@ -115,7 +112,7 @@ public class updateRebillDb implements Runnable {
               
        }
        catch(Exception e) {
-              System.out.println(e);
+            //  System.out.println(e);
        }
        try {
                      stmt.close();
@@ -146,7 +143,7 @@ public class updateRebillDb implements Runnable {
              }
              catch(Exception e) {
                     
-                    System.out.println("Could Not Get ERA DB Connections");
+                 //   System.out.println("Could Not Get ERA DB Connections");
              }
              
 
@@ -172,14 +169,14 @@ public class updateRebillDb implements Runnable {
                     }
                     try {
                            if (rs.next()==false){
-                                 System.out.println("Is NULL");
+                               //  System.out.println("Is NULL");
                                  resultArray[0]="fail";
                                  resultArray[1]="Not In ERA Database";
                            }
                               else{
                                       String statusDesc = rs.getString("STATUS_DESC");
                              String errorDesc = rs.getString("ERROR_DESC");                           
-                             System.out.println(statusDesc +"    "+errorDesc);
+                         //    System.out.println(statusDesc +"    "+errorDesc);
                            
                            if (statusDesc.equals("SUCCESS")) {
                                  resultArray[0]="pass";
@@ -192,7 +189,7 @@ public class updateRebillDb implements Runnable {
                               }
                     } catch (SQLException e) {
                            // TODO Auto-generated catch block
-                           System.out.println(e);
+                       //    System.out.println(e);
                            e.printStackTrace();
                     }
                  try {
@@ -243,12 +240,12 @@ public  void getData() {
         //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
               
               stmt = GTMcon.createStatement();
-              System.out.println(databaseSqlCount);
+           //   System.out.println(databaseSqlCount);
              rs = stmt.executeQuery(databaseSqlCount);
              rs.next();
              rowCount=rs.getInt("total");
              stmt = GTMcon.createStatement();
-              System.out.println(databaseSqlQuery);
+          //   System.out.println(databaseSqlQuery);
              rs = stmt.executeQuery(databaseSqlQuery);
              rsmd = rs.getMetaData();
              colCount = rsmd.getColumnCount()+1;
@@ -259,7 +256,7 @@ public  void getData() {
              //     rowCount++;
                     // rebillDataArray.add(new rebillData(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16)));
                      for (int i=1;i<colCount;i++) {
-                           System.out.println(rs.getString(i));
+                        //   System.out.println(rs.getString(i));
                            if (rs.getString(i)==null) {
                                   allData[rowCountTemp][i-1]="";
                            }
@@ -272,7 +269,7 @@ public  void getData() {
               //colCount=17;
        }
        catch(Exception e) {
-              System.out.println(e);
+          //    System.out.println(e);
        }
 
     try {
@@ -292,7 +289,7 @@ public void closeConnections(Connection con,ResultSet rs,Statement s, PreparedSt
               ps.close();
        }
        catch(Exception e) {
-              System.out.println(e);
+          //    System.out.println(e);
        }
 }
 
