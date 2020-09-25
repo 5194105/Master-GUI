@@ -114,8 +114,37 @@ public class updateVersion {
 	
 	public void downloadNewVersion() {
 		
+		
+		
+		
+		String userDirStephen=  System.getProperty("user.dir");
+		if (userDirStephen.contains("corp.ds.fedex.com")==true){
+		System.out.println(userDirStephen);
+		userDirStephen = userDirStephen.substring(userDirStephen.indexOf("z\\")+2);
+		userDirStephen = userDirStephen.substring(0,10);  		
+		System.out.println(userDirStephen);
+		char ch = userDirStephen.charAt(userDirStephen.length()-1);
+		
+		if (ch=='\\'){
+			userDirStephen = userDirStephen.substring(0,9);  
+		}
+		System.out.println(c);
+		System.out.println(userDirStephen);
+		StringBuilder sb = new StringBuilder(userDirStephen);
+		sb.insert(2, "\\");
+		userDirStephen=sb.toString();
+		String userDownloadsTemp="\\\\corp.ds.fedex.com\\vdi-oz\\TEMP\\Downloads";
+		String userDownloads=userDownloadsTemp.replaceAll("TEMP", userDirStephen);
+		System.out.println(userDownloads);
+		copyTo=userDownloads;
+		}
+		else {
+			 copyTo=System.getProperty("user.home")+"\\Downloads";
+		}
+		
 		  copyFrom = c.getUpdatePath()+"*exe"; 
-		  copyTo=System.getProperty("user.home")+"\\Downloads";
+		  System.out.println(System.getProperty("user.home")+"\\Downloads");
+		  JOptionPane.showMessageDialog(null, "Installer Will Be Downloaded To Following Directory: "+copyTo); 
 		  
 	        JSch jsch = new JSch();
 	        Session session = null;
@@ -135,6 +164,7 @@ public class updateVersion {
 	        catch(Exception e) {
 	        	System.out.println(e);
 	        }
+	        
 	}
 }
 
