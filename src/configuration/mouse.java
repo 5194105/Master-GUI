@@ -31,6 +31,8 @@ import org.testng.xml.XmlTest;
 
 import UD.UdExecution;
 import guis.datapopAutomationGui;
+import guis.eraCreditAndDebitAutomationGui;
+import guis.eraCreditAndDebitExtendedAutomationGui;
 import guis.eraRerateAutomationExtendGui;
 import guis.eraRerateAutomationGui;
 import guis.gui;
@@ -188,8 +190,10 @@ public class mouse {
 	
 	eraRerateAutomationGui eraRerate;
 	
-    public rerateAutomationGui rag;
-	
+    rerateAutomationGui rag;
+    eraCreditAndDebitAutomationGui creditAndDebit;
+    
+    
 	public mouse(guiBase gb,gui g,config c,Object obj,JFrame currentFrame) {
 		this.g=g;
 		this.gb=gb;
@@ -697,6 +701,20 @@ public void setupMouseListener() {
 		    			}
 			    		}
 			    		
+			    		
+			    		if (mouseLabel.getName().equals("creditAndDebit")) {
+			    			if(c.getCreditAndDebitEnabled()==true) {
+			    			creditAndDebit = new eraCreditAndDebitAutomationGui(g,c);
+			    		}
+		    			else {
+		    				JOptionPane.showMessageDialog(frame, "You Do Not Have Access To This Section");
+		    			}
+			    		}
+			    		
+			    		
+			    		
+			    		
+			    		
 			    		if (mouseLabel.getName().equals("rebillTroubleshoot")) {
 			    			if(c.getRebillTroubleshootEnabled()==true) {
 			    			JOptionPane.showMessageDialog(frame, "Started");
@@ -857,6 +875,13 @@ public void setupMouseListener() {
 								prsRerateAutomationExtendGui prae= new prsRerateAutomationExtendGui(g,c);
 						
 						}
+							
+							if (obj.getClass().getCanonicalName().equals("guis.eraCreditAndDebitAutomationGui")) {
+								eraCreditAndDebitExtendedAutomationGui ecad= new eraCreditAndDebitExtendedAutomationGui(g,c);
+						
+						}
+							
+							
 							
 							}
 						

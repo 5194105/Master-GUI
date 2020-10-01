@@ -72,13 +72,14 @@ public class config {
     
     String headless;
     
-    Boolean rerateEnabled,rebillEnabled,prerateEnabled,eraRerateEnabled,instantInvoiceEnabled,udEnabled,rebillTroubleshootEnabled;
+    Boolean rerateEnabled,rebillEnabled,prerateEnabled,eraRerateEnabled,instantInvoiceEnabled,udEnabled,rebillTroubleshootEnabled,creditAndDebitEnabled;
     
     Boolean fedexNetwork,admin;
     
     String version,updateUsername,updatePassword;
     
     String updateHostname,updatePath;
+    String creditCheckBox,debitCheckBox;
     
 	public config() {
 		
@@ -1184,8 +1185,19 @@ public void setMfRetireCheckBox(String mfRetireCheckBox) {
 }
 
 
+public void setCreditCheckBox(String creditCheckBox) {
+	this.creditCheckBox=creditCheckBox;
+}
 
-
+public void setDebitCheckBox(String debitCheckBox) {
+	this.debitCheckBox=debitCheckBox;
+}
+public String getCreditCheckBox() {
+	return creditCheckBox;
+}
+public String getDebitCheckBox() {
+	return debitCheckBox;
+}
 
 
 
@@ -1462,6 +1474,14 @@ public void setRebillTroubleshootEnabled(Boolean rebillTroubleshootEnabled) {
 
 public Boolean getRebillTroubleshootEnabled() {
 	return rebillTroubleshootEnabled;
+}
+
+public void setCreditAndDebitEnabled(Boolean creditAndDebitEnabled) {
+	this.creditAndDebitEnabled=creditAndDebitEnabled;
+}
+
+public Boolean getCreditAndDebitEnabled() {
+	return creditAndDebitEnabled;
 }
 
 

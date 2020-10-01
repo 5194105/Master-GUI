@@ -227,7 +227,9 @@ public class importData {
 	        	 case "Update Password" :
 	        		 c.setUpdatePassword(tempStringPostFix);
 	        		 break;
-	        		 
+	        	 case "Credit And Debit" :
+	        		 c.setCreditAndDebitEnabled(covertBoolean(tempStringPostFix));
+	        		 break;
 	        		
 	        		 
 	        	 }

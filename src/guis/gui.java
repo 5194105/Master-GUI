@@ -68,7 +68,8 @@ public class gui {
      String udDefault="ud.png";
      String prerateDefault="prerate.png";
      String eraRerateDefault="eraRerate.png";
-     public String rebillTroubleshootPic="rebillTroubleshootPic.png";
+     String rebillTroubleshootPic="rebillTroubleshootPic.png";
+     String creditAndDebitDefault="creditanddebit.png";
      
      String rebillAlt="rebillHighlight.png";
      String rerateAlt="rerateHighlight.png";
@@ -77,8 +78,10 @@ public class gui {
      String udAlt="udHighlight.png";
      String prerateAlt="prerateHighlight.png";
      String eraRerateAlt="eraRerateHighlight.png";
-     public String rebillTroubleshootAlt="rebillTroubleshootPicHighlight.png";
-
+     String rebillTroubleshootAlt="rebillTroubleshootPicHighlight.png";
+     String creditAndDebitAlt="creditanddebithighlight.png";
+      
+      
      String rebillDisabled="rebillDisabled.png";
      String rerateDisabled="rerateDisabled.png";
      String instantDisabled="instantDisabled.png";
@@ -86,8 +89,8 @@ public class gui {
      String udDisabled="udDisabled.png";
      String prerateDisabled="prerateDisabled.png";
      String eraRerateDisabled="eraRerateDisabled.png";
-     public String rebillTroubleshootDisabled="rebillTroubleshootPicDisabled.png";
-     										   
+     String rebillTroubleshootDisabled="rebillTroubleshootPicDisabled.png";
+     String creditAndDebitDisabled="creditanddebitdisabled.png";
      
      
      String libDirectoryDB,libDirectoryExcel,libDirectorySelenium;
@@ -127,7 +130,7 @@ public class gui {
 	String udUsername,udPassword;
 
 	
-	JLabel rebillGUI,rerateGUI,prerateGUI,instantInvoiceGUI,udAutomationGUI,datapopGUI,background,rebillTroubleShootGUI,eraRerateGUI;
+	JLabel rebillGUI,rerateGUI,prerateGUI,instantInvoiceGUI,udAutomationGUI,datapopGUI,background,rebillTroubleShootGUI,eraRerateGUI,creditAndDebitGUI;
 	
 	/**
 	 * Launch the application.
@@ -212,7 +215,9 @@ public class gui {
 		eraRerateGUI.setBounds(561, 463, 338, 54);
 		eraRerateGUI.setName("eraRerate");
 		
-		
+		creditAndDebitGUI = new JLabel("New label");
+		creditAndDebitGUI.setBounds(561, 525, 338, 54);
+		creditAndDebitGUI.setName("creditAndDebit");
 		
 		
 		
@@ -237,7 +242,7 @@ public class gui {
 		m.addIconWithMouse(eraRerateGUI,"eraRerate",eraRerateDefault,eraRerateAlt,eraRerateDisabled,c.getEraRerateEnabled());	
 		//m.addIconWithMouse(datapopGUI,"datapop",datapopDefault,datapopAlt);	
 		m.addIconWithMouse(rebillTroubleShootGUI,"rebillTroubleshoot",rebillTroubleshootPic,rebillTroubleshootAlt,rebillTroubleshootDisabled,c.getRebillTroubleshootEnabled());	
-		
+		m.addIconWithMouse(creditAndDebitGUI,"creditAndDebit",creditAndDebitDefault,creditAndDebitAlt,creditAndDebitDisabled,c.getCreditAndDebitEnabled());	
 		m.setupBackground();
 	
 	    frame.setVisible(true);
