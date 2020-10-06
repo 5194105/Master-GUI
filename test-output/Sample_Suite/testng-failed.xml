@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Sample_Suite]">
-  <parameter name="nullCheckBox" value="false"/>
-  <parameter name="level" value="3"/>
-  <parameter name="failedCheckBox" value="false"/>
-  <parameter name="groundCheckBox" value="false"/>
-  <parameter name="source" value="db"/>
+  <parameter name="nullCheckBox" value=""/>
+  <parameter name="level" value="2"/>
+  <parameter name="failedCheckBox" value=""/>
+  <parameter name="debitCheckBox" value=""/>
+  <parameter name="source" value="excel"/>
   <parameter name="compatibleMode" value=""/>
-  <parameter name="customCheckBox" value="true"/>
-  <parameter name="expressCheckBox" value="false"/>
-  <parameter name="allCheckBox" value="false"/>
-  <parameter name="filepath" value="C:\Users\FedExUser\Desktop\stephen\R66\L3C6\rebill.xlsx"/>
+  <parameter name="headless" value="false"/>
+  <parameter name="customCheckBox" value="false"/>
+  <parameter name="allCheckBox" value=""/>
+  <parameter name="filepath" value="C:\Users\theth\git\Master-GUI\test data\credit_debit.xlsx"/>
   <parameter name="sessionCount" value="1"/>
-  <parameter name="domesticCheckBox" value="false"/>
   <parameter name="browser" value="2"/>
-  <parameter name="databaseDisabled" value="false"/>
-  <parameter name="internationalCheckBox" value="false"/>
-  <parameter name="customString" value="TRKNGNBR=&#039;794975767222&#039;"/>
-  <test name="Rebill Test(failed)" parallel="methods">
+  <parameter name="creditCheckBox" value=""/>
+  <parameter name="databaseDisabled" value="true"/>
+  <parameter name="customString" value="trkngnbr in (&#039;882553697362&#039;,&#039;590443411313&#039;)"/>
+  <test thread-count="5" name="Rebill Test(failed)" parallel="methods">
     <classes>
-      <class name="rebill.testngRebillFast">
+      <class name="credit_debit.creditDebitTestNGSlow">
         <methods>
-          <include name="setupExcel"/>
-          <include name="testMethod1" invocation-numbers="0"/>
-          <include name="testMethod2"/>
           <include name="testMethod3"/>
+          <include name="testMethod2"/>
+          <include name="testMethod1" invocation-numbers="0 0 0 0 1 1 1 1 2 2 2 2 3 3 3 3 4 4 4 4"/>
           <include name="testMethod4"/>
+          <include name="setupExcel"/>
         </methods>
-      </class> <!-- rebill.testngRebillFast -->
+      </class> <!-- credit_debit.creditDebitTestNGSlow -->
     </classes>
   </test> <!-- Rebill Test(failed) -->
 </suite> <!-- Failed suite [Sample_Suite] -->
