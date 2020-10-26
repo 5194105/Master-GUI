@@ -23,7 +23,7 @@ public class runInstantInvoiceManually {
     	c.setLevel("3");
     	c.setDriverType("2");
     	c.setCompatibleMode("false");
-    	c.setSource("excel");
+    	c.setSource("db");
     	c.setAllCheckBox("false");
     	c.setNullCheckBox("true");
     	c.setFailedCheckBox("true");
