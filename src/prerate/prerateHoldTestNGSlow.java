@@ -35,7 +35,9 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import configuration.config;
 import configuration.excel;
+import configuration.importData;
 
 
 public class prerateHoldTestNGSlow {
@@ -127,10 +129,14 @@ public class prerateHoldTestNGSlow {
     String customString;
     String customCheckBox;
     String databaseDisabled;
-    
+    config c;
 	@BeforeClass
 	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox","sessionCount","customString","customCheckBox","databaseDisabled"})
 	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String sessionCount,String customString,String customCheckBox,String databaseDisabled) {
+		
+		
+		importData id = new importData();
+		c=id.getConfig();
 		try {
 			Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe");
 		} catch (IOException e1) {
@@ -215,12 +221,12 @@ try {
     	
         if (level.equals("2"))
     	{
-    		levelUrl="https://testsso.secure.fedex.com/l2/prerates";
+    		levelUrl=c.getPrerateL2Url();
     	}
     	else if (level.equals("3"))
     	{
-    		levelUrl="https://testedcsso.secure.fedex.com/l3/prerates";
-    		//levelUrl="https://testsso.secure.fedex.com/l3/prerates";
+    		levelUrl=c.getPrerateL3Url();
+    		
     	}
             
     	
@@ -238,16 +244,12 @@ try {
 	
     	try {
     	
-    			Class.forName("oracle.jdbc.driver.OracleDriver");
-    			GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
-    		
+    			
+    			GTMcon=c.getGtmRevToolsConnection();
 			
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
   	 String databaseSqlCount="select count(*) as total from prerate_hold_view ";
@@ -999,15 +1001,11 @@ try {
 	public synchronized void writeToDB(String testInputNbr,String tinCount,String trk,String[] resultArray) {
 		Connection GTMcon=null;
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
 			
+			GTMcon=c.getGtmRevToolsConnection();
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		PreparedStatement stmt = null;
@@ -1065,29 +1063,13 @@ public  Boolean validateEC(String trkngnbr,String tinComment){
 	PreparedStatement ps = null;
 	Connection ecCon= null;
  if (level.equals("2")){
-       // con=c.getOreL2DbConnection();
-       // con=c.getEcL2DbConnection();
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			ecCon=DriverManager.getConnection("jdbc:oracle:thin:@//idb00271.ute.fedex.com:1526/IE2VD991","test_readonly", "perftest");
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	 ecCon=c.getEcL2DbConnection();
 		
  }
  else if  (level.equals("3")){
-	 	try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			ecCon=DriverManager.getConnection("jdbc:oracle:thin:@//sdb00299.ute.fedex.com:1526/sdb00299.ute.fedex.com","test_readonly", "perftest");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+	 	
+			
+			ecCon=c.getEcL3DbConnection();
 }
 
 try {
@@ -1309,26 +1291,14 @@ where pkg_trkng_nbr ='582838858029';
 		String resultString="";
 	 if (level.equals("2")){
 	    
-			try {
-				Class.forName("oracle.jdbc.driver.OracleDriver");
-				oreCon=DriverManager.getConnection("jdbc:oracle:thin:@//idb00248.ute.fedex.com:1526/IE2VD925","test_readonly", "perftest");
-			} catch (ClassNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		 oreCon=c.getOreL2DbConnection();
 			
 	 }
 	 else if  (level.equals("3")){
-		 	try {
-				Class.forName("oracle.jdbc.driver.OracleDriver");
-				oreCon=DriverManager.getConnection("jdbc:oracle:thin:@//sdb00261.ute.fedex.com:1526/PT1VD925","test_readonly", "perftest");
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		 
+			
+				oreCon=c.getOreL3DbConnection();
+		
 			
 	}
 

@@ -40,6 +40,7 @@ import org.testng.annotations.Test;
 
 import configuration.config;
 import configuration.excel;
+import configuration.importData;
 
 public class testngRebillSlow {
 
@@ -57,7 +58,7 @@ public class testngRebillSlow {
 	Object o;
 	WebDriverWait wait1,wait2,wait3,wait4;
 	
-	config c;
+	
 	int count1,count2,count3,count4 ;
 	String  sh1;
 	String filepath;
@@ -132,16 +133,18 @@ public class testngRebillSlow {
 	
 	ArrayList<rebillData> rebillDataArray= new ArrayList<rebillData>();
 	String[][] allData;
+	config c;
+	String headless;
 	
 	@BeforeClass
-	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox","sessionCount","customString","customCheckBox","databaseDisabled"})
-	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String sessionCount,String customString,String customCheckBox,String databaseDisabled) {
-	c=new config();
-	/*
-	@BeforeClass
-	public void setupExcel() {
-*/
+	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox","sessionCount","customString","customCheckBox","databaseDisabled","headless"})
+	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String sessionCount,String customString,String customCheckBox,String databaseDisabled,String headless) {
+	
+
 		
+	importData id = new importData();
+	c=id.getConfig();
+	
 		//Kill all running chromedrivers leftover from previous sessions
 		try {
 			Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe");
@@ -174,7 +177,7 @@ public class testngRebillSlow {
 	        	this.customString=customString;
 	        	this.customCheckBox=customCheckBox;
 	        	this.databaseDisabled=databaseDisabled;
-        
+	        	this.headless=headless;
        
     	
     	if(source.equals("excel")) {
@@ -217,13 +220,11 @@ public class testngRebillSlow {
     	
         if (level.equals("2"))
     	{
-    		levelUrl="https://testsso.secure.fedex.com/L2/eRA/index.html";
-    		
+    		levelUrl=c.getRebillL2Url();		
     	}
     	else if (level.equals("3"))
     	{
-    		levelUrl="https://testsso.secure.fedex.com/L3/eRA/index.html";
-    	
+    		levelUrl=c.getRebillL3Url();	   	
     	}
        
     	
@@ -234,26 +235,12 @@ public class testngRebillSlow {
 	
 	public void runDbQuery() {
 		try {
-		Connection GTMcon=null;
+		Connection GTMcon=c.getGtmRevToolsConnection();
 		Statement stmt = null;
 		ResultSet rs = null;
 		ResultSetMetaData rsmd=null;
-		//Change to L3
-    	try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
-			
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+
     	String databaseSqlCount="select count(*) as total from rebill_regression ";
-    	
-    	
     	String databaseSqlQuery="select result, description, test_input_nbr, tin_count, trkngnbr, reason_code, rebill_acct,invoice_nbr_1, invoice_nbr_2, mig, region,  login,   password,  rs_Type, company, worktype, ORIGIN_LOC,DEST_LOC,DIM_VOL,SHIPPER_REF,RECP_ADDRESS,SHIPPER_ADDRESS,ACC_NBR_DEL_STATUS,SVC_BASE, CREDIT_CARD_DTL,PRE_RATE_SCENARIOS,EXP_Pieces,EXP_ACTUAL_Weight,EXP_Adj_Weight,CREDIT_CARD_DTL from rebill_regression ";
     	
     	if (allCheckBox.equals("true")) {
@@ -1375,7 +1362,7 @@ public class testngRebillSlow {
              }
              Thread.sleep(2000);
              	driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")).click();
-             	Thread.sleep(15000);
+             	Thread.sleep(10000);
              	}
              	catch(Exception e) {
              		System.out.println("Failed Trying to Rebill..");
@@ -1490,17 +1477,14 @@ public class testngRebillSlow {
     
     public synchronized void writeToDB(String testInputNbr,String tinCount,String trk,String[] resultArray) {
     	Connection GTMcon=null;
-    	try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
-			
+		try {
+			GTMcon = c.getGtmRevToolsConnection();
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+
+
 		
     	PreparedStatement stmt = null;
     	
@@ -1540,19 +1524,18 @@ public class testngRebillSlow {
     }
     
     public String[] validateResults(String trk) {
-    	
-    	Boolean result=null;
+    
     	Connection con = null;
     	String[] resultArray = new String[2];
     	
     	try {
     	
     		if (level.equals("2")){
-    			 c.setEraL2DbConnection();
+    			 
        		     con=c.getEraL2DbConnection();
        	 }
        	 else if (level.equals("3")){
-       		 	c.setEraL3DbConnection();
+       		 	
        		 	con=c.getEraL3DbConnection();
        	 	}
     	

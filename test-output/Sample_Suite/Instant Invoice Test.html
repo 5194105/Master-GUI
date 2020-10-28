@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Instant Invoice Test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>0/3/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>6/3/0</td>
 </tr><tr>
-<td>Started on:</td><td>Sun Jun 28 20:55:59 CDT 2020</td>
+<td>Started on:</td><td>Wed Jul 08 13:47:56 CDT 2020</td>
 </tr>
-<tr><td>Total time:</td><td>5 seconds (5681 ms)</td>
+<tr><td>Total time:</td><td>10 seconds (10344 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -77,78 +77,110 @@ function toggleAllBoxes() {
 <tr>
 <td title='instant_invoice.testNgSlowInstantInvoice.testMethod2()'><b>testMethod2</b><br>Test class: instant_invoice.testNgSlowInstantInvoice</td>
 <td><div><pre>org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] instant_invoice.testNgSlowInstantInvoice.dataProviderMethod2() returned a null value
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
-... Removed 9 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace15546618", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace15546618'><pre>org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] instant_invoice.testNgSlowInstantInvoice.dataProviderMethod2() returned a null value
-	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:150)
-	at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
-	at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
-	at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
-	at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
-	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:788)
-	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
+Data Provider public synchronized java.lang.Object[][] instant_invoice.testNgSlowInstantInvoice.dataProviderMethod2() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 7 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1044965", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1044965'><pre>org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] instant_invoice.testNgSlowInstantInvoice.dataProviderMethod2() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
+	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
+	at org.testng.internal.Invoker.handleParameters(Invoker.java:1308)
+	at org.testng.internal.Invoker.createParameters(Invoker.java:1036)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1126)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
 </pre></div></td>
 <td>0</td>
-<td>instant_invoice.testNgSlowInstantInvoice@63f509</td></tr>
+<td>instant_invoice.testNgSlowInstantInvoice@1f205aa</td></tr>
 <tr>
 <td title='instant_invoice.testNgSlowInstantInvoice.testMethod3()'><b>testMethod3</b><br>Test class: instant_invoice.testNgSlowInstantInvoice</td>
 <td><div><pre>org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] instant_invoice.testNgSlowInstantInvoice.dataProviderMethod3() returned a null value
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
-... Removed 9 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace30802190", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace30802190'><pre>org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] instant_invoice.testNgSlowInstantInvoice.dataProviderMethod3() returned a null value
-	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:150)
-	at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
-	at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
-	at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
-	at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
-	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:788)
-	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
+Data Provider public synchronized java.lang.Object[][] instant_invoice.testNgSlowInstantInvoice.dataProviderMethod3() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 7 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace11594587", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace11594587'><pre>org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] instant_invoice.testNgSlowInstantInvoice.dataProviderMethod3() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
+	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
+	at org.testng.internal.Invoker.handleParameters(Invoker.java:1308)
+	at org.testng.internal.Invoker.createParameters(Invoker.java:1036)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1126)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
 </pre></div></td>
 <td>0</td>
-<td>instant_invoice.testNgSlowInstantInvoice@63f509</td></tr>
+<td>instant_invoice.testNgSlowInstantInvoice@1f205aa</td></tr>
 <tr>
 <td title='instant_invoice.testNgSlowInstantInvoice.testMethod4()'><b>testMethod4</b><br>Test class: instant_invoice.testNgSlowInstantInvoice</td>
 <td><div><pre>org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] instant_invoice.testNgSlowInstantInvoice.dataProviderMethod4() returned a null value
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
-... Removed 9 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace20017140", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace20017140'><pre>org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] instant_invoice.testNgSlowInstantInvoice.dataProviderMethod4() returned a null value
-	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:150)
-	at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
-	at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
-	at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
-	at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
-	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:788)
-	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
+Data Provider public synchronized java.lang.Object[][] instant_invoice.testNgSlowInstantInvoice.dataProviderMethod4() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+... Removed 7 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace32802393", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace32802393'><pre>org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] instant_invoice.testNgSlowInstantInvoice.dataProviderMethod4() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
+	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
+	at org.testng.internal.Invoker.handleParameters(Invoker.java:1308)
+	at org.testng.internal.Invoker.createParameters(Invoker.java:1036)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1126)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
 </pre></div></td>
 <td>0</td>
-<td>instant_invoice.testNgSlowInstantInvoice@63f509</td></tr>
+<td>instant_invoice.testNgSlowInstantInvoice@1f205aa</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='instant_invoice.testNgSlowInstantInvoice.testMethod1()'><b>testMethod1</b><br>Test class: instant_invoice.testNgSlowInstantInvoice<br>Parameters: 248781.0, 794977289292, 700707890, OR, , 1</td>
+<td></td>
+<td>1</td>
+<td>instant_invoice.testNgSlowInstantInvoice@1f205aa</td></tr>
+<tr>
+<td title='instant_invoice.testNgSlowInstantInvoice.testMethod1()'><b>testMethod1</b><br>Test class: instant_invoice.testNgSlowInstantInvoice<br>Parameters: 248781.0, 583058564066, 700707890, OR, , 2</td>
+<td></td>
+<td>0</td>
+<td>instant_invoice.testNgSlowInstantInvoice@1f205aa</td></tr>
+<tr>
+<td title='instant_invoice.testNgSlowInstantInvoice.testMethod1()'><b>testMethod1</b><br>Test class: instant_invoice.testNgSlowInstantInvoice<br>Parameters: 248781.0, 794977290035, 700707890, OR, , 3</td>
+<td></td>
+<td>0</td>
+<td>instant_invoice.testNgSlowInstantInvoice@1f205aa</td></tr>
+<tr>
+<td title='instant_invoice.testNgSlowInstantInvoice.testMethod1()'><b>testMethod1</b><br>Test class: instant_invoice.testNgSlowInstantInvoice<br>Parameters: 248781.0, 583058564066, 700707890, OR, , 4</td>
+<td></td>
+<td>0</td>
+<td>instant_invoice.testNgSlowInstantInvoice@1f205aa</td></tr>
+<tr>
+<td title='instant_invoice.testNgSlowInstantInvoice.testMethod1()'><b>testMethod1</b><br>Test class: instant_invoice.testNgSlowInstantInvoice<br>Parameters: 248781.0, 794977290035, 700707890, OR, , 5</td>
+<td></td>
+<td>0</td>
+<td>instant_invoice.testNgSlowInstantInvoice@1f205aa</td></tr>
+<tr>
+<td title='instant_invoice.testNgSlowInstantInvoice.testMethod1()'><b>testMethod1</b><br>Test class: instant_invoice.testNgSlowInstantInvoice<br>Parameters: 248781.0, 794977289292, 700707890, OR, , 6</td>
+<td></td>
+<td>0</td>
+<td>instant_invoice.testNgSlowInstantInvoice@1f205aa</td></tr>
 </table><p>
 </body>
 </html>

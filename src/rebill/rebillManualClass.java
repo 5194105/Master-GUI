@@ -34,33 +34,34 @@ public class rebillManualClass {
 	static ArrayList<rebillData> rebillDataArray= new ArrayList<rebillData>();
     public static void main(String[] args) {
     	config c = new config();
-       	c.setExcelPath("C:\\Users\\FedExUser\\Documents\\rebill.xlsx");
+       	c.setExcelPath("C:\\Users\\FedExUser\\Desktop\\stephen\\R66\\L3C6\\rebill.xlsx");
     	c.setLevel("3");
-    	c.setDriverType("2");
-    	
+    	c.setDriverType("2");	
     	c.setCompatibleMode("false");
     	c.setSource("db");
     	c.setAllCheckBox("false");
     	c.setNullCheckBox("true");
     	c.setFailedCheckBox("true");
+<<<<<<< HEAD
 		c.setDomesticCheckBox("true");
 		c.setInternationalCheckBox("true");
 		c.setExpressCheckBox("true");
 
 		
 
+=======
+		c.setDomesticCheckBox("true");
+		c.setInternationalCheckBox("true");
+		c.setExpressCheckBox("false");
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 		c.setGroundCheckBox("true");
-		c.setNormalCheckBox("true");
-	
-		
-
+		c.setNormalCheckBox("false");
 		c.setDatabaseDisabled("false");
 		c.setCustomCheckBox("false");
-		c.setCustomString("");
-		//c.setNormalCheckBox("true");
-		//c.setMfRetireCheckBox("true");
+		c.setCustomString("trkngnbr in ('882553697362','590443411313')");
+		c.setHeadlessString("false");
 
-		c.setSessionCount("1");
+		c.setSessionCount("2");
     	
     	String filepath=c.getExcelPath();
 		String level=c.getLevel();
@@ -77,9 +78,11 @@ public class rebillManualClass {
 
 		String sessionCount=c.getSessionCount();
 		
-	String databaseDisabled=	c.getDatabaseDisabled();
-	String	customCheckBox= c.getCustomCheckBox();
-	String	customString= c.getCustomString();
+		String databaseDisabled=	c.getDatabaseDisabled();
+		String	customCheckBox= c.getCustomCheckBox();
+		String	customString= c.getCustomString();
+		
+		String headless=c.getHeadlessString();
 		
 		System.out.println("filepath "+filepath);
 		System.out.println("level "+level);
@@ -98,6 +101,7 @@ public class rebillManualClass {
 		System.out.println("customString "+customString);
 		System.out.println("customCheckBox "+customCheckBox);
 		System.out.println("databaseDisabled "+databaseDisabled);
+		System.out.println("headless "+headless);
 		
 		
 		if(filepath==null) {
@@ -133,18 +137,10 @@ public class rebillManualClass {
 		if(groundCheckBox==null) {
 			groundCheckBox="";
 		}
-		/*
-		if(normalCheckBox==null) {
-			normalCheckBox="";
-		}
-		if(mfRetireCheckBox==null) {
-			mfRetireCheckBox="";
-		}
-		*/
+	
 		if(sessionCount==null) {
 			sessionCount="";
 		}
-		
 		
 		if(customString==null) {
 			customString="";
@@ -155,18 +151,11 @@ public class rebillManualClass {
 		if(databaseDisabled==null) {
 			databaseDisabled="";
 		}
-	
-	
-/*
-		@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox",
-		"failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox",
-		"sessionCount","customString","customCheckBox","databaseDisabled"})
-	
-		public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,
-		String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,
-		String sessionCount,String customString,String customCheckBox,String databaseDisabled) {
+		if(headless==null) {
+			headless="";
+		}
 		
-			*/
+
         XmlSuite xmlSuite = new XmlSuite();
         xmlSuite.setName("Sample_Suite");
         Map<String, String> fieldValues = new HashMap<>();
@@ -186,12 +175,12 @@ public class rebillManualClass {
         fieldValues.put("customString",customString);
         fieldValues.put("customCheckBox",customCheckBox);
         fieldValues.put("databaseDisabled",databaseDisabled);
-        
+        fieldValues.put("headless",headless);
         xmlSuite.setParameters(fieldValues);
         XmlTest xmlTest = new XmlTest(xmlSuite);
         xmlTest.setName("Rebill Test");
-        //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
-        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testngRebillSlow.class)));
+        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testngRebillFast.class)));
+       // xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testngRebillSlow.class)));
         xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
         TestNG tng = new TestNG();
         tng.setXmlSuites(Collections.singletonList(xmlSuite));

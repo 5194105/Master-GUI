@@ -20,6 +20,7 @@ import org.openqa.selenium.WebDriver;
 
 import UD.UdExecution;
 import configuration.config;
+import configuration.importData;
 import configuration.mouse;
 import configuration.testStuff;
 import rebill.rebillMain;
@@ -67,6 +68,8 @@ public class gui {
      String udDefault="ud.png";
      String prerateDefault="prerate.png";
      String eraRerateDefault="eraRerate.png";
+     String rebillTroubleshootPic="rebillTroubleshootPic.png";
+     String creditAndDebitDefault="creditanddebit.png";
      
      String rebillAlt="rebillHighlight.png";
      String rerateAlt="rerateHighlight.png";
@@ -75,12 +78,20 @@ public class gui {
      String udAlt="udHighlight.png";
      String prerateAlt="prerateHighlight.png";
      String eraRerateAlt="eraRerateHighlight.png";
-    
-   
-    
-     public String rebillTroubleshootPic="rebillTroubleshootPic.png";
-     public String rebillTroubleshootAlt="rebillTroubleshootPicHighlight.png";
-
+     String rebillTroubleshootAlt="rebillTroubleshootPicHighlight.png";
+     String creditAndDebitAlt="creditanddebithighlight.png";
+      
+      
+     String rebillDisabled="rebillDisabled.png";
+     String rerateDisabled="rerateDisabled.png";
+     String instantDisabled="instantDisabled.png";
+     String datapopDisabled="datapopDisabled.png";
+     String udDisabled="udDisabled.png";
+     String prerateDisabled="prerateDisabled.png";
+     String eraRerateDisabled="eraRerateDisabled.png";
+     String rebillTroubleshootDisabled="rebillTroubleshootPicDisabled.png";
+     String creditAndDebitDisabled="creditanddebitdisabled.png";
+     
      
      String libDirectoryDB,libDirectoryExcel,libDirectorySelenium;
      
@@ -119,7 +130,7 @@ public class gui {
 	String udUsername,udPassword;
 
 	
-	JLabel rebillGUI,rerateGUI,prerateGUI,instantInvoiceGUI,udAutomationGUI,datapopGUI,background,rebillTroubleShootGUI,eraRerateGUI;
+	JLabel rebillGUI,rerateGUI,prerateGUI,instantInvoiceGUI,udAutomationGUI,datapopGUI,background,rebillTroubleShootGUI,eraRerateGUI,creditAndDebitGUI;
 	
 	/**
 	 * Launch the application.
@@ -141,12 +152,8 @@ public class gui {
 	 * Create the application.
 	 */
 	public gui() {
-		try {
-			setUp();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}  
+		importData id = new importData(); 
+		c=id.getConfig();
 		initialize();
 		
 		  	
@@ -158,7 +165,7 @@ public class gui {
 	private void initialize() {
 		
 		
-	      
+	      /*
 	      libDirectoryDB=homePath+"\\libs+\\DB";
 	      libDirectoryExcel=homePath+"\\libs+\\Excel";
 	      libDirectorySelenium=homePath+"\\libs+\\Selenium";
@@ -166,9 +173,9 @@ public class gui {
 	      System.out.println(homePath);
 	      System.out.println(imagePath);
 	        
-	        
+	        */
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1005, 718);
+		frame.setBounds(100, 100, 985, 680);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -208,35 +215,15 @@ public class gui {
 		eraRerateGUI.setBounds(561, 463, 338, 54);
 		eraRerateGUI.setName("eraRerate");
 		
+		creditAndDebitGUI = new JLabel("New label");
+		creditAndDebitGUI.setBounds(561, 525, 338, 54);
+		creditAndDebitGUI.setName("creditAndDebit");
 		
 		
 		
 		
 		
-		
-		
-		JButton testButton = new JButton("Testing - Dont Click");
-		testButton.setBounds(740, 617, 207, 29);
-		frame.getContentPane().add(testButton);
-		
-		JButton btnRebillTroubleshoot = new JButton("Test Whatever");
-		btnRebillTroubleshoot.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				try {
-					//rebillTroubleshoot rt = new rebillTroubleshoot(c);
-				//	testStuff ts = new testStuff(c);
-					udcompare uc = new udcompare(c);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			}
-		});
-		btnRebillTroubleshoot.setBounds(64, 631, 153, 23);
-		frame.getContentPane().add(btnRebillTroubleshoot);
-		
+	
 		
 		
 		
@@ -247,90 +234,26 @@ public class gui {
 		m.setFrame(frame);
 		m.setupBaseIcons();
 		
-		m.addIconWithMouse(rebillGUI,"rebill",rebillDefault,rebillAlt);
-		m.addIconWithMouse(rerateGUI,"rerate",rerateDefault,rerateAlt);
-		m.addIconWithMouse(prerateGUI,"prerate",prerateDefault,prerateAlt);
-		m.addIconWithMouse(instantInvoiceGUI,"instant",instantDefault,instantAlt);
-		m.addIconWithMouse(udAutomationGUI,"ud",udDefault,udAlt);
-		m.addIconWithMouse(eraRerateGUI,"eraRerate",eraRerateDefault,eraRerateAlt);	
+		m.addIconWithMouse(rebillGUI,"rebill",rebillDefault,rebillAlt,rebillDisabled,c.getRebillEnabled());
+		m.addIconWithMouse(rerateGUI,"rerate",rerateDefault,rerateAlt,rerateDisabled,c.getRerateEnabled());
+		m.addIconWithMouse(prerateGUI,"prerate",prerateDefault,prerateAlt,prerateDisabled,c.getPrerateEnabled());
+		m.addIconWithMouse(instantInvoiceGUI,"instant",instantDefault,instantAlt,instantDisabled,c.getInstantInvoiceEnabled());
+		m.addIconWithMouse(udAutomationGUI,"ud",udDefault,udAlt,udDisabled,c.getUdEnabled());
+		m.addIconWithMouse(eraRerateGUI,"eraRerate",eraRerateDefault,eraRerateAlt,eraRerateDisabled,c.getEraRerateEnabled());	
 		//m.addIconWithMouse(datapopGUI,"datapop",datapopDefault,datapopAlt);	
-
-		m.addIconWithMouse(rebillTroubleShootGUI,"rebillTroubleshoot",rebillTroubleshootPic,rebillTroubleshootAlt);	
-		
+		m.addIconWithMouse(rebillTroubleShootGUI,"rebillTroubleshoot",rebillTroubleshootPic,rebillTroubleshootAlt,rebillTroubleshootDisabled,c.getRebillTroubleshootEnabled());	
+		m.addIconWithMouse(creditAndDebitGUI,"creditAndDebit",creditAndDebitDefault,creditAndDebitAlt,creditAndDebitDisabled,c.getCreditAndDebitEnabled());	
 		m.setupBackground();
 	
 	    frame.setVisible(true);
-	    //
-	    
-		testButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			
-				
-				c.setDriverType("2");
-				c.setSource("excel");
-				c.setExcelPath(homePath+"\\test data\\rebill.xlsx");
-				c.setLevel("2");
-				try {
-					rebillMain rebill = new rebillMain(c);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-			/*
-				
-				//You can give them manually here to just see if program runs... if you dont want to type in GUI everytime.
-				
-				//
-				
-				
-	//			c.setUdUsername(textField.getText());
-//				c.setUdPassword(textField_1.getText());
-				
-				
-				//level entry
-
-//				String level1,compatibleMode;
-//				
-//					c.setLevel(false);
-//					c.setLevel(true);
-//					c.setCompatibleMode(false);
-//					c.setCompatibleMode(true);
-//					c.setType("Domestic");
-//					c.setFlavour("NA");
-//				//	c.setFlavour("AB");
-//					//c.setFlavour("NT");
-//					//c.setFlavour("CCAR");
-//					//level1="L2";
-//					level1="L3";
-//					compatibleMode="RDP";
-//				//	compatibleMode="LOCAL";
-//					c.setUdUsername("5194105");
-//					c.setUdPassword("Online74");
-//					c.setUnixPath("/home/sqaatt/onlines/udpending");
-//					c.setExcelPath("C:\\Users\\FedExUser\\Desktop\\test.xlsx");
-//				c.setSource(false);;
-//				
-				
-				
-				try {
-					UdExecution ud=new UdExecution(c);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				*/
-				
-			}
-		});
 
 	}
 	
-
 	//Sets up config file
+	/*
 	public void setUp() throws ClassNotFoundException {
 		
-		
+	
 		 homePath=System.getProperty("user.dir");
 	      if (System.getProperty("user.dir").indexOf("dist")==-1){
 	    	  imagePath=System.getProperty("user.dir");
@@ -471,4 +394,5 @@ public class gui {
 		
 		
 	}
+	*/
 }

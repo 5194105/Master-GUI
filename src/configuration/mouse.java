@@ -31,10 +31,13 @@ import org.testng.xml.XmlTest;
 
 import UD.UdExecution;
 import guis.datapopAutomationGui;
+import guis.eraCreditAndDebitAutomationGui;
+import guis.eraCreditAndDebitExtendedAutomationGui;
 import guis.eraRerateAutomationExtendGui;
 import guis.eraRerateAutomationGui;
 import guis.gui;
 import guis.guiBase;
+import guis.instantInvoiceAutomationExtendGui;
 import guis.instantInvoiceAutomationGui;
 import guis.prerateAutomationExtendedGui;
 import guis.prerateAutomationGui;
@@ -43,9 +46,11 @@ import guis.rebillAutomationExtendGUI;
 import guis.rebillAutomationGui;
 import guis.rerateAutomationGui;
 import guis.udAutomation;
+import instant_invoice.testNgSlowInstantInvoice;
 import prerate.prerateHoldTestNGSlow;
 import prerate.prerateTestNGSlow;
 import rebill.rebillMain;
+import rebill.testngRebillFast;
 import rebill.testngRebillSlow;
 import rebill.testngRebillSlowMfRetire;
 import rebill.updateRebillDb;
@@ -188,8 +193,10 @@ public class mouse {
 	
 	eraRerateAutomationGui eraRerate;
 	
-    public rerateAutomationGui rag;
-	
+    rerateAutomationGui rag;
+    eraCreditAndDebitAutomationGui creditAndDebit;
+    
+    
 	public mouse(guiBase gb,gui g,config c,Object obj,JFrame currentFrame) {
 		this.g=g;
 		this.gb=gb;
@@ -235,11 +242,11 @@ public class mouse {
 	
 	public void setupBaseIcons() {
 		
-		addIconWithMouse(gb.menuLabel,"menu",gb.menuDefault,gb.menuAlt);
-		addIconWithMouse(gb.databaseLabel,"db",gb.dbDefault,gb.dbAlt);
-		addIconWithMouse(gb.linkLabel,"link",gb.linkDefault,gb.linkAlt);
-		addIconWithMouse(gb.infoLabel,"info",gb.infoDefault,gb.infoAlt);
-		addIconWithMouse(gb.backLabel,"back",gb.backDefault,gb.backAlt);	
+		addIconWithMouse(gb.menuLabel,"menu",gb.menuDefault,gb.menuAlt,"",true);
+		addIconWithMouse(gb.databaseLabel,"db",gb.dbDefault,gb.dbAlt,"",true);
+		addIconWithMouse(gb.linkLabel,"link",gb.linkDefault,gb.linkAlt,"",true);
+		addIconWithMouse(gb.infoLabel,"info",gb.infoDefault,gb.infoAlt,"",true);
+		addIconWithMouse(gb.backLabel,"back",gb.backDefault,gb.backAlt,"",true);	
 	}
 	
 	public void setupBackground() {
@@ -313,6 +320,7 @@ public void addExcel(JLabel jlabel) {
 
 public void addDb(JLabel jlabel) {
 	jLabelDatabase=jlabel;
+	if(c.getAdmin()==true) {
 	try {
 		
 		if(databaseBoolean==false) {
@@ -342,6 +350,10 @@ public void addDb(JLabel jlabel) {
 	  jLabelDatabase.addMouseListener(m2);
 	  c2=true;
 	  }
+	}
+	else {
+		JOptionPane.showMessageDialog(frame, "You Dont Have Admin Access. Certain Functionality Have Been Disabled.");
+	}
 	  
 }
 
@@ -562,9 +574,9 @@ public void addRemoveAkshayUDStuff(Boolean addRemove){
 
 
 
-	public void addIconWithMouse(JLabel jl,String name,String defaultPic,String altPic) {
+	public void addIconWithMouse(JLabel jl,String name,String defaultPic,String altPic,String disabledPic,Boolean enabled) {
 		
-		labelClassArray.add(new labelClass(jl,name,defaultPic,altPic));
+		labelClassArray.add(new labelClass(jl,name,defaultPic,altPic,disabledPic,enabled));
 		addIcon(jl,defaultPic);
 		jl.addMouseListener( ml );
 	}
@@ -593,7 +605,12 @@ public void setupMouseListener() {
 			        for (int i=0;i<labelClassArray.size();i++) {
 			    		if (labelClassArray.get(i).getName().equals(mouseLabel.getName())) {
 			    			 mouseLabelStringDark=labelClassArray.get(i).getDefaultPic();
-				        	 mouseLabelStringLight=labelClassArray.get(i).getAltPic();
+				        	if (labelClassArray.get(i).getEnabled()==true) {
+			    			 mouseLabelStringLight=labelClassArray.get(i).getAltPic();
+				        	}
+				        	else {
+				        		mouseLabelStringLight=labelClassArray.get(i).getDisabledPic();
+				        	}
 				        	  mouseImage = ImageIO.read(new File(imagePath+"\\assets\\"+mouseLabelStringLight));
 					            mouseDimg = mouseImage.getScaledInstance(mouseLabel.getWidth(), mouseLabel.getHeight(),
 					    		        Image.SCALE_SMOOTH);
@@ -636,37 +653,111 @@ public void setupMouseListener() {
 					System.out.println("LABEL NAME : "+mouseLabel.getName());
 					
 			    		if (mouseLabel.getName().equals("rebill")) {
+			    			if(c.getRebillEnabled()==true) {
 			    			rebill = new rebillAutomationGui(g,c);
+			    			}
+			    			else {
+			    				JOptionPane.showMessageDialog(frame, "You Do Not Have Access To This Section");
+			    			}
 			    		}
 			    		if (mouseLabel.getName().equals("rerate")) {
+			    			if(c.getRebillEnabled()==true) {
 			    			rerate = new rerateAutomationGui(g,c);
 			    		}
+		    			else {
+		    				JOptionPane.showMessageDialog(frame, "You Do Not Have Access To This Section");
+		    			}
+			    		}
 			    		if (mouseLabel.getName().equals("prerate")) {
+			    			if(c.getPrerateEnabled()==true) {
 			    			prerate = new prerateAutomationGui(g,c);
 			    		}
+		    			else {
+		    				JOptionPane.showMessageDialog(frame, "You Do Not Have Access To This Section");
+		    			}
+			    		}
 			    		if (mouseLabel.getName().equals("instant")) {
+			    			if(c.getInstantInvoiceEnabled()==true) {
 			    			instantInvoice = new instantInvoiceAutomationGui(g,c);
 			    		}
+		    			else {
+		    				JOptionPane.showMessageDialog(frame, "You Do Not Have Access To This Section");
+		    			}
+			    		}
 			    		if (mouseLabel.getName().equals("ud")) {
+			    			if(c.getUdEnabled()==true) {
 			    			ud= new udAutomation(g,c);
+			    		}
+		    			else {
+		    				JOptionPane.showMessageDialog(frame, "You Do Not Have Access To This Section");
+		    			}
 			    		}
 			    		//if (mouseLabel.getName().equals("datapop")) {
 			    			//datapop = new datapopAutomationGui(g,c);
 			    		//}
 			    		if (mouseLabel.getName().equals("eraRerate")) {
+			    			if(c.getEraRerateEnabled()==true) {
 			    			eraRerate = new eraRerateAutomationGui(g,c);
 			    		}
+		    			else {
+		    				JOptionPane.showMessageDialog(frame, "You Do Not Have Access To This Section");
+		    			}
+			    		}
+			    		
+			    		
+			    		if (mouseLabel.getName().equals("creditAndDebit")) {
+			    			if(c.getCreditAndDebitEnabled()==true) {
+			    			creditAndDebit = new eraCreditAndDebitAutomationGui(g,c);
+			    		}
+		    			else {
+		    				JOptionPane.showMessageDialog(frame, "You Do Not Have Access To This Section");
+		    			}
+			    		}
+			    		
+			    		
+			    		
+			    		
 			    		
 			    		if (mouseLabel.getName().equals("rebillTroubleshoot")) {
+			    			if(c.getRebillTroubleshootEnabled()==true) {
 			    			JOptionPane.showMessageDialog(frame, "Started");
 			    			rt = new rebillTroubleshoot(c);
 			    			JOptionPane.showMessageDialog(frame, "Finished");
 			    		}
+			    			else {
+			    				JOptionPane.showMessageDialog(frame, "You Do Not Have Access To This Section");
+			    			}
+			    		}
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			
+			    			
 			    		
 			    		//Info Label
 			    		if (mouseLabel.getName().equals("info")) {		
 			    			 infoPane=new JFrame();  
-			    			    JOptionPane.showMessageDialog(infoPane,"Hello from GTMC Revenue Execution Onlines Team!");  
+			    			 if (JOptionPane.showConfirmDialog(null, "Do You Want To Check For An Update?", "WARNING",
+			    				        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+			    				 updateVersion uv= new updateVersion(c);
+			    				    // yes option
+			    				} else {
+			    				    // no option
+			    				}
+			    		}
+			    		
+			    		//Info Label
+			    		if (mouseLabel.getName().equals("link")) {		
+			    			// infoPane=new JFrame();  
+			    			 //   JOptionPane.showMessageDialog(infoPane,"Hello from GTMC Revenue Execution Onlines Team!");  
+			    			homePath=System.getProperty("user.dir");
+			    			ProcessBuilder pb = new ProcessBuilder("Notepad.exe", homePath+"\\config.txt");
+			    			pb.start();
 			    		}
 			    		
   		
@@ -788,6 +879,18 @@ public void setupMouseListener() {
 						
 						}
 							
+							if (obj.getClass().getCanonicalName().equals("guis.eraCreditAndDebitAutomationGui")) {
+								eraCreditAndDebitExtendedAutomationGui ecad= new eraCreditAndDebitExtendedAutomationGui(g,c);
+						
+						}
+							
+							if (obj.getClass().getCanonicalName().equals("guis.instantInvoiceAutomationGui")) {
+								instantInvoiceAutomationExtendGui iieag= new instantInvoiceAutomationExtendGui(g,c);
+						
+						}
+							
+							
+							
 							}
 						
 						if (mouseLabel.getName().equals("uploadResult")) {
@@ -796,7 +899,10 @@ public void setupMouseListener() {
 									JOptionPane.showMessageDialog(frame, "Must Select A Level");
 								}
 								else {
-									updateRebillDb urd= new updateRebillDb(c);
+									updateRebillDb urd= new updateRebillDb(c,obj);
+									Thread t1 = new Thread(urd);
+									t1.start();
+								
 								}
 							}
 						}
@@ -923,7 +1029,7 @@ public void setupMouseListener() {
 				    				String databaseDisabled=	c.getDatabaseDisabled();
 				    				String	customCheckBox= c.getCustomCheckBox();
 				    				String	customString= c.getCustomString();
-				    					
+				    				String headless=c.getHeadlessString();
 				    		
 				    				
 				    				System.out.println("filepath "+filepath);
@@ -943,6 +1049,7 @@ public void setupMouseListener() {
 				    				System.out.println("customString "+customString);
 				    				System.out.println("customCheckBox "+customCheckBox);
 				    				System.out.println("databaseDisabled "+databaseDisabled);
+				    				System.out.println("headless "+headless);
 				    				
 				    				
 				    				if(filepath==null) {
@@ -1001,7 +1108,9 @@ public void setupMouseListener() {
 				    					databaseDisabled="";
 				    				}
 				    			
-				    			
+				    				if(headless==null) {
+				    					headless="";
+				    				}
 				    		/*
 				    				@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox",
 				    				"failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox",
@@ -1031,12 +1140,12 @@ public void setupMouseListener() {
 				    		        fieldValues.put("customString",customString);
 				    		        fieldValues.put("customCheckBox",customCheckBox);
 				    		        fieldValues.put("databaseDisabled",databaseDisabled);
-				    		        
+				    		        fieldValues.put("headless",headless);
 				    		        xmlSuite.setParameters(fieldValues);
 				    		        XmlTest xmlTest = new XmlTest(xmlSuite);
 				    		        xmlTest.setName("Rebill Test");
 				    		        //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
-				    		        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testngRebillSlow.class)));
+				    		        xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testngRebillFast.class)));
 				    		        xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
 				    		        TestNG tng = new TestNG();
 				    		        tng.setXmlSuites(Collections.singletonList(xmlSuite));
@@ -1128,6 +1237,161 @@ public void setupMouseListener() {
 				    				
 				    				System.out.println("STARTED INSTANT INVOICE");
 
+				    		    	String filepath=c.getExcelPath();
+				    				String level=c.getLevel();
+				    				String browser=c.getDriverType();
+				    				String compatibleMode=c.getCompatibleMode();
+				    				String source = c.getSource();
+				    				String allCheckBox=c.getAllCheckBox();
+				    				String nullCheckBox=c.getNullCheckBox();
+				    				String failedCheckBox=c.getFailedCheckBox();
+				    				String domesticCheckBox=c.getDomesticCheckBox();
+				    				String internationalCheckBox=c.getInternationalCheckBox();
+				    				String expressCheckBox=c.getExpressCheckBox();
+				    				String groundCheckBox=c.getGroundCheckBox();
+
+				    				String sessionCount=c.getSessionCount();
+				    				
+				    			String databaseDisabled=	c.getDatabaseDisabled();
+				    			String	customCheckBox= c.getCustomCheckBox();
+				    			String	customString= c.getCustomString();
+				    				
+
+				    			
+				    			System.out.println("filepath "+filepath);
+				    			System.out.println("level "+level);
+				    			System.out.println("browser "+browser);
+				    			System.out.println("compatibleMode "+compatibleMode);
+				    			System.out.println("source "+source);
+				    			System.out.println("allCheckBox "+allCheckBox);
+				    			System.out.println("nullCheckBox "+nullCheckBox);
+				    			System.out.println("failedCheckBox "+failedCheckBox);
+				    			System.out.println("domesticCheckBox "+domesticCheckBox);
+				    			System.out.println("internationalCheckBox "+internationalCheckBox);
+				    			System.out.println("expressCheckBox "+expressCheckBox);
+				    			System.out.println("groundCheckBox "+groundCheckBox);
+
+				    			System.out.println("sessionCount "+sessionCount);
+				    			System.out.println("customString "+customString);
+				    			System.out.println("customCheckBox "+customCheckBox);
+				    			System.out.println("databaseDisabled "+databaseDisabled);
+				    			
+				    			
+				    			if(filepath==null) {
+				    				filepath="";
+				    			}
+				    			if(level==null) {
+				    				level="";
+				    			}
+				    			if(browser==null) {
+				    				browser="";
+				    			}
+				    			if(compatibleMode==null) {
+				    				compatibleMode="";
+				    			}
+				    			if(allCheckBox==null) {
+				    				allCheckBox="";
+				    			}
+				    			if(nullCheckBox==null) {
+				    				nullCheckBox="";
+				    			}
+				    			if(failedCheckBox==null) {
+				    				failedCheckBox="";
+				    			}
+				    			if(domesticCheckBox==null) {
+				    				domesticCheckBox="";
+				    			}
+				    			if(internationalCheckBox==null) {
+				    				internationalCheckBox="";
+				    			}
+				    			if(expressCheckBox==null) {
+				    				expressCheckBox="";
+				    			}
+				    			if(groundCheckBox==null) {
+				    				groundCheckBox="";
+				    			}
+
+				    			if(sessionCount==null) {
+				    				sessionCount="";
+				    			}
+				    			
+				    			
+				    			if(customString==null) {
+				    				customString="";
+				    			}
+				    			if(customCheckBox==null) {
+				    				customCheckBox="";
+				    			}
+				    			if(databaseDisabled==null) {
+				    				databaseDisabled="";
+				    			}
+
+				    		/*
+				    			@Parameters({
+				    				"filepath",
+				    				"level",
+				    				"browser",
+				    				"compatibleMode",
+				    				"source",
+				    				"allCheckBox",
+				    				"nullCheckBox",
+				    				"failedCheckBox",
+				    				"domesticCheckBox",
+				    				"internationalCheckBox",
+				    				"expressCheckBox",
+				    				"groundCheckBox",
+				    				"sessionCount",
+				    				"customString",
+				    				"customCheckBox",
+				    				"databaseDisabled"})
+				    			}
+				    			public void setupExcel(
+				    					String filepath,
+				    					String level,
+				    					String browser,
+				    					String compatibleMode,
+				    					String source,
+				    					String allCheckBox,
+				    					String nullCheckBox,
+				    					String failedCheckBox,
+				    					String domesticCheckBox,
+				    					String internationalCheckBox,
+				    					String expressCheckBox,
+				    					String groundCheckBox,
+				    					String sessionCount,
+				    					String customString,
+				    					String customCheckBox,
+				    					String databaseDisabled) {
+				    			
+				    				*/
+				    		    XmlSuite xmlSuite = new XmlSuite();
+				    		    xmlSuite.setName("Sample_Suite");
+				    		    Map<String, String> fieldValues = new HashMap<>();
+				    		    fieldValues.put("filepath", filepath);
+				    		    fieldValues.put("level", level);
+				    		    fieldValues.put("browser", browser);
+				    		    fieldValues.put("compatibleMode", compatibleMode);
+				    		    fieldValues.put("source", source);
+				    		    fieldValues.put("allCheckBox", allCheckBox);
+				    		    fieldValues.put("nullCheckBox", nullCheckBox);
+				    		    fieldValues.put("failedCheckBox", failedCheckBox);
+				    		   
+				    		    fieldValues.put("sessionCount",sessionCount);
+				    		    fieldValues.put("customString",customString);
+				    		    fieldValues.put("customCheckBox",customCheckBox);
+				    		    fieldValues.put("databaseDisabled",databaseDisabled);
+				    		    
+				    		    xmlSuite.setParameters(fieldValues);
+				    		    XmlTest xmlTest = new XmlTest(xmlSuite);
+				    		    xmlTest.setName("Instant Invoice Test");
+				    		   
+				    		 
+				    		    xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testNgSlowInstantInvoice.class)));
+				    		  
+				    		    xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
+				    		    TestNG tng = new TestNG();
+				    		    tng.setXmlSuites(Collections.singletonList(xmlSuite));
+				    		    tng.run();
 					    				}
 				    			
 				    			

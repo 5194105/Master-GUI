@@ -37,9 +37,11 @@ public class rerateManualTest {
 	c.setInternationalCheckBox("true");
 	c.setExpressCheckBox("true");
 	c.setGroundCheckBox("true");
+
 	c.setStartDate("01/01/2020");
 
-	c.setEndDate("06/25/2020");
+	c.setEndDate("07/06/2020");
+
 
 	c.setSessionCount("1");
 	c.setDatabaseDisabled("false");

@@ -7,11 +7,11 @@ import org.openqa.selenium.WebDriver;
 
 public class config {
 	
-	Connection taa1Con,gtmRevToolsCon,ciCon,oreL2Con,oreL3Con,ecL2Con,ecL3Con,eraL2Con,eraL3Con;
+	Connection rtmCon,gtmRevToolsCon,ciCon,oreL2Con,oreL3Con,ecL2Con,ecL3Con,eraL2Con,eraL3Con;
 	String chromeSetProperty,ieSetProperty,chromePath,ieDriverPath;
 	WebDriver ieDriver,chromeDriver,tempWebDriver;
-    String gtmDbName,gtmDbResults,gtmDbPassword,retryAttempts,secondTimeout,rebillL2URL,rebillL3URL;
-    String rtmDbName,rtmDbPassword;
+    String gtmDbUsername,gtmDbResults,gtmDbPassword,retryAttempts,secondTimeout,rebillL2URL,rebillL3URL;
+    String rtmDbUsername,rtmDbPassword;
     String rerateL2URL,rerateL3URL,prerateL2URL,prerateL3URL;
     String instantInvoiceL2URL,instantInvoiceL3URL;
     String rebillResultTable;
@@ -39,7 +39,7 @@ public class config {
     String prerateType;
     String customCheckBox;
     String customString;
-    
+    String whatever;
     String cycle;
     String homePath;
 
@@ -54,7 +54,43 @@ public class config {
     
     String ed1,ed2,ei1,ei2,gd1,gd2,gi1,gi2,nt1,nt2,sp1,sp2;
 	
+    String[][] allData;
+    
+    String function;
+    
+    String filePath;
+    
+    int rowCount,colCount;
+    
+    String oreL2DbUsername,oreL3DbUsername,ecL2DbUsername,ecL3DbUsername,eraL2DbUsername,eraL3DbUsername;
+    String oreL2DbPassword,oreL3DbPassword,ecL2DbPassword,ecL3DbPassword,eraL2DbPassword,eraL3DbPassword;
+    String prsReratePaL2Url,prsReratePaL3Url,prsRerateCreateL2Url,prsRerateCreateL3Url,prsRerateMainL2Url,prsRerateMainL3Url;
+    String eraRerateL2Url,eraRerateL3Url,prerateL2Url,prerateL3Url,rebillL2Url,rebillL3Url,instantInvoiceL2Url,instantInvoiceL3Url;
+    
+    String eraRerateSecondTimeout,rebillSecondTimeout,prerateSecondTimeout,instantInvoiceSecondTimeout,prsRerateSecondTimeout;
+    String prerateRetryAttempts,eraRerateRetryAttempts,prsRerateRetryAttempts,instantInvoiceRetryAttempts,rebillRetryAttempts;
+    
+    String headless;
+    
+    Boolean rerateEnabled,rebillEnabled,prerateEnabled,eraRerateEnabled,instantInvoiceEnabled,udEnabled,rebillTroubleshootEnabled,creditAndDebitEnabled;
+    
+    Boolean fedexNetwork,admin;
+    
+    String version,updateUsername,updatePassword;
+    
+    String updateHostname,updatePath;
+    String creditCheckBox,debitCheckBox;
+    
 	public config() {
+		
+	}
+	
+	public void setHeadlessString(String headless) {
+		this.headless=headless;
+	}
+	
+	public String getHeadlessString() {
+		return headless;
 		
 	}
 	
@@ -110,42 +146,252 @@ public class config {
 	
 
 	
-	public void setGtmDbName(String gtmDbName) {
+	public void setGtmDbUsername(String gtmDbUsername) {
 		
-		this.gtmDbName=gtmDbName;
-	}
-	public void setGtmDbResults(String gtmDbResults) {
+		this.gtmDbUsername=gtmDbUsername;
 		
-		this.gtmDbResults=gtmDbResults;
+		
 	}
+	public void setOreL2DbUsername(String oreL2DbUsername) {
+		
+		this.oreL2DbUsername=oreL2DbUsername;
+	}
+	public void setOreL3DbUsername(String oreL3DbUsername) {
+	
+	this.oreL3DbUsername=oreL3DbUsername;
+	}
+	
+	public void setEcL2DbUsername(String ecL2DbUsername) {
+	
+	this.ecL2DbUsername=ecL2DbUsername;
+	}
+	
+	public void setEcL3DbUsername(String ecL3DbUsername) {
+		
+		this.ecL3DbUsername=ecL3DbUsername;
+	}
+	
+	public void setEraL2DbUsername(String eraL2DbUsername) {
+		
+	this.eraL2DbUsername=eraL2DbUsername;
+	}
+	
+	public void setEraL3DbUsername(String eraL3DbUsername) {
+		
+		this.eraL3DbUsername=eraL3DbUsername;
+	}
+	
+	public void setOreL2DbPassword(String oreL2DbPassword) {
+		
+		this.oreL2DbPassword=oreL2DbPassword;
+	}
+	public void setOreL3DbPassword(String oreL3DbPassword) {
+	
+	this.oreL3DbPassword=oreL3DbPassword;
+	}
+	public void setEcL2DbPassword(String ecL2DbPassword) {
+	
+	this.ecL2DbPassword=ecL2DbPassword;
+	}
+	
+	public void setEcL3DbPassword(String ecL3DbPassword) {
+		
+		this.ecL3DbPassword=ecL3DbPassword;
+	}
+	public void setEraL2DbPassword(String eraL2DbPassword) {
+		
+	this.eraL2DbPassword=eraL2DbPassword;
+	}
+	
+	public void setEraL3DbPassword(String eraL3DbPassword) {
+		
+		this.eraL3DbPassword=eraL3DbPassword;
+	}
+	
 	
 	public void setGtmDbPassword(String gtmDbPassword) {
 		
 		this.gtmDbPassword=gtmDbPassword;
 	}
 	
-	public void setRetryAttempts(String retryAttempts) {
+	
+	
+	
+	
+	public void setRebillRetryAttempts(String rebillRetryAttempts) {
 		
-		this.retryAttempts=retryAttempts;
+		this.rebillRetryAttempts=rebillRetryAttempts;
 	}
 	
-	public void setSecondTimeout(String secondTimeout) {
+	public void setRebillSecondTimeout(String rebillSecondTimeout) {
 		
-		this.secondTimeout=secondTimeout;
+		this.rebillSecondTimeout=rebillSecondTimeout;
+	}
+public void setPrsRerateRetryAttempts(String prsRerateRetryAttempts) {
+		
+		this.prsRerateRetryAttempts=prsRerateRetryAttempts;
 	}
 	
-	public void setRebillL2URL(String rebillL2URL) {
+	public void setPrsRerateSecondTimeout(String prsRerateSecondTimeout) {
 		
-		this.rebillL2URL=rebillL2URL;
+		this.prsRerateSecondTimeout=prsRerateSecondTimeout;
 	}
-	public void setRebillL3URL(String rebillL3URL) {
+public void setInstantInvoiceRetryAttempts(String instantInvoiceRetryAttempts) {
 		
-		this.rebillL3URL=rebillL3URL;
+		this.instantInvoiceRetryAttempts=instantInvoiceRetryAttempts;
 	}
 	
-	public void setRtmDbName(String rtmDbName) {
+	public void setInstantInvoiceSecondTimeout(String instantInvoiceSecondTimeout) {
 		
-		this.rtmDbName=rtmDbName;
+		this.instantInvoiceSecondTimeout=instantInvoiceSecondTimeout;
+	}
+public void setPrerateRetryAttempts(String prerateRetryAttempts) {
+		
+		this.prerateRetryAttempts=prerateRetryAttempts;
+	}
+	
+	public void setPrerateSecondTimeout(String prerateSecondTimeout) {
+		
+		this.prerateSecondTimeout=prerateSecondTimeout;
+	}
+public void setEraRerateRetryAttempts(String eraRerateRetryAttempts) {
+		
+		this.eraRerateRetryAttempts=eraRerateRetryAttempts;
+	}
+	
+	public void setEraRerateSecondTimeout(String eraRerateSecondTimeout) {
+		
+		this.eraRerateSecondTimeout=eraRerateSecondTimeout;
+	}
+	
+	
+	public String getRebillRetryAttempts() {
+		return rebillRetryAttempts;
+	}
+	
+	public String getPrerateRetryAttempts() {
+		return prerateRetryAttempts;
+	}
+	
+	public String getEraRerateRetryAttempts() {
+		return eraRerateRetryAttempts;
+	}
+	
+	public String getPrsRerateRetryAttempts() {
+		return prsRerateRetryAttempts;
+	}
+	
+	public String getInstantInvoiceRetryAttempts() {
+		return instantInvoiceRetryAttempts;
+	}
+	
+	
+	public String getRebillSecondTimeout() {
+		return rebillSecondTimeout;
+	}
+	
+	public String getPrerateSecondTimeout() {
+		return prerateSecondTimeout;
+	}
+	
+	public String getEraRerateSecondTimeout() {
+		return eraRerateSecondTimeout;
+	}
+	
+	public String getPrsRerateSecondTimeout() {
+		return prsRerateSecondTimeout;
+	}
+	
+	public String getInstantInvoiceSecondTimeout() {
+		return instantInvoiceSecondTimeout;
+	}
+	
+	
+	
+	
+	public void setStephenPassword(String whatever) {
+		
+		this.whatever=whatever;
+	}
+	
+	public String getStephenPassword() {
+		
+		return whatever;
+	}
+	
+	
+	public void setRebillL2Url(String rebillL2Url) {
+		
+		this.rebillL2Url=rebillL2Url;
+	}
+	public void setRebillL3Url(String rebillL3Url) {
+		
+		this.rebillL3Url=rebillL3Url;
+	}
+	
+	public void setPrerateL2Url(String prerateL2Url) {
+		
+		this.prerateL2Url=prerateL2Url;
+	}
+	public void setPrerateL3Url(String prerateL3Url) {
+		
+		this.prerateL3Url=prerateL3Url;
+	}
+	
+	public void setInstantInvoiceL2Url(String instantInvoiceL2Url) {
+		
+		this.instantInvoiceL2Url=instantInvoiceL2Url;
+	}
+	public void setInstantInvoiceL3Url(String instantInvoiceL3Url) {
+		
+		this.instantInvoiceL3Url=instantInvoiceL3Url;
+	}
+	
+	public void setEraRerateL2Url(String eraRerateL2Url) {
+		
+		this.eraRerateL2Url=eraRerateL2Url;
+	}
+	public void setEraRerateL3Url(String eraRerateL3Url) {
+		
+		this.eraRerateL3Url=eraRerateL3Url;
+	}
+	
+	public void setPrsRerateMainL2Url(String prsRerateMainL2Url) {
+		
+		this.prsRerateMainL2Url=prsRerateMainL2Url;
+	}
+	public void setPrsRerateMainL3Url(String prsRerateMainL3Url) {
+		
+		this.prsRerateMainL3Url=prsRerateMainL3Url;
+	}
+	
+	public void setPrsRerateCreateL2Url(String prsRerateCreateL2Url) {
+		
+		this.prsRerateCreateL2Url=prsRerateCreateL2Url;
+	}
+	public void setPrsRerateCreateL3Url(String prsRerateCreateL3Url) {
+		
+		this.prsRerateCreateL3Url=prsRerateCreateL3Url;
+	}
+	
+	public void setPrsReratePaL2Url(String prsReratePaL2Url) {
+		
+		this.prsReratePaL2Url=prsReratePaL2Url;
+	}
+	public void setPrsReratePaL3Url(String prsReratePaL3Url) {
+		
+		this.prsReratePaL3Url=prsReratePaL3Url;
+	}
+	
+	
+	
+	
+	
+	
+	
+	public void setRtmDbUsername(String rtmDbUsername) {
+		
+		this.rtmDbUsername=rtmDbUsername;
 	}
 	
 	public void setRtmDbPassword(String rtmDbPassword) {
@@ -191,9 +437,9 @@ public class config {
 	}
 	
 	
-	public String getGtmDbName() {
+	public String getGtmDbUsername() {
 		
-		return gtmDbName;
+		return gtmDbUsername;
 		}
 	public String getGtmDbResults() {
 		
@@ -219,9 +465,9 @@ public class config {
 		
 		return rebillL3URL;
 		}
-	public String getRtmDbName() {
+	public String getRtmDbUsername() {
 		
-		return rtmDbName;
+		return rtmDbUsername;
 		}
 	public String getRtmDbPassword() {
 		
@@ -280,6 +526,224 @@ public class config {
 		}
 	
 	
+	public Connection getRtmCon() {
+		return rtmCon;
+	}
+
+
+
+	public Connection getCiCon() {
+		return ciCon;
+	}
+
+	public Connection getOreL2Con() {
+		return oreL2Con;
+	}
+
+	public Connection getOreL3Con() {
+		return oreL3Con;
+	}
+
+	public Connection getEcL2Con() {
+		return ecL2Con;
+	}
+
+	public Connection getEcL3Con() {
+		return ecL3Con;
+	}
+
+	public Connection getEraL2Con() {
+		return eraL2Con;
+	}
+
+	public Connection getEraL3Con() {
+		return eraL3Con;
+	}
+
+	public String getChromeSetProperty() {
+		return chromeSetProperty;
+	}
+
+	public String getIeSetProperty() {
+		return ieSetProperty;
+	}
+
+	public String getChromePath() {
+		return chromePath;
+	}
+
+	public WebDriver getIeDriver() {
+		return ieDriver;
+	}
+
+	public WebDriver getTempWebDriver() {
+		return tempWebDriver;
+	}
+
+	public String getTemp() {
+		return temp;
+	}
+
+	public String getCompatible() {
+		return compatible;
+	}
+
+	public String getEd1() {
+		return ed1;
+	}
+
+	public String getEd2() {
+		return ed2;
+	}
+
+	public String getEi1() {
+		return ei1;
+	}
+
+	public String getEi2() {
+		return ei2;
+	}
+
+	public String getGd1() {
+		return gd1;
+	}
+
+	public String getGd2() {
+		return gd2;
+	}
+
+	public String getGi1() {
+		return gi1;
+	}
+
+	public String getGi2() {
+		return gi2;
+	}
+
+	public String getNt1() {
+		return nt1;
+	}
+
+	public String getNt2() {
+		return nt2;
+	}
+
+	public String getSp1() {
+		return sp1;
+	}
+
+	public String getSp2() {
+		return sp2;
+	}
+
+	public String[][] getAllData() {
+		return allData;
+	}
+
+	public String getOreL2DbUsername() {
+		return oreL2DbUsername;
+	}
+
+	public String getOreL3DbUsername() {
+		return oreL3DbUsername;
+	}
+
+	public String getEcL2DbUsername() {
+		return ecL2DbUsername;
+	}
+
+	public String getEcL3DbUsername() {
+		return ecL3DbUsername;
+	}
+
+	public String getEraL2DbUsername() {
+		return eraL2DbUsername;
+	}
+
+	public String getEraL3DbUsername() {
+		return eraL3DbUsername;
+	}
+
+	public String getOreL2DbPassword() {
+		return oreL2DbPassword;
+	}
+
+	public String getOreL3DbPassword() {
+		return oreL3DbPassword;
+	}
+
+	public String getEcL2DbPassword() {
+		return ecL2DbPassword;
+	}
+
+	public String getEcL3DbPassword() {
+		return ecL3DbPassword;
+	}
+
+	public String getEraL2DbPassword() {
+		return eraL2DbPassword;
+	}
+
+	public String getEraL3DbPassword() {
+		return eraL3DbPassword;
+	}
+
+	public String getPrsReratePaL2Url() {
+		return prsReratePaL2Url;
+	}
+
+	public String getPrsReratePaL3Url() {
+		return prsReratePaL3Url;
+	}
+
+	public String getPrsRerateCreateL2Url() {
+		return prsRerateCreateL2Url;
+	}
+
+	public String getPrsRerateCreateL3Url() {
+		return prsRerateCreateL3Url;
+	}
+
+	public String getPrsRerateMainL2Url() {
+		return prsRerateMainL2Url;
+	}
+
+	public String getPrsRerateMainL3Url() {
+		return prsRerateMainL3Url;
+	}
+
+	public String getEraRerateL2Url() {
+		return eraRerateL2Url;
+	}
+
+	public String getEraRerateL3Url() {
+		return eraRerateL3Url;
+	}
+
+	public String getPrerateL2Url() {
+		return prerateL2Url;
+	}
+
+	public String getPrerateL3Url() {
+		return prerateL3Url;
+	}
+
+	public String getRebillL2Url() {
+		return rebillL2Url;
+	}
+
+	public String getRebillL3Url() {
+		return rebillL3Url;
+	}
+
+	public String getInstantInvoiceL2Url() {
+		return instantInvoiceL2Url;
+	}
+
+	public String getInstantInvoiceL3Url() {
+		return instantInvoiceL3Url;
+	}
+
 	public void setHomePath(String homePath) {
 		
 		this.homePath=homePath;
@@ -432,31 +896,32 @@ public void setFlavour(String flavour) {
 		return chromeDriver;
 	}
 	
-	public Connection getTaa1DbConnection() {
-		
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			taa1Con=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD1_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","ri","ri");
-		} catch (SQLException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return taa1Con;
+	public void setRtmDbConnection(String username,String password) {
+			try {
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+				rtmCon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD1_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com",username,password);
+				
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
+
 	
-public void setGtmRevToolsConnection(String username,String password) throws ClassNotFoundException {
+public void setGtmRevToolsConnection(String username,String password) {
 		
 		try {
 			
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-								//jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com
 			gtmRevToolsCon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com",username,password);
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
+
+
 	
 	public Connection getGtmRevToolsConnection() throws ClassNotFoundException {
 		
@@ -509,11 +974,12 @@ public void setGtmRevToolsConnection(String username,String password) throws Cla
 	}
 
 
-public void setOreL2DbConnection(String dbCon,String username,String password) {
+public void setOreL2DbConnection(String username,String password) {
 	
 	try {
-		oreL2Con=DriverManager.getConnection("jdbc:oracle:thin:@//idb00248.ute.fedex.com:1526/IE2VD925","test_readonly","perftest");
-	} catch (SQLException e) {
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		oreL2Con=DriverManager.getConnection("jdbc:oracle:thin:@//idb00248.ute.fedex.com:1526/IE2VD925",username,password);
+	} catch (SQLException | ClassNotFoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
@@ -527,14 +993,13 @@ public Connection getOreL2DbConnection() {
 
 
 
-public void setOreL3DbConnection() {
+public void setOreL3DbConnection(String username,String password) {
 	
 	try {
 		
-		
-		oreL3Con=DriverManager.getConnection("jdbc:oracle:thin:@//sdb00261.ute.fedex.com:1526/PT1VD925","test_readonly", "perftest");
-		//oreL3Con=DriverManager.getConnection("jdbc:oracle:thin:sdb00261.ute.fedex.com:1526:PT1VD925","test_readonly", "perftest");
-	} catch (SQLException e) {
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		oreL3Con=DriverManager.getConnection("jdbc:oracle:thin:@//sdb00261.ute.fedex.com:1526/PT1VD925",username,password);
+			} catch (SQLException | ClassNotFoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
@@ -548,25 +1013,17 @@ public Connection getOreL3DbConnection() {
 
 
 
-public void setEcL2DbConnection() {
+public void setEcL2DbConnection(String username,String password) {
 	
-	try {
+	
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-		} catch (ClassNotFoundException e) {
+			ecL2Con=DriverManager.getConnection("jdbc:oracle:thin:@//idb00271.ute.fedex.com:1526/IE2VD991",username,password);
+		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-
-	
-		ecL2Con=DriverManager.getConnection("jdbc:oracle:thin:@//idb00271.ute.fedex.com:1526/IE2VD991","test_readonly", "perftest");
-			
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
 
 }
 
@@ -576,13 +1033,13 @@ public Connection getEcL2DbConnection() {
 }
 
 
-public void setEcL3DbConnection() {
+public void setEcL3DbConnection(String username,String password) {
 	
 	try {
 		
-		
-		ecL3Con=DriverManager.getConnection("jdbc:oracle:thin:@//sdb00299.ute.fedex.com:1526/SDB00299.ute.fedex.com","test_readonly", "perftest");
-			} catch (SQLException e) {
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		ecL3Con=DriverManager.getConnection("jdbc:oracle:thin:@//sdb00299.ute.fedex.com:1526/SDB00299.ute.fedex.com",username,password);
+			} catch (ClassNotFoundException | SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
@@ -596,18 +1053,14 @@ public Connection getEcL3DbConnection() {
 
 
 
-public void setEraL2DbConnection() {
+public void setEraL2DbConnection(String username,String password) {
 	
 	try {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
-		//eraL2Con=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/INVADJ_SVC_INT,cn=OracleContext,dc=ute,dc=fedex,dc=com","INVADJ_APP","apppwdli");
-		eraL2Con=DriverManager.getConnection("jdbc:oracle:thin:@//idb00270.ute.fedex.com:1526/IDB00270.ute.fedex.com","test_readonly", "perftest");
-		} catch (SQLException e) {
+		eraL2Con=DriverManager.getConnection("jdbc:oracle:thin:@//idb00270.ute.fedex.com:1526/IDB00270.ute.fedex.com",username,password);
+		} catch (SQLException | ClassNotFoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	
 }
@@ -618,21 +1071,17 @@ public Connection getEraL2DbConnection() {
 }
 
 
-public void setEraL3DbConnection() {
+public void setEraL3DbConnection(String username,String password) {
 	
-	try {
-		
+
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-		} catch (ClassNotFoundException e) {
+			eraL3Con=DriverManager.getConnection("jdbc:oracle:thin:@//sdb00325.ute.fedex.com:1526/SDB00325.ute.fedex.com",username,password);
+		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		eraL3Con=DriverManager.getConnection("jdbc:oracle:thin:@//sdb00325.ute.fedex.com:1526/SDB00325.ute.fedex.com","test_readonly", "perftest");
-		} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+		
 	
 }
 
@@ -736,8 +1185,19 @@ public void setMfRetireCheckBox(String mfRetireCheckBox) {
 }
 
 
+public void setCreditCheckBox(String creditCheckBox) {
+	this.creditCheckBox=creditCheckBox;
+}
 
-
+public void setDebitCheckBox(String debitCheckBox) {
+	this.debitCheckBox=debitCheckBox;
+}
+public String getCreditCheckBox() {
+	return creditCheckBox;
+}
+public String getDebitCheckBox() {
+	return debitCheckBox;
+}
 
 
 
@@ -907,10 +1367,165 @@ public String getSp2String(){
 
 
 
+public void setAllDataArray(String[][] allData) {
+	this.allData=allData;
+}
+
+public String[][] getAllDataArray() {
+	return allData;
+}
 
 
+public void setFunction(String function) {
+	this.function=function;
+}
+
+public String getFunction() {
+	return function;
+}
+
+public void setFilePath(String filePath) {
+	this.filePath=filePath;
+}
+
+public String getFilePath() {
+	return filePath;
+}
 
 
+public void setRowCount(int rowCount) {
+	this.rowCount=rowCount;
+}
+
+public int getRowCount() {
+	return rowCount;
+}
+
+
+public void setFedexNetwork(Boolean fedexNetwork) {
+	this.fedexNetwork=fedexNetwork;
+}
+
+public Boolean getFedexNetwork() {
+	return fedexNetwork;
+}
+
+public void setAdmin(Boolean admin) {
+	this.admin=admin;
+}
+
+public Boolean getAdmin() {
+	return admin;
+}
+
+
+public void setRebillEnabled(Boolean rebillEnabled) {
+	this.rebillEnabled=rebillEnabled;
+}
+
+public Boolean getRebillEnabled() {
+	return rebillEnabled;
+}
+
+
+public void setPrerateEnabled(Boolean prerateEnabled) {
+	this.prerateEnabled=prerateEnabled;
+}
+
+public Boolean getPrerateEnabled() {
+	return prerateEnabled;
+}
+
+public void setEraRerateEnabled(Boolean eraRerateEnabled) {
+	this.eraRerateEnabled=eraRerateEnabled;
+}
+
+public Boolean getEraRerateEnabled() {
+	return eraRerateEnabled;
+}
+
+public void setInstantInvoiceEnabled(Boolean instantInvoiceEnabled) {
+	this.instantInvoiceEnabled=instantInvoiceEnabled;
+}
+
+public Boolean getInstantInvoiceEnabled() {
+	return instantInvoiceEnabled;
+}
+
+public void setUdEnabled(Boolean udEnabled) {
+	this.udEnabled=udEnabled;
+}
+
+public Boolean getUdEnabled() {
+	return udEnabled;
+}
+
+public void setRerateEnabled(Boolean rerateEnabled) {
+	this.rerateEnabled=rerateEnabled;
+}
+
+public Boolean getRerateEnabled() {
+	return rerateEnabled;
+}
+
+public void setRebillTroubleshootEnabled(Boolean rebillTroubleshootEnabled) {
+	this.rebillTroubleshootEnabled=rebillTroubleshootEnabled;
+}
+
+public Boolean getRebillTroubleshootEnabled() {
+	return rebillTroubleshootEnabled;
+}
+
+public void setCreditAndDebitEnabled(Boolean creditAndDebitEnabled) {
+	this.creditAndDebitEnabled=creditAndDebitEnabled;
+}
+
+public Boolean getCreditAndDebitEnabled() {
+	return creditAndDebitEnabled;
+}
+
+
+public void setVersion(String version) {
+	this.version=version;
+}
+
+public String getVersion() {
+	return version;
+}
+
+
+public void setUpdateUser(String updateUser) {
+	this.updateUsername=updateUser;
+}
+
+public String getUpdateUser() {
+	return updateUsername;
+}
+
+public void setUpdatePassword(String updatePassword) {
+	this.updatePassword=updatePassword;
+}
+
+public String getUpdatePassword() {
+	return updatePassword;
+}
+
+
+public void setUpdateHostname(String updateHostname) {
+	this.updateHostname=updateHostname;
+}
+
+public String getUpdateHostname() {
+	return updateHostname;
+}
+
+public void setUpdatePath(String updatePath) {
+	this.updatePath=updatePath;
+}
+
+public String getUpdatePath() {
+	return updatePath;
+}
 }
 
 

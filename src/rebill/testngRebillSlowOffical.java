@@ -40,6 +40,7 @@ import org.testng.annotations.Test;
 
 import configuration.config;
 import configuration.excel;
+import configuration.importData;
 
 public class testngRebillSlowOffical {
 
@@ -47,9 +48,6 @@ public class testngRebillSlowOffical {
 	
     //False = Running from xml only
 	//True = Running from GUI only
-	Boolean testingMode=false;
-	Boolean testingDB=true;
-	Boolean uploadTrkToDB=true;
 	
 	String tempFile,configFile;
 	excel excelVar;
@@ -60,7 +58,7 @@ public class testngRebillSlowOffical {
 	Object o;
 	WebDriverWait wait1,wait2,wait3,wait4;
 	
-	config c;
+	
 	int count1,count2,count3,count4 ;
 	String  sh1;
 	String filepath;
@@ -127,21 +125,26 @@ public class testngRebillSlowOffical {
 	String mfRetireCheckBox;
 	String source;
 	String sessionCount;
+    String customString;
+    String customCheckBox;
+    String databaseDisabled;
 	
 	int sessionCountInt;
 	
 	ArrayList<rebillData> rebillDataArray= new ArrayList<rebillData>();
 	String[][] allData;
+	config c;
+	
 	
 	@BeforeClass
-	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox","normalCheckBox","mfRetireCheckBox","sessionCount"})
-	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String normalCheckBox,String mfRetireCheckBox,String sessionCount) {
-	c=new config();
-	/*
-	@BeforeClass
-	public void setupExcel() {
-*/
+	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox","sessionCount","customString","customCheckBox","databaseDisabled"})
+	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String sessionCount,String customString,String customCheckBox,String databaseDisabled) {
+	
+
 		
+	importData id = new importData();
+	c=id.getConfig();
+	
 		//Kill all running chromedrivers leftover from previous sessions
 		try {
 			Runtime.getRuntime().exec("taskkill /F /IM chromedriver.exe");
@@ -152,25 +155,7 @@ public class testngRebillSlowOffical {
 		
 		homePath=System.getProperty("user.dir");
     	
-		
-        if (testingMode==true){
-        	browser="2";
-        	level="2";
-        	//filepath=homePath+"\\test data\\rebill.xlsx";
-        	source="db";
-        	allCheckBox="false";
-        	nullCheckBox="true";
-        	failedCheckBox="true";
-        	domesticCheckBox="false";
-        	internationalCheckBox="true";
-        	expressCheckBox="false";
-        	groundCheckBox="true";
-        	normalCheckBox="true";
-        	mfRetireCheckBox="false";
-        	sessionCountInt=4;
-        	
-        }
-        else {
+	
         	if (source.equals("excel")) {
         		this.filepath=filepath;	
         		excelVar = new excel(filepath);
@@ -187,11 +172,11 @@ public class testngRebillSlowOffical {
 				this.internationalCheckBox=internationalCheckBox;
 				this.expressCheckBox=expressCheckBox;
 				this.groundCheckBox=groundCheckBox;
-				this.normalCheckBox=normalCheckBox;
-				this.mfRetireCheckBox=mfRetireCheckBox;
 	        	this.sessionCount=sessionCount;
 	        	sessionCountInt=Integer.parseInt(sessionCount);
-        }
+	        	this.customString=customString;
+	        	this.customCheckBox=customCheckBox;
+	        	this.databaseDisabled=databaseDisabled;
         
        
     	
@@ -235,13 +220,11 @@ public class testngRebillSlowOffical {
     	
         if (level.equals("2"))
     	{
-    		levelUrl="https://testsso.secure.fedex.com/L2/eRA/index.html";
-    		
+    		levelUrl=c.getRebillL2Url();		
     	}
     	else if (level.equals("3"))
     	{
-    		levelUrl="https://testsso.secure.fedex.com/L3/eRA/index.html";
-    	
+    		levelUrl=c.getRebillL3Url();	   	
     	}
        
     	
@@ -251,31 +234,32 @@ public class testngRebillSlowOffical {
 	
 	
 	public void runDbQuery() {
-		Connection GTMcon=null;
+		try {
+		Connection GTMcon=c.getGtmRevToolsConnection();
 		Statement stmt = null;
 		ResultSet rs = null;
 		ResultSetMetaData rsmd=null;
-		//Change to L3
-    	try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
-			
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+
     	String databaseSqlCount="select count(*) as total from rebill_regression ";
     	String databaseSqlQuery="select result, description, test_input_nbr, tin_count, trkngnbr, reason_code, rebill_acct,invoice_nbr_1, invoice_nbr_2, mig, region,  login,   password,  rs_Type, company, worktype, ORIGIN_LOC,DEST_LOC,DIM_VOL,SHIPPER_REF,RECP_ADDRESS,SHIPPER_ADDRESS,ACC_NBR_DEL_STATUS,SVC_BASE, CREDIT_CARD_DTL,PRE_RATE_SCENARIOS,EXP_Pieces,EXP_ACTUAL_Weight,EXP_Adj_Weight,CREDIT_CARD_DTL from rebill_regression ";
     	
+    	if (allCheckBox.equals("true")) {
+    		databaseSqlCount+="where trkngnbr is not null";
+    		databaseSqlQuery+="where trkngnbr is not null ";
+    	}
+    	
+    	System.out.println(customCheckBox);
+    	System.out.println(customString);
+    	
+    	if (customCheckBox.equals("false")) {
     	
     	if (allCheckBox.equals("false")) {
     		databaseSqlCount+="where ";
     		databaseSqlQuery+="where ";
-    	}
+    	
+    	
+    	
+    	
     	if (nullCheckBox.equals("true") && failedCheckBox.equals("true")) {
     		databaseSqlCount+="(result is null or result ='fail') ";
     		databaseSqlQuery+="(result is null or result ='fail') ";
@@ -314,7 +298,7 @@ public class testngRebillSlowOffical {
     		databaseSqlCount+="and company in ('GD','EP') ";
     		databaseSqlQuery+="and company in ('GD','EP') ";
     	}
-    	
+    	/*
        	if (normalCheckBox.equals("true") && mfRetireCheckBox.equals("false")) {
        		databaseSqlCount+="and worktype='NORMAL' ";
        		databaseSqlQuery+="and worktype='NORMAL' ";
@@ -327,7 +311,13 @@ public class testngRebillSlowOffical {
        		databaseSqlCount+="and worktype in ('MFRETIRE','NORMAL') ";
        		databaseSqlQuery+="and worktype in ('MFRETIRE','NORMAL') ";
     	}
-       	
+    	*/
+    	}
+    	}
+    	else if (customCheckBox.equals("true")){
+    		databaseSqlCount+="where "+customString;
+    		databaseSqlQuery+="where "+customString;
+    	}
     	
     	
 
@@ -369,7 +359,10 @@ public class testngRebillSlowOffical {
         	catch(Exception e) {
         		System.out.println(e);
         	}
-    	
+		}
+    	catch(Exception ee) {
+    		System.out.println(ee);
+    	}
 	}
 	
 	
@@ -555,7 +548,7 @@ public class testngRebillSlowOffical {
     	
     	//Will Check if Trk is already successful;
   	  try {
-    	if (testingDB==true) {
+    	if (databaseDisabled.equals("false")) {
     
   		  String[] resultArray = validateResults(trk);
   	  if ( resultArray[0].equals("pass")){
@@ -581,6 +574,7 @@ public class testngRebillSlowOffical {
     	
     	try { 
     		driver1.quit();
+    		driver1.close();
 	  }
 	  catch(Exception eee) {
 		  System.out.println(eee);
@@ -608,9 +602,7 @@ public class testngRebillSlowOffical {
     	
     	
     	else if (browser.equals("3")) {
-       	 
-    		
-        	
+    
         	FirefoxProfile profile = new FirefoxProfile(); 
         	profile.setPreference("capability.policy.default.Window.QueryInterface", "allAccess");
         	profile.setPreference("capability.policy.default.Window.frameElement.get","allAccess");
@@ -650,7 +642,7 @@ public class testngRebillSlowOffical {
     	//Will Check if Trk is already successful;
   	 
   	 try {
-     	if (testingDB==true) {
+     	if (databaseDisabled.equals("false")) {
      
    		  String[] resultArray = validateResults(trk);
    	  if ( resultArray[0].equals("pass")){
@@ -717,7 +709,7 @@ public class testngRebillSlowOffical {
     	
     	//Will Check if Trk is already successful;
     	 try {
-    	    	if (testingDB==true) {
+    	    	if (databaseDisabled.equals("false")) {
     	    
     	  		  String[] resultArray = validateResults(trk);
     	  	  if ( resultArray[0].equals("pass")){
@@ -788,7 +780,7 @@ public class testngRebillSlowOffical {
     	readTrk(trk);
     	
     	 try {
-    	    	if (testingDB==true) {
+    	    	if (databaseDisabled.equals("false")) {
     	    
     	  		  String[] resultArray = validateResults(trk);
     	  	  if ( resultArray[0].equals("pass")){
@@ -881,7 +873,7 @@ public class testngRebillSlowOffical {
 	               	 writeToExcel(rowNumber, 0,"fail");
 	               	 writeToExcel(rowNumber, 1,"Prerate Code Not Added Yet");
 	               	 }
-	   				 if(uploadTrkToDB==true) {
+	   				 if(databaseDisabled.equals("false")) {
      	   			 String[] resultArray = new String[2];
      	   			 	resultArray[0]="fail";
      	   				resultArray[1]="Prerate Code Not Added Yet";
@@ -1097,7 +1089,7 @@ public class testngRebillSlowOffical {
             	 writeToExcel(rowNumber, 1,"Could Not Find Rebill Dropdown");
             	return;
             	 }
-				 if(uploadTrkToDB==true) {
+				 if(databaseDisabled.equals("false")) {
 	   			 String[] resultArray = new String[2];
 	   			 	resultArray[0]="fail";
 	   				resultArray[1]="Could Not Find Rebill Dropdown";
@@ -1145,7 +1137,7 @@ public class testngRebillSlowOffical {
          	               	 writeToExcel(rowNumber, 0,"fail");
          	               	 writeToExcel(rowNumber, 1,"Trying To Rebill A Partial Amount");
          	               	 }
-         	   				 if(uploadTrkToDB==true) {
+         	   				 if(databaseDisabled.equals("false")) {
                  	   			 String[] resultArray = new String[2];
                  	   			 	resultArray[0]="fail";
                  	   				resultArray[1]="Trying To Rebill A Partial Amount";
@@ -1223,7 +1215,7 @@ public class testngRebillSlowOffical {
          	               	 writeToExcel(rowNumber, 0,"fail");
          	               	 writeToExcel(rowNumber, 1,"Management approval");
          	               	 }
-         	   				 if(uploadTrkToDB==true) {
+         	   				 if(databaseDisabled.equals("false")) {
                  	   			 String[] resultArray = new String[2];
                  	   			 	resultArray[0]="fail";
                  	   				resultArray[1]="Management approval";
@@ -1236,7 +1228,7 @@ public class testngRebillSlowOffical {
          	   				}
          	   				catch(Exception ee) {
          	   				 System.out.println(ee+"Could Not Get to Rebill Screen");
-         	   			 if(uploadTrkToDB==true) {
+         	   			 if(databaseDisabled.equals("false")) {
          	   			 String[] resultArray = new String[2];
          	   			 	resultArray[0]="fail";
          	   				resultArray[1]="Could Not Get to Rebill Screen";
@@ -1398,7 +1390,7 @@ public class testngRebillSlowOffical {
             	 writeToExcel(rowNumber, 0,"pass");
             	 writeToExcel(rowNumber, 1,"completed");
             	 }
-            	 if(uploadTrkToDB==true) {
+            	 if(databaseDisabled.equals("false")) {
                  	  writeToDB(testInputNbr,tinCount,trk,resultArray);
                  	 }
             	 return;
@@ -1457,7 +1449,7 @@ public class testngRebillSlowOffical {
                  	 writeToExcel(rowNumber, 0,"pass");
                  	 writeToExcel(rowNumber, 1,"completed");
             			 }
-                	 if(uploadTrkToDB==true) {
+                	 if(databaseDisabled.equals("false")) {
                      	  writeToDB(testInputNbr,tinCount,trk,resultArray);
                      	 }
                   }
@@ -1466,7 +1458,7 @@ public class testngRebillSlowOffical {
                 	  writeToExcel(rowNumber, 0,"fail");
                   	  writeToExcel(rowNumber, 1,resultArray[1]);
                 		 }
-                  	 if(uploadTrkToDB==true) {
+                  	 if(databaseDisabled.equals("false")) {
                   	  writeToDB(testInputNbr,tinCount,trk,resultArray);
                   	 }
                   	//  Assert.fail("Faled At Last Rebill Screen: "+resultArray[1]);
@@ -1485,17 +1477,14 @@ public class testngRebillSlowOffical {
     
     public synchronized void writeToDB(String testInputNbr,String tinCount,String trk,String[] resultArray) {
     	Connection GTMcon=null;
-    	try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
-			
+		try {
+			GTMcon = c.getGtmRevToolsConnection();
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+
+
 		
     	PreparedStatement stmt = null;
     	
@@ -1535,19 +1524,18 @@ public class testngRebillSlowOffical {
     }
     
     public String[] validateResults(String trk) {
-    	
-    	Boolean result=null;
+    
     	Connection con = null;
     	String[] resultArray = new String[2];
     	
     	try {
     	
     		if (level.equals("2")){
-    			 c.setEraL2DbConnection();
+    			 
        		     con=c.getEraL2DbConnection();
        	 }
        	 else if (level.equals("3")){
-       		 	c.setEraL3DbConnection();
+       		 	
        		 	con=c.getEraL3DbConnection();
        	 	}
     	

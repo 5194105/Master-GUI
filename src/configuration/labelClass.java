@@ -3,14 +3,16 @@ import javax.swing.JLabel;
 
 
 public class labelClass {
-	String name,defaultPic,altPic;
+	String name,defaultPic,altPic,disabledPic;
 	JLabel jl;
-
-	public labelClass(JLabel jl,String name,String defaultPic,String altPic) {
+	Boolean enabled;
+	public labelClass(JLabel jl,String name,String defaultPic,String altPic,String disabledPic,Boolean enabled) {
 		this.jl=jl;
 		this.name=name;
 		this.defaultPic=defaultPic;
 		this.altPic=altPic;
+		this.enabled=enabled;
+		this.disabledPic=disabledPic;
 	}
 	public String getName() {
 		return name;
@@ -36,4 +38,18 @@ public class labelClass {
 	public void setJl(JLabel jl) {
 		this.jl = jl;
 	}
+	public void setDisabledPic(String disabledPic) {
+		this.disabledPic = disabledPic;
+	}
+	public String getDisabledPic() {
+		return disabledPic;
+	}
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+	public Boolean getEnabled() {
+		return enabled;
+	}
+	
+	
 }

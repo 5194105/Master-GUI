@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Sample_Suite]">
   <parameter name="nullCheckBox" value="true"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 =======
@@ -17,12 +18,15 @@
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+=======
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
   <parameter name="level" value="3"/>
   <parameter name="failedCheckBox" value="true"/>
   <parameter name="groundCheckBox" value="true"/>
   <parameter name="source" value="db"/>
   <parameter name="compatibleMode" value=""/>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 =======
@@ -43,14 +47,21 @@
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+=======
+  <parameter name="headless" value="false"/>
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
   <parameter name="customCheckBox" value="false"/>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+=======
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
   <parameter name="expressCheckBox" value="true"/>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 =======
@@ -61,7 +72,10 @@
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+=======
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
   <parameter name="allCheckBox" value="false"/>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -102,7 +116,11 @@
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+=======
+  <parameter name="filepath" value="C:\Users\FedExUser\Desktop\stephen\R66\L3C6\rebill.xlsx"/>
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
   <parameter name="sessionCount" value="1"/>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -128,10 +146,12 @@
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+=======
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
   <parameter name="domesticCheckBox" value="true"/>
   <parameter name="browser" value="2"/>
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
   <parameter name="databaseDisabled" value="false"/>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -139,7 +159,10 @@
 =======
 <<<<<<< HEAD
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+=======
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
   <parameter name="internationalCheckBox" value="true"/>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 =======
@@ -163,7 +186,11 @@
 =======
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+=======
+  <parameter name="customString" value="trkngnbr in (&#039;882553697362&#039;,&#039;590443411313&#039;)"/>
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
   <test name="Rebill Test(failed)" parallel="methods">
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
@@ -172,7 +199,10 @@
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+=======
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
     <classes>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -206,7 +236,11 @@
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+=======
+      <class name="rebill.testngRebillFast">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
         <methods>
+<<<<<<< HEAD
 <<<<<<< HEAD
           <include name="testMethod1" invocation-numbers="0 0 0 0 7 7 7 9 9 9 9 10 10 11 12 12 12 12 13 13 13 13 20 20 20 21 21 21 21 22 22 22 22 25 28 28 28 28 46 53 67 67 67 67 74 78 78 78 78 80 82 82 82 82"/>
 =======
@@ -258,7 +292,10 @@
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
           <include name="testMethod4"/>
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+=======
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
           <include name="setupExcel"/>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -285,14 +322,23 @@
 <<<<<<< HEAD
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 =======
+=======
+          <include name="testMethod1" invocation-numbers="50 50 50 50 58 74 92 119 119 120 120 121 121 122 122"/>
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
           <include name="testMethod2"/>
+<<<<<<< HEAD
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+=======
+          <include name="testMethod3"/>
+          <include name="testMethod4"/>
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
         </methods>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -326,6 +372,9 @@
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 >>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+=======
+      </class> <!-- rebill.testngRebillFast -->
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
     </classes>
-  </test> <!-- Instant Invoice Test(failed) -->
+  </test> <!-- Rebill Test(failed) -->
 </suite> <!-- Failed suite [Sample_Suite] -->
