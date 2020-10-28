@@ -1362,7 +1362,7 @@ public class testngRebillSlow {
              }
              Thread.sleep(2000);
              	driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")).click();
-             	Thread.sleep(15000);
+             	Thread.sleep(10000);
              	}
              	catch(Exception e) {
              		System.out.println("Failed Trying to Rebill..");

@@ -132,7 +132,7 @@ public class prerateTestNGSlow {
     String customString;
     String customCheckBox;
     String databaseDisabled;
-config c;
+    config c;
 	@BeforeClass
 	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox","sessionCount","customString","customCheckBox","databaseDisabled"})
 	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String sessionCount,String customString,String customCheckBox,String databaseDisabled) {
@@ -174,16 +174,12 @@ config c;
 			        	this.customCheckBox=customCheckBox;
 			        	this.databaseDisabled=databaseDisabled;
 		
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	
 		
         
 	
     	
-    }
+    
         
     	
     	if (source.equals("excel")) {
@@ -247,11 +243,14 @@ config c;
 	
     	try {
     		
-    		
+    		//Class.forName("oracle.jdbc.driver.OracleDriver");
+    		//GTMcon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
+		
     			GTMcon=c.getGtmRevToolsConnection();
 			
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
+			System.out.println(e1);
 			e1.printStackTrace();
 		} 
 		

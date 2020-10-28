@@ -354,9 +354,9 @@ public class testngRebillFast {
         	catch(Exception e) {
         		System.out.println(e);
         	}
-    	GTMcon.close();
-    	stmt.close();
-		rs.close();
+    //	GTMcon.close();
+    //	stmt.close();
+	//	rs.close();
 		}
     	catch(Exception ee) {
     		System.out.println(ee);
@@ -1316,7 +1316,7 @@ public class testngRebillFast {
          	
          	
          	counter1=0;
-         	while(counter1>10) {
+         	while(counter1<10) {
          	try { 
          		counter1++;
          		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/label[1]")));
@@ -1343,7 +1343,7 @@ public class testngRebillFast {
          	   			 Assert.fail("Trying To Rebill A Partial Amount");
          		}
          			
-         				 if (tempError.indexOf("interline")==-1) {
+         				 if (tempError.indexOf("interline")==1) {
          				 System.out.println(tempError);
          				 if(source.equals("excel")) {
          	               	 writeToExcel(rowNumber, 0,"fail");
@@ -1358,7 +1358,7 @@ public class testngRebillFast {
          	   			 Assert.fail("interline acct");
          		} 
          				 
-         				 if (tempError.indexOf("specialist")==-1) {
+         				 if (tempError.indexOf("specialist")==1) {
              				 System.out.println(tempError);
              				 if(source.equals("excel")) {
              	               	 writeToExcel(rowNumber, 0,"fail");
@@ -1524,12 +1524,8 @@ public class testngRebillFast {
          	   			
          	   			
             
-              
-              
-         
-    	     wait=new WebDriverWait(driver,waitTime);
-    	     driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
-          
+    	 	
+             Boolean validated;
              try{    
             	
              switch (reasonCode){
@@ -1539,6 +1535,13 @@ public class testngRebillFast {
                        driver.findElement(By.xpath("//*[@id=\"reciptacct_number\"]")).sendKeys(rebillAccount);
                        break;
                     case "RSA" :
+                       //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[7]/di[1]/label")));
+                       //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[7]/div[1]/label")));
+                       //*[@id="shipacct_number"] 
+                       //TESTING PURPOSE ONLY! DELETE WHEN RUNNING.
+                       //driver.findElement(By.xpath("//*[@id=\"shipacct_number\"]")).clear();
+                       //driver.findElement(By.xpath("//*[@id=\"shipacct_number\"]")).sendKeys("39466825");
+                       //Thread.sleep(2000);
                         break;
                     case "RTA" :
                         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"thirdacct_number\"]")));
@@ -1619,28 +1622,9 @@ public class testngRebillFast {
             		 driver.findElement(By.xpath("//*[@id=\"exp_date\"]")).sendKeys(creditCardDt);
             	 }
              }
-             
-             
-             
-             if(source.equals("excel")) {
-            	 writeToExcel(rowNumber, 0,"fail");
-            	 writeToExcel(rowNumber, 1,"Made it to the end test");
-            	return;
-            	 }
-				 if(databaseDisabled.equals("false")) {
-	   			 String[] resultArray = new String[2];
-	   			 	resultArray[0]="fail";
-	   				resultArray[1]="Made it to the end test";
-	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-	   				 System.out.println("Made it to the end.");
-	   			  Assert.fail("Made it to the end.");
-             	 } 
-           
-             
              Thread.sleep(2000);
-             
              	driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")).click();
-             	Thread.sleep(15000);
+             	Thread.sleep(10000);
              	}
              	catch(Exception e) {
              		System.out.println("Failed Trying to Rebill..");
@@ -1691,7 +1675,7 @@ public class testngRebillFast {
             //If Rebill Is Not Successful
             
             	 try {
-            		
+            		 Boolean overrideBoolean;
             		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[6]/div/div/div[2]/div/label/span")));
             		 List<WebElement> errorList;
             		 errorList=driver.findElements(By.xpath("/html/body/div[6]/div/div/div[2]/div/label/span"));
@@ -1705,7 +1689,7 @@ public class testngRebillFast {
                          	}
                          else{
                         	 System.out.println("Could Not Click");
-                        	
+                        	 overrideBoolean=true;
                        }
             		 }
             		 popupCounter++;
@@ -1756,7 +1740,7 @@ public class testngRebillFast {
     public synchronized void writeToDB(String testInputNbr,String tinCount,String trk,String[] resultArray) {
     	Connection GTMcon=null;
 		try {
-			GTMcon = c.getGtmRevToolsConnection();
+   			GTMcon = c.getGtmRevToolsConnection();
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -1769,14 +1753,15 @@ public class testngRebillFast {
 
     	try {
         //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
-    	stmt=GTMcon.prepareStatement("insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values (?,?,?,?,?)");  
+    	stmt=GTMcon.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,era_rebill) values (?,?,?,?,?,?)");  
 		stmt.setString(1,testInputNbr);  
 		stmt.setString(2,tinCount);  
 		stmt.setString(3,trk);  
 		stmt.setString(4,resultArray[0]);  
 		stmt.setString(5,resultArray[1]);  
+		stmt.setString(6,"Y");  
 		stmt.executeUpdate();
-		stmt.close();
+		//stmt.close();
     	}
     	catch(Exception e) {
     		System.out.println(e);
@@ -1786,16 +1771,17 @@ public class testngRebillFast {
     	
     	try {
 		//	update gtm_rev_tools.rebill_results set result='fail',description='6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables' where trkngnbr='566166113544';
-    	stmt=GTMcon.prepareStatement("update rebill_results set result=?,description=? where trkngnbr=?");  
+    	stmt=GTMcon.prepareStatement("update era_results set result=?,description=? where trkngnbr=?");  
 		stmt.setString(1,resultArray[0]);  
 		stmt.setString(2,resultArray[1]); 
 		stmt.setString(3,trk); 
 		stmt.executeUpdate();
-		stmt.close();
+		//stmt.close();
 	}
 	catch(Exception e) {
 		System.out.println(e);
 	}
+    	/*
     	try {
 			GTMcon.close();
 			
@@ -1803,7 +1789,7 @@ public class testngRebillFast {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
+    	*/
     }
     
     public String[] validateResults(String trk) {
@@ -1872,6 +1858,7 @@ public class testngRebillFast {
     			// TODO Auto-generated catch block
     			e.printStackTrace();
     		}
+    	       /*
     	       try {
 				con.close();
 				stmt.close();
@@ -1880,7 +1867,7 @@ public class testngRebillFast {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-    	      
+    	      */
     	 return resultArray;      
 }    
     

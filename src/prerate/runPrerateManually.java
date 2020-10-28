@@ -11,6 +11,7 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
 import configuration.config;
+import configuration.importData;
 import rebill.rebillData;
 import rebill.testngRebillSlowMfRetire;
 
@@ -18,12 +19,13 @@ public class runPrerateManually {
 
 	static ArrayList<rebillData> rebillDataArray= new ArrayList<rebillData>();
     public static void main(String[] args) {
-    	config c = new config();
+    	importData id = new importData();
+    	config c = id.getConfig();
        	c.setExcelPath("C:\\Users\\FedExUser\\Documents\\PRERATE_UPDATE.xlsx");
     	c.setLevel("3");
     	c.setDriverType("2");
-    	c.setCompatibleMode("false");
-    	c.setSource("excel");
+    	c.setCompatibleMode("true");
+    	c.setSource("db");
     	c.setAllCheckBox("false");
     	c.setNullCheckBox("true");
     	c.setFailedCheckBox("true");

@@ -36,36 +36,23 @@ public class rebillManualClass {
     	config c = new config();
        	c.setExcelPath("C:\\Users\\FedExUser\\Desktop\\stephen\\R66\\L3C6\\rebill.xlsx");
     	c.setLevel("3");
-    	c.setDriverType("2");
-    	
+    	c.setDriverType("2");	
     	c.setCompatibleMode("false");
     	c.setSource("db");
     	c.setAllCheckBox("false");
     	c.setNullCheckBox("true");
     	c.setFailedCheckBox("true");
-<<<<<<< HEAD
-  
-		c.setDomesticCheckBox("true");
-
-		c.setInternationalCheckBox("true");
-		c.setExpressCheckBox("true");
-		c.setGroundCheckBox("true");
-		c.setNormalCheckBox("true");
-	
-		
-
-=======
 		c.setDomesticCheckBox("true");
 		c.setInternationalCheckBox("true");
-		c.setExpressCheckBox("true");
+		c.setExpressCheckBox("false");
 		c.setGroundCheckBox("true");
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
+		c.setNormalCheckBox("false");
 		c.setDatabaseDisabled("false");
-		c.setCustomCheckBox("true");
+		c.setCustomCheckBox("false");
 		c.setCustomString("trkngnbr in ('882553697362','590443411313')");
 		c.setHeadlessString("false");
 
-		c.setSessionCount("1");
+		c.setSessionCount("2");
     	
     	String filepath=c.getExcelPath();
 		String level=c.getLevel();
