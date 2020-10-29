@@ -1695,6 +1695,7 @@ public class testngRebillFast {
             		 popupCounter++;
             	 }
             	 driver.findElement(By.xpath("/html/body/div[6]/div/div/div[3]/button[2]")).click();
+            	 Thread.sleep(10000);
             } 
             
             catch(Exception e2) {
@@ -1819,7 +1820,7 @@ public class testngRebillFast {
     	ResultSet rs = null;
     	try {
     		
-    		stmt=con.prepareStatement("select * from invadj_schema.rdt_rebill_request where airbill_nbr=?");  
+    		stmt=con.prepareStatement("select * from invadj_schema.rdt_rebill_request where airbill_nbr=? order by LAST_UPDT_TMSTP desc");  
 			stmt.setString(1,trk);  
 			rs = stmt.executeQuery();
     	} catch (SQLException e) {

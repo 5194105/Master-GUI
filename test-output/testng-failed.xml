@@ -4,7 +4,7 @@
   <parameter name="nullCheckBox" value="true"/>
   <parameter name="level" value="3"/>
   <parameter name="failedCheckBox" value="true"/>
-  <parameter name="groundCheckBox" value="true"/>
+  <parameter name="groundCheckBox" value="false"/>
   <parameter name="source" value="db"/>
   <parameter name="compatibleMode" value=""/>
   <parameter name="headless" value="false"/>
@@ -12,19 +12,19 @@
   <parameter name="expressCheckBox" value="true"/>
   <parameter name="allCheckBox" value="false"/>
   <parameter name="filepath" value="C:\Users\FedExUser\Desktop\stephen\R66\L3C6\rebill.xlsx"/>
-  <parameter name="sessionCount" value="1"/>
-  <parameter name="domesticCheckBox" value="true"/>
+  <parameter name="sessionCount" value="2"/>
+  <parameter name="domesticCheckBox" value="false"/>
   <parameter name="browser" value="2"/>
   <parameter name="databaseDisabled" value="false"/>
   <parameter name="internationalCheckBox" value="true"/>
-  <parameter name="customString" value="trkngnbr in (&#039;882553697362&#039;,&#039;590443411313&#039;)"/>
+  <parameter name="customString" value="trkngnbr in (&#039;519769710260&#039;)"/>
   <test name="Rebill Test(failed)" parallel="methods">
     <classes>
       <class name="rebill.testngRebillFast">
         <methods>
           <include name="setupExcel"/>
-          <include name="testMethod1" invocation-numbers="50 50 50 50 58 74 92 119 119 120 120 121 121 122 122"/>
-          <include name="testMethod2"/>
+          <include name="testMethod1" invocation-numbers="1 1 1 1 2 2 4 4 5 5 7 7 18 18 20 20 21 21 22 23 23 24 24 25 25 27 27 28 28 29 29 30 30 32 32 33 33 35 35 36 36 37 37 38 38 39 39 40 40 41 41 42 42 44 44 45 45 46 46 47 47 48 48 50 50 51 51 52 52 53 53 54 54 55 55 56 56 58 58 62 62 73 81 81 82 82 83 83 84 84 85 85 89 89 90 90 92 92 93 93 94 94 95 95 97 97 98 98 99 99 100 100 101 101 102 102"/>
+          <include name="testMethod2" invocation-numbers="1 1 1 1 2 2 7 7 10 10 13 13 14 14 17 17 19 19 20 20 21 21 22 22 24 24 26 26 27 27 28 28 30 30 33 33 35 35 36 36 37 37 38 38 39 39 40 40 41 41 44 44 45 45 46 46 47 47 51 51 52 52 53 53 54 54 55 55 56 56 64 65 65 67 67 75 75 76 76 81 81 82 82 84 84 87 87 89 89 90 90 92 92 93 93 94 94 95 95 96 96 98 98 100 100"/>
           <include name="testMethod3"/>
           <include name="testMethod4"/>
         </methods>

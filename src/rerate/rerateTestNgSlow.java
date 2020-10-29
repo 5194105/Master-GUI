@@ -1398,7 +1398,7 @@ Thread.sleep(2000);
 			try {
 		
 			
-				driver.get(prsPaUrl);
+				driver.get("https://testsso.secure.fedex.com/L3C/PRSApps/inbox/inbox_router.jsp?inbox_id=11");
 		
 			
 			
