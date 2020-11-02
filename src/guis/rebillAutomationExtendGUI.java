@@ -33,7 +33,7 @@ public class rebillAutomationExtendGUI {
 	private JLabel normalLabel;
 	private JLabel mfRetireLabel;
 	private JLabel tipLabel;
-	
+	private JLabel workableLabel;
 	JTextField	customQueryTextField;
 
     config c;
@@ -136,6 +136,14 @@ public class rebillAutomationExtendGUI {
 		frame.getContentPane().add(statusLabel);
 		
 		
+		
+		workableLabel = new JLabel("Workable:");
+		workableLabel.setBounds(300, 240, 78, 31);
+		workableLabel.setForeground(Color.WHITE);
+		workableLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		frame.getContentPane().add(workableLabel);
+		
+		
 		allLabel = new JLabel("All:");
 		allLabel.setBounds(300, 320, 78, 31);
 		allLabel.setForeground(Color.WHITE);
@@ -194,6 +202,11 @@ public class rebillAutomationExtendGUI {
 		*/
 		
 		
+		
+		JCheckBox workableBox = new JCheckBox("");
+		workableBox.setBounds(415, 240, 27, 29);
+		workableBox.setOpaque(false);
+		frame.getContentPane().add(workableBox);
 		
 		JCheckBox allBox = new JCheckBox("");
 		allBox.setBounds(415, 320, 27, 29);
@@ -321,6 +334,14 @@ public class rebillAutomationExtendGUI {
 	    	  }
 	    	  else if(!groundBox.isSelected()){
 	    		  c.setGroundCheckBox("false");
+	    	  }
+	    	  
+	    	  
+	    	  if (workableBox.isSelected()) {
+	    		  c.setEraWorkable("true");
+	    	  }
+	    	  else if(!workableBox.isSelected()){
+	    		  c.setEraWorkable("false");
 	    	  }
 	    	  
 	    	  

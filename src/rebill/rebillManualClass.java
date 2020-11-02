@@ -51,12 +51,14 @@ public class rebillManualClass {
 		c.setNormalCheckBox("false");
 		c.setDatabaseDisabled("false");
 		c.setCustomCheckBox("false");
-		c.setCustomString("trkngnbr in ('519769710260')");
+		c.setCustomString("trkngnbr in ('597616868066')");
 				
 		c.setHeadlessString("false");
 
 		c.setSessionCount("1");
     	
+		c.setEraWorkable("true");
+		
     	String filepath=c.getExcelPath();
 		String level=c.getLevel();
 		String browser=c.getDriverType();
@@ -78,6 +80,8 @@ public class rebillManualClass {
 		
 		String headless=c.getHeadlessString();
 		
+		String eraWorkable=c.getEraWorkable();
+		
 		System.out.println("filepath "+filepath);
 		System.out.println("level "+level);
 		System.out.println("browser "+browser);
@@ -96,6 +100,7 @@ public class rebillManualClass {
 		System.out.println("customCheckBox "+customCheckBox);
 		System.out.println("databaseDisabled "+databaseDisabled);
 		System.out.println("headless "+headless);
+		System.out.println("eraWorkable "+eraWorkable);
 		
 		
 		if(filepath==null) {
@@ -148,6 +153,10 @@ public class rebillManualClass {
 		if(headless==null) {
 			headless="";
 		}
+		if(eraWorkable==null) {
+			eraWorkable="false";
+		}
+		
 		
 
         XmlSuite xmlSuite = new XmlSuite();
@@ -170,6 +179,7 @@ public class rebillManualClass {
         fieldValues.put("customCheckBox",customCheckBox);
         fieldValues.put("databaseDisabled",databaseDisabled);
         fieldValues.put("headless",headless);
+        fieldValues.put("eraWorkable",eraWorkable);
         xmlSuite.setParameters(fieldValues);
         XmlTest xmlTest = new XmlTest(xmlSuite);
         xmlTest.setName("Rebill Test");

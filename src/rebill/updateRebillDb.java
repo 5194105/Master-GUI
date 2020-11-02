@@ -85,7 +85,7 @@ public class updateRebillDb implements Runnable {
        
        GTMcon=c.getGtmRevToolsConnection();
         //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
-       stmt=GTMcon.prepareStatement("insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description,ERA_REBILL) values (?,?,?,?,?,?)");  
+       stmt=GTMcon.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,ERA_REBILL) values (?,?,?,?,?,?)");  
               stmt.setString(1,testInputNbr);  
               stmt.setString(2,tinCount);  
               stmt.setString(3,trk);  
@@ -103,7 +103,7 @@ public class updateRebillDb implements Runnable {
        
        try {
               //     update gtm_rev_tools.rebill_results set result='fail',description='6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables' where trkngnbr='566166113544';
-              stmt=GTMcon.prepareStatement("update rebill_results set result=?,description=?,ERA_REBILL='Y' where trkngnbr=?");  
+              stmt=GTMcon.prepareStatement("update rera_results set result=?,description=?,ERA_REBILL='Y' where trkngnbr=?");  
               
               stmt.setString(1,resultArray[0]);  
               stmt.setString(2,resultArray[1]); 
@@ -178,6 +178,12 @@ public class updateRebillDb implements Runnable {
                              String errorDesc = rs.getString("ERROR_DESC");                           
                          //    System.out.println(statusDesc +"    "+errorDesc);
                            
+                             if (statusDesc==null){
+                            	 
+                            	 statusDesc="fail";
+                            	 errorDesc="Not in ERA DB";
+                             }
+                             
                            if (statusDesc.equals("SUCCESS")) {
                                  resultArray[0]="pass";
                                  resultArray[1]="completed";

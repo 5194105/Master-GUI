@@ -81,6 +81,8 @@ public class config {
     String updateHostname,updatePath;
     String creditCheckBox,debitCheckBox;
     
+    String eraWorkable;
+    
 	public config() {
 		
 	}
@@ -1526,11 +1528,20 @@ public void setUpdatePath(String updatePath) {
 public String getUpdatePath() {
 	return updatePath;
 }
+
+
+
+
+public void setEraWorkable(String eraWorkable){
+	this.eraWorkable=eraWorkable;
 }
 
 
 
-
+public String getEraWorkable(){
+	return eraWorkable;
+}
+}
 
 
 //jdbc:oracle:thin:@<host>:<port>:<SID>

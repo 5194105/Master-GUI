@@ -1405,7 +1405,7 @@ Thread.sleep(2000);
 			  
 	
 			wait = new WebDriverWait( driver,60);
-			
+			Thread.sleep(5000);
 			
 		//	count = getRerateId(driver,name,testCounter);
 			
@@ -1421,6 +1421,8 @@ Thread.sleep(2000);
 			
 			JavascriptExecutor js = ((JavascriptExecutor) driver);
 			js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+			
+			
 			Thread.sleep(1000);
 			
 			//driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[1]/input")).get(count-1).sendKeys(r.keyPress(KeyEvent.VK_ENTER));
@@ -1442,10 +1444,26 @@ Thread.sleep(2000);
 				}
 			
 			
-			
-				Thread.sleep(1000);
-			driver.findElement(By.name("btnAcceptTask")).click();
+			js.executeScript("window.scrollTo(0, 0)");
 			Thread.sleep(1000);
+			driver.findElement(By.name("btnAcceptTask")).click();
+			Thread.sleep(3000);
+			int counter2=0;
+			while (true) {
+				if (counter2==10){
+					break;
+				}
+				if (driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]/parent::font/parent::td/parent::tr/td[1]/input")).get(count-1).isSelected()!=true) {
+					break;
+				}
+					else {
+						driver.findElement(By.name("btnAcceptTask")).click();
+						counter2++;	
+					}
+				}
+			
+			
+			Thread.sleep(3000);
 			driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]")).get(count-1).click();
 			Thread.sleep(2000);
 			wait = new WebDriverWait( driver,10);
@@ -1524,7 +1542,7 @@ Thread.sleep(2000);
 			       	 }
 			  	String[] resultArray = new String[2];
 			  	resultArray[0]="fail";
-			  	resultArray[1]="Try This Manually";
+			  	resultArray[1]="NoSuchElementException on third page";
 			  	if(databaseDisabled.contentEquals("false")) {
 			  	writeToDB(testInputNbr,tinCount,trk,requestId,resultArray);
 			  	}

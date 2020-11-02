@@ -138,11 +138,11 @@ public class testngRebillFast {
 	String[][] allData;
 	config c;
 	int waitTime;
-	
+	String eraWorkable;
 	
 	@BeforeClass
-	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox","sessionCount","customString","customCheckBox","databaseDisabled","headless"})
-	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String sessionCount,String customString,String customCheckBox,String databaseDisabled,String headless) {
+	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox","sessionCount","customString","customCheckBox","databaseDisabled","headless","eraWorkable"})
+	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,String sessionCount,String customString,String customCheckBox,String databaseDisabled,String headless,String eraWorkable) {
 	
 
 		try {
@@ -184,7 +184,7 @@ public class testngRebillFast {
 	        	this.customCheckBox=customCheckBox;
 	        	this.databaseDisabled=databaseDisabled;
 	        	this.headless=headless;
-       
+	        	this.eraWorkable=eraWorkable;
     	
     	if(source.equals("excel")) {
 	    	excelVar.setUpExcelWorkbook();
@@ -307,6 +307,11 @@ public class testngRebillFast {
     		databaseSqlCount+="and company in ('GD','EP') ";
     		databaseSqlQuery+="and company in ('GD','EP') ";
     	}
+    	if (eraWorkable.equals("true")) {
+    		databaseSqlCount+="and workable='Y'";
+    		databaseSqlQuery+="and workable='Y'";
+    	}
+    	
     		}
     			}
     	else if (customCheckBox.equals("true")){
@@ -1358,6 +1363,21 @@ public class testngRebillFast {
          	   			 Assert.fail("interline acct");
          		} 
          				 
+         				 if (tempError.indexOf("Approval Limit")==1) {
+             				 System.out.println(tempError);
+             				 if(source.equals("excel")) {
+             	               	 writeToExcel(rowNumber, 0,"fail");
+             	               	 writeToExcel(rowNumber, 1,tempError);
+             	               	 }
+             	   				 if(databaseDisabled.equals("false")) {
+                     	   			 String[] resultArray = new String[2];
+                     	   			 	resultArray[0]="fail";
+                     	   				resultArray[1]=tempError;
+                     	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                                    	 }
+             	   			 Assert.fail(tempError);
+             		} 
+         				 
          				 if (tempError.indexOf("specialist")==1) {
              				 System.out.println(tempError);
              				 if(source.equals("excel")) {
@@ -1372,6 +1392,23 @@ public class testngRebillFast {
                                     	 }
              	   			 Assert.fail("specialist error");
              		} 
+         				 
+         				 if (tempError.indexOf("Cannot Credit An AirBill For More Than The Invoice Amount Due")==1) {
+             				 System.out.println(tempError);
+             				 if(source.equals("excel")) {
+             	               	 writeToExcel(rowNumber, 0,"fail");
+             	               	 writeToExcel(rowNumber, 1,"Cannot Credit An AirBill For More Than The Invoice Amount Due");
+             	               	 }
+             	   				 if(databaseDisabled.equals("false")) {
+                     	   			 String[] resultArray = new String[2];
+                     	   			 	resultArray[0]="fail";
+                     	   				resultArray[1]="Cannot Credit An AirBill For More Than The Invoice Amount Due";
+                     	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                                    	 }
+             	   			 Assert.fail("Cannot Credit An AirBill For More Than The Invoice Amount Due");
+             		} 	 
+         			
+         				 
  
          		 driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/button[1]")).click();
          		 System.out.println("Found Pop Up");
@@ -1642,6 +1679,7 @@ public class testngRebillFast {
              }
             
              //If False.. think maybe there is stat codes to select.
+         	driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
             
              String[] resultArray = validateResults(trk);
              
@@ -1694,7 +1732,8 @@ public class testngRebillFast {
             		 }
             		 popupCounter++;
             	 }
-            	 driver.findElement(By.xpath("/html/body/div[6]/div/div/div[3]/button[2]")).click();
+            	
+            	 driver.findElement(By.xpath("/html/body/div[6]/div/div/div[3]/button[1]")).click();
             	 Thread.sleep(10000);
             } 
             
