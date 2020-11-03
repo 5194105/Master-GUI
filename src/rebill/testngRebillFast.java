@@ -959,9 +959,15 @@ public class testngRebillFast {
 		    driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
 			wait = new WebDriverWait(driver,waitTime);
 			driver.manage().window().maximize();
-			driver.findElement(By.id("username")).sendKeys(login);
-			driver.findElement(By.id("password")).sendKeys(password);
-			driver.findElement(By.id("submit")).click();
+			
+										
+			driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[2]/div/div/form/div[1]/div[2]/div[1]/div[2]/span/input")).sendKeys(login);
+			driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[2]/div/div/form/div[1]/div[2]/div[2]/div[2]/span/input")).sendKeys(password);
+			driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[2]/div/div/form/div[2]/input")).click();
+			
+			//driver.findElement(By.id("username")).sendKeys(login);
+			//driver.findElement(By.id("password")).sendKeys(password);
+			//driver.findElement(By.id("submit")).click();
     	}
     	catch(Exception e) {
     		

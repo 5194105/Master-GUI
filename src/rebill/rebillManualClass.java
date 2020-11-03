@@ -44,14 +44,14 @@ public class rebillManualClass {
     	c.setFailedCheckBox("true");
 
 		c.setDomesticCheckBox("true");
-		c.setInternationalCheckBox("true");
-		c.setExpressCheckBox("true");	
-		c.setGroundCheckBox("false");
+		c.setInternationalCheckBox("false");
+		c.setExpressCheckBox("false");	
+		c.setGroundCheckBox("true");
 
 		c.setNormalCheckBox("false");
 		c.setDatabaseDisabled("false");
-		c.setCustomCheckBox("false");
-		c.setCustomString("trkngnbr in ('597616868066')");
+		c.setCustomCheckBox("true");
+		c.setCustomString("trkngnbr is not null and company='GD' and login='5194105'");
 				
 		c.setHeadlessString("false");
 

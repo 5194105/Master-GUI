@@ -49,15 +49,26 @@ import org.testng.xml.XmlTest;
 public class Highest {
 
   public Highest() {}
-    	
+  static String  homePath=System.getProperty("user.dir");
+  static  String browser;
+  static  String chromeSetProperty="webdriver.chrome.driver";
+  static  String chromePath=homePath+"\\drivers\\chromedriver.exe";
+  static String ieDriverPath=homePath+"\\drivers\\IEDriverServer.exe";
     
     	public static void main (String[] arg) {
-    		 List<String> list = new ArrayList<String>();
-    	  //   System.out.println("Hello");  
-    		 
-    	     while (1<2){
-    	            list.add("OutOfMemoryError soon");
-    	        }
+    		System.setProperty(chromeSetProperty,chromePath);
+    		WebDriver driver ;
+    		driver = new ChromeDriver();
+    		
+    		driver.get("https://test-myapps.secure.fedex.com/L3/eRA/");
+		    driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+			
+			driver.manage().window().maximize();
+			
+										
+			driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[2]/div/div/form/div[1]/div[2]/div[1]/div[2]/span/input")).sendKeys("5194105");
+			driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[2]/div/div/form/div[1]/div[2]/div[2]/div[2]/span/input")).sendKeys("Syntel99");
+			driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[2]/div/div/form/div[2]/input")).click();
     	        
     	}
 	
