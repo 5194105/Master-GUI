@@ -1462,6 +1462,7 @@ Thread.sleep(2000);
 					}
 				}
 			
+			js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 			
 			Thread.sleep(3000);
 			driver.findElements(By.xpath("//a[contains(text(),'"+name+"')]")).get(count-1).click();

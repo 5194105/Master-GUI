@@ -3,32 +3,39 @@
 <suite name="Failed suite [Sample_Suite]">
   <parameter name="nullCheckBox" value="true"/>
   <parameter name="level" value="3"/>
-  <parameter name="failedCheckBox" value="true"/>
-  <parameter name="groundCheckBox" value="false"/>
-  <parameter name="source" value="db"/>
-  <parameter name="compatibleMode" value=""/>
-  <parameter name="headless" value="false"/>
-  <parameter name="customCheckBox" value="false"/>
-  <parameter name="expressCheckBox" value="true"/>
+  <parameter name="failedCheckBox" value="false"/>
+  <parameter name="nt1" value="true"/>
+  <parameter name="source" value="excel"/>
+  <parameter name="endDateText" value="11/04/2020"/>
+  <parameter name="ei1" value="true"/>
+  <parameter name="nt2" value="true"/>
+  <parameter name="compatibleMode" value="true"/>
+  <parameter name="gi1" value="true"/>
+  <parameter name="ei2" value="true"/>
+  <parameter name="gi2" value="true"/>
+  <parameter name="ed2" value="true"/>
   <parameter name="allCheckBox" value="false"/>
-  <parameter name="filepath" value="C:\Users\FedExUser\Desktop\stephen\R66\L3C6\rebill.xlsx"/>
+  <parameter name="startDateText" value="01/01/2020"/>
+  <parameter name="ed1" value="true"/>
+  <parameter name="filepath" value="C:\Users\FedExUser\Documents\rerate.xlsx"/>
+  <parameter name="gd2" value="true"/>
+  <parameter name="sp2" value="true"/>
   <parameter name="sessionCount" value="1"/>
-  <parameter name="domesticCheckBox" value="true"/>
-  <parameter name="browser" value="2"/>
+  <parameter name="gd1" value="true"/>
+  <parameter name="sp1" value="true"/>
+  <parameter name="browser" value="1"/>
   <parameter name="databaseDisabled" value="false"/>
-  <parameter name="internationalCheckBox" value="true"/>
-  <parameter name="customString" value="trkngnbr in (&#039;597616868066&#039;)"/>
   <test name="Rebill Test(failed)" parallel="methods">
     <classes>
-      <class name="rebill.testngRebillFast">
+      <class name="rerate.rerateTestNgSlow">
         <methods>
-          <include name="setupExcel"/>
-          <include name="testMethod1" invocation-numbers="3 3 3 3 6 6 8 8 11 11 12 12 13 13 14 14 15 15 17 17 19 19 21 21 25 25 26 26 27 27 31 31 32 32 34 34 47 48 48 50 50 53 53 54 54 56 56 59 59 60 60 61 61 62 62 63 63 65 65 66 66 67 67 68 69 69 72 72 73 73 74 74 75 75 77 79 79 80 80 81 81 82 82 84 93"/>
           <include name="testMethod2"/>
-          <include name="testMethod3"/>
+          <include name="testMethod" invocation-numbers="0 1 2 3 4 5 6"/>
           <include name="testMethod4"/>
+          <include name="setupExcel"/>
+          <include name="testMethod3"/>
         </methods>
-      </class> <!-- rebill.testngRebillFast -->
+      </class> <!-- rerate.rerateTestNgSlow -->
     </classes>
   </test> <!-- Rebill Test(failed) -->
 </suite> <!-- Failed suite [Sample_Suite] -->

@@ -25,7 +25,7 @@ public class rerateManualTest {
 		
 		
 	config c = new config();
-   	c.setExcelPath("C:\\Users\\FedExUser\\Documents\\vishnu test.xlsx");
+   	c.setExcelPath("C:\\Users\\FedExUser\\Documents\\Stephen\\rerate.xlsx");
 	c.setLevel("3");
 	c.setDriverType("1");
 	c.setCompatibleMode("true");
@@ -40,7 +40,7 @@ public class rerateManualTest {
 
 	c.setStartDate("01/01/2020");
 
-	c.setEndDate("10/30/2020");
+	c.setEndDate("11/04/2020");
 
 
 	c.setSessionCount("1");
