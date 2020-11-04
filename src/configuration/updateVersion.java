@@ -32,8 +32,7 @@ public class updateVersion {
 		downloadVersion();
 		
 		if (checkVersion()==true) {
-			 if (JOptionPane.showConfirmDialog(null, "Do You Want To Check For An Update?", "WARNING",
-				        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+			
 				 if (JOptionPane.showConfirmDialog(null, "Newer Version Found. Do You Want To Download It?", "WARNING",
 					        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 					 downloadNewVersion();
@@ -42,9 +41,7 @@ public class updateVersion {
 				 } else {
 					    // no option
 					}
-				 } else {
-				    // no option
-				}
+				 
 		}
 		if (checkVersion()==false) {
 			JOptionPane.showMessageDialog(null, "Your Program Is Up To Date");

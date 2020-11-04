@@ -28,7 +28,7 @@ Instant Invoice Seconds Timeout=15
 Rebill L2 URL=https://testsso.secure.fedex.com/L2/eRA/index.html
 Rebill L3 URL=https://test-myapps.secure.fedex.com/L3/eRA/
 ERA Rerate L2 URL=https://testsso.secure.fedex.com/L2/eRA/index.html
-ERA Rerate L3 URL=https://testsso.secure.fedex.com/L3/eRA/index.html
+ERA Rerate L3 URL=https://test-myapps.secure.fedex.com/L3/eRA/
 PRS Rerate L2 Main URL=https://devsso.secure.fedex.com/L2/PRSApps
 PRS Rerate L2 Create URL=https://devsso.secure.fedex.com/L2/PRSApps/rerate/iscreen/rrAERerateMain.jsp?inbox_id=10
 PRS Rerate L2 PA URL=https://devsso.secure.fedex.com/L2/PRSApps/inbox/inbox_router.jsp?inbox_id=11
@@ -44,7 +44,7 @@ UD Password=NA
 Update Hostname=c0021925.test.cloud.fedex.com
 Update Path=/var/fedex/sqa/sqaatt/onlines/masterGui/
 Update Username=sd5194105
-Update Password=Syntel66
+Update Password=Syntel99
 Fedex Network=true
 Admin=true
 Rebill Enabled=true

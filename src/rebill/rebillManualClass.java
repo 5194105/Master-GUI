@@ -30,7 +30,7 @@ import org.testng.xml.XmlTest;
 public class rebillManualClass {
 
 	 
-
+//I will choose Intl Ground Trks that are failed an null
 	static ArrayList<rebillData> rebillDataArray= new ArrayList<rebillData>();
     public static void main(String[] args) {
     	config c = new config();
@@ -42,15 +42,15 @@ public class rebillManualClass {
     	c.setAllCheckBox("false");
     	c.setNullCheckBox("true");
     	c.setFailedCheckBox("true");
-
-		c.setDomesticCheckBox("true");
-		c.setInternationalCheckBox("false");
+		c.setDomesticCheckBox("false");
+		c.setInternationalCheckBox("true");
 		c.setExpressCheckBox("false");	
 		c.setGroundCheckBox("true");
-
-		c.setNormalCheckBox("false");
+		//c.setNormalCheckBox("false"); Retired Value
 		c.setDatabaseDisabled("false");
-		c.setCustomCheckBox("true");
+		
+		//You can give custom query if want to
+		c.setCustomCheckBox("false");
 		c.setCustomString("trkngnbr is not null and company='GD' and login='5194105'");
 				
 		c.setHeadlessString("false");

@@ -1030,7 +1030,7 @@ public void setupMouseListener() {
 				    				String	customCheckBox= c.getCustomCheckBox();
 				    				String	customString= c.getCustomString();
 				    				String headless=c.getHeadlessString();
-				    		
+				    				String eraWorkable=c.getEraWorkable();
 				    				
 				    				System.out.println("filepath "+filepath);
 				    				System.out.println("level "+level);
@@ -1050,7 +1050,7 @@ public void setupMouseListener() {
 				    				System.out.println("customCheckBox "+customCheckBox);
 				    				System.out.println("databaseDisabled "+databaseDisabled);
 				    				System.out.println("headless "+headless);
-				    				
+				    				System.out.println("eraWorkable "+eraWorkable);
 				    				
 				    				if(filepath==null) {
 				    					filepath="";
@@ -1111,6 +1111,10 @@ public void setupMouseListener() {
 				    				if(headless==null) {
 				    					headless="";
 				    				}
+				    				if(eraWorkable==null) {
+				    					eraWorkable="false";
+				    				}
+				    				
 				    		/*
 				    				@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox",
 				    				"failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox",
@@ -1141,6 +1145,7 @@ public void setupMouseListener() {
 				    		        fieldValues.put("customCheckBox",customCheckBox);
 				    		        fieldValues.put("databaseDisabled",databaseDisabled);
 				    		        fieldValues.put("headless",headless);
+				    		        fieldValues.put("eraWorkable",eraWorkable);
 				    		        xmlSuite.setParameters(fieldValues);
 				    		        XmlTest xmlTest = new XmlTest(xmlSuite);
 				    		        xmlTest.setName("Rebill Test");

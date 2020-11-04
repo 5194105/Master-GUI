@@ -436,6 +436,12 @@ if(failCheckBox.isSelected())  {
 	else {
 		c.setFailedCheckBox("false");
 	}
+if (checkList==true) {
+	  frame.setVisible(false);
+}
+else if (checkList==false){
+	JOptionPane.showMessageDialog(frame, "Contact Stephen");
+}
 	    	  
       }
 	    });
