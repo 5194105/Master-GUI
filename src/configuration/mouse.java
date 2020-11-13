@@ -49,6 +49,7 @@ import guis.udAutomation;
 import instant_invoice.testNgSlowInstantInvoice;
 import prerate.prerateHoldTestNGSlow;
 import prerate.prerateTestNGSlow;
+import prerate.prerateUpload;
 import rebill.rebillMain;
 import rebill.testngRebillFast;
 import rebill.testngRebillSlow;
@@ -905,6 +906,20 @@ public void setupMouseListener() {
 								
 								}
 							}
+							
+							if (obj.getClass().getCanonicalName().equals("guis.prerateAutomationGui")) {
+								if (c.getLevel()==null) {
+									JOptionPane.showMessageDialog(frame, "Must Select A Level");
+								}
+								else {
+									prerateUpload pu= new prerateUpload(c,obj);
+									Thread t1 = new Thread(pu);
+									t1.start();
+								
+								}
+							}
+							
+							
 						}
 						
 						

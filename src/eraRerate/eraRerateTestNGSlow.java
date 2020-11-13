@@ -69,7 +69,7 @@ public class eraRerateTestNGSlow {
 	static FileInputStream fin;
 	static FileOutputStream fout;
 	public int  rowcount;
-
+	int waitTime;
 	WebDriver driver1,driver2,driver3,driver4;
 	static int sheetcount;
 	static int j ;
@@ -169,7 +169,7 @@ public class eraRerateTestNGSlow {
 				this.customString=customString;
 	        	this.customCheckBox=customCheckBox;
 	        	sessionCountInt=Integer.parseInt(sessionCount);
-        
+	        	waitTime=Integer.parseInt(c.getEraRerateSecondTimeout());
         
        
     	
@@ -244,7 +244,8 @@ public class eraRerateTestNGSlow {
 		
     	
     	String databaseSqlCount="select count(*) as total from era_rerate_view where trkngnbr is not null ";
-    	String databaseSqlQuery="select result, description, test_input_nbr, tin_count, trkngnbr, invoice_nbr_1,invoice_nbr_2,SVC_CHANGED,ACT_Wgt, CUST_Wgt, RERATE_COMMENTS, region,  USERNAME,   password from era_rerate_view where trkngnbr is not null ";
+    	//String databaseSqlQuery="select result, description, test_input_nbr, tin_count, trkngnbr, invoice_nbr_1,invoice_nbr_2,SVC_CHANGED,ACT_Wgt, CUST_Wgt, RERATE_COMMENTS, region,  USERNAME,   password from era_rerate_view where trkngnbr is not null ";
+    	String databaseSqlQuery="select result, description, test_input_nbr, tin_count, trkngnbr, invoice_nbr_1,invoice_nbr_2,TEMP_RATE_WEIGHT,TEMP_ACTUAL_WEIGHT,TEMP_LENGTH,TEMP_WIDTH,TEMP_HEIGHT,TEMP_WORKABLE,TEMP_PAYOR,TEMP_SVC_TYPE,TEMP_PACKAGE_TYPE, region,  USERNAME,   password,billAcctNbr from era_rerate_view where trkngnbr is not null ";
     	
     	
     	if (customCheckBox.equals("false")) {
@@ -460,8 +461,14 @@ public class eraRerateTestNGSlow {
     
      
     @Test(dataProvider="data-provider1",retryAnalyzer = Retry.class)
-    public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String svcChanged,String actWeight,String custWeight,String rerateComments,String region ,String login ,String password,int rowNumber) {
+    public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,
+    		String TEMP_RATE_WEIGHT,String TEMP_ACTUAL_WEIGHT,String TEMP_LENGTH,String TEMP_WIDTH,String TEMP_HEIGHT,
+    		String TEMP_WORKABLE,String TEMP_PAYOR,String TEMP_SVC_TYPE,String TEMP_PACKAGE_TYPE,
+    		String region ,String login ,String password,String billAcctNbr,int rowNumber) {
      
+    	
+    	
+    	
     	System.out.println("Instance: 1");
     	
     	System.out.println(result);
@@ -478,7 +485,7 @@ public class eraRerateTestNGSlow {
     	
     	//Will Check if Trk is already successful;
   	  
-    	
+    	/*
     	String[] resultArray = validateResults(trk);
   	  if ( resultArray[0].equals("pass")){
        	 if(source.equals("excel")) {
@@ -487,7 +494,7 @@ public class eraRerateTestNGSlow {
        	 }
        	 return;
         }
-    	
+    	*/
     	try { 
     		driver1.quit();
 	  }
@@ -519,7 +526,10 @@ public class eraRerateTestNGSlow {
 	    	
 	    	
 	        
-			doRebill(driver1,wait1, result,  descripiton, testInputNbr, tinCount, trk,invoiceNbr1,invoiceNbr2, svcChanged, actWeight, custWeight,rerateComments, region , login , password,1);
+			doRebill(driver1,wait1,  result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,
+		    		 TEMP_RATE_WEIGHT, TEMP_ACTUAL_WEIGHT, TEMP_LENGTH, TEMP_WIDTH, TEMP_HEIGHT,
+		    		 TEMP_WORKABLE, TEMP_PAYOR, TEMP_SVC_TYPE, TEMP_PACKAGE_TYPE,
+		    		 region , login , password,billAcctNbr,1);
 	/*
 			 public void doRebill(WebDriver driver,WebDriverWait wait, String result, String descripiton,
 					 String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,
@@ -708,9 +718,10 @@ public class eraRerateTestNGSlow {
 		    driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 			wait = new WebDriverWait(driver,10);
 			driver.manage().window().maximize();
-			driver.findElement(By.id("username")).sendKeys(login);
-			driver.findElement(By.id("password")).sendKeys(password);
-			driver.findElement(By.id("submit")).click();
+			driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[2]/div/div/form/div[1]/div[2]/div[1]/div[2]/span/input")).sendKeys(login);
+			driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[2]/div/div/form/div[1]/div[2]/div[2]/div[2]/span/input")).sendKeys(password);
+			driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[2]/div/div/form/div[2]/input")).click();
+			
     	}
     	catch(Exception e) {
     		
@@ -719,17 +730,37 @@ public class eraRerateTestNGSlow {
     }
     
     
-    public void doRebill(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String svcChanged,String actWeight,String custWeight,String rerateComments,String region ,String login ,String password,int rowNumber) throws InterruptedException {
-    
+    public void doRebill(WebDriver driver,WebDriverWait wait, 
+    		String result,String  descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,
+    		String TEMP_RATE_WEIGHT,String TEMP_ACTUAL_WEIGHT,String TEMP_LENGTH,String TEMP_WIDTH,String TEMP_HEIGHT,
+    		String TEMP_WORKABLE,String TEMP_PAYOR,String TEMP_SVC_TYPE,String TEMP_PACKAGE_TYPE,
+    		String region ,String login ,String password, String billAcctNbr,
+    		int rowNumber) throws InterruptedException {
+    	WebElement element=null;
     	JavascriptExecutor js= (JavascriptExecutor) driver;
-    	By tempElement;
+    	
     	int packageCounter=0;
     	Boolean exist;
     	WebElement scrollElement;
-    	Boolean packageTab=false;
+    	
     	wait=new WebDriverWait(driver,20);
-    	driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
-
+    	driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
+    /*
+    	  if(!preRateScenarios.equals("")) {
+    	 
+    		 if(source.equals("excel")) {
+	               	 writeToExcel(rowNumber, 0,"fail");
+	               	 writeToExcel(rowNumber, 1,"Prerate Code Not Added Yet");
+	               	 }
+	   				 if(databaseDisabled.equals("false")) {
+     	   			 String[] resultArray = new String[2];
+     	   			 	resultArray[0]="fail";
+     	   				resultArray[1]="Prerate Code Not Added Yet";
+     	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                    	 }
+    	return;	
+    	}
+    	*/
     	
     	
     	try {
@@ -749,43 +780,67 @@ public class eraRerateTestNGSlow {
     	} 
     	catch(Exception e) {
     		System.out.println("Failed on Entering Tracking Number");
+   		 if(source.equals("excel")) {
+           	 writeToExcel(rowNumber, 0,"fail");
+           	 writeToExcel(rowNumber, 1,"Failed on Entering Tracking Number");
+           	 }
+				 if(databaseDisabled.equals("false")) {
+	   			 String[] resultArray = new String[2];
+	   			 	resultArray[0]="fail";
+	   				resultArray[1]="Failed on Entering Tracking Number";
+	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+            	 }
     		 Assert.fail("Failed on Entering Tracking Number");
     		
     	}
     	
     	//Try to Click Package Tab
+    	int counter1=0;
+    	String tempString1;
+    	driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS);
+    	while (counter1<10) {
     	try {  
-    		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div/div/div/div/div[2]/div")));
-    	//	/html/body/div[2]/div/div/div/div/div[1]/div[1]/div/div[2]/form/div[1]/div[1]/div/div[2]/div/input
-    		//WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a")));
-        	//element.click();
-    		WebElement element =driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a"));
-    		js.executeScript("arguments[0].click()", element);
-    		packageTab=true;
-        	//driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a")).click();
+    		counter1++;
+    		System.out.println("Trying to click package tab");
+    		element =driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a"));
+    		js.executeScript("arguments[0].click()", element);    
+    		tempString1=driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[2]/div[1]/div/div[2]/div[1]/div/div/div/div/div/div[1]/div/div[1]/span[1]")).getText();
+    		if(tempString1.equals("Charge Code Description")) {
+    			System.out.println("Found Code Desc");
+    			break;
+    		}
     	}
     	catch(Exception e) {
-    		System.out.println("Could Not Find PopUp..");
-    		
+    		try {  
+    			System.out.println("Trying to click popup");
+        		driver.findElement(By.xpath(" /html[1]/body[1]/div[6]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]/div[2]/div[1]/div[1]/input[1]")).sendKeys(invoiceNbr1);
+        		Thread.sleep(1000);
+        		driver.findElement(By.xpath("/html[1]/body[1]/div[6]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]")).click();
+        		driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/button[1]")).click();
+        		System.out.println("Found Pop Up");
+        		element =driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a"));
+            	js.executeScript("arguments[0].click()", element);
+        }	catch(Exception ee) {
+        	System.out.println("Could Not Find Pop Up Or Continue To Charge Code Screen");
+           // Assert.fail("Could Not Find Popup Or COntinue to Package Screen");
+        	}
+    	}
     	}
     	
-    	//Trying to find popup
-    	if (packageTab==false) {
-    	try {  
-    		driver.findElement(By.xpath(" /html[1]/body[1]/div[6]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]/div[2]/div[1]/div[1]/input[1]")).sendKeys(invoiceNbr1);
-    		Thread.sleep(1000);
-    		driver.findElement(By.xpath("/html[1]/body[1]/div[6]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]")).click();
-    		driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/button[1]")).click();
-    		System.out.println("Found Pop Up");
-    		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/div/div[2]/div/div[1]/div[2]/div[2]/div/div/div/div/div[2]/div")));
-        		WebElement element =driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a"));
-        		js.executeScript("arguments[0].click()", element);
-        	
-
-    }	catch(Exception e) {
-        Assert.fail("Could Not Find Popup Or COntinue to Package Screen");
-    	}
-	}
+    	if(counter1>=10) {
+    		 if(source.equals("excel")) {
+               	 writeToExcel(rowNumber, 0,"fail");
+               	 writeToExcel(rowNumber, 1,"Could Not Get To Charge Code Details");
+               	 }
+    				 if(databaseDisabled.equals("false")) {
+    	   			 String[] resultArray = new String[2];
+    	   			 	resultArray[0]="fail";
+    	   				resultArray[1]="Could Not Get To Charge Code Details";
+    	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                	 }
+        		
+     		Assert.fail("Could Not Get To Charge Code Details");
+     	}
     	
     	
     	
@@ -897,13 +952,25 @@ public class eraRerateTestNGSlow {
          
      //    String svcChanged,String dimDetails,String actWeight,String custWeight,String rerateComments
 
-        
+        System.out.println("TEMP_SVC_TYPE: "+TEMP_SVC_TYPE);
             	
             	 
-            	 if (!svcChanged.equals("")) {
+            	 if (!TEMP_SVC_TYPE.equals("")) {
             		  Select svcDropDown = new Select (driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div[2]/div/div/div/select")));
-            		 	driver.findElement(By.xpath("//*[@id=\"origin\"]")).sendKeys(svcChanged);
-            		 	switch(svcChanged) {
+            		 	//driver.findElement(By.xpath("//*[@id=\"origin\"]")).sendKeys(TEMP_SVC_TYPE);
+            		 	switch(TEMP_SVC_TYPE) {
+            		 	
+            		 	
+            			case "92":
+            		 		svcDropDown.selectByValue("string:Service");
+            		 		Select svcDropDown2 = new Select (driver.findElement(By.xpath("  /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div[3]/div/div/div/select")));
+            		 		svcDropDown2.selectByValue("object:2995");
+            		 		break;
+            		 	
+            		 	
+            		 	
+            		 	
+            		 	
             		 	
             		 	case "Express Saver":
             		 		svcDropDown.selectByValue("string:Express Saver");
@@ -930,6 +997,60 @@ public class eraRerateTestNGSlow {
            
             	 }
             	 
+            	 	
+            	//driver.findElement(By.xpath("//*[@id=\"origin\"]")).sendKeys(TEMP_SVC_TYPE);
+        		  
+            	 if (!TEMP_RATE_WEIGHT.equals("")) {
+            		driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[2]/div[3]/div/div/input")).sendKeys(TEMP_SVC_TYPE);
+            	 }
+            	 if (!TEMP_ACTUAL_WEIGHT.equals("")) {
+            		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[2]/div[2]/div/div/input")).sendKeys(TEMP_SVC_TYPE);
+            	 }
+            	 if (!TEMP_LENGTH.equals("")) {
+            		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[4]/div[2]/div[1]/div/input")).sendKeys(TEMP_SVC_TYPE);
+            	 }
+            	 if (!TEMP_WIDTH.equals("")) {
+            		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[4]/div[3]/div[1]/div/input")).sendKeys(TEMP_SVC_TYPE);
+            	 }
+            	 if (!TEMP_HEIGHT.equals("")) {
+            		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[4]/div[4]/div[1]/div/input")).sendKeys(TEMP_SVC_TYPE);
+            	 }
+            	/*
+            	 if (!TEMP_WORKABLE.equals("")) {
+            		 driver.findElement(By.xpath("")).sendKeys(TEMP_SVC_TYPE);
+            	 }
+            	*/
+            	 if (!TEMP_PAYOR.equals("")) {
+            		 switch(TEMP_PAYOR) {
+         		 	
+         		 	
+         			case "1":
+         				 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[3]/div[2]/div[1]/div/label/span")).click();
+                		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[3]/div[2]/div[2]/div/input")).sendKeys(billAcctNbr);
+                     	
+         				
+         				 break;
+         			case "2":
+        				 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[3]/div[3]/div[1]/div/label/span")).click();
+        				 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[3]/div[3]/div[2]/div/input")).sendKeys(billAcctNbr);
+                      	
+        				 break;
+         			case "3":
+        				
+         				driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[3]/div[4]/div[1]/div/label/span")).click();
+         				driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[3]/div[4]/div[2]/div/input")).sendKeys(billAcctNbr);
+                     	
+         				break;
+         		 	
+            	 }
+            	 }
+            	
+            	 if (!TEMP_PACKAGE_TYPE.equals("")) {
+            		// driver.findElement(By.xpath("")).sendKeys(TEMP_SVC_TYPE);
+            	 }
+            	 
+            	
+            	 
             	 
             	 /*
             	 if (!dimDetails.equals("")) {
@@ -940,6 +1061,7 @@ public class eraRerateTestNGSlow {
             		 driver.findElement(By.xpath("//*[@id=\"rb_volume\"]")).sendKeys(actWeight);
             	 }
             	 */
+            	 /*
             	 if (!custWeight.equals("")) {
             		try {
             		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[2]/div[2]/div/div/input")).clear();
@@ -1046,7 +1168,7 @@ public class eraRerateTestNGSlow {
             	 }
             
           }
-             
+             */
              
         }
     

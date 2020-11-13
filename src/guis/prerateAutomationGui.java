@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
@@ -54,7 +55,7 @@ public class prerateAutomationGui {
 	     JLabel functionLabel;
 	     JRadioButton updateButton;
 	     JRadioButton holdButton;
-	     
+	     JProgressBar b ;
 	     mouse m;
 	public prerateAutomationGui( gui g,config c) {
 		this.g=g;
@@ -118,7 +119,14 @@ public class prerateAutomationGui {
 		
 		
 	
-	    
+b=new JProgressBar(0,100);   
+		
+		b.setBounds(275,574,50,30);
+        b.setValue(0);
+        b.setStringPainted(true);
+        b.setSize(475, 20);
+        b.setVisible(true);
+        frame.getContentPane().add(b);
 	     
 	     
 	    
@@ -371,4 +379,7 @@ public class prerateAutomationGui {
 		        }
 			c.setPrerateType("hold");
 		}
+		public JProgressBar getProgressBar() {
+			return b;
+		} 
 }

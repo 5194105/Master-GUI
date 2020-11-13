@@ -39,7 +39,7 @@ public class eraRerateManualTest {
 		c.setSessionCount("1");
 		c.setDatabaseDisabled("false");
 		c.setCustomCheckBox("true");
-		c.setCustomString("trkngnbr ='794974734599'");
+		c.setCustomString("trkngnbr ='794986095985'");
     	
     	String filepath=c.getExcelPath();
 		String level=c.getLevel();

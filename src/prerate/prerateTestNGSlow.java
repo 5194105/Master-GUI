@@ -1192,11 +1192,19 @@ public class prerateTestNGSlow {
 			 
 			
 			 writeToExcel(rowNumber,1, errorMessage);
-			 
-			 String[] resultArray =checkFailure(trk);
+			 String[] resultArray = new String[2];
+			 if (errorMessage.equals("")|| errorMessage == null) {
+			  resultArray =checkFailure(trk);
 				if (resultArray[1].equals("")) {
 					 resultArray[1]=errorMessage;
 				}
+				}
+			 else
+			 {
+				 resultArray[0]="fail";
+				 resultArray[1]=errorMessage;
+				 
+			 }
 			
 		
 			 writeToDB(testInputNbr,tinCount,trk,resultArray);
@@ -1417,7 +1425,7 @@ where pkg_trkng_nbr ='582838858029';
 			if (rs.next()==false){
 			      System.out.println("Is NULL");
 			      resultArray[0]="fail"; 
-			      resultArray[1]="Could Not Find in IORE";
+			      resultArray[1]="Result Not Found";
 			}
 			   else{
 			      
