@@ -42,16 +42,16 @@ public class rebillManualClass {
     	c.setAllCheckBox("false");
     	c.setNullCheckBox("true");
     	c.setFailedCheckBox("true");
-		c.setDomesticCheckBox("false");
+		c.setDomesticCheckBox("true");
 		c.setInternationalCheckBox("true");
-		c.setExpressCheckBox("false");	
+		c.setExpressCheckBox("true");	
 		c.setGroundCheckBox("true");
 		//c.setNormalCheckBox("false"); Retired Value
 		c.setDatabaseDisabled("false");
 		
 		//You can give custom query if want to
-		c.setCustomCheckBox("false");
-		c.setCustomString("trkngnbr is not null and company='GD' and login='5194105'");
+		c.setCustomCheckBox("true");
+		c.setCustomString("trkngnbr ='732640071350'");
 				
 		c.setHeadlessString("false");
 

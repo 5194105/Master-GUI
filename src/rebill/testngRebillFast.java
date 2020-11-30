@@ -1164,7 +1164,7 @@ public class testngRebillFast {
 	         
 	         */
 		         
-		         
+		System.out.println("")   ;      
 	         //For domestic.
 	         if (login.equals("5194105") || login.equals("584168")){
 	             switch (reasonCode){
@@ -1593,8 +1593,8 @@ public class testngRebillFast {
                         break;
                     }
 
-             
-             System.out.println("MF TEST");
+         	System.out.println("")   ;   
+           
              if(worktype.equals("MFRETIRE")) {
            /*
             	 String originLoc,
@@ -1745,6 +1745,17 @@ public class testngRebillFast {
             
             catch(Exception e2) {
             	System.out.println("Did not reach override errors or failed here");
+            	if(databaseDisabled.equals("false")) {
+    	   			 String[] resultArray1 = new String[2];
+    	   			 	resultArray1[0]="fail";
+    	   				resultArray1[1]="Failed at last screen with unknown error.";
+    	   				 writeToDB(testInputNbr,tinCount,trk,resultArray1);
+                   	 }
+    	   		 if(source.equals("excel")) {
+   	               	 writeToExcel(rowNumber, 0,"fail");
+   	               	 writeToExcel(rowNumber, 1,"Could Not Get to Rebill Screen");
+   	               	 }
+            	
             	 Assert.fail("Faled At Last Rebill Screen: Did not reach override errors or failed here");
             }
             	 

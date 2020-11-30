@@ -1517,9 +1517,15 @@ Thread.sleep(2000);
 		  	if(databaseDisabled.contentEquals("false")) {
 		  	writeToDB(testInputNbr,tinCount,trk,requestId,resultArray);
 		  	}
+		  	
+		  	try {
 		  	driver.quit();
 			driver.close();
-		    Assert.assertTrue(true,"Test Case Completed.");
+		  	}
+		  	catch(Exception e) {
+		  		System.out.println(e);
+		  	}
+			Assert.assertTrue(true,"Test Case Completed.");
 		       	 	
 		       	 return;
 		  	  

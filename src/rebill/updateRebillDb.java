@@ -103,7 +103,7 @@ public class updateRebillDb implements Runnable {
        
        try {
               //     update gtm_rev_tools.rebill_results set result='fail',description='6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables' where trkngnbr='566166113544';
-              stmt=GTMcon.prepareStatement("update rera_results set result=?,description=?,ERA_REBILL='Y' where trkngnbr=?");  
+              stmt=GTMcon.prepareStatement("update era_results set result=?,description=?,ERA_REBILL='Y' where trkngnbr=?");  
               
               stmt.setString(1,resultArray[0]);  
               stmt.setString(2,resultArray[1]); 
@@ -112,7 +112,7 @@ public class updateRebillDb implements Runnable {
               
        }
        catch(Exception e) {
-            //  System.out.println(e);
+              System.out.println(e);
        }
        try {
                      stmt.close();
@@ -151,9 +151,9 @@ public class updateRebillDb implements Runnable {
             ResultSet rs = null;
              try {
                     
-                    stmt=con.prepareStatement("select * from invadj_schema.rdt_rebill_request where airbill_nbr=?");  
+                    stmt=con.prepareStatement("select * from invadj_schema.rdt_rebill_request where airbill_nbr=? order by LAST_UPDT_TMSTP desc");  
                     stmt.setString(1,trk);  
-                    
+                    System.out.print(trk+": ");
              } catch (SQLException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -172,12 +172,13 @@ public class updateRebillDb implements Runnable {
                                //  System.out.println("Is NULL");
                                  resultArray[0]="fail";
                                  resultArray[1]="Not In ERA Database";
+                                 System.out.println("Not In ERA Database");
                            }
                               else{
                                       String statusDesc = rs.getString("STATUS_DESC");
                              String errorDesc = rs.getString("ERROR_DESC");                           
                          //    System.out.println(statusDesc +"    "+errorDesc);
-                           
+                             System.out.println(errorDesc);
                              if (statusDesc==null){
                             	 
                             	 statusDesc="fail";
@@ -197,6 +198,7 @@ public class updateRebillDb implements Runnable {
                            // TODO Auto-generated catch block
                        //    System.out.println(e);
                            e.printStackTrace();
+                           System.out.println(e);
                     }
                  try {
                            rs.close();

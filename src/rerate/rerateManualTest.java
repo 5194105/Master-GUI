@@ -40,7 +40,7 @@ public class rerateManualTest {
 
 	c.setStartDate("01/01/2020");
 
-	c.setEndDate("11/04/2020");
+	c.setEndDate("11/27/2020");
 
 //
 	c.setSessionCount("1");
