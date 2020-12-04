@@ -1901,12 +1901,19 @@ public class testngRebillFast {
     				    String statusDesc = rs.getString("STATUS_DESC");
     	                String errorDesc = rs.getString("ERROR_DESC"); 	    	                
     	                System.out.println(statusDesc +"    "+errorDesc);
+    	                
     	              
     	              if (statusDesc.equals("SUCCESS")) {
   	    			      resultArray[0]="pass";
   	    			      resultArray[1]="completed";
     	              }
-    	              else {
+    	              else if (statusDesc==null){
+                     	 
+                     	 statusDesc="fail";
+                     	 errorDesc="In ERA DB But Error Not Set";
+                      }
+    			else
+    	              {
   	    			      resultArray[0]="fail";
   	    			      resultArray[1]=errorDesc;
     	              }

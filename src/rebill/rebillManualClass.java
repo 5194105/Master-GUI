@@ -51,7 +51,7 @@ public class rebillManualClass {
 		
 		//You can give custom query if want to
 		c.setCustomCheckBox("true");
-		c.setCustomString("trkngnbr ='732640071350'");
+		c.setCustomString("region ='USA' and result is null");
 				
 		c.setHeadlessString("false");
 

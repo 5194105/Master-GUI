@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Rebill Test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>6/4/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>1/3/0</td>
 </tr><tr>
-<td>Started on:</td><td>Fri Nov 27 15:16:59 CST 2020</td>
+<td>Started on:</td><td>Thu Dec 03 21:29:18 UTC 2020</td>
 </tr>
-<tr><td>Total time:</td><td>899 seconds (899816 ms)</td>
+<tr><td>Total time:</td><td>10 seconds (10715 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -75,120 +75,80 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='rerate.rerateTestNgSlow.testMethod()'><b>testMethod</b><br>Test class: rerate.rerateTestNgSlow<br>Parameters: 52384, 1, 199987941, , 715150071355, , 716067206, , NT, , Tracking Number, CE Level, SDTL3C4-52384-1-175, 7</td>
-<td><div><pre>org.openqa.selenium.NoSuchSessionException: Session ID is null. Using WebDriver after calling quit()?
-Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:25:48&apos;
-System info: host: &apos;SQA-CRS-021&apos;, ip: &apos;10.255.251.244&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;x86&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_212&apos;
-Driver info: driver.version: RemoteWebDriver
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:125)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:609)
-	at org.openqa.selenium.remote.RemoteWebDriver.close(RemoteWebDriver.java:442)
-	at rerate.rerateTestNgSlow.secondPage(rerateTestNgSlow.java:1380)
-	at rerate.rerateTestNgSlow.doWork(rerateTestNgSlow.java:803)
-	at rerate.rerateTestNgSlow.testMethod(rerateTestNgSlow.java:636)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.lang.Thread.run(Unknown Source)
-... Removed 10 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace15146039", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace15146039'><pre>org.openqa.selenium.NoSuchSessionException: Session ID is null. Using WebDriver after calling quit()?
-Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:25:48&apos;
-System info: host: &apos;SQA-CRS-021&apos;, ip: &apos;10.255.251.244&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;x86&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_212&apos;
-Driver info: driver.version: RemoteWebDriver
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:125)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:609)
-	at org.openqa.selenium.remote.RemoteWebDriver.close(RemoteWebDriver.java:442)
-	at rerate.rerateTestNgSlow.secondPage(rerateTestNgSlow.java:1380)
-	at rerate.rerateTestNgSlow.doWork(rerateTestNgSlow.java:803)
-	at rerate.rerateTestNgSlow.testMethod(rerateTestNgSlow.java:636)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
-	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
-	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
-	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.lang.Thread.run(Unknown Source)
-</pre></div></td>
-<td>72</td>
-<td>rerate.rerateTestNgSlow@79c6c6</td></tr>
-<tr>
-<td title='rerate.rerateTestNgSlow.testMethod2()'><b>testMethod2</b><br>Test class: rerate.rerateTestNgSlow</td>
+<td title='rebill.testngRebillFast.testMethod2()'><b>testMethod2</b><br>Test class: rebill.testngRebillFast</td>
 <td><div><pre>org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod2() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.lang.Thread.run(Unknown Source)
-... Removed 7 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace25943337", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace25943337'><pre>org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod2() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
-	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
-	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
-	at org.testng.internal.Invoker.handleParameters(Invoker.java:1308)
-	at org.testng.internal.Invoker.createParameters(Invoker.java:1036)
-	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1126)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.lang.Thread.run(Unknown Source)
+Data Provider public synchronized java.lang.Object[][] rebill.testngRebillFast.dataProviderMethod2() returned a null value
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+... Removed 9 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace54275228", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace54275228'><pre>org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] rebill.testngRebillFast.dataProviderMethod2() returned a null value
+	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:147)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
+	at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
+	at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:789)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
 </pre></div></td>
 <td>0</td>
-<td>rerate.rerateTestNgSlow@79c6c6</td></tr>
+<td>rebill.testngRebillFast@5762806e</td></tr>
 <tr>
-<td title='rerate.rerateTestNgSlow.testMethod3()'><b>testMethod3</b><br>Test class: rerate.rerateTestNgSlow</td>
+<td title='rebill.testngRebillFast.testMethod3()'><b>testMethod3</b><br>Test class: rebill.testngRebillFast</td>
 <td><div><pre>org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod3() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.lang.Thread.run(Unknown Source)
-... Removed 7 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace20633693", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace20633693'><pre>org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod3() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
-	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
-	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
-	at org.testng.internal.Invoker.handleParameters(Invoker.java:1308)
-	at org.testng.internal.Invoker.createParameters(Invoker.java:1036)
-	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1126)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.lang.Thread.run(Unknown Source)
+Data Provider public synchronized java.lang.Object[][] rebill.testngRebillFast.dataProviderMethod3() returned a null value
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+... Removed 9 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1036519065", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1036519065'><pre>org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] rebill.testngRebillFast.dataProviderMethod3() returned a null value
+	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:147)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
+	at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
+	at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:789)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
 </pre></div></td>
 <td>0</td>
-<td>rerate.rerateTestNgSlow@79c6c6</td></tr>
+<td>rebill.testngRebillFast@5762806e</td></tr>
 <tr>
-<td title='rerate.rerateTestNgSlow.testMethod4()'><b>testMethod4</b><br>Test class: rerate.rerateTestNgSlow</td>
+<td title='rebill.testngRebillFast.testMethod4()'><b>testMethod4</b><br>Test class: rebill.testngRebillFast</td>
 <td><div><pre>org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod4() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.lang.Thread.run(Unknown Source)
-... Removed 7 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace17109184", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace17109184'><pre>org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod4() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
-	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:137)
-	at org.testng.internal.Parameters.handleParameters(Parameters.java:509)
-	at org.testng.internal.Invoker.handleParameters(Invoker.java:1308)
-	at org.testng.internal.Invoker.createParameters(Invoker.java:1036)
-	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1126)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.lang.Thread.run(Unknown Source)
+Data Provider public synchronized java.lang.Object[][] rebill.testngRebillFast.dataProviderMethod4() returned a null value
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+... Removed 9 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace452473906", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace452473906'><pre>org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] rebill.testngRebillFast.dataProviderMethod4() returned a null value
+	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:147)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
+	at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
+	at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:789)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
 </pre></div></td>
 <td>0</td>
-<td>rerate.rerateTestNgSlow@79c6c6</td></tr>
+<td>rebill.testngRebillFast@5762806e</td></tr>
 </table><p>
 <table width='100%' border='1' class='invocation-passed'>
 <tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
@@ -198,35 +158,10 @@ Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.d
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='rerate.rerateTestNgSlow.testMethod()'><b>testMethod</b><br>Test class: rerate.rerateTestNgSlow<br>Parameters: 105265, 1, 450312657, , 416250071356, , 716067941, , Express Domestic, , Tracking Number, CE Level, SDTL3C4-105265-1-40, 1</td>
+<td title='rebill.testngRebillFast.testMethod1()'><b>testMethod1</b><br>Test class: rebill.testngRebillFast<br>Parameters: , , 114162, 2, 794989991711, RBS, , 716068208, , N, USA, 5194105, Online20, DM, GD, NORMAL, , , , , , , , , , , , , , , 1</td>
 <td></td>
-<td>133</td>
-<td>rerate.rerateTestNgSlow@79c6c6</td></tr>
-<tr>
-<td title='rerate.rerateTestNgSlow.testMethod()'><b>testMethod</b><br>Test class: rerate.rerateTestNgSlow<br>Parameters: 196677, 1, 605390900, , 794988398908, , 330836683, , Ground International, , Date Range, CE Level, SDTL3C4-196677-1-133, 2</td>
-<td></td>
-<td>133</td>
-<td>rerate.rerateTestNgSlow@79c6c6</td></tr>
-<tr>
-<td title='rerate.rerateTestNgSlow.testMethod()'><b>testMethod</b><br>Test class: rerate.rerateTestNgSlow<br>Parameters: 199013, 1, 611309007, 611309147, 794988424850, 273870868517, 716064188, 716065240, Ground Domestic, Ground Domestic, Date Range, CE Level, SDTL3C4-199013-1-31, 3</td>
-<td></td>
-<td>149</td>
-<td>rerate.rerateTestNgSlow@79c6c6</td></tr>
-<tr>
-<td title='rerate.rerateTestNgSlow.testMethod()'><b>testMethod</b><br>Test class: rerate.rerateTestNgSlow<br>Parameters: 196678, 1, 605390900, , 794988398757, , 330836683, , Ground International, , Date Range, CE Level, SDTL3C4-196678-1-134, 4</td>
-<td></td>
-<td>140</td>
-<td>rerate.rerateTestNgSlow@79c6c6</td></tr>
-<tr>
-<td title='rerate.rerateTestNgSlow.testMethod()'><b>testMethod</b><br>Test class: rerate.rerateTestNgSlow<br>Parameters: 88406, 1, 450424188, , 764150071353, , 530882009, , NT, , Tracking Number, CE Level, SDTL3C4-88406-1-207, 5</td>
-<td></td>
-<td>132</td>
-<td>rerate.rerateTestNgSlow@79c6c6</td></tr>
-<tr>
-<td title='rerate.rerateTestNgSlow.testMethod()'><b>testMethod</b><br>Test class: rerate.rerateTestNgSlow<br>Parameters: 201057, 1, 605390820, , 139540071356, , 716066028, , Express Domestic, , Date Range, CE Level, SDTL3C4-201057-1-143, 6</td>
-<td></td>
-<td>132</td>
-<td>rerate.rerateTestNgSlow@79c6c6</td></tr>
+<td>0</td>
+<td>rebill.testngRebillFast@5762806e</td></tr>
 </table><p>
 </body>
 </html>

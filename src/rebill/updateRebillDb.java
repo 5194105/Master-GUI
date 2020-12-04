@@ -182,7 +182,7 @@ public class updateRebillDb implements Runnable {
                              if (statusDesc==null){
                             	 
                             	 statusDesc="fail";
-                            	 errorDesc="Not in ERA DB";
+                            	 errorDesc="In ERA DB But Error Not Set";
                              }
                              
                            if (statusDesc.equals("SUCCESS")) {

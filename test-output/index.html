@@ -5,8 +5,9 @@
   <meta charset='utf-8'>
   <title>TestNG reports</title>
 
-    <link type="text/css" href="testng-reports.css" rel="stylesheet" />
-    <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+    <link type="text/css" href="testng-reports1.css" rel="stylesheet" id="ultra" />
+    <link type="text/css" href="testng-reports.css" rel="stylesheet" id="retro" disabled="false"/>
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="testng-reports.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type='text/javascript'>
@@ -23,21 +24,22 @@
   <body>
     <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
+      <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite, 4 failed tests</span>
+      <span class="top-banner-font-1">1 suite, 3 failed tests</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
         <span>All suites</span>
-        <a href="#" class="collapse-all-link" title="Collapse/expand all the suites">
-          <img class="collapse-all-icon" src="collapseall.gif">
+        <a href="#" title="Collapse/expand all the suites" class="collapse-all-link">
+          <img src="collapseall.gif" class="collapse-all-icon">
           </img> <!-- collapse-all-icon -->
         </a> <!-- collapse-all-link -->
       </div> <!-- navigator-suite-header -->
       <div class="suite">
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
-            <a href="#" class="navigator-link" panel-name="suite-Sample_Suite">
+            <a href="#" panel-name="suite-Sample_Suite" class="navigator-link">
               <span class="suite-name border-failed">Sample_Suite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
@@ -48,37 +50,37 @@
             <div class="suite-section-content">
               <ul>
                 <li>
-                  <a href="#" class="navigator-link " panel-name="test-xml-Sample_Suite">
+                  <a href="#" panel-name="test-xml-Sample_Suite" class="navigator-link ">
                     <span>[unset file name]</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
-                  <a href="#" class="navigator-link " panel-name="testlist-Sample_Suite">
+                  <a href="#" panel-name="testlist-Sample_Suite" class="navigator-link ">
                     <span class="test-stats">1 test</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
-                  <a href="#" class="navigator-link " panel-name="group-Sample_Suite">
+                  <a href="#" panel-name="group-Sample_Suite" class="navigator-link ">
                     <span>0 groups</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
-                  <a href="#" class="navigator-link " panel-name="times-Sample_Suite">
+                  <a href="#" panel-name="times-Sample_Suite" class="navigator-link ">
                     <span>Times</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
-                  <a href="#" class="navigator-link " panel-name="reporter-Sample_Suite">
+                  <a href="#" panel-name="reporter-Sample_Suite" class="navigator-link ">
                     <span>Reporter output</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
-                  <a href="#" class="navigator-link " panel-name="ignored-methods-Sample_Suite">
+                  <a href="#" panel-name="ignored-methods-Sample_Suite" class="navigator-link ">
                     <span>Ignored methods</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
-                  <a href="#" class="navigator-link " panel-name="chronological-Sample_Suite">
+                  <a href="#" panel-name="chronological-Sample_Suite" class="navigator-link ">
                     <span>Chronological view</span>
                   </a> <!-- navigator-link  -->
                 </li>
@@ -91,7 +93,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">10 methods, 4 failed,   6 passed</span>
+                    <span class="method-stats">4 methods, 3 failed,   1 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title failed">Failed methods</span>
@@ -101,23 +103,18 @@
                     </span>
                     <div class="method-list-content failed suite-Sample_Suite">
                       <span>
-                        <img width="3%" src="failed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Sample_Suite" title="rerate.rerateTestNgSlow" hash-for-method="testMethod(52384, 1, 199987941, , 715150071355, , 716067206, , NT, , Tracking Number, CE Level, SDTL3C4-52384-1...)">testMethod(52384, 1, 199987941, , 715150071355, , 716067206, , NT, , Tracking Number, CE Level, SDTL3C4-52384-1...)</a> <!-- method navigator-link -->
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Sample_Suite" title="rebill.testngRebillFast" class="method navigator-link" hash-for-method="testMethod2">testMethod2</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
-                        <img width="3%" src="failed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Sample_Suite" title="rerate.rerateTestNgSlow" hash-for-method="testMethod2">testMethod2</a> <!-- method navigator-link -->
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Sample_Suite" title="rebill.testngRebillFast" class="method navigator-link" hash-for-method="testMethod3">testMethod3</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
-                        <img width="3%" src="failed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Sample_Suite" title="rerate.rerateTestNgSlow" hash-for-method="testMethod3">testMethod3</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img width="3%" src="failed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Sample_Suite" title="rerate.rerateTestNgSlow" hash-for-method="testMethod4">testMethod4</a> <!-- method navigator-link -->
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Sample_Suite" title="rebill.testngRebillFast" class="method navigator-link" hash-for-method="testMethod4">testMethod4</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-Sample_Suite -->
@@ -130,33 +127,8 @@
                     </span>
                     <div class="method-list-content passed suite-Sample_Suite">
                       <span>
-                        <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Sample_Suite" title="rerate.rerateTestNgSlow" hash-for-method="testMethod(199013, 1, 611309007, 611309147, 794988424850, 273870868517, 716064188, 716065240, Ground Domestic, ...)">testMethod(199013, 1, 611309007, 611309147, 794988424850, 273870868517, 716064188, 716065240, Ground Domestic, ...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Sample_Suite" title="rerate.rerateTestNgSlow" hash-for-method="testMethod(88406, 1, 450424188, , 764150071353, , 530882009, , NT, , Tracking Number, CE Level, SDTL3C4-88406-1...)">testMethod(88406, 1, 450424188, , 764150071353, , 530882009, , NT, , Tracking Number, CE Level, SDTL3C4-88406-1...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Sample_Suite" title="rerate.rerateTestNgSlow" hash-for-method="testMethod(201057, 1, 605390820, , 139540071356, , 716066028, , Express Domestic, , Date Range, CE Level, SDTL3...)">testMethod(201057, 1, 605390820, , 139540071356, , 716066028, , Express Domestic, , Date Range, CE Level, SDTL3...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Sample_Suite" title="rerate.rerateTestNgSlow" hash-for-method="testMethod(196677, 1, 605390900, , 794988398908, , 330836683, , Ground International, , Date Range, CE Level, S...)">testMethod(196677, 1, 605390900, , 794988398908, , 330836683, , Ground International, , Date Range, CE Level, S...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Sample_Suite" title="rerate.rerateTestNgSlow" hash-for-method="testMethod(196678, 1, 605390900, , 794988398757, , 330836683, , Ground International, , Date Range, CE Level, S...)">testMethod(196678, 1, 605390900, , 794988398757, , 330836683, , Ground International, , Date Range, CE Level, S...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img width="3%" src="passed.png"/>
-                        <a href="#" class="method navigator-link" panel-name="suite-Sample_Suite" title="rerate.rerateTestNgSlow" hash-for-method="testMethod(105265, 1, 450312657, , 416250071356, , 716067941, , Express Domestic, , Tracking Number, CE Level, ...)">testMethod(105265, 1, 450312657, , 416250071356, , 716067941, , Express Domestic, , Tracking Number, CE Level, ...)</a> <!-- method navigator-link -->
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Sample_Suite" title="rebill.testngRebillFast" class="method navigator-link" hash-for-method="testMethod1(, , 114162, 2, 794989991711, RBS, , 716068208, , N, USA, 5194105, Online20, DM, GD, NORMAL, , , , , ...)">testMethod1(, , 114162, 2, 794989991711, RBS, , 716068208, , N, USA, 5194105, Online20, DM, GD, NORMAL, , , , , ...)</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Sample_Suite -->
@@ -174,45 +146,20 @@
           <div class="suite-Sample_Suite-class-failed">
             <div class="main-panel-header rounded-window-top">
               <img src="failed.png"/>
-              <span class="class-name">rerate.rerateTestNgSlow</span>
+              <span class="class-name">rebill.testngRebillFast</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod(52384, 1, 199987941, , 715150071355, , 716067206, , NT, , Tracking Number, CE Level, SDTL3C4-52384-1...)">
-                  </a> <!-- testMethod(52384, 1, 199987941, , 715150071355, , 716067206, , NT, , Tracking Number, CE Level, SDTL3C4-52384-1...) -->
-                  <span class="method-name">testMethod</span>
-                  <span class="parameters">(52384, 1, 199987941, , 715150071355, , 716067206, , NT, , Tracking Number, CE Level, SDTL3C4-52384-1-175, 7)</span>
-                  <div class="stack-trace">org.openqa.selenium.NoSuchSessionException: Session ID is null. Using WebDriver after calling quit()?
-Build info: version: &apos;3.141.59&apos;, revision: &apos;e82be7d358&apos;, time: &apos;2018-11-14T08:25:48&apos;
-System info: host: &apos;SQA-CRS-021&apos;, ip: &apos;10.255.251.244&apos;, os.name: &apos;Windows 7&apos;, os.arch: &apos;x86&apos;, os.version: &apos;6.1&apos;, java.version: &apos;1.8.0_212&apos;
-Driver info: driver.version: RemoteWebDriver
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:125)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:609)
-	at org.openqa.selenium.remote.RemoteWebDriver.close(RemoteWebDriver.java:442)
-	at rerate.rerateTestNgSlow.secondPage(rerateTestNgSlow.java:1380)
-	at rerate.rerateTestNgSlow.doWork(rerateTestNgSlow.java:803)
-	at rerate.rerateTestNgSlow.testMethod(rerateTestNgSlow.java:636)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.lang.Thread.run(Unknown Source)
-... Removed 10 stack frames
-</div> <!-- stack-trace -->
-                </div> <!-- method-content -->
-              </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
                   <a name="testMethod2">
                   </a> <!-- testMethod2 -->
                   <span class="method-name">testMethod2</span>
                   <div class="stack-trace">org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod2() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.lang.Thread.run(Unknown Source)
-... Removed 7 stack frames
+Data Provider public synchronized java.lang.Object[][] rebill.testngRebillFast.dataProviderMethod2() returned a null value
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+... Removed 9 stack frames
 </div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
@@ -222,11 +169,11 @@ Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.d
                   </a> <!-- testMethod3 -->
                   <span class="method-name">testMethod3</span>
                   <div class="stack-trace">org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod3() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.lang.Thread.run(Unknown Source)
-... Removed 7 stack frames
+Data Provider public synchronized java.lang.Object[][] rebill.testngRebillFast.dataProviderMethod3() returned a null value
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+... Removed 9 stack frames
 </div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
@@ -236,11 +183,11 @@ Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.d
                   </a> <!-- testMethod4 -->
                   <span class="method-name">testMethod4</span>
                   <div class="stack-trace">org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod4() must return either Object[][] or Iterator&lt;Object&gt;[], not class [[Ljava.lang.Object;
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
-	at java.lang.Thread.run(Unknown Source)
-... Removed 7 stack frames
+Data Provider public synchronized java.lang.Object[][] rebill.testngRebillFast.dataProviderMethod4() returned a null value
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+... Removed 9 stack frames
 </div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
@@ -249,55 +196,15 @@ Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.d
           <div class="suite-Sample_Suite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
-              <span class="class-name">rerate.rerateTestNgSlow</span>
+              <span class="class-name">rebill.testngRebillFast</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="testMethod(199013, 1, 611309007, 611309147, 794988424850, 273870868517, 716064188, 716065240, Ground Domestic, ...)">
-                  </a> <!-- testMethod(199013, 1, 611309007, 611309147, 794988424850, 273870868517, 716064188, 716065240, Ground Domestic, ...) -->
-                  <span class="method-name">testMethod</span>
-                  <span class="parameters">(199013, 1, 611309007, 611309147, 794988424850, 273870868517, 716064188, 716065240, Ground Domestic, Ground Domestic, Date Range, CE Level, SDTL3C4-199013-1-31, 3)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod(88406, 1, 450424188, , 764150071353, , 530882009, , NT, , Tracking Number, CE Level, SDTL3C4-88406-1...)">
-                  </a> <!-- testMethod(88406, 1, 450424188, , 764150071353, , 530882009, , NT, , Tracking Number, CE Level, SDTL3C4-88406-1...) -->
-                  <span class="method-name">testMethod</span>
-                  <span class="parameters">(88406, 1, 450424188, , 764150071353, , 530882009, , NT, , Tracking Number, CE Level, SDTL3C4-88406-1-207, 5)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod(201057, 1, 605390820, , 139540071356, , 716066028, , Express Domestic, , Date Range, CE Level, SDTL3...)">
-                  </a> <!-- testMethod(201057, 1, 605390820, , 139540071356, , 716066028, , Express Domestic, , Date Range, CE Level, SDTL3...) -->
-                  <span class="method-name">testMethod</span>
-                  <span class="parameters">(201057, 1, 605390820, , 139540071356, , 716066028, , Express Domestic, , Date Range, CE Level, SDTL3C4-201057-1-143, 6)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod(196677, 1, 605390900, , 794988398908, , 330836683, , Ground International, , Date Range, CE Level, S...)">
-                  </a> <!-- testMethod(196677, 1, 605390900, , 794988398908, , 330836683, , Ground International, , Date Range, CE Level, S...) -->
-                  <span class="method-name">testMethod</span>
-                  <span class="parameters">(196677, 1, 605390900, , 794988398908, , 330836683, , Ground International, , Date Range, CE Level, SDTL3C4-196677-1-133, 2)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod(196678, 1, 605390900, , 794988398757, , 330836683, , Ground International, , Date Range, CE Level, S...)">
-                  </a> <!-- testMethod(196678, 1, 605390900, , 794988398757, , 330836683, , Ground International, , Date Range, CE Level, S...) -->
-                  <span class="method-name">testMethod</span>
-                  <span class="parameters">(196678, 1, 605390900, , 794988398757, , 330836683, , Ground International, , Date Range, CE Level, SDTL3C4-196678-1-134, 4)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod(105265, 1, 450312657, , 416250071356, , 716067941, , Express Domestic, , Tracking Number, CE Level, ...)">
-                  </a> <!-- testMethod(105265, 1, 450312657, , 416250071356, , 716067941, , Express Domestic, , Tracking Number, CE Level, ...) -->
-                  <span class="method-name">testMethod</span>
-                  <span class="parameters">(105265, 1, 450312657, , 416250071356, , 716067941, , Express Domestic, , Tracking Number, CE Level, SDTL3C4-105265-1-40, 1)</span>
+                  <a name="testMethod1(, , 114162, 2, 794989991711, RBS, , 716068208, , N, USA, 5194105, Online20, DM, GD, NORMAL, , , , , ...)">
+                  </a> <!-- testMethod1(, , 114162, 2, 794989991711, RBS, , 716068208, , N, USA, 5194105, Online20, DM, GD, NORMAL, , , , , ...) -->
+                  <span class="method-name">testMethod1</span>
+                  <span class="parameters">(, , 114162, 2, 794989991711, RBS, , 716068208, , N, USA, 5194105, Online20, DM, GD, NORMAL, , , , , , , , , , , , , , , 1)</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -309,35 +216,29 @@ Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.d
           <div class="main-panel-content rounded-window-bottom">
             <pre>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE suite SYSTEM &quot;http://testng.org/testng-1.0.dtd&quot;&gt;
+&lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite name=&quot;Sample_Suite&quot;&gt;
   &lt;parameter name=&quot;nullCheckBox&quot; value=&quot;true&quot;/&gt;
   &lt;parameter name=&quot;level&quot; value=&quot;3&quot;/&gt;
-  &lt;parameter name=&quot;failedCheckBox&quot; value=&quot;false&quot;/&gt;
-  &lt;parameter name=&quot;nt1&quot; value=&quot;true&quot;/&gt;
-  &lt;parameter name=&quot;source&quot; value=&quot;excel&quot;/&gt;
-  &lt;parameter name=&quot;endDateText&quot; value=&quot;11/27/2020&quot;/&gt;
-  &lt;parameter name=&quot;ei1&quot; value=&quot;true&quot;/&gt;
-  &lt;parameter name=&quot;nt2&quot; value=&quot;true&quot;/&gt;
-  &lt;parameter name=&quot;compatibleMode&quot; value=&quot;true&quot;/&gt;
-  &lt;parameter name=&quot;gi1&quot; value=&quot;true&quot;/&gt;
-  &lt;parameter name=&quot;ei2&quot; value=&quot;true&quot;/&gt;
-  &lt;parameter name=&quot;gi2&quot; value=&quot;true&quot;/&gt;
-  &lt;parameter name=&quot;ed2&quot; value=&quot;true&quot;/&gt;
+  &lt;parameter name=&quot;failedCheckBox&quot; value=&quot;true&quot;/&gt;
+  &lt;parameter name=&quot;groundCheckBox&quot; value=&quot;true&quot;/&gt;
+  &lt;parameter name=&quot;source&quot; value=&quot;db&quot;/&gt;
+  &lt;parameter name=&quot;compatibleMode&quot; value=&quot;&quot;/&gt;
+  &lt;parameter name=&quot;eraWorkable&quot; value=&quot;true&quot;/&gt;
+  &lt;parameter name=&quot;headless&quot; value=&quot;false&quot;/&gt;
+  &lt;parameter name=&quot;customCheckBox&quot; value=&quot;true&quot;/&gt;
+  &lt;parameter name=&quot;expressCheckBox&quot; value=&quot;true&quot;/&gt;
   &lt;parameter name=&quot;allCheckBox&quot; value=&quot;false&quot;/&gt;
-  &lt;parameter name=&quot;startDateText&quot; value=&quot;01/01/2020&quot;/&gt;
-  &lt;parameter name=&quot;ed1&quot; value=&quot;true&quot;/&gt;
-  &lt;parameter name=&quot;filepath&quot; value=&quot;C:\Users\FedExUser\Documents\Stephen\rerate.xlsx&quot;/&gt;
-  &lt;parameter name=&quot;gd2&quot; value=&quot;true&quot;/&gt;
-  &lt;parameter name=&quot;sp2&quot; value=&quot;true&quot;/&gt;
+  &lt;parameter name=&quot;filepath&quot; value=&quot;C:\Users\FedExUser\Desktop\stephen\R66\L3C6\rebill.xlsx&quot;/&gt;
   &lt;parameter name=&quot;sessionCount&quot; value=&quot;1&quot;/&gt;
-  &lt;parameter name=&quot;gd1&quot; value=&quot;true&quot;/&gt;
-  &lt;parameter name=&quot;sp1&quot; value=&quot;true&quot;/&gt;
-  &lt;parameter name=&quot;browser&quot; value=&quot;1&quot;/&gt;
+  &lt;parameter name=&quot;domesticCheckBox&quot; value=&quot;true&quot;/&gt;
+  &lt;parameter name=&quot;browser&quot; value=&quot;2&quot;/&gt;
   &lt;parameter name=&quot;databaseDisabled&quot; value=&quot;false&quot;/&gt;
-  &lt;test name=&quot;Rebill Test&quot; parallel=&quot;methods&quot;&gt;
+  &lt;parameter name=&quot;internationalCheckBox&quot; value=&quot;true&quot;/&gt;
+  &lt;parameter name=&quot;customString&quot; value=&quot;region =&amp;#039;USA&amp;#039; and result is null&quot;/&gt;
+  &lt;test thread-count=&quot;5&quot; parallel=&quot;methods&quot; name=&quot;Rebill Test&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;rerate.rerateTestNgSlow&quot;/&gt;
+      &lt;class name=&quot;rebill.testngRebillFast&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Rebill Test --&gt;
 &lt;/suite&gt; &lt;!-- Sample_Suite --&gt;
@@ -377,52 +278,28 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(10);
+data.addRows(4);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'testMethod')
-data.setCell(0, 2, 'rerate.rerateTestNgSlow')
-data.setCell(0, 3, 149775);
+data.setCell(0, 1, 'testMethod1')
+data.setCell(0, 2, 'rebill.testngRebillFast')
+data.setCell(0, 3, 319);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'testMethod')
-data.setCell(1, 2, 'rerate.rerateTestNgSlow')
-data.setCell(1, 3, 140335);
+data.setCell(1, 1, 'testMethod2')
+data.setCell(1, 2, 'rebill.testngRebillFast')
+data.setCell(1, 3, 0);
 data.setCell(2, 0, 2)
-data.setCell(2, 1, 'testMethod')
-data.setCell(2, 2, 'rerate.rerateTestNgSlow')
-data.setCell(2, 3, 133974);
+data.setCell(2, 1, 'testMethod3')
+data.setCell(2, 2, 'rebill.testngRebillFast')
+data.setCell(2, 3, 0);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'testMethod')
-data.setCell(3, 2, 'rerate.rerateTestNgSlow')
-data.setCell(3, 3, 133935);
-data.setCell(4, 0, 4)
-data.setCell(4, 1, 'testMethod')
-data.setCell(4, 2, 'rerate.rerateTestNgSlow')
-data.setCell(4, 3, 132822);
-data.setCell(5, 0, 5)
-data.setCell(5, 1, 'testMethod')
-data.setCell(5, 2, 'rerate.rerateTestNgSlow')
-data.setCell(5, 3, 132464);
-data.setCell(6, 0, 6)
-data.setCell(6, 1, 'testMethod')
-data.setCell(6, 2, 'rerate.rerateTestNgSlow')
-data.setCell(6, 3, 72586);
-data.setCell(7, 0, 7)
-data.setCell(7, 1, 'testMethod2')
-data.setCell(7, 2, 'rerate.rerateTestNgSlow')
-data.setCell(7, 3, 0);
-data.setCell(8, 0, 8)
-data.setCell(8, 1, 'testMethod4')
-data.setCell(8, 2, 'rerate.rerateTestNgSlow')
-data.setCell(8, 3, 0);
-data.setCell(9, 0, 9)
-data.setCell(9, 1, 'testMethod3')
-data.setCell(9, 2, 'rerate.rerateTestNgSlow')
-data.setCell(9, 3, 0);
+data.setCell(3, 1, 'testMethod4')
+data.setCell(3, 2, 'rebill.testngRebillFast')
+data.setCell(3, 3, 0);
 window.suiteTableData['Sample_Suite']= { tableData: data, tableDiv: 'times-div-Sample_Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 14 minutes</span>
+              <span class="suite-total-time">Total running time: 319 ms</span>
               <div id="times-div-Sample_Suite">
               </div> <!-- times-div-Sample_Suite -->
             </div> <!-- times-div -->
@@ -448,44 +325,19 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">rerate.rerateTestNgSlow</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">rebill.testngRebillFast</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
-                <span class="method-name">setupExcel(C:\Users\FedExUser\Documents\Stephen\rerate.xlsx, 3, 1, excel, true, false, true, false, 1, false, 0...)</span>
+                <span class="method-name">setupExcel(C:\Users\FedExUser\Desktop\stephen\R66\L3C6\rebill.xlsx, 3, 2, , db, false, true, true, true, true, ...)</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
-                <span class="method-name">testMethod(105265, 1, 450312657, , 416250071356, , 716067941, , Express Domestic, , Tracking Number, CE Level, ...)</span>
-                <span class="method-start">3907 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod(196677, 1, 605390900, , 794988398908, , 330836683, , Ground International, , Date Range, CE Level, S...)</span>
-                <span class="method-start">137842 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod(199013, 1, 611309007, 611309147, 794988424850, 273870868517, 716064188, 716065240, Ground Domestic, ...)</span>
-                <span class="method-start">271817 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod(196678, 1, 605390900, , 794988398757, , 330836683, , Ground International, , Date Range, CE Level, S...)</span>
-                <span class="method-start">421593 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod(88406, 1, 450424188, , 764150071353, , 530882009, , NT, , Tracking Number, CE Level, SDTL3C4-88406-1...)</span>
-                <span class="method-start">561928 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod(201057, 1, 605390820, , 139540071356, , 716066028, , Express Domestic, , Date Range, CE Level, SDTL3...)</span>
-                <span class="method-start">694392 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <img src="failed.png">
-                </img>
-                <span class="method-name">testMethod(52384, 1, 199987941, , 715150071355, , 716067206, , NT, , Tracking Number, CE Level, SDTL3C4-52384-1...)</span>
-                <span class="method-start">827215 ms</span>
+                <span class="method-name">testMethod1(, , 114162, 2, 794989991711, RBS, , 716068208, , N, USA, 5194105, Online20, DM, GD, NORMAL, , , , , ...)</span>
+                <span class="method-start">10367 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
       </div> <!-- main-panel-root -->
     </div> <!-- wrapper -->
   </body>
+<script type="text/javascript" src="testng-reports2.js"></script>
 </html>
