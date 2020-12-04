@@ -1747,8 +1747,9 @@ public class testngRebillFast {
             	System.out.println("Did not reach override errors or failed here");
             	if(databaseDisabled.equals("false")) {
     	   			 String[] resultArray1 = new String[2];
-    	   			 	resultArray1[0]="fail";
-    	   				resultArray1[1]="Failed at last screen with unknown error.";
+    	   			 resultArray1 = validateResults(trk);
+    	   			// resultArray1[0]="fail";
+    	   				//resultArray1[1]="Failed at last screen with unknown error.";
     	   				 writeToDB(testInputNbr,tinCount,trk,resultArray1);
                    	 }
     	   		 if(source.equals("excel")) {

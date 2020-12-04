@@ -18,12 +18,13 @@
   <parameter name="browser" value="2"/>
   <parameter name="databaseDisabled" value="false"/>
   <parameter name="internationalCheckBox" value="true"/>
-  <parameter name="customString" value="region =&#039;USA&#039; and result is null"/>
+  <parameter name="customString" value="description =&#039;Not In ERA Database&#039; and region=&#039;USA&#039; and company=&#039;GD&#039;"/>
   <test thread-count="5" parallel="methods" name="Rebill Test(failed)">
     <classes>
       <class name="rebill.testngRebillFast">
         <methods>
           <include name="setupExcel"/>
+          <include name="testMethod1" invocation-numbers="7 7 7 7"/>
           <include name="testMethod2"/>
           <include name="testMethod3"/>
           <include name="testMethod4"/>
