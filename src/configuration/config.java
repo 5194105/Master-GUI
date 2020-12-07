@@ -83,6 +83,8 @@ public class config {
     
     String eraWorkable;
     
+    String eraMassRerate;
+    
 	public config() {
 		
 	}
@@ -1540,6 +1542,16 @@ public void setEraWorkable(String eraWorkable){
 
 public String getEraWorkable(){
 	return eraWorkable;
+}
+
+public void setEraMassRerate(String eraMassRerate){
+	this.eraMassRerate=eraMassRerate;
+}
+
+
+
+public String getEraMassRerate(){
+	return eraMassRerate;
 }
 }
 

@@ -56,20 +56,9 @@ public class Highest {
   static String ieDriverPath=homePath+"\\drivers\\IEDriverServer.exe";
     
     	public static void main (String[] arg) {
-    		System.setProperty(chromeSetProperty,chromePath);
-    		WebDriver driver ;
-    		driver = new ChromeDriver();
-    		
-    		driver.get("https://test-myapps.secure.fedex.com/L3/eRA/");
-		    driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-			
-			driver.manage().window().maximize();
-			
-										
-			driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[2]/div/div/form/div[1]/div[2]/div[1]/div[2]/span/input")).sendKeys("5194105");
-			driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[2]/div/div/form/div[1]/div[2]/div[2]/div[2]/span/input")).sendKeys("Syntel99");
-			driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[2]/div/div/form/div[2]/input")).click();
-    	        
+    	String temp="Your Mass Rerate batch number is:64897";
+    	String str=temp.replaceAll("\\D+","");
+    	System.out.println( str);
     	}
 	
     }

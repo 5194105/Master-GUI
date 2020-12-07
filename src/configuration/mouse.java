@@ -30,6 +30,7 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
 import UD.UdExecution;
+import eraRerate.eraMassRerateTestNGSlow;
 import guis.datapopAutomationGui;
 import guis.eraCreditAndDebitAutomationGui;
 import guis.eraCreditAndDebitExtendedAutomationGui;
@@ -1218,6 +1219,139 @@ public void setupMouseListener() {
 				    				
 					    			}
 				    			
+				    			
+				    			if (obj.getClass().getCanonicalName().equals("guis.eraRerateAutomationGui")) {
+				    			
+						    			
+					    				
+					    				System.out.println("Booleans "+c.getLevel()+"      "+c.getSource());
+	//c.setSource("excel");
+					    				
+					    				System.out.println("Booleans "+c.getLevel()+"      "+c.getSource());
+					    				
+					    				if(c.getLevel()!=null && c.getSource()!=null) {
+					    				
+					    					
+					    					
+
+					    					
+					    					String filepath=c.getExcelPath();
+					    					String level=c.getLevel();
+					    					String browser=c.getDriverType();
+					    					String compatibleMode=c.getCompatibleMode();
+					    					String source = c.getSource();
+					    					String allCheckBox=c.getAllCheckBox();
+					    					String nullCheckBox=c.getNullCheckBox();
+					    					String failedCheckBox=c.getFailedCheckBox();
+
+
+					    					String sessionCount=c.getSessionCount();
+					    					
+					    					String databaseDisabled=	c.getDatabaseDisabled();
+					    					String	customCheckBox= c.getCustomCheckBox();
+					    					String	customString= c.getCustomString();
+					    					
+					    					String headless=c.getHeadlessString();
+					    					
+					    					String eraWorkable=c.getEraWorkable();
+					    					
+					    					System.out.println("filepath "+filepath);
+					    					System.out.println("level "+level);
+					    					System.out.println("browser "+browser);
+					    					System.out.println("compatibleMode "+compatibleMode);
+					    					System.out.println("source "+source);
+					    					System.out.println("allCheckBox "+allCheckBox);
+					    					System.out.println("nullCheckBox "+nullCheckBox);
+					    					System.out.println("failedCheckBox "+failedCheckBox);
+					    					
+
+					    					System.out.println("sessionCount "+sessionCount);
+					    					System.out.println("customString "+customString);
+					    					System.out.println("customCheckBox "+customCheckBox);
+					    					System.out.println("databaseDisabled "+databaseDisabled);
+					    					System.out.println("headless "+headless);
+					    					System.out.println("eraWorkable "+eraWorkable);
+					    					
+					    					
+					    					if(filepath==null) {
+					    						filepath="";
+					    					}
+					    					if(level==null) {
+					    						level="";
+					    					}
+					    					if(browser==null) {
+					    						browser="";
+					    					}
+					    					if(compatibleMode==null) {
+					    						compatibleMode="";
+					    					}
+					    					if(allCheckBox==null) {
+					    						allCheckBox="";
+					    					}
+					    					if(nullCheckBox==null) {
+					    						nullCheckBox="";
+					    					}
+					    					if(failedCheckBox==null) {
+					    						failedCheckBox="";
+					    					}
+					    					if(sessionCount==null) {
+					    						sessionCount="";
+					    					}
+					    					
+					    					if(customString==null) {
+					    						customString="";
+					    					}
+					    					if(customCheckBox==null) {
+					    						customCheckBox="";
+					    					}
+					    					if(databaseDisabled==null) {
+					    						databaseDisabled="";
+					    					}
+					    					if(headless==null) {
+					    						headless="";
+					    					}
+					    					if(eraWorkable==null) {
+					    						eraWorkable="false";
+					    					}
+					    					
+					    					
+
+					    				    XmlSuite xmlSuite = new XmlSuite();
+					    				    xmlSuite.setName("Sample_Suite");
+					    				    Map<String, String> fieldValues = new HashMap<>();
+					    				    fieldValues.put("filepath", filepath);
+					    				    fieldValues.put("level", level);
+					    				    fieldValues.put("browser", "2");
+					    				    fieldValues.put("compatibleMode", "");
+					    				    fieldValues.put("source", source);
+					    				    fieldValues.put("allCheckBox", allCheckBox);
+					    				    fieldValues.put("nullCheckBox", nullCheckBox);
+					    				    fieldValues.put("failedCheckBox", failedCheckBox);
+					    				    fieldValues.put("sessionCount",sessionCount);
+					    				    fieldValues.put("customString",customString);
+					    				    fieldValues.put("customCheckBox",customCheckBox);
+					    				    fieldValues.put("databaseDisabled",databaseDisabled);
+					    				    fieldValues.put("headless",headless);
+					    				    fieldValues.put("eraWorkable",eraWorkable);
+					    				    xmlSuite.setParameters(fieldValues);
+					    				    XmlTest xmlTest = new XmlTest(xmlSuite);
+					    				    xmlTest.setName("era Mass Rerate Test");
+					    				    xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(eraMassRerateTestNGSlow.class)));
+					    				   // xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(testngRebillSlow.class)));
+					    				    xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
+					    				    TestNG tng = new TestNG();
+					    				    tng.setXmlSuites(Collections.singletonList(xmlSuite));
+					    				    tng.run();
+					    					
+					    				
+					    				}
+					    				else {
+					    					JOptionPane.showMessageDialog(frame, "Please choose Level and Source");
+					    					
+					    				}
+					    				
+				    			}
+				    			
 				    			if (obj.getClass().getCanonicalName().equals("guis.rerateAutomationGui")) {
 				    			
 				    				
@@ -1228,6 +1362,8 @@ public void setupMouseListener() {
 				    				
 				    				if(c.getLevel()!=null && c.getSource()!=null) {
 
+				    					
+				    					
 				    					String filepath=c.getExcelPath();
 				    					String level=c.getLevel();
 				    					String browser=c.getDriverType();
@@ -1260,6 +1396,12 @@ public void setupMouseListener() {
 				    					 String sp1=c.getSp1String();
 				    					 String sp2=c.getSp2String();
 				    						
+				    						String headless=c.getHeadlessString();
+				    						
+				    						String eraWorkable=c.getEraWorkable();
+				    						
+				    						String	customCheckBox= c.getCustomCheckBox();
+				    						String	customString= c.getCustomString();
 				    					
 				    					System.out.println("filepath "+filepath);
 				    					System.out.println("level "+level);
@@ -1344,6 +1486,12 @@ public void setupMouseListener() {
 				    					if(sessionCount==null) {
 				    						sessionCount="";
 				    					}
+				    					if(customString==null) {
+				    						customString="";
+				    					}
+				    					if(customCheckBox==null) {
+				    						customCheckBox="";
+				    					}
 				    					
 				    					if(ed1==null) {
 				    						ed1="";
@@ -1391,63 +1539,8 @@ public void setupMouseListener() {
 				    					
 				    					
 				    					
-				    					
-				    					/*
-				    					@Parameters({
-				    						"filepath",
-				    						"level",
-				    						"browser"
-				    						,"source",
-				    						"compatibleMode"
-				    						,"allCheckBox"
-				    						,"nullCheckBox",
-				    						"failedCheckBox",
-				    						"sessionCount",
-				    						"databaseDisabled"
-				    						,"startDateText",
-				    						"endDateText",
-				    						"ed1"
-				    						,"ei1"
-				    						,"gd1"
-				    						,"gi1"
-				    						,"nt1"
-				    						,"sp1"
-				    						,"ed2"
-				    						,"ei2"
-				    						,"gd2"
-				    						,"gi2"
-				    						,"nt2"
-				    						,"sp2"})
-				    					}
-				    					public void setupExcel(
-				    							String filepath,
-				    							String level,
-				    							String browser,
-				    							String source,
-				    							String compatibleMode
-				    							,String allCheckBox,
-				    							String nullCheckBox,
-				    							String failedCheckBox,
-				    					
-				    							String sessionCount,
-				    							String databaseDisabled,
-				    							String startDateText,
-				    							String endDateText,
-				    							String ed1, 
-				    							String ei1,
-				    							String gd1,
-				    							String gi1,
-				    							String nt1,
-				    							String sp1,
-				    							String ed2,
-				    							String ei2,
-				    							String gd2,
-				    							String gi2,
-				    							String nt2, 
-				    							String sp2) {
-				    					
-				    					*/
-				    					
+				    				
+				    					if (c.getEraMassRerate().equals("false")) {
 				    				    XmlSuite xmlSuite = new XmlSuite();
 				    				    xmlSuite.setName("Sample_Suite");
 				    				    Map<String, String> fieldValues = new HashMap<>();
@@ -1462,25 +1555,22 @@ public void setupMouseListener() {
 				    				    fieldValues.put("sessionCount",sessionCount);
 				    				    fieldValues.put("databaseDisabled",databaseDisabled);
 				    				    fieldValues.put("startDateText", startDateText);
-				    				    fieldValues.put("endDateText",endDateText);
-				    				    
+				    				    fieldValues.put("endDateText",endDateText);				    				   
 				    				    fieldValues.put("ed1",ed1);
 				    				    fieldValues.put("ei1",ei1);
 				    				    fieldValues.put("gd1",gd1);
 				    				    fieldValues.put("gi1",gi1);
 				    				    fieldValues.put("nt1",nt1);
-				    				    fieldValues.put("sp1",sp1);
-				    				  
+				    				    fieldValues.put("sp1",sp1);				    				  
 				    				    fieldValues.put("ed2",ed2);
 				    				    fieldValues.put("ei2",ei2);
 				    				    fieldValues.put("gd2",gd2);
 				    				    fieldValues.put("gi2",gi2);
 				    				    fieldValues.put("nt2",nt2);
-				    				    fieldValues.put("sp2",sp2);
-				    				    
+				    				    fieldValues.put("sp2",sp2);			    				    
 				    				    xmlSuite.setParameters(fieldValues);
 				    				    XmlTest xmlTest = new XmlTest(xmlSuite);
-				    				    xmlTest.setName("Rebill Test");
+				    				    xmlTest.setName("ERA RERATE Test");
 				    				    //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
 				    				    xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(rerateTestNgSlow.class)));
 				    				    xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);
@@ -1490,7 +1580,15 @@ public void setupMouseListener() {
 				    					}
 				    				
 				    				
-					    				}
+				    					
+				    					
+				    				}
+				    			}
+				    					
+				    					
+				    				
+				    				
+					    				
 				    			
 				    			
 				    			

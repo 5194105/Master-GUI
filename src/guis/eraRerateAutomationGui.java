@@ -54,6 +54,8 @@ public class eraRerateAutomationGui {
      JCheckBox disableDatabaseCheckBox;
      gui g;
      JLabel ie,firefox,chrome;
+     JLabel eraMassRerateTextLabel;
+     JCheckBox eraMassRerateCheckBox;
      
      mouse m;
 	/**
@@ -77,7 +79,8 @@ public class eraRerateAutomationGui {
 	private void initialize() {
 		c.setCompatibleMode("false");
 		c.setDatabaseDisabled("false");
-     
+		c.setEraMassRerate("false");
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 985, 680);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -96,7 +99,7 @@ public class eraRerateAutomationGui {
 		dbLabel.setBounds(415, 340, 78, 56);
 		
 		moreOptionsLabel = new JLabel("New label");
-		moreOptionsLabel.setBounds(725, 353, 50, 30);
+		moreOptionsLabel.setBounds(725, 328, 50, 30);
 		
 		
 		ie = new JLabel("New label");
@@ -128,7 +131,7 @@ public class eraRerateAutomationGui {
 		
 		lblRebillAutomation = new JLabel("<HTML><U>ERA Rerate Automation<HTML><U>");
 		lblRebillAutomation.setForeground(Color.WHITE);
-		lblRebillAutomation.setFont(new Font("Segoe UI", Font.BOLD, 42));
+		lblRebillAutomation.setFont(new Font("Segoe UI", Font.BOLD, 36));
 		lblRebillAutomation.setBounds(353, 196, 386, 64);
 		frame.getContentPane().add(lblRebillAutomation);
 		
@@ -190,19 +193,30 @@ public class eraRerateAutomationGui {
 		moreOptionsTextLabel = new JLabel("Filter Options: ");
 		moreOptionsTextLabel.setForeground(Color.WHITE);
 		moreOptionsTextLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		moreOptionsTextLabel.setBounds(550, 350, 212, 29);
+		moreOptionsTextLabel.setBounds(550, 325, 212, 29);
 		frame.getContentPane().add(moreOptionsTextLabel);
+		
+		eraMassRerateTextLabel = new JLabel("Mass Rerates: ");
+		eraMassRerateTextLabel.setForeground(Color.WHITE);
+		eraMassRerateTextLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		eraMassRerateTextLabel.setBounds(550, 375, 212, 29);
+		frame.getContentPane().add(eraMassRerateTextLabel);
+		
+		eraMassRerateCheckBox = new JCheckBox("");
+		eraMassRerateCheckBox.setBounds(750, 378, 27, 29);
+		eraMassRerateCheckBox.setOpaque(false);
+		frame.getContentPane().add(eraMassRerateCheckBox);
 		
 	
 		sessionLabel = new JLabel("Parallel Sessions:");
 		sessionLabel.setForeground(Color.WHITE);
 		sessionLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		sessionLabel.setBounds(550, 420,  250, 31);
+		sessionLabel.setBounds(550, 425,  250, 31);
 		frame.getContentPane().add(sessionLabel);
 		
 		sessionTextField= new JTextField(2);
 		sessionTextField.setText("1");
-		sessionTextField.setBounds(750, 428, 20, 20);
+		sessionTextField.setBounds(750, 433, 20, 20);
 		frame.getContentPane().add(sessionTextField);
 		
 		
@@ -291,6 +305,17 @@ public class eraRerateAutomationGui {
 		}
 	}
 	
+	
+	
+	private void eraMassRerateCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {    
+
+		if (eraMassRerateCheckBox.isSelected()) {
+			c.setEraMassRerate("true");
+		}
+		else {
+			c.setEraMassRerate("false");
+		}
+	}
 	private void compatibleCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {    
 
 		if (compatibleCheckBox.isSelected()) {
