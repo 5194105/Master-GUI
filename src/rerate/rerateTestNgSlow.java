@@ -1512,7 +1512,7 @@ Thread.sleep(2000);
 		       	 writeToExcel(testCounter, 14,"Processed");
 		       	 }
 		  	String[] resultArray = new String[2];
-		  	resultArray[0]="pass";
+		  	resultArray[0]="in progress";
 		  	resultArray[1]="processed";
 		  	if(databaseDisabled.contentEquals("false")) {
 		  	writeToDB(testInputNbr,tinCount,trk,requestId,resultArray);

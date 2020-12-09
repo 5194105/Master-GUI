@@ -3,29 +3,39 @@
 <suite name="Failed suite [Sample_Suite]">
   <parameter name="nullCheckBox" value="true"/>
   <parameter name="level" value="3"/>
-  <parameter name="failedCheckBox" value="true"/>
-  <parameter name="source" value="db"/>
-  <parameter name="compatibleMode" value=""/>
-  <parameter name="eraWorkable" value="false"/>
-  <parameter name="headless" value="false"/>
-  <parameter name="customCheckBox" value="false"/>
+  <parameter name="failedCheckBox" value="false"/>
+  <parameter name="nt1" value="true"/>
+  <parameter name="source" value="excel"/>
+  <parameter name="endDateText" value="12/08/2020"/>
+  <parameter name="ei1" value="true"/>
+  <parameter name="nt2" value="true"/>
+  <parameter name="compatibleMode" value="true"/>
+  <parameter name="gi1" value="true"/>
+  <parameter name="ei2" value="true"/>
+  <parameter name="gi2" value="true"/>
+  <parameter name="ed2" value="true"/>
   <parameter name="allCheckBox" value="false"/>
-  <parameter name="filepath" value="C:\Users\FedExUser\Desktop\stephen\R66\L3C6\rebill.xlsx"/>
+  <parameter name="startDateText" value="01/01/2020"/>
+  <parameter name="ed1" value="true"/>
+  <parameter name="filepath" value="C:\Users\5194105\Documents\rerate.xlsx"/>
+  <parameter name="gd2" value="true"/>
+  <parameter name="sp2" value="true"/>
   <parameter name="sessionCount" value="1"/>
-  <parameter name="browser" value="2"/>
+  <parameter name="gd1" value="true"/>
+  <parameter name="sp1" value="true"/>
+  <parameter name="browser" value="1"/>
   <parameter name="databaseDisabled" value="false"/>
-  <parameter name="customString" value="trkngnbr =&#039;794989849840&#039;"/>
-  <test thread-count="5" parallel="methods" name="era Mass Rerate Test(failed)">
+  <test thread-count="5" parallel="methods" name="Rebill Test(failed)">
     <classes>
-      <class name="eraRerate.eraMassRerateTestNGSlow">
+      <class name="rerate.rerateTestNgSlow">
         <methods>
-          <include name="testMethod4"/>
-          <include name="testMethod3"/>
           <include name="testMethod2"/>
+          <include name="testMethod" invocation-numbers="0 19 20 21 22"/>
+          <include name="testMethod4"/>
           <include name="setupExcel"/>
-          <include name="testMethod1" invocation-numbers="0"/>
+          <include name="testMethod3"/>
         </methods>
-      </class> <!-- eraRerate.eraMassRerateTestNGSlow -->
+      </class> <!-- rerate.rerateTestNgSlow -->
     </classes>
-  </test> <!-- era Mass Rerate Test(failed) -->
+  </test> <!-- Rebill Test(failed) -->
 </suite> <!-- Failed suite [Sample_Suite] -->

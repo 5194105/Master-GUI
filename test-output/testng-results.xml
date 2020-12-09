@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results retried="1" ignored="0" total="8" passed="4" failed="3" skipped="0">
+<testng-results ignored="0" total="26" passed="18" failed="8" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2020-12-07T22:19:27 UTC" name="Sample_Suite" finished-at="2020-12-07T22:22:08 UTC" duration-ms="161042">
+  <suite started-at="2020-12-08T20:03:51 UTC" name="Sample_Suite" finished-at="2020-12-08T20:54:37 UTC" duration-ms="3046022">
     <groups>
     </groups>
-    <test started-at="2020-12-07T22:19:27 UTC" name="era Mass Rerate Test" finished-at="2020-12-07T22:22:08 UTC" duration-ms="161042">
-      <class name="eraRerate.eraMassRerateTestNGSlow">
-        <test-method is-config="true" signature="setupExcel(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:eraRerate.eraMassRerateTestNGSlow@12d3a4e9]" started-at="2020-12-07T22:19:27 UTC" name="setupExcel" finished-at="2020-12-07T22:19:34 UTC" duration-ms="6677" status="PASS">
+    <test started-at="2020-12-08T20:03:51 UTC" name="Rebill Test" finished-at="2020-12-08T20:54:37 UTC" duration-ms="3046022">
+      <class name="rerate.rerateTestNgSlow">
+        <test-method is-config="true" signature="setupExcel(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:03:51 UTC" name="setupExcel" finished-at="2020-12-08T20:03:57 UTC" duration-ms="6093" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[C:\Users\FedExUser\Desktop\stephen\R66\L3C6\rebill.xlsx]]>
+                <![CDATA[C:\Users\5194105\Documents\rerate.xlsx]]>
               </value>
             </param>
             <param index="1">
@@ -21,17 +21,17 @@
             </param>
             <param index="2">
               <value>
-                <![CDATA[2]]>
+                <![CDATA[1]]>
               </value>
             </param>
             <param index="3">
               <value>
-                <![CDATA[]]>
+                <![CDATA[excel]]>
               </value>
             </param>
             <param index="4">
               <value>
-                <![CDATA[db]]>
+                <![CDATA[true]]>
               </value>
             </param>
             <param index="5">
@@ -46,7 +46,7 @@
             </param>
             <param index="7">
               <value>
-                <![CDATA[true]]>
+                <![CDATA[false]]>
               </value>
             </param>
             <param index="8">
@@ -56,96 +56,92 @@
             </param>
             <param index="9">
               <value>
-                <![CDATA[trkngnbr ='794989849840']]>
+                <![CDATA[false]]>
               </value>
             </param>
             <param index="10">
               <value>
-                <![CDATA[false]]>
+                <![CDATA[01/01/2020]]>
               </value>
             </param>
             <param index="11">
               <value>
-                <![CDATA[false]]>
+                <![CDATA[12/08/2020]]>
               </value>
             </param>
             <param index="12">
               <value>
-                <![CDATA[false]]>
+                <![CDATA[true]]>
               </value>
             </param>
             <param index="13">
               <value>
-                <![CDATA[false]]>
+                <![CDATA[true]]>
+              </value>
+            </param>
+            <param index="14">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+            <param index="15">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+            <param index="16">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+            <param index="17">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+            <param index="18">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+            <param index="19">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+            <param index="20">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+            <param index="21">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+            <param index="22">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+            <param index="23">
+              <value>
+                <![CDATA[true]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupExcel -->
-        <test-method signature="testMethod3(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:eraRerate.eraMassRerateTestNGSlow@12d3a4e9]" started-at="2020-12-07T22:19:34 UTC" name="testMethod3" data-provider="data-provider3" finished-at="2020-12-07T22:19:34 UTC" duration-ms="0" status="FAIL">
+        <test-method signature="testMethod4(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:03:57 UTC" name="testMethod4" data-provider="data-provider4" finished-at="2020-12-08T20:03:57 UTC" duration-ms="0" status="FAIL">
           <exception class="org.testng.TestNGException">
             <message>
               <![CDATA[
-Data Provider public synchronized java.lang.Object[][] eraRerate.eraMassRerateTestNGSlow.dataProviderMethod3() returned a null value]]>
+Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod4() returned a null value]]>
             </message>
             <full-stacktrace>
               <![CDATA[org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] eraRerate.eraMassRerateTestNGSlow.dataProviderMethod3() returned a null value
-at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:147)
-at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
-at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
-at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
-at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:789)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-at java.base/java.lang.Thread.run(Thread.java:834)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.testng.TestNGException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testMethod3 -->
-        <test-method signature="testMethod2(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:eraRerate.eraMassRerateTestNGSlow@12d3a4e9]" started-at="2020-12-07T22:19:34 UTC" name="testMethod2" data-provider="data-provider2" finished-at="2020-12-07T22:19:34 UTC" duration-ms="0" status="FAIL">
-          <exception class="org.testng.TestNGException">
-            <message>
-              <![CDATA[
-Data Provider public synchronized java.lang.Object[][] eraRerate.eraMassRerateTestNGSlow.dataProviderMethod2() returned a null value]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] eraRerate.eraMassRerateTestNGSlow.dataProviderMethod2() returned a null value
-at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:147)
-at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
-at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
-at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
-at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:789)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-at java.base/java.lang.Thread.run(Thread.java:834)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.testng.TestNGException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testMethod2 -->
-        <test-method signature="testMethod4(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:eraRerate.eraMassRerateTestNGSlow@12d3a4e9]" started-at="2020-12-07T22:19:34 UTC" name="testMethod4" data-provider="data-provider4" finished-at="2020-12-07T22:19:34 UTC" duration-ms="0" status="FAIL">
-          <exception class="org.testng.TestNGException">
-            <message>
-              <![CDATA[
-Data Provider public synchronized java.lang.Object[][] eraRerate.eraMassRerateTestNGSlow.dataProviderMethod4() returned a null value]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] eraRerate.eraMassRerateTestNGSlow.dataProviderMethod4() returned a null value
+Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod4() returned a null value
 at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:147)
 at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
 at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
@@ -164,123 +160,153 @@ at java.base/java.lang.Thread.run(Thread.java:834)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod4 -->
-        <test-method retried="true" signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:eraRerate.eraMassRerateTestNGSlow@12d3a4e9]" started-at="2020-12-07T22:19:34 UTC" name="testMethod1" data-provider="data-provider1" finished-at="2020-12-07T22:19:54 UTC" duration-ms="19521" status="SKIP">
+        <test-method signature="testMethod3(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:03:57 UTC" name="testMethod3" data-provider="data-provider3" finished-at="2020-12-08T20:03:57 UTC" duration-ms="0" status="FAIL">
+          <exception class="org.testng.TestNGException">
+            <message>
+              <![CDATA[
+Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod3() returned a null value]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod3() returned a null value
+at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:147)
+at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
+at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
+at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
+at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:789)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+at java.base/java.lang.Thread.run(Thread.java:834)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.TestNGException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod3 -->
+        <test-method signature="testMethod2(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:03:57 UTC" name="testMethod2" data-provider="data-provider2" finished-at="2020-12-08T20:03:57 UTC" duration-ms="0" status="FAIL">
+          <exception class="org.testng.TestNGException">
+            <message>
+              <![CDATA[
+Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod2() returned a null value]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod2() returned a null value
+at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:147)
+at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
+at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
+at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
+at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:789)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+at java.base/java.lang.Thread.run(Thread.java:834)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.TestNGException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod2 -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:03:57 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:04:27 UTC" duration-ms="30177" status="FAIL">
           <params>
             <param index="0">
               <value>
-                <![CDATA[]]>
+                <![CDATA[200164]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[]]>
+                <![CDATA[1]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[227171]]>
+                <![CDATA[609048786]]>
               </value>
             </param>
             <param index="3">
               <value>
-                <![CDATA[1]]>
+                <![CDATA[]]>
               </value>
             </param>
             <param index="4">
               <value>
-                <![CDATA[794990275021]]>
+                <![CDATA[794990174526]]>
               </value>
             </param>
             <param index="5">
               <value>
-                <![CDATA[632533830]]>
+                <![CDATA[]]>
               </value>
             </param>
             <param index="6">
               <value>
-                <![CDATA[]]>
+                <![CDATA[244823390]]>
               </value>
             </param>
             <param index="7">
               <value>
-                <![CDATA[EMEA]]>
+                <![CDATA[]]>
               </value>
             </param>
             <param index="8">
               <value>
-                <![CDATA[3735811]]>
+                <![CDATA[Express International]]>
               </value>
             </param>
             <param index="9">
               <value>
-                <![CDATA[Online20]]>
+                <![CDATA[]]>
               </value>
             </param>
             <param index="10">
               <value>
-                <![CDATA[]]>
+                <![CDATA[Date Range]]>
               </value>
             </param>
             <param index="11">
               <value>
-                <![CDATA[]]>
+                <![CDATA[CE Level]]>
               </value>
             </param>
             <param index="12">
               <value>
-                <![CDATA[5]]>
+                <![CDATA[SDTL3C5-200164-1-142]]>
               </value>
             </param>
             <param index="13">
-              <value>
-                <![CDATA[5]]>
-              </value>
-            </param>
-            <param index="14">
-              <value>
-                <![CDATA[5]]>
-              </value>
-            </param>
-            <param index="15">
-              <value>
-                <![CDATA[IN]]>
-              </value>
-            </param>
-            <param index="16">
-              <value>
-                <![CDATA[Dims]]>
-              </value>
-            </param>
-            <param index="17">
-              <value>
-                <![CDATA[IL]]>
-              </value>
-            </param>
-            <param index="18">
-              <value>
-                <![CDATA[EP]]>
-              </value>
-            </param>
-            <param index="19">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="20">
               <value>
                 <![CDATA[1]]>
               </value>
             </param>
           </params>
-          <exception class="java.lang.AssertionError">
+          <exception class="org.openqa.selenium.NoSuchSessionException">
             <message>
-              <![CDATA[Failed on Entering Tracking Number]]>
+              <![CDATA[Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:48'
+System info: host: 'C0016390', ip: '10.242.69.100', os.name: 'Windows Server 2016', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.6'
+Driver info: driver.version: RemoteWebDriver]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: Failed on Entering Tracking Number
-at org.testng.Assert.fail(Assert.java:99)
-at eraRerate.eraMassRerateTestNGSlow.doMassRerate(eraMassRerateTestNGSlow.java:1121)
-at eraRerate.eraMassRerateTestNGSlow.testMethod1(eraMassRerateTestNGSlow.java:600)
+              <![CDATA[org.openqa.selenium.NoSuchSessionException: Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:48'
+System info: host: 'C0016390', ip: '10.242.69.100', os.name: 'Windows Server 2016', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.6'
+Driver info: driver.version: RemoteWebDriver
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:125)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:609)
+at org.openqa.selenium.remote.RemoteWebDriver.close(RemoteWebDriver.java:442)
+at rerate.rerateTestNgSlow.firstPage(rerateTestNgSlow.java:1075)
+at rerate.rerateTestNgSlow.doWork(rerateTestNgSlow.java:802)
+at rerate.rerateTestNgSlow.testMethod(rerateTestNgSlow.java:636)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -298,224 +324,78 @@ at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecut
 at java.base/java.lang.Thread.run(Thread.java:834)
 ]]>
             </full-stacktrace>
-          </exception> <!-- java.lang.AssertionError -->
+          </exception> <!-- org.openqa.selenium.NoSuchSessionException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testMethod1 -->
-        <test-method signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:eraRerate.eraMassRerateTestNGSlow@12d3a4e9]" started-at="2020-12-07T22:19:54 UTC" name="testMethod1" data-provider="data-provider1" finished-at="2020-12-07T22:20:28 UTC" duration-ms="34054" status="PASS">
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:04:27 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:06:50 UTC" duration-ms="142860" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[]]>
+                <![CDATA[203208]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[]]>
+                <![CDATA[1]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[227171]]>
+                <![CDATA[609845589]]>
               </value>
             </param>
             <param index="3">
               <value>
-                <![CDATA[1]]>
+                <![CDATA[]]>
               </value>
             </param>
             <param index="4">
               <value>
-                <![CDATA[794990275021]]>
+                <![CDATA[403754991720]]>
               </value>
             </param>
             <param index="5">
               <value>
-                <![CDATA[632533830]]>
+                <![CDATA[]]>
               </value>
             </param>
             <param index="6">
               <value>
-                <![CDATA[]]>
+                <![CDATA[244823791]]>
               </value>
             </param>
             <param index="7">
               <value>
-                <![CDATA[EMEA]]>
+                <![CDATA[]]>
               </value>
             </param>
             <param index="8">
               <value>
-                <![CDATA[3735811]]>
+                <![CDATA[Express Domestic]]>
               </value>
             </param>
             <param index="9">
               <value>
-                <![CDATA[Online20]]>
+                <![CDATA[]]>
               </value>
             </param>
             <param index="10">
               <value>
-                <![CDATA[]]>
+                <![CDATA[Date Range]]>
               </value>
             </param>
             <param index="11">
               <value>
-                <![CDATA[]]>
+                <![CDATA[CE Level]]>
               </value>
             </param>
             <param index="12">
               <value>
-                <![CDATA[5]]>
+                <![CDATA[SDTL3C5-203208-1-160]]>
               </value>
             </param>
             <param index="13">
-              <value>
-                <![CDATA[5]]>
-              </value>
-            </param>
-            <param index="14">
-              <value>
-                <![CDATA[5]]>
-              </value>
-            </param>
-            <param index="15">
-              <value>
-                <![CDATA[IN]]>
-              </value>
-            </param>
-            <param index="16">
-              <value>
-                <![CDATA[Dims]]>
-              </value>
-            </param>
-            <param index="17">
-              <value>
-                <![CDATA[IL]]>
-              </value>
-            </param>
-            <param index="18">
-              <value>
-                <![CDATA[EP]]>
-              </value>
-            </param>
-            <param index="19">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="20">
-              <value>
-                <![CDATA[1]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testMethod1 -->
-        <test-method signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:eraRerate.eraMassRerateTestNGSlow@12d3a4e9]" started-at="2020-12-07T22:20:28 UTC" name="testMethod1" data-provider="data-provider1" finished-at="2020-12-07T22:21:00 UTC" duration-ms="32356" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[259951]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[1]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[315797999941]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[244824996]]>
-              </value>
-            </param>
-            <param index="6">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="7">
-              <value>
-                <![CDATA[CAN]]>
-              </value>
-            </param>
-            <param index="8">
-              <value>
-                <![CDATA[3735812]]>
-              </value>
-            </param>
-            <param index="9">
-              <value>
-                <![CDATA[Online20]]>
-              </value>
-            </param>
-            <param index="10">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="11">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="12">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="13">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="14">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="15">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="16">
-              <value>
-                <![CDATA[Service Change]]>
-              </value>
-            </param>
-            <param index="17">
-              <value>
-                <![CDATA[IL]]>
-              </value>
-            </param>
-            <param index="18">
-              <value>
-                <![CDATA[EP]]>
-              </value>
-            </param>
-            <param index="19">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="20">
               <value>
                 <![CDATA[2]]>
               </value>
@@ -523,110 +403,75 @@ at java.base/java.lang.Thread.run(Thread.java:834)
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testMethod1 -->
-        <test-method signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:eraRerate.eraMassRerateTestNGSlow@12d3a4e9]" started-at="2020-12-07T22:21:00 UTC" name="testMethod1" data-provider="data-provider1" finished-at="2020-12-07T22:21:36 UTC" duration-ms="35720" status="PASS">
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:06:50 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:09:12 UTC" duration-ms="141695" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[]]>
+                <![CDATA[201057]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[]]>
+                <![CDATA[1]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[244860]]>
+                <![CDATA[605390820]]>
               </value>
             </param>
             <param index="3">
               <value>
-                <![CDATA[1]]>
+                <![CDATA[]]>
               </value>
             </param>
             <param index="4">
               <value>
-                <![CDATA[795011939711]]>
+                <![CDATA[856730071352]]>
               </value>
             </param>
             <param index="5">
               <value>
-                <![CDATA[330842332]]>
+                <![CDATA[]]>
               </value>
             </param>
             <param index="6">
               <value>
-                <![CDATA[]]>
+                <![CDATA[716069468]]>
               </value>
             </param>
             <param index="7">
               <value>
-                <![CDATA[USA]]>
+                <![CDATA[]]>
               </value>
             </param>
             <param index="8">
               <value>
-                <![CDATA[5194105]]>
+                <![CDATA[Express Domestic]]>
               </value>
             </param>
             <param index="9">
               <value>
-                <![CDATA[Online20]]>
+                <![CDATA[]]>
               </value>
             </param>
             <param index="10">
               <value>
-                <![CDATA[10]]>
+                <![CDATA[Date Range]]>
               </value>
             </param>
             <param index="11">
               <value>
-                <![CDATA[LB]]>
+                <![CDATA[CE Level]]>
               </value>
             </param>
             <param index="12">
               <value>
-                <![CDATA[]]>
+                <![CDATA[SDTL3C5-201057-1-143]]>
               </value>
             </param>
             <param index="13">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="14">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="15">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="16">
-              <value>
-                <![CDATA[Weight]]>
-              </value>
-            </param>
-            <param index="17">
-              <value>
-                <![CDATA[IL]]>
-              </value>
-            </param>
-            <param index="18">
-              <value>
-                <![CDATA[EP]]>
-              </value>
-            </param>
-            <param index="19">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="20">
               <value>
                 <![CDATA[3]]>
               </value>
@@ -634,110 +479,75 @@ at java.base/java.lang.Thread.run(Thread.java:834)
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testMethod1 -->
-        <test-method signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:eraRerate.eraMassRerateTestNGSlow@12d3a4e9]" started-at="2020-12-07T22:21:36 UTC" name="testMethod1" data-provider="data-provider1" finished-at="2020-12-07T22:22:08 UTC" duration-ms="32658" status="PASS">
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:09:12 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:11:51 UTC" duration-ms="159176" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[]]>
+                <![CDATA[199011]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[]]>
+                <![CDATA[1]]>
               </value>
             </param>
             <param index="2">
               <value>
-                <![CDATA[172732]]>
+                <![CDATA[611309007]]>
               </value>
             </param>
             <param index="3">
               <value>
-                <![CDATA[2]]>
+                <![CDATA[611309147]]>
               </value>
             </param>
             <param index="4">
               <value>
-                <![CDATA[597776363849]]>
+                <![CDATA[273871303239]]>
               </value>
             </param>
             <param index="5">
               <value>
-                <![CDATA[811614175]]>
+                <![CDATA[794989858076]]>
               </value>
             </param>
             <param index="6">
               <value>
-                <![CDATA[]]>
+                <![CDATA[716071026]]>
               </value>
             </param>
             <param index="7">
               <value>
-                <![CDATA[LAC]]>
+                <![CDATA[716068465]]>
               </value>
             </param>
             <param index="8">
               <value>
-                <![CDATA[3726698]]>
+                <![CDATA[Ground Domestic]]>
               </value>
             </param>
             <param index="9">
               <value>
-                <![CDATA[Online20]]>
+                <![CDATA[Ground Domestic]]>
               </value>
             </param>
             <param index="10">
               <value>
-                <![CDATA[]]>
+                <![CDATA[Date Range]]>
               </value>
             </param>
             <param index="11">
               <value>
-                <![CDATA[]]>
+                <![CDATA[CE Level]]>
               </value>
             </param>
             <param index="12">
               <value>
-                <![CDATA[]]>
+                <![CDATA[SDTL3C5-199011-1-29]]>
               </value>
             </param>
             <param index="13">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="14">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="15">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="16">
-              <value>
-                <![CDATA[None]]>
-              </value>
-            </param>
-            <param index="17">
-              <value>
-                <![CDATA[IL]]>
-              </value>
-            </param>
-            <param index="18">
-              <value>
-                <![CDATA[EP]]>
-              </value>
-            </param>
-            <param index="19">
-              <value>
-                <![CDATA[]]>
-              </value>
-            </param>
-            <param index="20">
               <value>
                 <![CDATA[4]]>
               </value>
@@ -745,8 +555,1600 @@ at java.base/java.lang.Thread.run(Thread.java:834)
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testMethod1 -->
-      </class> <!-- eraRerate.eraMassRerateTestNGSlow -->
-    </test> <!-- era Mass Rerate Test -->
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:11:51 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:14:25 UTC" duration-ms="153826" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[199013]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[611309007]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[611309147]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[794989857996]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[273871303291]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[716071026]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[716068465]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[Ground Domestic]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[Ground Domestic]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[Date Range]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[CE Level]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[SDTL3C5-199013-1-31]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[5]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:14:25 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:17:02 UTC" duration-ms="156838" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[199015]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[611309007]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[611309147]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[273871303260]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[794989858168]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[716071026]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[716068465]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[Ground Domestic]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[Ground Domestic]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[Invoice]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[CE Level]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[SDTL3C5-199015-1-32]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[6]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:17:02 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:19:29 UTC" duration-ms="147614" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[196558]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[609597747]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[122466188720]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[716069464]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[SmartPost]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[Tracking Number]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[CE Level]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[SDTL3C5-196558-1-121]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[7]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:19:29 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:21:55 UTC" duration-ms="145312" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[190260]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[608052348]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[794989850730]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[716070940]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[Ground Domestic]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[Date Range]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[CE Level]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[SDTL3C5-190260-1-89]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[8]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:21:55 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:24:20 UTC" duration-ms="145046" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[202879]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[2]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[609049006]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[404487741432]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[244823812]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[Express Domestic]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[Date Range]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[CE Level]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[SDTL3C5-202879-2-157]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[9]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:24:20 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:26:45 UTC" duration-ms="145609" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[202879]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[609049006]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[794990078610]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[244823812]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[Express Domestic]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[Date Range]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[CE Level]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[SDTL3C5-202879-1-158]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[10]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:26:45 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:29:06 UTC" duration-ms="141193" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[179903]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[603645120]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[794989994835]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[716070111]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[Ground Domestic]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[Date Range]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[CE Level]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[SDTL3C5-179903-1-88]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[11]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:29:06 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:31:34 UTC" duration-ms="147546" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[201465]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[610618421]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[703782906]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[794990166745]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[244823873]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[Express Domestic]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[SmartPost]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[Date Range]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[CE Level]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[SDTL3C5-201465-1-21]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[12]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:31:34 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:34:11 UTC" duration-ms="157318" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[201466]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[2]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[610618561]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[703731244]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[404429741289]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[244823981]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[Express Domestic]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[SmartPost]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[Invoice]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[CE Level]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[SDTL3C5-201466-2-22]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[13]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:34:11 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:36:39 UTC" duration-ms="147733" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[201466]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[610618561]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[609822163]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[794990166712]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[244823981]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[Express Domestic]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[Ground Domestic]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[Invoice]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[CE Level]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[SDTL3C5-201466-1-16]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[14]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:36:39 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:39:11 UTC" duration-ms="151836" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[201494]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[609872128]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[404566741448]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[244823353]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[Express International]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[Date Range]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[CE Level]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[SDTL3C5-201494-1-148]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[15]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:39:11 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:41:40 UTC" duration-ms="149259" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[201499]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[609822163]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[703782906]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[404566741492]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[244823353]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[Express International]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[SmartPost]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[Date Range]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[CE Level]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[SDTL3C5-201499-1-23]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[16]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:41:40 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:44:14 UTC" duration-ms="153990" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[201500]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[609920122]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[703731244]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[404566741426]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[244823353]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[Express International]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[SmartPost]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[Invoice]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[CE Level]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[SDTL3C5-201500-1-24]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[17]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:44:14 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:46:36 UTC" duration-ms="141689" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[202893]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[609049006]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[794990402396]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[244823815]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[Express Domestic]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[Tracking Number]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[CE Level]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[SDTL3C5-202893-1-159]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[18]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:46:36 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:49:05 UTC" duration-ms="149317" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[201510]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[609920602]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[404543742009]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[244823353]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[Ground Domestic]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[Tracking Number]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[CE Level]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[SDTL3C5-201510-1-153]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[19]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:49:05 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:50:35 UTC" duration-ms="89774" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[98512]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[451143280]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[522544697364]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[244823924]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[Express Domestic]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[Tracking Number]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[CE Level]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[SDTL3C5-98512-1-218]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[20]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.openqa.selenium.NoSuchSessionException">
+            <message>
+              <![CDATA[Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:48'
+System info: host: 'C0016390', ip: '10.242.69.100', os.name: 'Windows Server 2016', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.6'
+Driver info: driver.version: RemoteWebDriver]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchSessionException: Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:48'
+System info: host: 'C0016390', ip: '10.242.69.100', os.name: 'Windows Server 2016', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.6'
+Driver info: driver.version: RemoteWebDriver
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:125)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:609)
+at org.openqa.selenium.remote.RemoteWebDriver.close(RemoteWebDriver.java:442)
+at rerate.rerateTestNgSlow.secondPage(rerateTestNgSlow.java:1380)
+at rerate.rerateTestNgSlow.doWork(rerateTestNgSlow.java:803)
+at rerate.rerateTestNgSlow.testMethod(rerateTestNgSlow.java:636)
+at jdk.internal.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:132)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:599)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:174)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:822)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+at java.base/java.lang.Thread.run(Thread.java:834)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.NoSuchSessionException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:50:35 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:51:57 UTC" duration-ms="81952" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[105555]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[451143280]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[597630071351]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[244823924]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[Express Domestic]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[Tracking Number]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[CE Level]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[SDTL3C5-105555-1-42]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[21]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.openqa.selenium.NoSuchSessionException">
+            <message>
+              <![CDATA[Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:48'
+System info: host: 'C0016390', ip: '10.242.69.100', os.name: 'Windows Server 2016', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.6'
+Driver info: driver.version: RemoteWebDriver]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchSessionException: Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:48'
+System info: host: 'C0016390', ip: '10.242.69.100', os.name: 'Windows Server 2016', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.6'
+Driver info: driver.version: RemoteWebDriver
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:125)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:609)
+at org.openqa.selenium.remote.RemoteWebDriver.close(RemoteWebDriver.java:442)
+at rerate.rerateTestNgSlow.secondPage(rerateTestNgSlow.java:1380)
+at rerate.rerateTestNgSlow.doWork(rerateTestNgSlow.java:803)
+at rerate.rerateTestNgSlow.testMethod(rerateTestNgSlow.java:636)
+at jdk.internal.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:132)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:599)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:174)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:822)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+at java.base/java.lang.Thread.run(Thread.java:834)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.NoSuchSessionException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:51:57 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:53:16 UTC" duration-ms="79258" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[105676]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[451143280]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[648444697364]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[244823924]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[Express Domestic]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[Tracking Number]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[CE Level]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[SDTL3C5-105676-1-44]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[22]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.openqa.selenium.NoSuchSessionException">
+            <message>
+              <![CDATA[Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:48'
+System info: host: 'C0016390', ip: '10.242.69.100', os.name: 'Windows Server 2016', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.6'
+Driver info: driver.version: RemoteWebDriver]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchSessionException: Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:48'
+System info: host: 'C0016390', ip: '10.242.69.100', os.name: 'Windows Server 2016', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.6'
+Driver info: driver.version: RemoteWebDriver
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:125)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:609)
+at org.openqa.selenium.remote.RemoteWebDriver.close(RemoteWebDriver.java:442)
+at rerate.rerateTestNgSlow.secondPage(rerateTestNgSlow.java:1380)
+at rerate.rerateTestNgSlow.doWork(rerateTestNgSlow.java:803)
+at rerate.rerateTestNgSlow.testMethod(rerateTestNgSlow.java:636)
+at jdk.internal.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:132)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:599)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:174)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:822)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+at java.base/java.lang.Thread.run(Thread.java:834)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.NoSuchSessionException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+        <test-method signature="testMethod(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@1d548a08]" started-at="2020-12-08T20:53:16 UTC" name="testMethod" data-provider="data-provider1" finished-at="2020-12-08T20:54:37 UTC" duration-ms="80701" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[100037]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[1]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[128652868]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[404460741686]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[244823396]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[Express Domestic]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[Tracking Number]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[CE Level]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[SDTL3C5-100037-1-33]]>
+              </value>
+            </param>
+            <param index="13">
+              <value>
+                <![CDATA[23]]>
+              </value>
+            </param>
+          </params>
+          <exception class="org.openqa.selenium.NoSuchSessionException">
+            <message>
+              <![CDATA[Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:48'
+System info: host: 'C0016390', ip: '10.242.69.100', os.name: 'Windows Server 2016', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.6'
+Driver info: driver.version: RemoteWebDriver]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchSessionException: Session ID is null. Using WebDriver after calling quit()?
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:48'
+System info: host: 'C0016390', ip: '10.242.69.100', os.name: 'Windows Server 2016', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.6'
+Driver info: driver.version: RemoteWebDriver
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:125)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:609)
+at org.openqa.selenium.remote.RemoteWebDriver.close(RemoteWebDriver.java:442)
+at rerate.rerateTestNgSlow.secondPage(rerateTestNgSlow.java:1380)
+at rerate.rerateTestNgSlow.doWork(rerateTestNgSlow.java:803)
+at rerate.rerateTestNgSlow.testMethod(rerateTestNgSlow.java:636)
+at jdk.internal.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:132)
+at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:599)
+at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:174)
+at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:822)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+at java.base/java.lang.Thread.run(Thread.java:834)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.NoSuchSessionException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod -->
+      </class> <!-- rerate.rerateTestNgSlow -->
+    </test> <!-- Rebill Test -->
   </suite> <!-- Sample_Suite -->
 </testng-results>
