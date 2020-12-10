@@ -24,22 +24,21 @@ public class eraRerateManualTest {
        	c.setExcelPath("C:\\Users\\FedExUser\\Documents\\rebill.xlsx");
     	c.setLevel("3");
     	c.setDriverType("2");
-    	c.setDriverType("2");
     	c.setCompatibleMode("false");
     	c.setSource("db");
     	c.setAllCheckBox("false");
     	c.setNullCheckBox("true");
     	c.setFailedCheckBox("false");
-		c.setDomesticCheckBox("false");
+		c.setDomesticCheckBox("true");
 		c.setInternationalCheckBox("true");
 		c.setExpressCheckBox("true");
-		c.setGroundCheckBox("false");
-		c.setNormalCheckBox("false");
-		c.setMfRetireCheckBox("true");
+		c.setGroundCheckBox("true");
 		c.setSessionCount("1");
 		c.setDatabaseDisabled("false");
 		c.setCustomCheckBox("true");
-		c.setCustomString("trkngnbr ='794986095985'");
+		c.setCustomString("trkngnbr='188253949738'");
+		
+		//c.setCustomString("rerate_type='service'");
     	
     	String filepath=c.getExcelPath();
 		String level=c.getLevel();
@@ -52,13 +51,11 @@ public class eraRerateManualTest {
 		String domesticCheckBox=c.getDomesticCheckBox();
 		String internationalCheckBox=c.getInternationalCheckBox();
 		String expressCheckBox=c.getExpressCheckBox();
-		String groundCheckBox=c.getGroundCheckBox();
-		String normalCheckBox=c.getNormalCheckBox();
-		String mfRetireCheckBox=c.getMfRetireCheckBox();
+		String groundCheckBox=c.getGroundCheckBox();	
 		String sessionCount=c.getSessionCount();
 		String databaseDisabled=	c.getDatabaseDisabled();
-		String	customCheckBox= c.getCustomCheckBox();
-		String	customString= c.getCustomString();
+		String customCheckBox= c.getCustomCheckBox();
+		String customString= c.getCustomString();
 			
 		
 		System.out.println("filepath "+filepath);
@@ -73,8 +70,7 @@ public class eraRerateManualTest {
 		System.out.println("internationalCheckBox "+internationalCheckBox);
 		System.out.println("expressCheckBox "+expressCheckBox);
 		System.out.println("groundCheckBox "+groundCheckBox);
-		System.out.println("normalCheckBox "+normalCheckBox);
-		System.out.println("mfRetireCheckBox "+mfRetireCheckBox);
+		
 		System.out.println("sessionCount "+sessionCount);
 		System.out.println("customString "+customString);
 		System.out.println("customCheckBox "+customCheckBox);
@@ -114,12 +110,7 @@ public class eraRerateManualTest {
 		if(groundCheckBox==null) {
 			groundCheckBox="";
 		}
-		if(normalCheckBox==null) {
-			normalCheckBox="";
-		}
-		if(mfRetireCheckBox==null) {
-			mfRetireCheckBox="";
-		}
+	
 		if(sessionCount==null) {
 			sessionCount="";
 		}
@@ -144,8 +135,7 @@ public class eraRerateManualTest {
         fieldValues.put("level", level);
         fieldValues.put("browser", "2");
         fieldValues.put("compatibleMode", "");
-        fieldValues.put("source", source);
-       
+        fieldValues.put("source", source);   
         fieldValues.put("allCheckBox", allCheckBox);
         fieldValues.put("nullCheckBox", nullCheckBox);
         fieldValues.put("failedCheckBox", failedCheckBox);
@@ -156,7 +146,7 @@ public class eraRerateManualTest {
         
         xmlSuite.setParameters(fieldValues);
         XmlTest xmlTest = new XmlTest(xmlSuite);
-        xmlTest.setName("Rebill Test");
+        xmlTest.setName("era Rerate Test");
         //xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(playAround.class)));
         xmlTest.setXmlClasses(Collections.singletonList(new XmlClass(eraRerateTestNGSlow.class)));
         xmlTest.setParallel(XmlSuite.ParallelMode.METHODS);

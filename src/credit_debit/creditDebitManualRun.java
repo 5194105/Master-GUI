@@ -19,14 +19,15 @@ public class creditDebitManualRun {
 	c.setLevel("2");
 	c.setDriverType("2");
 	c.setCompatibleMode("false");
-	c.setSource("excel");
-//	c.setAllCheckBox("false");
-//	c.setNullCheckBox("true");
-//	c.setFailedCheckBox("true");
-//	c.setCreditCheckBox("true");
-//	c.setDebitCheckBox("true");
-
-	c.setDatabaseDisabled("true");
+	c.setSource("db");
+	c.setAllCheckBox("false");
+	c.setNullCheckBox("true");
+	c.setFailedCheckBox("true");
+	c.setCreditCheckBox("false");
+	c.setDebitCheckBox("true");
+	c.setDisputeCheckBox("false");
+	c.setResolveCreditCheckBox("true");
+	c.setDatabaseDisabled("false");
 	c.setCustomCheckBox("false");
 	c.setCustomString("trkngnbr in ('882553697362','590443411313')");
 	c.setHeadlessString("false");
@@ -53,6 +54,9 @@ public class creditDebitManualRun {
 	String	customString= c.getCustomString();
 	
 	String headless=c.getHeadlessString();
+	
+	String disputeCheckBox=c.getDisputeCheckBox();
+	String resolveCreditCheckBox=c.getExpressCheckBox();
 	
 	System.out.println("filepath "+filepath);
 	System.out.println("level "+level);
@@ -125,6 +129,16 @@ public class creditDebitManualRun {
 		headless="";
 	}
 	
+	
+	
+	if(disputeCheckBox==null) {
+		disputeCheckBox="";
+	}
+	
+	if(resolveCreditCheckBox==null) {
+		resolveCreditCheckBox="";
+	}
+	
 
     XmlSuite xmlSuite = new XmlSuite();
     xmlSuite.setName("Sample_Suite");
@@ -139,6 +153,8 @@ public class creditDebitManualRun {
     fieldValues.put("failedCheckBox", failedCheckBox);
     fieldValues.put("creditCheckBox", creditCheckBox);
     fieldValues.put("debitCheckBox", debitCheckBox);
+    fieldValues.put("disputeCheckBox", disputeCheckBox);
+    fieldValues.put("resolveCreditCheckBox", debitCheckBox);
     fieldValues.put("sessionCount",sessionCount);
     fieldValues.put("customString",customString);
     fieldValues.put("customCheckBox",customCheckBox);

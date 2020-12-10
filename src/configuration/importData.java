@@ -250,6 +250,9 @@ public class importData {
 		     c.setEcL3DbConnection(c.getEcL3DbUsername(),c.getEcL3DbPassword());
 		     c.setEraL2DbConnection(c.getEraL2DbUsername(),c.getEraL2DbPassword());
 		     c.setEraL3DbConnection(c.getEraL3DbUsername(),c.getEraL3DbPassword());
+		    // c.setOracleARL2DbConnection(c.getOracleARL2DbUsername(),c.getOracleARL2DbPassword());
+		     c.setOracleARL3DbConnection("appsread","appsread");
+		     
 	     }
 	   
 	

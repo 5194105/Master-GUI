@@ -20,9 +20,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import javax.naming.Context;
+import javax.naming.NamingException;
+import javax.naming.directory.DirContext;
+import javax.naming.directory.InitialDirContext;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -54,17 +60,97 @@ public class Highest {
   static  String chromeSetProperty="webdriver.chrome.driver";
   static  String chromePath=homePath+"\\drivers\\chromedriver.exe";
   static String ieDriverPath=homePath+"\\drivers\\IEDriverServer.exe";
-    
+  static Connection oracleARL3Con;
+  
     	public static void main (String[] arg) {
-    	String temp="Your Mass Rerate batch number is:64897";
-    	String str=temp.replaceAll("\\D+","");
-    	System.out.println( str);
+    		  String username="appsread";
+    		  String password="appsread";
+    		  String url="jdbc:oracle:thin:@ldap://hdsoid.ute.fedex.com:3060/ENBL_SVC1_LVL3,CN=OracleContext,DC=ute,DC=fedex,DC=com";
+    			try {
+    				//Class.forName("oracle.jdbc.driver.OracleDriver");
+    			    oracleARL3Con=DriverManager.getConnection(url,username,password);
+    			} catch (SQLException e) {
+    				System.out.println(e);
+    				e.printStackTrace();
+    			}
+    			PreparedStatement stmt = null;
+    	    	ResultSet rs = null;
+    	    	
+    	    	
+    	    	try {
+    	    		
+    	    		stmt=oracleARL3Con.prepareStatement("select * from XXFDX.xxfdx_ar_ADjUSTMENTS_data where airbill_number=?");  
+    				stmt.setString(1,"591241130812");  
+    				rs = stmt.executeQuery();
+    				rs.next();
+    			
+    				 String statusDesc = rs.getString("AMOUNT_CR");
+    				 System.out.println(statusDesc);
+    	    	} catch (SQLException e) {
+    	    		System.out.println(e);
+    	    		// TODO Auto-generated catch block
+    	    		e.printStackTrace();
+    	    	}
+    	    	      
+    		
+    		
+    		
+    	    
+    		//  SimpleDriverDataSource ds = new SimpleDriverDataSource();
+    		  
+    		  
+    		  /*
+    		
+    		String username = "appsread";
+    		String password = "appsread";
+    		String base = "cn=OracleContext,dc=ute,dc=fedex,dc=com";
+    		String dn = "uid=" + username + "," + base;
+    		String ldapURL = "ldap://hdsoid.ute.fedex.com:3060";
+
+    		// Setup environment for authenticating
+
+    		Hashtable<String, String> environment  =new Hashtable<String, String>();
+    		environment.put(Context.INITIAL_CONTEXT_FACTORY,"com.sun.jndi.ldap.LdapCtxFactory");
+    		environment.put(Context.PROVIDER_URL, ldapURL);
+    		environment.put(Context.SECURITY_AUTHENTICATION, "simple");
+    		environment.put(Context.SECURITY_PRINCIPAL, dn);
+    		environment.put(Context.SECURITY_CREDENTIALS, password);
+    		
+    		try {
+				DirContext authContext = new InitialDirContext(environment);
+			} catch (NamingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		*/
     	}
+    	
 	
     }
     
     
+/*
+ * 
+ * String username = "user";
+String password = "password";
+String base = "ou=People,dc=objects,dc=com,dc=au";
+String dn = "uid=" + username + "," + base;
+String ldapURL = "ldap://ldap.example.com:389";
 
+// Setup environment for authenticating
+
+Hashtable<String, String> environment =
+new Hashtable<String, String>();
+environment.put(Context.INITIAL_CONTEXT_FACTORY,"com.sun.jndi.ldap.LdapCtxFactory");
+environment.put(Context.PROVIDER_URL, ldapURL);
+environment.put(Context.SECURITY_AUTHENTICATION, "simple");
+environment.put(Context.SECURITY_PRINCIPAL, dn);
+environment.put(Context.SECURITY_CREDENTIALS, password);
+try
+{
+DirContext authContext =
+new InitialDirContext(environment);
+ */
 
  
 

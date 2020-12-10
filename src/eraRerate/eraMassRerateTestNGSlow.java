@@ -960,17 +960,17 @@ public class eraMassRerateTestNGSlow {
 				wait = new WebDriverWait(driver,waitTime);
 				driver.manage().window().maximize();
 				
-											
-				driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[2]/div/div/form/div[1]/div[2]/div[1]/div[2]/span/input")).sendKeys(login);
-				driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[2]/div/div/form/div[1]/div[2]/div[2]/div[2]/span/input")).sendKeys(password);
-				driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[2]/div/div/form/div[2]/input")).click();
+										//	 /html/body/div[2]/div[2]/main/div[2]/div/div/form/div[1]/div[2]/div[1]/div[2]/span/input					
+				//driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[2]/div/div/form/div[1]/div[2]/div[1]/div[2]/span/input")).sendKeys(login);
+				//driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[2]/div/div/form/div[1]/div[2]/div[2]/div[2]/span/input")).sendKeys(password);
+				//driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[2]/div/div/form/div[2]/input")).click();
 				
-				//driver.findElement(By.id("username")).sendKeys(login);
-				//driver.findElement(By.id("password")).sendKeys(password);
-				//driver.findElement(By.id("submit")).click();
+				driver.findElement(By.id("okta-signin-username")).sendKeys(login);
+				driver.findElement(By.id("okta-signin-password")).sendKeys(password);
+				driver.findElement(By.id("okta-signin-submit")).click();
 	    	}
 	    	catch(Exception e) {
-	    		
+	    		System.out.println(e);
 	    		 Assert.fail("Could Not Login");
 	    	}
 	    }
@@ -1162,7 +1162,7 @@ public class eraMassRerateTestNGSlow {
 			stmt.setString(1,resultArray[0]);  
 			stmt.setString(2,resultArray[1]); 
 			stmt.setString(3,trk); 
-			stmt.setString(3,"Y"); 
+			stmt.setString(4,"Y"); 
 			stmt.executeUpdate();
 			//stmt.close();
 		}

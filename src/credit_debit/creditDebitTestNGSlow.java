@@ -148,8 +148,8 @@ public class creditDebitTestNGSlow {
 	
 	
 	@BeforeClass
-	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","creditCheckBox","debitCheckBox","sessionCount","customString","customCheckBox","databaseDisabled","headless"})
-	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String creditCheckBox,String debitCheckBox,String sessionCount,String customString,String customCheckBox,String databaseDisabled,String headless) {
+	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","creditCheckBox","debitCheckBox","disputeCheckBox","resolveCreditCheckBox","sessionCount","customString","customCheckBox","databaseDisabled","headless"})
+	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String creditCheckBox,String debitCheckBox,String disputeCheckBox,String resolveCreditCheckBox,String sessionCount,String customString,String customCheckBox,String databaseDisabled,String headless) {
 	
 
 		try {
@@ -247,13 +247,14 @@ public class creditDebitTestNGSlow {
 
 public void runDbQuery() {
 	try {
+	int kounter=0;
 	Connection GTMcon=c.getGtmRevToolsConnection();
 	Statement stmt = null;
 	ResultSet rs = null;
 	ResultSetMetaData rsmd=null;
 
 	String databaseSqlCount="select count(*) as total from era_credit_debit ";
-	String databaseSqlQuery="select RESULT,	DESCRIPTION, TEST_INPUT_NBR, TIN_COUNT, TRKNGNBR, INVOICE_NBR_1, INVOICE_NBR_2,	REGION, USERNAME, PASSWORD, FUNCTION,COMMENTS from era_credit_debit" ;
+	String databaseSqlQuery="select result, description, TEST_INPUT_NBR,	TIN_COUNT	,TRKNGNBR,	INVOICE_NBR_1,	INVOICE_NBR_2,	REGION,	USERNAME,	PASSWORD,	CREDIT_FLG,	DEBIT_FLG,	DISPUTE_FLG,	RESOLVE_CREDIT_FLG from era_credit_debit " ;
 	
 	if (allCheckBox.equals("true")) {
 		databaseSqlCount+="where trkngnbr is not null";
@@ -266,36 +267,54 @@ public void runDbQuery() {
 	if (customCheckBox.equals("false")) {
 	
 	if (allCheckBox.equals("false")) {
-		databaseSqlCount+="where ";
-		databaseSqlQuery+="where ";
+		databaseSqlCount+="where trkngnbr is not null and ";
+		databaseSqlQuery+="where trkngnbr is not null and ";
 	
 	
 	
 	
 	if (nullCheckBox.equals("true") && failedCheckBox.equals("true")) {
-		databaseSqlCount+="(result is null or result ='fail') ";
-		databaseSqlQuery+="(result is null or result ='fail') ";
+		databaseSqlCount+="(result is null or result ='fail') and (";
+		databaseSqlQuery+="(result is null or result ='fail') and (";
 	}
 	if (nullCheckBox.equals("true") && failedCheckBox.equals("false")) {
-		databaseSqlCount+="result is null ";
-		databaseSqlQuery+="result is null ";
+		databaseSqlCount+="result is null and (";
+		databaseSqlQuery+="result is null and (";
 	}
 	if (nullCheckBox.equals("false") && failedCheckBox.equals("true")) {
-		databaseSqlCount+="result ='fail' ";
-		databaseSqlQuery+="result ='fail' ";
+		databaseSqlCount+="result ='fail' and (";
+		databaseSqlQuery+="result ='fail' and (";
 	}
-	if (creditCheckBox.equals("true") && debitCheckBox.equals("false")) {
-		databaseSqlCount+="and function='CREDIT' ";
-		databaseSqlQuery+="and function='CREDIT' ";
+		
+	
+	if (creditCheckBox.equals("true")){
+		databaseSqlCount+=" CREDIT_FLG='Y' or ";
+		databaseSqlQuery+=" CREDIT_FLG='Y' or ";
+		kounter++;
 	}
-	if (debitCheckBox.equals("true") && creditCheckBox.equals("false")) {
-		databaseSqlCount+="and function='DEBIT' ";
-		databaseSqlQuery+="and function='DEBIT' ";
+	if (creditCheckBox.equals("true")){
+		databaseSqlCount+=" DEBIT_FLG='Y' or ";
+		databaseSqlQuery+=" DEBIT_FLG='Y' or ";
+		kounter++;
 	}
-	if (creditCheckBox.equals("true") && debitCheckBox.equals("true")) {
-		databaseSqlCount+="and function in ('CREDIT','DEBIT')";
-		databaseSqlQuery+="and function in ('CREDIT','DEBIT')";
+	if (creditCheckBox.equals("true")){
+		databaseSqlCount+=" DISPUTE_FLG='Y' or ";
+		databaseSqlQuery+=" DISPUTE_FLG='Y' or ";
+		kounter++;
 	}
+	if (creditCheckBox.equals("true")){
+		databaseSqlCount+=" RESOLVE_CREDIT_FLG='Y' ";
+		databaseSqlQuery+=" RESOLVE_CREDIT_FLG='Y' ";
+		
+	}
+	
+	databaseSqlCount+=")";
+	databaseSqlQuery+=")";
+	if ( kounter<=2 ) {
+		databaseSqlQuery = databaseSqlQuery.replace("or", "");
+		databaseSqlCount = databaseSqlCount.replace("or", "");
+	}
+
 	
 		}
 			}
@@ -304,7 +323,7 @@ public void runDbQuery() {
 		databaseSqlQuery+="where trkngnbr is not null and "+customString;
 	}
 	
-	
+	System.out.println(databaseSqlCount);
 
    	try {
      		
@@ -485,10 +504,8 @@ public synchronized Object[][] dataProviderMethod4() {
 
 }
 @Test(dataProvider="data-provider1",retryAnalyzer = Retry.class)
-public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region ,String login ,String password,String function,String comments,int rowNumber) throws InterruptedException {
+public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg, String resolveCreditFlg,int rowNumber) throws InterruptedException {
  
-	
-	System.out.println("Instance: 1");
 	
 	System.out.println(result);
 	System.out.println(descripiton);
@@ -498,11 +515,10 @@ public void testMethod1(String result, String descripiton,String testInputNbr,St
 	System.out.println(invoiceNbr1);
 	System.out.println(invoiceNbr2);
 	System.out.println(region);
-	System.out.println(login);
+	
 	System.out.println(password);
 	System.out.println(rowNumber);
-	System.out.println(function);
-	System.out.println(comments);
+	
 	
 	//Will Check if Trk is already successful;
 	  try {
@@ -578,16 +594,16 @@ public void testMethod1(String result, String descripiton,String testInputNbr,St
 	
 	
 	wait1 = new WebDriverWait(driver1,20);
-    login(driver1,wait1,login,password);
+    login(driver1,wait1,username,password);
   
-    doCreditDebit(driver1,wait1, result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,  region , login , password, function, comments , rowNumber, 1);
+   // doCreditDebit(driver1,wait1, result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,  region , username , password,  creditFlg, debitFlg, disputeFlg, resolveCreditFlg,rowNumber,1);
     
 
 
 }
 
 @Test(dataProvider="data-provider2",retryAnalyzer = Retry.class)
-public void testMethod2( String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region ,String login ,String password,String function,String comments,int rowNumber) {
+public void testMethod2(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg, String resolveCreditFlg,int rowNumber) {
  
 	System.out.println("Instance: 2");
 	
@@ -650,10 +666,10 @@ public void testMethod2( String result, String descripiton,String testInputNbr,S
     	}
 	}
 	 wait2 = new WebDriverWait(driver2,20);
-	login(driver2,wait2,login,password);
+	login(driver2,wait2,username,password);
     try {
-    //	doRebill(driver2,wait2, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber, originLoc, destLoc, dimVol, shipperRef, recpAddress, shipperAddress, acctNbrDelStatus, svcBase,  creditCardDtl, preRateScenarios, expPieces, expActualWeight, expAdjWeight, creditCardDt,2);
-	} catch (InterruptedException e) {
+    //	doCreditDebit(driver2,wait2, result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,  region , username , password,  creditFlg, debitFlg, disputeFlg, resolveCreditFlg,rowNumber,2);
+	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
@@ -662,7 +678,7 @@ public void testMethod2( String result, String descripiton,String testInputNbr,S
 
 }
 @Test(dataProvider="data-provider3",retryAnalyzer = Retry.class)
-public void testMethod3( String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region ,String login ,String password,String function,String comments,int rowNumber) {
+public void testMethod3( String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg, String resolveCreditFlg,int rowNumber) {
 	System.out.println("Instance: 3");
 	
 	
@@ -724,10 +740,10 @@ public void testMethod3( String result, String descripiton,String testInputNbr,S
 	}
 	
 	 wait3 = new WebDriverWait(driver3,20);
-login(driver3,wait3,login,password);
+login(driver3,wait3,username,password);
 try {
-	//doRebill(driver3,wait3, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber, originLoc, destLoc, dimVol, shipperRef, recpAddress, shipperAddress, acctNbrDelStatus, svcBase,  creditCardDtl, preRateScenarios, expPieces, expActualWeight, expAdjWeight, creditCardDt,3);
-} catch (InterruptedException e) {
+//	doCreditDebit(driver3,wait3, result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,  region , username , password,  creditFlg, debitFlg, disputeFlg, resolveCreditFlg,rowNumber,3);
+} catch (Exception e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
@@ -740,7 +756,7 @@ try {
 
 
 @Test(dataProvider="data-provider4",retryAnalyzer = Retry.class)
-public void testMethod4(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region ,String login ,String password,String function,String comments,int rowNumber) {
+public void testMethod4(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg, String resolveCreditFlg,int rowNumber) {
 	System.out.println("Instance: 4");
 	//Will Check if Trk is already successful;
 	
@@ -801,10 +817,10 @@ public void testMethod4(String result, String descripiton,String testInputNbr,St
 	}
 	
 	 wait4 = new WebDriverWait(driver4,20);
-login(driver4,wait4,login,password);
+login(driver4,wait4,username,password);
 try {
-	//doRebill(driver4,wait4, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber, originLoc, destLoc, dimVol, shipperRef, recpAddress, shipperAddress, acctNbrDelStatus, svcBase,  creditCardDtl, preRateScenarios, expPieces, expActualWeight, expAdjWeight, creditCardDt,4);
-} catch (InterruptedException e) {
+	//doCreditDebit(driver4,wait4, result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,  region , username , password,  creditFlg, debitFlg, disputeFlg, resolveCreditFlg,rowNumber,4);
+} catch (Exception e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
 	}
@@ -884,14 +900,14 @@ public String[] validateResults(String temp) {
 
 
 
-public void login(WebDriver driver,WebDriverWait wait,String login,String password) {
+public void login(WebDriver driver,WebDriverWait wait,String username,String password) {
 	
 	try {
 	    driver.get(levelUrl);
 	    driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
 		wait = new WebDriverWait(driver,waitTime);
 		driver.manage().window().maximize();
-		driver.findElement(By.id("username")).sendKeys(login);
+		driver.findElement(By.id("username")).sendKeys(username);
 		driver.findElement(By.id("password")).sendKeys(password);
 		driver.findElement(By.id("submit")).click();
 	}
@@ -905,9 +921,7 @@ public void login(WebDriver driver,WebDriverWait wait,String login,String passwo
 }
 
 
-
-
-public void doCreditDebit(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2, String region ,String login ,String password,String function,String comments,int rowNumber, int instanceNumber) {
+public void doCreditDebit(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2, String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg,String resolveCreditFlg,int rowNumber, int instanceNumber) {
 	WebElement element=null;
 	JavascriptExecutor js= (JavascriptExecutor) driver;
 	

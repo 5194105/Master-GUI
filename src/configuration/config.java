@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 public class config {
 	
-	Connection rtmCon,gtmRevToolsCon,ciCon,oreL2Con,oreL3Con,ecL2Con,ecL3Con,eraL2Con,eraL3Con;
+	Connection rtmCon,gtmRevToolsCon,ciCon,oreL2Con,oreL3Con,ecL2Con,ecL3Con,eraL2Con,eraL3Con,oracleARL3Con;
 	String chromeSetProperty,ieSetProperty,chromePath,ieDriverPath;
 	WebDriver ieDriver,chromeDriver,tempWebDriver;
     String gtmDbUsername,gtmDbResults,gtmDbPassword,retryAttempts,secondTimeout,rebillL2URL,rebillL3URL;
@@ -84,7 +84,7 @@ public class config {
     String eraWorkable;
     
     String eraMassRerate;
-    
+    String resolveCreditCheckBox,disputeCheckBox;
 	public config() {
 		
 	}
@@ -1089,13 +1089,33 @@ public void setEraL3DbConnection(String username,String password) {
 	
 }
 
+
+
+
+
+
 public Connection getEraL3DbConnection() {
 
 	return eraL3Con;
 }
 
+public void setOracleARL3DbConnection(String username,String password) {
+	
 
+	String url="jdbc:oracle:thin:@ldap://hdsoid.ute.fedex.com:3060/ENBL_SVC1_LVL3,CN=OracleContext,DC=ute,DC=fedex,DC=com";
+		try {
+			//Class.forName("oracle.jdbc.driver.OracleDriver");
+		    oracleARL3Con=DriverManager.getConnection(url,username,password);
+		} catch (SQLException e) {
+			System.out.println(e);
+			e.printStackTrace();
+		}
+}
 
+public Connection getOracleARL3DbConnection() {
+
+	return oracleARL3Con;
+}
 
 public void setLparDate(String lparDate) {
 	
@@ -1553,8 +1573,30 @@ public void setEraMassRerate(String eraMassRerate){
 public String getEraMassRerate(){
 	return eraMassRerate;
 }
+
+
+
+public void setDisputeCheckBox(String disputeCheckBox){
+	this.disputeCheckBox=disputeCheckBox;
 }
 
+
+
+public String getDisputeCheckBox(){
+	return disputeCheckBox;
+}
+
+
+public void setResolveCreditCheckBox(String resolveCreditCheckBox){
+	this.resolveCreditCheckBox=resolveCreditCheckBox;
+}
+
+
+
+public String getResolveCreditCheckBox(){
+	return resolveCreditCheckBox;
+}
+}
 
 //jdbc:oracle:thin:@<host>:<port>:<SID>
 
