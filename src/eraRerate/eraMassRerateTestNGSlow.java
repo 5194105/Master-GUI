@@ -147,7 +147,7 @@ public class eraMassRerateTestNGSlow {
 		ResultSetMetaData rsmd=null;
 
     	String databaseSqlCount="select count(*) as total from era_rerate_mass ";
-    	String databaseSqlQuery="select  result,  DESCRIPTION, test_Input_Nbr, tin_Count, trkngnbr, invoice_Nbr_1, invoice_Nbr_2, region, username , password,  temp_rate_weight,wgt_type,temp_length,temp_height,temp_width,dim_type, rerate_type, rs_Type ,company  , mass_rerate_combo from era_rerate_mass ";
+    	String databaseSqlQuery="select  result,  DESCRIPTION, test_Input_Nbr, tin_Count, trkngnbr, invoice_Nbr_1, invoice_Nbr_2, region, username , password,  rate_weight,wgt_type,length,height,width,dim_type, rerate_type, rs_Type ,company  , mass_rerate_combo from era_rerate_mass ";
     	
     	
    	     
@@ -492,8 +492,8 @@ public class eraMassRerateTestNGSlow {
 	    
 	    
 	    @Test(dataProvider="data-provider1",retryAnalyzer = Retry.class)
-	    public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region,String username ,String password,String temp_rate_weight,String wgt_type,String temp_length,String temp_height,String temp_width,String dim_type,String rerate_type,String rsType ,String company ,String mass_rerate_combo,int rowNumber) {
-	    	String databaseSqlQuery="select  result,  DESCRIPTION, test_Input_Nbr, tin_Count, trkngnbr, invoice_Nbr_1, invoice_Nbr_2, region, username , password,  temp_rate_weight,wgt_type,temp_length,temp_height,temp_width,dim_type rerate_type, rs_Type ,company  , mass_rerate_combo from era_rerate_mass ";
+	    public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region,String username ,String password,String rate_weight,String wgt_type,String length,String height,String width,String dim_type,String rerate_type,String rsType ,String company ,String mass_rerate_combo,int rowNumber) {
+	    	String databaseSqlQuery="select  result,  DESCRIPTION, test_Input_Nbr, tin_Count, trkngnbr, invoice_Nbr_1, invoice_Nbr_2, region, username , password,  rate_weight,wgt_type,length,height,width,dim_type rerate_type, rs_Type ,company  , mass_rerate_combo from era_rerate_mass ";
 	    	
 	    	System.out.println("Instance: 1");
 	    	
@@ -507,8 +507,8 @@ public class eraMassRerateTestNGSlow {
 	    	System.out.println(region+": "+region);
 	    	System.out.println(username+": "+username);
 	    	System.out.println(password+": "+password);
-	    	System.out.println(temp_length+": "+temp_length);
-	    	System.out.println(temp_rate_weight+": "+temp_rate_weight);
+	    	System.out.println(length+": "+length);
+	    	System.out.println(rate_weight+": "+rate_weight);
 	    	System.out.println(rerate_type+": "+rerate_type);
 	    	System.out.println(rsType+": "+rsType);
 	    	System.out.println(company+": "+company);	
@@ -597,7 +597,7 @@ public class eraMassRerateTestNGSlow {
 		  
 		    try {    
 		        
-		    	doMassRerate(driver1,wait1,  result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2, region , username , password,temp_rate_weight,wgt_type,temp_length,temp_height,temp_width,dim_type,rerate_type, rsType , company,mass_rerate_combo, rowNumber,1);
+		    	doMassRerate(driver1,wait1,  result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2, region , username , password,rate_weight,wgt_type,length,height,width,dim_type,rerate_type, rsType , company,mass_rerate_combo, rowNumber,1);
 				} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -608,7 +608,7 @@ public class eraMassRerateTestNGSlow {
 	    }
 	    
 	    @Test(dataProvider="data-provider2",retryAnalyzer = Retry.class)
-	    public void testMethod2(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region,String username ,String password,String temp_rate_weight,String wgt_type,String temp_length,String temp_height,String temp_width,String dim_type,String rerate_type,String rsType ,String company ,String mass_rerate_combo,int rowNumber) {
+	    public void testMethod2(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region,String username ,String password,String rate_weight,String wgt_type,String length,String height,String width,String dim_type,String rerate_type,String rsType ,String company ,String mass_rerate_combo,int rowNumber) {
 	     
 	    	System.out.println("Instance: 2");
 	    	
@@ -621,8 +621,8 @@ public class eraMassRerateTestNGSlow {
 	    	System.out.println(invoiceNbr2);
 	    	System.out.println(username);
 	    	System.out.println(password);
-	    	System.out.println(temp_length);
-	    	System.out.println(temp_rate_weight);
+	    	System.out.println(length);
+	    	System.out.println(rate_weight);
 	    	System.out.println(rerate_type);
 	    	System.out.println(rsType);
 	    	System.out.println(company);	
@@ -711,7 +711,7 @@ public class eraMassRerateTestNGSlow {
 		  
 		    try {    
 		        
-		    	doMassRerate(driver2,wait2,  result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2, region , username , password,temp_rate_weight,wgt_type,temp_length,temp_height,temp_width,dim_type,rerate_type, rsType , company,mass_rerate_combo, rowNumber,2);
+		    	doMassRerate(driver2,wait2,  result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2, region , username , password,rate_weight,wgt_type,length,height,width,dim_type,rerate_type, rsType , company,mass_rerate_combo, rowNumber,2);
 				} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -723,7 +723,7 @@ public class eraMassRerateTestNGSlow {
 	    
 	    
 	    @Test(dataProvider="data-provider3",retryAnalyzer = Retry.class)
-	    public void testMethod3(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region,String username ,String password,String temp_rate_weight,String wgt_type,String temp_length,String temp_height,String temp_width,String dim_type,String rerate_type,String rsType ,String company ,String mass_rerate_combo,int rowNumber) {
+	    public void testMethod3(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region,String username ,String password,String rate_weight,String wgt_type,String length,String height,String width,String dim_type,String rerate_type,String rsType ,String company ,String mass_rerate_combo,int rowNumber) {
 	     
 	    	System.out.println("Instance: 3");
 	    	
@@ -736,8 +736,8 @@ public class eraMassRerateTestNGSlow {
 	    	System.out.println(invoiceNbr2);
 	    	System.out.println(username);
 	    	System.out.println(password);
-	    	System.out.println(temp_length);
-	    	System.out.println(temp_rate_weight);
+	    	System.out.println(length);
+	    	System.out.println(rate_weight);
 	    	System.out.println(rerate_type);
 	    	System.out.println(rsType);
 	    	System.out.println(company);	
@@ -826,7 +826,7 @@ public class eraMassRerateTestNGSlow {
 		  
 		    try {    
 		        
-		    	doMassRerate(driver3,wait3,  result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2, region , username , password,temp_rate_weight,wgt_type,temp_length,temp_height,temp_width,dim_type,rerate_type, rsType , company,mass_rerate_combo, rowNumber,3);
+		    	doMassRerate(driver3,wait3,  result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2, region , username , password,rate_weight,wgt_type,length,height,width,dim_type,rerate_type, rsType , company,mass_rerate_combo, rowNumber,3);
 					} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -837,7 +837,7 @@ public class eraMassRerateTestNGSlow {
 	    }
 	   
 	    @Test(dataProvider="data-provider4",retryAnalyzer = Retry.class)
-	    public void testMethod4(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region,String username ,String password,String temp_rate_weight,String wgt_type,String temp_length,String temp_height,String temp_width,String dim_type,String rerate_type,String rsType ,String company ,String mass_rerate_combo,int rowNumber) {
+	    public void testMethod4(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region,String username ,String password,String rate_weight,String wgt_type,String length,String height,String width,String dim_type,String rerate_type,String rsType ,String company ,String mass_rerate_combo,int rowNumber) {
 	     
 	    	System.out.println("Instance: 4");
 	    	
@@ -850,8 +850,8 @@ public class eraMassRerateTestNGSlow {
 	    	System.out.println(invoiceNbr2);
 	    	System.out.println(username);
 	    	System.out.println(password);
-	    	System.out.println(temp_length);
-	    	System.out.println(temp_rate_weight);
+	    	System.out.println(length);
+	    	System.out.println(rate_weight);
 	    	System.out.println(rerate_type);
 	    	System.out.println(rsType);
 	    	System.out.println(company);	
@@ -939,7 +939,7 @@ public class eraMassRerateTestNGSlow {
 		    login(driver4,wait4,username,password);
 		  
 		    try {    
-				doMassRerate(driver4,wait4, result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2, region , username , password,temp_rate_weight,wgt_type,temp_length,temp_height,temp_width,dim_type,rerate_type, rsType , company,mass_rerate_combo, rowNumber,4);
+				doMassRerate(driver4,wait4, result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2, region , username , password,rate_weight,wgt_type,length,height,width,dim_type,rerate_type, rsType , company,mass_rerate_combo, rowNumber,4);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -960,7 +960,7 @@ public class eraMassRerateTestNGSlow {
 				wait = new WebDriverWait(driver,waitTime);
 				driver.manage().window().maximize();
 				
-										//	 /html/body/div[2]/div[2]/main/div[2]/div/div/form/div[1]/div[2]/div[1]/div[2]/span/input					
+				//	 /html/body/div[2]/div[2]/main/div[2]/div/div/form/div[1]/div[2]/div[1]/div[2]/span/input					
 				//driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[2]/div/div/form/div[1]/div[2]/div[1]/div[2]/span/input")).sendKeys(login);
 				//driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[2]/div/div/form/div[1]/div[2]/div[2]/div[2]/span/input")).sendKeys(password);
 				//driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/div[2]/div/div/form/div[2]/input")).click();
@@ -975,8 +975,22 @@ public class eraMassRerateTestNGSlow {
 	    	}
 	    }
 		
-	    public void doMassRerate(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region,String username ,String password,String temp_rate_weight,String wgt_type,String temp_length, String temp_height, String temp_width,String dim_type, String rerate_type,String rsType ,String company ,String mass_rerate_combo,int rowNumber, int instanceNumber) throws InterruptedException {
-	    
+	    public void doMassRerate(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region,String username ,String password,String rate_weight,String wgt_type,String length, String height, String width,String dim_type, String rerate_type,String rsType ,String company ,String mass_rerate_combo,int rowNumber, int instanceNumber) throws InterruptedException {
+
+
+	    	if (rerate_type.equals("NA")) {
+	    		 if(source.equals("excel")) {
+	               //	 writeToExcel(rowNumber, 0,"fail");
+	               	// writeToExcel(rowNumber, 1,"Prerate Code Not Added Yet");
+	               	 }
+	   				 if(databaseDisabled.equals("false")) {
+     	   			 String[] resultArray = new String[2];
+     	   			 	resultArray[0]="fail";
+     	   				resultArray[1]="Not Info Info For Test Case";
+     	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                    	 }
+    	return;	
+	    	}
 	    	
 	   	   System.out.println("Inside of doMassRerate");
 	    	System.out.println("result: "+result);
@@ -990,11 +1004,11 @@ public class eraMassRerateTestNGSlow {
 	    	System.out.println("username: "+username);
 	    	System.out.println("password: "+password);
 	    	
-	    	System.out.println("temp_rate_weight: "+temp_rate_weight);
+	    	System.out.println("rate_weight: "+rate_weight);
 	    	System.out.println("wgt_type: "+wgt_type);
-	    	System.out.println("temp_length: "+temp_length);
-	    	System.out.println("temp_height: "+temp_height);
-	    	System.out.println("temp_width: "+temp_width);
+	    	System.out.println("length: "+length);
+	    	System.out.println("height: "+height);
+	    	System.out.println("width: "+width);
 	    	System.out.println("dim_type: "+dim_type);
 	    	System.out.println("rerate_type: "+rerate_type);
 	    	System.out.println("rsType: "+rsType);
@@ -1053,7 +1067,7 @@ public class eraMassRerateTestNGSlow {
 	        case "weight" :
 	        		
 	        	driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[3]/div[1]/div/div/div/div/div/select/option[3]")).click();
-	        		driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[3]/div[2]/div/div/input")).sendKeys(temp_rate_weight);
+	        		driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[3]/div[2]/div/div/input")).sendKeys(rate_weight);
 	        		
 	        		if (wgt_type.equals("LB")) {
 	        		driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[4]/div[3]/div[1]/div/label/span")).click();
@@ -1065,11 +1079,11 @@ public class eraMassRerateTestNGSlow {
 	        		break;
 	        
 	        //Dims
-	        case "dims" :
+	        case "dim" :
 	        		driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[3]/div[1]/div/div/div/div/div/select/option[4]")).click();
-	        		driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[4]/div[2]/div/div/div/div[1]/div/input")).sendKeys(temp_length);
-	        		driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[4]/div[2]/div/div/div/div[2]/div/input")).sendKeys(temp_width);
-	        		driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[4]/div[2]/div/div/div/div[3]/div/input")).sendKeys(temp_height);
+	        		driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[4]/div[2]/div/div/div/div[1]/div/input")).sendKeys(length);
+	        		driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[4]/div[2]/div/div/div/div[2]/div/input")).sendKeys(width);
+	        		driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[4]/div[2]/div/div/div/div[3]/div/input")).sendKeys(height);
 	        		
 	        		if (dim_type.equals("IN")) {
 	        		driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[4]/div[4]/div[1]/div/label/span")).click();
@@ -1080,7 +1094,7 @@ public class eraMassRerateTestNGSlow {
 	        		break;
 	        
     		//service
-	        case "service change" :
+	        case "service" :
 	        		//driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[3]/div[1]/div/div/div/div/div/select/option[5]")).click();
 	        		
 	        		driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[3]/div[3]/div/div/div/div/div/select/optgroup[5]/option[2]")).click();

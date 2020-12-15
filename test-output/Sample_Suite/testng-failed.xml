@@ -2,28 +2,34 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Sample_Suite]">
   <parameter name="nullCheckBox" value="true"/>
-  <parameter name="customCheckBox" value="true"/>
-  <parameter name="allCheckBox" value="false"/>
-  <parameter name="filepath" value="C:\Users\FedExUser\Documents\rebill.xlsx"/>
   <parameter name="level" value="3"/>
-  <parameter name="sessionCount" value="1"/>
-  <parameter name="failedCheckBox" value="false"/>
-  <parameter name="browser" value="2"/>
+  <parameter name="failedCheckBox" value="true"/>
+  <parameter name="groundCheckBox" value="true"/>
   <parameter name="source" value="db"/>
-  <parameter name="databaseDisabled" value="false"/>
   <parameter name="compatibleMode" value=""/>
-  <parameter name="customString" value="rerate_type=&#039;service&#039;"/>
-  <test thread-count="5" parallel="methods" name="era Rerate Test(failed)">
+  <parameter name="eraWorkable" value="true"/>
+  <parameter name="headless" value="false"/>
+  <parameter name="customCheckBox" value="true"/>
+  <parameter name="expressCheckBox" value="true"/>
+  <parameter name="allCheckBox" value="false"/>
+  <parameter name="filepath" value="C:\Users\FedExUser\Desktop\stephen\R66\L3C6\rebill.xlsx"/>
+  <parameter name="sessionCount" value="1"/>
+  <parameter name="domesticCheckBox" value="true"/>
+  <parameter name="browser" value="2"/>
+  <parameter name="databaseDisabled" value="false"/>
+  <parameter name="internationalCheckBox" value="true"/>
+  <parameter name="customString" value="region=&#039;USA&#039; and company=&#039;EP&#039;"/>
+  <test thread-count="5" parallel="methods" name="Rebill Test(failed)">
     <classes>
-      <class name="eraRerate.eraRerateTestNGSlow">
+      <class name="rebill.testngRebillFast">
         <methods>
           <include name="setupExcel"/>
+          <include name="testMethod1" invocation-numbers="2 2 2 2 10 10 10 10 13 13 13 13 14 14 14 14 15 15 15 15 24 24 24 24 28 28 28 28 33 33 33 33 38 38 38 38 66 66 66 66 67 67 67 67 69 69 69 69 70 70 70 70 71 71 71 71 72 72 79"/>
+          <include name="testMethod2"/>
           <include name="testMethod3"/>
           <include name="testMethod4"/>
-          <include name="testMethod1" invocation-numbers="0 0 0 0 1 1 1 1 2 2 2 2 3 3 3 3"/>
-          <include name="testMethod2"/>
         </methods>
-      </class> <!-- eraRerate.eraRerateTestNGSlow -->
+      </class> <!-- rebill.testngRebillFast -->
     </classes>
-  </test> <!-- era Rerate Test(failed) -->
+  </test> <!-- Rebill Test(failed) -->
 </suite> <!-- Failed suite [Sample_Suite] -->
