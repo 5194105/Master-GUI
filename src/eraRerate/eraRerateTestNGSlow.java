@@ -756,7 +756,7 @@ public class eraRerateTestNGSlow {
     	
     	wait=new WebDriverWait(driver,20);
     	driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
-    	 
+    	 /*
     	if(rerateType.equals("service")) {
         	 
     		 if(source.equals("excel")) {
@@ -772,7 +772,7 @@ public class eraRerateTestNGSlow {
 	   				Assert.fail("Failed on Service Change");
     	}
     	
-    	
+    	*/
     	
     	try {
     	//In order for clear button to be clickable need to scroll up
@@ -985,11 +985,103 @@ public class eraRerateTestNGSlow {
     			 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[2]/div[3]/div/div/input")).sendKeys(actualWeight);
     	    		 }
     	 }
+     }
+     
+     if(rerateType.contains("dim")) {
+    	 
+    	
+    	 if (!length.equals("")) {
+    		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[4]/div[2]/div[1]/div/input")).clear();	
+    		 Thread.sleep(1000);
+    		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[4]/div[2]/div[1]/div/input")).sendKeys(length);
+    	 }
+    	 if (!width.equals("")) {
+    		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[4]/div[3]/div[1]/div/input")).clear();	
+    		 Thread.sleep(1000);
+    		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[4]/div[3]/div[1]/div/input")).sendKeys(width);
+    	 }
+    	 if (!height.equals("")) {
+    		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[4]/div[4]/div[1]/div/input")).clear();	
+    		 Thread.sleep(1000);
+    		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[4]/div[4]/div[1]/div/input")).sendKeys(height);
+    	 }
+    	 
+    	 if (!dimType.equals("")) {
+    		 if (dimType.equals("LB")) {
+    			 driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[5]/div[2]/div/div/label/span")).click();
+    			
+    			 
+    		 }
+    		 if (dimType.equals("CM")) {
+    			 driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[5]/div[3]/div/div/label/span")).click();
+    			
+    			 
+    		 }
+    	 }
+    	 
+    	 
+     }
+     
+     
+     if(rerateType.contains("payor")) {
+    	 if (payor.equals("1")) {
+    		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[3]/div[2]/div[1]/div/label/span")).click();
+    		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[3]/div[2]/div[2]/div/input")).clear();	
+    		 Thread.sleep(1000);
+    		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[3]/div[2]/div[2]/div/input")).sendKeys(billAcctNbr);
+    	 }
+    	 if (payor.equals("2")) {
+    		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[3]/div[3]/div[1]/div/label/span")).click();
+    		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[3]/div[3]/div[2]/div/input")).clear();	
+    		 Thread.sleep(1000);
+    		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[3]/div[3]/div[2]/div/input")).sendKeys(billAcctNbr);
+    	 }
+    	 if (payor.equals("3")) {
+    		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[3]/div[4]/div[1]/div/label/span")).click();
+    		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[3]/div[4]/div[2]/div/input")).clear();	
+    		 Thread.sleep(1000);
+    		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[3]/div[4]/div[2]/div/input")).sendKeys(billAcctNbr);
+    	 }
+     
+     }
+     if(rerateType.contains("service")) {
+    	 
+    	Select sel = new Select(driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div[3]/div/div/div/select")));
+    	sel.selectByVisibleText(svcName);
+     }
+     
      
      //Click Rerate
      driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[4]/div/button[1]")).click();
     
      //Check Popup
+     
+     try {
+    	
+    	// System.out.println("GETTING ERRROR!!!! "+driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[1]/div/div[2]/form/div[1]/div[1]")).getText());
+    	 System.out.println("GETTING ERRROR!!!! "+driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[3]/div[2]/div/div/div/div[1]/div[2]/div/div[1]/div/div/div")).getText());
+    	
+     }
+     catch(Exception e) {
+    	 
+    	 
+    	 
+    	 if(source.equals("excel")) {
+           	 writeToExcel(rowNumber, 0,"fail");
+           	 writeToExcel(rowNumber, 1,"After Rerate Click No Data Came -- Unknown Error");
+           	 }
+    			 if(databaseDisabled.equals("false")) {
+       			 String[] resultArray = new String[2];
+       			 	resultArray[0]="fail";
+       				resultArray[1]="After Rerate Click No Data Came -- Unknown Error";
+       				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+            	 }
+    		
+    		Assert.fail("After Rerate Click No Data Came -- Unknown Error");
+    	 
+    	 System.out.println("Cannot Find Popup");
+     }
+     
      
      String errorMessage="";
      try {
@@ -1010,36 +1102,113 @@ public class eraRerateTestNGSlow {
         	// overrideBoolean=true;
       // }
 	 }
-	//popupCounter++;
- //}
+ if(!errorMessage.equals("")) {
+	 if(source.equals("excel")) {
+       	 writeToExcel(rowNumber, 0,"fail");
+       	 writeToExcel(rowNumber, 1,errorMessage);
+       	 }
+			 if(databaseDisabled.equals("false")) {
+   			 String[] resultArray = new String[2];
+   			 	resultArray[0]="fail";
+   				resultArray[1]=errorMessage;
+   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+        	 }
+		
+		Assert.fail(errorMessage);
+ }
      }
      catch(Exception e) {
     	 System.out.println("no popup errors");
      }
      
-     if(!errorMessage.equals("")) {
-    	 if(source.equals("excel")) {
-           	 writeToExcel(rowNumber, 0,"fail");
-           	 writeToExcel(rowNumber, 1,errorMessage);
-           	 }
-				 if(databaseDisabled.equals("false")) {
-	   			 String[] resultArray = new String[2];
-	   			 	resultArray[0]="fail";
-	   				resultArray[1]=errorMessage;
-	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-            	 }
-    		
- 		Assert.fail(errorMessage);
-     }
+
      
    
      
      //Click Continue 
      driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[4]/div/button[3]")).click();
     
-    
+     
      String getText =  driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[3]/select[1]")).getText();
      System.out.println(getText);
+     
+     
+     //click process
+    
+     driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[9]/div[1]/button")).click();
+    
+     //Click Continue
+     driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div/div/div[3]/div[3]/button[2]")).click();
+     
+     
+     try{
+    	 //Click on rebill RPI Complete, Phone, and Continue
+          if (username.equals("5194105")){
+        	  driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/label[1]")).click();
+          }
+      
+          
+       Select contactMethodDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"rmrks\"]")));
+       contactMethodDropDown.selectByValue("phone");  
+       Thread.sleep(1500);
+ 	   driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).click();
+     }
+     catch(Exception e1) {
+    	 System.out.println("Failed Selecting Contact Method and Clicking Continue");
+     
+    	 if(source.equals("excel")) {
+        	 writeToExcel(rowNumber, 0,"fail");
+        	 writeToExcel(rowNumber, 1,"Failed Selecting Contact Method and Clicking Continue");
+        	return;
+        	 }
+			 if(databaseDisabled.equals("false")) {
+   			 String[] resultArray = new String[2];
+   			 	resultArray[0]="fail";
+   				resultArray[1]="Failed Selecting Contact Method and Clicking Continue";
+   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+   				
+         	 } 
+			 Assert.fail("Failed Selecting Contact Method and Clicking Continue");
+     }
+     
+     
+     
+     try {
+	    	if (databaseDisabled.equals("false")) {
+	    
+	  		  String[] resultArray = validateResults(trk);
+	  	  if ( resultArray[0].equals("pass")){
+	       	 if(source.equals("excel")) {
+	       	 writeToExcel(rowNumber, 0,"pass");
+	       	 writeToExcel(rowNumber, 1,"completed");
+	       	
+	       	 }
+	       	 writeToDB(testInputNbr,tinCount,trk,resultArray);
+	       	 return;
+	  	  
+	  	  			}
+	  	  
+	  	  
+	  	  Thread.sleep(15000);
+	  	  //Check for Denied
+	  	if ( resultArray[0].equals("fail")){
+	  		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/ul/li[6]/a")).click();
+	  		 if (driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div")).getText().contains("DN")) {
+	  			 
+	   			 	resultArray[0]="fail";
+	   				resultArray[1]="Denied";
+	   				writeToDB(testInputNbr,tinCount,trk,resultArray);
+	   				
+	  		 } 
+return;
+	  	}
+	  		
+	    		}
+	  	  }
+	    
+	  	  catch(Exception e) {
+	  		System.out.println(e);  
+	  	  }
      
     	 }
      
@@ -1145,7 +1314,7 @@ public class eraRerateTestNGSlow {
           }
              */
              
-        }
+        
     
     
     
@@ -1231,7 +1400,7 @@ public class eraRerateTestNGSlow {
     	ResultSet rs = null;
     	try {
     		
-    		stmt=con.prepareStatement("select * from XXFDX.xxfdx_ar_ADjUSTMENTS_data where airbill_number=?");  
+    		stmt=con.prepareStatement("select * from XXFDX.FDX_AR_ADJUSTMENT_IRDT where AIRBILL_NBR=?");  
 			stmt.setString(1,trk);  
 			rs = stmt.executeQuery();
     	} catch (SQLException e) {
