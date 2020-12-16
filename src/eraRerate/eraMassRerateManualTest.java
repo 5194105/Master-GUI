@@ -33,7 +33,7 @@ public class eraMassRerateManualTest {
 	
 	//You can give custom query if want to
 	c.setCustomCheckBox("true");
-	c.setCustomString("company='GD'");
+	c.setCustomString("trkngnbr in ('794991209900','794991202695')");
 
 	
 	String filepath=c.getExcelPath();
