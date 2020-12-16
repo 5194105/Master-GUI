@@ -853,6 +853,36 @@ public class eraRerateTestNGSlow {
      	}
     	
     	
+    	/////NEW CODE TO VERIFY
+    	System.out.println();
+    	try {                              
+	  		if (driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/ul/li[6]")).getAttribute("class").contains("disabled")){	
+	  		System.out.println("Is Not Enabled");
+	  		}
+	  		else if (!driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/ul/li[6]")).getAttribute("class").contains("disabled")) {
+	  			
+		  		System.out.println("Is Not enabled");
+		  		
+    		driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/ul/li[6]")).click();
+	  		 if (driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div")).getText().contains(" CR ")) {
+	  			 String[] resultArray = new String[2];
+	   			 	resultArray[0]="pass";
+	   				resultArray[1]="completed";
+	   				writeToDB(testInputNbr,tinCount,trk,resultArray);
+	   				return;
+	  		 } 
+	  		 else {
+	  			 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/ul/li[1]/a")).click();
+	  		 }
+	  			
+	  		 }
+    	}
+    	catch(Exception e) {
+    		System.out.println("Code for Remarks 1");
+    		
+    	}
+    	
+    	
     	
     	//Getting all the charge codes..
     	try{
@@ -1122,7 +1152,7 @@ public class eraRerateTestNGSlow {
      
 
      
-   
+     
      
      //Click Continue 
      driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[4]/div/button[3]")).click();
@@ -1131,26 +1161,52 @@ public class eraRerateTestNGSlow {
      String getText =  driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[3]/select[1]")).getText();
      System.out.println(getText);
      
-     
+     System.out.println(5000);
      //click process
     
-     driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[9]/div[1]/button")).click();
-    
+     int i=0;
+     try {
+    while (i<10) {
+    	 driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[9]/div[1]/button")).click();
+    	 i++;
+    }
+    }
+     catch(Exception e) {
+    	 
+     }
      //Click Continue
+     System.out.println(3000);
+     try {
      driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div/div/div[3]/div[3]/button[2]")).click();
-     
+     }
+     catch(Exception e) {
+    	 System.out.println(e);
+     }
      
      try{
     	 //Click on rebill RPI Complete, Phone, and Continue
           if (username.equals("5194105")){
         	  driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/label[1]")).click();
+         
+        	  Select contactMethodDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"rmrks\"]")));
+              contactMethodDropDown.selectByValue("phone");  
+              Thread.sleep(1500);  
+              driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).click();
+            
+          }
+          else {
+        	  
+        	  Select contactMethodDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"rmrks\"]")));
+              contactMethodDropDown.selectByValue("phone");  
+              Thread.sleep(1500);  
+              driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).click();
+            
           }
       
           
-       Select contactMethodDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"rmrks\"]")));
-       contactMethodDropDown.selectByValue("phone");  
-       Thread.sleep(1500);
- 	   driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).click();
+      
+     
+       
      }
      catch(Exception e1) {
     	 System.out.println("Failed Selecting Contact Method and Clicking Continue");
@@ -1173,8 +1229,9 @@ public class eraRerateTestNGSlow {
      
      
      try {
+    	 
 	    	if (databaseDisabled.equals("false")) {
-	    
+	    		Thread.sleep(5000);
 	  		  String[] resultArray = validateResults(trk);
 	  	  if ( resultArray[0].equals("pass")){
 	       	 if(source.equals("excel")) {
@@ -1199,7 +1256,13 @@ public class eraRerateTestNGSlow {
 	   				writeToDB(testInputNbr,tinCount,trk,resultArray);
 	   				
 	  		 } 
-return;
+	  		 else if (driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div")).getText().contains(" CR ")) {
+	  			resultArray[0]="pass";
+   				resultArray[1]="completed";
+   				writeToDB(testInputNbr,tinCount,trk,resultArray);
+   				
+	  		 }
+	  		 return;
 	  	}
 	  		
 	    		}

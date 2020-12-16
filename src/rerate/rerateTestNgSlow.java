@@ -964,6 +964,32 @@ public class rerateTestNgSlow {
 				
 				Thread.sleep(3000);
 				
+				try {
+				Alert a = driver.switchTo().alert();
+				// Get the text of the alert or prompt
+				System.out.println(a.getText());
+				// And acknowledge the alert (equivalent to clicking "OK")
+				a.accept();
+				 if(source.equals("excel")) {
+			       	 writeToExcel(testCounter, 14,"Out of Scope");
+			       	 }
+					String[] resultArray = new String[2];
+				  	resultArray[0]="fail";
+				  	resultArray[1]="Out of Scope";
+				  	if(databaseDisabled.contentEquals("false")) {
+				  	writeToDB(testInputNbr,tinCount,trk,"Out of Scope",resultArray);
+				  	}
+				  	try {
+				  	driver.quit();
+					driver.close();
+				  	}
+				  	catch(Exception e) {}
+				  	 Assert.fail("Out of Scope");
+					return;
+				}catch(Exception e) {
+					System.out.println("No out of scope Error");
+				}
+				
 				
 //This will handle account if it was actually CE but we put 9 digit account.
 if (!acctType.equals("CE Level")) {
