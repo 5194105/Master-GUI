@@ -147,11 +147,14 @@ public class updateRebillDb implements Runnable {
              }
              
 
-             PreparedStatement stmt = null;
+            PreparedStatement stmt = null;
             ResultSet rs = null;
+            PreparedStatement stmt2 = null;
+            ResultSet rs2 = null;
              try {
                     
-                    stmt=con.prepareStatement("select * from invadj_schema.rdt_rebill_request where airbill_nbr=? order by LAST_UPDT_TMSTP desc");  
+                  //  stmt=con.prepareStatement("select * from invadj_schema.rdt_rebill_request where airbill_nbr=? order by LAST_UPDT_TMSTP desc");  
+            	    stmt=con.prepareStatement("select * from invadj_schema.rdt_rebill_store where rb_trkng_nbr=?");  
                     stmt.setString(1,trk);  
                     System.out.print(trk+": ");
              } catch (SQLException e) {
@@ -170,29 +173,48 @@ public class updateRebillDb implements Runnable {
                     try {
                            if (rs.next()==false){
                                //  System.out.println("Is NULL");
-                                 resultArray[0]="fail";
-                                 resultArray[1]="Not In ERA Database";
-                                 System.out.println("Not In ERA Database");
+                                
+                        	   stmt2=con.prepareStatement("select * from invadj_schema.rdt_rebill_request where airbill_nbr=? order by LAST_UPDT_TMSTP desc");                     	  
+                               stmt2.setString(1,trk);  
+                               rs2 = stmt2.executeQuery();
+                              try {
+                            	  if (rs2.next()==false){
+                            		  resultArray[0]="fail";
+                                      resultArray[1]="Not In ERA Database";
+                                      System.out.println("Not In ERA Database");
+                            	  }
+                            	  else {
+                            		  String statusDesc = rs2.getString("STATUS_DESC");
+                                      String errorDesc = rs2.getString("ERROR_DESC");   
+                                      
+                                      if (statusDesc==null){
+                                     	 
+                                     	 statusDesc="fail";
+                                     	 errorDesc="In ERA DB But Error Not Set";
+                                      }
+                                      
+                                    if (statusDesc.equals("SUCCESS")) {
+                                          resultArray[0]="pass";
+                                          resultArray[1]="completed";
+                                    }
+                                    else {
+                                          resultArray[0]="fail";
+                                          resultArray[1]=errorDesc;
+                                    }
+                            	  }
+                              }
+                              catch(Exception e) {
+                            	  
+                              }
+                               
+                               
+                        	  
                            }
                               else{
-                                      String statusDesc = rs.getString("STATUS_DESC");
-                             String errorDesc = rs.getString("ERROR_DESC");                           
-                         //    System.out.println(statusDesc +"    "+errorDesc);
-                             System.out.println(errorDesc);
-                             if (statusDesc==null){
-                            	 
-                            	 statusDesc="fail";
-                            	 errorDesc="In ERA DB But Error Not Set";
-                             }
-                             
-                           if (statusDesc.equals("SUCCESS")) {
+                         
                                  resultArray[0]="pass";
                                  resultArray[1]="completed";
-                           }
-                           else {
-                                 resultArray[0]="fail";
-                                 resultArray[1]=errorDesc;
-                           }
+                        
                               }
                     } catch (SQLException e) {
                            // TODO Auto-generated catch block

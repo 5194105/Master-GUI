@@ -2,91 +2,28 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Sample_Suite]">
   <parameter name="nullCheckBox" value="true"/>
-  <parameter name="level" value="3"/>
-<<<<<<< HEAD
-  <parameter name="failedCheckBox" value="false"/>
-  <parameter name="nt1" value="true"/>
-  <parameter name="source" value="excel"/>
-  <parameter name="endDateText" value="12/14/2020"/>
-  <parameter name="ei1" value="true"/>
-  <parameter name="nt2" value="true"/>
-  <parameter name="compatibleMode" value="true"/>
-  <parameter name="gi1" value="true"/>
-  <parameter name="ei2" value="true"/>
-  <parameter name="gi2" value="true"/>
-  <parameter name="ed2" value="true"/>
-  <parameter name="allCheckBox" value="false"/>
-  <parameter name="startDateText" value="01/01/2020"/>
-  <parameter name="ed1" value="true"/>
-  <parameter name="filepath" value="C:\Users\5194105\Documents\rerate.xlsx"/>
-  <parameter name="gd2" value="true"/>
-  <parameter name="sp2" value="true"/>
-  <parameter name="sessionCount" value="1"/>
-  <parameter name="gd1" value="true"/>
-  <parameter name="sp1" value="true"/>
-  <parameter name="browser" value="1"/>
-  <parameter name="databaseDisabled" value="false"/>
-=======
-  <parameter name="failedCheckBox" value="true"/>
-  <parameter name="source" value="db"/>
-  <parameter name="compatibleMode" value=""/>
-  <parameter name="eraWorkable" value="false"/>
-  <parameter name="headless" value="false"/>
   <parameter name="customCheckBox" value="true"/>
   <parameter name="allCheckBox" value="false"/>
-  <parameter name="filepath" value="C:\Users\FedExUser\Desktop\stephen\R66\L3C6\rebill.xlsx"/>
+  <parameter name="filepath" value="C:\Users\FedExUser\Documents\rebill.xlsx"/>
+  <parameter name="level" value="3"/>
   <parameter name="sessionCount" value="1"/>
+  <parameter name="failedCheckBox" value="false"/>
   <parameter name="browser" value="2"/>
+  <parameter name="source" value="db"/>
   <parameter name="databaseDisabled" value="false"/>
-<<<<<<< HEAD
-  <parameter name="customString" value="trkngnbr in (&#039;794991209900&#039;,&#039;794991202695&#039;)"/>
-  <test thread-count="5" parallel="methods" name="era Mass Rerate Test(failed)">
-=======
-  <parameter name="internationalCheckBox" value="true"/>
-  <parameter name="customString" value="region=&#039;USA&#039; and company=&#039;EP&#039;"/>
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
-  <test thread-count="5" parallel="methods" name="Rebill Test(failed)">
->>>>>>> refs/remotes/origin/master
+  <parameter name="compatibleMode" value=""/>
+  <parameter name="customString" value="trkngnbr is not null and (result is null or result =&#039;fail&#039;) and description !=&#039;Denied&#039; and description not like &#039;%QC%&#039;"/>
+  <test thread-count="5" parallel="methods" name="era Rerate Test(failed)">
     <classes>
-<<<<<<< HEAD
-      <class name="eraRerate.eraMassRerateTestNGSlow">
-=======
-<<<<<<< HEAD
-      <class name="rerate.rerateTestNgSlow">
-=======
-      <class name="rebill.testngRebillFast">
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
->>>>>>> refs/remotes/origin/master
+      <class name="eraRerate.eraRerateTestNGSlow">
         <methods>
-<<<<<<< HEAD
-=======
-          <include name="testMethod2"/>
-          <include name="testMethod4"/>
           <include name="setupExcel"/>
-          <include name="testMethod1" invocation-numbers="2 2 2 2 10 10 10 10 13 13 13 13 14 14 14 14 15 15 15 15 24 24 24 24 28 28 28 28 33 33 33 33 38 38 38 38 66 66 66 66 67 67 67 67 69 69 69 69 70 70 70 70 71 71 71 71 72 72 79"/>
-          <include name="testMethod2"/>
           <include name="testMethod3"/>
-<<<<<<< HEAD
-=======
->>>>>>> refs/remotes/origin/master
           <include name="testMethod4"/>
-<<<<<<< HEAD
-          <include name="testMethod3"/>
+          <include name="testMethod1" invocation-numbers="1 1 3 3 5 5 6 8 10 10 12 12 15 15 19 21 22 24 24 25 25 26 26 27 27 30 30 33 33 34 34 36 36 37 37 40 40 41 41 42 42"/>
           <include name="testMethod2"/>
-          <include name="setupExcel"/>
-=======
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
->>>>>>> refs/remotes/origin/master
         </methods>
-<<<<<<< HEAD
-      </class> <!-- eraRerate.eraMassRerateTestNGSlow -->
-=======
-<<<<<<< HEAD
-      </class> <!-- rerate.rerateTestNgSlow -->
-=======
-      </class> <!-- rebill.testngRebillFast -->
->>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
->>>>>>> refs/remotes/origin/master
+      </class> <!-- eraRerate.eraRerateTestNGSlow -->
     </classes>
-  </test> <!-- era Mass Rerate Test(failed) -->
+  </test> <!-- era Rerate Test(failed) -->
 </suite> <!-- Failed suite [Sample_Suite] -->

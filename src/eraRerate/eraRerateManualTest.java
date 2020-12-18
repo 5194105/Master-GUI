@@ -36,7 +36,10 @@ public class eraRerateManualTest {
 		c.setSessionCount("1");
 		c.setDatabaseDisabled("false");
 		c.setCustomCheckBox("true");
-		c.setCustomString("rerate_type='service'");
+		c.setCustomString("trkngnbr is not null and description !='Denied' and (result is null or result='fail')");
+		//c.setCustomString("trkngnbr '794991429664'");
+		
+		
 		
 		//c.setCustomString("rerate_type='service'");
     	

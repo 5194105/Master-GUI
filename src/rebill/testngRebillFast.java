@@ -1408,7 +1408,25 @@ public class testngRebillFast {
                      	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
                                     	 }
              	   			 Assert.fail("Cannot Credit An AirBill For More Than The Invoice Amount Due");
-             		} 	 
+             		}
+         				 
+         				 if (tempError.indexOf("Adjustment can not be done for discount amount")==1) {
+             				 System.out.println(tempError);
+             				 if(source.equals("excel")) {
+             	               	 writeToExcel(rowNumber, 0,"fail");
+             	               	 writeToExcel(rowNumber, 1,"Adjustment can not be done for discount amount");
+             	               	 }
+             	   				 if(databaseDisabled.equals("false")) {
+                     	   			 String[] resultArray = new String[2];
+                     	   			 	resultArray[0]="fail";
+                     	   				resultArray[1]="Adjustment can not be done for discount amount";
+                     	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                                    	 }
+             	   			 Assert.fail("Adjustment can not be done for discount amount");
+             		}
+         				 
+         				 
+         				
          			
          				 
  
@@ -1870,67 +1888,81 @@ public class testngRebillFast {
     	
 
     	PreparedStatement stmt = null;
-    	ResultSet rs = null;
-    	try {
-    		
-    		stmt=con.prepareStatement("select * from invadj_schema.rdt_rebill_request where airbill_nbr=? order by LAST_UPDT_TMSTP desc");  
-			stmt.setString(1,trk);  
-			rs = stmt.executeQuery();
-    	} catch (SQLException e) {
-    		// TODO Auto-generated catch block
-    		e.printStackTrace();
-    	}
-    	      
-    	   
-    		try {
-    			rs = stmt.executeQuery();
-    		} catch (SQLException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    		}
-    	       try {
-    			if (rs.next()==false){
-    			      System.out.println("Is NULL");
-    			      resultArray[0]="fail";
-    			      resultArray[1]="Not In ERA Database";
-    			}
-    			   else{
-    				    String statusDesc = rs.getString("STATUS_DESC");
-    	                String errorDesc = rs.getString("ERROR_DESC"); 	    	                
-    	                System.out.println(statusDesc +"    "+errorDesc);
-    	                
-    	              
-    	              if (statusDesc.equals("SUCCESS")) {
-  	    			      resultArray[0]="pass";
-  	    			      resultArray[1]="completed";
-    	              } 
-    	              
-    	              else if (statusDesc==null){
-                         	 
-                         	 statusDesc="fail";
-                         	 errorDesc="In ERA DB But Error Not Set";
+        ResultSet rs = null;
+        PreparedStatement stmt2 = null;
+        ResultSet rs2 = null;
+         try {
+                
+              //  stmt=con.prepareStatement("select * from invadj_schema.rdt_rebill_request where airbill_nbr=? order by LAST_UPDT_TMSTP desc");  
+        	    stmt=con.prepareStatement("select * from invadj_schema.rdt_rebill_store where rb_trkng_nbr=?");  
+                stmt.setString(1,trk);  
+                System.out.print(trk+": ");
+         } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+         }
+               
+            
+                try {
+                       rs = stmt.executeQuery();
+                       
+                } catch (SQLException e) {
+                       // TODO Auto-generated catch block
+                       e.printStackTrace();
+                }
+                try {
+                       if (rs.next()==false){
+                           //  System.out.println("Is NULL");
+                            
+                    	   stmt2=con.prepareStatement("select * from invadj_schema.rdt_rebill_request where airbill_nbr=? order by LAST_UPDT_TMSTP desc");                     	  
+                           stmt2.setString(1,trk);  
+                           rs2 = stmt2.executeQuery();
+                          try {
+                        	  if (rs2.next()==false){
+                        		  resultArray[0]="fail";
+                                  resultArray[1]="Not In ERA Database";
+                                  System.out.println("Not In ERA Database");
+                        	  }
+                        	  else {
+                        		  String statusDesc = rs2.getString("STATUS_DESC");
+                                  String errorDesc = rs2.getString("ERROR_DESC");   
+                                  
+                                  if (statusDesc==null){
+                                 	 
+                                 	 statusDesc="fail";
+                                 	 errorDesc="In ERA DB But Error Not Set";
+                                  }
+                                  
+                                if (statusDesc.equals("SUCCESS")) {
+                                      resultArray[0]="pass";
+                                      resultArray[1]="completed";
+                                }
+                                else {
+                                      resultArray[0]="fail";
+                                      resultArray[1]=errorDesc;
+                                }
+                        	  }
                           }
-    	            	  
-    	              
-    	              else {
-  	    			      resultArray[0]="fail";
-  	    			      resultArray[1]=errorDesc;
-    	              }
-    			   }
-    		} catch (SQLException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    		}
-    	       /*
-    	       try {
-				con.close();
-				stmt.close();
-	    	    rs.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    	      */
+                          catch(Exception e) {
+                        	  
+                          }
+                           
+                           
+                    	  
+                       }
+                          else{
+                     
+                             resultArray[0]="pass";
+                             resultArray[1]="completed";
+                    
+                          }
+                } catch (SQLException e) {
+                       // TODO Auto-generated catch block
+                   //    System.out.println(e);
+                       e.printStackTrace();
+                       System.out.println(e);
+                }
+    	       
     	 return resultArray;      
 }    
     
