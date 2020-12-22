@@ -855,6 +855,8 @@ public class eraRerateTestNGSlow {
     	
     	
     	/////NEW CODE TO VERIFY
+    	
+    	/*
     	System.out.println();
     	try {                              
 	  		if (driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/ul/li[6]")).getAttribute("class").contains("disabled")){	
@@ -872,6 +874,13 @@ public class eraRerateTestNGSlow {
 	   				writeToDB(testInputNbr,tinCount,trk,resultArray);
 	   				return;
 	  		 } 
+	  		 else if  (driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div")).getText().contains("DN")) {
+	  			 String[] resultArray = new String[2];
+	   			 	resultArray[0]="pass";
+	   				resultArray[1]="denied";
+	   				writeToDB(testInputNbr,tinCount,trk,resultArray);
+	   				return;
+	  		 } 
 	  		 else {
 	  			 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/ul/li[1]/a")).click();
 	  		 }
@@ -882,7 +891,7 @@ public class eraRerateTestNGSlow {
     		System.out.println("Code for Remarks 1");
     		
     	}
-    	
+    	*/
     	
     	
     	//Getting all the charge codes..
@@ -954,7 +963,7 @@ public class eraRerateTestNGSlow {
       		 
       		 
       		 try {
-        		 
+      			 driver.manage().timeouts().implicitlyWait(7,TimeUnit.SECONDS);
         		 String error = driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/h4")).getText();
         		  String[] resultArray = new String[2];
         		 resultArray[0]="fail";
@@ -981,7 +990,7 @@ public class eraRerateTestNGSlow {
     	  Assert.fail("Failed at Drop Down");
       }
    
-         
+         driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
         System.out.println();
         // driver.findElement(By.xpath("")).sendKeys();
        //  driver.findElement(By.xpath("")).click();
@@ -1087,10 +1096,40 @@ public class eraRerateTestNGSlow {
      //Check Popup
      
      try {
+    	 String tempErrorString="";
     	
+    	List<WebElement> rowCounts =driver.findElements(By.xpath("/html/body/div[6]/div/div/div[2]/div/div/div[1]/div[2]/div/div/div"));
+    	if ( rowCounts.size()!=0) {
+    	for(WebElement we:rowCounts) {
+    		System.out.println(we.getText());
+    		tempErrorString=tempErrorString+" "+we.getText();
+    		System.out.println(tempErrorString);
+    	}
     	// System.out.println("GETTING ERRROR!!!! "+driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[1]/div/div[2]/form/div[1]/div[1]")).getText());
-    	 System.out.println("GETTING ERRROR!!!! "+driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[3]/div[2]/div/div/div/div[1]/div[2]/div/div[1]/div/div/div")).getText());
+    	 						//												/html/body/div[6]/div/div/div[2]/div/div/div[1]/div[2]/div/div/div
+//    	 System.out.println("GETTING ERRROR!!!! "+driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[3]/div[2]/div/div/div/div[1]/div[2]/div/div[1]/div/div/div")).getText());
+    	String tempErr;
     	
+    	if (tempErrorString.length()>300) {
+    		 tempErr=tempErrorString.substring(0,300);
+    	}
+    	else {
+    		 tempErr=tempErrorString;
+    	}
+    		
+    	
+    	 if(source.equals("excel")) {
+           	 writeToExcel(rowNumber, 0,"fail");
+           	 writeToExcel(rowNumber, 1,tempErr);
+           	 }
+    			 if(databaseDisabled.equals("false")) {
+       			 String[] resultArray = new String[2];
+       			 	resultArray[0]="fail";
+       				resultArray[1]=tempErr;
+       				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+            	 }
+    			 Assert.fail("After Rerate Click No Data Came -- Unknown Error");
+    	}
      }
      catch(Exception e) {
     	 
@@ -1184,7 +1223,33 @@ public class eraRerateTestNGSlow {
     	 System.out.println(e);
      }
      
+     try {
+    	 driver.manage().timeouts().implicitlyWait(7,TimeUnit.SECONDS);
+    	 String tempE= driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[1]/h4")).getText();
+    	    if (tempE!=null) {
+    	 if(source.equals("excel")) {
+        	 writeToExcel(rowNumber, 0,"fail");
+        	 writeToExcel(rowNumber, 1,tempE);
+        	return;
+        	 }
+			 if(databaseDisabled.equals("false")) {
+   			 String[] resultArray = new String[2];
+   			 	resultArray[0]="fail";
+   				resultArray[1]=tempE;
+   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+   				
+         	 } 
+			 Assert.fail(tempE);
+     }
+     }
+     catch(Exception e) {
+    	 
+    	 System.out.println("No Error Before Phone");
+     }
+     
+     
      try{
+    	 driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
     	 //Click on rebill RPI Complete, Phone, and Continue
           if (username.equals("5194105")){
         	  driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/label[1]")).click();
@@ -1227,7 +1292,7 @@ public class eraRerateTestNGSlow {
 			 Assert.fail("Failed Selecting Contact Method and Clicking Continue");
      }
      
-     
+     Thread.sleep(15000);
      
      try {
     	 
@@ -1244,16 +1309,18 @@ public class eraRerateTestNGSlow {
 	       	 return;
 	  	  
 	  	  			}
+	    	}
+     }
 	  	  
-	  	  
+	  	  /*
 	  	  Thread.sleep(15000);
 	  	  //Check for Denied
 	  	if ( resultArray[0].equals("fail")){
 	  		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/ul/li[6]/a")).click();
 	  		 if (driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div")).getText().contains("DN")) {
 	  			 
-	   			 	resultArray[0]="fail";
-	   				resultArray[1]="Denied";
+	   			 	resultArray[0]="pass";
+	   				resultArray[1]="denied";
 	   				writeToDB(testInputNbr,tinCount,trk,resultArray);
 	   				
 	  		 } 
@@ -1268,11 +1335,11 @@ public class eraRerateTestNGSlow {
 	  		
 	    		}
 	  	  }
-	    
+	    */
 	  	  catch(Exception e) {
 	  		System.out.println(e);  
 	  	  }
-     
+	    	
     	 }
      
      
@@ -1463,7 +1530,7 @@ public class eraRerateTestNGSlow {
     	ResultSet rs = null;
     	try {
     		
-    		stmt=con.prepareStatement("select * from XXFDX.FDX_AR_ADJUSTMENT_IRDT where AIRBILL_NBR=?");  
+    		stmt=con.prepareStatement("select * from apps.xxfdx_eabr_airbill_notes_v where AIRBILL_NUMBER=?");  
 			stmt.setString(1,trk);  
 			rs = stmt.executeQuery();
     	} catch (SQLException e) {
@@ -1480,15 +1547,30 @@ public class eraRerateTestNGSlow {
     		}
     	       try {
     			if (rs.next()==false){
-    			      System.out.println("Is NULL");
+    			   
+    				
+    				System.out.println("Is NULL");
     			      resultArray[0]="fail";
     			      resultArray[1]="";
     			}
     			   else{
-    				  
-    				   resultArray[0]="pass";
+    				   
+    				  String tempString= rs.getString("NOTES");
+    				  if (tempString.contains("RDT CR")) {
+    					  resultArray[0]="pass";
 	    			      resultArray[1]="completed";
+    				  }
+    				  else  if (tempString.contains("RDT DN")) {
+    					  resultArray[0]="pass";
+	    			      resultArray[1]="denied";
+    				  }
+    				  else {
+    					  resultArray[0]="na";
+	    			      resultArray[1]="unable to validate";
+    					  
+    				  }
     	             
+    				  
     			   }
     		} catch (SQLException e) {
     			// TODO Auto-generated catch block

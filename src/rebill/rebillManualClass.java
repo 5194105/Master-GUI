@@ -51,7 +51,7 @@ public class rebillManualClass {
 		
 		//You can give custom query if want to
 		c.setCustomCheckBox("true");
-		c.setCustomString("test_input_nbr='251689'");
+		c.setCustomString("trkngnbr is not null and (result is null or result='fail')");
 				
 		c.setHeadlessString("false");
 

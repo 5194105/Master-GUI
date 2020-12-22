@@ -36,8 +36,13 @@ public class eraRerateManualTest {
 		c.setSessionCount("1");
 		c.setDatabaseDisabled("false");
 		c.setCustomCheckBox("true");
-		c.setCustomString("trkngnbr is not null and description !='Denied' and (result is null or result='fail')");
-		//c.setCustomString("trkngnbr '794991429664'");
+		//c.setCustomString("trkngnbr in ('597012059274',	'244496705687',	'794991365707',	'506365021201',	'757714581424',	'315459044390',	'777982821200')");
+		c.setCustomString("trkngnbr in ('163061855340')");
+		
+		
+		
+		
+		
 		
 		
 		
