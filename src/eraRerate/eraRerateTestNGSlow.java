@@ -129,15 +129,15 @@ public class eraRerateTestNGSlow {
 	String customString;
     String customCheckBox;
     String databaseDisabled;
-	
+	String eraWorkable;
     
     
 	int sessionCountInt;
 	String[][] allData;
 	
 	@BeforeClass
-	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","sessionCount","customString","customCheckBox","databaseDisabled"})
-	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String sessionCount,String customString,String customCheckBox,String databaseDisabled) {
+	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","sessionCount","customString","customCheckBox","databaseDisabled","eraWorkable"})
+	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String sessionCount,String customString,String customCheckBox,String databaseDisabled,String eraWorkable) {
 	importData id=new importData();
 		c=id.getConfig();
 	/*
@@ -170,6 +170,7 @@ public class eraRerateTestNGSlow {
 				this.customString=customString;
 	        	this.customCheckBox=customCheckBox;
 	        	this.databaseDisabled=databaseDisabled;
+	        	this.eraWorkable=eraWorkable;
 	        	sessionCountInt=Integer.parseInt(sessionCount);
 	        	waitTime=Integer.parseInt(c.getEraRerateSecondTimeout());
         
@@ -249,13 +250,23 @@ public class eraRerateTestNGSlow {
     	//String databaseSqlQuery="select result, description, test_input_nbr, tin_count, trkngnbr, invoice_nbr_1,invoice_nbr_2,SVC_CHANGED,ACT_Wgt, CUST_Wgt, RERATE_COMMENTS, region,  USERNAME,   password from era_rerate_view where trkngnbr is not null ";
     	String databaseSqlQuery="select RESULT,	DESCRIPTION,	TEST_INPUT_NBR,	TIN_COUNT,	TRKNGNBR,	INVOICE_NBR_1	,INVOICE_NBR_2,	RATE_WEIGHT,	ACTUAL_WEIGHT,	WGT_TYPE,	LENGTH,	WIDTH,	HEIGHT	,WORKABLE,	DIM_TYPE,	PAYOR	,BILL_ACCT_NBR	,SVC_TYPE,	SERVICE_NAME,	PACKAGE_TYPE	,RERATE_TYPE,	REGION,	USERNAME,	PASSWORD,	RS_TYPE,	COMPANY,	VAL_DESC,	COMMENTS from era_rerate_view where trkngnbr is not null ";
     	
+    	if (allCheckBox.equals("true")) {
+    		databaseSqlCount+="where trkngnbr is not null";
+    		databaseSqlQuery+="where trkngnbr is not null ";
+    	}
+    	
+    	System.out.println(customCheckBox);
+    	System.out.println(customString);
     	
     	if (customCheckBox.equals("false")) {
     	
     	if (allCheckBox.equals("false")) {
-    		databaseSqlCount+="and ";
-    		databaseSqlQuery+="and ";
-    	}
+    		databaseSqlCount+="where ";
+    		databaseSqlQuery+="where ";
+    	
+    	
+    	
+    	
     	if (nullCheckBox.equals("true") && failedCheckBox.equals("true")) {
     		databaseSqlCount+="(result is null or result ='fail') ";
     		databaseSqlQuery+="(result is null or result ='fail') ";
@@ -268,11 +279,42 @@ public class eraRerateTestNGSlow {
     		databaseSqlCount+="result ='fail' ";
     		databaseSqlQuery+="result ='fail' ";
     	}
-    	
+    	if (domesticCheckBox.equals("true") && internationalCheckBox.equals("false")) {
+    		databaseSqlCount+="and rs_type='DM' ";
+    		databaseSqlQuery+="and rs_type='DM' ";
     	}
+    	if (internationalCheckBox.equals("true") && domesticCheckBox.equals("false")) {
+    		databaseSqlCount+="and rs_type='IL' ";
+    		databaseSqlQuery+="and rs_type='IL' ";
+    	}
+    	if (internationalCheckBox.equals("true") && domesticCheckBox.equals("true")) {
+    		databaseSqlCount+="and rs_type in ('DM','IL')";
+    		databaseSqlQuery+="and rs_type in ('DM','IL')";
+    	}
+    	
+    	if (expressCheckBox.equals("true") && groundCheckBox.equals("false")) {
+    		databaseSqlCount+="and company='EP' ";
+    		databaseSqlQuery+="and company='EP' ";
+    	}
+    	if (groundCheckBox.equals("true") && expressCheckBox.equals("false")) {
+    		databaseSqlCount+="and company='GD' ";
+    		databaseSqlQuery+="and company='GD' ";
+    	}
+    	
+    	if (groundCheckBox.equals("true") && expressCheckBox.equals("true")) {
+    		databaseSqlCount+="and company in ('GD','EP') ";
+    		databaseSqlQuery+="and company in ('GD','EP') ";
+    	}
+    	if (eraWorkable.equals("true")) {
+    		databaseSqlCount+="and workable='Y'";
+    		databaseSqlQuery+="and workable='Y'";
+    	}
+    	
+    		}
+    			}
     	else if (customCheckBox.equals("true")){
-    		databaseSqlCount+="and "+customString;
-    		databaseSqlQuery+="and "+customString;
+    		databaseSqlCount+="where trkngnbr is not null and "+customString;
+    		databaseSqlQuery+="where trkngnbr is not null and "+customString;
     	}
        	
     	

@@ -16,6 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JProgressBar;
 
 import org.openqa.selenium.WebDriver;
 
@@ -56,7 +57,7 @@ public class eraRerateAutomationGui {
      JLabel ie,firefox,chrome;
      JLabel eraMassRerateTextLabel;
      JCheckBox eraMassRerateCheckBox;
-     
+     JProgressBar b ;
      mouse m;
 	/**
 	 * Launch the application.
@@ -80,6 +81,8 @@ public class eraRerateAutomationGui {
 		c.setCompatibleMode("false");
 		c.setDatabaseDisabled("false");
 		c.setEraMassRerate("false");
+		//temp setting
+		c.setEraWorkable("false");
 		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 985, 680);
@@ -131,7 +134,7 @@ public class eraRerateAutomationGui {
 		
 		lblRebillAutomation = new JLabel("<HTML><U>ERA Rerate Automation<HTML><U>");
 		lblRebillAutomation.setForeground(Color.WHITE);
-		lblRebillAutomation.setFont(new Font("Segoe UI", Font.BOLD, 36));
+		lblRebillAutomation.setFont(new Font("Segoe UI", Font.BOLD, 28));
 		lblRebillAutomation.setBounds(353, 196, 386, 64);
 		frame.getContentPane().add(lblRebillAutomation);
 		
@@ -226,7 +229,14 @@ public class eraRerateAutomationGui {
 		compatibleCheckBox.setOpaque(false);
 		frame.getContentPane().add(compatibleCheckBox);
 		
-	
+		b=new JProgressBar(0,100);   
+		
+		b.setBounds(275,574,50,30);
+        b.setValue(0);
+        b.setStringPainted(true);
+        b.setSize(475, 20);
+        b.setVisible(true);
+        frame.getContentPane().add(b);
 		
 		
 		guiBase gb = new guiBase();
@@ -342,4 +352,8 @@ public class eraRerateAutomationGui {
 		        }
 			c.setLevel("3");
 		}
+		
+		public JProgressBar getProgressBar() {
+			return b;
+		} 
 }

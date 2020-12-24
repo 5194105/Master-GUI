@@ -64,7 +64,7 @@ public class eraRerateManualTest {
 		String databaseDisabled=	c.getDatabaseDisabled();
 		String customCheckBox= c.getCustomCheckBox();
 		String customString= c.getCustomString();
-			
+		String eraWorkable = c.getEraWorkable();
 		
 		System.out.println("filepath "+filepath);
 		System.out.println("level "+level);
@@ -83,6 +83,7 @@ public class eraRerateManualTest {
 		System.out.println("customString "+customString);
 		System.out.println("customCheckBox "+customCheckBox);
 		System.out.println("databaseDisabled "+databaseDisabled);
+		System.out.println("eraWorkable "+eraWorkable);
 		
 		
 		if(filepath==null) {
@@ -132,6 +133,10 @@ public class eraRerateManualTest {
 		if(databaseDisabled==null) {
 			databaseDisabled="";
 		}
+		if(eraWorkable==null) {
+			eraWorkable="";
+		}
+	
 	
 	
 
@@ -151,6 +156,7 @@ public class eraRerateManualTest {
         fieldValues.put("customString",customString);
         fieldValues.put("customCheckBox",customCheckBox);
         fieldValues.put("databaseDisabled",databaseDisabled);
+        fieldValues.put("eraWorkable",eraWorkable);
         
         xmlSuite.setParameters(fieldValues);
         XmlTest xmlTest = new XmlTest(xmlSuite);
