@@ -35,7 +35,7 @@ public class runPrerateManually {
 		c.setGroundCheckBox("false");
 		c.setDatabaseDisabled("false");
 		c.setCustomCheckBox("false");
-		c.setCustomString("trkngnbr ='597616880836'");
+		c.setCustomString("");
 		c.setSessionCount("1");
 		c.setPrerateType("update");
 		

@@ -3,39 +3,31 @@
 <suite name="Failed suite [Sample_Suite]">
   <parameter name="nullCheckBox" value="true"/>
   <parameter name="level" value="3"/>
-  <parameter name="failedCheckBox" value="false"/>
-  <parameter name="nt1" value="true"/>
-  <parameter name="source" value="excel"/>
-  <parameter name="endDateText" value="12/14/2020"/>
-  <parameter name="ei1" value="true"/>
-  <parameter name="nt2" value="true"/>
+  <parameter name="failedCheckBox" value="true"/>
+  <parameter name="groundCheckBox" value="false"/>
+  <parameter name="source" value="db"/>
   <parameter name="compatibleMode" value="true"/>
-  <parameter name="gi1" value="true"/>
-  <parameter name="ei2" value="true"/>
-  <parameter name="gi2" value="true"/>
-  <parameter name="ed2" value="true"/>
+  <parameter name="customCheckBox" value="false"/>
+  <parameter name="expressCheckBox" value="false"/>
   <parameter name="allCheckBox" value="false"/>
-  <parameter name="startDateText" value="01/01/2020"/>
-  <parameter name="ed1" value="true"/>
-  <parameter name="filepath" value="C:\Users\5194105\Documents\rerate.xlsx"/>
-  <parameter name="gd2" value="true"/>
-  <parameter name="sp2" value="true"/>
+  <parameter name="filepath" value="C:\Users\FedExUser\Documents\PRERATE_UPDATE.xlsx"/>
   <parameter name="sessionCount" value="1"/>
-  <parameter name="gd1" value="true"/>
-  <parameter name="sp1" value="true"/>
-  <parameter name="browser" value="1"/>
+  <parameter name="domesticCheckBox" value="false"/>
+  <parameter name="browser" value="2"/>
   <parameter name="databaseDisabled" value="false"/>
+  <parameter name="internationalCheckBox" value="false"/>
+  <parameter name="customString" value=""/>
   <test thread-count="5" parallel="methods" name="Rebill Test(failed)">
     <classes>
-      <class name="rerate.rerateTestNgSlow">
+      <class name="prerate.prerateTestNGSlow">
         <methods>
           <include name="testMethod2"/>
-          <include name="testMethod" invocation-numbers="0 1 3"/>
+          <include name="testMethod1" invocation-numbers="1 3 4 5 6 7 8 9 11 12 13 21"/>
+          <include name="testMethod3"/>
           <include name="testMethod4"/>
           <include name="setupExcel"/>
-          <include name="testMethod3"/>
         </methods>
-      </class> <!-- rerate.rerateTestNgSlow -->
+      </class> <!-- prerate.prerateTestNGSlow -->
     </classes>
   </test> <!-- Rebill Test(failed) -->
 </suite> <!-- Failed suite [Sample_Suite] -->

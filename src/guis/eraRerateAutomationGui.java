@@ -299,6 +299,12 @@ public class eraRerateAutomationGui {
             	disableDatabaseCheckBoxActionPerformed(evt);
             }
         });
+	    
+	    eraMassRerateCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	eraMassRerateCheckBoxActionPerformed(evt);
+            }
+        });
 		
 	}
 	
@@ -321,9 +327,11 @@ public class eraRerateAutomationGui {
 
 		if (eraMassRerateCheckBox.isSelected()) {
 			c.setEraMassRerate("true");
+			System.out.println("era mass rerate: "+ c.getEraMassRerate());
 		}
 		else {
 			c.setEraMassRerate("false");
+			System.out.println("era mass rerate: "+ c.getEraMassRerate());
 		}
 	}
 	private void compatibleCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {    

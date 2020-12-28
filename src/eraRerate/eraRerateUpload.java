@@ -24,7 +24,7 @@ public class eraRerateUpload implements Runnable {
        int colCount;
        double total=0;
        int counter=1;
-       String testInputNbr,tinCount,trkngnbr;
+       String testInputNbr,tinCount,trkngnbr,requestID;
        config c;
        String[] resultArray = new String[2];
      //  JFrame frame;
@@ -34,6 +34,7 @@ public class eraRerateUpload implements Runnable {
               this.c=c;
               this.o=o;
               erag = (eraRerateAutomationGui)o;
+              System.out.println("era mass rerate: "+ c.getEraMassRerate());
          //     this.frame=frame;
        //     c.setLevel("3");
        }
@@ -53,7 +54,8 @@ public class eraRerateUpload implements Runnable {
     	    	   testInputNbr=allData[i][0];
                    tinCount=allData[i][1];
                    trkngnbr=allData[i][2];
-                   resultArray=validateResults(trkngnbr);
+                   requestID=allData[i][3];
+                   resultArray=validateResults(trkngnbr,requestID);
                    writeToDB(testInputNbr,tinCount,trkngnbr,resultArray);
               }
               
@@ -138,7 +140,7 @@ public class eraRerateUpload implements Runnable {
        }
        
        
-    public  String[] validateResults(String trk) {
+    public  String[] validateResults(String trk,String requestID) {
              counter++;
              Boolean result=null;
              Connection con = null;
@@ -146,13 +148,23 @@ public class eraRerateUpload implements Runnable {
          	
          	try {
          	
-         		if (c.getLevel().equals("2")){
+         		if (c.getLevel().equals("2") && c.getEraMassRerate().equals("false")){
          			 
             		   //  con=c.getOracleARL2DbConnection();
             	 }
-            	 else if (c.getLevel().equals("3")){
+            	 else if (c.getLevel().equals("3") && c.getEraMassRerate().equals("false")){
             		 	
             		 	con=c.getOracleARL3DbConnection();
+            	 	}
+         		
+
+         		if (c.getLevel().equals("2") && c.getEraMassRerate().equals("true")){
+         			 
+            		   //  con=c.getOracleARL2DbConnection();
+            	 }
+            	 else if (c.getLevel().equals("3") && c.getEraMassRerate().equals("true")){
+            		 	
+            		 	con=c.getEraL3Con();
             	 	}
          	
          	}
@@ -164,6 +176,8 @@ public class eraRerateUpload implements Runnable {
 
          	PreparedStatement stmt = null;
          	ResultSet rs = null;
+         	  if (c.getEraMassRerate().equals("false")) {
+         	
          	try {
          		System.out.println("Trk: "+trk);
          		stmt=con.prepareStatement("select * from apps.xxfdx_eabr_airbill_notes_v where AIRBILL_NUMBER=?");  
@@ -212,7 +226,50 @@ public class eraRerateUpload implements Runnable {
          			// TODO Auto-generated catch block
          			e.printStackTrace();
          		}
-         	      
+         		
+         		
+    }
+         	  if (c.getEraMassRerate().equals("true")) {
+         		  try {
+         			  System.out.println(requestID);
+         			 stmt=con.prepareStatement("select FAILED_REQ_QTY, SUCCESS_REQ_QTY ,TOTAL_REQUEST_QTY,RERATE_STATUS_CD, RERATE_OUTBOUND_TMSTP from invadj_schema.mass_adj_summary where batch_summary_nbr =?");  
+          			stmt.setString(1,requestID);  
+          			rs = stmt.executeQuery();
+         	
+         	  }
+         		  catch (Exception e) {
+         			  }
+         		 try {
+          			if (rs.next()==false){
+          			   
+          				
+          				System.out.println("Is NULL");
+          			      resultArray[0]="fail";
+          			      resultArray[1]="";
+          			}
+          			   else{
+          				   
+          				  String SUCCESS_REQ_QTY = rs.getString("SUCCESS_REQ_QTY");
+          				 String TOTAL_REQUEST_QTY = rs.getString("TOTAL_REQUEST_QTY");
+          				
+          				 if (SUCCESS_REQ_QTY.equals(TOTAL_REQUEST_QTY)) {
+          					  resultArray[0]="pass";
+    	    			      resultArray[1]="completed";
+          				 }
+          				
+          				  else {
+          					  resultArray[0]="na";
+      	    			      resultArray[1]="na";
+          					  
+          				  }
+          	             
+          				  
+          			   }
+          		} catch (SQLException e) {
+          			// TODO Auto-generated catch block
+          			e.printStackTrace();
+          		}
+         		  }
          	 return resultArray;      
      
    }    
@@ -243,11 +300,11 @@ public  void getData() {
        
        if (c.getEraMassRerate().equals("true")) {
     	    databaseSqlCount="select count(*) as total from era_rerate_mass where trkngnbr is not null ";
-            databaseSqlQuery="select  test_input_nbr, tin_count, trkngnbr from era_rerate_mass where trkngnbr is not null "; 
+            databaseSqlQuery="select  test_input_nbr, tin_count, trkngnbr,request_ID from era_rerate_mass where trkngnbr is not null "; 
            }
            if (c.getEraMassRerate().equals("false")) {
         	    databaseSqlCount="select count(*) as total from era_rerate_view where trkngnbr is not null ";
-                databaseSqlQuery="select  test_input_nbr, tin_count, trkngnbr from era_rerate_view where trkngnbr is not null ";
+                databaseSqlQuery="select  test_input_nbr, tin_count, trkngnbr,request_ID from era_rerate_view where trkngnbr is not null ";
            }
       
        
