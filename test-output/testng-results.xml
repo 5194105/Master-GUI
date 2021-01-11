@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testng-results ignored="0" total="3" passed="0" failed="3" skipped="0">
+=======
+<testng-results ignored="0" total="4" passed="0" failed="4" skipped="0">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
   <reporter-output>
   </reporter-output>
+<<<<<<< HEAD
   <suite started-at="2021-01-11T20:59:23 UTC" name="Sample_Suite" finished-at="2021-01-11T20:59:29 UTC" duration-ms="6071">
+=======
+  <suite started-at="2021-01-05T20:45:46 UTC" name="Default suite" finished-at="2021-01-05T20:45:46 UTC" duration-ms="55">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
     <groups>
     </groups>
+<<<<<<< HEAD
     <test started-at="2021-01-11T20:59:23 UTC" name="Rebill Test" finished-at="2021-01-11T20:59:29 UTC" duration-ms="6071">
       <class name="rebill.testngMassRebillSlow">
         <test-method is-config="true" signature="setupExcel(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:rebill.testngMassRebillSlow@14dd9eb7]" started-at="2021-01-11T20:59:23 UTC" name="setupExcel" finished-at="2021-01-11T20:59:29 UTC" duration-ms="6031" status="PASS">
@@ -104,14 +113,67 @@
           </reporter-output>
         </test-method> <!-- setupExcel -->
         <test-method signature="testMethod2(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rebill.testngMassRebillSlow@14dd9eb7]" started-at="2021-01-11T20:59:29 UTC" name="testMethod2" data-provider="data-provider2" finished-at="2021-01-11T20:59:29 UTC" duration-ms="0" status="FAIL">
+=======
+    <test started-at="2021-01-05T20:45:46 UTC" name="Default test" finished-at="2021-01-05T20:45:46 UTC" duration-ms="55">
+      <class name="credit_debit.creditDebitTestNGSlow">
+        <test-method is-config="true" signature="setupExcel(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:credit_debit.creditDebitTestNGSlow@3246fb96]" started-at="2021-01-05T20:45:46 UTC" name="setupExcel" finished-at="1970-01-01T00:00:00 UTC" duration-ms="-1609879546030" status="FAIL">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
           <exception class="org.testng.TestNGException">
             <message>
               <![CDATA[
+<<<<<<< HEAD
 Data Provider public synchronized java.lang.Object[][] rebill.testngMassRebillSlow.dataProviderMethod2() returned a null value]]>
+=======
+Parameter 'filepath' is required by BeforeClass on method setupExcel but has not been marked @Optional or defined
+in C:\Users\5194105\AppData\Local\Temp\756\testng-eclipse--2127804652\testng-customsuite.xml]]>
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
             </message>
             <full-stacktrace>
               <![CDATA[org.testng.TestNGException: 
+<<<<<<< HEAD
 Data Provider public synchronized java.lang.Object[][] rebill.testngMassRebillSlow.dataProviderMethod2() returned a null value
+=======
+Parameter 'filepath' is required by BeforeClass on method setupExcel but has not been marked @Optional or defined
+in C:\Users\5194105\AppData\Local\Temp\756\testng-eclipse--2127804652\testng-customsuite.xml
+at org.testng.internal.Parameters.createParams(Parameters.java:268)
+at org.testng.internal.Parameters.createParametersForMethod(Parameters.java:356)
+at org.testng.internal.Parameters.createParameters(Parameters.java:700)
+at org.testng.internal.Parameters.createConfigurationParameters(Parameters.java:166)
+at org.testng.internal.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:301)
+at org.testng.internal.TestMethodWorker.invokeBeforeClassMethods(TestMethodWorker.java:176)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:122)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+at org.testng.TestRunner.privateRun(TestRunner.java:764)
+at org.testng.TestRunner.run(TestRunner.java:585)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:384)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:378)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:337)
+at org.testng.SuiteRunner.run(SuiteRunner.java:286)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1218)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1140)
+at org.testng.TestNG.runSuites(TestNG.java:1069)
+at org.testng.TestNG.run(TestNG.java:1037)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.TestNGException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setupExcel -->
+        <test-method signature="testMethod1(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:credit_debit.creditDebitTestNGSlow@3246fb96]" started-at="2021-01-05T20:45:46 UTC" name="testMethod1" data-provider="data-provider1" finished-at="2021-01-05T20:45:46 UTC" duration-ms="0" status="FAIL">
+          <exception class="org.testng.TestNGException">
+            <message>
+              <![CDATA[
+Data Provider public synchronized java.lang.Object[][] credit_debit.creditDebitTestNGSlow.dataProviderMethod1() returned a null value]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] credit_debit.creditDebitTestNGSlow.dataProviderMethod1() returned a null value
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:147)
 at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
 at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
@@ -121,24 +183,89 @@ at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java
 at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
 at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
 at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-at java.base/java.lang.Thread.run(Thread.java:834)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+at org.testng.TestRunner.privateRun(TestRunner.java:764)
+at org.testng.TestRunner.run(TestRunner.java:585)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:384)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:378)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:337)
+at org.testng.SuiteRunner.run(SuiteRunner.java:286)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1218)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1140)
+at org.testng.TestNG.runSuites(TestNG.java:1069)
+at org.testng.TestNG.run(TestNG.java:1037)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.TestNGException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod1 -->
+        <test-method signature="testMethod2(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:credit_debit.creditDebitTestNGSlow@3246fb96]" started-at="2021-01-05T20:45:46 UTC" name="testMethod2" data-provider="data-provider2" finished-at="2021-01-05T20:45:46 UTC" duration-ms="0" status="FAIL">
+          <exception class="org.testng.TestNGException">
+            <message>
+              <![CDATA[
+Data Provider public synchronized java.lang.Object[][] credit_debit.creditDebitTestNGSlow.dataProviderMethod2() returned a null value]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] credit_debit.creditDebitTestNGSlow.dataProviderMethod2() returned a null value
+at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:147)
+at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
+at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
+at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
+at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:789)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+at org.testng.TestRunner.privateRun(TestRunner.java:764)
+at org.testng.TestRunner.run(TestRunner.java:585)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:384)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:378)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:337)
+at org.testng.SuiteRunner.run(SuiteRunner.java:286)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1218)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1140)
+at org.testng.TestNG.runSuites(TestNG.java:1069)
+at org.testng.TestNG.run(TestNG.java:1037)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
           </exception> <!-- org.testng.TestNGException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod2 -->
+<<<<<<< HEAD
         <test-method signature="testMethod4(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rebill.testngMassRebillSlow@14dd9eb7]" started-at="2021-01-11T20:59:29 UTC" name="testMethod4" data-provider="data-provider4" finished-at="2021-01-11T20:59:29 UTC" duration-ms="0" status="FAIL">
+=======
+        <test-method signature="testMethod3(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:credit_debit.creditDebitTestNGSlow@3246fb96]" started-at="2021-01-05T20:45:46 UTC" name="testMethod3" data-provider="data-provider3" finished-at="2021-01-05T20:45:46 UTC" duration-ms="0" status="FAIL">
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
           <exception class="org.testng.TestNGException">
             <message>
               <![CDATA[
+<<<<<<< HEAD
 Data Provider public synchronized java.lang.Object[][] rebill.testngMassRebillSlow.dataProviderMethod4() returned a null value]]>
+=======
+Data Provider public synchronized java.lang.Object[][] credit_debit.creditDebitTestNGSlow.dataProviderMethod3() returned a null value]]>
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
             </message>
             <full-stacktrace>
               <![CDATA[org.testng.TestNGException: 
+<<<<<<< HEAD
 Data Provider public synchronized java.lang.Object[][] rebill.testngMassRebillSlow.dataProviderMethod4() returned a null value
+=======
+Data Provider public synchronized java.lang.Object[][] credit_debit.creditDebitTestNGSlow.dataProviderMethod3() returned a null value
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:147)
 at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
 at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
@@ -148,15 +275,69 @@ at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java
 at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
 at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
 at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-at java.base/java.lang.Thread.run(Thread.java:834)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+at org.testng.TestRunner.privateRun(TestRunner.java:764)
+at org.testng.TestRunner.run(TestRunner.java:585)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:384)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:378)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:337)
+at org.testng.SuiteRunner.run(SuiteRunner.java:286)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1218)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1140)
+at org.testng.TestNG.runSuites(TestNG.java:1069)
+at org.testng.TestNG.run(TestNG.java:1037)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.TestNGException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod3 -->
+        <test-method signature="testMethod4(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:credit_debit.creditDebitTestNGSlow@3246fb96]" started-at="2021-01-05T20:45:46 UTC" name="testMethod4" data-provider="data-provider4" finished-at="2021-01-05T20:45:46 UTC" duration-ms="0" status="FAIL">
+          <exception class="org.testng.TestNGException">
+            <message>
+              <![CDATA[
+Data Provider public synchronized java.lang.Object[][] credit_debit.creditDebitTestNGSlow.dataProviderMethod4() returned a null value]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] credit_debit.creditDebitTestNGSlow.dataProviderMethod4() returned a null value
+at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:147)
+at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
+at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
+at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
+at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:789)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1540)
+at org.testng.TestRunner.privateRun(TestRunner.java:764)
+at org.testng.TestRunner.run(TestRunner.java:585)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:384)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:378)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:337)
+at org.testng.SuiteRunner.run(SuiteRunner.java:286)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:96)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1218)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1140)
+at org.testng.TestNG.runSuites(TestNG.java:1069)
+at org.testng.TestNG.run(TestNG.java:1037)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
           </exception> <!-- org.testng.TestNGException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod4 -->
+<<<<<<< HEAD
         <test-method signature="testMethod3(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rebill.testngMassRebillSlow@14dd9eb7]" started-at="2021-01-11T20:59:29 UTC" name="testMethod3" data-provider="data-provider3" finished-at="2021-01-11T20:59:29 UTC" duration-ms="0" status="FAIL">
           <exception class="org.testng.TestNGException">
             <message>
@@ -187,4 +368,9 @@ at java.base/java.lang.Thread.run(Thread.java:834)
       </class> <!-- rebill.testngMassRebillSlow -->
     </test> <!-- Rebill Test -->
   </suite> <!-- Sample_Suite -->
+=======
+      </class> <!-- credit_debit.creditDebitTestNGSlow -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+>>>>>>> branch 'master' of https://github.com/5194105/Master-GUI.git
 </testng-results>
