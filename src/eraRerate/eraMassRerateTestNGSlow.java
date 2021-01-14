@@ -1172,7 +1172,7 @@ public class eraMassRerateTestNGSlow {
 	    	
 	    	try {
 			//	update gtm_rev_tools.rebill_results set result='fail',description='6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables' where trkngnbr='566166113544';
-	    	stmt=GTMcon.prepareStatement("update era_results set result=?,description=? where trkngnbr=? and era_mass_rerate=?");  
+	    	stmt=GTMcon.prepareStatement("update era_results set result=?,request_ID=? where trkngnbr=? and era_mass_rerate=?");  
 			stmt.setString(1,resultArray[0]);  
 			stmt.setString(2,resultArray[1]); 
 			stmt.setString(3,trk); 
