@@ -140,8 +140,10 @@ public class testngMassRebillSlow {
 	config c;
 	int waitTime;
 	String eraWorkable;
-	
+	int min=0,max=0;
 	  ArrayList<Integer> trkList = new ArrayList<Integer>();
+	  ArrayList<String> addedTrks = new ArrayList<String>();
+	  ArrayList<String> removedTrks = new ArrayList<String>();
 	
 	@BeforeClass
 	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox","sessionCount","customString","customCheckBox","databaseDisabled","headless","eraWorkable"})
@@ -273,7 +275,7 @@ public class testngMassRebillSlow {
 		
 		
     	String databaseSqlCount="select count(*) as total from rebill_regression_mass ";
-    	String databaseSqlQuery="select result, description, test_input_nbr, tin_count, trkngnbr, reason_code, bill_acct_nbr,invoice_nbr_1, invoice_nbr_2,  region,  username,   password,  rs_Type, company from rebill_regression_mass";
+    	String databaseSqlQuery="select result, description, test_input_nbr, rowcount, trkngnbr, reason_code, bill_acct_nbr,invoice_nbr_1, invoice_nbr_2,  region,  username,   password,  rs_Type, company from rebill_regression_mass";
     	
     	if (allCheckBox.equals("true")) {
     		databaseSqlCount+=" where trkngnbr is not null";
@@ -551,6 +553,75 @@ public class testngMassRebillSlow {
     	if (counter1==trkList.get(counter2)) {
     		
     	
+    		
+    		
+    		
+    		
+    		min=trkList.get(counter2);
+    		max=trkList.get(counter2+1);	
+    		System.out.println(min);
+    		System.out.println(max);	
+    	
+    		for(int i=min;i<max;i++) {
+    				
+    			System.out.println("Test Input Number "+allData[i][2]);
+    			System.out.println("Row Count "+allData[i][3]);
+    			System.out.println("Tracking Number "+allData[i][4]);
+    			System.out.println("Reason Code "+allData[i][5]);
+    			System.out.println("Account Number "+allData[i][6]);
+    			addedTrks.add(allData[i][4]);
+    			
+    			
+    			
+    			try {
+    		    	if (databaseDisabled.equals("false")) {
+    		    
+    		  		  String[] resultArray = validateResults(allData[i][4]);
+    		  	  if ( resultArray[0].equals("pass")){
+    		       	 if(source.equals("excel")) {
+    		       	 writeToExcel(rowNumber, 0,"pass");
+    		       	 writeToExcel(rowNumber, 1,"completed");
+    		       	
+    		       	 }
+    		       	 System.out.println(tinCount);
+    		       	 writeToDB(testInputNbr,allData[i][3],allData[i][4],resultArray);
+    		       	// return;
+    		  	  addedTrks.remove(allData[i][4]);
+    		  	  removedTrks.add(allData[i][4]);
+    		  	  			}
+    		    		}
+    		  	  }
+    		    
+    		  	  catch(Exception e) {
+    		  		System.out.println(e);  
+    		  	  }
+    			
+    			 if(checkAmount(allData[i][4])==false) {
+  		    	   System.out.println("Amount is zero");
+  		      	   String[] resultArray = new String[3];
+  		    	   resultArray[0]="fail";
+  		    	   resultArray[1]="Amount Equals Zero";
+  		    	   resultArray[2]="NA";
+  		           	 
+  		           			 if(source.equals("excel")) {
+  		                	 writeToExcel(rowNumber, 0,"fail");
+  		                	 writeToExcel(rowNumber, 1,"Amount Equals Zero");
+  		           			 }
+  		               	 if(databaseDisabled.equals("false")) {
+  		               	 System.out.println(tinCount);
+  		                    	  writeToDB(testInputNbr,allData[i][3],allData[i][4],resultArray);
+  		                    	 }
+  		               addedTrks.remove(allData[i][4]);
+  	    		  	  removedTrks.add(allData[i][4]);
+  		                 	
+  		                 
+  		    	   
+  		       }
+    			
+    		}
+    		
+    		
+    		
     	
     	System.out.println(result);
     	System.out.println(descripiton);
@@ -568,27 +639,12 @@ public class testngMassRebillSlow {
     	System.out.println(company);
     	System.out.println(rowNumber);
     	
-    	//Will Check if Trk is already successful;
-  	  try {
-    	if (databaseDisabled.equals("false")) {
+    	
+    	
     
-  		  String[] resultArray = validateResults(trk);
-  	  if ( resultArray[0].equals("pass")){
-       	 if(source.equals("excel")) {
-       	 writeToExcel(rowNumber, 0,"pass");
-       	 writeToExcel(rowNumber, 1,"completed");
-       	
-       	 }
-       	 writeToDB(testInputNbr,tinCount,trk,resultArray);
-       	 return;
   	  
-  	  			}
-    		}
-  	  }
-    
-  	  catch(Exception e) {
-  		System.out.println(e);  
-  	  }
+  	  
+  	  
     	try { 
     		driver1.quit();
     		driver1.close();
@@ -649,8 +705,9 @@ public class testngMassRebillSlow {
 	    
 	    try {
 	    
-	        
+	        if (addedTrks.size()>=1) {
 			doRebill(driver1,wait1, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, region , login , password, rsType , company ,rowNumber,1);
+	        }
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -918,11 +975,7 @@ public class testngMassRebillSlow {
     	
     	WebElement element=null;
     	JavascriptExecutor js= (JavascriptExecutor) driver;
-    	
-    	int packageCounter=0;
-    	Boolean exist;
-    	WebElement scrollElement;
-    	
+ 
     	wait=new WebDriverWait(driver,20);
     	driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
     
@@ -1009,6 +1062,8 @@ public class testngMassRebillSlow {
      		Assert.fail("Could Not Get To Charge Code Details");
      	}
     	
+    	//driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[1]/button[1]")).getText();
+    	
     	System.out.println("Made it to mass adjusmtent screen");
     	
     	
@@ -1033,62 +1088,40 @@ public class testngMassRebillSlow {
         		driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div/div/textarea")).clear();
         		int trkCounter=0;
         		for(int i=min;i<max;i++) {
-        				
-        			driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div/div/textarea")).sendKeys(allData[i][4]);
-        			driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div/div/textarea")).sendKeys(Keys.chord(Keys.SHIFT,Keys.ENTER));
-        			System.out.println("Test Input Number "+allData[i][2]);
-        			System.out.println("Tracking Number "+allData[i][4]);
-        			System.out.println("Reason Code "+allData[i][5]);
-        			System.out.println("Account Number "+allData[i][6]);
-        			trkCounter++;
+        				if(addedTrks.contains(allData[i][4])) {
+		        			driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div/div/textarea")).sendKeys(allData[i][4]);
+		        			driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div/div/textarea")).sendKeys(Keys.chord(Keys.SHIFT,Keys.ENTER));
+		        			System.out.println("Test Input Number "+allData[i][2]);
+		        			System.out.println("Tracking Number "+allData[i][4]);
+		        			System.out.println("Reason Code "+allData[i][5]);
+		        			System.out.println("Account Number "+allData[i][6]);
+		        			trkCounter++;
+        				}
         		}
-        		
-    			
-    			 
-    			 
-    			 
-        		Thread.sleep(5000);
+ 
+        	  Thread.sleep(5000);
     		  Select actionDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"contry\"]")));
 		      actionDropDown.selectByValue("RB"); 
-		     driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[1]/button[1]")).click(); 
+		      driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[1]/button[1]")).click(); 
 		      driver.manage().timeouts().implicitlyWait(15,TimeUnit.SECONDS);  
 		      Thread.sleep(10000);
-		   //   driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[5]/div[1]/div/div[2]/div[1]/div/div[1]/div/div/div/div/div/div/div/div/div")).click(); 
 		      
 		      
 		      Actions actions = new Actions(driver);
-		     String tempTrk="";
+		      String tempTrk="";
 		      int xpathCounter=0;
 		      int rebillTrk=0;
-		      for(int i=0;i<trkCounter;i++) {
-		       xpathCounter++;
-		        
-		       tempTrk=driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[5]/div[1]/div/div[2]/div[2]/div[2]/div/div["+xpathCounter+"]/div/div/div[3]/div")).getText();
-			   System.out.println(tempTrk);
+		     
 		      
-			   if(checkAmount(tempTrk)==false) {
-		    	   System.out.println("Amount is zero");
-		    	 //  driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[5]/div[1]/div/div[2]/div[1]/div/div[2]/div/div["+xpathCounter+"]/div/div/div/div/div/div")).click();
-		    	   
-		       }
-		       else {
-		    	   rebillTrk++;
-		    	   
-		    	   driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[5]/div[1]/div/div[2]/div[1]/div/div[2]/div/div["+xpathCounter+"]/div/div/div/div/div/div")).click();
-		    	   
+		      for(int i=0;i<addedTrks.size();i++) {
+		    	xpathCounter++;
+		        driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[5]/div[1]/div/div[2]/div[1]/div/div[2]/div/div["+xpathCounter+"]/div/div/div/div/div/div")).click();
 		        element =driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[5]/div[1]/div/div[2]/div[2]/div[2]/div/div["+xpathCounter+"]/div/div/div[11]/div"));
-		      
 		        actions = new Actions(driver);
 		        actions.moveToElement(element);
 		        actions.click();
 		        actions.sendKeys("R");
 		        actions.build().perform();
-		        
-		       
-		       
-		        
-			    //  /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[5]/div[1]/div/div[2]/div[2]/div[2]/div/div[2]/div/div/div[11]/div
-			    //  /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[5]/div[1]/div/div[2]/div[2]/div[2]/div/div[3]/div/div/div[11]/div
 		        
 		        element =driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[5]/div[1]/div/div[2]/div[2]/div[2]/div/div["+xpathCounter+"]/div/div/div[11]/ui-select-wrap/div/div[1]/input"));
 			    actions.moveToElement(element);
@@ -1106,52 +1139,167 @@ public class testngMassRebillSlow {
 		        actions.sendKeys(rebillAccount);
 		        actions.sendKeys(Keys.ENTER);
 		        actions.build().perform();
+		        Thread.sleep(1000);
 		        
-		        
-		       }
-		      
-		     
-		      }
+		        }
 		      
 		      
 		      driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[5]/div[2]/div/button[4]")).click();
-		      driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[5]/div[2]/div/button[5]")).click();
-		        
+		      Thread.sleep(5000);
+    	}
+		      catch(Exception e)
+    	{
+		    	  System.out.println("Failed while entering mass data");
+		    		for(int i=min;i<max;i++) {
+						
+		    			System.out.println("Test Input Number "+allData[i][2]);
+		    			System.out.println("Row Count "+allData[i][3]);
+		    			System.out.println("Tracking Number "+allData[i][4]);
+		    			System.out.println("Reason Code "+allData[i][5]);
+		    			System.out.println("Account Number "+allData[i][6]);
+				  
+		    			
+		    			
+				  		 if(addedTrks.contains(allData[i][4])) {
+				  			
+				  			String[] resultArray = new String[3];
+				  			resultArray[0]= "fail";
+				  			resultArray[1]="Failed while entering mass data";
+				  			resultArray[2]="NA";
+				  					
+		                 if (resultArray[0].equals("fail")) {
+		               		 if(source.equals("excel")) {
+		               			 writeToExcel(rowNumber, 0,"fail");
+		               			 writeToExcel(rowNumber, 1,resultArray[1]);
+		               		 }
+		                 	 if(databaseDisabled.equals("false")) {
+		                 	  writeToDB(testInputNbr,allData[i][3],allData[i][4],resultArray);
+		                 	 }
+		    	}
+				  		 }
+				  		 
+		    		}
+		    		Assert.fail("Could Not Get To Charge Code Details");
+		    	  
+    	}
+    	
+    	
+    	 int counterCart=0;
+    	   try {
+		     
+		      
+		      while(counterCart<10) {
+		   
+		    	  driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[5]/div[2]/div/button[5]")).click();
+		    	  Thread.sleep(5000);
+		    	  String tempString =  driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[1]/div/label/h4")).getText();
+		    	  if (!tempString.equals("Cart Summary:")) {
+		    		  counterCart++;  
+		    	  }
+		      
+		      }
+    	   }
+		      catch(Exception e) {
+		    	counterCart++;  
+		      }
+		      
+		      
+		 
+    		
 
-		      
-		      
-		      
-  
-   String compareString="";
-   xpathCounter=0;
-		      for(int i=0;i<rebillTrk;i++) {
-		    	  xpathCounter++;
-		    	  											
-		    	  compareString=driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div/div/div/div/div/div/div[2]/div[2]/div/div["+xpathCounter+"]/div/div[3]/div")).getText();
-		       		
-		    	  for(int j=min;j<max;j++) {
-		       		if (compareString.equals(allData[j][4])) {
-		       			driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div/div/div/div/div/div/div[1]/div/div[2]/div/div["+xpathCounter+"]/div/div/div/div/div")).click();
-		       			}
-		       		}
-		       		
-    		}
-		      
+    	try {
+		    int xpathCounter=0;
+		  	 for(int i=0;i<addedTrks.size();i++) {
+		  		 xpathCounter++;
+		  		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div/div/div/div/div/div/div[1]/div/div[2]/div/div["+xpathCounter+"]/div/div/div/div/div")).click();
+		  	 }  
 		      
 		      //Processes
 		  	driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[3]/div[2]/button[3]")).click();
 		      
+		  
 		  	
 		  	//Validation stuff..
 		      
 		      
-
-    	}
-    	catch(Exception e) {
+		  	
+		  		
+    	
     		
-    		System.out.println(e);
+    	
+    		for(int i=min;i<max;i++) {
+    				
+    			System.out.println("Test Input Number "+allData[i][2]);
+    			System.out.println("Row Count "+allData[i][3]);
+    			System.out.println("Tracking Number "+allData[i][4]);
+    			System.out.println("Reason Code "+allData[i][5]);
+    			System.out.println("Account Number "+allData[i][6]);
+		  
+    			
+    			
+		  		 if(addedTrks.contains(allData[i][4])) {
+		  			 String[] resultArray = validateResults(allData[i][4]);
+		  			 	if (resultArray[0].equals("pass")){
+		  			 		if(source.equals("excel")) {
+		  			 			writeToExcel(rowNumber, 0,"pass");
+		  			 			writeToExcel(rowNumber, 1,"completed");
+		  			 			}
+		  			 		if(databaseDisabled.equals("false")) {
+		  			 			writeToDB(testInputNbr,allData[i][3],allData[i][4],resultArray);
+                    	 }
+                 }
+                 if (resultArray[0].equals("fail")) {
+               		 if(source.equals("excel")) {
+               			 writeToExcel(rowNumber, 0,"fail");
+               			 writeToExcel(rowNumber, 1,resultArray[1]);
+               		 }
+                 	 if(databaseDisabled.equals("false")) {
+                 	  writeToDB(testInputNbr,allData[i][3],allData[i][4],resultArray);
+                 	 }
+                 	//  Assert.fail("Faled At Last Rebill Screen: "+resultArray[1]);
+               	  
+                 }
+                 
+		  		 }
+		  		 
+		  		  }
+    		}
+           	  catch(Exception e) {
+           		
+          		System.out.println("Failed while entering mass data");
+          		for(int i=min;i<max;i++) {
+      				
+          			System.out.println("Test Input Number "+allData[i][2]);
+          			System.out.println("Row Count "+allData[i][3]);
+          			System.out.println("Tracking Number "+allData[i][4]);
+          			System.out.println("Reason Code "+allData[i][5]);
+          			System.out.println("Account Number "+allData[i][6]);
+      		  
+          			
+          			
+      		  		 if(addedTrks.contains(allData[i][4])) {
+      		  			
+      		  			String[] resultArray = new String[3];
+      		  			resultArray[0]= "fail";
+      		  			resultArray[1]="Failed at last page";
+      		  			resultArray[2]="NA";
+      		  					
+                       if (resultArray[0].equals("fail")) {
+                     		 if(source.equals("excel")) {
+                     			 writeToExcel(rowNumber, 0,"fail");
+                     			 writeToExcel(rowNumber, 1,resultArray[1]);
+                     		 }
+                       	 if(databaseDisabled.equals("false")) {
+                       	  writeToDB(testInputNbr,allData[i][3],allData[i][4],resultArray);
+                       	 }
+          	}
+      		  		 }
+      		  		 
+          		}
+           	  }
+		
     	}
-    }
+    
     
     
     
@@ -1180,13 +1328,14 @@ public class testngMassRebillSlow {
 
     	try {
         //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
-    	stmt=GTMcon.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,era_rebill_mass) values (?,?,?,?,?,?)");  
+    	stmt=GTMcon.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,era_rebill_mass,request_id) values (?,?,?,?,?,?,?)");  
 		stmt.setString(1,testInputNbr);  
 		stmt.setString(2,tinCount);  
 		stmt.setString(3,trk);  
 		stmt.setString(4,resultArray[0]);  
 		stmt.setString(5,resultArray[1]);  
 		stmt.setString(6,"Y");  
+		stmt.setString(7,resultArray[2]);  
 		stmt.executeUpdate();
 		//stmt.close();
     	}
@@ -1288,7 +1437,7 @@ public class testngMassRebillSlow {
     public String[] validateResults(String trk) {
     
     	Connection con = null;
-    	String[] resultArray = new String[2];
+    	String[] resultArray = new String[3];
     	
     	try {
     	
@@ -1312,26 +1461,50 @@ public class testngMassRebillSlow {
         ResultSet rs = null;
         PreparedStatement stmt2 = null;
         ResultSet rs2 = null;
-        
+        String batchID=null;
      
       
+        try {
+           stmt2=con.prepareStatement("select max(batch_Summary_nbr) as bsn from invadj_schema.mass_adj_detail where TRACKING_NBR =?");                     	  
+     	   stmt2.setString(1,trk);  
+     	   rs2 = stmt2.executeQuery();
+     	  try {
+        	  if (rs2.next()==false){
+        		  resultArray[0]="fail";
+                  resultArray[1]="Not In ERA Database";
+                  System.out.println("Not In ERA Database");
+        	  }
+        	  else {
+        		   batchID = rs2.getString("bsn");
+                  
+        	  }
+     	   
+        }
+     	  catch(Exception e) {
+         	 
+    		}
+        }catch(Exception e) {}
+     	   
                 
                 try {
-                       if (rs.next()==false){
+                  
                            //  System.out.println("Is NULL");
                             
-                    	   stmt2=con.prepareStatement("select * from invadj_schema.mass_adj_detail where batch_Summary_nbr =?");                     	  
-                           stmt2.setString(1,trk);  
-                           rs2 = stmt2.executeQuery();
+                    	   stmt=con.prepareStatement("select * from invadj_schema.mass_adj_detail where tracking_nbr =? and batch_summary_nbr=?");                     	  
+                    	   stmt.setString(1,trk); 
+                    	   stmt.setString(2,batchID); 
+                    	   
+                    	   rs = stmt.executeQuery();
+                    	   System.out.println(batchID);
                           try {
-                        	  if (rs2.next()==false){
+                        	  if (rs.next()==false){
                         		  resultArray[0]="fail";
                                   resultArray[1]="Not In ERA Database";
                                   System.out.println("Not In ERA Database");
                         	  }
                         	  else {
-                        		  String statusDesc = rs2.getString("RECORD_STATUS_DESC");
-                                  String errorDesc = rs2.getString("FAIL_REASON_DESC");   
+                        		  String statusDesc = rs.getString("RECORD_STATUS_DESC");
+                                  String errorDesc = rs.getString("FAIL_REASON_DESC");   
                                   
                                   if (statusDesc==null){
                                  	 
@@ -1342,17 +1515,19 @@ public class testngMassRebillSlow {
                                 if (statusDesc.equals("SUCCESS")) {
                                       resultArray[0]="pass";
                                       resultArray[1]="completed";
+                                      resultArray[2]=batchID;
                                 }
                                 else {
                                       resultArray[0]="fail";
                                       resultArray[1]=errorDesc;
+                                      resultArray[2]=batchID;
                                 }
                         	  }
                           }
                           catch(Exception e) {
                         	 
-                          }
-                          }
+                          		}
+                          
                 }
                        catch(Exception e) {
                       	 

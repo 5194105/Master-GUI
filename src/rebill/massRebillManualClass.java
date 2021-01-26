@@ -54,8 +54,10 @@ public class massRebillManualClass {
 		c.setDatabaseDisabled("false");
 		
 		//You can give custom query if want to
-		c.setCustomCheckBox("false");
-		c.setCustomString("trkngnbr in ('794992783379')");
+
+		c.setCustomCheckBox("true");
+
+		c.setCustomString("test_input_nbr in ('136616')");
 				
 		c.setHeadlessString("false");
 

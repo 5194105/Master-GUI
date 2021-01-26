@@ -16,7 +16,7 @@ public class creditDebitManualRun {
 	public static void main(String[] args) {
 	config c = new config();
    	c.setExcelPath("C:\\Users\\theth\\git\\Master-GUI\\test data\\credit_debit.xlsx");
-	c.setLevel("2");
+	c.setLevel("3");
 	c.setDriverType("2");
 	c.setCompatibleMode("false");
 	c.setSource("db");
@@ -28,8 +28,8 @@ public class creditDebitManualRun {
 	c.setDisputeCheckBox("false");
 	c.setResolveCreditCheckBox("true");
 	c.setDatabaseDisabled("false");
-	c.setCustomCheckBox("false");
-	c.setCustomString("trkngnbr in ('882553697362','590443411313')");
+	c.setCustomCheckBox("true");
+	c.setCustomString("trkngnbr in ('794992624414')");
 	c.setHeadlessString("false");
 
 	c.setSessionCount("1");

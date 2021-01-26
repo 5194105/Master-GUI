@@ -84,7 +84,7 @@ public class creditDebitTestNGSlow {
 	Boolean isChecked1=false,isChecked2=false,isChecked3=false,isChecked4=false;
     String compatibleMode;
     Boolean chrome;
-    String  homePath=System.getProperty("user.dir");
+    String homePath=System.getProperty("user.dir");
     String browser;
     String chromeSetProperty="webdriver.chrome.driver";
 	String ieSetProperty="webdriver.ie.driver";
@@ -254,7 +254,9 @@ public void runDbQuery() {
 	ResultSetMetaData rsmd=null;
 
 	String databaseSqlCount="select count(*) as total from era_credit_debit ";
-	String databaseSqlQuery="select result, description, TEST_INPUT_NBR,	TIN_COUNT	,TRKNGNBR,	INVOICE_NBR_1,	INVOICE_NBR_2,	REGION,	USERNAME,	PASSWORD,	CREDIT_FLG,	DEBIT_FLG,	DISPUTE_FLG,	RESOLVE_CREDIT_FLG from era_credit_debit " ;
+	String databaseSqlQuery="select result, description, TEST_INPUT_NBR,	TIN_COUNT	,TRKNGNBR,	INVOICE_NBR_1,	INVOICE_NBR_2,	REGION,	USERNAME,	PASSWORD,	CREDIT_FLG,	DEBIT_FLG,	DISPUTE_FLG,	RESOLVE_CREDIT_FLG,	WORKABLE ,REASON_CODE,	REASON_CATEGORY, ROOT_CAUSE,VAL_DESC from era_credit_debit " ;
+	
+		
 	
 	if (allCheckBox.equals("true")) {
 		databaseSqlCount+="where trkngnbr is not null";
@@ -286,7 +288,7 @@ public void runDbQuery() {
 		databaseSqlQuery+="result ='fail' and (";
 	}
 		
-	
+	/*
 	if (creditCheckBox.equals("true")){
 		databaseSqlCount+=" CREDIT_FLG='Y' or ";
 		databaseSqlQuery+=" CREDIT_FLG='Y' or ";
@@ -315,8 +317,9 @@ public void runDbQuery() {
 		databaseSqlCount = databaseSqlCount.replace("or", "");
 	}
 
-	
+	*/
 		}
+		
 			}
 	else if (customCheckBox.equals("true")){
 		databaseSqlCount+="where trkngnbr is not null and "+customString;
@@ -504,8 +507,9 @@ public synchronized Object[][] dataProviderMethod4() {
 
 }
 @Test(dataProvider="data-provider1",retryAnalyzer = Retry.class)
-public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg, String resolveCreditFlg,int rowNumber) throws InterruptedException {
+public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg, String resolveCreditFlg,String workable,String reasonCode,String reasonCategory,String rootCause,String valDesc,int rowNumber) throws InterruptedException {
  
+	
 	
 	System.out.println(result);
 	System.out.println(descripiton);
@@ -515,13 +519,26 @@ public void testMethod1(String result, String descripiton,String testInputNbr,St
 	System.out.println(invoiceNbr1);
 	System.out.println(invoiceNbr2);
 	System.out.println(region);
-	
 	System.out.println(password);
 	System.out.println(rowNumber);
+	System.out.println(creditFlg);
+	System.out.println(debitFlg);
+	System.out.println(disputeFlg);
+	System.out.println(resolveCreditFlg);
+	System.out.println(workable);
+	System.out.println(reasonCode);
+	System.out.println(reasonCategory);
+	System.out.println(rootCause);
+	System.out.println(valDesc);
+	
+	
 	
 	
 	//Will Check if Trk is already successful;
-	  try {
+	 
+	
+	/*
+	try {
 	if (databaseDisabled.equals("false")) {
 
 		 String[] resultArray = validateResults(trk);
@@ -541,6 +558,9 @@ public void testMethod1(String result, String descripiton,String testInputNbr,St
 	  catch(Exception e) {
 		System.out.println(e);  
 	  }
+	  
+	  */
+	  
 	try { 
 		driver1.quit();
 		driver1.close();
@@ -595,15 +615,138 @@ public void testMethod1(String result, String descripiton,String testInputNbr,St
 	
 	wait1 = new WebDriverWait(driver1,20);
     login(driver1,wait1,username,password);
-  
-   // doCreditDebit(driver1,wait1, result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,  region , username , password,  creditFlg, debitFlg, disputeFlg, resolveCreditFlg,rowNumber,1);
     
+    if(creditFlg.equals("Y") && checkValidation("credit",testInputNbr,tinCount,trk,valDesc,rowNumber)==false) {
+    doCredit(driver1,wait1, result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,  region , username , password,  creditFlg, debitFlg, disputeFlg, resolveCreditFlg,workable,reasonCode,reasonCategory,rootCause,rowNumber,valDesc,1);
+    }
+    checkGUI(driver1,wait1);
+    doDebit();
+    checkGUI(driver1,wait1);
+    doDispute();
+    checkGUI(driver1,wait1);
+    doResolve();
 
 
 }
 
+
+public Boolean checkValidation(String type,String testInputNbr,String tinCount,String trk,String valDesc,int rowNumber) {
+	Boolean successfulBoolean=false;
+	Boolean denialBoolean=false;
+	if(valDesc.equals("Denial Expected")) {
+		denialBoolean=true;
+	}
+	
+	try {
+		if (databaseDisabled.equals("false")) {
+
+			 String[] resultArray = validateResults(trk,type,denialBoolean);
+		  if ( resultArray[0].equals("pass")){
+			  successfulBoolean=true;
+	   	 if(source.equals("excel")) {
+	   		 writeToExcel(rowNumber, 0,"pass");
+	   		 writeToExcel(rowNumber, 1,"completed");
+	   	 }
+	   	 
+	   	 	writeToDB(testInputNbr,tinCount,trk,resultArray);
+	   	 
+		  
+		  			}
+		}
+	}
+		catch(Exception e) {
+			System.out.println(e);
+			}
+		
+	
+	return successfulBoolean;
+}
+	
+		
+		
+		
+		public String[] validateResults(String trk,String type,Boolean denialBoolean) {
+
+			Connection con = null;
+			String[] resultArray = new String[2];
+			
+			try {
+			
+				if (level.equals("2")){
+					 
+		   		   //  con=c.getOracleARL2DbConnection();
+		   	 }
+		   	 else if (level.equals("3")){
+		   		 	
+		   		 	con=c.getOracleARL3DbConnection();
+		   	 	}
+			
+			}
+			catch(Exception e) {
+				
+				System.out.println("Could Not Get ERA DB Connections");
+			}
+			
+
+			PreparedStatement stmt = null;
+			ResultSet rs = null;
+			try {
+				
+				stmt=con.prepareStatement("select * from apps.xxfdx_eabr_airbill_notes_v where AIRBILL_NUMBER=?");  
+				stmt.setString(1,trk);  
+				rs = stmt.executeQuery();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			      
+			   
+				try {
+					rs = stmt.executeQuery();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			       try {
+					if (rs.next()==false){
+						System.out.println("Is NULL");
+					      resultArray[0]="fail";
+					      resultArray[1]="";
+					}
+					   else{
+						   
+						  String tempString= rs.getString("NOTES");
+						  
+						  
+						  if (tempString.contains("RDT CR") && denialBoolean==false && type.equals("credit")) {
+							  resultArray[0]="pass";
+		    			      resultArray[1]="completed";
+						  }
+						  else  if (tempString.contains("RDT DN") && denialBoolean==true) {
+							  resultArray[0]="pass";
+		    			      resultArray[1]="denied";
+						  }
+						  else {
+							  resultArray[0]="na";
+		    			      resultArray[1]="unable to validate";
+							  
+						  }
+			             
+						  
+					   }
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			      
+			 return resultArray;      
+		}    
+
+		
+
+
 @Test(dataProvider="data-provider2",retryAnalyzer = Retry.class)
-public void testMethod2(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg, String resolveCreditFlg,int rowNumber) {
+public void testMethod2(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg, String resolveCreditFlg,String workable,String reasonCode,String reasonCategory,String rootCause,int rowNumber) {
  
 	System.out.println("Instance: 2");
 	
@@ -678,7 +821,7 @@ public void testMethod2(String result, String descripiton,String testInputNbr,St
 
 }
 @Test(dataProvider="data-provider3",retryAnalyzer = Retry.class)
-public void testMethod3( String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg, String resolveCreditFlg,int rowNumber) {
+public void testMethod3(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg, String resolveCreditFlg,String workable,String reasonCode,String reasonCategory,String rootCause,int rowNumber) {
 	System.out.println("Instance: 3");
 	
 	
@@ -756,7 +899,7 @@ try {
 
 
 @Test(dataProvider="data-provider4",retryAnalyzer = Retry.class)
-public void testMethod4(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg, String resolveCreditFlg,int rowNumber) {
+public void testMethod4(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg, String resolveCreditFlg,String workable,String reasonCode,String reasonCategory,String rootCause,int rowNumber) {
 	System.out.println("Instance: 4");
 	//Will Check if Trk is already successful;
 	
@@ -893,9 +1036,7 @@ catch(Exception e) {
 }
 
 
-public String[] validateResults(String temp) {
-	return null;
-}
+
 
 
 
@@ -907,21 +1048,22 @@ public void login(WebDriver driver,WebDriverWait wait,String username,String pas
 	    driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
 		wait = new WebDriverWait(driver,waitTime);
 		driver.manage().window().maximize();
-		driver.findElement(By.id("username")).sendKeys(username);
-		driver.findElement(By.id("password")).sendKeys(password);
-		driver.findElement(By.id("submit")).click();
+		driver.findElement(By.id("okta-signin-username")).sendKeys(username);
+		driver.findElement(By.id("okta-signin-password")).sendKeys(password);
+		driver.findElement(By.id("okta-signin-submit")).click();
 	}
 	catch(Exception e) {
 		
 		 Assert.fail("Could Not Login");
 	}
 	
-	
-	
 }
+	
 
 
-public void doCreditDebit(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2, String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg,String resolveCreditFlg,int rowNumber, int instanceNumber) {
+
+public void doCreditDebit(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2, String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg,String resolveCreditFlg,String workable,String reasonCode,String reasonCategory,String rootCause,String valDesc,int rowNumber, int instanceNumber) {
+							
 	WebElement element=null;
 	JavascriptExecutor js= (JavascriptExecutor) driver;
 	
@@ -1018,6 +1160,29 @@ public void doCreditDebit(WebDriver driver,WebDriverWait wait, String result, St
  		Assert.fail("Could Not Get To Charge Code Details");
  	}
 	
+	System.out.println("STOP HERE");
+	 try{
+	  Select actionDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"pkgaction\"]")));
+	if (creditFlg.equals("Y")) {
+		 actionDropDown.selectByValue("CR");
+	}
+	if (debitFlg.equals("Y")) {
+		 actionDropDown.selectByValue("DB");
+	}
+	if (disputeFlg.equals("Y")) {
+		 actionDropDown.selectByValue("D");
+	}
+	if (resolveCreditFlg.equals("Y")) {
+		 actionDropDown.selectByValue("RC");
+	}
+	    	 System.out.println("Inside getDetails");
+	         //Getting Action Dropdown. Will RB everytime.
+	  }
+	  catch(Exception e) {
+		  System.out.println(e);
+	  }
+	
+	/*
 	//*[@id="invAction"]
     try{
    	 System.out.println("Inside getDetails");
@@ -1061,14 +1226,7 @@ catch(Exception e) {
 
  	
  		 
- 		 /*
-     	 *****************************************************************************
-     	 *
-     	 *Getting to phone detail
-     	 *
-     	 *
-     	 ****************************************************************************
-     	 */
+ 		
  		 
  		 System.out.println("Phone Details");
 //   js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
@@ -1157,8 +1315,8 @@ catch(Exception e) {
 	 Assert.fail("Could Not Get to Rebill Screen");
      }
      }
-    
-    
+    */
+}
 }
 
 

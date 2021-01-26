@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -17,6 +18,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -109,7 +111,7 @@ public class eraMassRerateTestNGSlow {
 	String cm4;
 	int totalMod;
 	String level;
-	
+	int counter1=0,counter2=0;
 	String allCheckBox;
 	String nullCheckBox;
 	String failedCheckBox;
@@ -134,7 +136,10 @@ public class eraMassRerateTestNGSlow {
 	config c;
 	int waitTime;
 	String eraWorkable;
-	
+	int min=0,max=0;
+	  ArrayList<Integer> trkList = new ArrayList<Integer>();
+	  ArrayList<String> addedTrks = new ArrayList<String>();
+	  ArrayList<String> removedTrks = new ArrayList<String>();
 	
 	
 	
@@ -194,7 +199,9 @@ public class eraMassRerateTestNGSlow {
     		databaseSqlQuery+="where trkngnbr is not null and "+customString;
     	}
     	
-    	
+    	databaseSqlCount+=" order by test_input_nbr";
+		databaseSqlQuery+=" order by test_input_nbr";
+    	 
 
        	try {
             //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
@@ -337,8 +344,38 @@ public class eraMassRerateTestNGSlow {
 		catch(Exception e) {
 			System.out.println(e);
 		}
+		
+		
+		String tempTin="0";
+    	int tempNumber=0;
+    	
+    	for (int i=0;i<allData.length;i++){
+    		System.out.println(allData[i][2] + "  "+ tempTin);
+    		if (!allData[i][2].equals(tempTin)) {
+    			tempTin=allData[i][2];
+    			trkList.add(i);
+    		}
+    	}
+    	
+    	trkList.add(allData.length);
+    	
+    	for (int i=0;i<trkList.size();i++){
+    		System.out.println(trkList.get(i));
     	
 	}
+    	System.out.println();
+    	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	 @DataProvider(name = "data-provider1")
 	    public synchronized Object[][] dataProviderMethod1() { 
 	    	Object [][] obj=null;
@@ -495,6 +532,70 @@ public class eraMassRerateTestNGSlow {
 	    public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region,String username ,String password,String rate_weight,String wgt_type,String length,String height,String width,String dim_type,String rerate_type,String rsType ,String company ,String mass_rerate_combo,int rowNumber) {
 	    	String databaseSqlQuery="select  result,  DESCRIPTION, test_Input_Nbr, tin_Count, trkngnbr, invoice_Nbr_1, invoice_Nbr_2, region, username , password,  rate_weight,wgt_type,length,height,width,dim_type rerate_type, rs_Type ,company  , mass_rerate_combo from era_rerate_mass ";
 	    	
+	    	
+	    	
+	    	
+	    	if (counter1==trkList.get(counter2)) {
+	    		
+	        	
+	    		
+	    		
+	    		
+	    		
+	    		
+	    		min=trkList.get(counter2);
+	    		max=trkList.get(counter2+1);	
+	    		System.out.println(min);
+	    		System.out.println(max);	
+	    	
+	    		for(int i=min;i<max;i++) {
+	    				
+	    			System.out.println("Test Input Number "+allData[i][2]);
+	    			System.out.println("Row Count "+allData[i][3]);
+	    			System.out.println("Tracking Number "+allData[i][4]);
+	    			System.out.println("Reason Code "+allData[i][5]);
+	    			System.out.println("Account Number "+allData[i][6]);
+	    			addedTrks.add(allData[i][4]);
+	    			
+	    			
+	    			
+	    			try {
+	    		    	if (databaseDisabled.equals("false")) {
+	    		    
+	    		  		  String[] resultArray = validateResults(allData[i][4]);
+	    		  	  if ( resultArray[0].equals("pass")){
+	    		       	 if(source.equals("excel")) {
+	    		       //	 writeToExcel(rowNumber, 0,"pass");
+	    		       //	 writeToExcel(rowNumber, 1,"completed");
+	    		       	
+	    		       	 }
+	    		       	 System.out.println(tinCount);
+	    		       	 writeToDB(testInputNbr,allData[i][3],allData[i][4],resultArray);
+	    		       	// return;
+	    		  	  addedTrks.remove(allData[i][4]);
+	    		  	  removedTrks.add(allData[i][4]);
+	    		  	  			}
+	    		  	  else if ( resultArray[0].equals("pending")){
+	    		  		writeToDB(testInputNbr,allData[i][3],allData[i][4],resultArray);
+	    		  		addedTrks.remove(allData[i][4]);
+		    		  	  removedTrks.add(allData[i][4]);
+	    		  	  }
+	    		  	  }
+	    		    		
+	    		  	  }
+	    		    
+	    		  	  catch(Exception e) {
+	    		  		System.out.println(e);  
+	    		  	  }
+	    		}
+	    	
+	    		
+	    		
+	    		for (int i=0;i<addedTrks.size();i++) {
+	    			System.out.println(addedTrks.get(i));
+	    		}
+	    	
+	    		
 	    	System.out.println("Instance: 1");
 	    	
 	    	System.out.println(result+": "+result);
@@ -524,8 +625,8 @@ public class eraMassRerateTestNGSlow {
 	  		  String[] resultArray = validateResults(trk);
 	  	  if ( resultArray[0].equals("pass")){
 	       	 if(source.equals("excel")) {
-	       	 writeToExcel(rowNumber, 0,"pass");
-	       	 writeToExcel(rowNumber, 1,"completed");
+	       	// writeToExcel(rowNumber, 0,"pass");
+	       //	 writeToExcel(rowNumber, 1,"completed");
 	       	
 	       	 }
 	       	 writeToDB(testInputNbr,tinCount,trk,resultArray);
@@ -595,359 +696,29 @@ public class eraMassRerateTestNGSlow {
 	    	wait1 = new WebDriverWait(driver1,20);
 		    login(driver1,wait1,username,password);
 		  
-		    try {    
-		        
-		    	doMassRerate(driver1,wait1,  result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2, region , username , password,rate_weight,wgt_type,length,height,width,dim_type,rerate_type, rsType , company,mass_rerate_combo, rowNumber,1);
-				} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		    
+	
 	    
-	    
-	    }
-	    
-	    @Test(dataProvider="data-provider2",retryAnalyzer = Retry.class)
-	    public void testMethod2(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region,String username ,String password,String rate_weight,String wgt_type,String length,String height,String width,String dim_type,String rerate_type,String rsType ,String company ,String mass_rerate_combo,int rowNumber) {
-	     
-	    	System.out.println("Instance: 2");
-	    	
-	    	System.out.println(result);
-	    	System.out.println(descripiton);
-	    	System.out.println(testInputNbr);
-	    	System.out.println(tinCount);
-	    	System.out.println(trk);
-	    	System.out.println(invoiceNbr1);
-	    	System.out.println(invoiceNbr2);
-	    	System.out.println(username);
-	    	System.out.println(password);
-	    	System.out.println(length);
-	    	System.out.println(rate_weight);
-	    	System.out.println(rerate_type);
-	    	System.out.println(rsType);
-	    	System.out.println(company);	
-	    	System.out.println(mass_rerate_combo);
-	    	System.out.println(rowNumber);
 	    	
 	    	
-	    /*
-	    	//Will Check if Trk is already successful;
-	  	  try {
-	    	if (databaseDisabled.equals("false")) {
-	    
-	  		  String[] resultArray = validateResults(trk);
-	  	  if ( resultArray[0].equals("pass")){
-	       	 if(source.equals("excel")) {
-	       	 writeToExcel(rowNumber, 0,"pass");
-	       	 writeToExcel(rowNumber, 1,"completed");
-	       	
-	       	 }
-	       	 writeToDB(testInputNbr,tinCount,trk,resultArray);
-	       	 return;
-	  	  
-	  	  			}
-	    		}
-	  	  }
-	    
-	  	  catch(Exception e) {
-	  		System.out.println(e);  
-	  	  }
-	  	  
-	  	  */
-	    	try { 
-	    		driver2.quit();
-	    		driver2.close();
-		  }
-		  catch(Exception eee) {
-			  System.out.println(eee);
-			  
-		  }
-	    	if (browser.equals("1")) {
-	    		if (c.getCompatibleMode().equals("true")) {	
-	    			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-	    		    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
-	    		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
-	    		    capabilities.setCapability("ignoreZoomSetting", true);
-	    		    capabilities.setCapability("ignoreProtectedModeSettings", true);
-	    		    capabilities.setCapability("initialBrowserUrl",levelUrl);
-	    		}
-	    		System.setProperty(ieSetProperty, ieDriverPath);
-	    		driver2 =  new InternetExplorerDriver();
-	    	}
+	    	 try {
+	    		    
+	 	        if (addedTrks.size()>=1) {
+	 	       	doMassRerate(driver1,wait1,  result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2, region , username , password,rate_weight,wgt_type,length,height,width,dim_type,rerate_type, rsType , company,mass_rerate_combo, rowNumber,1);
+				    }
+	 		} catch (InterruptedException e) {
+	 			// TODO Auto-generated catch block
+	 			e.printStackTrace();
+	 		}
+	 	    counter2++;
+	 	    }
+	 	    
+	 	    counter1++;
 	    	
 	    	
-	    	else if (browser.equals("2")) {
-	    		System.setProperty(chromeSetProperty,chromePath);
-	    	if(headless.equals("true")) {
-	    		ChromeOptions options = new ChromeOptions();
-	    	    options.addArguments("headless");
-	    	    options.addArguments("window-size=1200x600");
-	    		driver2 = new ChromeDriver(options);
-	    	}
-	    	else {
-	    		driver2 = new ChromeDriver();
-	    	}
-	    		//driver1 = new ChromeDriver();
-	    	}
-	    	
-	    	
-	    	else if (browser.equals("3")) {
-	    
-	        	FirefoxProfile profile = new FirefoxProfile(); 
-	        	profile.setPreference("capability.policy.default.Window.QueryInterface", "allAccess");
-	        	profile.setPreference("capability.policy.default.Window.frameElement.get","allAccess");
-	        	profile.setAcceptUntrustedCertificates(true); profile.setAssumeUntrustedCertificateIssuer(true);
-	        	DesiredCapabilities capabilities = new DesiredCapabilities(); 
-	        	capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-	        	System.setProperty("webdriver.gecko.driver",  homePath+"\\drivers\\geckodriver.exe");
-	        	driver2 = new FirefoxDriver(capabilities);
-	    	}
-	    	
-	    	
-	    	
-	    	
-	    	wait2 = new WebDriverWait(driver2,20);
-		    login(driver2,wait2,username,password);
-		  
-		    try {    
-		        
-		    	doMassRerate(driver2,wait2,  result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2, region , username , password,rate_weight,wgt_type,length,height,width,dim_type,rerate_type, rsType , company,mass_rerate_combo, rowNumber,2);
-				} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		    
-	    
-	    
-	    }
-	    
-	    
-	    @Test(dataProvider="data-provider3",retryAnalyzer = Retry.class)
-	    public void testMethod3(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region,String username ,String password,String rate_weight,String wgt_type,String length,String height,String width,String dim_type,String rerate_type,String rsType ,String company ,String mass_rerate_combo,int rowNumber) {
-	     
-	    	System.out.println("Instance: 3");
-	    	
-	    	System.out.println(result);
-	    	System.out.println(descripiton);
-	    	System.out.println(testInputNbr);
-	    	System.out.println(tinCount);
-	    	System.out.println(trk);
-	    	System.out.println(invoiceNbr1);
-	    	System.out.println(invoiceNbr2);
-	    	System.out.println(username);
-	    	System.out.println(password);
-	    	System.out.println(length);
-	    	System.out.println(rate_weight);
-	    	System.out.println(rerate_type);
-	    	System.out.println(rsType);
-	    	System.out.println(company);	
-	    	System.out.println(mass_rerate_combo);
-	    	System.out.println(rowNumber);
-	    	
-	    	
-	    /*
-	    	//Will Check if Trk is already successful;
-	  	  try {
-	    	if (databaseDisabled.equals("false")) {
-	    
-	  		  String[] resultArray = validateResults(trk);
-	  	  if ( resultArray[0].equals("pass")){
-	       	 if(source.equals("excel")) {
-	       	 writeToExcel(rowNumber, 0,"pass");
-	       	 writeToExcel(rowNumber, 1,"completed");
-	       	
-	       	 }
-	       	 writeToDB(testInputNbr,tinCount,trk,resultArray);
-	       	 return;
-	  	  
-	  	  			}
-	    		}
-	  	  }
-	    
-	  	  catch(Exception e) {
-	  		System.out.println(e);  
-	  	  }
-	  	  
-	  	  */
-	    	try { 
-	    		driver3.quit();
-	    		driver3.close();
-		  }
-		  catch(Exception eee) {
-			  System.out.println(eee);
-			  
-		  }
-	    	if (browser.equals("1")) {
-	    		if (c.getCompatibleMode().equals("true")) {	
-	    			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-	    		    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
-	    		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
-	    		    capabilities.setCapability("ignoreZoomSetting", true);
-	    		    capabilities.setCapability("ignoreProtectedModeSettings", true);
-	    		    capabilities.setCapability("initialBrowserUrl",levelUrl);
-	    		}
-	    		System.setProperty(ieSetProperty, ieDriverPath);
-	    		driver3 =  new InternetExplorerDriver();
-	    	}
-	    	
-	    	
-	    	else if (browser.equals("2")) {
-	    		System.setProperty(chromeSetProperty,chromePath);
-	    	if(headless.equals("true")) {
-	    		ChromeOptions options = new ChromeOptions();
-	    	    options.addArguments("headless");
-	    	    options.addArguments("window-size=1200x600");
-	    		driver3 = new ChromeDriver(options);
-	    	}
-	    	else {
-	    		driver3 = new ChromeDriver();
-	    	}
-	    		//driver1 = new ChromeDriver();
-	    	}
-	    	
-	    	
-	    	else if (browser.equals("3")) {
-	    
-	        	FirefoxProfile profile = new FirefoxProfile(); 
-	        	profile.setPreference("capability.policy.default.Window.QueryInterface", "allAccess");
-	        	profile.setPreference("capability.policy.default.Window.frameElement.get","allAccess");
-	        	profile.setAcceptUntrustedCertificates(true); profile.setAssumeUntrustedCertificateIssuer(true);
-	        	DesiredCapabilities capabilities = new DesiredCapabilities(); 
-	        	capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-	        	System.setProperty("webdriver.gecko.driver",  homePath+"\\drivers\\geckodriver.exe");
-	        	driver3 = new FirefoxDriver(capabilities);
-	    	}
-	    	
-	    	
-	    	
-	    	
-	    	wait3 = new WebDriverWait(driver3,20);
-		    login(driver3,wait3,username,password);
-		  
-		    try {    
-		        
-		    	doMassRerate(driver3,wait3,  result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2, region , username , password,rate_weight,wgt_type,length,height,width,dim_type,rerate_type, rsType , company,mass_rerate_combo, rowNumber,3);
-					} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		    
-	    
 	    
 	    }
 	   
-	    @Test(dataProvider="data-provider4",retryAnalyzer = Retry.class)
-	    public void testMethod4(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region,String username ,String password,String rate_weight,String wgt_type,String length,String height,String width,String dim_type,String rerate_type,String rsType ,String company ,String mass_rerate_combo,int rowNumber) {
-	     
-	    	System.out.println("Instance: 4");
-	    	
-	    	System.out.println(result);
-	    	System.out.println(descripiton);
-	    	System.out.println(testInputNbr);
-	    	System.out.println(tinCount);
-	    	System.out.println(trk);
-	    	System.out.println(invoiceNbr1);
-	    	System.out.println(invoiceNbr2);
-	    	System.out.println(username);
-	    	System.out.println(password);
-	    	System.out.println(length);
-	    	System.out.println(rate_weight);
-	    	System.out.println(rerate_type);
-	    	System.out.println(rsType);
-	    	System.out.println(company);	
-	    	System.out.println(mass_rerate_combo);
-	    	System.out.println(rowNumber);
-	    	
-	    	
-	    /*
-	    	//Will Check if Trk is already successful;
-	  	  try {
-	    	if (databaseDisabled.equals("false")) {
 	    
-	  		  String[] resultArray = validateResults(trk);
-	  	  if ( resultArray[0].equals("pass")){
-	       	 if(source.equals("excel")) {
-	       	 writeToExcel(rowNumber, 0,"pass");
-	       	 writeToExcel(rowNumber, 1,"completed");
-	       	
-	       	 }
-	       	 writeToDB(testInputNbr,tinCount,trk,resultArray);
-	       	 return;
-	  	  
-	  	  			}
-	    		}
-	  	  }
-	    
-	  	  catch(Exception e) {
-	  		System.out.println(e);  
-	  	  }
-	  	  
-	  	  */
-	    	try { 
-	    		driver4.quit();
-	    		driver4.close();
-		  }
-		  catch(Exception eee) {
-			  System.out.println(eee);
-			  
-		  }
-	    	if (browser.equals("1")) {
-	    		if (c.getCompatibleMode().equals("true")) {	
-	    			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-	    		    capabilities.setCapability("InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION", true);
-	    		    capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
-	    		    capabilities.setCapability("ignoreZoomSetting", true);
-	    		    capabilities.setCapability("ignoreProtectedModeSettings", true);
-	    		    capabilities.setCapability("initialBrowserUrl",levelUrl);
-	    		}
-	    		System.setProperty(ieSetProperty, ieDriverPath);
-	    		driver4 =  new InternetExplorerDriver();
-	    	}
-	    	
-	    	
-	    	else if (browser.equals("2")) {
-	    		System.setProperty(chromeSetProperty,chromePath);
-	    	if(headless.equals("true")) {
-	    		ChromeOptions options = new ChromeOptions();
-	    	    options.addArguments("headless");
-	    	    options.addArguments("window-size=1200x600");
-	    		driver4 = new ChromeDriver(options);
-	    	}
-	    	else {
-	    		driver4 = new ChromeDriver();
-	    	}
-	    		//driver1 = new ChromeDriver();
-	    	}
-	    	
-	    	
-	    	else if (browser.equals("3")) {
-	    
-	        	FirefoxProfile profile = new FirefoxProfile(); 
-	        	profile.setPreference("capability.policy.default.Window.QueryInterface", "allAccess");
-	        	profile.setPreference("capability.policy.default.Window.frameElement.get","allAccess");
-	        	profile.setAcceptUntrustedCertificates(true); profile.setAssumeUntrustedCertificateIssuer(true);
-	        	DesiredCapabilities capabilities = new DesiredCapabilities(); 
-	        	capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-	        	System.setProperty("webdriver.gecko.driver",  homePath+"\\drivers\\geckodriver.exe");
-	        	driver4 = new FirefoxDriver(capabilities);
-	    	}
-	    	
-	    	
-	    	
-	    	
-	    	wait4 = new WebDriverWait(driver4,20);
-		    login(driver4,wait4,username,password);
-		  
-		    try {    
-				doMassRerate(driver4,wait4, result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2, region , username , password,rate_weight,wgt_type,length,height,width,dim_type,rerate_type, rsType , company,mass_rerate_combo, rowNumber,4);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		    
-	    
-	    
-	    }
 	    
 	    
 	    
@@ -978,20 +749,6 @@ public class eraMassRerateTestNGSlow {
 	    public void doMassRerate(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String region,String username ,String password,String rate_weight,String wgt_type,String length, String height, String width,String dim_type, String rerate_type,String rsType ,String company ,String mass_rerate_combo,int rowNumber, int instanceNumber) throws InterruptedException {
 
 
-	    	if (rerate_type.equals("NA")) {
-	    		 if(source.equals("excel")) {
-	               //	 writeToExcel(rowNumber, 0,"fail");
-	               	// writeToExcel(rowNumber, 1,"Prerate Code Not Added Yet");
-	               	 }
-	   				 if(databaseDisabled.equals("false")) {
-     	   			 String[] resultArray = new String[2];
-     	   			 	resultArray[0]="fail";
-     	   				resultArray[1]="Not Info Info For Test Case";
-     	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-                    	 }
-    	return;	
-	    	}
-	    	
 	   	   System.out.println("Inside of doMassRerate");
 	    	System.out.println("result: "+result);
 	    	System.out.println("descripiton: "+descripiton);
@@ -1045,8 +802,36 @@ public class eraMassRerateTestNGSlow {
 	        driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[2]/button[3]")).click();
 	        Thread.sleep(waittimer);
 	        //Will type the trk number to text area
-	        driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div/div/textarea")).sendKeys(trk);
-	        Thread.sleep(waittimer);
+	        
+	        
+	        
+	        
+	        
+	        int max=0;
+			int min=0;
+    		min=trkList.get(counter2);
+    		
+    		max=trkList.get(counter2+1);	
+    		System.out.println(min);
+    		System.out.println(max);	
+    		driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div/div/textarea")).clear();
+    		int trkCounter=0;
+    		for(int i=min;i<max;i++) {
+    				if(addedTrks.contains(allData[i][4])) {
+	        			driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div/div/textarea")).sendKeys(allData[i][4]);
+	        			driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div/div/textarea")).sendKeys(Keys.chord(Keys.SHIFT,Keys.ENTER));
+	        			System.out.println("Test Input Number "+allData[i][2]);
+	        			System.out.println("Tracking Number "+allData[i][4]);
+	        			System.out.println("Reason Code "+allData[i][5]);
+	        			System.out.println("Account Number "+allData[i][6]);
+	        			trkCounter++;
+    				}
+    		}
+	        
+	        
+	        
+	    //    driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div/div/textarea")).sendKeys(trk);
+	      //  Thread.sleep(waittimer);
 	        //Will click on go
 	        driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[1]/button[1]")).click();
 	        Thread.sleep(waittimer);
@@ -1103,19 +888,27 @@ public class eraMassRerateTestNGSlow {
 	        
 	        Thread.sleep(waittimer);
 	        System.out.println("RERATE");
+	        String[] resultArray = new String[3];
+	        resultArray[0]="stephen";
+			resultArray[1]="made it to the end";
+			resultArray[2]="na";
+			writeToDB(testInputNbr,tinCount,trk,resultArray);
+	        
+	        
 	        //Click on rerate
-	        driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[3]/div[5]/div/div/button")).click();
-        	
+	       // driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[3]/div[5]/div/div/button")).click();
+        	/*
 	        Thread.sleep(waittimer);
 	    	String temp=driver.findElement(By.xpath(" /html/body/div[7]/div/div/div[1]/h3")).getText();;
 	    	String requestID=temp.replaceAll("\\D+","");
 	    	System.out.println( requestID);
-	       
+	    	*/
+	       /*
 	    		String[] resultArray = new String[2];
 			 	resultArray[0]="In Progress";
 				resultArray[1]=requestID;
 				writeToDB(testInputNbr,tinCount,trk,resultArray);
-	        
+	        */
 	        
 	    	} 
 	    	catch(Exception e) {
@@ -1127,9 +920,10 @@ public class eraMassRerateTestNGSlow {
 	          // 	 writeToExcel(rowNumber, 1,"Failed on Entering Tracking Number");
 	           	 }
 					 if(databaseDisabled.equals("false")) {
-		   			 String[] resultArray = new String[2];
+		   			 String[] resultArray = new String[3];
 		   			 	resultArray[0]="fail";
 		   				resultArray[1]="Failed on Entering Tracking Number";
+		   				resultArray[2]="na";
 		   				writeToDB(testInputNbr,tinCount,trk,resultArray);
 	            	 }
 	    		 Assert.fail("Failed on Entering Tracking Number");
@@ -1137,6 +931,91 @@ public class eraMassRerateTestNGSlow {
 	    	}
 	    	
 	    }
+	    
+	    
+	    
+	    
+	    public String[] validateResults(String trk) {
+	    	 Boolean result=null;
+             Connection con = null;
+         	String[] resultArray = new String[3];
+         	
+         	try {
+         	
+         		if (level.equals("2")){
+         			 
+            		   //  con=c.getOracleARL2DbConnection();
+            	 }
+            	 else if (level.equals("3") ){
+            		 	
+            		 con=c.getEraL3Con();
+            	 	}
+         		
+
+         	
+         	
+         	}
+         	catch(Exception e) {
+         		System.out.println(e);
+         		System.out.println("Could Not Get ERA DB Connections");
+         	}
+         	
+
+         	PreparedStatement stmt = null;
+         	ResultSet rs = null;
+     
+         		  try {
+         			  System.out.println(trk);
+         			 stmt=con.prepareStatement("select FAILED_REQ_QTY, SUCCESS_REQ_QTY ,TOTAL_REQUEST_QTY,RERATE_STATUS_CD, RERATE_OUTBOUND_TMSTP from invadj_schema.mass_adj_summary a join (select max(batch_summary_nbr) as bsr from invadj_schema.mass_rerate_detail where airbill_nbr =?) b on b.bsr=a.batch_summary_nbr");  
+          			stmt.setString(1,trk);  
+          			rs = stmt.executeQuery();
+         	
+         	  }
+         		  catch (Exception e) {
+         			  }
+         		 try {
+          			if (rs.next()==false){
+          			   
+          				
+          				System.out.println("Is NULL");
+          			      resultArray[0]="fail";
+          			      resultArray[1]="Not Found in ERA DB";
+          			}
+          			   else{
+          				   
+          				  String SUCCESS_REQ_QTY = rs.getString("SUCCESS_REQ_QTY");
+          				 String TOTAL_REQUEST_QTY = rs.getString("TOTAL_REQUEST_QTY");
+          				 System.out.println(SUCCESS_REQ_QTY);
+          				 System.out.println(TOTAL_REQUEST_QTY);
+          				if (SUCCESS_REQ_QTY==null) {
+          					SUCCESS_REQ_QTY="null";
+          				}
+          				 if (SUCCESS_REQ_QTY.equals(TOTAL_REQUEST_QTY)) {
+          					  resultArray[0]="pass";
+    	    			      resultArray[1]="completed";
+          				 }
+          				 else if (SUCCESS_REQ_QTY.equals("null")) {
+          					  resultArray[0]="pending";
+      	    			      resultArray[1]="Still Processing";
+          				 }
+          				
+          				  else {
+          					  resultArray[0]="na";
+      	    			      resultArray[1]="Check Manually";
+          					  
+          				  }
+          	             
+          				  
+          			   }
+          		} catch (SQLException e) {
+          			// TODO Auto-generated catch block
+          			e.printStackTrace();
+          		}
+         		  
+         	      
+
+	    	 return resultArray;      
+	}    
 	    
 	    public synchronized void writeToDB(String testInputNbr,String tinCount,String trk,String[] resultArray) {
 	    	Connection GTMcon=null;
@@ -1154,13 +1033,14 @@ public class eraMassRerateTestNGSlow {
 
 	    	try {
 	        //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
-	    	stmt=GTMcon.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,era_mass_rerate) values (?,?,?,?,?,?)");  
+	    	stmt=GTMcon.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,era_mass_rerate,request_id) values (?,?,?,?,?,?,?)");  
 			stmt.setString(1,testInputNbr);  
 			stmt.setString(2,tinCount);  
 			stmt.setString(3,trk);  
 			stmt.setString(4,resultArray[0]);  
 			stmt.setString(5,resultArray[1]);  
 			stmt.setString(6,"Y");  
+			stmt.setString(7,resultArray[2]); 
 			stmt.executeUpdate();
 			//stmt.close();
 	    	}
@@ -1172,26 +1052,19 @@ public class eraMassRerateTestNGSlow {
 	    	
 	    	try {
 			//	update gtm_rev_tools.rebill_results set result='fail',description='6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables' where trkngnbr='566166113544';
-	    	stmt=GTMcon.prepareStatement("update era_results set result=?,request_ID=? where trkngnbr=? and era_mass_rerate=?");  
+	    	stmt=GTMcon.prepareStatement("update era_results set result=?,description=?,request_ID=? where trkngnbr=? and era_mass_rerate=?");  
 			stmt.setString(1,resultArray[0]);  
 			stmt.setString(2,resultArray[1]); 
-			stmt.setString(3,trk); 
-			stmt.setString(4,"Y"); 
+			stmt.setString(3,resultArray[2]); 
+			stmt.setString(4,trk); 
+			stmt.setString(5,"Y"); 
 			stmt.executeUpdate();
 			//stmt.close();
 		}
 		catch(Exception e) {
 			System.out.println(e);
 		}
-	    	/*
-	    	try {
-				GTMcon.close();
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	    	*/
+	    	
 	    }
 	    
 }
