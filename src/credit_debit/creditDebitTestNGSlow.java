@@ -617,18 +617,43 @@ public void testMethod1(String result, String descripiton,String testInputNbr,St
     login(driver1,wait1,username,password);
     
     if(creditFlg.equals("Y") && checkValidation("credit",testInputNbr,tinCount,trk,valDesc,rowNumber)==false) {
-    doCredit(driver1,wait1, result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,  region , username , password,  creditFlg, debitFlg, disputeFlg, resolveCreditFlg,workable,reasonCode,reasonCategory,rootCause,rowNumber,valDesc,1);
+    doCredit(driver1,wait1, result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,  region , username , password,  creditFlg, debitFlg, disputeFlg, resolveCreditFlg,workable,reasonCode,reasonCategory,rootCause,valDesc,rowNumber,1);
+   }
+    if(debitFlg.equals("Y") && checkValidation("debit",testInputNbr,tinCount,trk,valDesc,rowNumber)==false) {
+    checkGUI(driver1,wait1,username,password);
+    doDebit(driver1,wait1, result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,  region , username , password,  creditFlg, debitFlg, disputeFlg, resolveCreditFlg,workable,reasonCode,reasonCategory,rootCause,valDesc,rowNumber,1);
     }
-    checkGUI(driver1,wait1);
-    doDebit();
-    checkGUI(driver1,wait1);
-    doDispute();
-    checkGUI(driver1,wait1);
-    doResolve();
-
+    if(disputeFlg.equals("Y") && checkValidation("dispute",testInputNbr,tinCount,trk,valDesc,rowNumber)==false) {
+    checkGUI(driver1,wait1,username,password);
+    doDispute(driver1,wait1, result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,  region , username , password,  creditFlg, debitFlg, disputeFlg, resolveCreditFlg,workable,reasonCode,reasonCategory,rootCause,valDesc,rowNumber,1);
+    }
+    if(resolveCreditFlg.equals("Y") && checkValidation("resolve",testInputNbr,tinCount,trk,valDesc,rowNumber)==false) {
+    checkGUI(driver1,wait1,username,password);
+    doResolve(driver1,wait1, result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,  region , username , password,  creditFlg, debitFlg, disputeFlg, resolveCreditFlg,workable,reasonCode,reasonCategory,rootCause,valDesc,rowNumber,1);
+    }
 
 }
 
+	public void checkGUI(WebDriver driver,WebDriverWait wait,String username,String password) {
+		
+		JavascriptExecutor js= (JavascriptExecutor) driver;
+		//In order for clear button to be clickable need to scroll up
+	    js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    
+	String tempString= driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[1]/div/div[2]/form/div[1]/div[1]/div/div[3]/div/label")).getText();
+	if (tempString.equals("Tracking ID ")) {
+		
+	}
+	else {
+		try {
+		driver.quit();
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		login(driver,wait,username,password);
+		}
+}
 
 public Boolean checkValidation(String type,String testInputNbr,String tinCount,String trk,String valDesc,int rowNumber) {
 	Boolean successfulBoolean=false;
@@ -719,6 +744,18 @@ public Boolean checkValidation(String type,String testInputNbr,String tinCount,S
 						  
 						  
 						  if (tempString.contains("RDT CR") && denialBoolean==false && type.equals("credit")) {
+							  resultArray[0]="pass";
+		    			      resultArray[1]="completed";
+						  }
+						  else if (tempString.contains("RDT DB") && denialBoolean==false && type.equals("debit")) {
+							  resultArray[0]="pass";
+		    			      resultArray[1]="completed";
+						  }
+						  else if (tempString.contains("RDT CR") && denialBoolean==false && type.equals("resolve")) {
+							  resultArray[0]="pass";
+		    			      resultArray[1]="completed";
+						  }
+						  else if (tempString.contains("RDT D") && denialBoolean==false && type.equals("dispute")) {
 							  resultArray[0]="pass";
 		    			      resultArray[1]="completed";
 						  }
@@ -1060,16 +1097,17 @@ public void login(WebDriver driver,WebDriverWait wait,String username,String pas
 }
 	
 
+public void doDebit(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2, String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg,String resolveCreditFlg,String workable,String reasonCode,String reasonCategory,String rootCause,String valDesc,int rowNumber, int instanceNumber) {
+}
+public void doResolve(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2, String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg,String resolveCreditFlg,String workable,String reasonCode,String reasonCategory,String rootCause,String valDesc,int rowNumber, int instanceNumber) {
+}
+public void doDispute(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2, String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg,String resolveCreditFlg,String workable,String reasonCode,String reasonCategory,String rootCause,String valDesc,int rowNumber, int instanceNumber) {
+}
 
-
-public void doCreditDebit(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2, String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg,String resolveCreditFlg,String workable,String reasonCode,String reasonCategory,String rootCause,String valDesc,int rowNumber, int instanceNumber) {
+public void doCredit(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2, String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg,String resolveCreditFlg,String workable,String reasonCode,String reasonCategory,String rootCause,String valDesc,int rowNumber, int instanceNumber) {
 							
 	WebElement element=null;
 	JavascriptExecutor js= (JavascriptExecutor) driver;
-	
-	int packageCounter=0;
-	Boolean exist;
-	WebElement scrollElement;
 	
 	wait=new WebDriverWait(driver,20);
 	driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
@@ -1115,16 +1153,18 @@ public void doCreditDebit(WebDriver driver,WebDriverWait wait, String result, St
 	int counter1=0;
 	String tempString1;
 	driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS);
+	int counter1=0;
+	String tempString1;
+	driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS);
 	while (counter1<10) {
 	try {  
 		counter1++;
 		System.out.println("Trying to click package tab");
-		element =driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[2]/a"));
+		element =driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a"));
 		js.executeScript("arguments[0].click()", element);    
-		tempString1=driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div[2]/div/form/div/div[6]/div[1]/label")).getText();
-		System.out.println(tempString1);
-		if(tempString1.equals("Action")) {
-			System.out.println("Action");
+		tempString1=driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[2]/div[1]/div/div[2]/div[1]/div/div/div/div/div/div[1]/div/div[1]/span[1]")).getText();
+		if(tempString1.equals("Charge Code Description")) {
+			System.out.println("Found Code Desc");
 			break;
 		}
 	}
@@ -1136,7 +1176,7 @@ public void doCreditDebit(WebDriver driver,WebDriverWait wait, String result, St
     		driver.findElement(By.xpath("/html[1]/body[1]/div[6]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]")).click();
     		driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/button[1]")).click();
     		System.out.println("Found Pop Up");
-    		element =driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[2]/a"));
+    		element =driver.findElement(By.xpath("//*[@id=\"main-tabs\"]/li[3]/a"));
         	js.executeScript("arguments[0].click()", element);
     }	catch(Exception ee) {
     	System.out.println("Could Not Find Pop Up Or Continue To Charge Code Screen");
@@ -1159,7 +1199,6 @@ public void doCreditDebit(WebDriver driver,WebDriverWait wait, String result, St
     		
  		Assert.fail("Could Not Get To Charge Code Details");
  	}
-	
 	System.out.println("STOP HERE");
 	 try{
 	  Select actionDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"pkgaction\"]")));
@@ -1182,140 +1221,7 @@ public void doCreditDebit(WebDriver driver,WebDriverWait wait, String result, St
 		  System.out.println(e);
 	  }
 	
-	/*
-	//*[@id="invAction"]
-    try{
-   	 System.out.println("Inside getDetails");
-        //Getting Action Dropdown. Will RB everytime.
-        Select actionDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"invAction\"]")));
-   
-   	List<WebElement> aaa= actionDropDown.getOptions();
-   	for (WebElement we: aaa) {
- 	   System.out.println("|||"+we.getText()+"|||");
-   		if(we.getText().toLowerCase().contains(function.toLowerCase())) {
-   			actionDropDown.selectByVisibleText(we.getText());
-   			break;
-   		}
-   	}
-
-}
-catch(Exception e) {
-	System.out.println(e);
-	}
-    
-    
-     driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div[2]/div/form/div/div[6]/div[7]/button")).click();
-   
-    
-    
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
- 	wait=new WebDriverWait(driver,waitTime); 
-	    driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
-
- 	
- 		 
- 		
- 		 
- 		 System.out.println("Phone Details");
-//   js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-     try{
-    	 //Click on rebill RPI Complete, Phone, and Continue
-          if (login.equals("5194105")|| login.equals("584168")){
-        	//  driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/label[1]")).click();
-        	  driver.findElement(By.xpath("//*[@id=\"invoice-level\"]/div[2]/div/form/div/div[5]/div/div/div/div/div/div/div/div[2]/div[2]/label[1]")).click();
-              
-        	//*[@id="invoice-level"]/div[2]/div/form/div/div[5]/div/div/div/div/div/div/div/div[2]/div[2]/label[1]
-        	  }
-      
-          
-       Select contactMethodDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"rmrks\"]")));
-       contactMethodDropDown.selectByValue("phone");  
-       Thread.sleep(1500);
- 	   driver.findElement(By.xpath("//*[@id=\"invoice-level\"]/div[2]/div/form/div/div[5]/div/div/div/div/div/div/div/div[2]/div[2]/div/button[1]")).click();
-     }
-     catch(Exception e1) {
-    	 System.out.println("Failed Selecting Contact Method and Clicking Continue");
-     
-    	 if(source.equals("excel")) {
-        	 writeToExcel(rowNumber, 0,"fail");
-        	 writeToExcel(rowNumber, 1,"Failed Selecting Contact Method and Clicking Continue");
-        	return;
-        	 }
-			 if(databaseDisabled.equals("false")) {
-   			 String[] resultArray = new String[2];
-   			 	resultArray[0]="fail";
-   				resultArray[1]="Failed Selecting Contact Method and Clicking Continue";
-   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-   				
-         	 } 
-			 Assert.fail("Failed Selecting Contact Method and Clicking Continue");
-     }
- 	   
- 	
-     wait=new WebDriverWait(driver,1);
-     driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS);
-     counter1=0;
- 	  
-     
-     while(counter1<=10) {   
- 	   counter1++;
- 	   try {
- 	   wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")));
-     	break;
- 	   }
- 	   		catch(Exception e) {
- 	   			try {
- 	   				System.out.println("Could not select phone or click RPI..");
- 	   				String tempError= driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/div[1]/h4")).getText();
- 	   				if (tempError.indexOf("Management approval")!=-1) {
- 	   					System.out.println(tempError);
- 	   				 if(source.equals("excel")) {
- 	               	 writeToExcel(rowNumber, 0,"fail");
- 	               	 writeToExcel(rowNumber, 1,"Management approval");
- 	               	 }
- 	   				 if(databaseDisabled.equals("false")) {
-         	   			 String[] resultArray = new String[2];
-         	   			 	resultArray[0]="fail";
-         	   				resultArray[1]="Management approval";
-         	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-                        	 }
- 	   			 Assert.fail("Management approval");
- 	   					}
- 	   				driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/button[1]")).click();
- 	   					}
- 	   				catch(Exception ee) {
- 	   				 System.out.println(ee+"Could Not Get to Rebill Screen");
- 	   				
- 	   				}
- 	   			}
-     		}
-     if (counter1>=10){
-     if(databaseDisabled.equals("false")) {
-			 String[] resultArray = new String[2];
-			 	resultArray[0]="fail";
-				resultArray[1]="Could Not Get to Rebill Screen";
-				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-        	 }
-		 if(source.equals("excel")) {
-           	 writeToExcel(rowNumber, 0,"fail");
-           	 writeToExcel(rowNumber, 1,"Could Not Get to Rebill Screen");
-           	 }
-	 Assert.fail("Could Not Get to Rebill Screen");
-     }
-     }
-    */
+	
 }
 }
 
