@@ -26,7 +26,7 @@
       <span class="top-banner-title-font">Test results</span>
       <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">1 suite, 3 failed tests</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -40,7 +40,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-Sample_Suite" class="navigator-link">
-              <span class="suite-name border-skipped">Sample_Suite</span>
+              <span class="suite-name border-failed">Sample_Suite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -93,7 +93,31 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">27 methods,  2 skipped,  25 passed</span>
+                    <span class="method-stats">5 methods, 3 failed,  1 skipped,  1 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Sample_Suite" class="hide-methods failed suite-Sample_Suite"> (hide)</a> <!-- hide-methods failed suite-Sample_Suite -->
+                      <a href="#" panel-name="suite-Sample_Suite" class="show-methods failed suite-Sample_Suite"> (show)</a> <!-- show-methods failed suite-Sample_Suite -->
+                    </span>
+                    <div class="method-list-content failed suite-Sample_Suite">
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Sample_Suite" title="credit_debit.creditDebitTestNGSlow" class="method navigator-link" hash-for-method="testMethod2">testMethod2</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Sample_Suite" title="credit_debit.creditDebitTestNGSlow" class="method navigator-link" hash-for-method="testMethod3">testMethod3</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Sample_Suite" title="credit_debit.creditDebitTestNGSlow" class="method navigator-link" hash-for-method="testMethod4">testMethod4</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-Sample_Suite -->
                   </li>
                   <li>
                     <span class="method-list-title skipped">Retried methods</span>
@@ -104,12 +128,7 @@
                     <div class="method-list-content skipped suite-Sample_Suite">
                       <span>
                         <img src="skipped.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 251154, 1, 794993963313, 330852140, , USA, 5194105, mb4mn5NB, 70, LBS, , , , , weight, IL, EP, ,...)">testMethod1(, , 251154, 1, 794993963313, 330852140, , USA, 5194105, mb4mn5NB, 70, LBS, , , , , weight, IL, EP, ,...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="skipped.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 252332, 1, 597715361410, 330852073, , USA, 5194105, mb4mn5NB, 70, LB, , , , IN, weight, IL, GD, ...)">testMethod1(, , 252332, 1, 597715361410, 330852073, , USA, 5194105, mb4mn5NB, 70, LB, , , , IN, weight, IL, GD, ...)</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Sample_Suite" title="credit_debit.creditDebitTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 264640, 1, 794994036116, 716083093, , USA, 5194105, mb4mn5NB, Y, , , , Y, SVC - SERVICE FAILURE,...)">testMethod1(, , 264640, 1, 794994036116, 716083093, , USA, 5194105, mb4mn5NB, Y, , , , Y, SVC - SERVICE FAILURE,...)</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content skipped suite-Sample_Suite -->
@@ -123,127 +142,7 @@
                     <div class="method-list-content passed suite-Sample_Suite">
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 251524, 1, 794994229050, 330852040, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)">testMethod1(, , 251524, 1, 794994229050, 330852040, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 252295, 1, 597640611412, 330852044, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)">testMethod1(, , 252295, 1, 597640611412, 330852044, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 250177, 2, 597638111419, 330852081, , USA, 5194105, mb4mn5NB, 60, LB, 10, 5, 5, IN, weight, IL, ...)">testMethod1(, , 250177, 2, 597638111419, 330852081, , USA, 5194105, mb4mn5NB, 60, LB, 10, 5, 5, IN, weight, IL, ...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 250356, 1, 794993961972, 797356893, , EMEA, 3735811, Online30, 25, KG, , , , , weight, IL, EP, ,...)">testMethod1(, , 250356, 1, 794993961972, 797356893, , EMEA, 3735811, Online30, 25, KG, , , , , weight, IL, EP, ,...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 252333, 1, 597664361416, 330852086, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)">testMethod1(, , 252333, 1, 597664361416, 330852086, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 251447, 1, 794994227920, 330852085, , USA, 5194105, mb4mn5NB, 52, LB, 10, 5, 5, IN, weight, IL, ...)">testMethod1(, , 251447, 1, 794994227920, 330852085, , USA, 5194105, mb4mn5NB, 52, LB, 10, 5, 5, IN, weight, IL, ...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 251429, 1, 794994227540, 330852037, , USA, 5194105, mb4mn5NB, 35, LB, 10, 5, 5, IN, weight, IL, ...)">testMethod1(, , 251429, 1, 794994227540, 330852037, , USA, 5194105, mb4mn5NB, 35, LB, 10, 5, 5, IN, weight, IL, ...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 251154, 1, 794993963313, 330852140, , USA, 5194105, mb4mn5NB, 70, LBS, , , , , weight, IL, EP, ,...)">testMethod1(, , 251154, 1, 794993963313, 330852140, , USA, 5194105, mb4mn5NB, 70, LBS, , , , , weight, IL, EP, ,...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 252295, 1, 794994230113, 330852044, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)">testMethod1(, , 252295, 1, 794994230113, 330852044, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 252334, 1, 597672361414, 330852087, , USA, 5194105, mb4mn5NB, 55, LB, 10, 5, 5, IN, weight, IL, ...)">testMethod1(, , 252334, 1, 597672361414, 330852087, , USA, 5194105, mb4mn5NB, 55, LB, 10, 5, 5, IN, weight, IL, ...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 251524, 1, 597631111436, 330852040, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)">testMethod1(, , 251524, 1, 597631111436, 330852040, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 251877, 1, 597637861416, 330852050, , USA, 5194105, mb4mn5NB, 165, LB, 10, 5, 5, IN, weight, IL,...)">testMethod1(, , 251877, 1, 597637861416, 330852050, , USA, 5194105, mb4mn5NB, 165, LB, 10, 5, 5, IN, weight, IL,...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(pending, Still Processing, 227171, 2, 794993920321, 632535539, , EMEA, 3735811, Online30, , , 5, 5, ...)">testMethod1(pending, Still Processing, 227171, 2, 794993920321, 632535539, , EMEA, 3735811, Online30, , , 5, 5, ...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 251486, 1, 794994228742, 330852089, , USA, 5194105, mb4mn5NB, 78, LB, 10, 5, 5, IN, weight, IL, ...)">testMethod1(, , 251486, 1, 794994228742, 330852089, , USA, 5194105, mb4mn5NB, 78, LB, 10, 5, 5, IN, weight, IL, ...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 252329, 1, 597718361410, 330852046, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)">testMethod1(, , 252329, 1, 597718361410, 330852046, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 251486, 1, 597657611418, 330852089, , USA, 5194105, mb4mn5NB, 78, LB, 10, 5, 5, IN, weight, IL, ...)">testMethod1(, , 251486, 1, 597657611418, 330852089, , USA, 5194105, mb4mn5NB, 78, LB, 10, 5, 5, IN, weight, IL, ...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 250177, 2, 794994226338, 330852081, , USA, 5194105, mb4mn5NB, 60, LB, 10, 5, 5, IN, weight, IL, ...)">testMethod1(, , 250177, 2, 794994226338, 330852081, , USA, 5194105, mb4mn5NB, 60, LB, 10, 5, 5, IN, weight, IL, ...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 252332, 1, 597715361410, 330852073, , USA, 5194105, mb4mn5NB, 70, LB, , , , IN, weight, IL, GD, ...)">testMethod1(, , 252332, 1, 597715361410, 330852073, , USA, 5194105, mb4mn5NB, 70, LB, , , , IN, weight, IL, GD, ...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 250356, 1, 193965019765, 797356893, , EMEA, 3735811, Online30, 25, KG, , , , , weight, IL, EP, ,...)">testMethod1(, , 250356, 1, 193965019765, 797356893, , EMEA, 3735811, Online30, 25, KG, , , , , weight, IL, EP, ,...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 244860, 2, 597744611524, 330853973, , USA, 5194105, mb4mn5NB, 10, LB, , , , , weight, IL, EP, , ...)">testMethod1(, , 244860, 2, 597744611524, 330853973, , USA, 5194105, mb4mn5NB, 10, LB, , , , , weight, IL, EP, , ...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 244860, 2, 794993940242, 330853973, , USA, 5194105, mb4mn5NB, 10, LB, , , , , weight, IL, EP, , ...)">testMethod1(, , 244860, 2, 794993940242, 330853973, , USA, 5194105, mb4mn5NB, 10, LB, , , , , weight, IL, EP, , ...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(pending, Still Processing, 227171, 2, 597786862516, 632535539, , EMEA, 3735811, Online30, , , 5, 5, ...)">testMethod1(pending, Still Processing, 227171, 2, 597786862516, 632535539, , EMEA, 3735811, Online30, , , 5, 5, ...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 252333, 1, 794994230249, 330852086, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)">testMethod1(, , 252333, 1, 794994230249, 330852086, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 250356, 1, 257000775285, 797356893, , EMEA, 3735811, Online30, 25, KG, , , , , weight, IL, EP, ,...)">testMethod1(, , 250356, 1, 257000775285, 797356893, , EMEA, 3735811, Online30, 25, KG, , , , , weight, IL, EP, ,...)</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Sample_Suite" title="eraRerate.eraMassRerateTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 251877, 1, 794994229646, 330852050, , USA, 5194105, mb4mn5NB, 165, LB, 10, 5, 5, IN, weight, IL,...)">testMethod1(, , 251877, 1, 794994229646, 330852050, , USA, 5194105, mb4mn5NB, 165, LB, 10, 5, 5, IN, weight, IL,...)</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Sample_Suite" title="credit_debit.creditDebitTestNGSlow" class="method navigator-link" hash-for-method="testMethod1(, , 264640, 1, 794994036116, 716083093, , USA, 5194105, mb4mn5NB, Y, , , , Y, SVC - SERVICE FAILURE,...)">testMethod1(, , 264640, 1, 794994036116, 716083093, , USA, 5194105, mb4mn5NB, Y, , , , Y, SVC - SERVICE FAILURE,...)</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Sample_Suite -->
@@ -258,41 +157,75 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Sample_Suite" class="panel Sample_Suite">
-          <div class="suite-Sample_Suite-class-skipped">
+          <div class="suite-Sample_Suite-class-failed">
             <div class="main-panel-header rounded-window-top">
-              <img src="skipped.png"/>
-              <span class="class-name">eraRerate.eraMassRerateTestNGSlow</span>
+              <img src="failed.png"/>
+              <span class="class-name">credit_debit.creditDebitTestNGSlow</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="testMethod1(, , 251154, 1, 794993963313, 330852140, , USA, 5194105, mb4mn5NB, 70, LBS, , , , , weight, IL, EP, ,...)">
-                  </a> <!-- testMethod1(, , 251154, 1, 794993963313, 330852140, , USA, 5194105, mb4mn5NB, 70, LBS, , , , , weight, IL, EP, ,...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 251154, 1, 794993963313, 330852140, , USA, 5194105, mb4mn5NB, 70, LBS, , , , , weight, IL, EP, , 10)</span>
-                  <div class="stack-trace">java.lang.AssertionError: Failed on Entering Tracking Number
-	at eraRerate.eraMassRerateTestNGSlow.doMassRerate(eraMassRerateTestNGSlow.java:929)
-	at eraRerate.eraMassRerateTestNGSlow.testMethod1(eraMassRerateTestNGSlow.java:706)
+                  <a name="testMethod2">
+                  </a> <!-- testMethod2 -->
+                  <span class="method-name">testMethod2</span>
+                  <div class="stack-trace">org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] credit_debit.creditDebitTestNGSlow.dataProviderMethod2() returned a null value
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-... Removed 13 stack frames
+... Removed 9 stack frames
 </div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="testMethod1(, , 252332, 1, 597715361410, 330852073, , USA, 5194105, mb4mn5NB, 70, LB, , , , IN, weight, IL, GD, ...)">
-                  </a> <!-- testMethod1(, , 252332, 1, 597715361410, 330852073, , USA, 5194105, mb4mn5NB, 70, LB, , , , IN, weight, IL, GD, ...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 252332, 1, 597715361410, 330852073, , USA, 5194105, mb4mn5NB, 70, LB, , , , IN, weight, IL, GD, , 22)</span>
-                  <div class="stack-trace">java.lang.AssertionError: Failed on Entering Tracking Number
-	at eraRerate.eraMassRerateTestNGSlow.doMassRerate(eraMassRerateTestNGSlow.java:929)
-	at eraRerate.eraMassRerateTestNGSlow.testMethod1(eraMassRerateTestNGSlow.java:706)
+                  <a name="testMethod3">
+                  </a> <!-- testMethod3 -->
+                  <span class="method-name">testMethod3</span>
+                  <div class="stack-trace">org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] credit_debit.creditDebitTestNGSlow.dataProviderMethod3() returned a null value
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-... Removed 12 stack frames
+... Removed 9 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testMethod4">
+                  </a> <!-- testMethod4 -->
+                  <span class="method-name">testMethod4</span>
+                  <div class="stack-trace">org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] credit_debit.creditDebitTestNGSlow.dataProviderMethod4() returned a null value
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+... Removed 9 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Sample_Suite-class-failed -->
+          <div class="suite-Sample_Suite-class-skipped">
+            <div class="main-panel-header rounded-window-top">
+              <img src="skipped.png"/>
+              <span class="class-name">credit_debit.creditDebitTestNGSlow</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="testMethod1(, , 264640, 1, 794994036116, 716083093, , USA, 5194105, mb4mn5NB, Y, , , , Y, SVC - SERVICE FAILURE,...)">
+                  </a> <!-- testMethod1(, , 264640, 1, 794994036116, 716083093, , USA, 5194105, mb4mn5NB, Y, , , , Y, SVC - SERVICE FAILURE,...) -->
+                  <span class="method-name">testMethod1</span>
+                  <span class="parameters">(, , 264640, 1, 794994036116, 716083093, , USA, 5194105, mb4mn5NB, Y, , , , Y, SVC - SERVICE FAILURE, Service Failure, Customer Satisfaction, Denial Expected, 1)</span>
+                  <div class="stack-trace">java.lang.AssertionError: Failed on Entering Tracking Number
+	at credit_debit.creditDebitTestNGSlow.doCredit(creditDebitTestNGSlow.java:1143)
+	at credit_debit.creditDebitTestNGSlow.testMethod1(creditDebitTestNGSlow.java:620)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+... Removed 13 stack frames
 </div> <!-- stack-trace -->
                 </div> <!-- method-content -->
               </div> <!-- method -->
@@ -301,207 +234,15 @@
           <div class="suite-Sample_Suite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
-              <span class="class-name">eraRerate.eraMassRerateTestNGSlow</span>
+              <span class="class-name">credit_debit.creditDebitTestNGSlow</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="testMethod1(, , 251524, 1, 794994229050, 330852040, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)">
-                  </a> <!-- testMethod1(, , 251524, 1, 794994229050, 330852040, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...) -->
+                  <a name="testMethod1(, , 264640, 1, 794994036116, 716083093, , USA, 5194105, mb4mn5NB, Y, , , , Y, SVC - SERVICE FAILURE,...)">
+                  </a> <!-- testMethod1(, , 264640, 1, 794994036116, 716083093, , USA, 5194105, mb4mn5NB, Y, , , , Y, SVC - SERVICE FAILURE,...) -->
                   <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 251524, 1, 794994229050, 330852040, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, GD, , 16)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(, , 252295, 1, 597640611412, 330852044, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)">
-                  </a> <!-- testMethod1(, , 252295, 1, 597640611412, 330852044, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 252295, 1, 597640611412, 330852044, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, GD, , 20)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(, , 250177, 2, 597638111419, 330852081, , USA, 5194105, mb4mn5NB, 60, LB, 10, 5, 5, IN, weight, IL, ...)">
-                  </a> <!-- testMethod1(, , 250177, 2, 597638111419, 330852081, , USA, 5194105, mb4mn5NB, 60, LB, 10, 5, 5, IN, weight, IL, ...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 250177, 2, 597638111419, 330852081, , USA, 5194105, mb4mn5NB, 60, LB, 10, 5, 5, IN, weight, IL, GD, , 6)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(, , 250356, 1, 794993961972, 797356893, , EMEA, 3735811, Online30, 25, KG, , , , , weight, IL, EP, ,...)">
-                  </a> <!-- testMethod1(, , 250356, 1, 794993961972, 797356893, , EMEA, 3735811, Online30, 25, KG, , , , , weight, IL, EP, ,...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 250356, 1, 794993961972, 797356893, , EMEA, 3735811, Online30, 25, KG, , , , , weight, IL, EP, , 7)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(, , 252333, 1, 597664361416, 330852086, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)">
-                  </a> <!-- testMethod1(, , 252333, 1, 597664361416, 330852086, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 252333, 1, 597664361416, 330852086, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, GD, , 23)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(, , 251447, 1, 794994227920, 330852085, , USA, 5194105, mb4mn5NB, 52, LB, 10, 5, 5, IN, weight, IL, ...)">
-                  </a> <!-- testMethod1(, , 251447, 1, 794994227920, 330852085, , USA, 5194105, mb4mn5NB, 52, LB, 10, 5, 5, IN, weight, IL, ...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 251447, 1, 794994227920, 330852085, , USA, 5194105, mb4mn5NB, 52, LB, 10, 5, 5, IN, weight, IL, GD, , 12)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(, , 251429, 1, 794994227540, 330852037, , USA, 5194105, mb4mn5NB, 35, LB, 10, 5, 5, IN, weight, IL, ...)">
-                  </a> <!-- testMethod1(, , 251429, 1, 794994227540, 330852037, , USA, 5194105, mb4mn5NB, 35, LB, 10, 5, 5, IN, weight, IL, ...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 251429, 1, 794994227540, 330852037, , USA, 5194105, mb4mn5NB, 35, LB, 10, 5, 5, IN, weight, IL, GD, , 11)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(, , 251154, 1, 794993963313, 330852140, , USA, 5194105, mb4mn5NB, 70, LBS, , , , , weight, IL, EP, ,...)">
-                  </a> <!-- testMethod1(, , 251154, 1, 794993963313, 330852140, , USA, 5194105, mb4mn5NB, 70, LBS, , , , , weight, IL, EP, ,...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 251154, 1, 794993963313, 330852140, , USA, 5194105, mb4mn5NB, 70, LBS, , , , , weight, IL, EP, , 10)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(, , 252295, 1, 794994230113, 330852044, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)">
-                  </a> <!-- testMethod1(, , 252295, 1, 794994230113, 330852044, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 252295, 1, 794994230113, 330852044, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, GD, , 19)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(, , 252334, 1, 597672361414, 330852087, , USA, 5194105, mb4mn5NB, 55, LB, 10, 5, 5, IN, weight, IL, ...)">
-                  </a> <!-- testMethod1(, , 252334, 1, 597672361414, 330852087, , USA, 5194105, mb4mn5NB, 55, LB, 10, 5, 5, IN, weight, IL, ...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 252334, 1, 597672361414, 330852087, , USA, 5194105, mb4mn5NB, 55, LB, 10, 5, 5, IN, weight, IL, GD, , 25)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(, , 251524, 1, 597631111436, 330852040, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)">
-                  </a> <!-- testMethod1(, , 251524, 1, 597631111436, 330852040, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 251524, 1, 597631111436, 330852040, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, GD, , 15)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(, , 251877, 1, 597637861416, 330852050, , USA, 5194105, mb4mn5NB, 165, LB, 10, 5, 5, IN, weight, IL,...)">
-                  </a> <!-- testMethod1(, , 251877, 1, 597637861416, 330852050, , USA, 5194105, mb4mn5NB, 165, LB, 10, 5, 5, IN, weight, IL,...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 251877, 1, 597637861416, 330852050, , USA, 5194105, mb4mn5NB, 165, LB, 10, 5, 5, IN, weight, IL, GD, , 18)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(pending, Still Processing, 227171, 2, 794993920321, 632535539, , EMEA, 3735811, Online30, , , 5, 5, ...)">
-                  </a> <!-- testMethod1(pending, Still Processing, 227171, 2, 794993920321, 632535539, , EMEA, 3735811, Online30, , , 5, 5, ...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(pending, Still Processing, 227171, 2, 794993920321, 632535539, , EMEA, 3735811, Online30, , , 5, 5, 5, IN, dim, IL, EP, , 1)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(, , 251486, 1, 794994228742, 330852089, , USA, 5194105, mb4mn5NB, 78, LB, 10, 5, 5, IN, weight, IL, ...)">
-                  </a> <!-- testMethod1(, , 251486, 1, 794994228742, 330852089, , USA, 5194105, mb4mn5NB, 78, LB, 10, 5, 5, IN, weight, IL, ...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 251486, 1, 794994228742, 330852089, , USA, 5194105, mb4mn5NB, 78, LB, 10, 5, 5, IN, weight, IL, GD, , 13)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(, , 252329, 1, 597718361410, 330852046, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)">
-                  </a> <!-- testMethod1(, , 252329, 1, 597718361410, 330852046, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 252329, 1, 597718361410, 330852046, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, GD, , 21)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(, , 251486, 1, 597657611418, 330852089, , USA, 5194105, mb4mn5NB, 78, LB, 10, 5, 5, IN, weight, IL, ...)">
-                  </a> <!-- testMethod1(, , 251486, 1, 597657611418, 330852089, , USA, 5194105, mb4mn5NB, 78, LB, 10, 5, 5, IN, weight, IL, ...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 251486, 1, 597657611418, 330852089, , USA, 5194105, mb4mn5NB, 78, LB, 10, 5, 5, IN, weight, IL, GD, , 14)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(, , 250177, 2, 794994226338, 330852081, , USA, 5194105, mb4mn5NB, 60, LB, 10, 5, 5, IN, weight, IL, ...)">
-                  </a> <!-- testMethod1(, , 250177, 2, 794994226338, 330852081, , USA, 5194105, mb4mn5NB, 60, LB, 10, 5, 5, IN, weight, IL, ...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 250177, 2, 794994226338, 330852081, , USA, 5194105, mb4mn5NB, 60, LB, 10, 5, 5, IN, weight, IL, GD, , 5)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(, , 252332, 1, 597715361410, 330852073, , USA, 5194105, mb4mn5NB, 70, LB, , , , IN, weight, IL, GD, ...)">
-                  </a> <!-- testMethod1(, , 252332, 1, 597715361410, 330852073, , USA, 5194105, mb4mn5NB, 70, LB, , , , IN, weight, IL, GD, ...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 252332, 1, 597715361410, 330852073, , USA, 5194105, mb4mn5NB, 70, LB, , , , IN, weight, IL, GD, , 22)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(, , 250356, 1, 193965019765, 797356893, , EMEA, 3735811, Online30, 25, KG, , , , , weight, IL, EP, ,...)">
-                  </a> <!-- testMethod1(, , 250356, 1, 193965019765, 797356893, , EMEA, 3735811, Online30, 25, KG, , , , , weight, IL, EP, ,...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 250356, 1, 193965019765, 797356893, , EMEA, 3735811, Online30, 25, KG, , , , , weight, IL, EP, , 9)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(, , 244860, 2, 597744611524, 330853973, , USA, 5194105, mb4mn5NB, 10, LB, , , , , weight, IL, EP, , ...)">
-                  </a> <!-- testMethod1(, , 244860, 2, 597744611524, 330853973, , USA, 5194105, mb4mn5NB, 10, LB, , , , , weight, IL, EP, , ...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 244860, 2, 597744611524, 330853973, , USA, 5194105, mb4mn5NB, 10, LB, , , , , weight, IL, EP, , 3)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(, , 244860, 2, 794993940242, 330853973, , USA, 5194105, mb4mn5NB, 10, LB, , , , , weight, IL, EP, , ...)">
-                  </a> <!-- testMethod1(, , 244860, 2, 794993940242, 330853973, , USA, 5194105, mb4mn5NB, 10, LB, , , , , weight, IL, EP, , ...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 244860, 2, 794993940242, 330853973, , USA, 5194105, mb4mn5NB, 10, LB, , , , , weight, IL, EP, , 4)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(pending, Still Processing, 227171, 2, 597786862516, 632535539, , EMEA, 3735811, Online30, , , 5, 5, ...)">
-                  </a> <!-- testMethod1(pending, Still Processing, 227171, 2, 597786862516, 632535539, , EMEA, 3735811, Online30, , , 5, 5, ...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(pending, Still Processing, 227171, 2, 597786862516, 632535539, , EMEA, 3735811, Online30, , , 5, 5, 5, IN, dim, IL, EP, , 2)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(, , 252333, 1, 794994230249, 330852086, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)">
-                  </a> <!-- testMethod1(, , 252333, 1, 794994230249, 330852086, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 252333, 1, 794994230249, 330852086, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, GD, , 24)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(, , 250356, 1, 257000775285, 797356893, , EMEA, 3735811, Online30, 25, KG, , , , , weight, IL, EP, ,...)">
-                  </a> <!-- testMethod1(, , 250356, 1, 257000775285, 797356893, , EMEA, 3735811, Online30, 25, KG, , , , , weight, IL, EP, ,...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 250356, 1, 257000775285, 797356893, , EMEA, 3735811, Online30, 25, KG, , , , , weight, IL, EP, , 8)</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testMethod1(, , 251877, 1, 794994229646, 330852050, , USA, 5194105, mb4mn5NB, 165, LB, 10, 5, 5, IN, weight, IL,...)">
-                  </a> <!-- testMethod1(, , 251877, 1, 794994229646, 330852050, , USA, 5194105, mb4mn5NB, 165, LB, 10, 5, 5, IN, weight, IL,...) -->
-                  <span class="method-name">testMethod1</span>
-                  <span class="parameters">(, , 251877, 1, 794994229646, 330852050, , USA, 5194105, mb4mn5NB, 165, LB, 10, 5, 5, IN, weight, IL, GD, , 17)</span>
+                  <span class="parameters">(, , 264640, 1, 794994036116, 716083093, , USA, 5194105, mb4mn5NB, Y, , , , Y, SVC - SERVICE FAILURE, Service Failure, Customer Satisfaction, Denial Expected, 1)</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -516,24 +257,27 @@
 &lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite name=&quot;Sample_Suite&quot;&gt;
   &lt;parameter name=&quot;nullCheckBox&quot; value=&quot;true&quot;/&gt;
+  &lt;parameter name=&quot;disputeCheckBox&quot; value=&quot;false&quot;/&gt;
   &lt;parameter name=&quot;level&quot; value=&quot;3&quot;/&gt;
   &lt;parameter name=&quot;failedCheckBox&quot; value=&quot;true&quot;/&gt;
+  &lt;parameter name=&quot;debitCheckBox&quot; value=&quot;true&quot;/&gt;
+  &lt;parameter name=&quot;resolveCreditCheckBox&quot; value=&quot;true&quot;/&gt;
   &lt;parameter name=&quot;source&quot; value=&quot;db&quot;/&gt;
   &lt;parameter name=&quot;compatibleMode&quot; value=&quot;&quot;/&gt;
-  &lt;parameter name=&quot;eraWorkable&quot; value=&quot;false&quot;/&gt;
   &lt;parameter name=&quot;headless&quot; value=&quot;false&quot;/&gt;
   &lt;parameter name=&quot;customCheckBox&quot; value=&quot;true&quot;/&gt;
   &lt;parameter name=&quot;allCheckBox&quot; value=&quot;false&quot;/&gt;
-  &lt;parameter name=&quot;filepath&quot; value=&quot;C:\Users\FedExUser\Desktop\stephen\R66\L3C6\rebill.xlsx&quot;/&gt;
+  &lt;parameter name=&quot;filepath&quot; value=&quot;C:\Users\theth\git\Master-GUI\test data\credit_debit.xlsx&quot;/&gt;
   &lt;parameter name=&quot;sessionCount&quot; value=&quot;1&quot;/&gt;
   &lt;parameter name=&quot;browser&quot; value=&quot;2&quot;/&gt;
+  &lt;parameter name=&quot;creditCheckBox&quot; value=&quot;false&quot;/&gt;
   &lt;parameter name=&quot;databaseDisabled&quot; value=&quot;false&quot;/&gt;
-  &lt;parameter name=&quot;customString&quot; value=&quot;trkngnbr is not null and username in (&amp;#039;3735811&amp;#039;,&amp;#039;5194105&amp;#039;)&quot;/&gt;
-  &lt;test thread-count=&quot;5&quot; parallel=&quot;methods&quot; name=&quot;era Mass Rerate Test&quot;&gt;
+  &lt;parameter name=&quot;customString&quot; value=&quot;trkngnbr in (&amp;#039;794994036116&amp;#039;)&quot;/&gt;
+  &lt;test thread-count=&quot;5&quot; parallel=&quot;methods&quot; name=&quot;Rebill Test&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;eraRerate.eraMassRerateTestNGSlow&quot;/&gt;
+      &lt;class name=&quot;credit_debit.creditDebitTestNGSlow&quot;/&gt;
     &lt;/classes&gt;
-  &lt;/test&gt; &lt;!-- era Mass Rerate Test --&gt;
+  &lt;/test&gt; &lt;!-- Rebill Test --&gt;
 &lt;/suite&gt; &lt;!-- Sample_Suite --&gt;
             </pre>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -545,7 +289,7 @@
           <div class="main-panel-content rounded-window-bottom">
             <ul>
               <li>
-                <span class="test-name">era Mass Rerate Test (1 class)</span>
+                <span class="test-name">Rebill Test (1 class)</span>
               </li>
             </ul>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -571,120 +315,32 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(27);
+data.addRows(5);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'testMethod1')
-data.setCell(0, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(0, 3, 47387);
+data.setCell(0, 2, 'credit_debit.creditDebitTestNGSlow')
+data.setCell(0, 3, 32396);
 data.setCell(1, 0, 1)
 data.setCell(1, 1, 'testMethod1')
-data.setCell(1, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(1, 3, 31891);
+data.setCell(1, 2, 'credit_debit.creditDebitTestNGSlow')
+data.setCell(1, 3, 16097);
 data.setCell(2, 0, 2)
-data.setCell(2, 1, 'testMethod1')
-data.setCell(2, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(2, 3, 31317);
+data.setCell(2, 1, 'testMethod3')
+data.setCell(2, 2, 'credit_debit.creditDebitTestNGSlow')
+data.setCell(2, 3, 0);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'testMethod1')
-data.setCell(3, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(3, 3, 28783);
+data.setCell(3, 1, 'testMethod4')
+data.setCell(3, 2, 'credit_debit.creditDebitTestNGSlow')
+data.setCell(3, 3, 0);
 data.setCell(4, 0, 4)
-data.setCell(4, 1, 'testMethod1')
-data.setCell(4, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(4, 3, 27667);
-data.setCell(5, 0, 5)
-data.setCell(5, 1, 'testMethod1')
-data.setCell(5, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(5, 3, 27371);
-data.setCell(6, 0, 6)
-data.setCell(6, 1, 'testMethod1')
-data.setCell(6, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(6, 3, 27232);
-data.setCell(7, 0, 7)
-data.setCell(7, 1, 'testMethod1')
-data.setCell(7, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(7, 3, 27230);
-data.setCell(8, 0, 8)
-data.setCell(8, 1, 'testMethod1')
-data.setCell(8, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(8, 3, 26959);
-data.setCell(9, 0, 9)
-data.setCell(9, 1, 'testMethod1')
-data.setCell(9, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(9, 3, 26880);
-data.setCell(10, 0, 10)
-data.setCell(10, 1, 'testMethod1')
-data.setCell(10, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(10, 3, 26853);
-data.setCell(11, 0, 11)
-data.setCell(11, 1, 'testMethod1')
-data.setCell(11, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(11, 3, 26452);
-data.setCell(12, 0, 12)
-data.setCell(12, 1, 'testMethod1')
-data.setCell(12, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(12, 3, 26337);
-data.setCell(13, 0, 13)
-data.setCell(13, 1, 'testMethod1')
-data.setCell(13, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(13, 3, 26090);
-data.setCell(14, 0, 14)
-data.setCell(14, 1, 'testMethod1')
-data.setCell(14, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(14, 3, 20365);
-data.setCell(15, 0, 15)
-data.setCell(15, 1, 'testMethod1')
-data.setCell(15, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(15, 3, 18520);
-data.setCell(16, 0, 16)
-data.setCell(16, 1, 'testMethod1')
-data.setCell(16, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(16, 3, 5864);
-data.setCell(17, 0, 17)
-data.setCell(17, 1, 'testMethod1')
-data.setCell(17, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(17, 3, 1);
-data.setCell(18, 0, 18)
-data.setCell(18, 1, 'testMethod1')
-data.setCell(18, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(18, 3, 0);
-data.setCell(19, 0, 19)
-data.setCell(19, 1, 'testMethod1')
-data.setCell(19, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(19, 3, 0);
-data.setCell(20, 0, 20)
-data.setCell(20, 1, 'testMethod1')
-data.setCell(20, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(20, 3, 0);
-data.setCell(21, 0, 21)
-data.setCell(21, 1, 'testMethod1')
-data.setCell(21, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(21, 3, 0);
-data.setCell(22, 0, 22)
-data.setCell(22, 1, 'testMethod1')
-data.setCell(22, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(22, 3, 0);
-data.setCell(23, 0, 23)
-data.setCell(23, 1, 'testMethod1')
-data.setCell(23, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(23, 3, 0);
-data.setCell(24, 0, 24)
-data.setCell(24, 1, 'testMethod1')
-data.setCell(24, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(24, 3, 0);
-data.setCell(25, 0, 25)
-data.setCell(25, 1, 'testMethod1')
-data.setCell(25, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(25, 3, 0);
-data.setCell(26, 0, 26)
-data.setCell(26, 1, 'testMethod1')
-data.setCell(26, 2, 'eraRerate.eraMassRerateTestNGSlow')
-data.setCell(26, 3, 0);
+data.setCell(4, 1, 'testMethod2')
+data.setCell(4, 2, 'credit_debit.creditDebitTestNGSlow')
+data.setCell(4, 3, 0);
 window.suiteTableData['Sample_Suite']= { tableData: data, tableDiv: 'times-div-Sample_Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 7 minutes</span>
+              <span class="suite-total-time">Total running time: 48 seconds</span>
               <div id="times-div-Sample_Suite">
               </div> <!-- times-div-Sample_Suite -->
             </div> <!-- times-div -->
@@ -710,118 +366,18 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">eraRerate.eraMassRerateTestNGSlow</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">credit_debit.creditDebitTestNGSlow</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
-                <span class="method-name">setupExcel(C:\Users\FedExUser\Desktop\stephen\R66\L3C6\rebill.xlsx, 3, 2, , db, false, true, true, 1, trkngnbr ...)</span>
+                <span class="method-name">setupExcel(C:\Users\theth\git\Master-GUI\test data\credit_debit.xlsx, 3, 2, , db, false, true, true, false, tru...)</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
-                <span class="method-name">testMethod1(pending, Still Processing, 227171, 2, 794993920321, 632535539, , EMEA, 3735811, Online30, , , 5, 5, ...)</span>
-                <span class="method-start">7088 ms</span>
+                <span class="method-name">testMethod1(, , 264640, 1, 794994036116, 716083093, , USA, 5194105, mb4mn5NB, Y, , , , Y, SVC - SERVICE FAILURE,...)</span>
+                <span class="method-start">6525 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">testMethod1(pending, Still Processing, 227171, 2, 597786862516, 632535539, , EMEA, 3735811, Online30, , , 5, 5, ...)</span>
-                <span class="method-start">12954 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 244860, 2, 597744611524, 330853973, , USA, 5194105, mb4mn5NB, 10, LB, , , , , weight, IL, EP, , ...)</span>
-                <span class="method-start">12955 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 244860, 2, 794993940242, 330853973, , USA, 5194105, mb4mn5NB, 10, LB, , , , , weight, IL, EP, , ...)</span>
-                <span class="method-start">39836 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 250177, 2, 794994226338, 330852081, , USA, 5194105, mb4mn5NB, 60, LB, 10, 5, 5, IN, weight, IL, ...)</span>
-                <span class="method-start">39837 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 250177, 2, 597638111419, 330852081, , USA, 5194105, mb4mn5NB, 60, LB, 10, 5, 5, IN, weight, IL, ...)</span>
-                <span class="method-start">67209 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 250356, 1, 794993961972, 797356893, , EMEA, 3735811, Online30, 25, KG, , , , , weight, IL, EP, ,...)</span>
-                <span class="method-start">67209 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 250356, 1, 257000775285, 797356893, , EMEA, 3735811, Online30, 25, KG, , , , , weight, IL, EP, ,...)</span>
-                <span class="method-start">114597 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 250356, 1, 193965019765, 797356893, , EMEA, 3735811, Online30, 25, KG, , , , , weight, IL, EP, ,...)</span>
-                <span class="method-start">114597 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 251154, 1, 794993963313, 330852140, , USA, 5194105, mb4mn5NB, 70, LBS, , , , , weight, IL, EP, ,...)</span>
-                <span class="method-start">114597 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 251154, 1, 794993963313, 330852140, , USA, 5194105, mb4mn5NB, 70, LBS, , , , , weight, IL, EP, ,...)</span>
-                <span class="method-start">133118 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 251429, 1, 794994227540, 330852037, , USA, 5194105, mb4mn5NB, 35, LB, 10, 5, 5, IN, weight, IL, ...)</span>
-                <span class="method-start">165009 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 251447, 1, 794994227920, 330852085, , USA, 5194105, mb4mn5NB, 52, LB, 10, 5, 5, IN, weight, IL, ...)</span>
-                <span class="method-start">196327 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 251486, 1, 794994228742, 330852089, , USA, 5194105, mb4mn5NB, 78, LB, 10, 5, 5, IN, weight, IL, ...)</span>
-                <span class="method-start">222417 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 251486, 1, 597657611418, 330852089, , USA, 5194105, mb4mn5NB, 78, LB, 10, 5, 5, IN, weight, IL, ...)</span>
-                <span class="method-start">248870 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 251524, 1, 597631111436, 330852040, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)</span>
-                <span class="method-start">248870 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 251524, 1, 794994229050, 330852040, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)</span>
-                <span class="method-start">276538 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 251877, 1, 794994229646, 330852050, , USA, 5194105, mb4mn5NB, 165, LB, 10, 5, 5, IN, weight, IL,...)</span>
-                <span class="method-start">276538 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 251877, 1, 597637861416, 330852050, , USA, 5194105, mb4mn5NB, 165, LB, 10, 5, 5, IN, weight, IL,...)</span>
-                <span class="method-start">303498 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 252295, 1, 794994230113, 330852044, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)</span>
-                <span class="method-start">303498 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 252295, 1, 597640611412, 330852044, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)</span>
-                <span class="method-start">330730 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 252329, 1, 597718361410, 330852046, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)</span>
-                <span class="method-start">330730 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 252332, 1, 597715361410, 330852073, , USA, 5194105, mb4mn5NB, 70, LB, , , , IN, weight, IL, GD, ...)</span>
-                <span class="method-start">357583 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 252332, 1, 597715361410, 330852073, , USA, 5194105, mb4mn5NB, 70, LB, , , , IN, weight, IL, GD, ...)</span>
-                <span class="method-start">377949 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 252333, 1, 597664361416, 330852086, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)</span>
-                <span class="method-start">404287 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 252333, 1, 794994230249, 330852086, , USA, 5194105, mb4mn5NB, 70, LB, 10, 5, 5, IN, weight, IL, ...)</span>
-                <span class="method-start">433070 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <span class="method-name">testMethod1(, , 252334, 1, 597672361414, 330852087, , USA, 5194105, mb4mn5NB, 55, LB, 10, 5, 5, IN, weight, IL, ...)</span>
-                <span class="method-start">433071 ms</span>
+                <span class="method-name">testMethod1(, , 264640, 1, 794994036116, 716083093, , USA, 5194105, mb4mn5NB, Y, , , , Y, SVC - SERVICE FAILURE,...)</span>
+                <span class="method-start">22625 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

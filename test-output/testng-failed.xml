@@ -2,27 +2,33 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Sample_Suite]">
   <parameter name="nullCheckBox" value="true"/>
+  <parameter name="disputeCheckBox" value="false"/>
   <parameter name="level" value="3"/>
   <parameter name="failedCheckBox" value="true"/>
+  <parameter name="debitCheckBox" value="true"/>
+  <parameter name="resolveCreditCheckBox" value="true"/>
   <parameter name="source" value="db"/>
   <parameter name="compatibleMode" value=""/>
-  <parameter name="eraWorkable" value="false"/>
   <parameter name="headless" value="false"/>
   <parameter name="customCheckBox" value="true"/>
   <parameter name="allCheckBox" value="false"/>
-  <parameter name="filepath" value="C:\Users\FedExUser\Desktop\stephen\R66\L3C6\rebill.xlsx"/>
+  <parameter name="filepath" value="C:\Users\theth\git\Master-GUI\test data\credit_debit.xlsx"/>
   <parameter name="sessionCount" value="1"/>
   <parameter name="browser" value="2"/>
+  <parameter name="creditCheckBox" value="false"/>
   <parameter name="databaseDisabled" value="false"/>
-  <parameter name="customString" value="trkngnbr is not null and username in (&#039;3735811&#039;,&#039;5194105&#039;)"/>
-  <test thread-count="5" parallel="methods" name="era Mass Rerate Test(failed)">
+  <parameter name="customString" value="trkngnbr in (&#039;794994036116&#039;)"/>
+  <test thread-count="5" parallel="methods" name="Rebill Test(failed)">
     <classes>
-      <class name="eraRerate.eraMassRerateTestNGSlow">
+      <class name="credit_debit.creditDebitTestNGSlow">
         <methods>
+          <include name="testMethod3"/>
+          <include name="testMethod2"/>
+          <include name="testMethod1" invocation-numbers="0"/>
+          <include name="testMethod4"/>
           <include name="setupExcel"/>
-          <include name="testMethod1" invocation-numbers="9 21"/>
         </methods>
-      </class> <!-- eraRerate.eraMassRerateTestNGSlow -->
+      </class> <!-- credit_debit.creditDebitTestNGSlow -->
     </classes>
-  </test> <!-- era Mass Rerate Test(failed) -->
+  </test> <!-- Rebill Test(failed) -->
 </suite> <!-- Failed suite [Sample_Suite] -->
