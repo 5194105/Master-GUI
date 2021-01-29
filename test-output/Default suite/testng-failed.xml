@@ -3,15 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="eraRerate.eraRerateTestNGSlow">
+      <class name="credit_debit.creditDebitTestNGSlow">
         <methods>
-          <include name="setupExcel"/>
           <include name="testMethod3"/>
-          <include name="testMethod4"/>
-          <include name="testMethod1"/>
           <include name="testMethod2"/>
+          <include name="testMethod1"/>
+          <include name="testMethod4"/>
+          <include name="setupExcel"/>
         </methods>
-      </class> <!-- eraRerate.eraRerateTestNGSlow -->
+      </class> <!-- credit_debit.creditDebitTestNGSlow -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

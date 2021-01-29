@@ -10,7 +10,7 @@ public  class PupEntry {
 	static  JavascriptExecutor js = (JavascriptExecutor)Loginemass.driver;
 	static  int j =0;
 	
-	public static  void dataentry() {
+	public static  void dataentry() throws InterruptedException {
 		
 		 trk = Loginemass.driver.findElement(By.id("massEntryForm:pup_repeatdatatable:0:trkNo_inputtext"));
 		 fedexid = Loginemass.driver.findElement(By.xpath("//*[@id = 'massEntryForm:empNbr_inputtext']"));
@@ -30,31 +30,58 @@ public  class PupEntry {
 		 stoptype = Loginemass.driver.findElement(By.id("massEntryForm:pup_repeatdatatable:0:stopType_selectonemenu"));
 		 deliveryadd = Loginemass.driver.findElement(By.id("massEntryForm:pup_repeatdatatable:0:deliveryAddr_inputtext"));
 		 
-		 //avinash
-			fedexid.sendKeys("0000607383");
-			/*
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			*/
-			//route = Loginemass.driver.findElement(By.xpath("//*[@id='massEntryForm:route_inputtext']"));
-			route.sendKeys("123");
-		//	js.executeScript("document.getElementById('"+route+"').value='123'");
-			
-			
-			trk.sendKeys("794993969528");
-			formid.sendKeys("0430");
-			cosmosnbr.sendKeys("12345");
-			Select st = new Select(stoptype);
-			st.selectByValue("R");
-			destcity.sendKeys("0");
-			destcountry.sendKeys("US");
-			destzip.sendKeys("32810");
-			
+		 String empNbr="0000607383";
+		 String routeNbr="123";
+		 String trkNbr="794993969528";
+		 String formCd="0430";
+		 String cosmoNbr="12345";
+		 String drownDown="R";
+		 String destCityCd="O";
+		 String destCntryCd="US";
+		 String destPostalCd="32810";
+		 
+		 
+		 enterInfoXpath("//*[@id = 'massEntryForm:empNbr_inputtext']",empNbr);
+		 enterInfoXpath("//*[@id='massEntryForm:route_inputtext']",routeNbr);
+		 enterInfoId("massEntryForm:pup_repeatdatatable:0:trkNo_inputtext",trkNbr);
+		 enterInfoId("massEntryForm:pup_repeatdatatable:0:formCd_inputtext",formCd);
+		 enterInfoId("massEntryForm:pup_repeatdatatable:0:cosmosNbr_inputtext",cosmoNbr);
+		 enterInfoDropDown("massEntryForm:pup_repeatdatatable:0:stopType_selectonemenu",drownDown);	
+		 
+		 
+		// Select st = new Select(stoptype);
+		 //st.selectByValue("R");
+		 enterInfoId("massEntryForm:pup_repeatdatatable:0:destCityCd_inputtext",destCityCd);
+		 enterInfoId("massEntryForm:pup_repeatdatatable:0:destCountryCd_inputtext",destCntryCd);
+		 enterInfoId("massEntryForm:pup_repeatdatatable:0:destZipCd_inputtext",destPostalCd);
+		 
 	}
+	
+	public static void enterInfoXpath(String tempElementString,String tempText) throws InterruptedException {
+		  	WebElement tempElement = Loginemass.driver.findElement(By.xpath(tempElementString));
+		  	tempElement.click();
+			Thread.sleep(2000);
+			tempElement = Loginemass.driver.findElement(By.xpath(tempElementString));
+			tempElement.sendKeys(tempText);
+	}
+	
+	public static void enterInfoId(String tempElementString,String tempText) throws InterruptedException {
+	  	WebElement tempElement = Loginemass.driver.findElement(By.id(tempElementString));
+	  	tempElement.click();
+		Thread.sleep(2000);
+		tempElement = Loginemass.driver.findElement(By.id(tempElementString));
+		tempElement.sendKeys(tempText);
+}
+	
+	public static void enterInfoDropDown(String tempElementString,String tempText) throws InterruptedException {
+		WebElement tempElement = Loginemass.driver.findElement(By.id(tempElementString));
+	  	tempElement.click();
+		Thread.sleep(2000);
+		Select tempElementSelect = new Select(Loginemass.driver.findElement(By.id(tempElementString)));
+		tempElementSelect.selectByValue(tempText);
+		
+}
+	
 	
 	public static  void scroll1() throws Exception {
 		//j=20;

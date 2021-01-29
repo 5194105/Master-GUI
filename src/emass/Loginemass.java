@@ -13,8 +13,12 @@ public class Loginemass {
 	static WebDriver driver;
 	
 	public static void browser() {
-		
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\3715501\\Desktop\\fresh_start\\AutoEmass\\src\\lib\\chromedriver.exe");
+		String  homePath=System.getProperty("user.dir");  
+		String chromeSetProperty="webdriver.chrome.driver";
+		String chromePath=homePath+"\\drivers\\chromedriver.exe";
+			
+		System.setProperty(chromeSetProperty,chromePath);
+	//	System.setProperty("webdriver.chrome.driver", "C:\\Users\\3715501\\Desktop\\fresh_start\\AutoEmass\\src\\lib\\chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.get("https://test.secure.fedex.com/L3/eShipmentGUI/MenuPage.iface");
 		driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
