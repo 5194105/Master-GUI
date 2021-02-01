@@ -37,7 +37,7 @@ public class eraRerateManualTest {
 		c.setDatabaseDisabled("false");
 		c.setCustomCheckBox("true");
 		//c.setCustomString("trkngnbr in ('597012059274',	'244496705687',	'794991365707',	'506365021201',	'757714581424',	'315459044390',	'777982821200')");
-		c.setCustomString("trkngnbr in ('163061855340')");
+		c.setCustomString("trkngnbr in ('794993987755')");
 		
 		
 		
@@ -157,7 +157,10 @@ public class eraRerateManualTest {
         fieldValues.put("customCheckBox",customCheckBox);
         fieldValues.put("databaseDisabled",databaseDisabled);
         fieldValues.put("eraWorkable",eraWorkable);
-        
+        fieldValues.put("domesticCheckBox", domesticCheckBox);
+        fieldValues.put("internationalCheckBox", internationalCheckBox);
+        fieldValues.put("expressCheckBox", expressCheckBox);
+        fieldValues.put("groundCheckBox", groundCheckBox);
         xmlSuite.setParameters(fieldValues);
         XmlTest xmlTest = new XmlTest(xmlSuite);
         xmlTest.setName("era Rerate Test");

@@ -134,10 +134,11 @@ public class eraRerateTestNGSlow {
     
 	int sessionCountInt;
 	String[][] allData;
+
 	
 	@BeforeClass
-	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","sessionCount","customString","customCheckBox","databaseDisabled","eraWorkable"})
-	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String sessionCount,String customString,String customCheckBox,String databaseDisabled,String eraWorkable) {
+	@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox","failedCheckBox","sessionCount","customString","customCheckBox","databaseDisabled","eraWorkable","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox"})
+	public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,String failedCheckBox,String sessionCount,String customString,String customCheckBox,String databaseDisabled,String eraWorkable,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox) {
 	importData id=new importData();
 		c=id.getConfig();
 	/*
@@ -171,6 +172,13 @@ public class eraRerateTestNGSlow {
 	        	this.customCheckBox=customCheckBox;
 	        	this.databaseDisabled=databaseDisabled;
 	        	this.eraWorkable=eraWorkable;
+	        	this.domesticCheckBox=domesticCheckBox;
+	        	this.internationalCheckBox=internationalCheckBox;
+	        	this.expressCheckBox=expressCheckBox;
+	        	this.groundCheckBox=groundCheckBox;
+	        	
+	        	
+	        	
 	        	sessionCountInt=Integer.parseInt(sessionCount);
 	        	waitTime=Integer.parseInt(c.getEraRerateSecondTimeout());
         
@@ -261,8 +269,8 @@ public class eraRerateTestNGSlow {
     	if (customCheckBox.equals("false")) {
     	
     	if (allCheckBox.equals("false")) {
-    		databaseSqlCount+="where ";
-    		databaseSqlQuery+="where ";
+    		databaseSqlCount+="and ";
+    		databaseSqlQuery+="and ";
     	
     	
     	
@@ -313,8 +321,8 @@ public class eraRerateTestNGSlow {
     		}
     			}
     	else if (customCheckBox.equals("true")){
-    		databaseSqlCount+="where trkngnbr is not null and "+customString;
-    		databaseSqlQuery+="where trkngnbr is not null and "+customString;
+    		databaseSqlCount+=" and "+customString;
+    		databaseSqlQuery+=" and "+customString;
     	}
        	
     	

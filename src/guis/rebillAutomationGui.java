@@ -55,7 +55,8 @@ public class rebillAutomationGui {
      JCheckBox disableDatabaseCheckBox;
      gui g;
      JLabel ie,firefox,chrome;
-     
+     JLabel eraMassRebillTextLabel;
+     JCheckBox eraMassRebillCheckBox;
      mouse m;
      JProgressBar b ;
 	/**
@@ -79,7 +80,7 @@ public class rebillAutomationGui {
 	private void initialize() {
 		c.setCompatibleMode("false");
 		c.setDatabaseDisabled("false");
-        
+		c.setEraMassRebill("false");
 		frame = new JFrame();
 		frame.setBounds(100, 100, 985, 680);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -98,7 +99,7 @@ public class rebillAutomationGui {
 		dbLabel.setBounds(415, 340, 78, 56);
 		
 		moreOptionsLabel = new JLabel("New label");
-		moreOptionsLabel.setBounds(725, 353, 50, 30);
+		moreOptionsLabel.setBounds(725, 328, 50, 30);
 		
 		
 		ie = new JLabel("New label");
@@ -192,19 +193,30 @@ public class rebillAutomationGui {
 		moreOptionsTextLabel = new JLabel("Filter Options: ");
 		moreOptionsTextLabel.setForeground(Color.WHITE);
 		moreOptionsTextLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		moreOptionsTextLabel.setBounds(550, 350, 212, 29);
+		moreOptionsTextLabel.setBounds(550, 325, 212, 29);
 		frame.getContentPane().add(moreOptionsTextLabel);
+		
+		eraMassRebillTextLabel = new JLabel("Mass Rebill: ");
+		eraMassRebillTextLabel.setForeground(Color.WHITE);
+		eraMassRebillTextLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		eraMassRebillTextLabel.setBounds(550, 375, 212, 29);
+		frame.getContentPane().add(eraMassRebillTextLabel);
+		
+		eraMassRebillCheckBox = new JCheckBox("");
+		eraMassRebillCheckBox.setBounds(750, 378, 27, 29);
+		eraMassRebillCheckBox.setOpaque(false);
+		frame.getContentPane().add(eraMassRebillCheckBox);
 		
 	
 		sessionLabel = new JLabel("Parallel Sessions:");
 		sessionLabel.setForeground(Color.WHITE);
 		sessionLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
-		sessionLabel.setBounds(550, 420,  250, 31);
+		sessionLabel.setBounds(550, 425,  250, 31);
 		frame.getContentPane().add(sessionLabel);
 		
 		sessionTextField= new JTextField(2);
 		sessionTextField.setText("1");
-		sessionTextField.setBounds(750, 428, 20, 20);
+		sessionTextField.setBounds(750, 433, 20, 20);
 		frame.getContentPane().add(sessionTextField);
 		
 		
@@ -287,9 +299,30 @@ public class rebillAutomationGui {
             }
         });
 		
+	    
+	    
+	    
+	
+	eraMassRebillCheckBox.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+        	eraMassRebillCheckBoxActionPerformed(evt);
+        }
+    });
+	
+}
+	
+	
+	private void eraMassRebillCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {    
+
+		if (eraMassRebillCheckBox.isSelected()) {
+			c.setEraMassRebill("true");
+			System.out.println("era mass rerate: "+ c.getEraMassRebill());
+		}
+		else {
+			c.setEraMassRebill("false");
+			System.out.println("era mass rerate: "+ c.getEraMassRebill());
+		}
 	}
-	
-	
 	
 	
 	private void disableDatabaseCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {    

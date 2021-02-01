@@ -29,10 +29,10 @@ public class rerateManualTest {
 	c.setLevel("3");
 	c.setDriverType("1");
 	c.setCompatibleMode("true");
-	c.setSource("excel");
+	c.setSource("db");
 	c.setAllCheckBox("false");
 	c.setNullCheckBox("true");
-	c.setFailedCheckBox("false");
+	c.setFailedCheckBox("true");
 	c.setDomesticCheckBox("true");
 	c.setInternationalCheckBox("true");
 	c.setExpressCheckBox("true");

@@ -83,7 +83,7 @@ public class config {
     
     String eraWorkable;
     
-    String eraMassRerate;
+    String eraMassRerate,eraMassRebill;
     String resolveCreditCheckBox,disputeCheckBox;
 	public config() {
 		
@@ -1572,6 +1572,17 @@ public void setEraMassRerate(String eraMassRerate){
 
 public String getEraMassRerate(){
 	return eraMassRerate;
+}
+
+
+public void setEraMassRebill(String eraMassRebill){
+	this.eraMassRebill=eraMassRebill;
+}
+
+
+
+public String getEraMassRebill(){
+	return eraMassRebill;
 }
 
 
