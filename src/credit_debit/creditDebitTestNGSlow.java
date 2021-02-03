@@ -617,19 +617,28 @@ public void testMethod1(String result, String descripiton,String testInputNbr,St
     login(driver1,wait1,username,password);
     
     if(creditFlg.equals("Y") && checkValidation("credit",testInputNbr,tinCount,trk,valDesc,rowNumber)==false) {
-    doCredit(driver1,wait1,"credit", result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,  region , username , password,  creditFlg, debitFlg, disputeFlg, resolveCreditFlg,workable,reasonCode,reasonCategory,rootCause,valDesc,rowNumber,1);
-   }
+    
+    	enterDataStep1(driver1,wait1,testInputNbr,tinCount,trk,invoiceNbr1,rowNumber);
+    	doCredit(driver1,wait1,"credit", result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,  region , username , password,  creditFlg, debitFlg, disputeFlg, resolveCreditFlg,workable,reasonCode,reasonCategory,rootCause,valDesc,rowNumber,1);
+    	enterContactMethodStep3(driver1,wait1,testInputNbr,tinCount,trk,invoiceNbr1,username,rowNumber);
+}
     if(debitFlg.equals("Y") && checkValidation("debit",testInputNbr,tinCount,trk,valDesc,rowNumber)==false) {
     checkGUI(driver1,wait1,username,password);
+    enterDataStep1(driver1,wait1,testInputNbr,tinCount,trk,invoiceNbr1,rowNumber);
     doDebit(driver1,wait1,"debit", result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,  region , username , password,  creditFlg, debitFlg, disputeFlg, resolveCreditFlg,workable,reasonCode,reasonCategory,rootCause,valDesc,rowNumber,1);
+    enterContactMethodStep3(driver1,wait1,testInputNbr,tinCount,trk,invoiceNbr1,username,rowNumber);
     }
     if(disputeFlg.equals("Y") && checkValidation("dispute",testInputNbr,tinCount,trk,valDesc,rowNumber)==false) {
     checkGUI(driver1,wait1,username,password);
+    enterDataStep1(driver1,wait1,testInputNbr,tinCount,trk,invoiceNbr1,rowNumber);
     doDispute(driver1,wait1,"dispute", result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,  region , username , password,  creditFlg, debitFlg, disputeFlg, resolveCreditFlg,workable,reasonCode,reasonCategory,rootCause,valDesc,rowNumber,1);
+    enterContactMethodStep3(driver1,wait1,testInputNbr,tinCount,trk,invoiceNbr1,username,rowNumber);
     }
     if(resolveCreditFlg.equals("Y") && checkValidation("resolve",testInputNbr,tinCount,trk,valDesc,rowNumber)==false) {
     checkGUI(driver1,wait1,username,password);
+    enterDataStep1(driver1,wait1,testInputNbr,tinCount,trk,invoiceNbr1,rowNumber);
     doResolve(driver1,wait1,"resolve", result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,  region , username , password,  creditFlg, debitFlg, disputeFlg, resolveCreditFlg,workable,reasonCode,reasonCategory,rootCause,valDesc,rowNumber,1);
+    enterContactMethodStep3(driver1,wait1,testInputNbr,tinCount,trk,invoiceNbr1,username,rowNumber);
     }
 
 }
@@ -1493,8 +1502,13 @@ public void doResolve(WebDriver driver,WebDriverWait wait,String type, String re
 public void doDispute(WebDriver driver,WebDriverWait wait,String type, String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2, String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg,String resolveCreditFlg,String workable,String reasonCode,String reasonCategory,String rootCause,String valDesc,int rowNumber, int instanceNumber) {
 }
 
-public void doCredit(WebDriver driver,WebDriverWait wait,String type, String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2, String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg,String resolveCreditFlg,String workable,String reasonCode,String reasonCategory,String rootCause,String valDesc,int rowNumber, int instanceNumber) {
-							
+
+
+
+
+public void enterDataStep1(WebDriver driver,WebDriverWait wait,String testInputNbr,String tinCount,String trk,String invoiceNbr1,int rowNumber) {
+	
+	
 	WebElement element=null;
 	JavascriptExecutor js= (JavascriptExecutor) driver;
 	
@@ -1531,13 +1545,6 @@ public void doCredit(WebDriver driver,WebDriverWait wait,String type, String res
 		 Assert.fail("Failed on Entering Tracking Number");
 		
 	}
-	/*
-	/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[1]/ul/li[2]/a
-	 * 
-	 */
-	
-	//*[@id="main-tabs"]/li[2]/a
-	
  	//Try to Click Package Tab
 	int counter1=0;
 	String tempString1;
@@ -1586,6 +1593,250 @@ public void doCredit(WebDriver driver,WebDriverWait wait,String type, String res
  		Assert.fail("Could Not Get To Charge Code Details");
  	}
 	System.out.println("STOP HERE");
+	
+
+		 
+	
+}
+
+public void enterContactMethodStep3(WebDriver driver,WebDriverWait wait,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String username,int rowNumber) {
+try {
+	 System.out.println("Inside getDetails");
+     //Getting Action Dropdown. Will RB everytime.
+	 
+	 
+		driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[9]/div[1]/button")).click();
+	 
+	
+		
+		wait=new WebDriverWait(driver,1); 
+ 	    driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS);
+
+      	try {
+      		//tHIS BUTTON IS BUGGY!!!! click many times!!!!!!!!
+      		 Thread.sleep(5000);
+      		 driver.findElement(By.xpath("//*[@id=\"viewInvBtn\"]")).click();         	
+      		}
+      	catch(Exception e0) {
+      		System.out.println("Clould not click after dropdown");
+      		
+      	}
+      		
+      	
+      	
+      	
+      	
+      	int counter1=0;
+      	while(counter1<10) {
+      	try { 
+      		counter1++;
+      		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/label[1]")));
+             break; 
+      }
+      	catch(Exception e1) {
+	
+      		System.out.println("Could Not Click Rebill After Action Code");
+      		 try {
+      			 
+      			 String tempError= driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[1]/h4")).getText();
+      			 if (tempError.equals("Trying To Rebill A Partial Amount")) {
+      				 System.out.println(tempError);
+      				 if(source.equals("excel")) {
+      	               	 writeToExcel(rowNumber, 0,"fail");
+      	               	 writeToExcel(rowNumber, 1,"Trying To Rebill A Partial Amount");
+      	               	 }
+      	   				 if(databaseDisabled.equals("false")) {
+              	   			 String[] resultArray = new String[2];
+              	   			 	resultArray[0]="fail";
+              	   				resultArray[1]="Trying To Rebill A Partial Amount";
+              	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                             	 }
+      	   			 Assert.fail("Trying To Rebill A Partial Amount");
+      		}
+      			
+      				 if (tempError.indexOf("interline")==1) {
+      				 System.out.println(tempError);
+      				 if(source.equals("excel")) {
+      	               	 writeToExcel(rowNumber, 0,"fail");
+      	               	 writeToExcel(rowNumber, 1,"interline acct");
+      	               	 }
+      	   				 if(databaseDisabled.equals("false")) {
+              	   			 String[] resultArray = new String[2];
+              	   			 	resultArray[0]="fail";
+              	   				resultArray[1]="interline acct";
+              	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                             	 }
+      	   			 Assert.fail("interline acct");
+      		} 
+      				 
+      				 if (tempError.indexOf("Approval Limit")==1) {
+          				 System.out.println(tempError);
+          				 if(source.equals("excel")) {
+          	               	 writeToExcel(rowNumber, 0,"fail");
+          	               	 writeToExcel(rowNumber, 1,tempError);
+          	               	 }
+          	   				 if(databaseDisabled.equals("false")) {
+                  	   			 String[] resultArray = new String[2];
+                  	   			 	resultArray[0]="fail";
+                  	   				resultArray[1]=tempError;
+                  	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                                 	 }
+          	   			 Assert.fail(tempError);
+          		} 
+      				 
+      				 if (tempError.indexOf("specialist")==1) {
+          				 System.out.println(tempError);
+          				 if(source.equals("excel")) {
+          	               	 writeToExcel(rowNumber, 0,"fail");
+          	               	 writeToExcel(rowNumber, 1,"specialist error");
+          	               	 }
+          	   				 if(databaseDisabled.equals("false")) {
+                  	   			 String[] resultArray = new String[2];
+                  	   			 	resultArray[0]="fail";
+                  	   				resultArray[1]="specialist error";
+                  	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                                 	 }
+          	   			 Assert.fail("specialist error");
+          		} 
+      				 
+      				 if (tempError.indexOf("Cannot Credit An AirBill For More Than The Invoice Amount Due")==1) {
+          				 System.out.println(tempError);
+          				 if(source.equals("excel")) {
+          	               	 writeToExcel(rowNumber, 0,"fail");
+          	               	 writeToExcel(rowNumber, 1,"Cannot Credit An AirBill For More Than The Invoice Amount Due");
+          	               	 }
+          	   				 if(databaseDisabled.equals("false")) {
+                  	   			 String[] resultArray = new String[2];
+                  	   			 	resultArray[0]="fail";
+                  	   				resultArray[1]="Cannot Credit An AirBill For More Than The Invoice Amount Due";
+                  	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                                 	 }
+          	   			 Assert.fail("Cannot Credit An AirBill For More Than The Invoice Amount Due");
+          		}
+      				 
+      				 if (tempError.indexOf("Adjustment can not be done for discount amount")==1) {
+          				 System.out.println(tempError);
+          				 if(source.equals("excel")) {
+          	               	 writeToExcel(rowNumber, 0,"fail");
+          	               	 writeToExcel(rowNumber, 1,"Adjustment can not be done for discount amount");
+          	               	 }
+          	   				 if(databaseDisabled.equals("false")) {
+                  	   			 String[] resultArray = new String[2];
+                  	   			 	resultArray[0]="fail";
+                  	   				resultArray[1]="Adjustment can not be done for discount amount";
+                  	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                                 	 }
+          	   			 Assert.fail("Adjustment can not be done for discount amount");
+          		}
+      				 
+      				 
+      				
+      			
+      				 
+
+      		 driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/button[1]")).click();
+      		 System.out.println("Found Pop Up");
+      	    
+
+      			 
+      			
+      		 }
+      		 catch(Exception e) {
+      			 System.out.println("Could not move on past dropdown details");
+      			 }
+      		 }
+      	}
+      	if(counter1>=10) {
+      		 if(source.equals("excel")) {
+             	 writeToExcel(rowNumber, 0,"fail");
+             	 writeToExcel(rowNumber, 1,"Could Not go to phone detail screen");
+             	return;
+             	 }
+ 				 if(databaseDisabled.equals("false")) {
+ 	   			 String[] resultArray = new String[2];
+ 	   			 	resultArray[0]="fail";
+ 	   				resultArray[1]="Could Not go to phone detail screen";
+ 	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+ 	   				
+              	 } 
+      		Assert.fail("Could Not go to phone detail screen");
+      	}
+      	
+      	
+      	
+      	
+      	        
+      	
+      	
+      	
+      	wait=new WebDriverWait(driver,waitTime); 
+  	    driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
+	
+      	
+      		 
+      		 /*
+          	 *****************************************************************************
+          	 *
+          	 *Getting to phone detail
+          	 *
+          	 *
+          	 ****************************************************************************
+          	 */
+      		 
+      		 System.out.println("Phone Details");
+      		  Thread.sleep(1500);
+   //   js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+          try{
+         	 //Click on rebill RPI Complete, Phone, and Continue
+               if (username.equals("5194105")){
+             	  driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/label[1]")).click();
+               }
+           Thread.sleep(1500);
+               
+            Select contactMethodDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"rmrks\"]")));
+            Thread.sleep(1500);
+            contactMethodDropDown.selectByValue("phone");  
+            Thread.sleep(1500);
+      	  
+            //CLICK CONTINUE.. THIS WILL CREDIT IT
+            // driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).click();
+          }
+          catch(Exception e1) {
+         	 System.out.println("Failed Selecting Contact Method and Clicking Continue");
+          
+         	 if(source.equals("excel")) {
+             	 writeToExcel(rowNumber, 0,"fail");
+             	 writeToExcel(rowNumber, 1,"Failed Selecting Contact Method and Clicking Continue");
+             	return;
+             	 }
+ 				 if(databaseDisabled.equals("false")) {
+ 	   			 String[] resultArray = new String[2];
+ 	   			 	resultArray[0]="fail";
+ 	   				resultArray[1]="Failed Selecting Contact Method and Clicking Continue";
+ 	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+ 	   				
+              	 } 
+ 				 Assert.fail("Failed Selecting Contact Method and Clicking Continue");
+          }
+      	   
+          
+          
+          System.out.println();
+          endTest(testInputNbr,tinCount,trk,"test","made it to the end");
+          
+	 
+}
+catch(Exception e) {
+  System.out.println(e);
+
+}
+}
+
+
+
+public void doCredit(WebDriver driver,WebDriverWait wait,String type, String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2, String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg,String resolveCreditFlg,String workable,String reasonCode,String reasonCategory,String rootCause,String valDesc,int rowNumber, int instanceNumber) {
+							
+	
 	String spaceString="     ";
 	 try{
 	  Select actionDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"pkgaction\"]")));
@@ -1612,277 +1863,18 @@ public void doCredit(WebDriver driver,WebDriverWait wait,String type, String res
 		 actionDropDown.selectByValue("string:"+rootCause);
 		 }
 	}
-	if (debitFlg.equals("Y")) {
-		 actionDropDown.selectByValue("DB");
-	}
-	if (disputeFlg.equals("Y")) {
-		 actionDropDown.selectByValue("D");
-	}
-	if (resolveCreditFlg.equals("Y")) {
-		 actionDropDown.selectByValue("RC");
-	}
-	    	 System.out.println("Inside getDetails");
-	         //Getting Action Dropdown. Will RB everytime.
-	    	 
-	    	 
-	    		driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[9]/div[1]/button")).click();
-	    	 
+
 	    	
-	    		
-	    		 wait=new WebDriverWait(driver,1); 
-	     	    driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS);
-
-	          	try {
-	          		//tHIS BUTTON IS BUGGY!!!! click many times!!!!!!!!
-	          		 Thread.sleep(5000);
-	          		 driver.findElement(By.xpath("//*[@id=\"viewInvBtn\"]")).click();         	
-	          		}
-	          	catch(Exception e0) {
-	          		System.out.println("Clould not click after dropdown");
-	          		
-	          	}
-	          		
-	          	
-	          	
-	          	
-	          	
-	          	counter1=0;
-	          	while(counter1<10) {
-	          	try { 
-	          		counter1++;
-	          		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/label[1]")));
-	                 break; 
-	          }
-	          	catch(Exception e1) {
-	 	
-	          		System.out.println("Could Not Click Rebill After Action Code");
-	          		 try {
-	          			 
-	          			 String tempError= driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[1]/h4")).getText();
-	          			 if (tempError.equals("Trying To Rebill A Partial Amount")) {
-	          				 System.out.println(tempError);
-	          				 if(source.equals("excel")) {
-	          	               	 writeToExcel(rowNumber, 0,"fail");
-	          	               	 writeToExcel(rowNumber, 1,"Trying To Rebill A Partial Amount");
-	          	               	 }
-	          	   				 if(databaseDisabled.equals("false")) {
-	                  	   			 String[] resultArray = new String[2];
-	                  	   			 	resultArray[0]="fail";
-	                  	   				resultArray[1]="Trying To Rebill A Partial Amount";
-	                  	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-	                                 	 }
-	          	   			 Assert.fail("Trying To Rebill A Partial Amount");
-	          		}
-	          			
-	          				 if (tempError.indexOf("interline")==1) {
-	          				 System.out.println(tempError);
-	          				 if(source.equals("excel")) {
-	          	               	 writeToExcel(rowNumber, 0,"fail");
-	          	               	 writeToExcel(rowNumber, 1,"interline acct");
-	          	               	 }
-	          	   				 if(databaseDisabled.equals("false")) {
-	                  	   			 String[] resultArray = new String[2];
-	                  	   			 	resultArray[0]="fail";
-	                  	   				resultArray[1]="interline acct";
-	                  	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-	                                 	 }
-	          	   			 Assert.fail("interline acct");
-	          		} 
-	          				 
-	          				 if (tempError.indexOf("Approval Limit")==1) {
-	              				 System.out.println(tempError);
-	              				 if(source.equals("excel")) {
-	              	               	 writeToExcel(rowNumber, 0,"fail");
-	              	               	 writeToExcel(rowNumber, 1,tempError);
-	              	               	 }
-	              	   				 if(databaseDisabled.equals("false")) {
-	                      	   			 String[] resultArray = new String[2];
-	                      	   			 	resultArray[0]="fail";
-	                      	   				resultArray[1]=tempError;
-	                      	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-	                                     	 }
-	              	   			 Assert.fail(tempError);
-	              		} 
-	          				 
-	          				 if (tempError.indexOf("specialist")==1) {
-	              				 System.out.println(tempError);
-	              				 if(source.equals("excel")) {
-	              	               	 writeToExcel(rowNumber, 0,"fail");
-	              	               	 writeToExcel(rowNumber, 1,"specialist error");
-	              	               	 }
-	              	   				 if(databaseDisabled.equals("false")) {
-	                      	   			 String[] resultArray = new String[2];
-	                      	   			 	resultArray[0]="fail";
-	                      	   				resultArray[1]="specialist error";
-	                      	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-	                                     	 }
-	              	   			 Assert.fail("specialist error");
-	              		} 
-	          				 
-	          				 if (tempError.indexOf("Cannot Credit An AirBill For More Than The Invoice Amount Due")==1) {
-	              				 System.out.println(tempError);
-	              				 if(source.equals("excel")) {
-	              	               	 writeToExcel(rowNumber, 0,"fail");
-	              	               	 writeToExcel(rowNumber, 1,"Cannot Credit An AirBill For More Than The Invoice Amount Due");
-	              	               	 }
-	              	   				 if(databaseDisabled.equals("false")) {
-	                      	   			 String[] resultArray = new String[2];
-	                      	   			 	resultArray[0]="fail";
-	                      	   				resultArray[1]="Cannot Credit An AirBill For More Than The Invoice Amount Due";
-	                      	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-	                                     	 }
-	              	   			 Assert.fail("Cannot Credit An AirBill For More Than The Invoice Amount Due");
-	              		}
-	          				 
-	          				 if (tempError.indexOf("Adjustment can not be done for discount amount")==1) {
-	              				 System.out.println(tempError);
-	              				 if(source.equals("excel")) {
-	              	               	 writeToExcel(rowNumber, 0,"fail");
-	              	               	 writeToExcel(rowNumber, 1,"Adjustment can not be done for discount amount");
-	              	               	 }
-	              	   				 if(databaseDisabled.equals("false")) {
-	                      	   			 String[] resultArray = new String[2];
-	                      	   			 	resultArray[0]="fail";
-	                      	   				resultArray[1]="Adjustment can not be done for discount amount";
-	                      	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-	                                     	 }
-	              	   			 Assert.fail("Adjustment can not be done for discount amount");
-	              		}
-	          				 
-	          				 
-	          				
-	          			
-	          				 
-	  
-	          		 driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[2]/button[1]")).click();
-	          		 System.out.println("Found Pop Up");
-	          	    
-	   
-	          			 
-	          			
-	          		 }
-	          		 catch(Exception e) {
-	          			 System.out.println("Could not move on past dropdown details");
-	          			 }
-	          		 }
-	          	}
-	          	if(counter1>=10) {
-	          		 if(source.equals("excel")) {
-	                 	 writeToExcel(rowNumber, 0,"fail");
-	                 	 writeToExcel(rowNumber, 1,"Could Not go to phone detail screen");
-	                 	return;
-	                 	 }
-	     				 if(databaseDisabled.equals("false")) {
-	     	   			 String[] resultArray = new String[2];
-	     	   			 	resultArray[0]="fail";
-	     	   				resultArray[1]="Could Not go to phone detail screen";
-	     	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-	     	   				
-	                  	 } 
-	          		Assert.fail("Could Not go to phone detail screen");
-	          	}
-	          	
-	          	
-	          	
-	          	
-	          	        
-	          	
-	          	
-	          	
-	          	wait=new WebDriverWait(driver,waitTime); 
-	      	    driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
-	 	
-	          	
-	          		 
-	          		 /*
-	              	 *****************************************************************************
-	              	 *
-	              	 *Getting to phone detail
-	              	 *
-	              	 *
-	              	 ****************************************************************************
-	              	 */
-	          		 
-	          		 System.out.println("Phone Details");
-	          		  Thread.sleep(1500);
-	       //   js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-	              try{
-	             	 //Click on rebill RPI Complete, Phone, and Continue
-	                   if (username.equals("5194105")){
-	                 	  driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[2]/label[1]")).click();
-	                   }
-	               Thread.sleep(1500);
-	                   
-	                Select contactMethodDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"rmrks\"]")));
-	                Thread.sleep(1500);
-	                contactMethodDropDown.selectByValue("phone");  
-	                Thread.sleep(1500);
-	          	  
-	                //CLICK CONTINUE.. THIS WILL CREDIT IT
-	                // driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).click();
-	              }
-	              catch(Exception e1) {
-	             	 System.out.println("Failed Selecting Contact Method and Clicking Continue");
-	              
-	             	 if(source.equals("excel")) {
-	                 	 writeToExcel(rowNumber, 0,"fail");
-	                 	 writeToExcel(rowNumber, 1,"Failed Selecting Contact Method and Clicking Continue");
-	                 	return;
-	                 	 }
-	     				 if(databaseDisabled.equals("false")) {
-	     	   			 String[] resultArray = new String[2];
-	     	   			 	resultArray[0]="fail";
-	     	   				resultArray[1]="Failed Selecting Contact Method and Clicking Continue";
-	     	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
-	     	   				
-	                  	 } 
-	     				 Assert.fail("Failed Selecting Contact Method and Clicking Continue");
-	              }
-	          	   
-	            
-	            	  /*
-	            	  Boolean successfulBoolean=false;
-	            		Boolean denialBoolean=false;
-	            		if(valDesc.equals("Denial Expected")) {
-	            			denialBoolean=true;
-	            		}
-	            		
-	            		try {
-	            			if (databaseDisabled.equals("false")) {
-
-	            				 String[] resultArray = validateResults(trk,type,denialBoolean);
-	            			 
-	            				  successfulBoolean=true;
-	            		   	 if(source.equals("excel")) {
-	            		   		 writeToExcel(rowNumber, 0,resultArray[0]);
-	            		   		 writeToExcel(rowNumber, 1,resultArray[1]);
-	            		   	 }
-	            		   	 
-	            		   	 	writeToDB(testInputNbr,tinCount,trk,resultArray);
-	            		   	 
-	            			  
-	            			  			}
-	            		
-	            			
-	            		}
-	            			catch(Exception e) {
-	            				System.out.println(e);
-	            				}
-	              
-	           */
-	              
-	              
-	              System.out.println();
-	              endTest(testInputNbr,tinCount,trk,"test","made it to the end");
-	              
-	    	 
-	  }
-	  catch(Exception e) {
-		  System.out.println(e);
-	  }
 	
 	
 }
+	 catch(Exception e) {
+		  System.out.println(e);
+
+		}
+		}
+	 
+	 
 public void endTest(String testInputNbr,String tinCount,String trk,String endMessage1,String endMessage2) {
 	 String[] resultArray = new String[2];
 	 resultArray[0]=endMessage1;

@@ -286,8 +286,8 @@ public class testNgSlowInstantInvoice {
     	}
     	}
     	else if (customCheckBox.equals("true")){
-    		databaseSqlCount+="where instnt_inv_flg !='Y' and "+customString;
-    		databaseSqlQuery+="where instnt_inv_flg !='Y' and "+customString;
+    		databaseSqlCount+="where (instnt_inv_flg is null or instnt_inv_flg ='fail')  and "+customString;
+    		databaseSqlQuery+="where (instnt_inv_flg is null or instnt_inv_flg ='fail')  and "+customString;
     	}
     	
     	

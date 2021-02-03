@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
+import javax.swing.JTextField;
 
 import configuration.config;
 import configuration.mouse;
@@ -21,8 +21,8 @@ public class instantInvoiceAutomationExtendGui {
 	private JLabel allLabel;
 	private JLabel nullLabel;
 	private JLabel failedLabel;
-
-
+	private JLabel tipLabel,functionLabel;
+	JTextField customQueryTextField;
     config c;
   
     private JLabel saveAndClose;
@@ -51,10 +51,38 @@ public class instantInvoiceAutomationExtendGui {
 	
 		
 		
-		
 		saveAndCLose =new JButton("Save and Close");  
-		saveAndCLose.setBounds(450, 510, 284, 41);  
+		saveAndCLose.setBounds(450, 530, 284, 41);  
 		frame.getContentPane().add(saveAndCLose);
+		
+		
+		
+		
+		functionLabel = new JLabel("Custom Query: ");
+		functionLabel.setBounds(300, 440, 200, 31);
+		functionLabel.setForeground(Color.WHITE);
+		functionLabel.setFont(new Font("Segoe UI", Font.BOLD, 23));
+		frame.getContentPane().add(functionLabel);
+		
+		JCheckBox customBox = new JCheckBox("");
+		customBox.setBounds(475, 443, 27, 29);
+		customBox.setOpaque(false);
+		frame.getContentPane().add(customBox);
+		
+		
+		
+		
+		tipLabel = new JLabel("* Enter Where Clause Only. Example: test_input_nbr='12345' *");
+		tipLabel.setBounds(300, 470, 500, 31);
+		tipLabel.setForeground(Color.WHITE);
+		tipLabel.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		frame.getContentPane().add(tipLabel);
+		
+		customQueryTextField= new JTextField(2);
+		customQueryTextField.setText("");
+		customQueryTextField.setBounds(300, 500, 500, 20);
+		frame.getContentPane().add(customQueryTextField);
+		
 		
 		
 		/*
@@ -227,6 +255,21 @@ public class instantInvoiceAutomationExtendGui {
 	    {
 	      public void actionPerformed(ActionEvent e)
 	      {
+	    	  
+	     	  c.setCustomString(customQueryTextField.getText());
+	    	  System.out.println(c.getCustomString());
+	    	  
+	    	  
+	    	  
+	    	  
+	    	  if (customBox.isSelected()) {
+	    		  c.setCustomCheckBox("true");
+	    		  c.setCustomString(customQueryTextField.getText());
+	    	  }
+	    	  else if(!customBox.isSelected()){
+	    		  c.setCustomCheckBox("false");
+	    		  c.setCustomString("");
+	    	  }
 	    	  
 	    	  if (allBox.isSelected()) {
 	    		  c.setAllCheckBox("true");

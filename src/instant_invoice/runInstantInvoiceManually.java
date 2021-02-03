@@ -28,8 +28,8 @@ public class runInstantInvoiceManually {
     	c.setNullCheckBox("true");
     	c.setFailedCheckBox("true");
 		c.setDatabaseDisabled("false");
-		c.setCustomCheckBox("false");
-		c.setCustomString("");
+		c.setCustomCheckBox("true");
+		c.setCustomString("trkngnbr='443129894300'");
 		c.setSessionCount("1");
 	//	c.setPrerateType("hold");
 		
