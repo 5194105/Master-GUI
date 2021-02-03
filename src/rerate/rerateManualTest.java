@@ -60,7 +60,9 @@ public class rerateManualTest {
 	
 	
 	
-	
+	//You can give custom query if want to
+			c.setCustomCheckBox("true");
+			c.setCustomString("trk_no1 is not null");
 	
 	String filepath=c.getExcelPath();
 	String level=c.getLevel();
@@ -93,7 +95,8 @@ public class rerateManualTest {
 	 String nt2=c.getNt2String();
 	 String sp1=c.getSp1String();
 	 String sp2=c.getSp2String();
-		
+		String	customCheckBox= c.getCustomCheckBox();
+		String	customString= c.getCustomString();
 	
 	System.out.println("filepath "+filepath);
 	System.out.println("level "+level);
@@ -113,7 +116,8 @@ public class rerateManualTest {
 	System.out.println("startDateText "+startDateText);
 	System.out.println("endDate "+endDateText);
 	System.out.println("databaseDisabled "+databaseDisabled);
-
+	System.out.println("customString "+customString);
+	System.out.println("customCheckBox "+customCheckBox);
 	
 	System.out.println("ed1 "+ed1);
 	System.out.println("ei1 "+ei1);
@@ -216,7 +220,12 @@ public class rerateManualTest {
 	if(sp2==null) {
 		sp2="";
 	}
-	
+	if(customString==null) {
+		customString="";
+	}
+	if(customCheckBox==null) {
+		customCheckBox="";
+	}
 
 	if(databaseDisabled==null) {
 		databaseDisabled="";
@@ -311,7 +320,8 @@ public class rerateManualTest {
     fieldValues.put("gi2",gi2);
     fieldValues.put("nt2",nt2);
     fieldValues.put("sp2",sp2);
-    
+    fieldValues.put("customString",customString);
+    fieldValues.put("customCheckBox",customCheckBox);
     xmlSuite.setParameters(fieldValues);
     XmlTest xmlTest = new XmlTest(xmlSuite);
     xmlTest.setName("Rebill Test");

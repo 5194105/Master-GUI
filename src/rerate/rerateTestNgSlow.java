@@ -159,10 +159,11 @@ public class rerateTestNgSlow {
 	String prsMainUrl;
 	String prsCreateUrl;
 	String prsPaUrl;
+	String customString;String customCheckBox;
 	    
 		@BeforeClass
-		@Parameters({"filepath","level","browser","source","compatibleMode","allCheckBox","nullCheckBox","failedCheckBox","sessionCount","databaseDisabled","startDateText","endDateText","ed1","ei1","gd1","gi1","nt1","sp1","ed2","ei2","gd2","gi2","nt2","sp2"})
-		public void setupExcel(String filepath,String level,String browser,String source,String compatibleMode,String allCheckBox,String nullCheckBox,String failedCheckBox,String sessionCount,String databaseDisabled,String startDateText,String endDateText,String ed1, String ei1,String gd1, String gi1,String nt1,String sp1,String ed2,String ei2, String gd2, String gi2,String nt2, String sp2) {
+		@Parameters({"filepath","level","browser","source","compatibleMode","allCheckBox","nullCheckBox","failedCheckBox","sessionCount","databaseDisabled","startDateText","endDateText","ed1","ei1","gd1","gi1","nt1","sp1","ed2","ei2","gd2","gi2","nt2","sp2","customString","customCheckBox"})
+		public void setupExcel(String filepath,String level,String browser,String source,String compatibleMode,String allCheckBox,String nullCheckBox,String failedCheckBox,String sessionCount,String databaseDisabled,String startDateText,String endDateText,String ed1, String ei1,String gd1, String gi1,String nt1,String sp1,String ed2,String ei2, String gd2, String gi2,String nt2, String sp2,String customString,String customCheckBox) {
 			//public void setupExcel() {
 			//or from eclipse.
 			importData id = new importData();
@@ -191,8 +192,8 @@ public class rerateTestNgSlow {
 	        	this.startDateText=startDateText;
 	        	this.endDateText=endDateText;
 	        	this.databaseDisabled=databaseDisabled;
-	        	
-	        	
+	        	this.customString=customString;
+	        	this.customCheckBox=customCheckBox;
 	        	this.ed1=ed1;
 	     	    this.ei1=ei1;
 	     	    this.gd1=gd1;
@@ -288,6 +289,8 @@ public class rerateTestNgSlow {
 	    	String databaseSqlQuery="select TEST_INPUT_NBR	,TIN_COUNT	,ACCT1,	ACCT2,	TRK_NO1,	TRK_NO2	,INVOICE_NBR_1,	INV_NO2,	SERVICE1,	SERVICE2,	REQUEST_TYPE,	ACCT_TYPE,	ACCNAME from (select * from rerate_master where trk_no1 is not null and acct2 is null union all select * from rerate_master where trk_no1 is not null and trk_no2 is not null and acct2 is not null)";
 	    	
 	    	
+	    	if (customCheckBox.equals("false")) {
+	    	
 	    	if (allCheckBox.equals("false")) {
 	    		databaseSqlCount+="where ";
 	    		databaseSqlQuery+="where ";
@@ -377,7 +380,11 @@ public class rerateTestNgSlow {
 	    	
 	    	 databaseSqlCount = databaseSqlCount.replace(",)",")");
 	    	 databaseSqlQuery = databaseSqlQuery.replace(",)",")");
-	    	 
+	    	}
+	    	else if (customCheckBox.equals("true")){
+	    		databaseSqlCount+="where trk_no1 is not null and "+customString;
+	    		databaseSqlQuery+="where trk_no1 is not null and "+customString;
+	    	}
 	    	
 	       	try {
 	            //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');

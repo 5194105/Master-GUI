@@ -51,7 +51,7 @@ public class rebillManualClass {
 		
 		//You can give custom query if want to
 		c.setCustomCheckBox("true");
-		c.setCustomString("description ='Not In ERA Database'");
+		c.setCustomString("company='GD' and region='USA'");
 				
 		c.setHeadlessString("false");
 

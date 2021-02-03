@@ -887,28 +887,33 @@ public class eraMassRerateTestNGSlow {
 	        }
 	        
 	        Thread.sleep(waittimer);
+	        
+	        /*
 	        System.out.println("RERATE");
 	        String[] resultArray = new String[3];
 	        resultArray[0]="stephen";
 			resultArray[1]="made it to the end";
 			resultArray[2]="na";
 			writeToDB(testInputNbr,tinCount,trk,resultArray);
+	        */
+	        
 	        
 	        
 	        //Click on rerate
-	       // driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[3]/div[5]/div/div/button")).click();
-        	/*
+	        driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[3]/div[5]/div/div/button")).click();
+        	
 	        Thread.sleep(waittimer);
 	    	String temp=driver.findElement(By.xpath(" /html/body/div[7]/div/div/div[1]/h3")).getText();;
 	    	String requestID=temp.replaceAll("\\D+","");
 	    	System.out.println( requestID);
-	    	*/
-	       /*
-	    		String[] resultArray = new String[2];
+	    	
+	       
+	    		String[] resultArray = new String[3];
 			 	resultArray[0]="In Progress";
-				resultArray[1]=requestID;
+			 	resultArray[1]="Rerate Created";
+				resultArray[2]=requestID;
 				writeToDB(testInputNbr,tinCount,trk,resultArray);
-	        */
+	        
 	        
 	    	} 
 	    	catch(Exception e) {

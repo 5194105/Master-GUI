@@ -33,7 +33,7 @@ public class eraMassRerateManualTest {
 	
 	//You can give custom query if want to
 	c.setCustomCheckBox("true");
-	c.setCustomString("trkngnbr is not null and username in ('3735811','5194105')");
+	c.setCustomString("test_input_nbr !='172732'");
 
 	
 	String filepath=c.getExcelPath();

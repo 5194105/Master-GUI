@@ -259,8 +259,8 @@ public class eraRerateTestNGSlow {
     	String databaseSqlQuery="select RESULT,	DESCRIPTION,	TEST_INPUT_NBR,	TIN_COUNT,	TRKNGNBR,	INVOICE_NBR_1	,INVOICE_NBR_2,	RATE_WEIGHT,	ACTUAL_WEIGHT,	WGT_TYPE,	LENGTH,	WIDTH,	HEIGHT	,WORKABLE,	DIM_TYPE,	PAYOR	,BILL_ACCT_NBR	,SVC_TYPE,	SERVICE_NAME,	PACKAGE_TYPE	,RERATE_TYPE,	REGION,	USERNAME,	PASSWORD,	RS_TYPE,	COMPANY,	VAL_DESC,	COMMENTS from era_rerate_view where trkngnbr is not null ";
     	
     	if (allCheckBox.equals("true")) {
-    		databaseSqlCount+="where trkngnbr is not null";
-    		databaseSqlQuery+="where trkngnbr is not null ";
+    		//databaseSqlCount+="where trkngnbr is not null";
+    		//databaseSqlQuery+="where trkngnbr is not null ";
     	}
     	
     	System.out.println(customCheckBox);
@@ -1320,8 +1320,32 @@ public class eraRerateTestNGSlow {
           }
       
           
+          Thread.sleep(5000);
+          
+          
+          try {
       
-     
+          String tempError= driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[1]/h4")).getText();
+			 if (tempError.equals("Conflicting Case check call failed")) {
+				 System.out.println(tempError);
+				 if(source.equals("excel")) {
+	               	 writeToExcel(rowNumber, 0,"fail");
+	               	 writeToExcel(rowNumber, 1,"Conflicting Case check call failed");
+	               	 }
+	   				 if(databaseDisabled.equals("false")) {
+      	   			 String[] resultArray = new String[2];
+      	   			 	resultArray[0]="fail";
+      	   				resultArray[1]="Conflicting Case check call failed";
+      	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                     	 }
+	   			 Assert.fail("Conflicting Case check call failed");
+		}
+          }
+          catch(Exception e) {
+        	  System.out.println(e);
+        	  System.out.println("SEEING IF ERROR EXISTED");
+        	  
+          }
        
      }
      catch(Exception e1) {

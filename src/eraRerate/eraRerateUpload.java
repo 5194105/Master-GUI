@@ -90,7 +90,7 @@ public class eraRerateUpload implements Runnable {
        GTMcon=c.getGtmRevToolsConnection();
         //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
        if (c.getEraMassRerate().equals("true")) {
-       stmt=GTMcon.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,ERA_mass_rerate) values (?,?,?,?,?,?)");  
+       stmt=GTMcon.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,ERA_mass_rerate,request_id) values (?,?,?,?,?,?,?)");  
        }
        if (c.getEraMassRerate().equals("false")) {
     	   stmt=GTMcon.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,ERA_rerate) values (?,?,?,?,?,?)");  
@@ -101,6 +101,10 @@ public class eraRerateUpload implements Runnable {
               stmt.setString(4,resultArray[0]);  
               stmt.setString(5,resultArray[1]);  
               stmt.setString(6,"Y");  
+              if (c.getEraMassRerate().equals("true")) {
+            	  stmt.setString(7,resultArray[2]);  
+              }
+              
        
               stmt.executeUpdate();
        }
@@ -114,7 +118,7 @@ public class eraRerateUpload implements Runnable {
               //     update gtm_rev_tools.rebill_results set result='fail',description='6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables' where trkngnbr='566166113544';
              
     	   if (c.getEraMassRerate().equals("true")) {
-    		   stmt=GTMcon.prepareStatement("update era_results set result=?,description=?,ERA_mass_rerate='Y' where trkngnbr=?");    
+    		   stmt=GTMcon.prepareStatement("update era_results set result=?,description=?,ERA_mass_rerate='Y',request_id=? where trkngnbr=?");    
     	       }
     	       if (c.getEraMassRerate().equals("false")) {
     	    	   stmt=GTMcon.prepareStatement("update era_results set result=?,description=?,ERA_rerate='Y' where trkngnbr=?");   
@@ -125,6 +129,9 @@ public class eraRerateUpload implements Runnable {
               stmt.setString(1,resultArray[0]);  
               stmt.setString(2,resultArray[1]); 
               stmt.setString(3,trk); 
+              if (c.getEraMassRerate().equals("true")) {
+            	  stmt.setString(4,resultArray[2]);  
+              }
               stmt.executeUpdate();
               
        }
@@ -144,7 +151,7 @@ public class eraRerateUpload implements Runnable {
              counter++;
              Boolean result=null;
              Connection con = null;
-         	String[] resultArray = new String[2];
+         	String[] resultArray = new String[3];
          	
          	try {
          	
@@ -231,8 +238,11 @@ public class eraRerateUpload implements Runnable {
     }
          	  if (c.getEraMassRerate().equals("true")) {
          		  try {
+         			  if(trk.equals("794994229050") || trk.equals("794993961972")) {
+         				  System.out.println("HOLD");
+         			  }
          			  System.out.println(trk);
-         			 stmt=con.prepareStatement("select FAILED_REQ_QTY, SUCCESS_REQ_QTY ,TOTAL_REQUEST_QTY,RERATE_STATUS_CD, RERATE_OUTBOUND_TMSTP from invadj_schema.mass_adj_summary a join (select max(batch_summary_nbr) as bsr from invadj_schema.mass_rerate_detail where airbill_nbr =?) b on b.bsr=a.batch_summary_nbr");  
+         			 stmt=con.prepareStatement("select FAILED_REQ_QTY, SUCCESS_REQ_QTY ,TOTAL_REQUEST_QTY,RERATE_STATUS_CD, RERATE_OUTBOUND_TMSTP,batch_summary_nbr from invadj_schema.mass_adj_summary a join (select max(batch_summary_nbr) as bsr from invadj_schema.mass_rerate_detail where airbill_nbr =?) b on b.bsr=a.batch_summary_nbr");  
           			stmt.setString(1,trk);  
           			rs = stmt.executeQuery();
          	
@@ -251,12 +261,20 @@ public class eraRerateUpload implements Runnable {
           				   
           				  String SUCCESS_REQ_QTY = rs.getString("SUCCESS_REQ_QTY");
           				 String TOTAL_REQUEST_QTY = rs.getString("TOTAL_REQUEST_QTY");
+          				 String batch_summary_nbr = rs.getString("batch_summary_nbr");
+          				 
+          				 
+          				 
+          				 
+          				 if(SUCCESS_REQ_QTY==null || SUCCESS_REQ_QTY.equals("")) {
+          					SUCCESS_REQ_QTY="";
+          				 }
           				
           				 if (SUCCESS_REQ_QTY.equals(TOTAL_REQUEST_QTY)) {
           					  resultArray[0]="pass";
     	    			      resultArray[1]="completed";
           				 }
-          				 else if (SUCCESS_REQ_QTY==null) {
+          				 else if (SUCCESS_REQ_QTY.equals("")) {
           					  resultArray[0]="pending";
       	    			      resultArray[1]="Still Processing";
           				 }
@@ -266,7 +284,7 @@ public class eraRerateUpload implements Runnable {
       	    			      resultArray[1]="Check Manually";
           					  
           				  }
-          	             
+          				 resultArray[2]=batch_summary_nbr;
           				  
           			   }
           		} catch (SQLException e) {
@@ -308,7 +326,7 @@ public  void getData() {
            }
            if (c.getEraMassRerate().equals("false")) {
         	    databaseSqlCount="select count(*) as total from era_rerate_view where trkngnbr is not null ";
-                databaseSqlQuery="select  test_input_nbr, tin_count, trkngnbr,request_ID from era_rerate_view where trkngnbr is not null ";
+                databaseSqlQuery="select  test_input_nbr, tin_count, trkngnbr from era_rerate_view where trkngnbr is not null ";
            }
       
        
@@ -323,12 +341,12 @@ public  void getData() {
         //insert into gtm_rev_tools.rebill_results (test_input_nbr,tin_count,trkngnbr,result,description) values ('125335','1','566166113544','fail','6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables');
               
               stmt = GTMcon.createStatement();
-           //   System.out.println(databaseSqlCount);
+              System.out.println(databaseSqlCount);
              rs = stmt.executeQuery(databaseSqlCount);
              rs.next();
              rowCount=rs.getInt("total");
              stmt = GTMcon.createStatement();
-          //   System.out.println(databaseSqlQuery);
+            System.out.println(databaseSqlQuery);
              rs = stmt.executeQuery(databaseSqlQuery);
              rsmd = rs.getMetaData();
              colCount = rsmd.getColumnCount()+1;
@@ -352,7 +370,7 @@ public  void getData() {
               //colCount=17;
        }
        catch(Exception e) {
-          //    System.out.println(e);
+              System.out.println(e);
        }
 
     try {

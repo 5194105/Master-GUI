@@ -2,16 +2,16 @@
 <testng-results ignored="0" total="3" passed="0" failed="3" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2021-02-01T20:13:13 UTC" name="Sample_Suite" finished-at="2021-02-01T20:13:18 UTC" duration-ms="5246">
+  <suite started-at="2021-02-03T15:28:58 UTC" name="Sample_Suite" finished-at="2021-02-03T15:29:03 UTC" duration-ms="5122">
     <groups>
     </groups>
-    <test started-at="2021-02-01T20:13:13 UTC" name="era Rerate Test" finished-at="2021-02-01T20:13:18 UTC" duration-ms="5246">
-      <class name="eraRerate.eraRerateTestNGSlow">
-        <test-method is-config="true" signature="setupExcel(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:eraRerate.eraRerateTestNGSlow@5af97850]" started-at="2021-02-01T20:13:13 UTC" name="setupExcel" finished-at="2021-02-01T20:13:18 UTC" duration-ms="5201" status="PASS">
+    <test started-at="2021-02-03T15:28:58 UTC" name="Rebill Test" finished-at="2021-02-03T15:29:03 UTC" duration-ms="5122">
+      <class name="rerate.rerateTestNgSlow">
+        <test-method is-config="true" signature="setupExcel(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:rerate.rerateTestNgSlow@50a7bc6e]" started-at="2021-02-03T15:28:58 UTC" name="setupExcel" finished-at="2021-02-03T15:29:03 UTC" duration-ms="5087" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[C:\Users\FedExUser\Documents\rebill.xlsx]]>
+                <![CDATA[C:\Users\5194105\Documents\rerate.xlsx]]>
               </value>
             </param>
             <param index="1">
@@ -21,17 +21,17 @@
             </param>
             <param index="2">
               <value>
-                <![CDATA[2]]>
+                <![CDATA[1]]>
               </value>
             </param>
             <param index="3">
               <value>
-                <![CDATA[]]>
+                <![CDATA[db]]>
               </value>
             </param>
             <param index="4">
               <value>
-                <![CDATA[db]]>
+                <![CDATA[true]]>
               </value>
             </param>
             <param index="5">
@@ -46,7 +46,7 @@
             </param>
             <param index="7">
               <value>
-                <![CDATA[false]]>
+                <![CDATA[true]]>
               </value>
             </param>
             <param index="8">
@@ -56,22 +56,22 @@
             </param>
             <param index="9">
               <value>
-                <![CDATA[trkngnbr in ('794993987755')]]>
+                <![CDATA[false]]>
               </value>
             </param>
             <param index="10">
               <value>
-                <![CDATA[true]]>
+                <![CDATA[01/01/2020]]>
               </value>
             </param>
             <param index="11">
               <value>
-                <![CDATA[false]]>
+                <![CDATA[12/14/2020]]>
               </value>
             </param>
             <param index="12">
               <value>
-                <![CDATA[]]>
+                <![CDATA[true]]>
               </value>
             </param>
             <param index="13">
@@ -94,46 +94,64 @@
                 <![CDATA[true]]>
               </value>
             </param>
+            <param index="17">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+            <param index="18">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+            <param index="19">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+            <param index="20">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+            <param index="21">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+            <param index="22">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+            <param index="23">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
+            <param index="24">
+              <value>
+                <![CDATA[]]>
+              </value>
+            </param>
+            <param index="25">
+              <value>
+                <![CDATA[true]]>
+              </value>
+            </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setupExcel -->
-        <test-method signature="testMethod2(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:eraRerate.eraRerateTestNGSlow@5af97850]" started-at="2021-02-01T20:13:18 UTC" name="testMethod2" data-provider="data-provider2" finished-at="2021-02-01T20:13:18 UTC" duration-ms="0" status="FAIL">
+        <test-method signature="testMethod4(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@50a7bc6e]" started-at="2021-02-03T15:29:03 UTC" name="testMethod4" data-provider="data-provider4" finished-at="2021-02-03T15:29:03 UTC" duration-ms="0" status="FAIL">
           <exception class="org.testng.TestNGException">
             <message>
               <![CDATA[
-Data Provider public synchronized java.lang.Object[][] eraRerate.eraRerateTestNGSlow.dataProviderMethod2() returned a null value]]>
+Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod4() returned a null value]]>
             </message>
             <full-stacktrace>
               <![CDATA[org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] eraRerate.eraRerateTestNGSlow.dataProviderMethod2() returned a null value
-at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:147)
-at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
-at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
-at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
-at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:789)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-at java.base/java.lang.Thread.run(Thread.java:834)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.testng.TestNGException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- testMethod2 -->
-        <test-method signature="testMethod4(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:eraRerate.eraRerateTestNGSlow@5af97850]" started-at="2021-02-01T20:13:18 UTC" name="testMethod4" data-provider="data-provider4" finished-at="2021-02-01T20:13:18 UTC" duration-ms="0" status="FAIL">
-          <exception class="org.testng.TestNGException">
-            <message>
-              <![CDATA[
-Data Provider public synchronized java.lang.Object[][] eraRerate.eraRerateTestNGSlow.dataProviderMethod4() returned a null value]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] eraRerate.eraRerateTestNGSlow.dataProviderMethod4() returned a null value
+Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod4() returned a null value
 at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:147)
 at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
 at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
@@ -152,15 +170,15 @@ at java.base/java.lang.Thread.run(Thread.java:834)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod4 -->
-        <test-method signature="testMethod3(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:eraRerate.eraRerateTestNGSlow@5af97850]" started-at="2021-02-01T20:13:18 UTC" name="testMethod3" data-provider="data-provider3" finished-at="2021-02-01T20:13:18 UTC" duration-ms="0" status="FAIL">
+        <test-method signature="testMethod3(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@50a7bc6e]" started-at="2021-02-03T15:29:03 UTC" name="testMethod3" data-provider="data-provider3" finished-at="2021-02-03T15:29:03 UTC" duration-ms="0" status="FAIL">
           <exception class="org.testng.TestNGException">
             <message>
               <![CDATA[
-Data Provider public synchronized java.lang.Object[][] eraRerate.eraRerateTestNGSlow.dataProviderMethod3() returned a null value]]>
+Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod3() returned a null value]]>
             </message>
             <full-stacktrace>
               <![CDATA[org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] eraRerate.eraRerateTestNGSlow.dataProviderMethod3() returned a null value
+Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod3() returned a null value
 at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:147)
 at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
 at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
@@ -179,7 +197,34 @@ at java.base/java.lang.Thread.run(Thread.java:834)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testMethod3 -->
-      </class> <!-- eraRerate.eraRerateTestNGSlow -->
-    </test> <!-- era Rerate Test -->
+        <test-method signature="testMethod2(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int)[pri:0, instance:rerate.rerateTestNgSlow@50a7bc6e]" started-at="2021-02-03T15:29:03 UTC" name="testMethod2" data-provider="data-provider2" finished-at="2021-02-03T15:29:03 UTC" duration-ms="0" status="FAIL">
+          <exception class="org.testng.TestNGException">
+            <message>
+              <![CDATA[
+Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod2() returned a null value]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod2() returned a null value
+at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:147)
+at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
+at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
+at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
+at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
+at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:789)
+at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+at java.base/java.lang.Thread.run(Thread.java:834)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.testng.TestNGException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethod2 -->
+      </class> <!-- rerate.rerateTestNgSlow -->
+    </test> <!-- Rebill Test -->
   </suite> <!-- Sample_Suite -->
 </testng-results>

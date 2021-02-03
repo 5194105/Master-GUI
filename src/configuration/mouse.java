@@ -1868,7 +1868,9 @@ public void setupMouseListener() {
 				    				    fieldValues.put("gd2",gd2);
 				    				    fieldValues.put("gi2",gi2);
 				    				    fieldValues.put("nt2",nt2);
-				    				    fieldValues.put("sp2",sp2);			    				    
+				    				    fieldValues.put("sp2",sp2);			 
+				    				    fieldValues.put("customString",customString);
+				    				    fieldValues.put("customCheckBox",customCheckBox);
 				    				    xmlSuite.setParameters(fieldValues);
 				    				    XmlTest xmlTest = new XmlTest(xmlSuite);
 				    				    xmlTest.setName("ERA RERATE Test");
