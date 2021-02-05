@@ -117,7 +117,12 @@ public class eraRerateUpload implements Runnable {
        try {
               //     update gtm_rev_tools.rebill_results set result='fail',description='6015   :   A Technical Error has been encountered retrieving Freight, Surcharge, and tax tables' where trkngnbr='566166113544';
              
+    	   System.out.println(resultArray[0]);
+    	   System.out.println(resultArray[1]);
+    	   System.out.println(resultArray[2]);
+    	   System.out.println(trk);
     	   if (c.getEraMassRerate().equals("true")) {
+    		   
     		   stmt=GTMcon.prepareStatement("update era_results set result=?,description=?,ERA_mass_rerate='Y',request_id=? where trkngnbr=?");    
     	       }
     	       if (c.getEraMassRerate().equals("false")) {
@@ -128,9 +133,15 @@ public class eraRerateUpload implements Runnable {
               
               stmt.setString(1,resultArray[0]);  
               stmt.setString(2,resultArray[1]); 
-              stmt.setString(3,trk); 
+             
               if (c.getEraMassRerate().equals("true")) {
-            	  stmt.setString(4,resultArray[2]);  
+            	  stmt.setString(3,resultArray[2]);  
+            	  stmt.setString(4,trk); 
+              }
+              else if 
+               (c.getEraMassRerate().equals("false")) {
+            	   
+            	  stmt.setString(3,trk); 
               }
               stmt.executeUpdate();
               
@@ -238,7 +249,7 @@ public class eraRerateUpload implements Runnable {
     }
          	  if (c.getEraMassRerate().equals("true")) {
          		  try {
-         			  if(trk.equals("794994229050") || trk.equals("794993961972")) {
+         			  if(trk.equals("794993920321") || trk.equals("597786862516")) {
          				  System.out.println("HOLD");
          			  }
          			  System.out.println(trk);

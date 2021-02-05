@@ -1146,6 +1146,22 @@ public class testngMassRebillSlow {
 		      
 		      driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[5]/div[2]/div/button[4]")).click();
 		      Thread.sleep(5000);
+		      
+		      
+		      //check popup
+		      try {
+		    	 System.out.println( driver.findElement(By.xpath(" /html/body/div[7]/div/div/div[1]/h4")).getText());
+		    	  driver.findElement(By.xpath("/html/body/div[7]/div/div/div[2]/button[1]")).click();
+		    	  Thread.sleep(4000);
+		    	
+		    	  
+		      }
+		      catch(Exception e) {
+		    	  System.out.println("Could Not Find Popup");
+		      }
+		      
+		      
+		      
     	}
 		      catch(Exception e)
     	{
@@ -1420,8 +1436,15 @@ public class testngMassRebillSlow {
     			   else{
     				   
     				  String tempString= rs.getString("AMOUNT_DUE");
-    				  if (!tempString.contains("0")) {
+    				  if (rs.getString("AMOUNT_DUE")==null) {
+    					  tempString="";
+    				  }
+    				  
+    				  if (!tempString.equals("0")) {
     					  b=true;
+    				  }
+    				  if (tempString.equals("")) {
+    					 
     				  }
     			   }
     		} catch (SQLException e) {

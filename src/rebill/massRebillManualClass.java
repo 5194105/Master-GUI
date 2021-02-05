@@ -57,7 +57,7 @@ public class massRebillManualClass {
 
 		c.setCustomCheckBox("true");
 
-		c.setCustomString("test_input_nbr in ('136616')");
+		c.setCustomString("test_input_nbr in ('244860')");
 				
 		c.setHeadlessString("false");
 

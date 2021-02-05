@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>Rebill Test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>0/3/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>0/5/6</td>
 </tr><tr>
-<td>Started on:</td><td>Wed Feb 03 15:28:58 UTC 2021</td>
+<td>Started on:</td><td>Fri Feb 05 18:02:39 UTC 2021</td>
 </tr>
-<tr><td>Total time:</td><td>5 seconds (5122 ms)</td>
+<tr><td>Total time:</td><td>12 seconds (12015 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -75,21 +75,26 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='rerate.rerateTestNgSlow.testMethod2()'><b>testMethod2</b><br>Test class: rerate.rerateTestNgSlow</td>
-<td><div><pre>org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod2() returned a null value
+<td title='rebill.testngMassRebillSlow.testMethod1()'><b>testMethod1</b><br>Test class: rebill.testngMassRebillSlow<br>Parameters: , , 244860, 1, 794993940242, RRA, 700102700, 330853973, , USA, 5194105, Online30, IL, EP, 1</td>
+<td><div><pre>java.lang.NullPointerException
+	at rebill.testngMassRebillSlow.checkAmount(testngMassRebillSlow.java:1439)
+	at rebill.testngMassRebillSlow.testMethod1(testngMassRebillSlow.java:599)
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-... Removed 9 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace423530225", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace423530225'><pre>org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod2() returned a null value
-	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:147)
-	at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
-	at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
-	at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
-	at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
-	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:789)
+... Removed 12 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace740410783", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace740410783'><pre>java.lang.NullPointerException
+	at rebill.testngMassRebillSlow.checkAmount(testngMassRebillSlow.java:1439)
+	at rebill.testngMassRebillSlow.testMethod1(testngMassRebillSlow.java:599)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:132)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:599)
+	at org.testng.internal.TestInvoker.retryFailed(TestInvoker.java:214)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:58)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:822)
 	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
@@ -98,23 +103,28 @@ Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.d
 	at java.base/java.lang.Thread.run(Thread.java:834)
 </pre></div></td>
 <td>0</td>
-<td>rerate.rerateTestNgSlow@50a7bc6e</td></tr>
+<td>rebill.testngMassRebillSlow@52e6fdee</td></tr>
 <tr>
-<td title='rerate.rerateTestNgSlow.testMethod3()'><b>testMethod3</b><br>Test class: rerate.rerateTestNgSlow</td>
-<td><div><pre>org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod3() returned a null value
+<td title='rebill.testngMassRebillSlow.testMethod1()'><b>testMethod1</b><br>Test class: rebill.testngMassRebillSlow<br>Parameters: , , 244860, 2, 597744611524, RRA, 700102700, 330853973, , USA, 5194105, Online30, IL, EP, 2</td>
+<td><div><pre>java.lang.NullPointerException
+	at rebill.testngMassRebillSlow.checkAmount(testngMassRebillSlow.java:1439)
+	at rebill.testngMassRebillSlow.testMethod1(testngMassRebillSlow.java:599)
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-... Removed 9 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1389448868", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1389448868'><pre>org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod3() returned a null value
-	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:147)
-	at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
-	at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
-	at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
-	at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
-	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:789)
+... Removed 12 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace749725225", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace749725225'><pre>java.lang.NullPointerException
+	at rebill.testngMassRebillSlow.checkAmount(testngMassRebillSlow.java:1439)
+	at rebill.testngMassRebillSlow.testMethod1(testngMassRebillSlow.java:599)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:132)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:599)
+	at org.testng.internal.TestInvoker.retryFailed(TestInvoker.java:214)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:58)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:822)
 	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
 	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
 	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
@@ -123,17 +133,17 @@ Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.d
 	at java.base/java.lang.Thread.run(Thread.java:834)
 </pre></div></td>
 <td>0</td>
-<td>rerate.rerateTestNgSlow@50a7bc6e</td></tr>
+<td>rebill.testngMassRebillSlow@52e6fdee</td></tr>
 <tr>
-<td title='rerate.rerateTestNgSlow.testMethod4()'><b>testMethod4</b><br>Test class: rerate.rerateTestNgSlow</td>
+<td title='rebill.testngMassRebillSlow.testMethod2()'><b>testMethod2</b><br>Test class: rebill.testngMassRebillSlow</td>
 <td><div><pre>org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod4() returned a null value
+Data Provider public synchronized java.lang.Object[][] rebill.testngMassRebillSlow.dataProviderMethod2() returned a null value
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-... Removed 9 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace769951499", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace769951499'><pre>org.testng.TestNGException: 
-Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.dataProviderMethod4() returned a null value
+... Removed 9 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1710410948", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1710410948'><pre>org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] rebill.testngMassRebillSlow.dataProviderMethod2() returned a null value
 	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:147)
 	at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
 	at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
@@ -148,7 +158,245 @@ Data Provider public synchronized java.lang.Object[][] rerate.rerateTestNgSlow.d
 	at java.base/java.lang.Thread.run(Thread.java:834)
 </pre></div></td>
 <td>0</td>
-<td>rerate.rerateTestNgSlow@50a7bc6e</td></tr>
+<td>rebill.testngMassRebillSlow@52e6fdee</td></tr>
+<tr>
+<td title='rebill.testngMassRebillSlow.testMethod3()'><b>testMethod3</b><br>Test class: rebill.testngMassRebillSlow</td>
+<td><div><pre>org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] rebill.testngMassRebillSlow.dataProviderMethod3() returned a null value
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+... Removed 9 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1426891128", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1426891128'><pre>org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] rebill.testngMassRebillSlow.dataProviderMethod3() returned a null value
+	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:147)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
+	at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
+	at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:789)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+</pre></div></td>
+<td>0</td>
+<td>rebill.testngMassRebillSlow@52e6fdee</td></tr>
+<tr>
+<td title='rebill.testngMassRebillSlow.testMethod4()'><b>testMethod4</b><br>Test class: rebill.testngMassRebillSlow</td>
+<td><div><pre>org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] rebill.testngMassRebillSlow.dataProviderMethod4() returned a null value
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+... Removed 9 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1822896716", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1822896716'><pre>org.testng.TestNGException: 
+Data Provider public synchronized java.lang.Object[][] rebill.testngMassRebillSlow.dataProviderMethod4() returned a null value
+	at org.testng.internal.MethodInvocationHelper.invokeDataProvider(MethodInvocationHelper.java:147)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:797)
+	at org.testng.internal.Parameters.handleParameters(Parameters.java:740)
+	at org.testng.internal.ParameterHandler.handleParameters(ParameterHandler.java:59)
+	at org.testng.internal.ParameterHandler.createParameters(ParameterHandler.java:38)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:789)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+</pre></div></td>
+<td>0</td>
+<td>rebill.testngMassRebillSlow@52e6fdee</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-skipped'>
+<tr><td colspan='4' align='center'><b>SKIPPED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='rebill.testngMassRebillSlow.testMethod1()'><b>testMethod1</b><br>Test class: rebill.testngMassRebillSlow<br>Parameters: , , 244860, 1, 794993940242, RRA, 700102700, 330853973, , USA, 5194105, Online30, IL, EP, 1</td>
+<td><div><pre>java.lang.NullPointerException
+	at rebill.testngMassRebillSlow.checkAmount(testngMassRebillSlow.java:1439)
+	at rebill.testngMassRebillSlow.testMethod1(testngMassRebillSlow.java:599)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+... Removed 12 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1898662748", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1898662748'><pre>java.lang.NullPointerException
+	at rebill.testngMassRebillSlow.checkAmount(testngMassRebillSlow.java:1439)
+	at rebill.testngMassRebillSlow.testMethod1(testngMassRebillSlow.java:599)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:132)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:599)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:174)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:822)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+</pre></div></td>
+<td>0</td>
+<td>rebill.testngMassRebillSlow@52e6fdee</td></tr>
+<tr>
+<td title='rebill.testngMassRebillSlow.testMethod1()'><b>testMethod1</b><br>Test class: rebill.testngMassRebillSlow<br>Parameters: , , 244860, 1, 794993940242, RRA, 700102700, 330853973, , USA, 5194105, Online30, IL, EP, 1</td>
+<td><div><pre>java.lang.NullPointerException
+	at rebill.testngMassRebillSlow.checkAmount(testngMassRebillSlow.java:1439)
+	at rebill.testngMassRebillSlow.testMethod1(testngMassRebillSlow.java:599)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+... Removed 12 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace2138652835", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace2138652835'><pre>java.lang.NullPointerException
+	at rebill.testngMassRebillSlow.checkAmount(testngMassRebillSlow.java:1439)
+	at rebill.testngMassRebillSlow.testMethod1(testngMassRebillSlow.java:599)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:132)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:599)
+	at org.testng.internal.TestInvoker.retryFailed(TestInvoker.java:214)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:58)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:822)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+</pre></div></td>
+<td>0</td>
+<td>rebill.testngMassRebillSlow@52e6fdee</td></tr>
+<tr>
+<td title='rebill.testngMassRebillSlow.testMethod1()'><b>testMethod1</b><br>Test class: rebill.testngMassRebillSlow<br>Parameters: , , 244860, 1, 794993940242, RRA, 700102700, 330853973, , USA, 5194105, Online30, IL, EP, 1</td>
+<td><div><pre>java.lang.NullPointerException
+	at rebill.testngMassRebillSlow.checkAmount(testngMassRebillSlow.java:1439)
+	at rebill.testngMassRebillSlow.testMethod1(testngMassRebillSlow.java:599)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+... Removed 12 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace235290900", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace235290900'><pre>java.lang.NullPointerException
+	at rebill.testngMassRebillSlow.checkAmount(testngMassRebillSlow.java:1439)
+	at rebill.testngMassRebillSlow.testMethod1(testngMassRebillSlow.java:599)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:132)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:599)
+	at org.testng.internal.TestInvoker.retryFailed(TestInvoker.java:214)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:58)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:822)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+</pre></div></td>
+<td>0</td>
+<td>rebill.testngMassRebillSlow@52e6fdee</td></tr>
+<tr>
+<td title='rebill.testngMassRebillSlow.testMethod1()'><b>testMethod1</b><br>Test class: rebill.testngMassRebillSlow<br>Parameters: , , 244860, 2, 597744611524, RRA, 700102700, 330853973, , USA, 5194105, Online30, IL, EP, 2</td>
+<td><div><pre>java.lang.NullPointerException
+	at rebill.testngMassRebillSlow.checkAmount(testngMassRebillSlow.java:1439)
+	at rebill.testngMassRebillSlow.testMethod1(testngMassRebillSlow.java:599)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+... Removed 12 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace133896940", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace133896940'><pre>java.lang.NullPointerException
+	at rebill.testngMassRebillSlow.checkAmount(testngMassRebillSlow.java:1439)
+	at rebill.testngMassRebillSlow.testMethod1(testngMassRebillSlow.java:599)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:132)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:599)
+	at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:174)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:822)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+</pre></div></td>
+<td>0</td>
+<td>rebill.testngMassRebillSlow@52e6fdee</td></tr>
+<tr>
+<td title='rebill.testngMassRebillSlow.testMethod1()'><b>testMethod1</b><br>Test class: rebill.testngMassRebillSlow<br>Parameters: , , 244860, 2, 597744611524, RRA, 700102700, 330853973, , USA, 5194105, Online30, IL, EP, 2</td>
+<td><div><pre>java.lang.NullPointerException
+	at rebill.testngMassRebillSlow.checkAmount(testngMassRebillSlow.java:1439)
+	at rebill.testngMassRebillSlow.testMethod1(testngMassRebillSlow.java:599)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+... Removed 12 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace842149608", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace842149608'><pre>java.lang.NullPointerException
+	at rebill.testngMassRebillSlow.checkAmount(testngMassRebillSlow.java:1439)
+	at rebill.testngMassRebillSlow.testMethod1(testngMassRebillSlow.java:599)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:132)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:599)
+	at org.testng.internal.TestInvoker.retryFailed(TestInvoker.java:214)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:58)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:822)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+</pre></div></td>
+<td>0</td>
+<td>rebill.testngMassRebillSlow@52e6fdee</td></tr>
+<tr>
+<td title='rebill.testngMassRebillSlow.testMethod1()'><b>testMethod1</b><br>Test class: rebill.testngMassRebillSlow<br>Parameters: , , 244860, 2, 597744611524, RRA, 700102700, 330853973, , USA, 5194105, Online30, IL, EP, 2</td>
+<td><div><pre>java.lang.NullPointerException
+	at rebill.testngMassRebillSlow.checkAmount(testngMassRebillSlow.java:1439)
+	at rebill.testngMassRebillSlow.testMethod1(testngMassRebillSlow.java:599)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+... Removed 12 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace243320667", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace243320667'><pre>java.lang.NullPointerException
+	at rebill.testngMassRebillSlow.checkAmount(testngMassRebillSlow.java:1439)
+	at rebill.testngMassRebillSlow.testMethod1(testngMassRebillSlow.java:599)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:132)
+	at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:599)
+	at org.testng.internal.TestInvoker.retryFailed(TestInvoker.java:214)
+	at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:58)
+	at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:822)
+	at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:147)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+</pre></div></td>
+<td>0</td>
+<td>rebill.testngMassRebillSlow@52e6fdee</td></tr>
 </table><p>
 </body>
 </html>
