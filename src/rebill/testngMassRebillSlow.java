@@ -979,7 +979,7 @@ public class testngMassRebillSlow {
     	wait=new WebDriverWait(driver,20);
     	driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
     
- 	
+ 	/*
     	try {
     	//In order for clear button to be clickable need to scroll up
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
@@ -1011,7 +1011,7 @@ public class testngMassRebillSlow {
     		
     	}
     	
-    	
+    	*/
     	
     	//Try to Mass Adjustment Package Tab
     	int counter1=0;
@@ -1099,7 +1099,7 @@ public class testngMassRebillSlow {
         				}
         		}
  
-        	  Thread.sleep(5000);
+        	  Thread.sleep(1000);
     		  Select actionDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"contry\"]")));
 		      actionDropDown.selectByValue("RB"); 
 		      driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[1]/button[1]")).click(); 

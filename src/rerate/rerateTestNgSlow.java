@@ -929,12 +929,21 @@ public class rerateTestNgSlow {
 				//If it is CE Level. Please note that for some reason you MUST select date option before entering in account info.
 				//Otherwise when selecting date it will uncheck the box for for selecting all accounts.
 				if (acctType.equals("CE Level")) {
-					 driver.findElement(By.id("ceLevelAccountNumbersRadio")).click();
+				
+					  
+					  driver.findElement(By.id("ceLevelAccountNumbersRadio")).click();
 					  Thread.sleep(1000);
 					  CEDropDown = new Select(driver.findElement(By.name("celevel")));
 					  CEDropDown.selectByValue("EAN No");
 					  driver.findElement(By.name("ceLevelAcc")).sendKeys(acct1);
 					  driver.findElement(By.cssSelector("input[type='button'][value='Lookup & Add']")).click();
+					  try {
+						  Thread.sleep(2000);
+						  driver.switchTo().alert().accept();
+					  }
+					  catch(Exception e) {
+						  System.out.println("no popup");
+					  }
 					  Thread.sleep(6000);
 					  driver.findElement(By.name("pricingType")).click();
 					  Thread.sleep(6000);

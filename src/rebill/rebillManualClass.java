@@ -50,8 +50,10 @@ public class rebillManualClass {
 		c.setDatabaseDisabled("false");
 		
 		//You can give custom query if want to
-		c.setCustomCheckBox("true");
-		c.setCustomString("company='GD'");
+		c.setCustomCheckBox("false");
+		//c.setCustomString("description like '%Could Not go to phone detail screen%'");
+		c.setCustomString("trkngnbr='742586002898'");
+		
 				
 		c.setHeadlessString("false");
 

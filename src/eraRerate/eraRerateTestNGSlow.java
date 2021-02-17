@@ -256,7 +256,7 @@ public class eraRerateTestNGSlow {
     	
     	String databaseSqlCount="select count(*) as total from era_rerate_view where trkngnbr is not null ";
     	//String databaseSqlQuery="select result, description, test_input_nbr, tin_count, trkngnbr, invoice_nbr_1,invoice_nbr_2,SVC_CHANGED,ACT_Wgt, CUST_Wgt, RERATE_COMMENTS, region,  USERNAME,   password from era_rerate_view where trkngnbr is not null ";
-    	String databaseSqlQuery="select RESULT,	DESCRIPTION,	TEST_INPUT_NBR,	TIN_COUNT,	TRKNGNBR,	INVOICE_NBR_1	,INVOICE_NBR_2,	RATE_WEIGHT,	ACTUAL_WEIGHT,	WGT_TYPE,	LENGTH,	WIDTH,	HEIGHT	,WORKABLE,	DIM_TYPE,	PAYOR	,BILL_ACCT_NBR	,SVC_TYPE,	SERVICE_NAME,	PACKAGE_TYPE	,RERATE_TYPE,	REGION,	USERNAME,	PASSWORD,	RS_TYPE,	COMPANY,	VAL_DESC,	COMMENTS from era_rerate_view where trkngnbr is not null ";
+    	String databaseSqlQuery="select RESULT,	DESCRIPTION,	TEST_INPUT_NBR,	TIN_COUNT,	TRKNGNBR,	INVOICE_NBR_1	,INVOICE_NBR_2,	RATE_WEIGHT,	ACTUAL_WEIGHT,	WGT_TYPE,	LENGTH,	WIDTH,	HEIGHT	,WORKABLE,	DIM_TYPE,	PAYOR	,BILL_ACCT_NBR	,SERVICE_TYPE,	SERVICE_NAME,	PACKAGE_TYPE	,RERATE_TYPE,	REGION,	USERNAME,	PASSWORD,	RS_TYPE,	COMPANY,	VAL_DESC,	COMMENTS from era_rerate_view where trkngnbr is not null ";
     	
     	if (allCheckBox.equals("true")) {
     		//databaseSqlCount+="where trkngnbr is not null";
@@ -1134,20 +1134,40 @@ public class eraRerateTestNGSlow {
      
      }
      if(rerateType.contains("service")) {
-    	 
-    	Select sel = new Select(driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div[3]/div/div/div/select")));
+    	Select sel = new Select(driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div[2]/div/div/div/select")));
+    	if (!svcType.equals("")) {
+    	sel.selectByVisibleText(svcType);
+    	}
+    	/*
+    	System.out.println(sel.getFirstSelectedOption().getText());
+    	if(sel.getFirstSelectedOption().getText().equals("")) {
+    		sel.selectByVisibleText(svcType);
+    		
+    	} 
+    	*/
+    	sel = new Select(driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div[3]/div/div/div/select")));
     	sel.selectByVisibleText(svcName);
+    	
      }
      
      
      //Click Rerate
      driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[4]/div/button[1]")).click();
-    
+   //  Thread.sleep(10000);
      //Check Popup
      
+     
+     driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
+     int knter=0;
+     String tempErrorString="";
+ 	     while(knter<10) {
      try {
-    	 String tempErrorString="";
-    	
+    	knter++;
+    	System.out.println(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[3]/div[2]/div/div/div/div[1]/div[2]/div/div[1]/div/div/div")).getText());
+    	break;
+     }
+    	catch(Exception e) {	
+    	try {
     	List<WebElement> rowCounts =driver.findElements(By.xpath("/html/body/div[6]/div/div/div[2]/div/div/div[1]/div[2]/div/div/div"));
     	if ( rowCounts.size()!=0) {
     	for(WebElement we:rowCounts) {
@@ -1155,9 +1175,6 @@ public class eraRerateTestNGSlow {
     		tempErrorString=tempErrorString+" "+we.getText();
     		System.out.println(tempErrorString);
     	}
-    	// System.out.println("GETTING ERRROR!!!! "+driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[1]/div/div[2]/form/div[1]/div[1]")).getText());
-    	 						//												/html/body/div[6]/div/div/div[2]/div/div/div[1]/div[2]/div/div/div
-//    	 System.out.println("GETTING ERRROR!!!! "+driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[3]/div[2]/div/div/div/div[1]/div[2]/div/div[1]/div/div/div")).getText());
     	String tempErr;
     	
     	if (tempErrorString.length()>300) {
@@ -1181,9 +1198,29 @@ public class eraRerateTestNGSlow {
     			 Assert.fail("After Rerate Click No Data Came -- Unknown Error");
     	}
      }
-     catch(Exception e) {
-    	 
-    	 
+    	catch(Exception ee) {
+    		System.out.println("Cant Continue Rerate.. Retry count: "+ knter);
+        }
+    }
+ 	     }
+ 	     
+ 	     if (knter>=10) {
+ 	    	 if(source.equals("excel")) {
+ 	           	 writeToExcel(rowNumber, 0,"fail");
+ 	           	 writeToExcel(rowNumber, 1,"Timeout on Rerate Screen");
+ 	           	 }
+ 	    			 if(databaseDisabled.equals("false")) {
+ 	       			 String[] resultArray = new String[2];
+ 	       			 	resultArray[0]="fail";
+ 	       				resultArray[1]="Timeout on Rerate Screen";
+ 	       				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+ 	            	 }
+ 	    			 Assert.fail("After Rerate Click No Data Came -- Unknown Error");
+ 	    	 
+ 	     }
+ 	     
+ 	    driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+    /*
     	 
     	 if(source.equals("excel")) {
            	 writeToExcel(rowNumber, 0,"fail");
@@ -1200,8 +1237,8 @@ public class eraRerateTestNGSlow {
     	 
     	 System.out.println("Cannot Find Popup");
      }
-     
-     
+     */
+     /*
      String errorMessage="";
      try {
      List<WebElement> errorList;
@@ -1239,7 +1276,7 @@ public class eraRerateTestNGSlow {
      catch(Exception e) {
     	 System.out.println("no popup errors");
      }
-     
+     */
 
      
      
@@ -1256,14 +1293,53 @@ public class eraRerateTestNGSlow {
     
      int i=0;
      try {
+    	 driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
+    	    
     while (i<10) {
-    	 driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[9]/div[1]/button")).click();
-    	 i++;
+    	i++;
+    	
+    	driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[9]/div[1]/button")).click();
+    	
+    	try {
+    		//if normal continue
+    		String tempString11 = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).getText();
+    		if (tempString11.equals("Continue"))	{
+    			break;
+    		}
+    		}
+    		catch(Exception e) {    		
+    		}
+    		    	
+    		  
+    		    	
+    	
+    	
+    	try {		
+    		//if adjust by value
+    			String tempString11 = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div/div/div[3]/div[3]/button[2]")).getText();
+    			if (tempString11.equals("Continue"))	{
+    				break;
+    			}
+    	}
+    	catch(Exception e) {    		
+    	}
+
     }
-    }
-     catch(Exception e) {
+    
+     
+     }
+ catch(Exception e) {
     	 
      }
+     
+     
+     
+     
+     
+     
+     
+     driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
+     
      //Click Continue
      System.out.println(3000);
      try {
@@ -1307,7 +1383,7 @@ public class eraRerateTestNGSlow {
         	  Select contactMethodDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"rmrks\"]")));
               contactMethodDropDown.selectByValue("phone");  
               Thread.sleep(1500);  
-              driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).click();
+              //driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).click();
             
           }
           else {
@@ -1315,10 +1391,26 @@ public class eraRerateTestNGSlow {
         	  Select contactMethodDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"rmrks\"]")));
               contactMethodDropDown.selectByValue("phone");  
               Thread.sleep(1500);  
-              driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).click();
+              //driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).click();
             
           }
       
+          //Keep clicking until button is not there... give 10 tries
+       
+          driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+          int kounter=0;
+          while (kounter<10)
+          try {
+        	  kounter++;
+        	  driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).click();
+              
+          }
+          catch(Exception e) {
+        	  System.out.println("Could Not Click Last Continue... should be rerated now");
+          }
+          
+          
+          
           
           Thread.sleep(5000);
           
