@@ -1494,7 +1494,23 @@ public class testngRebillFast {
                Select contactMethodDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"rmrks\"]")));
                contactMethodDropDown.selectByValue("phone");  
                Thread.sleep(1500);
-         	   driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).click();
+               
+               
+               try {
+            	   driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS);
+                   int continueCounter=0;
+                   while (continueCounter<10){
+                   	continueCounter++;
+                  
+                   	driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).click();
+                 	Thread.sleep(1000);
+                   }
+                    }
+                    catch (Exception continueException) {
+                   	 System.out.println("Could Not Click Continue Again");
+                    }
+               
+         	  
              }
              catch(Exception e1) {
             	 System.out.println("Failed Selecting Contact Method and Clicking Continue");

@@ -1033,7 +1033,7 @@ public class eraRerateTestNGSlow {
       		 try {
       			 driver.manage().timeouts().implicitlyWait(7,TimeUnit.SECONDS);
         		 String error = driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/h4")).getText();
-        		  String[] resultArray = new String[2];
+        		 String[] resultArray = new String[2];
         		 resultArray[0]="fail";
         		 resultArray[1]=error;
         		 if(source.equals("excel")) {
