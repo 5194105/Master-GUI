@@ -1865,31 +1865,38 @@ public class testngRebillFast {
     }
     
     public String[] validateResults(String trk) {
-
-       	Connection con = null;
-       	String[] resultArray = new String[2];
-       	
+        
+    	Connection conRDT = null;
+    	Connection conOracle=null;
+    	String[] resultArray = new String[2];
+    	
+    	
+    	PreparedStatement stmt = null;
+        ResultSet rs = null;
+        PreparedStatement stmt2 = null;
+        ResultSet rs2 = null;
+    	
+        
+        Boolean oracleBoolean=false;
+        
+    	PreparedStatement stmtOracle = null;
+        ResultSet rsOracle = null;
+        
+    	
        	try {
-       	
-       		
-          	 
-          		 	con=c.getOracleARL3DbConnection();
-          	 	
-       	
+       		conOracle=c.getOracleARL3DbConnection();
+
        	}
        	catch(Exception e) {
        		
-       		System.out.println("Could Not Get ERA DB Connections");
+       		System.out.println("Could Not Get Oracle DB Connections");
        	}
        	
-
-       	PreparedStatement stmt = null;
-       	ResultSet rs = null;
-       	try {
+	try {
        		
-       		stmt=con.prepareStatement("select * from apps.xxfdx_eabr_airbill_notes_v where AIRBILL_NUMBER=?");  
-   			stmt.setString(1,trk);  
-   			rs = stmt.executeQuery();
+		stmtOracle=conOracle.prepareStatement("select * from apps.xxfdx_eabr_airbill_notes_v where AIRBILL_NUMBER=?");  
+		stmtOracle.setString(1,trk);  
+		rsOracle = stmtOracle.executeQuery();
        	} catch (SQLException e) {
        		// TODO Auto-generated catch block
        		e.printStackTrace();
@@ -1897,13 +1904,13 @@ public class testngRebillFast {
        	      
        	   
        		try {
-       			rs = stmt.executeQuery();
+       			rsOracle = stmtOracle.executeQuery();
        		} catch (SQLException e) {
        			// TODO Auto-generated catch block
        			e.printStackTrace();
        		}
        	       try {
-       			if (rs.next()==false){
+       			if (rsOracle.next()==false){
        			   
        				
        				System.out.println("Is NULL");
@@ -1912,26 +1919,120 @@ public class testngRebillFast {
        			}
        			   else{
        				   
-       				  String tempString= rs.getString("NOTES");
+       				  String tempString= rsOracle.getString("NOTES");
        				  if (tempString.contains("RDT RB")) {
        					  resultArray[0]="pass";
    	    			      resultArray[1]="completed";
+   	    			      oracleBoolean=true;
        				  }
-       				  else {
-       					  resultArray[0]="na";
-   	    			      resultArray[1]="unable to validate";
-       					  
-       				  }
-       	             
-       				  
+	  
        			   }
        		} catch (SQLException e) {
        			// TODO Auto-generated catch block
        			e.printStackTrace();
        		}
-       	      
-       	 return resultArray;      
-   }
+
+       	
+       	
+        if (oracleBoolean==false) {
+        //If not found in oracle
+    	try {
+    	
+    		if (level.equals("2")){
+    			 
+    			conRDT=c.getEraL2DbConnection();
+       	 }
+       	 else if (level.equals("3")){
+       		 	
+       		conRDT=c.getEraL3DbConnection();
+       	 	}
+    	
+    	}
+    	
+    	
+    	
+    	catch(Exception e) {
+    		
+    		System.out.println("Could Not Get ERA DB Connections");
+    	}
+    	
+
+
+         try {
+                
+              //  stmt=con.prepareStatement("select * from invadj_schema.rdt_rebill_request where airbill_nbr=? order by LAST_UPDT_TMSTP desc");  
+        	    stmt=conRDT.prepareStatement("select * from invadj_schema.rdt_rebill_store where rb_trkng_nbr=?");  
+                stmt.setString(1,trk);  
+                System.out.print(trk+": ");
+         } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+         }
+
+                try {
+                       rs = stmt.executeQuery();
+                       
+                } catch (SQLException e) {
+                       // TODO Auto-generated catch block
+                       e.printStackTrace();
+                }
+                try {
+                       if (rs.next()==false){
+                           //  System.out.println("Is NULL");
+                            
+                    	   stmt2=conRDT.prepareStatement("select * from invadj_schema.rdt_rebill_request where airbill_nbr=? order by LAST_UPDT_TMSTP desc");                     	  
+                           stmt2.setString(1,trk);  
+                           rs2 = stmt2.executeQuery();
+                          try {
+                        	  if (rs2.next()==false){
+                        		  resultArray[0]="fail";
+                                  resultArray[1]="Not In ERA Database";
+                                  System.out.println("Not In ERA Database");
+                        	  }
+                        	  else {
+                        		  String statusDesc = rs2.getString("STATUS_DESC");
+                                  String errorDesc = rs2.getString("ERROR_DESC");   
+                                  
+                                  if (statusDesc==null){
+                                 	 
+                                 	 statusDesc="fail";
+                                 	 errorDesc="In ERA DB But Error Not Set";
+                                  }
+                                  
+                                if (statusDesc.equals("SUCCESS")) {
+                                      resultArray[0]="pass";
+                                      resultArray[1]="completed";
+                                }
+                                else {
+                                      resultArray[0]="fail";
+                                      resultArray[1]=errorDesc;
+                                }
+                        	  }
+                          }
+                          catch(Exception e) {
+                        	  
+                          }
+                       }
+                          else{
+                     
+                             resultArray[0]="pass";
+                             resultArray[1]="completed";
+                    
+                          }
+                } catch (SQLException e) {
+                       // TODO Auto-generated catch block
+                   //    System.out.println(e);
+                       e.printStackTrace();
+                       System.out.println(e);
+                }
+        }
+    	 return resultArray;      
+}    
+    
+    
+    
+    
+    
     
 public synchronized void writeToExcel(int rowCountExcel,int colCountExcel,String outputString){
 		

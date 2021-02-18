@@ -30,7 +30,7 @@ public class creditDebitManualRun {
 	c.setDatabaseDisabled("false");
 	c.setCustomCheckBox("true");
 	//c.setCustomString("credit_flg='Y' and DESCRIPTION is null");
-	c.setCustomString("trkngnbr='794993959376'");
+	c.setCustomString("trkngnbr is not null and CREDIT_FLG='Y'");
 	
 	c.setHeadlessString("false");
 

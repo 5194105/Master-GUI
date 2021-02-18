@@ -1456,7 +1456,7 @@ try {
             Thread.sleep(1500);
       	  
             //CLICK CONTINUE.. THIS WILL CREDIT IT
-            // driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).click();
+             driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).click();
           }
           catch(Exception e1) {
          	 System.out.println("Failed Selecting Contact Method and Clicking Continue");
@@ -1479,7 +1479,25 @@ try {
           
           
           System.out.println();
-          endTest(testInputNbr,tinCount,trk,"test","made it to the end");
+          
+          Thread.sleep(10000);
+         
+          
+          String[] resultArray = validateResults(trk,type,false);
+          if(source.equals("excel")) {
+          	 writeToExcel(rowNumber, 0,resultArray[0]);
+          	 writeToExcel(rowNumber, 1,resultArray[1]);
+          	return;
+          	 }
+				 if(databaseDisabled.equals("false")) {
+	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+	   				
+           	 } 
+          
+          
+         
+          
+         // endTest(testInputNbr,tinCount,trk,"test","made it to the end");
           
 	 
 }
