@@ -102,7 +102,7 @@ public class creditDebitTestNGSlow {
 	int testCounter1,testCounter2,testCounter3,testCounter4;
 	int totalRows1,totalRows2,totalRows3,totalRows4;
 	int count;
-	String type;
+	
 	String comment;
 	String podScan;
 	String tinCount;
@@ -621,7 +621,7 @@ public void testMethod1(String result, String descripiton,String testInputNbr,St
     
     	enterDataStep1(driver1,wait1,testInputNbr,tinCount,trk,invoiceNbr1,rowNumber);
     	doCreditDebit(driver1,wait1,"credit", result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,  region , username , password,  creditFlg, debitFlg, disputeFlg, resolveCreditFlg,workable,reasonCode,reasonCategory,rootCause,valDesc,rowNumber,1);
-    	enterContactMethodStep3(driver1,wait1,testInputNbr,tinCount,trk,invoiceNbr1,username,rowNumber);
+    	enterContactMethodStep3(driver1,wait1,testInputNbr,tinCount,trk,invoiceNbr1,username,"credit",valDesc,rowNumber);
 }
     
     /*
@@ -1247,7 +1247,7 @@ public void enterDataStep1(WebDriver driver,WebDriverWait wait,String testInputN
 	
 }
 
-public void enterContactMethodStep3(WebDriver driver,WebDriverWait wait,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String username,int rowNumber) {
+public void enterContactMethodStep3(WebDriver driver,WebDriverWait wait,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String username,String type,String valDesc, int rowNumber) {
 try {
 	 System.out.println("Inside getDetails");
      //Getting Action Dropdown. Will RB everytime.
@@ -1495,9 +1495,9 @@ try {
           System.out.println();
           
           Thread.sleep(10000);
-         
-          
-          String[] resultArray = validateResults(trk,type,false);
+          checkValidation(type,testInputNbr,tinCount,trk,valDesc,rowNumber);
+          /*
+          String[] resultArray = validateResults(trk,type,true);
           if(source.equals("excel")) {
           	 writeToExcel(rowNumber, 0,resultArray[0]);
           	 writeToExcel(rowNumber, 1,resultArray[1]);
@@ -1507,7 +1507,7 @@ try {
 	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
 	   				
            	 } 
-          
+          */
           
          
           
