@@ -29,7 +29,9 @@ public class creditDebitManualRun {
 	c.setResolveCreditCheckBox("true");
 	c.setDatabaseDisabled("false");
 	c.setCustomCheckBox("true");
-	c.setCustomString("trkngnbr is not null");
+	//c.setCustomString("credit_flg='Y' and DESCRIPTION is null");
+	c.setCustomString("trkngnbr='794993959376'");
+	
 	c.setHeadlessString("false");
 
 	c.setSessionCount("1");

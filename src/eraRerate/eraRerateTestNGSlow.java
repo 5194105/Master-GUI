@@ -518,23 +518,8 @@ public class eraRerateTestNGSlow {
     		String rerate_type,String region ,String username ,String password,
     		String rsType,String company,String valDesc,String comments,int rowNumber) {
      
-    	
-    	
-    	
     	System.out.println("Instance: 1");
-    	
-    	System.out.println(result);
-    	System.out.println(descripiton);
-    	System.out.println(testInputNbr);
-    	System.out.println(tinCount);
-    	System.out.println(trk);
     
-    	System.out.println(region);
-    	System.out.println(username);
-    	System.out.println(password);
- 
-    	System.out.println(rowNumber);
-    	
     	//Will Check if Trk is already successful;
   	  
     	  try {
@@ -543,9 +528,8 @@ public class eraRerateTestNGSlow {
     	  		  String[] resultArray = validateResults(trk);
     	  	  if ( resultArray[0].equals("pass")){
     	       	 if(source.equals("excel")) {
-    	       	 writeToExcel(rowNumber, 0,"pass");
-    	       	 writeToExcel(rowNumber, 1,"completed");
-    	       	
+    	       		// writeToExcel(rowNumber, 0,"pass");
+    	       		// writeToExcel(rowNumber, 1,"completed");
     	       	 }
     	       	 writeToDB(testInputNbr,tinCount,trk,resultArray);
     	       	 return;
@@ -553,7 +537,6 @@ public class eraRerateTestNGSlow {
     	  	  			}
     	    		}
     	  	  }
-    	    
     	  	  catch(Exception e) {
     	  		System.out.println(e);  
     	  	  }
@@ -584,44 +567,49 @@ public class eraRerateTestNGSlow {
     	wait1 = new WebDriverWait(driver1,20);
 	    login(driver1,wait1,username,password);
 	    
-	    try {
-	    	
-	    	
-	
-    		
+	    try {	
 			doEraRerate(driver1,wait1,  result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,
 					rateWeight, actualWeight, weightType, length, width,height,
 					workable,dimType,payor,billAcctNbr,svcType,svcName,packageType,
 					rerate_type, region, username, password,
-					rsType , company , valDesc,comments,rowNumber,1);
-	
-		
-	    
+					rsType , company , valDesc,comments,rowNumber,1);	    
 	    } catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    
-    
-    
     }
-   
+    
+    
+    
     @Test(dataProvider="data-provider2",retryAnalyzer = Retry.class)
-    public void testMethod2( String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String svcChanged,String dimDetails,String actWeight,String custWeight,String rerateComments,String region ,String login ,String password,int rowNumber) {
+    public void testMethod2(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,
+    		String rateWeight,String actualWeight,String weightType,String length,String width,String height,
+    		String workable,String dimType,String payor,String billAcctNbr,String svcType,String svcName,String packageType,
+    		String rerate_type,String region ,String username ,String password,
+    		String rsType,String company,String valDesc,String comments,int rowNumber) {
      
     	System.out.println("Instance: 2");
-    	readTrk(trk);
-    	
+    
     	//Will Check if Trk is already successful;
-  	  String[] resultArray = validateResults(trk);
-  	  if ( resultArray[0].equals("pass")){
-  		 if(source.equals("excel")) {
-       	 writeToExcel(rowNumber, 0,"pass");
-       	 writeToExcel(rowNumber, 1,"completed");
-  		 }
-       	 return;
-        }
   	  
+    	  try {
+    	    	if (databaseDisabled.equals("false")) {
+    	    
+    	  		  String[] resultArray = validateResults(trk);
+    	  	  if ( resultArray[0].equals("pass")){
+    	       	 if(source.equals("excel")) {
+    	       		// writeToExcel(rowNumber, 0,"pass");
+    	       		// writeToExcel(rowNumber, 1,"completed");
+    	       	 }
+    	       	 writeToDB(testInputNbr,tinCount,trk,resultArray);
+    	       	 return;
+    	  	  
+    	  	  			}
+    	    		}
+    	  	  }
+    	  	  catch(Exception e) {
+    	  		System.out.println(e);  
+    	  	  }
     	try { 
     		driver2.quit();
 	  }
@@ -629,7 +617,6 @@ public class eraRerateTestNGSlow {
 		  System.out.println(eee);
 		  
 	  }
-	  
     	if (browser.equals("1")) {
     		if (c.getCompatibleMode().equals("true")) {	
     			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
@@ -647,33 +634,52 @@ public class eraRerateTestNGSlow {
     		System.setProperty(chromeSetProperty,chromePath);
     		driver2 = new ChromeDriver();
     	}
-    	 wait2 = new WebDriverWait(driver2,20);
-    	login(driver2,wait2,login,password);
-	    try {
-	    	doRebill(driver2,wait2, result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1,invoiceNbr2,svcChanged, dimDetails, actWeight, custWeight, rerateComments, region , login , password,2);
-		} catch (InterruptedException e) {
+    	wait2 = new WebDriverWait(driver2,20);
+	    login(driver2,wait2,username,password);
+	    
+	    try {	
+			doEraRerate(driver2,wait2,  result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,
+					rateWeight, actualWeight, weightType, length, width,height,
+					workable,dimType,payor,billAcctNbr,svcType,svcName,packageType,
+					rerate_type, region, username, password,
+					rsType , company , valDesc,comments,rowNumber,2);	    
+	    } catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    
+    }    
     
     
-    }
+    
     @Test(dataProvider="data-provider3",retryAnalyzer = Retry.class)
-    public void testMethod3( String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String svcChanged,String dimDetails,String actWeight,String custWeight,String rerateComments,String region ,String login ,String password,int rowNumber) {
+    public void testMethod3(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,
+    		String rateWeight,String actualWeight,String weightType,String length,String width,String height,
+    		String workable,String dimType,String payor,String billAcctNbr,String svcType,String svcName,String packageType,
+    		String rerate_type,String region ,String username ,String password,
+    		String rsType,String company,String valDesc,String comments,int rowNumber) {
+     
     	System.out.println("Instance: 3");
-    	readTrk(trk);
-    	
-    	
+    
     	//Will Check if Trk is already successful;
-  	  String[] resultArray = validateResults(trk);
-  	  if ( resultArray[0].equals("pass")){
-  		 if(source.equals("excel")) {
-       	 writeToExcel(rowNumber, 0,"pass");
-       	 writeToExcel(rowNumber, 1,"completed");
-  		 }
-       	 return;
-        }
+  	  
+    	  try {
+    	    	if (databaseDisabled.equals("false")) {
+    	    
+    	  		  String[] resultArray = validateResults(trk);
+    	  	  if ( resultArray[0].equals("pass")){
+    	       	 if(source.equals("excel")) {
+    	       		// writeToExcel(rowNumber, 0,"pass");
+    	       		// writeToExcel(rowNumber, 1,"completed");
+    	       	 }
+    	       	 writeToDB(testInputNbr,tinCount,trk,resultArray);
+    	       	 return;
+    	  	  
+    	  	  			}
+    	    		}
+    	  	  }
+    	  	  catch(Exception e) {
+    	  		System.out.println(e);  
+    	  	  }
     	try { 
     		driver3.quit();
 	  }
@@ -681,7 +687,6 @@ public class eraRerateTestNGSlow {
 		  System.out.println(eee);
 		  
 	  }
-	  
     	if (browser.equals("1")) {
     		if (c.getCompatibleMode().equals("true")) {	
     			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
@@ -699,38 +704,51 @@ public class eraRerateTestNGSlow {
     		System.setProperty(chromeSetProperty,chromePath);
     		driver3 = new ChromeDriver();
     	}
-    	
-    	 wait3 = new WebDriverWait(driver3,20);
-    login(driver3,wait3,login,password);
-    try {
-    	doRebill(driver3,wait3, result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1,invoiceNbr2,svcChanged, dimDetails, actWeight, custWeight, rerateComments, region , login , password,3);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
+    	wait3 = new WebDriverWait(driver3,20);
+	    login(driver3,wait3,username,password);
+	    
+	    try {	
+			doEraRerate(driver3,wait3,  result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,
+					rateWeight, actualWeight, weightType, length, width,height,
+					workable,dimType,payor,billAcctNbr,svcType,svcName,packageType,
+					rerate_type, region, username, password,
+					rsType , company , valDesc,comments,rowNumber,3);	    
+	    } catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
     
-    
-    
-    
-    
-    
     @Test(dataProvider="data-provider4",retryAnalyzer = Retry.class)
-    public void testMethod4(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,String svcChanged,String dimDetails,String actWeight,String custWeight,String rerateComments,String region ,String login ,String password,int rowNumber) {
+    public void testMethod4(String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2,
+    		String rateWeight,String actualWeight,String weightType,String length,String width,String height,
+    		String workable,String dimType,String payor,String billAcctNbr,String svcType,String svcName,String packageType,
+    		String rerate_type,String region ,String username ,String password,
+    		String rsType,String company,String valDesc,String comments,int rowNumber) {
+     
     	System.out.println("Instance: 4");
+    
     	//Will Check if Trk is already successful;
-    	readTrk(trk);
-    	
-    	String[] resultArray = validateResults(trk);
-    	  if ( resultArray[0].equals("pass")){
-    			 if(source.equals("excel")) {
-         	 writeToExcel(rowNumber, 0,"pass");
-         	 writeToExcel(rowNumber, 1,"completed");
-    			 }
-         	 return;
-          }
+  	  
+    	  try {
+    	    	if (databaseDisabled.equals("false")) {
+    	    
+    	  		  String[] resultArray = validateResults(trk);
+    	  	  if ( resultArray[0].equals("pass")){
+    	       	 if(source.equals("excel")) {
+    	       		// writeToExcel(rowNumber, 0,"pass");
+    	       		// writeToExcel(rowNumber, 1,"completed");
+    	       	 }
+    	       	 writeToDB(testInputNbr,tinCount,trk,resultArray);
+    	       	 return;
+    	  	  
+    	  	  			}
+    	    		}
+    	  	  }
+    	  	  catch(Exception e) {
+    	  		System.out.println(e);  
+    	  	  }
     	try { 
     		driver4.quit();
 	  }
@@ -738,7 +756,6 @@ public class eraRerateTestNGSlow {
 		  System.out.println(eee);
 		  
 	  }
-	  
     	if (browser.equals("1")) {
     		if (c.getCompatibleMode().equals("true")) {	
     			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
@@ -756,19 +773,20 @@ public class eraRerateTestNGSlow {
     		System.setProperty(chromeSetProperty,chromePath);
     		driver4 = new ChromeDriver();
     	}
-    	
-    	 wait4 = new WebDriverWait(driver4,20);
-    login(driver4,wait4,login,password);
-    try {
-    	
-    	doRebill(driver4,wait4, result,  descripiton, testInputNbr, tinCount, trk,invoiceNbr1,invoiceNbr2, svcChanged, dimDetails, actWeight, custWeight, rerateComments, region , login , password, 4);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-    
+    	wait4 = new WebDriverWait(driver4,20);
+	    login(driver4,wait4,username,password);
+	    
+	    try {	
+			doEraRerate(driver4,wait4,  result,  descripiton, testInputNbr, tinCount, trk, invoiceNbr1, invoiceNbr2,
+					rateWeight, actualWeight, weightType, length, width,height,
+					workable,dimType,payor,billAcctNbr,svcType,svcName,packageType,
+					rerate_type, region, username, password,
+					rsType , company , valDesc,comments,rowNumber,4);	    
+	    } catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
-    
     
     
     public void login(WebDriver driver,WebDriverWait wait,String login,String password) {
