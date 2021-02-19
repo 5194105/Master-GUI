@@ -26,6 +26,8 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.JCheckBox;
 
 public class instantInvoiceAutomationGui {
@@ -243,7 +245,30 @@ public class instantInvoiceAutomationGui {
 		
 		
 	    frame.setVisible(true);
-      
+	    sessionTextField.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				 c.setSessionCount(sessionTextField.getText());
+		    	    System.out.println(c.getSessionCount());
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				 c.setSessionCount(sessionTextField.getText());
+		    	    System.out.println(c.getSessionCount());
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				 c.setSessionCount(sessionTextField.getText());
+		    	    System.out.println(c.getSessionCount());
+			} 
+	    	
+	});
 	    
 	    sessionTextField.addActionListener(new java.awt.event.ActionListener() {
 	    	  public void actionPerformed(ActionEvent event) {

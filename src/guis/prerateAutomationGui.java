@@ -20,6 +20,8 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import org.openqa.selenium.WebDriver;
 
@@ -279,6 +281,31 @@ b=new JProgressBar(0,100);
 		
 	    frame.setVisible(true);
       
+	    sessionTextField.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				 c.setSessionCount(sessionTextField.getText());
+		    	    System.out.println(c.getSessionCount());
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				 c.setSessionCount(sessionTextField.getText());
+		    	    System.out.println(c.getSessionCount());
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				 c.setSessionCount(sessionTextField.getText());
+		    	    System.out.println(c.getSessionCount());
+			} 
+	    	
+	});
+	    
 	    
 	    sessionTextField.addActionListener(new java.awt.event.ActionListener() {
 	    	  public void actionPerformed(ActionEvent event) {
