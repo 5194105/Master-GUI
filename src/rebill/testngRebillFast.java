@@ -982,7 +982,7 @@ public class testngRebillFast {
     	
     	wait=new WebDriverWait(driver,20);
     	driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
-    
+    /*
     	  if(!preRateScenarios.equals("")) {
     	 
     		 if(source.equals("excel")) {
@@ -997,7 +997,7 @@ public class testngRebillFast {
                     	 }
     	return;	
     	}
-    	
+    	*/
     	
     	
     	try {
@@ -1247,7 +1247,9 @@ public class testngRebillFast {
      		 Thread.sleep(2000);
     	     driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div/div/div[2]/label[2]/span")).click();
     	     Thread.sleep(2000);
-    	   
+    	     driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div/div/div[3]/div[3]/button[1]")).click();
+     	    
+    	     
     	    /* 
     	     Actions actions = new Actions(driver);
     	     actions.moveToElement(driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div/div/div[3]/div[1]/div[1]/div/div[1]/div[2]/div/div[1]/div/div[3]/div")));
@@ -1256,6 +1258,7 @@ public class testngRebillFast {
     	     actions.build().perform();
     	   
     	   */
+    	     /*
     	  WebElement elementJS=  driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div/div/div[3]/div[1]/div[1]/div/div[1]/div[2]/div/div[1]/div/div[3]/div"));
     	  elementJS.click();
     	  elementJS.click();
@@ -1270,15 +1273,14 @@ public class testngRebillFast {
     	     							 //  /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div/div/div[3]/div[1]/div[1]/div/div[1]/div[2]/div/div[1]/div/div[3]/div	
     	     							   ///html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div/div/div[3]/div[1]/div[1]/div/div[1]/div[2]/div/div[1]/div/div[1]/div
        System.out.println("plz");
+       */
          }
          catch(Exception e) {
         	 System.out.println(e);
          }
     	     }
-    	     
-    	     
-    	     
     	     else {
+    	
     	 /*
     	 *****************************************************************************
     	 *
@@ -1349,7 +1351,23 @@ public class testngRebillFast {
                                 	 }
          	   			 Assert.fail("Trying To Rebill A Partial Amount");
          		}
+         			 if (tempError.contains("Cannot Credit An AirBill For More Than The Invoice Amount Due.")) {
+         				 System.out.println(tempError);
+         				 if(source.equals("excel")) {
+         	               	 writeToExcel(rowNumber, 0,"fail");
+         	               	 writeToExcel(rowNumber, 1,"Cannot Credit An AirBill For More Than The Invoice Amount Due");
+         	               	 }
+         	   				 if(databaseDisabled.equals("false")) {
+                 	   			 String[] resultArray = new String[2];
+                 	   			 	resultArray[0]="fail";
+                 	   				resultArray[1]="Cannot Credit An AirBill For More Than The Invoice Amount Due";
+                 	   				 writeToDB(testInputNbr,tinCount,trk,resultArray);
+                                	 }
+         	   			 Assert.fail("Cannot Credit An AirBill For More Than The Invoice Amount Due");
+         		}
+         			 
          			
+         			 
          				 if (tempError.indexOf("interline")==1) {
          				 System.out.println(tempError);
          				 if(source.equals("excel")) {
@@ -1462,7 +1480,7 @@ public class testngRebillFast {
          	
          	
          	
-         	
+    	     }
          	
          	
          	
@@ -1581,7 +1599,7 @@ public class testngRebillFast {
 	               	 }
  	   	 Assert.fail("Could Not Get to Rebill Screen");
              }
-    	     }
+    	     
              
              
              
@@ -1647,7 +1665,7 @@ public class testngRebillFast {
             	 if (!preRateScenarios.equals("")) {
          		 	//driver.findElement(By.xpath("//*[@id=\"origin\"]")).sendKeys(originLoc);
             		  System.out.println("Prerate TEst");
-            		 return;
+            		// return;
          	 }
             	 
             	 if (!originLoc.equals("")) {
