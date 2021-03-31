@@ -85,9 +85,24 @@ public class config {
     
     String eraMassRerate,eraMassRebill;
     String resolveCreditCheckBox,disputeCheckBox;
+    
+    String stephenTest;
+    
 	public config() {
 		
 	}
+	
+	
+	
+	public void setStephenTest(String stephenTest) {
+		this.stephenTest=stephenTest;
+	}
+	
+	public String getStephenTest() {
+		return stephenTest;
+		
+	}
+	
 	
 	public void setHeadlessString(String headless) {
 		this.headless=headless;
@@ -982,7 +997,7 @@ public void setOreL2DbConnection(String username,String password) {
 	
 	try {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
-		oreL2Con=DriverManager.getConnection("jdbc:oracle:thin:@//idb00248.ute.fedex.com:1526/IE2VD925",username,password);
+		oreL2Con=DriverManager.getConnection("jdbc:oracle:thin:@//idb00248.ute.fedex.com:1526:IE2VD925",username,password);
 	} catch (SQLException | ClassNotFoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

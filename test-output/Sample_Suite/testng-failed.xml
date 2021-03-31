@@ -9,7 +9,7 @@
   <parameter name="compatibleMode" value=""/>
   <parameter name="eraWorkable" value="true"/>
   <parameter name="headless" value="false"/>
-  <parameter name="customCheckBox" value="true"/>
+  <parameter name="customCheckBox" value="false"/>
   <parameter name="expressCheckBox" value="true"/>
   <parameter name="allCheckBox" value="false"/>
   <parameter name="filepath" value="C:\Users\FedExUser\Desktop\stephen\R66\L3C6\rebill.xlsx"/>
@@ -24,6 +24,7 @@
       <class name="rebill.testngRebillFast">
         <methods>
           <include name="setupExcel"/>
+          <include name="testMethod1"/>
           <include name="testMethod2"/>
           <include name="testMethod3"/>
           <include name="testMethod4"/>

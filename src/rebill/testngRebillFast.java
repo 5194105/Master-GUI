@@ -241,6 +241,7 @@ public class testngRebillFast {
 	
 	
 	
+
 	
 	public void runDbQuery() {
 		try {
@@ -248,9 +249,8 @@ public class testngRebillFast {
 		Statement stmt = null;
 		ResultSet rs = null;
 		ResultSetMetaData rsmd=null;
-
-    	String databaseSqlCount="select count(*) as total from rebill_regression ";
-    	String databaseSqlQuery="select result, description, test_input_nbr, tin_count, trkngnbr, reason_code, rebill_acct,invoice_nbr_1, invoice_nbr_2, mig, region,  login,   password,  rs_Type, company, worktype, ORIGIN_LOC,DEST_LOC,DIM_VOL,SHIPPER_REF,RECP_ADDRESS,SHIPPER_ADDRESS,ACC_NBR_DEL_STATUS,SVC_BASE, CREDIT_CARD_DTL,PRE_RATE_SCENARIOS,EXP_Pieces,EXP_ACTUAL_Weight,EXP_Adj_Weight,CREDIT_CARD_DTL from rebill_regression ";
+		String databaseSqlCount="select count(*) as total from rebill_regression ";
+    	String databaseSqlQuery="select RESULT,	DESCRIPTION,	TEST_INPUT_NBR	,TIN_COUNT	,TRKNGNBR,	REASON_CODE	,BILL_ACCT_NBR	,INVOICE_NBR_1,	INVOICE_NBR_2	,REGION	,USERNAME,	PASSWORD,	RS_TYPE,	COMPANY	,rebill_prerate,	WORKABLE,	DEFECT_FLG,	DEFECT_NBR	,DEFECT_CONTACT from rebill_regression ";
     	
     	if (allCheckBox.equals("true")) {
     		databaseSqlCount+="where trkngnbr is not null";
@@ -513,9 +513,8 @@ public class testngRebillFast {
     
     
     
-    
     @Test(dataProvider="data-provider1",retryAnalyzer = Retry.class)
-    public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt,int rowNumber) {
+    public void testMethod1(String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String region ,String login ,String password,String rsType ,String company ,String prerate,String workable,String defectFlg,String defectNbr, String defectContact,int rowNumber) {
      
     	System.out.println("Instance: 1");
     	
@@ -528,27 +527,14 @@ public class testngRebillFast {
     	System.out.println(rebillAccount);
     	System.out.println(invoiceNbr1);
     	System.out.println(invoiceNbr2);
-    	System.out.println(mig);
+    
     	System.out.println(region);
     	System.out.println(login);
     	System.out.println(password);
     	System.out.println(rsType);
     	System.out.println(company);
-    	System.out.println(worktype);
-    	System.out.println(originLoc);
-    	System.out.println(destLoc);
-    	System.out.println(dimVol);
-    	System.out.println(shipperRef);
-    	System.out.println(recpAddress);
-    	System.out.println(shipperAddress);
-    	System.out.println(acctNbrDelStatus);
-    	System.out.println(svcBase);
-    	System.out.println(creditCardDtl);
-    	System.out.println(preRateScenarios);
-    	System.out.println(expPieces);
-    	System.out.println(expActualWeight);
-    	System.out.println(expAdjWeight);
-    	System.out.println(creditCardDt);
+    	System.out.println(workable);
+    
     	System.out.println(rowNumber);
     	
     	//Will Check if Trk is already successful;
@@ -630,8 +616,7 @@ public class testngRebillFast {
 	    try {
 	    	
 	    
-	        
-			doRebill(driver1,wait1, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber, originLoc, destLoc, dimVol, shipperRef, recpAddress, shipperAddress, acctNbrDelStatus, svcBase,  creditCardDtl, preRateScenarios, expPieces, expActualWeight, expAdjWeight, creditCardDt,1);
+	    	doRebill(driver1,wait1, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, region , login , password, rsType , company , prerate,workable, rowNumber, 1);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -642,7 +627,7 @@ public class testngRebillFast {
     }
    
     @Test(dataProvider="data-provider2",retryAnalyzer = Retry.class)
-    public void testMethod2( String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt,int rowNumber) {
+    public void testMethod2( String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String region ,String login ,String password,String rsType ,String company ,String prerate,String workable,String defectFlg,String defectNbr, String defectContact,int rowNumber) {
      
     	System.out.println("Instance: 2");
     	readTrk(trk);
@@ -707,7 +692,7 @@ public class testngRebillFast {
     	 wait2 = new WebDriverWait(driver2,20);
     	login(driver2,wait2,login,password);
 	    try {
-	    	doRebill(driver2,wait2, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber, originLoc, destLoc, dimVol, shipperRef, recpAddress, shipperAddress, acctNbrDelStatus, svcBase,  creditCardDtl, preRateScenarios, expPieces, expActualWeight, expAdjWeight, creditCardDt,2);
+	    	doRebill(driver2,wait2, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, region , login , password, rsType , company ,prerate, workable, rowNumber,2);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -717,7 +702,7 @@ public class testngRebillFast {
     
     }
     @Test(dataProvider="data-provider3",retryAnalyzer = Retry.class)
-    public void testMethod3( String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt,int rowNumber) {
+    public void testMethod3(String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String region ,String login ,String password,String rsType ,String company ,String prerate,String workable,String defectFlg,String defectNbr, String defectContact,int rowNumber) {
     	System.out.println("Instance: 3");
     	readTrk(trk);
     	
@@ -781,7 +766,7 @@ public class testngRebillFast {
     	 wait3 = new WebDriverWait(driver3,20);
     login(driver3,wait3,login,password);
     try {
-    	doRebill(driver3,wait3, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber, originLoc, destLoc, dimVol, shipperRef, recpAddress, shipperAddress, acctNbrDelStatus, svcBase,  creditCardDtl, preRateScenarios, expPieces, expActualWeight, expAdjWeight, creditCardDt,3);
+    	doRebill(driver3,wait3, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, region , login , password, rsType , company ,prerate, workable, rowNumber, 3);
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -795,7 +780,7 @@ public class testngRebillFast {
     
     
     @Test(dataProvider="data-provider4",retryAnalyzer = Retry.class)
-    public void testMethod4(String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt,int rowNumber) {
+    public void testMethod4(String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String region ,String login ,String password,String rsType ,String company ,String prerate,String workable,String defectFlg,String defectNbr, String defectContact,int rowNumber) {
     	System.out.println("Instance: 4");
     	//Will Check if Trk is already successful;
     	readTrk(trk);
@@ -858,7 +843,7 @@ public class testngRebillFast {
     	 wait4 = new WebDriverWait(driver4,20);
     login(driver4,wait4,login,password);
     try {
-    	doRebill(driver4,wait4, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, mig, region , login , password, rsType , company , worktype, rowNumber, originLoc, destLoc, dimVol, shipperRef, recpAddress, shipperAddress, acctNbrDelStatus, svcBase,  creditCardDtl, preRateScenarios, expPieces, expActualWeight, expAdjWeight, creditCardDt,4);
+    	doRebill(driver4,wait4, result,  descripiton, testInputNbr, tinCount, trk, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, region , login , password, rsType , company ,prerate, workable, rowNumber,4);
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -972,7 +957,7 @@ public class testngRebillFast {
     }
     
     
-    public void doRebill(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2,String mig,String region ,String login ,String password,String rsType ,String company ,String worktype,int rowNumber,String originLoc,String destLoc,String dimVol,String shipperRef,String recpAddress,String shipperAddress,String acctNbrDelStatus,String svcBase, String creditCardDtl,String preRateScenarios,String expPieces,String expActualWeight,String expAdjWeight,String creditCardDt, int instanceNumber) throws InterruptedException {
+    public void doRebill(WebDriver driver,WebDriverWait wait, String result, String descripiton,String testInputNbr,String tinCount,String trk,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2 ,String region ,String login ,String password,String rsType ,String company ,String prerate,String workable,int rowNumber, int instanceNumber) throws InterruptedException {
     	WebElement element=null;
     	JavascriptExecutor js= (JavascriptExecutor) driver;
     	
@@ -1238,7 +1223,7 @@ public class testngRebillFast {
              	 } 
     	  Assert.fail("Failed at Drop Down");
       }
-    	     if(!preRateScenarios.equals("")) {
+    	     if(!prerate.equals("")) {
          try {
         	 
     	     driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[9]/label[2]/span[1]")).click();
@@ -1643,76 +1628,9 @@ public class testngRebillFast {
 
          	System.out.println("")   ;   
            
-             if(worktype.equals("MFRETIRE")) {
-           /*
-            	 String originLoc,
-            	 String destLoc,
-            	 String dimVol,
-            	 String shipperRef,
-            	 String recpAddress,
-            	 String shipperAddress,
-            	 String acctNbrDelStatus,
-            	 String svcBase, 
-            	 String creditCardDtl,
-            	 String preRateScenarios,
-            	 String expPieces,
-            	 String expActualWeight,
-            	 String expAdjWeight,
-            	 String creditCardDt,
-            	 */
-            	 
-            	
-            	 if (!preRateScenarios.equals("")) {
-         		 	//driver.findElement(By.xpath("//*[@id=\"origin\"]")).sendKeys(originLoc);
-            		  System.out.println("Prerate TEst");
-            		// return;
-         	 }
-            	 
-            	 if (!originLoc.equals("")) {
-            		 	driver.findElement(By.xpath("//*[@id=\"origin\"]")).sendKeys(originLoc);
-            		 
-            	 }
-            	 if (!destLoc.equals("")) {
-            		 driver.findElement(By.xpath("//*[@id=\"destination\"]")).sendKeys(destLoc);
-            	 }
-            	 if (!dimVol.equals("")) {
-            		 driver.findElement(By.xpath("//*[@id=\"rb_volume\"]")).sendKeys(dimVol);
-            	 }
-            	 if (!shipperRef.equals("")) {
-            		 driver.findElement(By.xpath("//*[@id=\"reference_notes\"]")).sendKeys(shipperRef);
-            	 }
-            	 if (!recpAddress.equals("")) {
-            		 driver.findElement(By.xpath("//*[@id=\"reciptacct_number\"]")).sendKeys(recpAddress);
-            	 }
-            	 if (!shipperAddress.equals("")) {
-            		 driver.findElement(By.xpath("//*[@id=\"shipacct_number\"]")).sendKeys(shipperAddress);
-            	 }
-            	 if (!acctNbrDelStatus.equals("")) {
-            		// driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")).sendKeys(arg0);
-            	 }
-            	 if (!svcBase.equals("")) {
-            		 driver.findElement(By.xpath("//*[@id=\"service_base\"]")).sendKeys(svcBase);
-            	 }
-            	 if (!creditCardDtl.equals("")) {
-            		 String[] splitCC = creditCardDtl.split(" ");
-            		 driver.findElement(By.xpath("//*[@id=\"cc_num1\"]")).sendKeys(splitCC[0]);
-            		 driver.findElement(By.xpath("//*[@id=\"cc_num2\"]")).sendKeys(splitCC[1]);
-            		 driver.findElement(By.xpath("//*[@id=\"cc_num3\"]")).sendKeys(splitCC[2]);
-            		 driver.findElement(By.xpath("//*[@id=\"cc_num4\"]")).sendKeys(splitCC[3]);
-            	 }
-            	 if (!expPieces.equals("")) {
-            		 driver.findElement(By.xpath("//*[@id=\"rb_totalEXPPIECES\"]")).sendKeys(expPieces);
-            	 }
-            	 if (!expActualWeight.equals("")) {
-            		 driver.findElement(By.xpath("//*[@id=\"rb_totalEXPweight\"]")).sendKeys(expActualWeight);
-            	 }
-            	 if (!expAdjWeight.equals("")) {
-            		 driver.findElement(By.xpath("//*[@id=\"rb_totalEXPADJWeight\"]")).sendKeys(expAdjWeight);
-            	 }
-            	 if (!creditCardDt.equals("")) {
-            		 driver.findElement(By.xpath("//*[@id=\"exp_date\"]")).sendKeys(creditCardDt);
-            	 }
-             }
+            
+             
+             
              Thread.sleep(2000);
              	driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")).click();
              	Thread.sleep(10000);

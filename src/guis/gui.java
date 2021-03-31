@@ -154,6 +154,8 @@ public class gui {
 	public gui() {
 		importData id = new importData(); 
 		c=id.getConfig();
+		System.out.println(c.getStephenTest());
+		
 		initialize();
 		
 		  	

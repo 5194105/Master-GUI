@@ -55,3 +55,6 @@ Instant Invoice Enabled=true
 UD Enabled=false
 Rebill Troubleshoot=false
 Credit And Debit=false
+stephen example=testing
+Chrome Property=webdriver.chrome.driver
+Chrome Path=\drivers\chromedriver.exe

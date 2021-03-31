@@ -2,27 +2,13 @@ package rebill;
 
 
 import configuration.config;
-import prerate.prerateTestNGSlow;
-import rebill.rebillData;
-import rebill.testngRebillSlow;
-import rebill.testngRebillSlowMfRetire;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.testng.TestNG;
-import org.testng.annotations.Parameters;
+
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
@@ -50,7 +36,7 @@ public class rebillManualClass {
 		c.setDatabaseDisabled("false");
 		
 		//You can give custom query if want to
-		c.setCustomCheckBox("true");
+		c.setCustomCheckBox("false");
 		//c.setCustomString("description like '%Could Not go to phone detail screen%'");
 		c.setCustomString("description ='Failed on Entering Tracking Number'");
 		
