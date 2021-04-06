@@ -10,25 +10,25 @@ import configuration.config;
 import configuration.importData;
 
 public class base {
-	static ArrayList<data> dataArray;
+	 ArrayList<data> dataArray;
 	
-	static int sqlCount,tempCounter=0,function;;
-	static int [][]minxMaxArray;
-	static ArrayList<Object> threadArray= new ArrayList<Object>();
+	 int sqlCount,tempCounter=0,function;;
+	 int [][]minxMaxArray;
+	 ArrayList<Object> threadArray= new ArrayList<Object>();
 	//static ArrayList<rebillThread> singleRebillThreadArray= new ArrayList<rebillThread>();
-	static String sqlQueryBase1="",sqlQueryBase2="",sqlQuery1="",sqlQuery2="";
-	static config c;
-	public static void main(String args[]) {
+	
+	 config c;
+	String allCheckBox,customCheckBox,customString,nullCheckBox,failedCheckBox,domesticCheckBox,internationalCheckBox,expressCheckBox,groundCheckBox,eraWorkable,databaseSqlCount,databaseSqlQuery;
+	//public static void main(String args[]) {
+	public base(config c,int function) {
 		int low=0;
 		int high=0;
-		
-		importData id = new importData();
-		c=id.getConfig();
-		//Update your config commands 
-		customConfig();
+		this.c=c;
+		this.function=function;
+		setVars();
 		
 		//Amount of threads
-		int threadCount=1;
+		int threadCount=Integer.parseInt(c.getSessionCount());
 		
 		//Function Type
 		// 1 Single Rebill
@@ -40,13 +40,12 @@ public class base {
 		// 7 Prerate Single
 		// 8 Prerate Hold
 		// 9 PRS Rerate
-		function=1;
 		
-		//Set your custom query start with 'where' here
-		setSqlCustomQuery("where trkngnbr ='410287221702'");	
 		
+	
+		setSqlQuery();
 		//Stores data to a data object then puts it in array
-		getDataDb(sqlQuery1,sqlQuery2);
+		getDataDb();
 		//Gets which segements data is in based on thread count.
 		minMaxArrayMath(threadCount);
 		
@@ -113,58 +112,29 @@ public class base {
 	}
 	
 	
-	public static void setSqlCustomQuery(String sqlWhereQuery) {
+	
+	
+	public  void setVars() {
 		
-		//sets up default query
-				switch (function) {
-				case 1:	
-					 sqlQueryBase1="select RESULT, DESCRIPTION, TEST_INPUT_NBR	,TIN_COUNT	,TRKNGNBR,	REASON_CODE	,BILL_ACCT_NBR	,INVOICE_NBR_1,	INVOICE_NBR_2	,REGION	,USERNAME,	PASSWORD,	RS_TYPE,	COMPANY	,rebill_prerate,	WORKABLE,	DEFECT_FLG,	DEFECT_NBR  from rebill_regression ";
-					 sqlQueryBase2="select count(*) from rebill_regression  ";
-				break;
-				case 2:	
-					sqlQueryBase1="select result, description, test_input_nbr, rowcount, trkngnbr, reason_code, bill_acct_nbr,invoice_nbr_1, invoice_nbr_2,  region,  username,   password,  rs_Type, company from rebill_regression_mass ";
-					sqlQueryBase2="select count(*) from  rebill_regression_mass ";
-				break;
-				case 3:	
-					sqlQueryBase1="select RESULT,	DESCRIPTION,	TEST_INPUT_NBR,	TIN_COUNT,	TRKNGNBR,	INVOICE_NBR_1	,INVOICE_NBR_2,	RATE_WEIGHT,	ACTUAL_WEIGHT,	WGT_TYPE,	LENGTH,	WIDTH,	HEIGHT	,WORKABLE,	DIM_TYPE,	PAYOR	,BILL_ACCT_NBR	,SERVICE_TYPE,	SERVICE_NAME,	PACKAGE_TYPE	,RERATE_TYPE,	REGION,	USERNAME,	PASSWORD,	RS_TYPE,	COMPANY,	VAL_DESC,	COMMENTS from era_rerate_view  ";
-					sqlQueryBase2="select count(*) from  era_rerate_view  ";
-				break;
-				case 4:	
-					sqlQueryBase1="select  result,  DESCRIPTION, test_Input_Nbr, tin_Count, trkngnbr, invoice_Nbr_1, invoice_Nbr_2, region, username , password,  rate_weight,wgt_type,length,height,width,dim_type, rerate_type, rs_Type ,company  , mass_rerate_combo from era_rerate_mass ";
-					sqlQueryBase2="select count(*) from  era_rerate_mass";
-				break;
-				case 5:	
-					sqlQueryBase1="select result, description, TEST_INPUT_NBR,	TIN_COUNT	,TRKNGNBR,	INVOICE_NBR_1,	INVOICE_NBR_2,	REGION,	USERNAME,	PASSWORD,	CREDIT_FLG,	DEBIT_FLG,	DISPUTE_FLG,	RESOLVE_CREDIT_FLG,	WORKABLE ,REASON_CODE,	REASON_CATEGORY, ROOT_CAUSE,VAL_DESC from era_credit_debit  ";
-					sqlQueryBase2="select count(*) from  era_credit_debit ";
-				break;
-				case 6:	
-					sqlQueryBase1="select TEST_INPUT_NBR	,TRKNGNBR	,PAYOR_ACCT_NBR,	ITEM_PRCS_CD	,INSTNT_INV_FLG from instant_invoice_view   ";
-					sqlQueryBase2="select count(*) from  instant_invoice_view ";
-				break;
-				case 7:	
-					sqlQueryBase1="select PRE_RATE_TYPE_CD, DESCRIPTION,POD_SCAN ,TIN_COUNT ,TEST_INPUT_NBR ,TRKNGNBR ,PRERATE_AMT, CURRENCY_CD, APPROVER_ID ,CHRG_CD1 ,CHRG_AMT1 ,CHRG_CD2 ,CHRG_AMT2 ,CHRG_CD3, CHRG_AMT3, CHRG_CD4, CHRG_AMT4 from prerate_view  ";
-					sqlQueryBase2="select count(*) from  prerate_view ";
-				break;
-				case 8:	
-					sqlQueryBase1="select RESULT, DESCRIPTION,POD_SCAN,TEST_INPUT_NBR,TIN_COUNT,TRKNGNBR,TIN_COMMENT from prerate_hold_view  ";
-					sqlQueryBase2="select count(*) from  prerate_hold_view ";
-				break;
-				case 9:	
-					sqlQueryBase1="select TEST_INPUT_NBR	,TIN_COUNT	,ACCT1,	ACCT2,	TRK_NO1,	TRK_NO2	,INVOICE_NBR_1,	INV_NO2,	SERVICE1,	SERVICE2,	REQUEST_TYPE,	ACCT_TYPE,	ACCNAME from rerate_master  ";
-					sqlQueryBase2="select count(*) from  rerate_master ";
-				break;
-				
-				
-				}
-				
-				//Gets custom where clause
-				sqlQuery1=sqlQueryBase1+sqlWhereQuery;
-				sqlQuery2=sqlQueryBase2+sqlWhereQuery;
+	
+		 allCheckBox=c.getAllCheckBox();
+		 nullCheckBox=c.getNullCheckBox();
+		 failedCheckBox=c.getFailedCheckBox();
+		 domesticCheckBox=c.getDomesticCheckBox();
+		 internationalCheckBox=c.getInternationalCheckBox();
+		 expressCheckBox=c.getExpressCheckBox();
+		 groundCheckBox=c.getGroundCheckBox();
+		 customCheckBox= c.getCustomCheckBox();
+		 customString= c.getCustomString();	
+		 eraWorkable=c.getEraWorkable();
+		
+
 		
 	}
 	
-	public static void minMaxArrayMath(int threadCount){
-		System.out.println(sqlCount+"   "+threadCount);
+	
+	public  void minMaxArrayMath(int threadCount){
+		System.out.println("Data Count:"+sqlCount+"   Thread Count:"+threadCount);
 		int partition = sqlCount/threadCount; 
 		minxMaxArray = new int[threadCount][2];
 		int lowLimit=0;
@@ -187,13 +157,11 @@ public class base {
 		}
 	}
 	
-	public static void getDataDb(String sql1,String sql2) {
+	public  void getDataDb() {
 		Connection con=null;
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
-			
-		} catch (ClassNotFoundException | SQLException e1) {
+			con=c.getGtmRevToolsConnection();		
+		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
@@ -205,14 +173,13 @@ public class base {
        	try {
            	
         		stmt = con.createStatement();
-            	rs = stmt.executeQuery(sql1);
+            	rs = stmt.executeQuery(databaseSqlQuery);
             	
             	 
             	 while(rs.next()) {
             		 tempCounter++;
             		dataArray.add(new data(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16),rs.getString(17),rs.getString(18),tempCounter));	
-            		 //rebillThreadArrayAll.add(new rebillThread(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16),rs.getString(17),rs.getString(18)));
-            	 }
+            		 }
             	
         	}
         	catch(Exception e) {
@@ -222,7 +189,7 @@ public class base {
      	try {
            	
     		stmt = con.createStatement();
-        	rs = stmt.executeQuery(sql2);
+        	rs = stmt.executeQuery(databaseSqlCount);
             
         	 while(rs.next()) {
         	
@@ -252,17 +219,159 @@ public class base {
        	
 	}
 	
-	public static void customConfig () {
-		
-    	c.setLevel("3");
-    	c.setDriverType("2");	
-    	c.setCompatibleMode("false");
-    	c.setSource("db");
-    	c.setDatabaseDisabled("false");
-		c.setHeadlessString("false");
-
 	
-		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public  void setSqlQuery() {
+		System.out.println("Inside QUERY");
+		//sets up default query
+				switch (function) {
+				case 1:	
+					 
+					 databaseSqlCount="select count(*) as total from rebill_regression ";
+				     databaseSqlQuery="select RESULT,	DESCRIPTION,	TEST_INPUT_NBR	,TIN_COUNT	,TRKNGNBR,	REASON_CODE	,BILL_ACCT_NBR	,INVOICE_NBR_1,	INVOICE_NBR_2	,REGION	,USERNAME,	PASSWORD,	RS_TYPE,	COMPANY	,rebill_prerate,	WORKABLE,	DEFECT_FLG,	DEFECT_NBR	,DEFECT_CONTACT from rebill_regression ";
+				    	
+				    	if (allCheckBox.equals("true")) {
+				    		databaseSqlCount+="where trkngnbr is not null";
+				    		databaseSqlQuery+="where trkngnbr is not null ";
+				    	}
+				    	
+				    	System.out.println(customCheckBox);
+				    	System.out.println(customString);
+				    	
+				    	if (customCheckBox.equals("false")) {
+				    	
+				    	if (allCheckBox.equals("false")) {
+				    		databaseSqlCount+="where ";
+				    		databaseSqlQuery+="where ";
+
+				    	if (nullCheckBox.equals("true") && failedCheckBox.equals("true")) {
+				    		databaseSqlCount+="(result is null or result ='fail') ";
+				    		databaseSqlQuery+="(result is null or result ='fail') ";
+				    	}
+				    	if (nullCheckBox.equals("true") && failedCheckBox.equals("false")) {
+				    		databaseSqlCount+="result is null ";
+				    		databaseSqlQuery+="result is null ";
+				    	}
+				    	if (nullCheckBox.equals("false") && failedCheckBox.equals("true")) {
+				    		databaseSqlCount+="result ='fail' ";
+				    		databaseSqlQuery+="result ='fail' ";
+				    	}
+				    	if (domesticCheckBox.equals("true") && internationalCheckBox.equals("false")) {
+				    		databaseSqlCount+="and rs_type='DM' ";
+				    		databaseSqlQuery+="and rs_type='DM' ";
+				    	}
+				    	if (internationalCheckBox.equals("true") && domesticCheckBox.equals("false")) {
+				    		databaseSqlCount+="and rs_type='IL' ";
+				    		databaseSqlQuery+="and rs_type='IL' ";
+				    	}
+				    	if (internationalCheckBox.equals("true") && domesticCheckBox.equals("true")) {
+				    		databaseSqlCount+="and rs_type in ('DM','IL')";
+				    		databaseSqlQuery+="and rs_type in ('DM','IL')";
+				    	}
+				    	
+				    	if (expressCheckBox.equals("true") && groundCheckBox.equals("false")) {
+				    		databaseSqlCount+="and company='EP' ";
+				    		databaseSqlQuery+="and company='EP' ";
+				    	}
+				    	if (groundCheckBox.equals("true") && expressCheckBox.equals("false")) {
+				    		databaseSqlCount+="and company='GD' ";
+				    		databaseSqlQuery+="and company='GD' ";
+				    	}
+				    	
+				    	if (groundCheckBox.equals("true") && expressCheckBox.equals("true")) {
+				    		databaseSqlCount+="and company in ('GD','EP') ";
+				    		databaseSqlQuery+="and company in ('GD','EP') ";
+				    	}
+				    	/*
+				    	if (eraWorkable.equals("true")) {
+				    		databaseSqlCount+="and workable='Y'";
+				    		databaseSqlQuery+="and workable='Y'";
+				    	}
+				    	*/
+				    		}
+				    			}
+				    	else if (customCheckBox.equals("true")){
+				    		databaseSqlCount+="where trkngnbr is not null and "+customString;
+				    		databaseSqlQuery+="where trkngnbr is not null and "+customString;
+				    	}
+				    	
+					 
+					 
+					 
+					 
+					 
+				break;
+				case 2:	
+					databaseSqlQuery="select result, description, test_input_nbr, rowcount, trkngnbr, reason_code, bill_acct_nbr,invoice_nbr_1, invoice_nbr_2,  region,  username,   password,  rs_Type, company from rebill_regression_mass ";
+					databaseSqlCount="select count(*) from  rebill_regression_mass ";
+				break;
+				case 3:	
+					databaseSqlQuery="select RESULT,	DESCRIPTION,	TEST_INPUT_NBR,	TIN_COUNT,	TRKNGNBR,	INVOICE_NBR_1	,INVOICE_NBR_2,	RATE_WEIGHT,	ACTUAL_WEIGHT,	WGT_TYPE,	LENGTH,	WIDTH,	HEIGHT	,WORKABLE,	DIM_TYPE,	PAYOR	,BILL_ACCT_NBR	,SERVICE_TYPE,	SERVICE_NAME,	PACKAGE_TYPE	,RERATE_TYPE,	REGION,	USERNAME,	PASSWORD,	RS_TYPE,	COMPANY,	VAL_DESC,	COMMENTS from era_rerate_view  ";
+					databaseSqlCount="select count(*) from  era_rerate_view  ";
+				break;
+				case 4:	
+					databaseSqlQuery="select  result,  DESCRIPTION, test_Input_Nbr, tin_Count, trkngnbr, invoice_Nbr_1, invoice_Nbr_2, region, username , password,  rate_weight,wgt_type,length,height,width,dim_type, rerate_type, rs_Type ,company  , mass_rerate_combo from era_rerate_mass ";
+					databaseSqlCount="select count(*) from  era_rerate_mass";
+				break;
+				case 5:	
+					databaseSqlQuery="select result, description, TEST_INPUT_NBR,	TIN_COUNT	,TRKNGNBR,	INVOICE_NBR_1,	INVOICE_NBR_2,	REGION,	USERNAME,	PASSWORD,	CREDIT_FLG,	DEBIT_FLG,	DISPUTE_FLG,	RESOLVE_CREDIT_FLG,	WORKABLE ,REASON_CODE,	REASON_CATEGORY, ROOT_CAUSE,VAL_DESC from era_credit_debit  ";
+					databaseSqlCount="select count(*) from  era_credit_debit ";
+				break;
+				case 6:	
+					databaseSqlQuery="select TEST_INPUT_NBR	,TRKNGNBR	,PAYOR_ACCT_NBR,	ITEM_PRCS_CD	,INSTNT_INV_FLG from instant_invoice_view   ";
+					databaseSqlCount="select count(*) from  instant_invoice_view ";
+				break;
+				case 7:	
+					databaseSqlQuery="select PRE_RATE_TYPE_CD, DESCRIPTION,POD_SCAN ,TIN_COUNT ,TEST_INPUT_NBR ,TRKNGNBR ,PRERATE_AMT, CURRENCY_CD, APPROVER_ID ,CHRG_CD1 ,CHRG_AMT1 ,CHRG_CD2 ,CHRG_AMT2 ,CHRG_CD3, CHRG_AMT3, CHRG_CD4, CHRG_AMT4 from prerate_view  ";
+					databaseSqlCount="select count(*) from  prerate_view ";
+				break;
+				case 8:	
+					databaseSqlQuery="select RESULT, DESCRIPTION,POD_SCAN,TEST_INPUT_NBR,TIN_COUNT,TRKNGNBR,TIN_COMMENT from prerate_hold_view  ";
+					databaseSqlCount="select count(*) from  prerate_hold_view ";
+				break;
+				case 9:	
+					databaseSqlQuery="select TEST_INPUT_NBR	,TIN_COUNT	,ACCT1,	ACCT2,	TRK_NO1,	TRK_NO2	,INVOICE_NBR_1,	INV_NO2,	SERVICE1,	SERVICE2,	REQUEST_TYPE,	ACCT_TYPE,	ACCNAME from rerate_master  ";
+					databaseSqlCount="select count(*) from  rerate_master ";
+				break;
+				
+				
+				}
+				
+				System.out.println(databaseSqlQuery);
+				System.out.println(databaseSqlCount);
+				
+				
+				
 		
 	}
+	
+
 }

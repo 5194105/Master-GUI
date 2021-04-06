@@ -41,7 +41,9 @@ public class driverClass {
     		System.out.println(c.getChromeProperty());
     		System.out.println(c.getChromePath());
     		System.setProperty(c.getChromeProperty(),c.getChromePath());
-    	if(headless.equals("true")) {
+    		driver = new ChromeDriver();
+    	/*
+    		if(headless.equals("true")) {
     		ChromeOptions options = new ChromeOptions();
     	    options.addArguments("headless");
     	    options.addArguments("window-size=1200x600");
@@ -50,7 +52,7 @@ public class driverClass {
     	else {
     		driver = new ChromeDriver();
     	}
-    		
+    		*/
     	}
     	
     	

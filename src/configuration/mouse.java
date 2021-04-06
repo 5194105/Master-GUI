@@ -29,6 +29,7 @@ import org.testng.xml.XmlClass;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
+import ThreadTest.base;
 import UD.UdExecution;
 import eraRerate.eraMassRerateTestNGSlow;
 import eraRerate.eraRerateTestNGSlow;
@@ -53,14 +54,12 @@ import instant_invoice.testNgSlowInstantInvoice;
 import prerate.prerateHoldTestNGSlow;
 import prerate.prerateTestNGSlow;
 import prerate.prerateUpload;
-import rebill.rebillMain;
+
 import rebill.testngMassRebillSlow;
 import rebill.testngRebillFast;
-import rebill.testngRebillSlow;
-import rebill.testngRebillSlowMfRetire;
+
 import rebill.updateRebillDb;
 import rebill_troubleshoot.rebillTroubleshoot;
-import rerate.abc;
 import rerate.rerateTestNgSlow;
 import testng.testingonly;
 public class mouse {
@@ -1041,8 +1040,12 @@ public void setupMouseListener() {
 				    			if (obj.getClass().getCanonicalName().equals("guis.rebillAutomationGui")) {
 				    				System.out.println("Booleans "+c.getLevel()+"      "+c.getSource());
 				    				if(c.getLevel()!=null && c.getSource()!=null) {
-				    					//JOptionPane.showMessageDialog(frame, "Started Rebill");
 				    					
+				    					base b = new base(c,1);
+				    					
+				    					//JOptionPane.showMessageDialog(frame, "Started Rebill");
+				    					/*
+				    					 * 
 				    					if(c.getEraMassRebill().equals("false")) {
 
 				    			    	String filepath=c.getExcelPath();
@@ -1120,14 +1123,7 @@ public void setupMouseListener() {
 				    				if(groundCheckBox==null) {
 				    					groundCheckBox="";
 				    				}
-				    				/*
-				    				if(normalCheckBox==null) {
-				    					normalCheckBox="";
-				    				}
-				    				if(mfRetireCheckBox==null) {
-				    					mfRetireCheckBox="";
-				    				}
-				    				*/
+				    			
 				    				if(sessionCount==null) {
 				    					sessionCount="";
 				    				}
@@ -1149,17 +1145,7 @@ public void setupMouseListener() {
 				    				if(eraWorkable==null) {
 				    					eraWorkable="false";
 				    				}
-				    				
-				    		/*
-				    				@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox",
-				    				"failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox",
-				    				"sessionCount","customString","customCheckBox","databaseDisabled"})
-				    			
-				    				public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,
-				    				String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,
-				    				String sessionCount,String customString,String customCheckBox,String databaseDisabled) {
-				    				
-				    					*/
+				    	
 				    		        XmlSuite xmlSuite = new XmlSuite();
 				    		        xmlSuite.setName("Sample_Suite");
 				    		        Map<String, String> fieldValues = new HashMap<>();
@@ -1268,14 +1254,7 @@ public void setupMouseListener() {
 				    				if(groundCheckBox==null) {
 				    					groundCheckBox="";
 				    				}
-				    				/*
-				    				if(normalCheckBox==null) {
-				    					normalCheckBox="";
-				    				}
-				    				if(mfRetireCheckBox==null) {
-				    					mfRetireCheckBox="";
-				    				}
-				    				*/
+				    			
 				    				if(sessionCount==null) {
 				    					sessionCount="";
 				    				}
@@ -1298,16 +1277,7 @@ public void setupMouseListener() {
 				    					eraWorkable="false";
 				    				}
 				    				
-				    		/*
-				    				@Parameters({"filepath","level","browser","compatibleMode","source","allCheckBox","nullCheckBox",
-				    				"failedCheckBox","domesticCheckBox","internationalCheckBox","expressCheckBox","groundCheckBox",
-				    				"sessionCount","customString","customCheckBox","databaseDisabled"})
-				    			
-				    				public void setupExcel(String filepath,String level,String browser,String compatibleMode,String source,String allCheckBox,String nullCheckBox,
-				    				String failedCheckBox,String domesticCheckBox,String internationalCheckBox,String expressCheckBox,String groundCheckBox,
-				    				String sessionCount,String customString,String customCheckBox,String databaseDisabled) {
-				    				
-				    					*/
+				    	
 				    		        XmlSuite xmlSuite = new XmlSuite();
 				    		        xmlSuite.setName("Sample_Suite");
 				    		        Map<String, String> fieldValues = new HashMap<>();
@@ -1343,7 +1313,7 @@ public void setupMouseListener() {
 					    		        
 					    		        
 					    		        
-					    		        
+					    		        */
 				    					
 				    				}
 				    				else {
@@ -1351,6 +1321,12 @@ public void setupMouseListener() {
 				    					
 				    				}
 				    			}
+				    			
+				    			
+				    			
+				    			
+				    			
+				    			
 				    			
 				    			if (obj.getClass().getCanonicalName().equals("guis.udAutomation")) {
 					    			//DO UD STUFF
