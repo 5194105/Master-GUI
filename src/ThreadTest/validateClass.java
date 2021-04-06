@@ -9,7 +9,7 @@ import java.sql.Statement;
 import configuration.config;
 
 public class validateClass {
-	Boolean result=false,oracleBoolean=false,eraBoolean=false;
+	Boolean result=false,oracleBoolean=false,eraBoolean=false,prerateBoolean=false;
 	String databaseDisabled,flag;
 	config c;
 	
@@ -43,6 +43,68 @@ public class validateClass {
 			 }
 		return result;
 	}
+	
+	
+	public Boolean validateRerate(String testInputNbr,String tinCount,String trkngnbr) {
+		oracleBoolean=false;
+		if (databaseDisabled.equals("false")) {
+			searchOracleDB("select * from apps.xxfdx_eabr_airbill_notes_v where AIRBILL_NUMBER="+trkngnbr,testInputNbr,tinCount,trkngnbr);
+			
+		}
+		return oracleBoolean;
+		
+	}
+	
+	
+	
+	
+	
+	/////////////////////PRERATE
+	
+	public Boolean validatePrerate(String testInputNbr,String tinCount,String trkngnbr) {
+		prerateBoolean=false;
+		
+		if (databaseDisabled.equals("false")) {
+			searchEcDB("select * from ec_intl_schema.ec_pre_rate_history where pkg_trkng_nbr ="+trkngnbr,testInputNbr,tinCount,trkngnbr);
+			}
+		return prerateBoolean;
+	}
+	
+	
+	
+	
+	
+	public void searchEcDB(String sqlQuery,String testInputNbr,String tinCount,String trkngnbr) {
+		Connection con=null;
+		Statement stmt=null;
+		ResultSet rs=null;
+		try {
+			con=c.getEcL3DbConnection();
+			stmt=con.createStatement();
+			rs=stmt.executeQuery(sqlQuery);
+			String finalResult="";
+			String finalDesc="";
+			
+			if (rs.next()==false){
+			      System.out.println("Is NULL");
+			      prerateBoolean=false;   
+			}
+			   else{
+			      System.out.println("IS NOT NULL");
+			      prerateBoolean=true;
+			      finalResult="pass";
+            	  finalDesc="completed";
+			      writeToDbPrerate(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc);
+			   }
+		}
+			catch(Exception e) {
+				System.out.println(e);
+			}
+	}
+	
+	
+	
+	
 
 public void searchEraDB(String sqlQuery,String testInputNbr,String tinCount,String trkngnbr,int methodNumber) {
 	Connection con=null;
@@ -98,7 +160,7 @@ public void searchEraDB(String sqlQuery,String testInputNbr,String tinCount,Stri
 		}
 	}
 	catch(Exception e) {
-		
+		System.out.println(e);
 	}
 	try {
 	//	con.close();
@@ -156,7 +218,7 @@ public void searchOracleDB(String sqlQuery,String testInputNbr,String tinCount,S
 
 
 
-public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String finalResult,String  finalDesc,String requestID) {
+public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String finalResult,String finalDesc,String requestID) {
 	if (databaseDisabled.equals("true")) {
 	Connection con=null;
 	try {
@@ -195,6 +257,62 @@ public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String
 		stmt.setString(3,flag);
 		stmt.setString(4,"Y");
 		stmt.setString(5,trkngnbr); 
+		stmt.executeUpdate();
+		
+}
+catch(Exception e) {
+	System.out.println(e);
+}
+	
+	try {
+	//	con.close();
+	//	stmt.close();
+		
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+}
+}
+
+
+
+
+public void writeToDbPrerate(String testInputNbr,String tinCount,String trkngnbr,String finalResult,String finalDesc) {
+	if (databaseDisabled.equals("true")) {
+	Connection con=null;
+	try {
+		con = c.getGtmRevToolsConnection();
+	} catch (ClassNotFoundException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+
+	PreparedStatement stmt = null;
+	
+
+	try {
+	    stmt=con.prepareStatement("insert into gtm_rev_tools.prerate_results (test_input_nbr,tin_count,trkngnbr,result,description) values (?,?,?,?,?)");  
+		stmt.setString(1,testInputNbr);  
+		stmt.setString(2,tinCount);  
+		stmt.setString(3,trkngnbr);  
+		stmt.setString(4,finalResult);  
+		stmt.setString(5,finalDesc);  
+		  
+		stmt.executeUpdate();
+	}
+	catch(Exception e) {
+		System.out.println(e);
+	}
+	
+	
+	
+	try {
+		stmt=con.prepareStatement("update prerate_results set result=?,description=? where trkngnbr=?");  
+		stmt.setString(1,finalResult);  
+		stmt.setString(2,finalDesc); 
+		stmt.setString(3,trkngnbr); 
 		stmt.executeUpdate();
 		
 }

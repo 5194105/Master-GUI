@@ -2,7 +2,7 @@ package eraRerate;
 
 
 
-import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,12 +13,10 @@ import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
 import configuration.config;
-import rebill.rebillData;
-import rebill.testngRebillSlowMfRetire;
+
 
 public class eraRerateManualTest {
 
-	static ArrayList<rebillData> rebillDataArray= new ArrayList<rebillData>();
     public static void main(String[] args) {
     	config c = new config();
        	c.setExcelPath("C:\\Users\\FedExUser\\Documents\\rebill.xlsx");

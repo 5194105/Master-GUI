@@ -1,6 +1,5 @@
 package prerate;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,12 +11,10 @@ import org.testng.xml.XmlTest;
 
 import configuration.config;
 import configuration.importData;
-import rebill.rebillData;
-import rebill.testngRebillSlowMfRetire;
+
 
 public class runPrerateManually {
 
-	static ArrayList<rebillData> rebillDataArray= new ArrayList<rebillData>();
     public static void main(String[] args) {
     	importData id = new importData();
     	config c = id.getConfig();

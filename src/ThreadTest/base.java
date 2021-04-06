@@ -78,7 +78,7 @@ public class base {
 				//	threadArray.add(new massRebillThread(dataArrayPartition,c));
 					break;
 					case 3:	
-				//	threadArray.add(new singleRerateThread(dataArrayPartition,c));
+					threadArray.add(new singleRerateThread(dataArrayPartition,c));
 					break;
 					case 4:	
 				//	threadArray.add(new massRerateThread(dataArrayPartition,c));
@@ -90,7 +90,7 @@ public class base {
 				//	threadArray.add(new instantInvoiceThread(dataArrayPartition,c));
 					break;
 					case 7:	
-				//	threadArray.add(new prerateSingleThread(dataArrayPartition,c));
+					threadArray.add(new prerateThread(dataArrayPartition,c));
 					break;
 					case 8:	
 				//	threadArray.add(new prerateHoldThread(dataArrayPartition,c));
@@ -177,9 +177,21 @@ public class base {
             	
             	 
             	 while(rs.next()) {
-            		 tempCounter++;
+            		tempCounter++;
+            		switch(function) {
+            		case 1:
             		dataArray.add(new data(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16),rs.getString(17),rs.getString(18),tempCounter));	
-            		 }
+            		break;
+            		
+            		case 3:
+                		dataArray.add(new data(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16),rs.getString(17),rs.getString(18),rs.getString(19),rs.getString(20),rs.getString(21),rs.getString(22),rs.getString(23),rs.getString(24),rs.getString(25),rs.getString(26),rs.getString(27),rs.getString(28),tempCounter));	
+                		break;
+            		
+            		case 7:
+                	dataArray.add(new data(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16),rs.getString(17),tempCounter));	
+                	break;
+            		}
+            		}
             	
         	}
         	catch(Exception e) {
@@ -333,9 +345,79 @@ public class base {
 					databaseSqlQuery="select result, description, test_input_nbr, rowcount, trkngnbr, reason_code, bill_acct_nbr,invoice_nbr_1, invoice_nbr_2,  region,  username,   password,  rs_Type, company from rebill_regression_mass ";
 					databaseSqlCount="select count(*) from  rebill_regression_mass ";
 				break;
+				
+				//Single ERA Rerate
 				case 3:	
-					databaseSqlQuery="select RESULT,	DESCRIPTION,	TEST_INPUT_NBR,	TIN_COUNT,	TRKNGNBR,	INVOICE_NBR_1	,INVOICE_NBR_2,	RATE_WEIGHT,	ACTUAL_WEIGHT,	WGT_TYPE,	LENGTH,	WIDTH,	HEIGHT	,WORKABLE,	DIM_TYPE,	PAYOR	,BILL_ACCT_NBR	,SERVICE_TYPE,	SERVICE_NAME,	PACKAGE_TYPE	,RERATE_TYPE,	REGION,	USERNAME,	PASSWORD,	RS_TYPE,	COMPANY,	VAL_DESC,	COMMENTS from era_rerate_view  ";
-					databaseSqlCount="select count(*) from  era_rerate_view  ";
+					 databaseSqlCount="select count(*) as total from era_rerate_view where trkngnbr is not null ";
+			    	 databaseSqlQuery="select RESULT,	DESCRIPTION,	TEST_INPUT_NBR,	TIN_COUNT,	TRKNGNBR,	INVOICE_NBR_1	,INVOICE_NBR_2,	RATE_WEIGHT,	ACTUAL_WEIGHT,	WGT_TYPE,	LENGTH,	WIDTH,	HEIGHT	,WORKABLE,	DIM_TYPE,	PAYOR	,BILL_ACCT_NBR	,SERVICE_TYPE,	SERVICE_NAME,	PACKAGE_TYPE	,RERATE_TYPE,	REGION,	USERNAME,	PASSWORD,	RS_TYPE,	COMPANY,	VAL_DESC,	COMMENTS from era_rerate_view where trkngnbr is not null ";
+			    	
+			    	if (allCheckBox.equals("true")) {
+			    		databaseSqlCount+="where trkngnbr is not null";
+			    		databaseSqlQuery+="where trkngnbr is not null ";
+			    	}
+			    	
+			    	System.out.println(customCheckBox);
+			    	System.out.println(customString);
+			    	
+			    	if (customCheckBox.equals("false")) {
+			    	
+			    	if (allCheckBox.equals("false")) {
+			    		databaseSqlCount+="and ";
+			    		databaseSqlQuery+="and ";
+			    	
+			    	
+			    	
+			    	
+			    	if (nullCheckBox.equals("true") && failedCheckBox.equals("true")) {
+			    		databaseSqlCount+="(result is null or result ='fail') ";
+			    		databaseSqlQuery+="(result is null or result ='fail') ";
+			    	}
+			    	if (nullCheckBox.equals("true") && failedCheckBox.equals("false")) {
+			    		databaseSqlCount+="result is null ";
+			    		databaseSqlQuery+="result is null ";
+			    	}
+			    	if (nullCheckBox.equals("false") && failedCheckBox.equals("true")) {
+			    		databaseSqlCount+="result ='fail' ";
+			    		databaseSqlQuery+="result ='fail' ";
+			    	}
+			    	if (domesticCheckBox.equals("true") && internationalCheckBox.equals("false")) {
+			    		databaseSqlCount+="and rs_type='DM' ";
+			    		databaseSqlQuery+="and rs_type='DM' ";
+			    	}
+			    	if (internationalCheckBox.equals("true") && domesticCheckBox.equals("false")) {
+			    		databaseSqlCount+="and rs_type='IL' ";
+			    		databaseSqlQuery+="and rs_type='IL' ";
+			    	}
+			    	if (internationalCheckBox.equals("true") && domesticCheckBox.equals("true")) {
+			    		databaseSqlCount+="and rs_type in ('DM','IL')";
+			    		databaseSqlQuery+="and rs_type in ('DM','IL')";
+			    	}
+			    	
+			    	if (expressCheckBox.equals("true") && groundCheckBox.equals("false")) {
+			    		databaseSqlCount+="and company='EP' ";
+			    		databaseSqlQuery+="and company='EP' ";
+			    	}
+			    	if (groundCheckBox.equals("true") && expressCheckBox.equals("false")) {
+			    		databaseSqlCount+="and company='GD' ";
+			    		databaseSqlQuery+="and company='GD' ";
+			    	}
+			    	
+			    	if (groundCheckBox.equals("true") && expressCheckBox.equals("true")) {
+			    		databaseSqlCount+="and company in ('GD','EP') ";
+			    		databaseSqlQuery+="and company in ('GD','EP') ";
+			    	}
+			    	if (eraWorkable.equals("true")) {
+			    		databaseSqlCount+="and workable='Y'";
+			    		databaseSqlQuery+="and workable='Y'";
+			    	}
+			    	
+			    		}
+			    			}
+			    	else if (customCheckBox.equals("true")){
+			    		databaseSqlCount+=" and "+customString;
+			    		databaseSqlQuery+=" and "+customString;
+			    	}
+			       	
 				break;
 				case 4:	
 					databaseSqlQuery="select  result,  DESCRIPTION, test_Input_Nbr, tin_Count, trkngnbr, invoice_Nbr_1, invoice_Nbr_2, region, username , password,  rate_weight,wgt_type,length,height,width,dim_type, rerate_type, rs_Type ,company  , mass_rerate_combo from era_rerate_mass ";
@@ -349,10 +431,44 @@ public class base {
 					databaseSqlQuery="select TEST_INPUT_NBR	,TRKNGNBR	,PAYOR_ACCT_NBR,	ITEM_PRCS_CD	,INSTNT_INV_FLG from instant_invoice_view   ";
 					databaseSqlCount="select count(*) from  instant_invoice_view ";
 				break;
+			
+				//Prerate Single
 				case 7:	
-					databaseSqlQuery="select PRE_RATE_TYPE_CD, DESCRIPTION,POD_SCAN ,TIN_COUNT ,TEST_INPUT_NBR ,TRKNGNBR ,PRERATE_AMT, CURRENCY_CD, APPROVER_ID ,CHRG_CD1 ,CHRG_AMT1 ,CHRG_CD2 ,CHRG_AMT2 ,CHRG_CD3, CHRG_AMT3, CHRG_CD4, CHRG_AMT4 from prerate_view  ";
-					databaseSqlCount="select count(*) from  prerate_view ";
+					
+					
+					
+					 databaseSqlCount="select count(*) as total from prerate_view ";
+				  	 databaseSqlQuery="select result,description,TEST_INPUT_NBR,TIN_COUNT ,TRKNGNBR ,PRE_RATE_TYPE_CD,PRERATE_AMT, CURRENCY_CD, APPROVER_ID ,CHRG_CD1 ,CHRG_AMT1 ,CHRG_CD2 ,CHRG_AMT2 ,CHRG_CD3, CHRG_AMT3, CHRG_CD4, CHRG_AMT4 from prerate_view ";
+				    
+				    	if (allCheckBox.equals("false")) {
+				    		databaseSqlCount+="where trkngnbr is not null and ";
+				    		databaseSqlQuery+="where trkngnbr is not null and ";
+				    	}
+				    
+				    	 if (allCheckBox.equals("true")) {
+				     		databaseSqlCount+="where trkngnbr is not null  ";
+				     		databaseSqlQuery+="where trkngnbr is not null   ";
+				     	}
+				    	if (nullCheckBox.equals("true") && failedCheckBox.equals("true")) {
+				    		databaseSqlCount+="(result is null or result ='fail') ";
+				    		databaseSqlQuery+="(result is null or result ='fail') ";
+				    	}
+				    	if (nullCheckBox.equals("true") && failedCheckBox.equals("false")) {
+				    		databaseSqlCount+="result is null ";
+				    		databaseSqlQuery+="result is null ";
+				    	}
+				    	if (nullCheckBox.equals("false") && failedCheckBox.equals("true")) {
+				    		databaseSqlCount+="result ='fail' ";
+				    		databaseSqlQuery+="result ='fail' ";
+				    
+				    	}
+				       	
+				    	
 				break;
+				
+				
+				
+				
 				case 8:	
 					databaseSqlQuery="select RESULT, DESCRIPTION,POD_SCAN,TEST_INPUT_NBR,TIN_COUNT,TRKNGNBR,TIN_COMMENT from prerate_hold_view  ";
 					databaseSqlCount="select count(*) from  prerate_hold_view ";
