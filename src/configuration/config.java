@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 public class config {
 	
-	Connection rtmCon,gtmRevToolsCon,ciCon,oreL2Con,oreL3Con,ecL2Con,ecL3Con,eraL2Con,eraL3Con,oracleARL3Con;
+	Connection rtmCon,gtmRevToolsCon,ciCon,oreL2Con,doreL3Con,ioreL3Con,ecL2Con,ecL3Con,eraL2Con,eraL3Con,oracleARL3Con;
 	String chromeSetProperty,ieSetProperty,chromePath,ieDriverPath;
 	WebDriver ieDriver,chromeDriver,tempWebDriver;
     String gtmDbUsername,gtmDbResults,gtmDbPassword,retryAttempts,secondTimeout,rebillL2URL,rebillL3URL;
@@ -559,9 +559,7 @@ public void setEraRerateRetryAttempts(String eraRerateRetryAttempts) {
 		return oreL2Con;
 	}
 
-	public Connection getOreL3Con() {
-		return oreL3Con;
-	}
+	
 
 	public Connection getEcL2Con() {
 		return ecL2Con;
@@ -930,7 +928,6 @@ public void setFlavour(String flavour) {
 public void setGtmRevToolsConnection(String username,String password) {
 		
 		try {
-			
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			gtmRevToolsCon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com",username,password);
 		} catch (SQLException | ClassNotFoundException e) {
@@ -939,6 +936,18 @@ public void setGtmRevToolsConnection(String username,String password) {
 		}
 		
 	}
+
+public void setGtmRevToolsConnection() {
+	
+	try {
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		gtmRevToolsCon=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
+	} catch (SQLException | ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+}
 
 
 	
@@ -1012,12 +1021,14 @@ public Connection getOreL2DbConnection() {
 
 
 
-public void setOreL3DbConnection(String username,String password) {
+public void setDoreL3DbConnection(String username,String password) {
 	
 	try {
 		
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		oreL3Con=DriverManager.getConnection("jdbc:oracle:thin:@//sdb00261.ute.fedex.com:1526/PT1VD925",username,password);
+		Class.forName("oracle.jdbc.OracleDriver");
+		
+		
+		doreL3Con=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/PT1DORE,cn=OracleContext,dc=ute,dc=fedex,dc=com","test_readonly","perftest");
 			} catch (SQLException | ClassNotFoundException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -1025,9 +1036,29 @@ public void setOreL3DbConnection(String username,String password) {
 	//return ciCon;
 }
 
-public Connection getOreL3DbConnection() {
 
-	return oreL3Con;
+
+public void setIoreL3DbConnection(String username,String password) {
+	
+	try {
+		
+		Class.forName("oracle.jdbc.OracleDriver");
+		ioreL3Con=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/PT1IORE,cn=OracleContext,dc=ute,dc=fedex,dc=com","test_readonly","perftest");
+			} catch (SQLException | ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	//return ciCon;
+}
+
+public Connection getDoreL3DbConnection() {
+
+	return doreL3Con;
+}
+
+public Connection getIoreL3DbConnection() {
+
+	return ioreL3Con;
 }
 
 

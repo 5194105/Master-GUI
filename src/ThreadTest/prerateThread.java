@@ -18,7 +18,7 @@ import org.testng.Assert;
 
 import configuration.config;
 
-public class prerateThread {
+public class prerateThread extends Thread{
 	ArrayList<data> dataArray;
 	config c;
 	String homePath;
@@ -72,7 +72,7 @@ public class prerateThread {
 			this.chrgCd4=d.getChrgCd4();
 			this.chrgAmt4=d.getChrgAmt4();
 			
-			
+			System.out.println(chrgCd3);
 			
 			//Check if track is already successful
 			
@@ -116,15 +116,19 @@ public class prerateThread {
 			driver.findElement(By.id("submit")).click();
 			}
     	catch(Exception e) {
-    		
-    		 Assert.fail("Could Not Login");
+    		vc.writeToDbPrerate(testInputNbr,tinCount,trkngnbr,"fail","Could not login");
+    		System.out.println("Could not login");
     	}
     }
     
     
     
   public void doPrerate(String result,String description,String testInputNbr,String tinCount,String trkngnbr,String prerateTypeCd,String  prerateAmt,String currencyCd,String approvalId,String chrgCd1,String chrgAmt1,String chrgCd2, String chrgAmt2,String chrgCd3,String chrgAmt3,String  chrgCd4,String chrgAmt4) throws InterruptedException {
-    	login();
+	  maxAttempts=2;
+	  String [] resultArray = new String[2];
+	  for (int i=0;i<maxAttempts;i++) {
+	  System.out.println("Attempt Number :"+(i+1));
+		login();
     	WebElement element;
     	JavascriptExecutor Executor;
     	JavascriptExecutor Executor1;
@@ -154,13 +158,15 @@ public class prerateThread {
     		System.out.println(e);
     		
     		
-    		String[] resultArray =checkFailure(trkngnbr);
-			if (resultArray[1].equals("")) {
-				resultArray[1]="Failed on Home Page";
+    		resultArray =checkFailure(trkngnbr);
+			if (!resultArray[0].equals("")) {
+				vc.writeToDbPrerate(testInputNbr,tinCount,trkngnbr,resultArray[0],resultArray[1]);
+				return;
 			}
-			
-			vc.writeToDbPrerate(testInputNbr,tinCount,trkngnbr,resultArray[0],resultArray[1]);
-			 return;
+			else {
+			vc.writeToDbPrerate(testInputNbr,tinCount,trkngnbr,"fail","failed on homepage");
+			}
+			 continue;
     		}
 		
     	try{
@@ -206,27 +212,28 @@ public class prerateThread {
 				dropDownError=By.xpath("/html/body/form[1]/div[1]/div/table/tbody/tr[5]/td/span/div/div/table/tbody/tr/td/div/div/div/div[2]/table/tbody/tr/td[3]/div/span");
 				errorMessage=driver.findElement(dropDownError).getText();
 				//writeToExcel(rowNumber,1, errorMessage);
-				String[] resultArray =checkFailure(trkngnbr);
-				if (resultArray[1].equals("")) {
-					resultArray[1]="Failed on Home Page";
-				}
+				
+				
+					resultArray[0]="fail";
+					resultArray[1]="Failed on prerate Page";
+				
 				
 				vc.writeToDbPrerate(testInputNbr,tinCount,trkngnbr,resultArray[0],resultArray[1]);
 				 
-				 return;
+				 continue;
 				}
 			catch(Exception ee) {
 				System.out.println("Didnt find error message from dropdown menu...");
 			
-					String[] resultArray =checkFailure(trkngnbr);
-					if (resultArray[1].equals("")) {
+					
+						resultArray[0]="fail";
 						resultArray[1]="Failed selecting dropdown menu...";
-					}
+					
 					
 					
 					vc.writeToDbPrerate(testInputNbr,tinCount,trkngnbr,resultArray[0],resultArray[1]);
 					
-					 return;
+					continue;
 			}
 			
 		}
@@ -264,20 +271,20 @@ public class prerateThread {
 	
 		}
 		catch(Exception e) {
-			
+			System.out.println(e);
 			 if (vc.validatePrerate(testInputNbr,tinCount,trkngnbr)==true) {
 				// writeToExcel(rowNumber,1, "pass");
 				 return;
 			 }
 		// writeToExcel(rowNumber,1, "Failed on the input menu...");
 			 
-			 String[] resultArray =checkFailure(trkngnbr);
-				if (resultArray[1].equals("")) {
+			 
+				resultArray[0]="fail";
 					resultArray[1]="Failed on the input menu...";
-				}
+				
 				
 			 vc.writeToDbPrerate(testInputNbr,tinCount,trkngnbr,resultArray[0],resultArray[1]);
-			 return;
+			 continue;
 		
 		}
 		
@@ -317,14 +324,15 @@ public class prerateThread {
 						 return;
 					 }
 					
-					 String[] resultArray =checkFailure(trkngnbr);
-						if (resultArray[1].equals("")) {
-							 resultArray[1]="Override Disabled";
-						}
+					 
+					
+							resultArray[0]="fail";
+							resultArray[1]="Override Disabled";
+						
 					
 						vc.writeToDbPrerate(testInputNbr,tinCount,trkngnbr,resultArray[0],resultArray[1]);
 					
-						 return;
+						return;
 				}
 				
 			}
@@ -371,15 +379,10 @@ public class prerateThread {
 			 
 			
 			
-			 String[] resultArray = new String[2];
-			 if (errorMessage.equals("")|| errorMessage == null) {
-			  resultArray =checkFailure(trkngnbr);
-				if (resultArray[1].equals("")) {
-					 resultArray[1]=errorMessage;
-				}
-				}
-			 else
-			 {
+			
+			 if (!errorMessage.equals("")|| errorMessage != null) {
+			 
+			
 				 resultArray[0]="fail";
 				 resultArray[1]=errorMessage;
 				 
@@ -387,7 +390,7 @@ public class prerateThread {
 			
 		    vc.writeToDbPrerate(testInputNbr,tinCount,trkngnbr,resultArray[0],resultArray[1]);
 			 
-		    return;
+		    continue;
 
 		}
 			catch(Exception e) {
@@ -410,14 +413,14 @@ public class prerateThread {
 			}
 			
 			 
-			 String[] resultArray =checkFailure(trkngnbr);
-				if (resultArray[1].equals("")) {
+			 
+					 resultArray[0]="fail";
 					 resultArray[1]=errorMessage;
-				}
+				
 			
 				vc.writeToDbPrerate(testInputNbr,tinCount,trkngnbr,resultArray[0],resultArray[1]);
 			 
-			return;
+				continue;
 		}
 			catch(Exception e) {
 				System.out.println("Did not find either upper or lower error");	
@@ -436,15 +439,15 @@ public class prerateThread {
 			 
 			}
 			
-			 String[] resultArray =checkFailure(trkngnbr);
-				if (resultArray[1].equals("")) {
+			 
+					resultArray[0]="fail";
 					 resultArray[1]="Failed Somewhere... No Error Found Tho";
-				}
+				
 		
 		
 				vc.writeToDbPrerate(testInputNbr,tinCount,trkngnbr,resultArray[0],resultArray[1]);
 			 
-				return;
+				continue;
 		
 		}
 		catch (NoSuchElementException a){
@@ -452,6 +455,7 @@ public class prerateThread {
 		}
 
 }
+	  }
   
   
   
@@ -520,8 +524,8 @@ where pkg_trkng_nbr ='582838858029';
 	       try {
 			if (rs.next()==false){
 			      System.out.println("Is NULL");
-			      resultArray[0]="fail"; 
-			      resultArray[1]="Result Not Found";
+			      resultArray[0]=""; 
+			      resultArray[1]="";
 			}
 			   else{
 			      

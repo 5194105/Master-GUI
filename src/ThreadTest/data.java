@@ -220,6 +220,15 @@ public class data {
 		this.acctName=acctName;
 	}
 	
+	//Instant Invoice Device
+	public data(String trkngnbr, String payorAcctNbr,String username,String password, int counter) {
+		this.trkngnbr=trkngnbr;
+		this.payorAcctNbr=payorAcctNbr;
+		this.username=username;
+		this.password=password;
+		this.counter=counter;
+		
+	}
 	
 	public String getServiceName() {
 		return serviceName;

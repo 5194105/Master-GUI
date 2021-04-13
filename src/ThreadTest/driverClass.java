@@ -17,12 +17,28 @@ import configuration.config;
 public class driverClass {
 	WebDriver driver=null;
 	config c;
+	String browser;
+	String headless;
+	String compatibleMode;
+	String homePath;
+	String levelUrl;
+	int waitTime;
 	public driverClass(config c,String levelUrl,int waitTime) {
 		this.c=c;
-		String browser=c.getDriverType();
-		String headless=c.getHeadlessString();
-		String compatibleMode=c.getCompatibleMode();
-		String homePath=System.getProperty("user.dir");
+		this.levelUrl=levelUrl;
+		this.waitTime=waitTime;
+		browser=c.getDriverType();
+		headless=c.getHeadlessString();
+		compatibleMode=c.getCompatibleMode();
+		homePath=System.getProperty("user.dir");
+		
+		
+	}
+	
+	
+	
+public void setDriver() {
+		
 		if (browser.equals("1")) {
     		if (compatibleMode.equals("true")) {	
     			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
@@ -32,14 +48,16 @@ public class driverClass {
     		    capabilities.setCapability("ignoreProtectedModeSettings", true);
     		    capabilities.setCapability("initialBrowserUrl",levelUrl);
     		}
+    		
+    		System.out.println(c.getIeProperty()+"     "+c.getIeDriverPath());
     		System.setProperty(c.getIeProperty(), c.getIeDriverPath());
     		driver =  new InternetExplorerDriver();
     	}
     	
     	
     	else if (browser.equals("2")) {
-    		System.out.println(c.getChromeProperty());
-    		System.out.println(c.getChromePath());
+    		//System.out.println(c.getChromeProperty());
+    		//System.out.println(c.getChromePath());
     		System.setProperty(c.getChromeProperty(),c.getChromePath());
     		driver = new ChromeDriver();
     	/*
@@ -74,6 +92,7 @@ public class driverClass {
 	}
 	
 	public WebDriver getDriver() {
+		setDriver();
 		return driver;
 	}
 	

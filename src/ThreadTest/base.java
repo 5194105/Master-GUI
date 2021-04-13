@@ -16,7 +16,7 @@ public class base {
 	 int [][]minxMaxArray;
 	 ArrayList<Object> threadArray= new ArrayList<Object>();
 	//static ArrayList<rebillThread> singleRebillThreadArray= new ArrayList<rebillThread>();
-	
+	int  dbVal=1;
 	 config c;
 	String allCheckBox,customCheckBox,customString,nullCheckBox,failedCheckBox,domesticCheckBox,internationalCheckBox,expressCheckBox,groundCheckBox,eraWorkable,databaseSqlCount,databaseSqlQuery;
 	//public static void main(String args[]) {
@@ -40,9 +40,14 @@ public class base {
 		// 7 Prerate Single
 		// 8 Prerate Hold
 		// 9 PRS Rerate
-		
+		// 10 Instant Invoice Device
 		
 	
+		//DbVal 
+		// 1 GTM
+		// 2 RTM
+		dbVal=1;
+		
 		setSqlQuery();
 		//Stores data to a data object then puts it in array
 		getDataDb();
@@ -84,7 +89,7 @@ public class base {
 				//	threadArray.add(new massRerateThread(dataArrayPartition,c));
 					break;
 					case 5:	
-				//	threadArray.add(new creditDebitThread(dataArrayPartition,c));
+					threadArray.add(new creditDebitThread(dataArrayPartition,c));
 					break;
 					case 6:	
 				//	threadArray.add(new instantInvoiceThread(dataArrayPartition,c));
@@ -97,6 +102,9 @@ public class base {
 					break;
 					case 9:	
 				//	threadArray.add(new prsRerateThread(dataArrayPartition,c));
+					break;
+					case 10:	
+					threadArray.add(new instantInvoiceThread(dataArrayPartition,c));
 					break;
 	}
 			}
@@ -160,7 +168,12 @@ public class base {
 	public  void getDataDb() {
 		Connection con=null;
 		try {
-			con=c.getGtmRevToolsConnection();		
+			if (dbVal==1) {
+			con=c.getGtmRevToolsConnection();
+			}
+			if (dbVal==2) {
+				con=c.getRtmCon();
+				}
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -187,10 +200,20 @@ public class base {
                 		dataArray.add(new data(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16),rs.getString(17),rs.getString(18),rs.getString(19),rs.getString(20),rs.getString(21),rs.getString(22),rs.getString(23),rs.getString(24),rs.getString(25),rs.getString(26),rs.getString(27),rs.getString(28),tempCounter));	
                 		break;
             		
+                		
+            		case 5:
+                    	dataArray.add(new data(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16),rs.getString(17),rs.getString(18),rs.getString(19),tempCounter));	
+                    	break;
+                		
             		case 7:
-                	dataArray.add(new data(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16),rs.getString(17),tempCounter));	
-                	break;
-            		}
+            			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),nullCheck(rs.getString(8)),nullCheck(rs.getString(9)),nullCheck(rs.getString(10)),nullCheck(rs.getString(11)),nullCheck(rs.getString(12)),nullCheck(rs.getString(13)),nullCheck(rs.getString(14)),nullCheck(rs.getString(15)),nullCheck(rs.getString(16)),nullCheck(rs.getString(17)),tempCounter));	
+            		     	break;
+            		
+            		
+            	 case 10:
+         			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),"5194105","5194105",tempCounter));	
+         		     	break;
+         		}
             		}
             	
         	}
@@ -234,7 +257,12 @@ public class base {
 	
 	
 	
-	
+	public String nullCheck(String temp) {
+		if (temp==null){
+			temp="";
+		}
+		return temp;
+	}
 	
 	
 	
@@ -423,9 +451,82 @@ public class base {
 					databaseSqlQuery="select  result,  DESCRIPTION, test_Input_Nbr, tin_Count, trkngnbr, invoice_Nbr_1, invoice_Nbr_2, region, username , password,  rate_weight,wgt_type,length,height,width,dim_type, rerate_type, rs_Type ,company  , mass_rerate_combo from era_rerate_mass ";
 					databaseSqlCount="select count(*) from  era_rerate_mass";
 				break;
+				
+				
+				//Credit Debit
 				case 5:	
-					databaseSqlQuery="select result, description, TEST_INPUT_NBR,	TIN_COUNT	,TRKNGNBR,	INVOICE_NBR_1,	INVOICE_NBR_2,	REGION,	USERNAME,	PASSWORD,	CREDIT_FLG,	DEBIT_FLG,	DISPUTE_FLG,	RESOLVE_CREDIT_FLG,	WORKABLE ,REASON_CODE,	REASON_CATEGORY, ROOT_CAUSE,VAL_DESC from era_credit_debit  ";
-					databaseSqlCount="select count(*) from  era_credit_debit ";
+					 databaseSqlCount="select count(*) as total from era_credit_debit ";
+					 databaseSqlQuery="select result, description, TEST_INPUT_NBR,	TIN_COUNT	,TRKNGNBR,	INVOICE_NBR_1,	INVOICE_NBR_2,	REGION,	USERNAME,	PASSWORD,	CREDIT_FLG,	DEBIT_FLG,	DISPUTE_FLG,	RESOLVE_CREDIT_FLG,	WORKABLE ,REASON_CODE,	REASON_CATEGORY, ROOT_CAUSE,VAL_DESC from era_credit_debit " ;
+					
+						
+					
+					if (allCheckBox.equals("true")) {
+						databaseSqlCount+="where trkngnbr is not null";
+						databaseSqlQuery+="where trkngnbr is not null ";
+					}
+					
+					System.out.println(customCheckBox);
+					System.out.println(customString);
+					
+					if (customCheckBox.equals("false")) {
+					
+					if (allCheckBox.equals("false")) {
+						databaseSqlCount+="where trkngnbr is not null and ";
+						databaseSqlQuery+="where trkngnbr is not null and ";
+					
+					
+					
+					
+					if (nullCheckBox.equals("true") && failedCheckBox.equals("true")) {
+						databaseSqlCount+="(result is null or result ='fail') and (";
+						databaseSqlQuery+="(result is null or result ='fail') and (";
+					}
+					if (nullCheckBox.equals("true") && failedCheckBox.equals("false")) {
+						databaseSqlCount+="result is null and (";
+						databaseSqlQuery+="result is null and (";
+					}
+					if (nullCheckBox.equals("false") && failedCheckBox.equals("true")) {
+						databaseSqlCount+="result ='fail' and (";
+						databaseSqlQuery+="result ='fail' and (";
+					}
+						
+					/*
+					if (creditCheckBox.equals("true")){
+						databaseSqlCount+=" CREDIT_FLG='Y' or ";
+						databaseSqlQuery+=" CREDIT_FLG='Y' or ";
+						kounter++;
+					}
+					if (creditCheckBox.equals("true")){
+						databaseSqlCount+=" DEBIT_FLG='Y' or ";
+						databaseSqlQuery+=" DEBIT_FLG='Y' or ";
+						kounter++;
+					}
+					if (creditCheckBox.equals("true")){
+						databaseSqlCount+=" DISPUTE_FLG='Y' or ";
+						databaseSqlQuery+=" DISPUTE_FLG='Y' or ";
+						kounter++;
+					}
+					if (creditCheckBox.equals("true")){
+						databaseSqlCount+=" RESOLVE_CREDIT_FLG='Y' ";
+						databaseSqlQuery+=" RESOLVE_CREDIT_FLG='Y' ";
+						
+					}
+					
+					databaseSqlCount+=")";
+					databaseSqlQuery+=")";
+					if ( kounter<=2 ) {
+						databaseSqlQuery = databaseSqlQuery.replace("or", "");
+						databaseSqlCount = databaseSqlCount.replace("or", "");
+					}
+
+					*/
+						}
+						
+							}
+					else if (customCheckBox.equals("true")){
+						databaseSqlCount+="where trkngnbr is not null and "+customString;
+						databaseSqlQuery+="where trkngnbr is not null and "+customString;
+					}
 				break;
 				case 6:	
 					databaseSqlQuery="select TEST_INPUT_NBR	,TRKNGNBR	,PAYOR_ACCT_NBR,	ITEM_PRCS_CD	,INSTNT_INV_FLG from instant_invoice_view   ";
@@ -477,6 +578,14 @@ public class base {
 					databaseSqlQuery="select TEST_INPUT_NBR	,TIN_COUNT	,ACCT1,	ACCT2,	TRK_NO1,	TRK_NO2	,INVOICE_NBR_1,	INV_NO2,	SERVICE1,	SERVICE2,	REQUEST_TYPE,	ACCT_TYPE,	ACCNAME from rerate_master  ";
 					databaseSqlCount="select count(*) from  rerate_master ";
 				break;
+				
+				
+				
+				case 10:	
+					databaseSqlQuery="select trkngnbr,PAYOR_ACCT_NBR from ( select c.test_input_nbr,c.trkngnbr, PAYOR_ACCT_NBR,INSTNT_INV_FLG, case when cntry_cd is null then 'N' else 'Y' END as TimePeriodEligble, TO_CHAR(LPAR_ENHCMNT_DT + 2-(5/24), 'YYYY-MM-DD HH:MI:SS AM') as RM_TIME_STAMP from INTL_EXPRS_ONLN_SCHEMA.INTL_online_revenue_item@L3_IORE a join INTL_EXPRS_ONLN_SCHEMA.INTL_package@L3_IORE b on a.ONLN_REV_ITEM_ID = b.ONLN_REV_ITEM_ID  join rtm.batch_shipping_results c on c.trkngnbr=b.pkg_trkng_nbr join INTL_EXPRS_ONLN_SCHEMA.intl_onln_cust_addr_info@L3_IORE d on b.ONLN_REV_ITEM_ID=d.ONLN_REV_ITEM_ID left join INTL_EXPRS_ONLN_SCHEMA.time_period_country@L3_IORE e on d.CUST_CNTRY_CD=e.cntry_cd join  intl_EXPRS_ONLN_SCHEMA.intl_package_event@L3_IORE f on b.onln_pkg_id = f.onln_pkg_id  join INTL_EXPRS_ONLN_SCHEMA.intl_rev_item_payor@L3_IORE i on b.ONLN_REV_ITEM_ID=i.ONLN_REV_ITEM_ID where CYCLE = '0' and LEVELS = '3' and rs_type = 'IL' and company = 'EP' and src_org='B' and CUST_ROLE_TYPE_CD='B') where TimePeriodEligble='Y' and INSTNT_INV_FLG is null order by trkngnbr desc";
+					databaseSqlCount="select count(*) from ( select c.test_input_nbr,c.trkngnbr, PAYOR_ACCT_NBR,INSTNT_INV_FLG, case when cntry_cd is null then 'N' else 'Y' END as TimePeriodEligble, TO_CHAR(LPAR_ENHCMNT_DT + 2-(5/24), 'YYYY-MM-DD HH:MI:SS AM') as RM_TIME_STAMP from INTL_EXPRS_ONLN_SCHEMA.INTL_online_revenue_item@L3_IORE a join INTL_EXPRS_ONLN_SCHEMA.INTL_package@L3_IORE b on a.ONLN_REV_ITEM_ID = b.ONLN_REV_ITEM_ID  join rtm.batch_shipping_results c on c.trkngnbr=b.pkg_trkng_nbr join INTL_EXPRS_ONLN_SCHEMA.intl_onln_cust_addr_info@L3_IORE d on b.ONLN_REV_ITEM_ID=d.ONLN_REV_ITEM_ID left join INTL_EXPRS_ONLN_SCHEMA.time_period_country@L3_IORE e on d.CUST_CNTRY_CD=e.cntry_cd join  intl_EXPRS_ONLN_SCHEMA.intl_package_event@L3_IORE f on b.onln_pkg_id = f.onln_pkg_id  join INTL_EXPRS_ONLN_SCHEMA.intl_rev_item_payor@L3_IORE i on b.ONLN_REV_ITEM_ID=i.ONLN_REV_ITEM_ID where CYCLE = '0' and LEVELS = '3' and rs_type = 'IL' and company = 'EP' and src_org='B' and CUST_ROLE_TYPE_CD='B') where TimePeriodEligble='Y' and INSTNT_INV_FLG is null order by trkngnbr desc ";
+					dbVal=2;
+					break;
 				
 				
 				}

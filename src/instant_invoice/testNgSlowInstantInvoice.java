@@ -1047,7 +1047,7 @@ Thread.sleep(3000);
        	 }
        	 else if (level.equals("3")){
        		
-       		 	con=c.getOreL3DbConnection();
+       		 	con=c.getIoreL3DbConnection();
        	 	}
     	
     	}

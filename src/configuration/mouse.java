@@ -2042,7 +2042,11 @@ public void setupMouseListener() {
 				    				if(c.getLevel()!=null && c.getSource()!=null) {
 				    					//JOptionPane.showMessageDialog(frame, "Started Rebill");
 				    					
-
+				    					
+				    					//Prerate is 7
+				    					base b = new base(c,7);
+				    					
+/*
 				    			    	String filepath=c.getExcelPath();
 				    					String level=c.getLevel();
 				    					String browser=c.getDriverType();
@@ -2132,44 +2136,7 @@ public void setupMouseListener() {
 				    					databaseDisabled="";
 				    				}
 				    			
-				    			/*
-				    				@Parameters({
-				    					"filepath",
-				    					"level",
-				    					"browser",
-				    					"compatibleMode",
-				    					"source",
-				    					"allCheckBox",
-				    					"nullCheckBox",
-				    					"failedCheckBox",
-				    					"domesticCheckBox",
-				    					"internationalCheckBox",
-				    					"expressCheckBox",
-				    					"groundCheckBox",
-				    					"sessionCount",
-				    					"customString",
-				    					"customCheckBox",
-				    					"databaseDisabled"})
-				    				}
-				    				public void setupExcel(
-				    						String filepath,
-				    						String level,
-				    						String browser,
-				    						String compatibleMode,
-				    						String source,
-				    						String allCheckBox,
-				    						String nullCheckBox,
-				    						String failedCheckBox,
-				    						String domesticCheckBox,
-				    						String internationalCheckBox,
-				    						String expressCheckBox,
-				    						String groundCheckBox,
-				    						String sessionCount,
-				    						String customString,
-				    						String customCheckBox,
-				    						String databaseDisabled) {
-				    				
-				    					*/
+				    			
 				    		        XmlSuite xmlSuite = new XmlSuite();
 				    		        xmlSuite.setName("Sample_Suite");
 				    		        Map<String, String> fieldValues = new HashMap<>();
@@ -2205,7 +2172,7 @@ public void setupMouseListener() {
 				    		        tng.setXmlSuites(Collections.singletonList(xmlSuite));
 				    		        tng.run();
 				    		        
-					    		        
+					    		        */
 					    			
 				    				}
 				    				

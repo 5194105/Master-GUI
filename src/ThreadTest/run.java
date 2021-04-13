@@ -1,5 +1,8 @@
 package ThreadTest;
 
+import java.io.File;
+import java.io.IOException;
+
 import configuration.config;
 import configuration.importData;
 
@@ -16,12 +19,13 @@ public static void main (String args[]) {
 	// 7 Prerate Single
 	// 8 Prerate Hold
 	// 9 PRS Rerate
+	// 10 Instant Invoice Device
 
-	int function = 7;
+	int function = 10;
 	importData id = new importData();
-	 c=id.getConfig();
-	 customConfig(function);
-	 base b = new base(c,function);
+	c=id.getConfig();
+	customConfig(function);
+	base b = new base(c,function);
 }
 public static void customConfig (int function) {
 		switch (function) {
@@ -74,7 +78,29 @@ public static void customConfig (int function) {
 		case 4:
 			break;
 			
+			
+		//Credit and Debit
 		case 5:
+			
+			c.setExcelPath("C:\\Users\\theth\\git\\Master-GUI\\test data\\credit_debit.xlsx");
+			c.setLevel("3");
+			c.setDriverType("2");
+			c.setCompatibleMode("false");
+			c.setSource("db");
+			c.setAllCheckBox("false");
+			c.setNullCheckBox("true");
+			c.setFailedCheckBox("true");
+			c.setCreditCheckBox("false");
+			c.setDebitCheckBox("true");
+			c.setDisputeCheckBox("false");
+			c.setResolveCreditCheckBox("true");
+			c.setDatabaseDisabled("false");
+			c.setCustomCheckBox("true");
+			c.setCustomString("trkngnbr is not null and CREDIT_FLG='Y'");
+			
+			c.setHeadlessString("false");
+
+			c.setSessionCount("1");
 			break;
 			
 		case 6:
@@ -93,23 +119,37 @@ public static void customConfig (int function) {
 		    	c.setAllCheckBox("false");
 		    	c.setNullCheckBox("true");
 		    	c.setFailedCheckBox("true");
-				c.setDomesticCheckBox("false");
-				c.setInternationalCheckBox("false");
-				c.setExpressCheckBox("false");
-				c.setGroundCheckBox("false");
 				c.setDatabaseDisabled("false");
 				c.setCustomCheckBox("false");
 				c.setCustomString("");
-				c.setSessionCount("1");
-				c.setPrerateType("update");
+				c.setSessionCount("2");
+				
 				break;
 				
-				
-				
-			case 8:
+				case 8:
 				break;
 				
 			case 9:
+				break;
+				
+			case 10:
+				c.setDatabaseDisabled("false");
+				c.setDriverType("2");
+				c.setCompatibleMode("false");
+				c.setSessionCount("16");
+				
+				
+				File file = new File("E:\\Everyone Workspace Folders\\stephen\\Master-GUI\\instantInvoice.txt");
+				if (file.exists()) {
+					file.delete();
+				}
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+				
 				break;
 		}
 	

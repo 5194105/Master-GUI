@@ -242,7 +242,18 @@ public class importData {
 	        	 case "Chrome Path" :
 	        		 c.setChromePath(System.getProperty("user.dir")+tempStringPostFix);
 	        		 break;
+	        		 
+	        		 
+	        	 case "IE Property" :
+	        		 c.setIeProperty(tempStringPostFix);
+	        		 break;
+	        		 
+	        	 case "IE Path" :
+	        		 c.setIeDriverPath(System.getProperty("user.dir")+tempStringPostFix);
+	        		 break;
 	        		
+	        		 
+	        
 	        		 
 	        		 
 	        		 
@@ -260,13 +271,14 @@ public class importData {
 		     c.setRtmDbConnection(c.getRtmDbUsername(),c.getRtmDbPassword());
 		     c.setGtmRevToolsConnection(c.getGtmDbUsername(),c.getGtmDbPassword());
 		   //  c.setOreL2DbConnection(c.getOreL2DbUsername(),c.getOreL2DbPassword());
-		     c.setOreL3DbConnection(c.getOreL3DbUsername(),c.getOreL3DbPassword());
-		     c.setEcL2DbConnection(c.getEcL2DbUsername(),c.getEcL2DbPassword());
+		     c.setDoreL3DbConnection(c.getOreL3DbUsername(),c.getOreL3DbPassword());
+		     c.setIoreL3DbConnection(c.getOreL3DbUsername(),c.getOreL3DbPassword());
+		    // c.setEcL2DbConnection(c.getEcL2DbUsername(),c.getEcL2DbPassword());
 		     c.setEcL3DbConnection(c.getEcL3DbUsername(),c.getEcL3DbPassword());
 		    // c.setEraL2DbConnection(c.getEraL2DbUsername(),c.getEraL2DbPassword());
 		     c.setEraL3DbConnection(c.getEraL3DbUsername(),c.getEraL3DbPassword());
 		    // c.setOracleARL2DbConnection(c.getOracleARL2DbUsername(),c.getOracleARL2DbPassword());
-		     c.setOracleARL3DbConnection("appsread","appsread");
+		//     c.setOracleARL3DbConnection("appsread","appsread");
 		     
 	     }
 	   

@@ -9,7 +9,7 @@ import java.sql.Statement;
 import configuration.config;
 
 public class validateClass {
-	Boolean result=false,oracleBoolean=false,eraBoolean=false,prerateBoolean=false;
+	Boolean result=false,oracleBoolean=false,eraBoolean=false,prerateBoolean=false,denialBoolean=false,instantInvoiceBoolean=false;
 	String databaseDisabled,flag;
 	config c;
 	
@@ -19,6 +19,15 @@ public class validateClass {
 		this.databaseDisabled=databaseDisabled;
 		this.flag=flag;
 	}
+	
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+
+	
 	
 	
 	public Boolean validateRebill(String testInputNbr,String tinCount,String trkngnbr) {
@@ -43,6 +52,55 @@ public class validateClass {
 			 }
 		return result;
 	}
+	
+	
+	
+	
+	public Boolean validateInstantInvoice(String trkngnbr) {
+		instantInvoiceBoolean=false;
+		try {
+			Thread.sleep(7000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (databaseDisabled.equals("false")) {
+			searchIoreDB("select * from INTL_EXPRS_ONLN_SCHEMA.intl_online_revenue_item a join INTL_EXPRS_ONLN_SCHEMA.intl_package b on a.ONLN_REV_ITEM_ID =b.ONLN_REV_ITEM_ID  where INSTNT_INV_FLG ='Y' and  pkg_trkng_nbr="+trkngnbr);
+			}
+		return instantInvoiceBoolean;
+	}
+	
+	
+	public void searchIoreDB(String sqlQuery) {
+		Connection con=null;
+		Statement stmt=null;
+		ResultSet rs=null;
+		try {
+			con=c.getIoreL3DbConnection();
+			stmt=con.createStatement();
+			rs=stmt.executeQuery(sqlQuery);
+			String finalResult="";
+			String finalDesc="";
+			
+			if (rs.next()==false){
+			      System.out.println("Is NULL");
+			      instantInvoiceBoolean=false;   
+			}
+			   else{
+			      System.out.println("IS NOT NULL");
+			      instantInvoiceBoolean=true;
+			      finalResult="pass";
+            	  finalDesc="completed";
+			     
+			   }
+		}
+			catch(Exception e) {
+				System.out.println(e);
+			}
+	}
+	
+	
+	
 	
 	
 	public Boolean validateRerate(String testInputNbr,String tinCount,String trkngnbr) {
@@ -280,9 +338,10 @@ catch(Exception e) {
 
 
 public void writeToDbPrerate(String testInputNbr,String tinCount,String trkngnbr,String finalResult,String finalDesc) {
-	if (databaseDisabled.equals("true")) {
+	if (databaseDisabled.equals("false")) {
 	Connection con=null;
 	try {
+		c.setGtmRevToolsConnection();
 		con = c.getGtmRevToolsConnection();
 	} catch (ClassNotFoundException e1) {
 		// TODO Auto-generated catch block
@@ -321,7 +380,7 @@ catch(Exception e) {
 }
 	
 	try {
-	//	con.close();
+		con.close();
 	//	stmt.close();
 		
 	} catch (Exception e) {
@@ -331,6 +390,115 @@ catch(Exception e) {
 	
 }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public Boolean validateCreditDebit(String testInputNbr,String tinCount,String trkngnbr,String valDesc) {
+	oracleBoolean=false;
+	denialBoolean=false;
+	if (databaseDisabled.equals("false")) {
+	
+		if(valDesc.equals("Denial Expected")) {
+			denialBoolean=true;
+		}
+		
+		searchOracleDBDebitCredit("select * from apps.xxfdx_eabr_airbill_notes_v where AIRBILL_NUMBER="+trkngnbr,testInputNbr,tinCount,trkngnbr,denialBoolean);
+		}
+	return oracleBoolean;
+	
+}
+
+
+
+
+
+
+
+
+public void searchOracleDBDebitCredit(String sqlQuery,String testInputNbr,String tinCount,String trkngnbr,Boolean denialBoolean) {
+	Connection con=null;
+	Statement stmt=null;
+	ResultSet rs=null;
+	
+	try {
+		con=c.getOracleARL3DbConnection();
+		stmt=con.createStatement();
+		rs=stmt.executeQuery(sqlQuery);
+		String finalResult="";
+		String finalDesc="";
+		if (rs.next()==false){
+			finalResult="fail";
+			finalDesc="";
+		}
+		else{
+			String tempString= rs.getString("NOTES");
+				  if (tempString.contains("RDT RB")) {
+					  if (tempString.contains("RDT CR") && denialBoolean==false && flag.equals("ERA_CREDIT")) {
+						finalResult="pass";
+						finalDesc="completed";
+					}
+					else if (tempString.contains("RDT DB") && denialBoolean==false && flag.equals("ERA_DEBIT")) {
+						finalResult="pass";
+						finalDesc="completed";
+					}
+					else if (tempString.contains("RDT CR") && denialBoolean==false && flag.equals("ERA_RESOLVE")) {
+						finalResult="pass";
+						finalDesc="completed";
+					}
+					else if (tempString.contains("RDT D") && denialBoolean==false && flag.equals("ERA_DISPUTE")) {
+						finalResult="pass";
+						finalDesc="completed";
+					}
+					else  if (tempString.contains("RDT DN") && denialBoolean==true) {
+						finalResult="pass";
+						finalDesc="denied";
+					}
+					else {
+						finalResult="na";
+						finalDesc="unable to validate";
+						  
+					}
+					  writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
+				 }
+		}
+	}
+	catch(Exception e) {
+		System.out.println(e);
+		}
+	try {
+	//	con.close();
+	//	stmt.close();
+	//	rs.close();
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+}
+
+
+
+
+
+
+
+
+
+
 
 }
 
