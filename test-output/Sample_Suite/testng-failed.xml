@@ -4,7 +4,7 @@
   <parameter name="nullCheckBox" value="true"/>
   <parameter name="level" value="3"/>
   <parameter name="failedCheckBox" value="true"/>
-  <parameter name="groundCheckBox" value="true"/>
+  <parameter name="groundCheckBox" value="false"/>
   <parameter name="source" value="db"/>
   <parameter name="compatibleMode" value=""/>
   <parameter name="eraWorkable" value="true"/>
@@ -17,14 +17,13 @@
   <parameter name="domesticCheckBox" value="true"/>
   <parameter name="browser" value="2"/>
   <parameter name="databaseDisabled" value="false"/>
-  <parameter name="internationalCheckBox" value="true"/>
+  <parameter name="internationalCheckBox" value="false"/>
   <parameter name="customString" value="description =&#039;Failed on Entering Tracking Number&#039;"/>
   <test thread-count="5" parallel="methods" name="Rebill Test(failed)">
     <classes>
       <class name="rebill.testngRebillFast">
         <methods>
           <include name="setupExcel"/>
-          <include name="testMethod1"/>
           <include name="testMethod2"/>
           <include name="testMethod3"/>
           <include name="testMethod4"/>

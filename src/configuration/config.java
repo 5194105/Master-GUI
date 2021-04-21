@@ -1148,9 +1148,17 @@ public Connection getEraL3DbConnection() {
 public void setOracleARL3DbConnection(String username,String password) {
 	
 
-	String url="jdbc:oracle:thin:@ldap://hdsoid.ute.fedex.com:3060/ENBL_SVC1_LVL3,CN=OracleContext,DC=ute,DC=fedex,DC=com";
+	//String url="jdbc:oracle:thin:@ldap://hdsoid.ute.fedex.com:3060/ENBL_SVC1_LVL3,CN=OracleContext,DC=ute,DC=fedex,DC=com";
+	String url="jdbc:oracle:thin:@ldap://hdsoid.ute.fedex.com:3060/ENBL_INT_SVC1_LVL3,CN=OracleContext,DC=ute,DC=fedex,DC=com";
+	System.out.println(username+"   "+password);
 		try {
-			//Class.forName("oracle.jdbc.driver.OracleDriver");
+			try {
+				Class.forName("oracle.jdbc.OracleDriver");
+				//Class.forName("oracle.jdbc.driver.OracleDriver");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		    oracleARL3Con=DriverManager.getConnection(url,username,password);
 		} catch (SQLException e) {
 			System.out.println(e);

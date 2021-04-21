@@ -98,7 +98,7 @@ public class rebillThread extends Thread{
 			company =d.getCompany();
 			prerate=d.getRebillPrerate();
 			workable=d.getWorkable();
-			
+			System.out.println(trkngnbr);
 			
 			
 			//Check if track is already successful
@@ -597,7 +597,7 @@ public class rebillThread extends Thread{
  	   			finalResult="fail";
  		   	    finalDesc="Could Not Get to Rebill Screen";
  		   		vc.writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,"");
- 		   	
+             }
 
              			/*
                      	 *****************************************************************************
@@ -665,7 +665,7 @@ public class rebillThread extends Thread{
          	driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
             
          	 if (vc.validateRebill(testInputNbr,tinCount,trkngnbr)==true) {
- 		    	continue;
+ 		    	return;
  		    }
 
             	 try {
@@ -718,14 +718,14 @@ public class rebillThread extends Thread{
             	 
             	 //Check For Validation again and save result.
             	 if (vc.validateRebill(testInputNbr,tinCount,trkngnbr)==true) {
-     		    	continue;
+            		 return;
      		    }
             	
             	
           }
     	}
              
-        }
+        
 
     
    public synchronized void writeToExcel(int rowCountExcel,int colCountExcel,String outputString){

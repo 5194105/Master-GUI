@@ -21,7 +21,7 @@ public static void main (String args[]) {
 	// 9 PRS Rerate
 	// 10 Instant Invoice Device
 
-	int function = 7;
+	int function = 1;
 	importData id = new importData();
 	c=id.getConfig();
 	customConfig(function);
@@ -42,13 +42,15 @@ public static void customConfig (int function) {
 			c.setNullCheckBox("true");
 			c.setFailedCheckBox("true");
 			c.setDomesticCheckBox("true");
-			c.setInternationalCheckBox("true");
+			c.setInternationalCheckBox("false");
 			c.setExpressCheckBox("true");	
-			c.setGroundCheckBox("true");
-			c.setSessionCount("1");
-			c.setEraWorkable("true");
+			c.setGroundCheckBox("false");
+			c.setEraWorkable("false");
 			c.setCustomCheckBox("false");
 			c.setCustomString("description ='Failed on Entering Tracking Number'");
+			
+			
+			c.setSessionCount("2");
 			break;
 			
 		case 2:

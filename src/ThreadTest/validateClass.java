@@ -278,9 +278,10 @@ public void searchOracleDB(String sqlQuery,String testInputNbr,String tinCount,S
 
 
 public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String finalResult,String finalDesc,String requestID) {
-	if (databaseDisabled.equals("true")) {
+	if (databaseDisabled.equals("false")) {
 	Connection con=null;
 	try {
+		c.setGtmRevToolsConnection();
 		con = c.getGtmRevToolsConnection();
 	} catch (ClassNotFoundException e1) {
 		// TODO Auto-generated catch block
@@ -291,18 +292,20 @@ public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String
 	
 
 	try {
-	    stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,request_id,?) values (?,?,?,?,?,?)");  
+		if (flag.equals("era_rebill")) {
+	    stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,request_id,era_rebill) values (?,?,?,?,?,?,?)");  
 		
-		stmt.setString(1,flag); 
-		stmt.setString(2,testInputNbr);  
-		stmt.setString(3,tinCount);  
-		stmt.setString(4,trkngnbr);  
-		stmt.setString(5,finalResult);  
-		stmt.setString(6,finalDesc);  
-		stmt.setString(7,requestID);  
-		stmt.setString(8,"Y");  
+		//stmt.setString(1,flag); 
+		stmt.setString(1,testInputNbr);  
+		stmt.setString(2,tinCount);  
+		stmt.setString(3,trkngnbr);  
+		stmt.setString(4,finalResult);  
+		stmt.setString(5,finalDesc);  
+		stmt.setString(6,requestID);  
+		stmt.setString(7,"Y");  
 		stmt.executeUpdate();
 	}
+		}
 	catch(Exception e) {
 		System.out.println(e);
 	}
@@ -310,14 +313,15 @@ public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String
 	
 	
 	try {
-		stmt=con.prepareStatement("update era_results set result=?,description=?,?=? where trkngnbr=?");  
-		stmt.setString(1,requestID);  
+		if (flag.equals("era_rebill")) {
+		stmt=con.prepareStatement("update era_results set result=?,description=?,era_rebill='Y' where trkngnbr=?");  
+		stmt.setString(1,finalResult);  
 		stmt.setString(2,finalDesc); 
-		stmt.setString(3,flag);
-		stmt.setString(4,"Y");
-		stmt.setString(5,trkngnbr); 
+		////stmt.setString(3,flag);
+		//stmt.setString(4,"Y");
+		stmt.setString(3,trkngnbr); 
 		stmt.executeUpdate();
-		
+		}
 }
 catch(Exception e) {
 	System.out.println(e);

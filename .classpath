@@ -34,6 +34,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/xmlbeans-2.6.0.jar"/>
 	<classpathentry kind="lib" path="lib/jsch-0.1.55.jar"/>
 	<classpathentry exported="true" kind="con" path="org.testng.TESTNG_CONTAINER"/>
-	<classpathentry kind="lib" path="E:/Everyone Workspace Folders/stephen/Master-GUI/lib/ojdbc7.jar"/>
+	<classpathentry kind="lib" path="lib/ojdbc7.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
