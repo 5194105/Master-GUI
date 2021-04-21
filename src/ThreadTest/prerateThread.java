@@ -35,7 +35,7 @@ public class prerateThread extends Thread{
 	String level;
 	driverClass dc;
 	validateClass vc;
-	String result,  description, testInputNbr, tinCount, trkngnbr, prerateTypeCd,  prerateAmt, currencyCd, approvalId, chrgCd1, chrgAmt1, chrgCd2,  chrgAmt2, chrgCd3, chrgAmt3,  chrgCd4, chrgAmt4;
+	String result,  description, testInputNbr, tinCount, trkngnbr, prerateTypeCd,  prerateAmt, currencyCd, approvalId, chrgCd1, chrgAmt1, chrgCd2,  chrgAmt2, chrgCd3, chrgAmt3,  chrgCd4, chrgAmt4, valDesc,expectedStatus;
 	public prerateThread(ArrayList<data> dataArray,config c) {
 		
 		this.dataArray=dataArray;
@@ -71,7 +71,8 @@ public class prerateThread extends Thread{
 			this.chrgAmt3=d.getChrgAmt3();
 			this.chrgCd4=d.getChrgCd4();
 			this.chrgAmt4=d.getChrgAmt4();
-			
+			this.valDesc=d.getValDesc();
+			this.expectedStatus=d.getExpectedStatus();
 			System.out.println(chrgCd3);
 			
 			//Check if track is already successful
@@ -82,7 +83,7 @@ public class prerateThread extends Thread{
 		    }
 		
 			try {
-				doPrerate(result,description,testInputNbr, tinCount,trkngnbr, prerateTypeCd, prerateAmt, currencyCd, approvalId, chrgCd1, chrgAmt1, chrgCd2 , chrgAmt2 , chrgCd3, chrgAmt3 , chrgCd4 , chrgAmt4);
+				doPrerate(result,description,testInputNbr, tinCount,trkngnbr, prerateTypeCd, prerateAmt, currencyCd, approvalId, chrgCd1, chrgAmt1, chrgCd2 , chrgAmt2 , chrgCd3, chrgAmt3 , chrgCd4 , chrgAmt4,valDesc);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -116,19 +117,45 @@ public class prerateThread extends Thread{
 			driver.findElement(By.id("submit")).click();
 			}
     	catch(Exception e) {
+    		System.out.println(e);
     		vc.writeToDbPrerate(testInputNbr,tinCount,trkngnbr,"fail","Could not login");
     		System.out.println("Could not login");
     	}
     }
     
     
+public void homepage() {
+    	
+    	//Will See if even need to login.. if we can navigate to home page then skips.
+    	
+    	try {
+    		driver.get(levelUrl);
+    		driver.switchTo().frame("header");						
+    		if (!driver.findElement(By.id("preRateEntrySelForm:_t12")).getText().equals("Tracking No:")) {
+    			login();
+    		}
+    	
+    	}
+    	catch(Exception e) {
+    		System.out.println(e);
+    		login();
+    	}
+    		
+    	
+    }
     
-  public void doPrerate(String result,String description,String testInputNbr,String tinCount,String trkngnbr,String prerateTypeCd,String  prerateAmt,String currencyCd,String approvalId,String chrgCd1,String chrgAmt1,String chrgCd2, String chrgAmt2,String chrgCd3,String chrgAmt3,String  chrgCd4,String chrgAmt4) throws InterruptedException {
+    
+    
+    
+  public void doPrerate(String result,String description,String testInputNbr,String tinCount,String trkngnbr,String prerateTypeCd,String  prerateAmt,String currencyCd,String approvalId,String chrgCd1,String chrgAmt1,String chrgCd2, String chrgAmt2,String chrgCd3,String chrgAmt3,String  chrgCd4,String chrgAmt4,String valDesc) throws InterruptedException {
 	  maxAttempts=2;
 	  String [] resultArray = new String[2];
 	  for (int i=0;i<maxAttempts;i++) {
 	  System.out.println("Attempt Number :"+(i+1));
-		login();
+		
+	  
+	  
+	  	
     	WebElement element;
     	JavascriptExecutor Executor;
     	JavascriptExecutor Executor1;
@@ -142,10 +169,37 @@ public class prerateThread extends Thread{
     	
     	By webElementTemp;
     	String errorMessage;
-    	wait = new WebDriverWait(driver,10);
+    	
+    	
     	
     	try {
-	    	driver.switchTo().frame("header");
+    		driver.get(levelUrl);
+    		driver.switchTo().frame("header");
+    		Boolean isPresent = driver.findElements(By.id("preRateEntrySelection")).size() > 0;
+    	if (isPresent==false) {
+    		login();
+    			}
+    	}
+    	catch(Exception e) {
+    		login();
+    	}
+    	
+    	
+    
+    	
+    	
+	    	
+    	
+	    	
+	    		
+	    		
+	    	
+	    try {
+	    	wait = new WebDriverWait(driver,3);
+	    	driver.switchTo().frame("header");}
+	    	catch(Exception e) {}
+	    	try {
+	    		wait = new WebDriverWait(driver,10);
 			driver.findElement(By.id("preRateEntrySelection")).click();
 			driver.switchTo().defaultContent();
 			driver.switchTo().frame("content");
@@ -225,7 +279,16 @@ public class prerateThread extends Thread{
 			catch(Exception ee) {
 				System.out.println("Didnt find error message from dropdown menu...");
 			
-					
+				resultArray =checkFailure(trkngnbr);
+				if (!resultArray[0].equals("")) {
+					vc.writeToDbPrerate(testInputNbr,tinCount,trkngnbr,resultArray[0],resultArray[1]);
+					return;
+				}
+				else {
+				vc.writeToDbPrerate(testInputNbr,tinCount,trkngnbr,"fail","failed on homepage");
+				}
+				 continue;
+				 /*
 						resultArray[0]="fail";
 						resultArray[1]="Failed selecting dropdown menu...";
 					
@@ -234,6 +297,7 @@ public class prerateThread extends Thread{
 					vc.writeToDbPrerate(testInputNbr,tinCount,trkngnbr,resultArray[0],resultArray[1]);
 					
 					continue;
+					*/
 			}
 			
 		}
@@ -494,7 +558,7 @@ where pkg_trkng_nbr ='582838858029';
 		Boolean oreError=false;
 		String resultString="";
 	
-		 	oreCon=c.getOreL3Con();
+		 	oreCon=c.getIoreL3DbConnection();
 			
 	
 

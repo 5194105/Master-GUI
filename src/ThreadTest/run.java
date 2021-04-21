@@ -21,7 +21,7 @@ public static void main (String args[]) {
 	// 9 PRS Rerate
 	// 10 Instant Invoice Device
 
-	int function = 10;
+	int function = 7;
 	importData id = new importData();
 	c=id.getConfig();
 	customConfig(function);
@@ -120,9 +120,9 @@ public static void customConfig (int function) {
 		    	c.setNullCheckBox("true");
 		    	c.setFailedCheckBox("true");
 				c.setDatabaseDisabled("false");
-				c.setCustomCheckBox("false");
-				c.setCustomString("");
-				c.setSessionCount("2");
+				c.setCustomCheckBox("true");
+				c.setCustomString("trkngnbr ='383842819584'");
+				c.setSessionCount("1");
 				
 				break;
 				
@@ -136,7 +136,7 @@ public static void customConfig (int function) {
 				c.setDatabaseDisabled("false");
 				c.setDriverType("2");
 				c.setCompatibleMode("false");
-				c.setSessionCount("16");
+				c.setSessionCount("10");
 				
 				
 				File file = new File("E:\\Everyone Workspace Folders\\stephen\\Master-GUI\\instantInvoice.txt");

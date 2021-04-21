@@ -11,7 +11,7 @@ public class data {
 	String massRerateCombo;
 	String creditFlg, debitFlg,  disputeFlg, resolveCreditFlg,rootCause,reasonCategory;
 	String payorAcctNbr, itemPrcsCd, instantInvFlg,tinComment,podScan;
-	String acct1, acct2,  trkngnbr1, trkngnbr2, service1, service2, requestType, acctType, acctName,serviceName;
+	String acct1, acct2,  trkngnbr1, trkngnbr2, service1, service2, requestType, acctType, acctName,serviceName,expectedStatus;
 	//Function Type
 	// 1 Single Rebill
 	// 2 Mass Rebill
@@ -168,7 +168,7 @@ public class data {
 	
 	
 	//Prerate Single
-	public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String prerateTypeCd, String prerateAmt,String currencyCd,String approvalId,String chrgCd1,String chrgAmt1,String chrgCd2, String chrgAmt2,String chrgCd3,String chrgAmt3, String chrgCd4,String chrgAmt4,int counter) {
+	public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String prerateTypeCd, String prerateAmt,String currencyCd,String approvalId,String chrgCd1,String chrgAmt1,String chrgCd2, String chrgAmt2,String chrgCd3,String chrgAmt3, String chrgCd4,String chrgAmt4, String valDesc,String expectedStatus) {
 		this.result=result;
 		this.description=description;
 		this.testInputNbr=testInputNbr;
@@ -186,7 +186,8 @@ public class data {
 		this.chrgAmt3=chrgAmt3;
 		this.chrgCd4=chrgCd4;
 		this.chrgAmt4=chrgAmt4;
-		this.counter=counter;
+		this.valDesc=valDesc;
+		this.expectedStatus=expectedStatus;
 	}
 	
 	
@@ -228,6 +229,13 @@ public class data {
 		this.password=password;
 		this.counter=counter;
 		
+	}
+	
+	public void setExpectedStatus(String expectedStatus) {
+		this.expectedStatus=expectedStatus;
+	}
+	public String getExpectedStatus() {
+		return expectedStatus;
 	}
 	
 	public String getServiceName() {

@@ -65,7 +65,7 @@ public class validateClass {
 			e.printStackTrace();
 		}
 		if (databaseDisabled.equals("false")) {
-			searchIoreDB("select * from INTL_EXPRS_ONLN_SCHEMA.intl_online_revenue_item a join INTL_EXPRS_ONLN_SCHEMA.intl_package b on a.ONLN_REV_ITEM_ID =b.ONLN_REV_ITEM_ID  where INSTNT_INV_FLG ='Y' and  pkg_trkng_nbr="+trkngnbr);
+			searchIoreDB("select * from INTL_EXPRS_ONLN_SCHEMA.intl_online_revenue_item a join INTL_EXPRS_ONLN_SCHEMA.intl_package b on a.ONLN_REV_ITEM_ID =b.ONLN_REV_ITEM_ID  where INSTNT_INV_FLG ='Y' and  pkg_trkng_nbr='"+trkngnbr+"'");
 			}
 		return instantInvoiceBoolean;
 	}
@@ -75,6 +75,7 @@ public class validateClass {
 		Connection con=null;
 		Statement stmt=null;
 		ResultSet rs=null;
+		System.out.println(sqlQuery);
 		try {
 			con=c.getIoreL3DbConnection();
 			stmt=con.createStatement();
@@ -352,12 +353,13 @@ public void writeToDbPrerate(String testInputNbr,String tinCount,String trkngnbr
 	
 
 	try {
-	    stmt=con.prepareStatement("insert into gtm_rev_tools.prerate_results (test_input_nbr,tin_count,trkngnbr,result,description) values (?,?,?,?,?)");  
+	    stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,prerate_single) values (?,?,?,?,?,?)");  
 		stmt.setString(1,testInputNbr);  
 		stmt.setString(2,tinCount);  
 		stmt.setString(3,trkngnbr);  
 		stmt.setString(4,finalResult);  
 		stmt.setString(5,finalDesc);  
+		stmt.setString(6,"Y");  
 		  
 		stmt.executeUpdate();
 	}
@@ -368,7 +370,7 @@ public void writeToDbPrerate(String testInputNbr,String tinCount,String trkngnbr
 	
 	
 	try {
-		stmt=con.prepareStatement("update prerate_results set result=?,description=? where trkngnbr=?");  
+		stmt=con.prepareStatement("update era_results set result=?,description=? where trkngnbr=?");  
 		stmt.setString(1,finalResult);  
 		stmt.setString(2,finalDesc); 
 		stmt.setString(3,trkngnbr); 

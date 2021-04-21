@@ -154,22 +154,35 @@ public class instantInvoiceThread extends Thread{
     public void doInstantInvoice( String trkngnbr,String payorAcctNbr,String  login ,String  password) {
     	for (int i=0;i<maxAttempts;i++) {
     	try {	
-    		
-        	login();
-          	  driver.switchTo().frame("content");
+    		try {
+    		driver.navigate().refresh();
+    		Thread.sleep(2000);
+    		driver.switchTo().frame("content");
+    		Boolean isPresent = driver.findElements(By.xpath("/html/body/form[1]/table[1]/tbody/tr[4]/td/div/div[2]/table/tbody/tr[1]/td[1]/span/span[1]/span[1]/input")).size() > 0;
+        	if (isPresent==false) {
+        		login();
+        		 driver.switchTo().frame("content");
+        			}
+        	}
+        	catch(Exception e) {
+        		login();
+        		 driver.switchTo().frame("content");
+        	}
+        	// login();
+          	
         	//WebElement dateWidget = driver.findElement(By.id("iiForm:fromDateII_input"));
         	//WebElement dateWidget = driver.findElement(By.xpath("/html/body/form[1]/table[1]/tbody/tr[4]/td/div/div[2]/table/tbody/tr[1]/td[2]/span"));
-          	 Date date = new Date();
-             SimpleDateFormat formatter = new SimpleDateFormat("dd");
-             String AB = formatter.format(date);
-             int tempInt=Integer.parseInt(AB)+8;
+          	
         	
         	//List<WebElement> columns=dateWidget.findElements(By.tagName("td"));
         //	System.out.println("HERE");
         	
-             driver.findElement(By.xpath("/html/body/form[1]/table[1]/tbody/tr[4]/td/div/div[2]/table/tbody/tr[1]/td[1]/span/span[1]/span[1]/input")).sendKeys(payorAcctNbr);
+            driver.findElement(By.xpath("/html/body/form[1]/table[1]/tbody/tr[4]/td/div/div[2]/table/tbody/tr[1]/td[1]/span/span[1]/span[1]/input")).sendKeys(payorAcctNbr);
          	driver.findElement(By.xpath("/html/body/form[1]/table[1]/tbody/tr[4]/td/div/div[2]/table/tbody/tr[2]/td[1]/span/span[1]/span[1]/input")).sendKeys(trkngnbr);
-         	
+         	 Date date = new Date();
+             SimpleDateFormat formatter = new SimpleDateFormat("dd");
+             String AB = formatter.format(date);
+             int tempInt=Integer.parseInt(AB)+8;
          	/*
          	
             driver.findElement(By.xpath("//input[@id='iiForm:fromDateII_input']")).click();

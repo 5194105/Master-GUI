@@ -29,9 +29,9 @@ public class rebillManualClass {
     	c.setNullCheckBox("true");
     	c.setFailedCheckBox("true");
 		c.setDomesticCheckBox("true");
-		c.setInternationalCheckBox("true");
+		c.setInternationalCheckBox("false");
 		c.setExpressCheckBox("true");	
-		c.setGroundCheckBox("true");
+		c.setGroundCheckBox("false");
 		//c.setNormalCheckBox("false"); Retired Value
 		c.setDatabaseDisabled("false");
 		
@@ -45,7 +45,7 @@ public class rebillManualClass {
 
 		c.setSessionCount("1");
     	
-		c.setEraWorkable("true");
+		c.setEraWorkable("false");
 		
     	String filepath=c.getExcelPath();
 		String level=c.getLevel();
