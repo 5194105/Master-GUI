@@ -25,7 +25,7 @@ public class data {
 
 
 	//Rebill Single
-	public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String reasonCode, String billAcctNbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password, String rs_type,String company,String rebillPrerate, String workable,String defectFlg,String defectNbr,int counter) {
+	public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String reasonCode, String billAcctNbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password, String rs_type,String company,String rebillPrerate,String length,String width,String height,String actualWeight,String workable,String defectFlg,String defectNbr,int counter) {
 		this.result=result;
 		this.description=description;
 		this.testInputNbr=testInputNbr;
@@ -45,6 +45,10 @@ public class data {
 		this.defectFlg=defectFlg;
 		this.defectNbr=defectNbr;
 		this.counter=counter;
+		this.length=length;
+		this.width=width;
+		this.height=height;
+		this.actualWeight=actualWeight;
 	}
 	
 	  // Rebill Mass

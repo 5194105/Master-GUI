@@ -355,7 +355,7 @@ public void writeToDbPrerate(String testInputNbr,String tinCount,String trkngnbr
 
 	PreparedStatement stmt = null;
 	
-
+System.out.println(trkngnbr +" : "+finalResult+" : "+finalDesc);
 	try {
 	    stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,prerate_single) values (?,?,?,?,?,?)");  
 		stmt.setString(1,testInputNbr);  

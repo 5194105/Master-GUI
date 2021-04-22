@@ -7,24 +7,25 @@
   <parameter name="groundCheckBox" value="false"/>
   <parameter name="source" value="db"/>
   <parameter name="compatibleMode" value=""/>
-  <parameter name="eraWorkable" value="true"/>
+  <parameter name="eraWorkable" value="false"/>
   <parameter name="headless" value="false"/>
-  <parameter name="customCheckBox" value="false"/>
+  <parameter name="customCheckBox" value="true"/>
   <parameter name="expressCheckBox" value="true"/>
   <parameter name="allCheckBox" value="false"/>
   <parameter name="filepath" value="C:\Users\FedExUser\Desktop\stephen\R66\L3C6\rebill.xlsx"/>
-  <parameter name="sessionCount" value="1"/>
+  <parameter name="sessionCount" value="2"/>
   <parameter name="domesticCheckBox" value="true"/>
   <parameter name="browser" value="2"/>
   <parameter name="databaseDisabled" value="false"/>
   <parameter name="internationalCheckBox" value="false"/>
-  <parameter name="customString" value="description =&#039;Failed on Entering Tracking Number&#039;"/>
+  <parameter name="customString" value="trkngnbr is not null and region=&#039;USA&#039; and(result=&#039;fail&#039; or result is null)"/>
   <test thread-count="5" parallel="methods" name="Rebill Test(failed)">
     <classes>
       <class name="rebill.testngRebillFast">
         <methods>
           <include name="setupExcel"/>
-          <include name="testMethod2"/>
+          <include name="testMethod1" invocation-numbers="15 15 19 19 19 19 20 35 42 42 42 42 45 45 45 45 47 47 47 47 48 48 48 48 49 49 49 49 52 52 52 52 54 54 54 54 56 58 59 59 59 59 62 62 62 62 66 66 66 66"/>
+          <include name="testMethod2" invocation-numbers="1 1 1 1 15 15 15 15 16 18 18 18 18 19 19 19 19 25 25 25 25 28 34 34 34 34 43 45 45 45 45 46 46 46 46 50 50 50 50 51 51 51 51 54 54 54 54 59 59 59 59 62 62 62 62"/>
           <include name="testMethod3"/>
           <include name="testMethod4"/>
         </methods>

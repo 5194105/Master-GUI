@@ -57,7 +57,7 @@ public class rebillThread extends Thread{
 	String databaseDisabled;
 	WebDriverWait wait;
 	String source;
-	String result, descripiton, testInputNbr, tinCount, trkngnbr, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, region , login , password, rsType , company , prerate,workable, rowNumber;
+	String result, descripiton, testInputNbr, tinCount, trkngnbr, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, region , login , password, rsType , company , prerate,workable, rowNumber,length,width,height,actualWeight;
 	int waitTime;
 	int attempts=0;
 	int maxAttempts=3;
@@ -99,7 +99,10 @@ public class rebillThread extends Thread{
 			prerate=d.getRebillPrerate();
 			workable=d.getWorkable();
 			System.out.println(trkngnbr);
-			
+			length=d.getLength();
+			width=d.getWidth();
+			height=d.getHeight();
+			actualWeight=d.getActualWeight();
 			
 			//Check if track is already successful
 			
@@ -109,7 +112,7 @@ public class rebillThread extends Thread{
 		    }
 		
 			try {
-				doRebill(testInputNbr, tinCount, trkngnbr, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, region , login , password, rsType ,company , prerate,workable);
+				doRebill(testInputNbr, tinCount, trkngnbr, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, region , login , password, rsType ,company , prerate,length,width,height,actualWeight,workable);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -150,7 +153,7 @@ public class rebillThread extends Thread{
     }
     
    
-    public void doRebill(String testInputNbr,String tinCount,String trkngnbr,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2 ,String region ,String login ,String password,String rsType ,String company ,String prerate,String workable) throws InterruptedException {
+    public void doRebill(String testInputNbr,String tinCount,String trkngnbr,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2 ,String region ,String login ,String password,String rsType ,String company ,String prerate,String length,String width,String height,String actualWeight,String workable) throws InterruptedException {
     	String finalResult="";
     	String finalDesc="";
     	for (int i=0;i<maxAttempts;i++) {

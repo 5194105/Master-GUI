@@ -36,14 +36,14 @@ public class rebillManualClass {
 		c.setDatabaseDisabled("false");
 		
 		//You can give custom query if want to
-		c.setCustomCheckBox("false");
+		c.setCustomCheckBox("true");
 		//c.setCustomString("description like '%Could Not go to phone detail screen%'");
-		c.setCustomString("description ='Failed on Entering Tracking Number'");
+		c.setCustomString("trkngnbr is not null and region='USA' and(result='fail' or result is null)");
 		
 				
 		c.setHeadlessString("false");
 
-		c.setSessionCount("1");
+		c.setSessionCount("2");
     	
 		c.setEraWorkable("false");
 		
