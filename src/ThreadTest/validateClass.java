@@ -356,6 +356,9 @@ public void writeToDbPrerate(String testInputNbr,String tinCount,String trkngnbr
 	PreparedStatement stmt = null;
 	
 System.out.println(trkngnbr +" : "+finalResult+" : "+finalDesc);
+if (finalDesc.equals("")) {
+	finalDesc="Unknown Error";
+}
 	try {
 	    stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,prerate_single) values (?,?,?,?,?,?)");  
 		stmt.setString(1,testInputNbr);  
@@ -374,10 +377,11 @@ System.out.println(trkngnbr +" : "+finalResult+" : "+finalDesc);
 	
 	
 	try {
-		stmt=con.prepareStatement("update era_results set result=?,description=? where trkngnbr=?");  
+		stmt=con.prepareStatement("update era_results set result=?,description=?,tin_Count=? where trkngnbr=?");  
 		stmt.setString(1,finalResult);  
 		stmt.setString(2,finalDesc); 
-		stmt.setString(3,trkngnbr); 
+		stmt.setString(3,tinCount); 
+		stmt.setString(4,trkngnbr); 
 		stmt.executeUpdate();
 		
 }
@@ -403,6 +407,49 @@ catch(Exception e) {
 
 
 
+public Boolean searchOracleDBError(String testInputNbr,String tinCount,String trkngnbr,String invoiceNbr) {
+	Connection con=null;
+	Statement stmt=null;
+	ResultSet rs=null;
+	Boolean boo=false;;
+	try {
+		con=c.getOracleARL3DbConnection();
+		stmt=con.createStatement();
+		rs=stmt.executeQuery("select process_Status_cd from apps.fdx_ar_invoice_interface_all where  length(invoice_sequence_nbr) =16 and invoice_nbr='"+invoiceNbr+"'");
+		String finalResult="";
+		String finalDesc="";
+		if (rs.next()==false){
+			
+			finalResult="fail";
+			finalDesc="Invoice Failed Not In Oracle DB";
+			  //oracleBoolean=true;
+			writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
+			boo=true;
+		}
+		else{
+			String tempString= rs.getString("PROCESS_STATUS_CD");
+				  if (!tempString.equals("S")) {
+					  finalResult="fail";
+					  finalDesc="Invoice Failed in Oracle DB";
+					  //oracleBoolean=true;
+					  writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
+					  boo=true;
+				 }
+		}
+	}
+	catch(Exception e) {
+		System.out.println(e);
+		}
+	try {
+	//	con.close();
+	//	stmt.close();
+	//	rs.close();
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return boo;
+}
 
 
 

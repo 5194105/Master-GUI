@@ -60,7 +60,7 @@ public class rebillThread extends Thread{
 	String result, descripiton, testInputNbr, tinCount, trkngnbr, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, region , login , password, rsType , company , prerate,workable, rowNumber,length,width,height,actualWeight;
 	int waitTime;
 	int attempts=0;
-	int maxAttempts=3;
+	int maxAttempts;
 	String level;
 	driverClass dc;
 	validateClass vc;
@@ -110,6 +110,8 @@ public class rebillThread extends Thread{
 		    if (vc.validateRebill(testInputNbr,tinCount,trkngnbr)==true) {
 		    	continue;
 		    }
+		    
+		    
 		
 			try {
 				doRebill(testInputNbr, tinCount, trkngnbr, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, region , login , password, rsType ,company , prerate,length,width,height,actualWeight,workable);
@@ -156,6 +158,7 @@ public class rebillThread extends Thread{
     public void doRebill(String testInputNbr,String tinCount,String trkngnbr,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2 ,String region ,String login ,String password,String rsType ,String company ,String prerate,String length,String width,String height,String actualWeight,String workable) throws InterruptedException {
     	String finalResult="";
     	String finalDesc="";
+    	maxAttempts=1;
     	for (int i=0;i<maxAttempts;i++) {
     	login();
     	WebElement element=null;
@@ -185,7 +188,9 @@ public class rebillThread extends Thread{
     		finalResult="fail";
     		finalDesc="Failed on Entering Tracking Number";
 	   		vc.writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,"");
-	   		continue;
+    		
+	   		
+	   		
             	 }
     		
     		
@@ -225,9 +230,19 @@ public class rebillThread extends Thread{
     	}
     	
     	if(counter1>=10) {
-    			finalResult="fail";
-    	   	    finalDesc="Could Not Get To Charge Code Details";
-    	   		vc.writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,"");
+    			
+    	   		
+    	   		if (vc.searchOracleDBError(testInputNbr, tinCount, trkngnbr, invoiceNbr1)==true){
+    		   		return;
+    	    		}
+    	    		else {
+    	    			finalResult="fail";
+    	    	   	    finalDesc="Could Not Get To Charge Code Details";
+    	    	   		vc.writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,"");
+    	    			
+    	    		}
+    	   		
+    	   		
     	   		continue;
                 	 }
         		
@@ -639,7 +654,29 @@ public class rebillThread extends Thread{
                         driver.findElement(By.xpath("//*[@id=\"thirdacct_number\"]")).sendKeys(rebillAccount);
                         break;
                     }
-
+         	System.out.println("")   ; 
+             if (!length.equals("")) {
+            	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[1]/input")));
+                 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[1]/input")).clear();
+                 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[1]/input")).sendKeys(length);
+             }
+             if (!width.equals("")) {
+              	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[2]/input")));
+                 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[3]/input")).clear();
+                 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[3]/input")).sendKeys(width);
+             }
+             if (!height.equals("")) {
+              	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[4]/input")));
+                 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[4]/input")).clear();
+                 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[4]/input")).sendKeys(height);
+             }
+             if (!actualWeight.equals("")) {
+              	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("  /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[2]/div[2]/input")));
+                 driver.findElement(By.xpath("  /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[2]/div[2]/input")).clear();
+                 driver.findElement(By.xpath("  /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[2]/div[2]/input")).sendKeys(actualWeight);
+             }
+            
+             
          	System.out.println("")   ;   
            
             
@@ -651,7 +688,7 @@ public class rebillThread extends Thread{
              	}
              	catch(Exception e) {
              		System.out.println("Failed Trying to Rebill..");
-             		 Assert.fail("Failed Trying to Rebill..");
+             		// Assert.fail("Failed Trying to Rebill..");
              	}
 
             
@@ -706,8 +743,14 @@ public class rebillThread extends Thread{
             		 }
             		 popupCounter++;
             	 }
-            	
+            	 try {
             	 driver.findElement(By.xpath("/html/body/div[6]/div/div/div[3]/button[1]")).click();
+            	 }
+            	 catch(Exception e) {
+            		 driver.findElement(By.xpath("/html/body/div[6]/div/div/div[3]/button[2]")).click();
+                 	
+            		 
+            	 }
             	 Thread.sleep(10000);
             } 
             

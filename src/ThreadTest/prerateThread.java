@@ -76,7 +76,7 @@ public class prerateThread extends Thread{
 			System.out.println(chrgCd3);
 			
 			//Check if track is already successful
-			
+			System.out.println(trkngnbr);
 		    
 		    if (vc.validatePrerate(testInputNbr,tinCount,trkngnbr)==true) {
 		    	continue;
@@ -130,7 +130,8 @@ public void homepage() {
     	
     	try {
     		driver.get(levelUrl);
-    		driver.switchTo().frame("header");						
+    		driver.switchTo().frame("header");	
+    		wait = new WebDriverWait(driver,3);
     		if (!driver.findElement(By.id("preRateEntrySelForm:_t12")).getText().equals("Tracking No:")) {
     			login();
     		}
@@ -148,7 +149,7 @@ public void homepage() {
     
     
   public void doPrerate(String result,String description,String testInputNbr,String tinCount,String trkngnbr,String prerateTypeCd,String  prerateAmt,String currencyCd,String approvalId,String chrgCd1,String chrgAmt1,String chrgCd2, String chrgAmt2,String chrgCd3,String chrgAmt3,String  chrgCd4,String chrgAmt4,String valDesc) throws InterruptedException {
-	  maxAttempts=2;
+	  maxAttempts=1;
 	  String [] resultArray = new String[2];
 	  for (int i=0;i<maxAttempts;i++) {
 	  System.out.println("Attempt Number :"+(i+1));
@@ -199,7 +200,7 @@ public void homepage() {
 	    	driver.switchTo().frame("header");}
 	    	catch(Exception e) {}
 	    	try {
-	    		wait = new WebDriverWait(driver,10);
+	    		wait = new WebDriverWait(driver,5);
 			driver.findElement(By.id("preRateEntrySelection")).click();
 			driver.switchTo().defaultContent();
 			driver.switchTo().frame("content");
@@ -269,7 +270,7 @@ public void homepage() {
 				
 				
 					resultArray[0]="fail";
-					resultArray[1]="Failed on prerate Page";
+					resultArray[1]=errorMessage;
 				
 				
 				vc.writeToDbPrerate(testInputNbr,tinCount,trkngnbr,resultArray[0],resultArray[1]);
@@ -355,7 +356,7 @@ public void homepage() {
 		//Tries to see if back to homepage indicating success
 		try {
 			
-			 Thread.sleep(10000);
+			// Thread.sleep(10000);
 			
 			
 			 wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]")), "Shipment Selection for Pre-Rate Entry"));
@@ -413,7 +414,7 @@ public void homepage() {
 		   
 		//Check again for success
 		try{
-			Thread.sleep(10000);
+			//Thread.sleep(10000);
 			wait.until(ExpectedConditions.textToBePresentInElement(driver.findElement(By.xpath("/html/body/form[1]/div/div/table/tbody/tr[1]/td/span/div/div[1]/div/div/span[1]")), "Shipment Selection for Pre-Rate Entry"));
 		
 			if (vc.validatePrerate(testInputNbr,tinCount,trkngnbr)==true) {
@@ -622,6 +623,11 @@ where pkg_trkng_nbr ='582838858029';
 					   resultString+="SVC_TPY_CD is 21 ";
 					   oreError=true;
 				   }
+				   if (rs.getString(3).equals("18")) {
+					   System.out.println("SVC_TPY_CD is 18");
+					   resultString+="SVC_TPY_CD is 18 (IPD) ";
+					   oreError=true;
+				   }
 				   if (!rs.getString(4).equals("OR")) {
 					   System.out.println("ITEM_PRCS_CD is "+rs.getString(4));
 					   resultString+="ITEM_PRCS_CD is "+rs.getString(4);
@@ -632,7 +638,7 @@ where pkg_trkng_nbr ='582838858029';
 				   
 				   	  resultArray[0]="fail"; 
 				   	  if (resultString.equals("")) {
-				      resultArray[1]="";
+				      resultArray[1]="Unknown Not Eligible Error";
 				   	  }
 				   	  else	if (!resultString.equals("")) {
 					      resultArray[1]=resultString;

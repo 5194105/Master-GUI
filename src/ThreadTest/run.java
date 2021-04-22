@@ -9,6 +9,8 @@ import configuration.importData;
 public class run {
 	static config c;
 public static void main (String args[]) {
+	importData id = new importData();
+	c=id.getConfig();
 	//Function Type
 	// 1 Single Rebill
 	// 2 Mass Rebill
@@ -22,8 +24,8 @@ public static void main (String args[]) {
 	// 10 Instant Invoice Device
 
 	int function = 7;
-	importData id = new importData();
-	c=id.getConfig();
+	
+	c.setSessionCount("2");
 	customConfig(function);
 	base b = new base(c,function);
 }
@@ -122,9 +124,9 @@ public static void customConfig (int function) {
 		    	c.setNullCheckBox("true");
 		    	c.setFailedCheckBox("true");
 				c.setDatabaseDisabled("false");
-				c.setCustomCheckBox("false");
-				c.setCustomString("trkngnbr is not null and description is null");
-				c.setSessionCount("2");
+				c.setCustomCheckBox("true");
+				c.setCustomString("trkngnbr is not null and result is null");
+				//c.setSessionCount("2");
 				
 				break;
 				
