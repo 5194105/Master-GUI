@@ -27,7 +27,7 @@ import configuration.config;
 public class instantInvoiceThread extends Thread{
 	ArrayList<data> dataArray;
 	config c;
-	String homePath;
+	String homePath,testInputNbr,tinCount;
 	WebDriver driver;
 	String browser;
 	String levelUrl;
@@ -58,10 +58,15 @@ public class instantInvoiceThread extends Thread{
 		for(data d: dataArray) {
 			
 			//Declare Vars
+			
+			testInputNbr=d.getTestInputNbr();
+			tinCount=d.getTinCount();
 			trkngnbr=d.getTrkngnbr();
 			payorAcctNbr=d.getPayorAcctNbr();
 			username =d.getUsername();
 			password=d.getPassword(); 
+			
+			
 			
 			System.out.println(trkngnbr);
 			System.out.println(payorAcctNbr);
@@ -278,7 +283,7 @@ Thread.sleep(3000);
                  {
                      //FAILED.. Will not progress any further.
                      System.out.println("No Record found");
-                     writeToFile( trkngnbr,"No Record found");	
+                    // writeToFile( trkngnbr,"No Record found");	
                      return;
                  }
              }
@@ -319,7 +324,7 @@ Thread.sleep(3000);
                             
                             // System.out.println(ee);
                              System.out.println("Could not submit");
-                             writeToFile( trkngnbr,"Could not submit");
+                           //  writeToFile( trkngnbr,"Could not submit");
                              continue;
                            
                          }
@@ -329,13 +334,13 @@ Thread.sleep(3000);
                    if( vc.validateInstantInvoice(trkngnbr)==true) {
                   
                  System.out.println("pass");
-                 writeToFile( trkngnbr,"pass");
+               //  writeToFile( trkngnbr,"pass");
                  	 return;
                  	 
                   }
                   else {
                 	 System.out.println("FAILED");
-                	 writeToFile( trkngnbr,"FAILED");
+                	 //writeToFile( trkngnbr,"FAILED");
                 	 continue;
                      }
     }

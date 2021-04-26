@@ -18,6 +18,7 @@ public class base {
 	//static ArrayList<rebillThread> singleRebillThreadArray= new ArrayList<rebillThread>();
 	int  dbVal=1;
 	 config c;
+	 String eraCase;
 	String allCheckBox,customCheckBox,customString,nullCheckBox,failedCheckBox,domesticCheckBox,internationalCheckBox,expressCheckBox,groundCheckBox,eraWorkable,databaseSqlCount,databaseSqlQuery;
 	//public static void main(String args[]) {
 	public base(config c,int function) {
@@ -106,6 +107,10 @@ public class base {
 					case 10:	
 					threadArray.add(new instantInvoiceThread(dataArrayPartition,c));
 					break;
+					
+					case 22:	
+						threadArray.add(new eraRerateUpload(dataArrayPartition,c));
+						break;
 	}
 			}
 			
@@ -202,9 +207,16 @@ public class base {
             		
                 		
             		case 5:
-                    	dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),nullCheck(rs.getString(8)),nullCheck(rs.getString(9)),nullCheck(rs.getString(10)),nullCheck(rs.getString(11)),nullCheck(rs.getString(12)),nullCheck(rs.getString(13)),nullCheck(rs.getString(14)),nullCheck(rs.getString(15)),nullCheck(rs.getString(16)),nullCheck(rs.getString(17)),nullCheck(rs.getString(18)),nullCheck(rs.getString(19)),tempCounter));	
+            			eraCase = c.getEraCase();
+                    	dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),nullCheck(rs.getString(8)),nullCheck(rs.getString(9)),nullCheck(rs.getString(10)),nullCheck(rs.getString(11)),nullCheck(rs.getString(12)),nullCheck(rs.getString(13)),nullCheck(rs.getString(14)),nullCheck(rs.getString(15)),eraCase));	
                     	break;
                 		
+                    	
+            		 case 6:
+            			       			 
+              			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),"5194105","5194105",tempCounter));	
+              		     	break;
+                    	
             		case 7:
             			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),nullCheck(rs.getString(8)),nullCheck(rs.getString(9)),nullCheck(rs.getString(10)),nullCheck(rs.getString(11)),nullCheck(rs.getString(12)),nullCheck(rs.getString(13)),nullCheck(rs.getString(14)),nullCheck(rs.getString(15)),nullCheck(rs.getString(16)),nullCheck(rs.getString(17)),nullCheck(rs.getString(18)),nullCheck(rs.getString(19))));	
             		     	break;
@@ -213,8 +225,18 @@ public class base {
             	 case 10:
          			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),"5194105","5194105",tempCounter));	
          		     	break;
-         		}
+         		
+            		
+            	 case 22:
+           			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3))));	
+           		     	break;
             		}
+            		
+            		
+            	
+          		}
+            		
+            		
             	
         	}
         	catch(Exception e) {
@@ -455,9 +477,27 @@ public class base {
 				
 				//Credit Debit
 				case 5:	
-					 databaseSqlCount="select count(*) as total from era_credit_debit ";
-					 databaseSqlQuery="select result, description, TEST_INPUT_NBR,	TIN_COUNT	,TRKNGNBR,	INVOICE_NBR_1,	INVOICE_NBR_2,	REGION,	USERNAME,	PASSWORD,	CREDIT_FLG,	DEBIT_FLG,	DISPUTE_FLG,	RESOLVE_CREDIT_FLG,	WORKABLE ,REASON_CODE,	REASON_CATEGORY, ROOT_CAUSE,VAL_DESC from era_credit_debit " ;
-					
+					 
+					eraCase = c.getEraCase();
+
+					switch(eraCase) {
+					case "1":
+						databaseSqlCount="select count(*) as total from era_credit ";
+						databaseSqlQuery="select result, description, TEST_INPUT_NBR,	TIN_COUNT	,TRKNGNBR,	INVOICE_NBR_1,	INVOICE_NBR_2,	REGION,	USERNAME,	PASSWORD,	WORKABLE ,REASON_CATEGORY,	Reason_code, ROOT_CAUSE,VAL_DESC from era_credit " ;
+					break;
+					case "2":
+						databaseSqlCount="select count(*) as total from era_debit ";
+						databaseSqlQuery="select result, description, TEST_INPUT_NBR,	TIN_COUNT	,TRKNGNBR,	INVOICE_NBR_1,	INVOICE_NBR_2,	REGION,	USERNAME,	PASSWORD,	WORKABLE ,REASON_CATEGORY,	Reason_code, ROOT_CAUSE,VAL_DESC from era_debit " ;
+						break;
+					case "3":
+						databaseSqlCount="select count(*) as total from era_dispute ";
+						databaseSqlQuery="select result, description, TEST_INPUT_NBR,	TIN_COUNT	,TRKNGNBR,	INVOICE_NBR_1,	INVOICE_NBR_2,	REGION,	USERNAME,	PASSWORD,	WORKABLE ,REASON_CATEGORY,	Reason_code, ROOT_CAUSE,VAL_DESC from era_dispute " ;
+						break;
+					case "4":
+						databaseSqlCount="select count(*) as total from era_resolve_credit ";
+						databaseSqlQuery="select result, description, TEST_INPUT_NBR,	TIN_COUNT	,TRKNGNBR,	INVOICE_NBR_1,	INVOICE_NBR_2,	REGION,	USERNAME,	PASSWORD,	WORKABLE ,REASON_CATEGORY,	Reason_code, ROOT_CAUSE,VAL_DESC from era_resolve_credit " ;
+						break;
+					}
 						
 					
 					if (allCheckBox.equals("true")) {
@@ -528,9 +568,48 @@ public class base {
 						databaseSqlQuery+="where trkngnbr is not null and "+customString;
 					}
 				break;
+				
+				
+				
 				case 6:	
 					databaseSqlQuery="select TEST_INPUT_NBR	,TRKNGNBR	,PAYOR_ACCT_NBR,	ITEM_PRCS_CD	,INSTNT_INV_FLG from instant_invoice_view   ";
 					databaseSqlCount="select count(*) from  instant_invoice_view ";
+					
+					if (allCheckBox.equals("true")) {
+			    		databaseSqlCount+="where trkngnbr is not null and instnt_inv_flg is null ";
+			    		databaseSqlQuery+="where trkngnbr is not null and instnt_inv_flg is null";
+			    	}
+			    	
+			    	System.out.println(customCheckBox);
+			    	System.out.println(customString);
+			    	
+			    	if (customCheckBox.equals("false")) {
+			    	
+			    	if (allCheckBox.equals("false")) {
+			    		databaseSqlCount+="where  ";
+			    		databaseSqlQuery+="where  ";
+
+			    	if (nullCheckBox.equals("true") && failedCheckBox.equals("true")) {
+			    		databaseSqlCount+="(instnt_inv_flg is null or instnt_inv_flg ='fail') ";
+			    		databaseSqlQuery+="(instnt_inv_flg is null or instnt_inv_flg ='fail') ";
+			    	}
+			    	if (nullCheckBox.equals("true") && failedCheckBox.equals("false")) {
+			    		databaseSqlCount+="instnt_inv_flg is null ";
+			    		databaseSqlQuery+="instnt_inv_flg is null ";
+			    	}
+			    	if (nullCheckBox.equals("false") && failedCheckBox.equals("true")) {
+			    		databaseSqlCount+="instnt_inv_flg ='fail' ";
+			    		databaseSqlQuery+="instnt_inv_flg ='fail' ";
+			    	}
+			    	
+			    	}
+			    	}
+			    	else if (customCheckBox.equals("true")){
+			    		databaseSqlCount+="where (instnt_inv_flg is null or instnt_inv_flg ='fail')  and "+customString;
+			    		databaseSqlQuery+="where (instnt_inv_flg is null or instnt_inv_flg ='fail')  and "+customString;
+			    	}
+			    	
+					
 				break;
 			
 				//Prerate Single
@@ -593,7 +672,18 @@ public class base {
 					dbVal=2;
 					break;
 				
-				
+				case 22:	
+					databaseSqlQuery="select TEST_INPUT_NBR	,TIN_COUNT	,trkngnbr from era_rerate_view  ";
+					databaseSqlCount="select count(*) from  era_rerate_view ";
+					
+					
+					 if (customCheckBox.equals("true")) {
+					  		databaseSqlCount+="where trkngnbr is not null and "+customString;
+				    		databaseSqlQuery+="where trkngnbr is not null and "+customString;
+					  		 
+					  	 }
+					
+				break;
 				}
 				
 				System.out.println(databaseSqlQuery);

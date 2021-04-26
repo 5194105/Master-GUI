@@ -3,7 +3,10 @@ package eraRerate;
 
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,12 +38,10 @@ public class eraRerateManualTest {
 		c.setDatabaseDisabled("false");
 		c.setCustomCheckBox("true");
 		//c.setCustomString("trkngnbr in ('597012059274',	'244496705687',	'794991365707',	'506365021201',	'757714581424',	'315459044390',	'777982821200')");
-		c.setCustomString("trkngnbr in ('794993961067')");
+		c.setCustomString("trkngnbr is not null and defect_flg is null and (result is null or result ='fail')");
 		
 		
-		
-		
-		
+
 		
 		
 		

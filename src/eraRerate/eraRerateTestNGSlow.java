@@ -12,7 +12,10 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -818,6 +821,16 @@ public class eraRerateTestNGSlow {
     	WebElement element=null;
     	JavascriptExecutor js= (JavascriptExecutor) driver;
     	
+    	
+    	
+    	
+    	
+    	
+    	 DateFormat dateFormat = new SimpleDateFormat("MM/dd/YYYY");
+	        Date newDate = new Date();
+	        System.out.println(dateFormat.format(newDate));
+    	
+    	
     	int packageCounter=0;
     	Boolean exist;
     	WebElement scrollElement;
@@ -907,6 +920,52 @@ public class eraRerateTestNGSlow {
     	}
     	
     	if(counter1>=10) {
+    		
+    		Connection con=null;
+    		Statement stmt=null;
+    		ResultSet rs=null;
+    		Boolean boo=false;;
+    		try {
+    			con=c.getOracleARL3DbConnection();
+    			stmt=con.createStatement();
+    			rs=stmt.executeQuery("select process_Status_cd from apps.fdx_ar_invoice_interface_all where  length(invoice_sequence_nbr) =16 and invoice_nbr='"+invoiceNbr1+"'");
+    			String finalResult="";
+    			String finalDesc="";
+    			if (rs.next()==false){
+    				
+    				finalResult="fail";
+    				finalDesc="Invoice Failed Not In Oracle DB";
+    				  //oracleBoolean=true;
+    			
+    				boo=true;
+    			}
+    			else{
+    				String tempString= rs.getString("PROCESS_STATUS_CD");
+    				String[] resultArray = new String[2];
+    					  if (!tempString.equals("S")) {
+    						  resultArray[0]="fail";
+    						  resultArray[1]="Invoice Failed in Oracle DB";
+    						  //oracleBoolean=true;
+    						  writeToDB(testInputNbr,tinCount,trk,resultArray);
+    						  boo=true;
+    					 }
+    			}
+    		}
+    		catch(Exception e) {
+    			System.out.println(e);
+    			}
+    		try {
+    		//	con.close();
+    		//	stmt.close();
+    		//	rs.close();
+    		} catch (Exception e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    		
+		   	
+	    		
+    		
     		 if(source.equals("excel")) {
                	 writeToExcel(rowNumber, 0,"fail");
                	 writeToExcel(rowNumber, 1,"Could Not Get To Charge Code Details");
@@ -1130,6 +1189,8 @@ public class eraRerateTestNGSlow {
      }
      
      
+     
+     
      if(rerateType.contains("payor")) {
     	 if (payor.equals("1")) {
     		 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[3]/div[2]/div[1]/div/label/span")).click();
@@ -1168,6 +1229,16 @@ public class eraRerateTestNGSlow {
     	
      }
      
+     
+     if(rerateType.contains("date")) {
+    	 
+    	 driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[1]/div[2]/div/div/input")).clear();	
+		 Thread.sleep(1000);
+		 driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[1]/div[2]/div/div/input")).sendKeys(dateFormat.format(newDate));
+	 
+    	 
+    
+     }
      
      //Click Rerate
      driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[4]/div/button[1]")).click();
@@ -1391,7 +1462,7 @@ public class eraRerateTestNGSlow {
     	 System.out.println("No Error Before Phone");
      }
      
-     
+     String tempErrorContact="Failed Selecting Contact Method and Clicking Continue";
      try{
     	 driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
     	 //Click on rebill RPI Complete, Phone, and Continue
@@ -1432,12 +1503,13 @@ public class eraRerateTestNGSlow {
           
           Thread.sleep(5000);
           
-          
+        
           try {
-      
-          String tempError= driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[1]/h4")).getText();
-			 if (tempError.equals("Conflicting Case check call failed")) {
-				 System.out.println(tempError);
+       
+        	  tempErrorContact= driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[1]/h4")).getText();
+			
+          if (tempErrorContact.equals("Conflicting Case check call failed")) {
+				 System.out.println(tempErrorContact);
 				 if(source.equals("excel")) {
 	               	 writeToExcel(rowNumber, 0,"fail");
 	               	 writeToExcel(rowNumber, 1,"Conflicting Case check call failed");
@@ -1463,13 +1535,13 @@ public class eraRerateTestNGSlow {
      
     	 if(source.equals("excel")) {
         	 writeToExcel(rowNumber, 0,"fail");
-        	 writeToExcel(rowNumber, 1,"Failed Selecting Contact Method and Clicking Continue");
+        	 writeToExcel(rowNumber, 1,tempErrorContact);
         	return;
         	 }
 			 if(databaseDisabled.equals("false")) {
    			 String[] resultArray = new String[2];
    			 	resultArray[0]="fail";
-   				resultArray[1]="Failed Selecting Contact Method and Clicking Continue";
+   				resultArray[1]=tempErrorContact;
    				 writeToDB(testInputNbr,tinCount,trk,resultArray);
    				
          	 } 

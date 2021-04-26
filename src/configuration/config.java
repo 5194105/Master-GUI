@@ -44,7 +44,7 @@ public class config {
     String homePath;
 
     String startDate,endDate;
-
+    String eraCase;
     
     String compatible;
     
@@ -94,6 +94,13 @@ public class config {
 	
 	
 	
+	
+	public void setEraCase(String eraCase) {
+		this.eraCase=eraCase;
+	}
+	public String getEraCase() {
+		return eraCase;
+	}
 	public void setStephenTest(String stephenTest) {
 		this.stephenTest=stephenTest;
 	}

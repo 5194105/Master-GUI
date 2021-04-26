@@ -250,16 +250,49 @@ public void searchOracleDB(String sqlQuery,String testInputNbr,String tinCount,S
 		String finalDesc="";
 		if (rs.next()==false){
 			finalResult="fail";
-			finalDesc="";
+			finalDesc="Could Not Find in Oracle DB";
 		}
 		else{
 			String tempString= rs.getString("NOTES");
+								
+			
+			
+			
+			
+				if (flag.equals("era_rebill")) {
 				  if (tempString.contains("RDT RB")) {
 					  finalResult="pass";
 					  finalDesc="completed";
 					  oracleBoolean=true;
 					  writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
-				 }
+				  		}
+					}
+				if (flag.equals("era_rerate")) {
+				if (tempString.contains("RDT CR")) {
+					finalResult="pass";
+					finalDesc="completed";
+				  }
+				  else  if (tempString.contains("RDT DN")) {
+					  finalResult="pass";
+					  finalDesc="denied";
+				  }
+				  else {
+					  finalResult="na";
+					  finalDesc="unable to validate";
+					  
+				  }
+				  writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
+				
+				}		
+								
+								
+						System.out.println(finalResult);		
+						System.out.println(finalDesc);		
+								
+								
+								
+								
+								
 		}
 	}
 	catch(Exception e) {
@@ -274,6 +307,86 @@ public void searchOracleDB(String sqlQuery,String testInputNbr,String tinCount,S
 		e.printStackTrace();
 	}
 }
+
+
+
+
+
+
+
+
+
+public void searchOracleDBRerateTemp(String sqlQuery,String testInputNbr,String tinCount,String trkngnbr) {
+	  
+   
+
+    	Connection con = null;
+    	String[] resultArray = new String[2];
+    	
+       	con=c.getOracleARL3DbConnection();
+       	 	
+    	
+    	
+    	
+    	
+
+    	PreparedStatement stmt = null;
+    	ResultSet rs = null;
+    	try {
+    		
+    		stmt=con.prepareStatement("select * from apps.xxfdx_eabr_airbill_notes_v where AIRBILL_NUMBER=?");  
+			stmt.setString(1,trkngnbr);  
+			rs = stmt.executeQuery();
+    	} catch (SQLException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}
+    	      
+    	   
+    		try {
+    			rs = stmt.executeQuery();
+    		} catch (SQLException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    	       try {
+    			if (rs.next()==false){
+    			   
+    				
+    				System.out.println("Is NULL");
+    			      resultArray[0]="fail";
+    			      resultArray[1]="Not Found In Oracle DB";
+    			}
+    			   else{
+    				   
+    				  String tempString= rs.getString("NOTES");
+    				  if (tempString.contains("RDT CR")) {
+    					  resultArray[0]="pass";
+	    			      resultArray[1]="completed";
+    				  }
+    				  else  if (tempString.contains("RDT DN")) {
+    					  resultArray[0]="pass";
+	    			      resultArray[1]="denied";
+    				  }
+    				  else {
+    					  resultArray[0]="na";
+	    			      resultArray[1]="unable to validate";
+    					  
+    				  }
+    				  writeToDb(testInputNbr,tinCount,trkngnbr, resultArray[0],resultArray[1],null);
+    				  
+    			   }
+    		} catch (SQLException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    	      
+    	   
+}    
+
+
+
+
 
 
 
@@ -305,6 +418,70 @@ public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String
 		stmt.setString(7,"Y");  
 		stmt.executeUpdate();
 	}
+		
+		if (flag.equals("era_rerate")) {
+			 stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,request_id,era_rerate) values (?,?,?,?,?,?,?)");  
+				
+				//stmt.setString(1,flag); 
+				stmt.setString(1,testInputNbr);  
+				stmt.setString(2,tinCount);  
+				stmt.setString(3,trkngnbr);  
+				stmt.setString(4,finalResult);  
+				stmt.setString(5,finalDesc);  
+				stmt.setString(6,requestID);  
+				stmt.setString(7,"Y");  
+				stmt.executeUpdate();
+		}
+		if (flag.equals("era_credit")) {
+		    stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,era_credit) values (?,?,?,?,?,?)");  
+			
+			//stmt.setString(1,flag); 
+			stmt.setString(1,testInputNbr);  
+			stmt.setString(2,tinCount);  
+			stmt.setString(3,trkngnbr);  
+			stmt.setString(4,finalResult);  
+			stmt.setString(5,finalDesc);  
+			 stmt.setString(6,"Y");  
+			stmt.executeUpdate();
+		}
+		if (flag.equals("era_debit")) {
+		    stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,era_debit) values (?,?,?,?,?,?)");  
+			
+			//stmt.setString(1,flag); 
+			stmt.setString(1,testInputNbr);  
+			stmt.setString(2,tinCount);  
+			stmt.setString(3,trkngnbr);  
+			stmt.setString(4,finalResult);  
+			stmt.setString(5,finalDesc);  
+			 stmt.setString(6,"Y");  
+			stmt.executeUpdate();
+		}
+		if (flag.equals("era_dispute")) {
+		    stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,era_dispute) values (?,?,?,?,?,?)");  
+			
+			//stmt.setString(1,flag); 
+			stmt.setString(1,testInputNbr);  
+			stmt.setString(2,tinCount);  
+			stmt.setString(3,trkngnbr);  
+			stmt.setString(4,finalResult);  
+			stmt.setString(5,finalDesc);  
+			 stmt.setString(6,"Y");  
+			stmt.executeUpdate();
+		}
+		if (flag.equals("era_resolve_credit")) {
+		    stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,era_resolve) values (?,?,?,?,?,?)");  
+			
+			//stmt.setString(1,flag); 
+			stmt.setString(1,testInputNbr);  
+			stmt.setString(2,tinCount);  
+			stmt.setString(3,trkngnbr);  
+			stmt.setString(4,finalResult);  
+			stmt.setString(5,finalDesc);  
+			 stmt.setString(6,"Y");  
+			stmt.executeUpdate();
+		}
+		
+		
 		}
 	catch(Exception e) {
 		System.out.println(e);
@@ -317,11 +494,53 @@ public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String
 		stmt=con.prepareStatement("update era_results set result=?,description=?,era_rebill='Y' where trkngnbr=?");  
 		stmt.setString(1,finalResult);  
 		stmt.setString(2,finalDesc); 
-		////stmt.setString(3,flag);
-		//stmt.setString(4,"Y");
+		
 		stmt.setString(3,trkngnbr); 
 		stmt.executeUpdate();
 		}
+		
+		if (flag.equals("era_rerate")) {
+			stmt=con.prepareStatement("update era_results set result=?,description=?,era_rerate='Y' where trkngnbr=?");  
+			stmt.setString(1,finalResult);  
+			stmt.setString(2,finalDesc); 
+			stmt.setString(3,trkngnbr); 
+			stmt.executeUpdate();
+		}
+		if (flag.equals("era_credit")) {
+			stmt=con.prepareStatement("update era_results set result=?,description=?,era_credit='Y',tin_count=? where trkngnbr=?");  
+			stmt.setString(1,finalResult);  
+			stmt.setString(2,finalDesc); 
+			stmt.setString(3,tinCount);
+			stmt.setString(4,trkngnbr); 
+			stmt.executeUpdate();
+		}
+		
+		if (flag.equals("era_debit")) {
+			stmt=con.prepareStatement("update era_results set result=?,description=?,era_debit='Y',tin_count=? where trkngnbr=?");  
+			stmt.setString(1,finalResult);  
+			stmt.setString(2,finalDesc); 
+			stmt.setString(3,tinCount);
+			stmt.setString(4,trkngnbr); 
+			stmt.executeUpdate();
+		}
+		if (flag.equals("era_dispute")) {
+			stmt=con.prepareStatement("update era_results set result=?,description=?,era_dispute='Y',tin_count=? where trkngnbr=?");  
+			stmt.setString(1,finalResult);  
+			stmt.setString(2,finalDesc); 
+			stmt.setString(3,tinCount);
+			stmt.setString(4,trkngnbr); 
+			 
+			stmt.executeUpdate();
+		}
+		if (flag.equals("era_resolove_credit")) {
+			stmt=con.prepareStatement("update era_results set result=?,description=?,era_resolve='Y',tin_count=? where trkngnbr=?");  
+			stmt.setString(1,finalResult);  
+			stmt.setString(2,finalDesc); 
+			stmt.setString(3,tinCount);
+			stmt.setString(4,trkngnbr); 
+			stmt.executeUpdate();
+		}
+		
 }
 catch(Exception e) {
 	System.out.println(e);
@@ -500,33 +719,44 @@ public void searchOracleDBDebitCredit(String sqlQuery,String testInputNbr,String
 		}
 		else{
 			String tempString= rs.getString("NOTES");
-				  if (tempString.contains("RDT RB")) {
-					  if (tempString.contains("RDT CR") && denialBoolean==false && flag.equals("ERA_CREDIT")) {
+				 System.out.println(tempString);
+				 							  
+					  if (tempString.contains("RDT CR") && denialBoolean==false && flag.equals("era_credit")) {
 						finalResult="pass";
 						finalDesc="completed";
+						oracleBoolean=true;
+						writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
+						
 					}
-					else if (tempString.contains("RDT DB") && denialBoolean==false && flag.equals("ERA_DEBIT")) {
+					else if (tempString.contains("RDT DB") && denialBoolean==false && flag.equals("era_debit")) {
 						finalResult="pass";
 						finalDesc="completed";
+						oracleBoolean=true;
+						writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
 					}
-					else if (tempString.contains("RDT CR") && denialBoolean==false && flag.equals("ERA_RESOLVE")) {
+					else if (tempString.contains("RDT CR") && denialBoolean==false && flag.equals("era_resolve")) {
 						finalResult="pass";
 						finalDesc="completed";
+						oracleBoolean=true;
+						writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
 					}
-					else if (tempString.contains("RDT D") && denialBoolean==false && flag.equals("ERA_DISPUTE")) {
+					else if (tempString.contains("RDT D") && denialBoolean==false && flag.equals("era_dispute")) {
 						finalResult="pass";
 						finalDesc="completed";
+						oracleBoolean=true;
+						writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
 					}
 					else  if (tempString.contains("RDT DN") && denialBoolean==true) {
 						finalResult="pass";
 						finalDesc="denied";
+						oracleBoolean=true;
+						writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
 					}
 					else {
 						finalResult="na";
 						finalDesc="unable to validate";
-						  
-					}
-					  writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
+						oracleBoolean=false;
+						writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
 				 }
 		}
 	}

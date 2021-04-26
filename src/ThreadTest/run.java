@@ -23,9 +23,12 @@ public static void main (String args[]) {
 	// 9 PRS Rerate
 	// 10 Instant Invoice Device
 
-	int function = 7;
+	int function = 5;
 	
-	c.setSessionCount("2");
+	c.setSessionCount("1");
+	c.setCustomCheckBox("true");
+	c.setCustomString("trkngnbr ='580150901558'");
+	
 	customConfig(function);
 	base b = new base(c,function);
 }
@@ -48,8 +51,8 @@ public static void customConfig (int function) {
 			c.setExpressCheckBox("true");	
 			c.setGroundCheckBox("false");
 			c.setEraWorkable("false");
-			c.setCustomCheckBox("true");
-			c.setCustomString("trkngnbr is not null and region='USA' and result='fail'");
+			//c.setCustomCheckBox("true");
+			//c.setCustomString("trkngnbr is not null and region='USA' and result='fail'");
 			
 			
 			c.setSessionCount("2");
@@ -75,8 +78,8 @@ public static void customConfig (int function) {
 			c.setGroundCheckBox("true");
 			c.setSessionCount("1");
 			c.setDatabaseDisabled("false");
-			c.setCustomCheckBox("true");
-			c.setCustomString("trkngnbr in ('794993961067')");
+		//	c.setCustomCheckBox("true");
+			//c.setCustomString("trkngnbr in ('794993961067')");
 			break;
 			
 		case 4:
@@ -100,14 +103,19 @@ public static void customConfig (int function) {
 			c.setResolveCreditCheckBox("true");
 			c.setDatabaseDisabled("false");
 			c.setCustomCheckBox("true");
-			c.setCustomString("trkngnbr is not null and CREDIT_FLG='Y'");
+			//c.setCustomString("trkngnbr is not null and (result='fail' or result='na' or result is null)");
+			//c.setCustomString("trkngnbr is not null and (result='fail' or result='na' or result is null)");
+			
 			
 			c.setHeadlessString("false");
-
-			c.setSessionCount("1");
+			c.setEraCase("3");
+			
 			break;
 			
 		case 6:
+			c.setDatabaseDisabled("false");
+			c.setDriverType("2");
+			c.setCompatibleMode("false");
 			break;
 			
 		
@@ -124,8 +132,8 @@ public static void customConfig (int function) {
 		    	c.setNullCheckBox("true");
 		    	c.setFailedCheckBox("true");
 				c.setDatabaseDisabled("false");
-				c.setCustomCheckBox("true");
-				c.setCustomString("trkngnbr is not null and result is null");
+				//c.setCustomCheckBox("true");
+				//c.setCustomString("trkngnbr is not null and result is null");
 				//c.setSessionCount("2");
 				
 				break;
@@ -134,6 +142,10 @@ public static void customConfig (int function) {
 				break;
 				
 			case 9:
+				c.setDatabaseDisabled("false");
+				c.setDriverType("2");
+				c.setCompatibleMode("false");
+				
 				break;
 				
 			case 10:
@@ -155,6 +167,17 @@ public static void customConfig (int function) {
 			}
 				
 				break;
+				
+				
+				
+			case 22:
+				
+				c.setDatabaseDisabled("false");
+				c.setCustomCheckBox("true");
+				c.setCustomString("trkngnbr is not null");
+				
+				
+				 
 		}
 	
 		

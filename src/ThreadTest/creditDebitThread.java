@@ -16,7 +16,7 @@ import org.testng.Assert;
 
 import configuration.config;
 
-public class creditDebitThread {
+public class creditDebitThread extends Thread{
 
 	
 	
@@ -31,7 +31,7 @@ public class creditDebitThread {
 	WebDriverWait wait;
 	String source;
 	String result,  descripiton, testInputNbr, tinCount, trkngnbr, invoiceNbr1, invoiceNbr2, region , username ,
-	password, creditFlg, debitFlg, disputeFlg,  resolveCreditFlg, workable, reasonCode, reasonCategory, rootCause, valDesc;
+	password,  workable, reasonCode, reasonCategory, rootCause, valDesc,eraCase;
 	int waitTime;
 	int attempts=0;
 	int maxAttempts=3;
@@ -67,30 +67,41 @@ public void run () {
 			 region =d.getRegion();
 			 username=d.getUsername();
 			 password=d.getPassword();
-			 creditFlg=d.getCreditFlg();
-			 debitFlg=d.getDebitFlg();
-			 disputeFlg=d.getDisputeFlg();
-			 resolveCreditFlg=d.getResolveCreditFlg();
+			
 			 workable=d.getWorkable();
 			 reasonCode=d.getReasonCode();
 			 reasonCategory=d.getReasonCategory();
 			 rootCause=d.getRootCause();
 			 valDesc=d.getValDesc();
-			
-			
+			 eraCase=c.getEraCase();
+			System.out.println(trkngnbr);
 			//Check if track is already successful
 			
-			 if(creditFlg.equals("Y")){   
-				 vc.setFlag("ERA_CREDIT");
+			 if(eraCase.equals("1")){   
+				 vc.setFlag("era_credit");
+			 }
+			 if(eraCase.equals("2")){   
+				 vc.setFlag("era_debit");
+			 }
+			 if(eraCase.equals("3")){   
+				 vc.setFlag("era_dispute");
+			 }
+			 if(eraCase.equals("4")){   
+				 vc.setFlag("era_resolve");
+			 }
 				 if (vc.validateCreditDebit(testInputNbr,tinCount,trkngnbr,valDesc)==true) {
-					 vc.writeToDb(testInputNbr, tinCount, trkngnbr, "pass", "completed", null);
+					// vc.writeToDb(testInputNbr, tinCount, trkngnbr, "pass", "completed", null);
 				 continue;
 				 }
 				    
 			    	enterDataStep1(testInputNbr,tinCount,trkngnbr,invoiceNbr1);
-			    	doCreditDebit("credit", result,  descripiton, testInputNbr, tinCount, trkngnbr, invoiceNbr1, invoiceNbr2,  region , username , password,  creditFlg, debitFlg, disputeFlg, resolveCreditFlg,workable,reasonCode,reasonCategory,rootCause,valDesc);
-			    	enterContactMethodStep3(testInputNbr,tinCount,trkngnbr,invoiceNbr1,username,"credit",valDesc);
-			}
+			    	doCreditDebit(eraCase, result,  descripiton, testInputNbr, tinCount, trkngnbr, invoiceNbr1, invoiceNbr2,  region , username , password, workable,reasonCode,reasonCategory,rootCause,valDesc);
+			    	enterContactMethodStep3(testInputNbr,tinCount,trkngnbr,invoiceNbr1,username,eraCase,valDesc);
+			
+			 
+			 
+		
+			 
 			 
 			
 		}
@@ -262,7 +273,140 @@ public void run () {
     
     
 
-public void enterContactMethodStep3(String testInputNbr,String tinCount,String trk,String invoiceNbr1,String username,String type,String valDesc) {
+
+
+
+public void doCreditDebit(String eraCase, String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2, String region ,String username ,String password,String workable,String reasonCode,String reasonCategory,String rootCause,String valDesc) {
+	
+
+	String spaceString="     ";
+	 try{
+	  Select actionDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"pkgaction\"]")));
+	  
+	  String textContent="";
+	  List <WebElement> optionsInnerText=null;
+	  
+	  /*
+		List <WebElement> optionsInnerText= actionDropDown.getOptions();
+		for(WebElement text: optionsInnerText){
+		     textContent = text.getAttribute("textContent");
+		    if(textContent.toLowerCase().contains(reasonCode.toLowerCase()))
+		    	actionDropDown.selectByVisibleText(textContent);
+		    }
+	  */
+	  
+	  
+	if (eraCase.equals("1")) {
+		 actionDropDown.selectByValue("CR");
+		 Thread.sleep(1000);
+	}
+	else if (eraCase.equals("2")) {
+		 actionDropDown.selectByValue("DB");
+		 Thread.sleep(1000);
+	}
+	else if (eraCase.equals("3")) {
+		 actionDropDown.selectByValue("D");
+		 Thread.sleep(1000);
+	}
+		 
+		 //Reason Category
+		 if(!reasonCategory.equals("")) {
+		 actionDropDown = new Select (driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[4]/select")));
+		 optionsInnerText= actionDropDown.getOptions();
+			for(WebElement text: optionsInnerText){
+			     textContent = text.getAttribute("textContent");
+			    if(textContent.toLowerCase().contains(reasonCategory.toLowerCase()))
+			    	actionDropDown.selectByVisibleText(textContent);
+			    	break;
+			    }
+		 Thread.sleep(1000);
+		 }
+		 //Reason code
+		 if(!reasonCode.equals("")) { 
+			 
+		 actionDropDown = new Select (driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select")));
+		// actionDropDown.selectByVisibleText(reasonCode+spaceString);
+		
+			 optionsInnerText= actionDropDown.getOptions();
+				for(WebElement text: optionsInnerText){
+				     textContent = text.getAttribute("textContent");
+				    if(textContent.toLowerCase().contains(reasonCode.toLowerCase()))
+				    	actionDropDown.selectByVisibleText(textContent);
+				    break;
+				    }
+			 
+			 Thread.sleep(1000);
+		 }
+		 //Root Cause
+		 if(!rootCause.equals("")) { 
+		 actionDropDown = new Select (driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[6]/select")));
+		 optionsInnerText= actionDropDown.getOptions();
+			for(WebElement text: optionsInnerText){
+			     textContent = text.getAttribute("textContent");
+			    if(textContent.toLowerCase().contains(rootCause.toLowerCase()))
+			    	actionDropDown.selectByVisibleText(textContent);
+			    	break;
+			    }
+		 }
+	
+
+	    	
+	
+	
+}
+	 catch(Exception e) {
+		  System.out.println(e);
+
+		}
+		}
+	 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public void enterContactMethodStep3(String testInputNbr,String tinCount,String trk,String invoiceNbr1,String username,String eraCase,String valDesc) {
 try {
 	 System.out.println("Inside getDetails");
      //Getting Action Dropdown. Will RB everytime.
@@ -496,6 +640,19 @@ try {
           }
       	   
           
+          
+          
+          //Dispute Only
+           if (eraCase.equals("3")) {
+        	   driver.findElement(By.xpath(" /html/body/div[6]/div/div/div[1]/div[2]/div/div/div/input")).sendKeys("Stephen");
+        	   driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/div[3]/div/div/div/input")).sendKeys("Daniel");
+        	   driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/div[4]/div/div/div/input")).sendKeys("1234567890");
+        		driver.findElement(By.xpath("/html/body/div[6]/div/div/div[1]/div[5]/button[1]")).click();
+        	   
+        	  
+     		 Thread.sleep(1000);
+     	}
+          
           driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
           System.out.println();
           
@@ -537,88 +694,6 @@ catch(Exception e) {
 }
 }
 
-
-
-public void doCreditDebit(String type, String result, String descripiton,String testInputNbr,String tinCount,String trk,String invoiceNbr1,String invoiceNbr2, String region ,String username ,String password,String creditFlg,String debitFlg,String disputeFlg,String resolveCreditFlg,String workable,String reasonCode,String reasonCategory,String rootCause,String valDesc) {
-	
-
-	String spaceString="     ";
-	 try{
-	  Select actionDropDown = new Select (driver.findElement(By.xpath("//*[@id=\"pkgaction\"]")));
-	  
-	  String textContent="";
-	  List <WebElement> optionsInnerText=null;
-	  
-	  /*
-		List <WebElement> optionsInnerText= actionDropDown.getOptions();
-		for(WebElement text: optionsInnerText){
-		     textContent = text.getAttribute("textContent");
-		    if(textContent.toLowerCase().contains(reasonCode.toLowerCase()))
-		    	actionDropDown.selectByVisibleText(textContent);
-		    }
-	  */
-	  
-	  
-	if (creditFlg.equals("Y")) {
-		 actionDropDown.selectByValue("CR");
-		 Thread.sleep(1000);
-	}
-	else if (debitFlg.equals("Y")) {
-		 actionDropDown.selectByValue("DB");
-		 Thread.sleep(1000);
-	}
-		 
-		 //Reason Category
-		 if(!reasonCategory.equals("")) {
-		 actionDropDown = new Select (driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[4]/select")));
-		 optionsInnerText= actionDropDown.getOptions();
-			for(WebElement text: optionsInnerText){
-			     textContent = text.getAttribute("textContent");
-			    if(textContent.toLowerCase().contains(reasonCategory.toLowerCase()))
-			    	actionDropDown.selectByVisibleText(textContent);
-			    	break;
-			    }
-		 Thread.sleep(1000);
-		 }
-		 //Reason code
-		 if(!reasonCode.equals("")) { 
-			 
-		 actionDropDown = new Select (driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[5]/div[1]/select")));
-		// actionDropDown.selectByVisibleText(reasonCode+spaceString);
-		
-			 optionsInnerText= actionDropDown.getOptions();
-				for(WebElement text: optionsInnerText){
-				     textContent = text.getAttribute("textContent");
-				    if(textContent.toLowerCase().contains(reasonCode.toLowerCase()))
-				    	actionDropDown.selectByVisibleText(textContent);
-				    break;
-				    }
-			 
-			 Thread.sleep(1000);
-		 }
-		 //Root Cause
-		 if(!rootCause.equals("")) { 
-		 actionDropDown = new Select (driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[6]/select")));
-		 optionsInnerText= actionDropDown.getOptions();
-			for(WebElement text: optionsInnerText){
-			     textContent = text.getAttribute("textContent");
-			    if(textContent.toLowerCase().contains(rootCause.toLowerCase()))
-			    	actionDropDown.selectByVisibleText(textContent);
-			    	break;
-			    }
-		 }
-	
-
-	    	
-	
-	
-}
-	 catch(Exception e) {
-		  System.out.println(e);
-
-		}
-		}
-	 
 	 
     
 }

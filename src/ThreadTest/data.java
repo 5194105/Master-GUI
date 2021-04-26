@@ -11,7 +11,7 @@ public class data {
 	String massRerateCombo;
 	String creditFlg, debitFlg,  disputeFlg, resolveCreditFlg,rootCause,reasonCategory;
 	String payorAcctNbr, itemPrcsCd, instantInvFlg,tinComment,podScan;
-	String acct1, acct2,  trkngnbr1, trkngnbr2, service1, service2, requestType, acctType, acctName,serviceName,expectedStatus;
+	String acct1, acct2,  trkngnbr1, trkngnbr2, service1, service2, requestType, acctType, acctName,serviceName,expectedStatus,eraCase;
 	//Function Type
 	// 1 Single Rebill
 	// 2 Mass Rebill
@@ -111,7 +111,7 @@ public class data {
 	}
 	
 	//Mass Rerate
-	public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password,String rateWeight,String length, String height,String width,String dimType, String rerateType,String rsType,String company,String massRerateCombo,int counter) {
+	public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password,String rateWeight,String length, String height,String width,String dimType, String rerateType,String rsType,String company) {
 		this.result=result;
 		this.description=description;
 		this.testInputNbr=testInputNbr;
@@ -129,12 +129,16 @@ public class data {
 		this.password=password;
 		this.rsType=rsType;
 		this.company=company;
-		this.massRerateCombo=massRerateCombo;
+		
 	}
+	
+	
+	
+	
 	
 	//Credit/Debit
 
-	public data(String temp,String result, String description,String testInputNbr,String tinCount,String trkngnbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password,String creditFlg,String debitFlg, String disputeFlg,String resolveCreditFlg,String workable, String reasonCode,String reasonCategory,String rootCause,String valDesc,int counter) {
+	public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password,String workable, String reasonCategory,String reasonCode,String rootCause,String valDesc,String eraCase) {
 		this.result=result;
 		this.description=description;
 		this.testInputNbr=testInputNbr;
@@ -145,29 +149,37 @@ public class data {
 		this.region=region;
 		this.username=username;
 		this.password=password;
-		this.creditFlg=creditFlg;
-		this.debitFlg=debitFlg;
-		this.disputeFlg=disputeFlg;
-		this.resolveCreditFlg=resolveCreditFlg;
 		this.workable=workable;
 		this.reasonCode=reasonCode;
 		this.reasonCategory=reasonCategory;
 		this.rootCause=rootCause;
 		this.valDesc=valDesc;
-	
+		this.eraCase=eraCase;
 	}
 	
 	
 	
 	//Instant Invoice
-	public data(String testInputNbr,String trkngnbr,String payorAcctNbr,String itemPrcsCd,String instantInvFlg) {
+	public data(String testInputNbr,String trkngnbr,String payorAcctNbr,String itemPrcsCd,String instantInvFlg,String username,String password,int counter) {
 		this.testInputNbr=testInputNbr;
 		this.trkngnbr=trkngnbr;
 		this.payorAcctNbr=payorAcctNbr;
 		this.itemPrcsCd=itemPrcsCd;
 		this.instantInvFlg=instantInvFlg;
+		this.username=username;
+		this.password=password;
 		
 	}
+	
+	//ERA Rerate Upload
+	public data(String testInputNbr,String tinCount,String trkngnbr) {
+		this.testInputNbr=testInputNbr;
+		this.tinCount=tinCount;
+		this.trkngnbr=trkngnbr;
+		
+		
+	}
+	
 	
 	
 	
