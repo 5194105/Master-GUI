@@ -23,11 +23,11 @@ public static void main (String args[]) {
 	// 9 PRS Rerate
 	// 10 Instant Invoice Device
 
-	int function = 5;
+	int function = 3;
 	
 	c.setSessionCount("1");
 	c.setCustomCheckBox("true");
-	c.setCustomString("trkngnbr ='580150901558'");
+	c.setCustomString("description ='Could Not Get To Charge Code Details'");
 	
 	customConfig(function);
 	base b = new base(c,function);
@@ -62,6 +62,9 @@ public static void customConfig (int function) {
 			
 			break;
 			
+			
+			
+			//Single ERA Rerate
 		case 3:
 			
 			c.setExcelPath("C:\\Users\\FedExUser\\Documents\\rebill.xlsx");
@@ -76,7 +79,7 @@ public static void customConfig (int function) {
 			c.setInternationalCheckBox("true");
 			c.setExpressCheckBox("true");
 			c.setGroundCheckBox("true");
-			c.setSessionCount("1");
+			//c.setSessionCount("1");
 			c.setDatabaseDisabled("false");
 		//	c.setCustomCheckBox("true");
 			//c.setCustomString("trkngnbr in ('794993961067')");
@@ -116,6 +119,7 @@ public static void customConfig (int function) {
 			c.setDatabaseDisabled("false");
 			c.setDriverType("2");
 			c.setCompatibleMode("false");
+			c.setAllCheckBox("false");
 			break;
 			
 		

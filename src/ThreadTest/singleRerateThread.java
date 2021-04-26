@@ -15,7 +15,7 @@ import org.testng.Assert;
 
 import configuration.config;
 
-public class singleRerateThread {
+public class singleRerateThread extends Thread{
 	ArrayList<data> dataArray;
 	config c;
 	String homePath;
@@ -197,7 +197,8 @@ public void doEraRerate(
 		tempString1=driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[2]/div[1]/div/div[2]/div[1]/div/div/div/div/div/div[1]/div/div[1]/span[1]")).getText();
 		if(tempString1.equals("Charge Code Description")) {
 			System.out.println("Found Code Desc");
-			return;
+			break;
+		
 		}
 	}
 	catch(Exception e) {
@@ -222,7 +223,9 @@ public void doEraRerate(
            //	 writeToExcel(rowNumber, 0,"fail");
           // 	 writeToExcel(rowNumber, 1,"Could Not Get To Charge Code Details");
            	 }
-				
+		 if (vc.searchOracleDBError(testInputNbr, tinCount, trkngnbr, invoiceNbr1)==true){
+		   		return;
+	    		}
 	   			 String[] resultArray = new String[2];
 	   			 	resultArray[0]="fail";
 	   				resultArray[1]="Could Not Get To Charge Code Details";

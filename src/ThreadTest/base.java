@@ -93,7 +93,7 @@ public class base {
 					threadArray.add(new creditDebitThread(dataArrayPartition,c));
 					break;
 					case 6:	
-				//	threadArray.add(new instantInvoiceThread(dataArrayPartition,c));
+					threadArray.add(new instantInvoiceThread(dataArrayPartition,c));
 					break;
 					case 7:	
 					threadArray.add(new prerateThread(dataArrayPartition,c));
