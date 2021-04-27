@@ -138,7 +138,7 @@ public class validateClass {
 		prerateBoolean=false;
 		
 		if (databaseDisabled.equals("false")) {
-			searchEcDB("select * from ec_intl_schema.ec_pre_rate_history where pkg_trkng_nbr ="+trkngnbr+"and EVENT_TYPE_CD_DESC="+type,testInputNbr,tinCount,trkngnbr);
+			searchEcDB("select * from ec_intl_schema.ec_pre_rate_history where pkg_trkng_nbr ="+trkngnbr+"and EVENT_TYPE_CD_DESC='"+type+"'",testInputNbr,tinCount,trkngnbr);
 			}
 		return prerateBoolean;
 	}
@@ -154,6 +154,7 @@ public class validateClass {
 		Connection con=null;
 		Statement stmt=null;
 		ResultSet rs=null;
+		System.out.println(sqlQuery);
 		try {
 			con=c.getEcL3DbConnection();
 			stmt=con.createStatement();

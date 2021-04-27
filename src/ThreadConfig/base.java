@@ -746,7 +746,12 @@ public class base {
 					
 					
 					
-					 
+					if (customCheckBox.equals("true")) {
+				  		databaseSqlCount+="where trkngnbr is not null and "+customString;
+			    		databaseSqlQuery+="where trkngnbr is not null and "+customString;
+				  		 
+				  	 }
+					else {
 				    	if (allCheckBox.equals("false")) {
 				    		databaseSqlCount+="where trkngnbr is not null and ";
 				    		databaseSqlQuery+="where trkngnbr is not null and ";
@@ -767,7 +772,7 @@ public class base {
 				    	if (nullCheckBox.equals("false") && failedCheckBox.equals("true")) {
 				    		databaseSqlCount+="result ='fail' ";
 				    		databaseSqlQuery+="result ='fail' ";
-				    
+				    	}
 				    	}
 					
 				break;

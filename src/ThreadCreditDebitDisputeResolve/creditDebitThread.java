@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
+
 
 import ThreadConfig.data;
 import ThreadConfig.driverClass;
@@ -138,7 +138,7 @@ public void run () {
 			}
     	catch(Exception e) {
     		
-    		 Assert.fail("Could Not Login");
+    		
     	}
     }
     
@@ -259,7 +259,7 @@ public void run () {
         catch(Exception e){
         	 System.out.println("Could Not Clicked All Stat Codes");
             System.out.println(e);
-            Assert.fail("Could Not Clicked All Stat Codes");
+           return;
 
         }
     	

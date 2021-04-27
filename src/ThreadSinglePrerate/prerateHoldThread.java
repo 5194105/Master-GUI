@@ -11,12 +11,12 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
+
 
 import ThreadConfig.data;
 import ThreadConfig.driverClass;
@@ -70,7 +70,7 @@ public class prerateHoldThread extends Thread{
 			//Check if track is already successful
 			System.out.println(trkngnbr);
 		    
-		    if (vc.validatePrerate(testInputNbr,tinCount,trkngnbr)==true) {
+		    if (vc.validatePrerateHold(testInputNbr,tinCount,trkngnbr,tinComment)==true) {
 		    	continue;
 		    }
 		  	try {
@@ -145,14 +145,14 @@ public void homepage() {
 	  for (int i=0;i<maxAttempts;i++) {
 	  System.out.println("Attempt Number :"+(i+1));
 		
-	  
+	 
 	  WebElement element;
   	  JavascriptExecutor Executor;
 
   	
   	
   	String errorMessage;
-  	wait = new WebDriverWait(driver,10);
+  	
   	
 
 	try {
