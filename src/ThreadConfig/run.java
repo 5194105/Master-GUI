@@ -25,10 +25,10 @@ public static void main (String args[]) {
 	// 22 ERA Rerate Upload to DB -- Works
 	
 	
-	int function = 3;
+	int function = 1;
 	c.setSessionCount("1");
 	c.setCustomCheckBox("true");
-	c.setCustomString("trkngnbr in ('613173003986')");
+	c.setCustomString("trkngnbr is not null");
 	
 	customConfig(function);
 	base b = new base(c,function);
@@ -54,8 +54,6 @@ public static void customConfig (int function) {
 			c.setEraWorkable("false");
 			
 			
-			
-			c.setSessionCount("2");
 			break;
 			
 		case 2:
