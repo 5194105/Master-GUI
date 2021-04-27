@@ -1,4 +1,4 @@
-package ThreadTest;
+package ThreadSingleERARerate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +13,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import ThreadConfig.data;
+import ThreadConfig.driverClass;
+import ThreadConfig.validateClass;
 import configuration.config;
 
 public class singleRerateThread extends Thread{
@@ -138,7 +141,8 @@ public void doEraRerate(
 		String rsType,String company,String valDesc,String comments
 		) throws InterruptedException {
 	
-	
+	maxAttempts=1;
+	for (int ii=0;ii<maxAttempts;ii++) {
 	login();
 	
 	WebElement element=null;
@@ -439,8 +443,19 @@ public void doEraRerate(
 		
 	} 
 	*/
+	try {
 	sel = new Select(driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div[3]/div/div/div/select")));
 	sel.selectByVisibleText(serviceName);
+	
+	}
+	catch(Exception e) {
+		String[] resultArray = new String[2];
+		resultArray[0]="fail";
+		resultArray[1]="Couldnt Find Service";
+		 vc.writeToDb(testInputNbr,tinCount,trkngnbr,resultArray[0],resultArray[1],null);
+	 
+	 return;
+	}
 	
  }
  
@@ -458,7 +473,7 @@ public void doEraRerate(
  try {
 	knter++;
 	System.out.println(driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[3]/div[2]/div/div/div/div[1]/div[2]/div/div[1]/div/div/div")).getText());
-	return;
+	break;
  }
 	catch(Exception e) {	
 	try {
@@ -542,7 +557,7 @@ while (i<10) {
 		//if normal continue
 		String tempString11 = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).getText();
 		if (tempString11.equals("Continue"))	{
-			return;
+			break;
 		}
 		}
 		catch(Exception e) {    		
@@ -556,7 +571,7 @@ while (i<10) {
 		//if adjust by value
 			String tempString11 = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div/div/div[3]/div[3]/button[2]")).getText();
 			if (tempString11.equals("Continue"))	{
-				return;
+				break;
 			}
 	}
 	catch(Exception e) {    		
@@ -645,6 +660,7 @@ catch(Exception e) {
       }
       catch(Exception e) {
     	  System.out.println("Could Not Click Last Continue... should be rerated now");
+    	  break;
       }
       
       
@@ -709,7 +725,7 @@ catch(Exception e) {
   	  }
     	
 	 }
-
+}
 }
 
 

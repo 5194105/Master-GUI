@@ -1,4 +1,4 @@
-package ThreadTest;
+package ThreadInstantInvoice;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -22,6 +22,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import ThreadConfig.data;
+import ThreadConfig.driverClass;
+import ThreadConfig.validateClass;
 import configuration.config;
 
 public class instantInvoiceThread extends Thread{

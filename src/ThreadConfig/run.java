@@ -1,4 +1,4 @@
-package ThreadTest;
+package ThreadConfig;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,22 +12,23 @@ public static void main (String args[]) {
 	importData id = new importData();
 	c=id.getConfig();
 	//Function Type
-	// 1 Single Rebill
-	// 2 Mass Rebill
-	// 3 Single Rerate
-	// 4 Mass Rerate
-	// 5 Credit Debit
-	// 6 Instant Invoice
-	// 7 Prerate Single
-	// 8 Prerate Hold
-	// 9 PRS Rerate
-	// 10 Instant Invoice Device
-
-	int function = 3;
+	// 1 Single Rebill -- Works
+	// 2 Mass Rebill -- Not Working
+	// 3 Single Rerate -- Works
+	// 4 Mass Rerate -- Not Working
+	// 5 Credit Debit -- Works
+	// 6 Instant Invoice -- Works
+	// 7 Prerate Single -- Works
+	// 8 Prerate Hold -- Works (Not Tested yet)
+	// 9 PRS Rerate -- Not Working
+	// 10 Instant Invoice Device -- Works
+	// 22 ERA Rerate Upload to DB -- Works
 	
+	
+	int function = 3;
 	c.setSessionCount("1");
 	c.setCustomCheckBox("true");
-	c.setCustomString("description ='Could Not Get To Charge Code Details'");
+	c.setCustomString("trkngnbr in ('613173003986')");
 	
 	customConfig(function);
 	base b = new base(c,function);
@@ -51,8 +52,7 @@ public static void customConfig (int function) {
 			c.setExpressCheckBox("true");	
 			c.setGroundCheckBox("false");
 			c.setEraWorkable("false");
-			//c.setCustomCheckBox("true");
-			//c.setCustomString("trkngnbr is not null and region='USA' and result='fail'");
+			
 			
 			
 			c.setSessionCount("2");
@@ -79,10 +79,8 @@ public static void customConfig (int function) {
 			c.setInternationalCheckBox("true");
 			c.setExpressCheckBox("true");
 			c.setGroundCheckBox("true");
-			//c.setSessionCount("1");
 			c.setDatabaseDisabled("false");
-		//	c.setCustomCheckBox("true");
-			//c.setCustomString("trkngnbr in ('794993961067')");
+		
 			break;
 			
 		case 4:
@@ -105,9 +103,8 @@ public static void customConfig (int function) {
 			c.setDisputeCheckBox("false");
 			c.setResolveCreditCheckBox("true");
 			c.setDatabaseDisabled("false");
-			c.setCustomCheckBox("true");
-			//c.setCustomString("trkngnbr is not null and (result='fail' or result='na' or result is null)");
-			//c.setCustomString("trkngnbr is not null and (result='fail' or result='na' or result is null)");
+		
+			
 			
 			
 			c.setHeadlessString("false");
@@ -136,13 +133,21 @@ public static void customConfig (int function) {
 		    	c.setNullCheckBox("true");
 		    	c.setFailedCheckBox("true");
 				c.setDatabaseDisabled("false");
-				//c.setCustomCheckBox("true");
-				//c.setCustomString("trkngnbr is not null and result is null");
-				//c.setSessionCount("2");
+				
 				
 				break;
 				
 				case 8:
+					
+					c.setExcelPath("C:\\Users\\FedExUser\\Documents\\PRERATE_UPDATE.xlsx");
+			    	c.setLevel("3");
+			    	c.setDriverType("2");
+			    	c.setCompatibleMode("true");
+			    	c.setSource("db");
+			    	c.setAllCheckBox("false");
+			    	c.setNullCheckBox("true");
+			    	c.setFailedCheckBox("true");
+					c.setDatabaseDisabled("false");
 				break;
 				
 			case 9:
@@ -158,7 +163,7 @@ public static void customConfig (int function) {
 				c.setCompatibleMode("false");
 				c.setSessionCount("10");
 				
-				
+				/*
 				File file = new File("E:\\Everyone Workspace Folders\\stephen\\Master-GUI\\instantInvoice.txt");
 				if (file.exists()) {
 					file.delete();
@@ -169,7 +174,7 @@ public static void customConfig (int function) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-				
+				*/
 				break;
 				
 				
@@ -177,8 +182,7 @@ public static void customConfig (int function) {
 			case 22:
 				
 				c.setDatabaseDisabled("false");
-				c.setCustomCheckBox("true");
-				c.setCustomString("trkngnbr is not null");
+				
 				
 				
 				 

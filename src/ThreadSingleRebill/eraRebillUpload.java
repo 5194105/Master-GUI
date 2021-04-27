@@ -1,13 +1,16 @@
-package ThreadTest;
+package ThreadSingleRebill;
 
 import java.util.ArrayList;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import ThreadConfig.data;
+import ThreadConfig.driverClass;
+import ThreadConfig.validateClass;
 import configuration.config;
 
-public class eraRerateUpload extends Thread{
+public class eraRebillUpload extends Thread{
 	
 	ArrayList<data> dataArray;
 	config c;
@@ -27,12 +30,12 @@ public class eraRerateUpload extends Thread{
 	driverClass dc;
 	validateClass vc;
 	
-	public eraRerateUpload(ArrayList<data> dataArray,config c) {
+	public eraRebillUpload(ArrayList<data> dataArray,config c) {
 		this.dataArray=dataArray;
 		this.c=c;
 		databaseDisabled=c.getDatabaseDisabled();
 		level=c.getLevel();
-		vc= new validateClass(c,databaseDisabled,"era_rerate");
+		vc= new validateClass(c,databaseDisabled,"era_rebill");
 }
 	
 	

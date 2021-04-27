@@ -1,4 +1,4 @@
-package ThreadTest;
+package ThreadConfig;
 
 public class data {
 	String result, description, testInputNbr, tinCount, trkngnbr, reasonCode,  billAcctNbr, invoiceNbr1, invoiceNbr2, region, username, password,  rs_type, company, rebillPrerate,  workable, defectFlg, defectNbr;

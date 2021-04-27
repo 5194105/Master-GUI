@@ -1,4 +1,4 @@
-package ThreadTest;
+package ThreadConfig;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -128,6 +128,23 @@ public class validateClass {
 			}
 		return prerateBoolean;
 	}
+	
+	
+	
+	
+/////////////////////PRERATE HOLD
+	
+	public Boolean validatePrerateHold(String testInputNbr,String tinCount,String trkngnbr,String type) {
+		prerateBoolean=false;
+		
+		if (databaseDisabled.equals("false")) {
+			searchEcDB("select * from ec_intl_schema.ec_pre_rate_history where pkg_trkng_nbr ="+trkngnbr+"and EVENT_TYPE_CD_DESC="+type,testInputNbr,tinCount,trkngnbr);
+			}
+		return prerateBoolean;
+	}
+	
+	
+	
 	
 	
 	
@@ -578,6 +595,8 @@ System.out.println(trkngnbr +" : "+finalResult+" : "+finalDesc);
 if (finalDesc.equals("")) {
 	finalDesc="Unknown Error";
 }
+
+if (flag.equals("prerate_single")) {
 	try {
 	    stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,prerate_single) values (?,?,?,?,?,?)");  
 		stmt.setString(1,testInputNbr);  
@@ -588,15 +607,34 @@ if (finalDesc.equals("")) {
 		stmt.setString(6,"Y");  
 		  
 		stmt.executeUpdate();
+	
 	}
 	catch(Exception e) {
 		System.out.println(e);
 	}
-	
-	
-	
+}
+if (flag.equals("prerate_hold")) {
 	try {
-		stmt=con.prepareStatement("update era_results set result=?,description=?,tin_Count=? where trkngnbr=?");  
+	    stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,prerate_hold) values (?,?,?,?,?,?)");  
+		stmt.setString(1,testInputNbr);  
+		stmt.setString(2,tinCount);  
+		stmt.setString(3,trkngnbr);  
+		stmt.setString(4,finalResult);  
+		stmt.setString(5,finalDesc);  
+		stmt.setString(6,"Y");  
+		  
+		stmt.executeUpdate();
+	
+	}
+	catch(Exception e) {
+		System.out.println(e);
+	}
+}
+	
+	
+if (flag.equals("prerate_single")) {
+	try {
+		stmt=con.prepareStatement("update era_results set result=?,description=?,tin_Count=?,prerate_single='Y' where trkngnbr=?");  
 		stmt.setString(1,finalResult);  
 		stmt.setString(2,finalDesc); 
 		stmt.setString(3,tinCount); 
@@ -607,6 +645,24 @@ if (finalDesc.equals("")) {
 catch(Exception e) {
 	System.out.println(e);
 }
+}
+
+if (flag.equals("prerate_hold")) {
+	try {
+		stmt=con.prepareStatement("update era_results set result=?,description=?,tin_Count=?,prerate_hold='Y' where trkngnbr=?");  
+		stmt.setString(1,finalResult);  
+		stmt.setString(2,finalDesc); 
+		stmt.setString(3,tinCount); 
+		stmt.setString(4,trkngnbr); 
+		stmt.executeUpdate();
+		
+}
+catch(Exception e) {
+	System.out.println(e);
+}
+}
+
+
 	
 	try {
 		con.close();

@@ -1,11 +1,20 @@
-package ThreadTest;
+package ThreadConfig;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import ThreadCreditDebitDisputeResolve.creditDebitThread;
+import ThreadInstantInvoice.instantInvoiceThread;
+import ThreadMassERARerate.massRerateThread;
+import ThreadSingleERARerate.eraRerateUpload;
+import ThreadSingleERARerate.singleRerateThread;
+import ThreadSinglePrerate.prerateHoldThread;
+import ThreadSinglePrerate.prerateThread;
+import ThreadSingleRebill.rebillThread;
 import configuration.config;
 import configuration.importData;
 
@@ -87,7 +96,7 @@ public class base {
 					threadArray.add(new singleRerateThread(dataArrayPartition,c));
 					break;
 					case 4:	
-				//	threadArray.add(new massRerateThread(dataArrayPartition,c));
+					threadArray.add(new massRerateThread(dataArrayPartition,c));
 					break;
 					case 5:	
 					threadArray.add(new creditDebitThread(dataArrayPartition,c));
@@ -99,7 +108,7 @@ public class base {
 					threadArray.add(new prerateThread(dataArrayPartition,c));
 					break;
 					case 8:	
-				//	threadArray.add(new prerateHoldThread(dataArrayPartition,c));
+					threadArray.add(new prerateHoldThread(dataArrayPartition,c));
 					break;
 					case 9:	
 				//	threadArray.add(new prsRerateThread(dataArrayPartition,c));
@@ -220,6 +229,12 @@ public class base {
             		case 7:
             			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),nullCheck(rs.getString(8)),nullCheck(rs.getString(9)),nullCheck(rs.getString(10)),nullCheck(rs.getString(11)),nullCheck(rs.getString(12)),nullCheck(rs.getString(13)),nullCheck(rs.getString(14)),nullCheck(rs.getString(15)),nullCheck(rs.getString(16)),nullCheck(rs.getString(17)),nullCheck(rs.getString(18)),nullCheck(rs.getString(19))));	
             		     	break;
+            		     	
+            		     	
+            		case 8:
+            			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7))));	
+            		     	break;
+            		     	
             		
             		
             	 case 10:
@@ -469,10 +484,80 @@ public class base {
 			    	}
 			       	
 				break;
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				case 4:	
 					databaseSqlQuery="select  result,  DESCRIPTION, test_Input_Nbr, tin_Count, trkngnbr, invoice_Nbr_1, invoice_Nbr_2, region, username , password,  rate_weight,wgt_type,length,height,width,dim_type, rerate_type, rs_Type ,company  , mass_rerate_combo from era_rerate_mass ";
 					databaseSqlCount="select count(*) from  era_rerate_mass";
-				break;
+				
+					  	
+			    	
+			    	if (allCheckBox.equals("true")) {
+			    		databaseSqlCount+="where trkngnbr is not null";
+			    		databaseSqlQuery+="where trkngnbr is not null ";
+			    	}
+			    	
+			    	System.out.println(customCheckBox);
+			    	System.out.println(customString);
+			    	
+			    	if (customCheckBox.equals("false")) {
+			    	
+			    	if (allCheckBox.equals("false")) {
+			    		databaseSqlCount+="where trkngnbr is not null and ";
+			    		databaseSqlQuery+="where trkngnbr is not null and ";
+			    	
+			    	
+			    	
+			    	
+			    	if (nullCheckBox.equals("true") && failedCheckBox.equals("true")) {
+			    		databaseSqlCount+="(result is null or result ='fail') ";
+			    		databaseSqlQuery+="(result is null or result ='fail') ";
+			    	}
+			    	if (nullCheckBox.equals("true") && failedCheckBox.equals("false")) {
+			    		databaseSqlCount+="result is null ";
+			    		databaseSqlQuery+="result is null ";
+			    	}
+			    	if (nullCheckBox.equals("false") && failedCheckBox.equals("true")) {
+			    		databaseSqlCount+="result ='fail' ";
+			    		databaseSqlQuery+="result ='fail' ";
+			    	}
+			    	
+			    	if (eraWorkable.equals("true")) {
+			    		databaseSqlCount+="and workable='Y'";
+			    		databaseSqlQuery+="and workable='Y'";
+			    	}
+			    	
+			    		}
+			    			}
+			    	else if (customCheckBox.equals("true")){
+			    		databaseSqlCount+="where trkngnbr is not null and "+customString;
+			    		databaseSqlQuery+="where trkngnbr is not null and "+customString;
+			    	}
+			    	
+			    	databaseSqlCount+=" order by test_input_nbr";
+					databaseSqlQuery+=" order by test_input_nbr";
+			    	 
+					
+					break;
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				
 				
 				//Credit Debit
@@ -654,10 +739,37 @@ public class base {
 				
 				
 				
-				
+				//Prerate Hold
 				case 8:	
 					databaseSqlQuery="select RESULT, DESCRIPTION,POD_SCAN,TEST_INPUT_NBR,TIN_COUNT,TRKNGNBR,TIN_COMMENT from prerate_hold_view  ";
 					databaseSqlCount="select count(*) from  prerate_hold_view ";
+					
+					
+					
+					 
+				    	if (allCheckBox.equals("false")) {
+				    		databaseSqlCount+="where trkngnbr is not null and ";
+				    		databaseSqlQuery+="where trkngnbr is not null and ";
+				    	}
+				    
+				    	 if (allCheckBox.equals("true")) {
+				     		databaseSqlCount+="where trkngnbr is not null  ";
+				     		databaseSqlQuery+="where trkngnbr is not null   ";
+				     	}
+				    	if (nullCheckBox.equals("true") && failedCheckBox.equals("true")) {
+				    		databaseSqlCount+="(result is null or result ='fail') ";
+				    		databaseSqlQuery+="(result is null or result ='fail') ";
+				    	}
+				    	if (nullCheckBox.equals("true") && failedCheckBox.equals("false")) {
+				    		databaseSqlCount+="result is null ";
+				    		databaseSqlQuery+="result is null ";
+				    	}
+				    	if (nullCheckBox.equals("false") && failedCheckBox.equals("true")) {
+				    		databaseSqlCount+="result ='fail' ";
+				    		databaseSqlQuery+="result ='fail' ";
+				    
+				    	}
+					
 				break;
 				case 9:	
 					databaseSqlQuery="select TEST_INPUT_NBR	,TIN_COUNT	,ACCT1,	ACCT2,	TRK_NO1,	TRK_NO2	,INVOICE_NBR_1,	INV_NO2,	SERVICE1,	SERVICE2,	REQUEST_TYPE,	ACCT_TYPE,	ACCNAME from rerate_master  ";

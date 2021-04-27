@@ -29,8 +29,7 @@ import org.testng.xml.XmlClass;
 import org.testng.xml.XmlSuite;
 import org.testng.xml.XmlTest;
 
-import ThreadTest.base;
-
+import ThreadConfig.base;
 import eraRerate.eraMassRerateTestNGSlow;
 import eraRerate.eraRerateTestNGSlow;
 import eraRerate.eraRerateUpload;

@@ -1,4 +1,4 @@
-package ThreadTest;
+package ThreadSinglePrerate;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,6 +16,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import ThreadConfig.data;
+import ThreadConfig.driverClass;
+import ThreadConfig.validateClass;
 import configuration.config;
 
 public class prerateThread extends Thread{
