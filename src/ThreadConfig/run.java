@@ -28,7 +28,8 @@ public static void main (String args[]) {
 	int function = 3;
 	c.setSessionCount("1");
 	c.setCustomCheckBox("true");
-	c.setCustomString("trkngnbr is not null and region !='USA' and company='EP'");
+	c.setCustomString("test_input_nbr in ('238277', '137335', '194522', '236343', '236584', '235694', '237339', '240687', '236591', '237125', '244819', '167535', '188503', '242069', '242346', '219894', '226571') and defect_nbr='Drop Mail to TD'");
+	c.setEraCase("3");
 	
 	customConfig(function);
 	base b = new base(c,function);
@@ -101,12 +102,8 @@ public static void customConfig (int function) {
 			c.setDisputeCheckBox("false");
 			c.setResolveCreditCheckBox("true");
 			c.setDatabaseDisabled("false");
-		
-			
-			
-			
 			c.setHeadlessString("false");
-			c.setEraCase("3");
+			
 			
 			break;
 			

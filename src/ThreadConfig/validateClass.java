@@ -38,6 +38,7 @@ public class validateClass {
 			 		
 			 if (oracleBoolean==false) {
 				 searchEraDB("select * from invadj_schema.rdt_rebill_store where rb_trkng_nbr="+trkngnbr,testInputNbr,tinCount,trkngnbr,1);
+				System.out.println();
 				 if (eraBoolean==false) {
 					 searchEraDB("select * from invadj_schema.rdt_rebill_request where airbill_nbr="+trkngnbr+" order by LAST_UPDT_TMSTP desc",testInputNbr,tinCount,trkngnbr,2);
 		         }
@@ -231,6 +232,7 @@ public void searchEraDB(String sqlQuery,String testInputNbr,String tinCount,Stri
               else {
             	  finalResult="fail";
             	  finalDesc=errorDesc;
+            	  writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
               }
 		break;
 		     }
@@ -534,7 +536,7 @@ public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String
 		}
 		
 		if (flag.equals("era_debit")) {
-			stmt=con.prepareStatement("update era_results set result=?,description=?,era_debit='Y',tin_count=? where trkngnbr=?");  
+			stmt=con.prepareStatement("update era_results set result2=?,description2=?,era_debit='Y',tin_count=? where trkngnbr=?");  
 			stmt.setString(1,finalResult);  
 			stmt.setString(2,finalDesc); 
 			stmt.setString(3,tinCount);
@@ -770,11 +772,10 @@ public void searchOracleDBDebitCredit(String sqlQuery,String testInputNbr,String
 		rs=stmt.executeQuery(sqlQuery);
 		String finalResult="";
 		String finalDesc="";
-		if (rs.next()==false){
-			finalResult="fail";
-			finalDesc="";
-		}
-		else{
+		
+		
+		
+			while (rs.next()) {
 			String tempString= rs.getString("NOTES");
 				 System.out.println(tempString);
 				 							  
@@ -783,39 +784,86 @@ public void searchOracleDBDebitCredit(String sqlQuery,String testInputNbr,String
 						finalDesc="completed";
 						oracleBoolean=true;
 						writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
+						break;
 						
 					}
+					  
+					
+					  
 					else if (tempString.contains("RDT DB") && denialBoolean==false && flag.equals("era_debit")) {
 						finalResult="pass";
 						finalDesc="completed";
 						oracleBoolean=true;
 						writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
+						break;
 					}
-					else if (tempString.contains("RDT CR") && denialBoolean==false && flag.equals("era_resolve")) {
+					else if (tempString.contains("RDT RC") && denialBoolean==false && flag.equals("era_resolve")) {
 						finalResult="pass";
 						finalDesc="completed";
 						oracleBoolean=true;
 						writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
+						break;
 					}
 					else if (tempString.contains("RDT D") && denialBoolean==false && flag.equals("era_dispute")) {
 						finalResult="pass";
 						finalDesc="completed";
 						oracleBoolean=true;
 						writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
+						break;
 					}
 					else  if (tempString.contains("RDT DN") && denialBoolean==true) {
 						finalResult="pass";
 						finalDesc="denied";
 						oracleBoolean=true;
 						writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
+						break;
 					}
+					  
+					  
+					  
+					  
+					else if (tempString.contains("RDT CR") && denialBoolean==true) {
+						finalResult="fail";
+						finalDesc="got CR but should be denied";
+						oracleBoolean=true;
+						writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
+						break;
+					}
+					else if (tempString.contains("RDT DB") && denialBoolean==true) {
+						finalResult="fail";
+						finalDesc="got DB but should be denied";
+						oracleBoolean=true;
+						writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
+						break;
+					}
+					else if (tempString.contains("RDT D") && denialBoolean==true) {
+						finalResult="fail";
+						finalDesc="got D but should be denied";
+						oracleBoolean=true;
+						writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
+						break;
+					}
+					else if (tempString.contains("RDT RC") && denialBoolean==true) {
+						finalResult="fail";
+						finalDesc="got RC but should be denied";
+						oracleBoolean=true;
+						writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
+						break;
+					}
+					  
+					  
 					else {
 						finalResult="na";
 						finalDesc="unable to validate";
 						oracleBoolean=false;
 						writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
 				 }
-		}
+					  
+					  
+			}	  
+					  
+					  
+		
 	}
 	catch(Exception e) {
 		System.out.println(e);

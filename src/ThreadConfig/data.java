@@ -1,5 +1,7 @@
 package ThreadConfig;
 
+import ThreadCreditDebitDisputeResolve.debitDummyClass;
+
 public class data {
 	String result, description, testInputNbr, tinCount, trkngnbr, reasonCode,  billAcctNbr, invoiceNbr1, invoiceNbr2, region, username, password,  rs_type, company, rebillPrerate,  workable, defectFlg, defectNbr;
 	
@@ -12,6 +14,8 @@ public class data {
 	String creditFlg, debitFlg,  disputeFlg, resolveCreditFlg,rootCause,reasonCategory;
 	String payorAcctNbr, itemPrcsCd, instantInvFlg,tinComment,podScan;
 	String acct1, acct2,  trkngnbr1, trkngnbr2, service1, service2, requestType, acctType, acctName,serviceName,expectedStatus,eraCase;
+	debitDummyClass ddc;
+	String result2, description2;
 	//Function Type
 	// 1 Single Rebill
 	// 2 Mass Rebill
@@ -136,7 +140,7 @@ public class data {
 	
 	
 	
-	//Credit/Debit
+	//Credit/
 
 	public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password,String workable, String reasonCategory,String reasonCode,String rootCause,String valDesc,String eraCase) {
 		this.result=result;
@@ -157,8 +161,64 @@ public class data {
 		this.eraCase=eraCase;
 	}
 	
+	//Debit
+	public data(String result, String description,String result2, String description2,String testInputNbr,String tinCount,String trkngnbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password,String workable, String reasonCategory,String reasonCode,String rootCause,String valDesc,String eraCase,debitDummyClass ddc) {
+		this.result=result;
+		this.description=description;
+		this.description2=description2;
+		this.result2=result2;
+		this.testInputNbr=testInputNbr;
+		this.tinCount=tinCount;
+		this.trkngnbr=trkngnbr;
+		this.invoiceNbr1=invoiceNbr1;
+		this.invoiceNbr2=invoiceNbr2;
+		this.region=region;
+		this.username=username;
+		this.password=password;
+		this.workable=workable;
+		this.reasonCode=reasonCode;
+		this.reasonCategory=reasonCategory;
+		this.rootCause=rootCause;
+		this.valDesc=valDesc;
+		this.eraCase=eraCase;
+		this.ddc=ddc;
+		
+	}
 	
 	
+	
+	public String getEraCase() {
+		return eraCase;
+	}
+
+	public void setEraCase(String eraCase) {
+		this.eraCase = eraCase;
+	}
+
+	public debitDummyClass getDdc() {
+		return ddc;
+	}
+
+	public void setDdc(debitDummyClass ddc) {
+		this.ddc = ddc;
+	}
+
+	public String getResult2() {
+		return result2;
+	}
+
+	public void setResult2(String result2) {
+		this.result2 = result2;
+	}
+
+	public String getDescription2() {
+		return description2;
+	}
+
+	public void setDescription2(String description2) {
+		this.description2 = description2;
+	}
+
 	//Instant Invoice
 	public data(String testInputNbr,String trkngnbr,String payorAcctNbr,String itemPrcsCd,String instantInvFlg,String username,String password,int counter) {
 		this.testInputNbr=testInputNbr;

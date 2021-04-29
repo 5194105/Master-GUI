@@ -717,6 +717,9 @@ public class rebillThread extends Thread{
                          else{
                         	 System.out.println("Could Not Click");
                         	 overrideBoolean=true;
+                        	 vc.validateRebill(testInputNbr,tinCount,trkngnbr);
+                        	 return;
+                        	 
                        }
             		 }
             		 popupCounter++;
@@ -729,6 +732,8 @@ public class rebillThread extends Thread{
                  	
             		 
             	 }
+            	 
+            	 
             	 Thread.sleep(10000);
             } 
             

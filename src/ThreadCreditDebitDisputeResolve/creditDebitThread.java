@@ -33,7 +33,7 @@ public class creditDebitThread extends Thread{
 	String databaseDisabled;
 	WebDriverWait wait;
 	String source;
-	String result,  descripiton, testInputNbr, tinCount, trkngnbr, invoiceNbr1, invoiceNbr2, region , username ,
+	String result,  descripiton,result2,  descripiton2, testInputNbr, tinCount, trkngnbr, invoiceNbr1, invoiceNbr2, region , username ,
 	password,  workable, reasonCode, reasonCategory, rootCause, valDesc,eraCase;
 	int waitTime;
 	int attempts=0;
@@ -77,6 +77,10 @@ public void run () {
 			 rootCause=d.getRootCause();
 			 valDesc=d.getValDesc();
 			 eraCase=c.getEraCase();
+			 
+			 result2=d.getResult2();
+			 descripiton2=d.getDescription2();
+			 
 			System.out.println(trkngnbr);
 			//Check if track is already successful
 			
@@ -144,6 +148,9 @@ public void run () {
     
     
     public void enterDataStep1(String testInputNbr,String tinCount,String trkngnbr,String invoiceNbr1) {
+    	
+    	maxAttempts=3;
+    	for (int i=0;i<maxAttempts;i++) {
     	login();
     	WebElement scrollElement;
     	int packageCounter=0;
@@ -255,6 +262,7 @@ public void run () {
             
             
             System.out.println("Clicked All Stat Codes");
+            break;
         }
         catch(Exception e){
         	 System.out.println("Could Not Clicked All Stat Codes");
@@ -263,7 +271,7 @@ public void run () {
 
         }
     	
-
+    	}
     		 
     	
     }
