@@ -17,19 +17,26 @@ public static void main (String args[]) {
 	// 3 Single Rerate -- Works
 	// 4 Mass Rerate -- Not Working
 	// 5 Credit Debit -- Works
+	//	--1 Credit -- Works
+	//	--2 Debit -- Works
+	//	--3 Dispute -- Works
+	//	--4 Resolve Credit -- Works
+	//	--5 Resolve Rebill -- Works
 	// 6 Instant Invoice -- Works
 	// 7 Prerate Single -- Works
-	// 8 Prerate Hold -- Works (Not Tested yet)
+	// 8 Prerate Hold -- Works 
 	// 9 PRS Rerate -- Not Working
 	// 10 Instant Invoice Device -- Works
+	// 11 GFBO -- Doesnt Work
 	// 22 ERA Rerate Upload to DB -- Works
 	
 	
-	int function = 3;
+	int function = 5;
 	c.setSessionCount("1");
 	c.setCustomCheckBox("true");
-	c.setCustomString("test_input_nbr in ('238277', '137335', '194522', '236343', '236584', '235694', '237339', '240687', '236591', '237125', '244819', '167535', '188503', '242069', '242346', '219894', '226571') and defect_nbr='Drop Mail to TD'");
-	c.setEraCase("3");
+	//c.setCustomString("trkngnbr is not null and result is null");
+	c.setCustomString("trkngnbr is not null and result is not null");
+	c.setEraCase("5");
 	
 	customConfig(function);
 	base b = new base(c,function);
@@ -172,6 +179,13 @@ public static void customConfig (int function) {
 				*/
 				break;
 				
+				
+			case 11:
+				c.setDatabaseDisabled("false");
+				c.setDriverType("2");
+				c.setCompatibleMode("false");
+				
+				break;
 				
 				
 			case 22:

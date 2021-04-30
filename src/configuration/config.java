@@ -86,8 +86,36 @@ public class config {
     String eraMassRerate,eraMassRebill;
     String resolveCreditCheckBox,disputeCheckBox;
     
-    String stephenTest;
+    String stephenTest, gfboUrl,gfboSecondTimeout;
     
+	public String getGfboUrl() {
+		return gfboUrl;
+	}
+
+
+
+
+	public void setGfboUrl(String gfboUrl) {
+		this.gfboUrl = gfboUrl;
+	}
+
+
+
+
+	public String getGfboSecondTimeout() {
+		return gfboSecondTimeout;
+	}
+
+
+
+
+	public void setGfboSecondTimeout(String gfboSecondTimeout) {
+		this.gfboSecondTimeout = gfboSecondTimeout;
+	}
+
+
+
+
 	public config() {
 		
 	}

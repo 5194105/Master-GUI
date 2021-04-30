@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 import ThreadCreditDebitDisputeResolve.creditDebitThread;
 import ThreadCreditDebitDisputeResolve.debitDummyClass;
+import ThreadGFBO.gfboDummyClass;
+import ThreadGFBO.gfboThread;
 import ThreadInstantInvoice.instantInvoiceThread;
 import ThreadMassERARerate.massRerateThread;
 import ThreadSingleERARerate.eraRerateUpload;
@@ -52,6 +54,7 @@ public class base {
 		// 8 Prerate Hold
 		// 9 PRS Rerate
 		// 10 Instant Invoice Device
+		// 11 GFBO
 		
 	
 		//DbVal 
@@ -81,9 +84,18 @@ public class base {
 				high=minxMaxArray[i][1];
 				System.out.println(low);
 				System.out.println(high);
+				int cnt=0;
 				//Will get each segments top and bottom value
-				for (int j=low;j<high;j++) {
+				for (int j=low;j<=high;j++) {
+					cnt++;
+					System.out.println(cnt);
+					try {
+					System.out.println(dataArray.get(j).getTrkngnbr());
 					dataArrayPartition.add(dataArray.get(j));
+					}
+					catch(Exception e) {
+						System.out.println("Out of data.");
+					}
 				}
 				//Will Create the Objects for each function X amount times based on thread count.. does not start the actual execution yet.
 				switch (function) {
@@ -117,6 +129,9 @@ public class base {
 					case 10:	
 					threadArray.add(new instantInvoiceThread(dataArrayPartition,c));
 					break;
+					case 11:	
+						threadArray.add(new gfboThread(dataArrayPartition,c));
+						break;
 					
 					case 22:	
 						threadArray.add(new eraRerateUpload(dataArrayPartition,c));
@@ -208,7 +223,7 @@ public class base {
             		tempCounter++;
             		switch(function) {
             		case 1:
-            		dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),nullCheck(rs.getString(8)),nullCheck(rs.getString(9)),nullCheck(rs.getString(10)),nullCheck(rs.getString(11)),nullCheck(rs.getString(12)),nullCheck(rs.getString(13)),nullCheck(rs.getString(14)),nullCheck(rs.getString(15)),nullCheck(rs.getString(16)),nullCheck(rs.getString(17)),nullCheck(rs.getString(18)),nullCheck(rs.getString(19)),nullCheck(rs.getString(20)),nullCheck(rs.getString(19)),nullCheck(rs.getString(20)),tempCounter));	
+            		dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),nullCheck(rs.getString(8)),nullCheck(rs.getString(9)),nullCheck(rs.getString(10)),nullCheck(rs.getString(11)),nullCheck(rs.getString(12)),nullCheck(rs.getString(13)),nullCheck(rs.getString(14)),nullCheck(rs.getString(15)),nullCheck(rs.getString(16)),nullCheck(rs.getString(17)),nullCheck(rs.getString(18)),nullCheck(rs.getString(19)),nullCheck(rs.getString(20)),nullCheck(rs.getString(19)),nullCheck(rs.getString(20)),nullCheck(rs.getString(21)),tempCounter));	
             		break;
             		
             		case 3:
@@ -218,7 +233,7 @@ public class base {
                 		
             		case 5:
             			eraCase = c.getEraCase();
-            			if (eraCase.equals("1") || eraCase.equals("3") || eraCase.equals("4") || eraCase.equals("5")) {
+            			if (eraCase.equals("1") || eraCase.equals("3") || eraCase.equals("4")) {
                     	dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),nullCheck(rs.getString(8)),nullCheck(rs.getString(9)),nullCheck(rs.getString(10)),nullCheck(rs.getString(11)),nullCheck(rs.getString(12)),nullCheck(rs.getString(13)),nullCheck(rs.getString(14)),nullCheck(rs.getString(15)),eraCase));	
                     	break;
             			}
@@ -227,6 +242,12 @@ public class base {
                         	dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),nullCheck(rs.getString(8)),nullCheck(rs.getString(9)),nullCheck(rs.getString(10)),nullCheck(rs.getString(11)),nullCheck(rs.getString(12)),nullCheck(rs.getString(13)),nullCheck(rs.getString(14)),nullCheck(rs.getString(15)),nullCheck(rs.getString(16)),nullCheck(rs.getString(17)),eraCase,ddc));	
                         	break;
                 			}
+            			if (eraCase.equals("5")) {
+            				debitDummyClass ddc = null;
+            				dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),nullCheck(rs.getString(8)),nullCheck(rs.getString(9)),nullCheck(rs.getString(10)),nullCheck(rs.getString(11)),nullCheck(rs.getString(12)),nullCheck(rs.getString(13)),nullCheck(rs.getString(14)),eraCase,ddc));	
+                        	
+            				break;
+            			}
                 		
                     	
             		 case 6:
@@ -248,6 +269,12 @@ public class base {
             	 case 10:
          			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),"5194105","5194105",tempCounter));	
          		     	break;
+            	
+            	 
+            	 case 11 :
+            		 gfboDummyClass gdc = null;
+          			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),gdc));	
+          		     	break;
          		
             		
             	 case 22:
@@ -341,7 +368,7 @@ public class base {
 				case 1:	
 					 
 					 databaseSqlCount="select count(*) as total from rebill_regression ";
-				     databaseSqlQuery="select RESULT,	DESCRIPTION,	TEST_INPUT_NBR	,TIN_COUNT	,TRKNGNBR,	REASON_CODE	,BILL_ACCT_NBR	,INVOICE_NBR_1,	INVOICE_NBR_2	,REGION	,USERNAME,	PASSWORD,	RS_TYPE,	COMPANY	,rebill_prerate, length,width,height,actual_weight,	WORKABLE,	DEFECT_FLG,	DEFECT_NBR	,DEFECT_CONTACT from rebill_regression ";
+				     databaseSqlQuery="select RESULT,	DESCRIPTION,	TEST_INPUT_NBR	,TIN_COUNT	,TRKNGNBR,	REASON_CODE	,BILL_ACCT_NBR	,INVOICE_NBR_1,	INVOICE_NBR_2	,REGION	,USERNAME,	PASSWORD,	RS_TYPE,	COMPANY	,rebill_prerate,svc_type, length,width,height,actual_weight,	WORKABLE,	DEFECT_FLG,	DEFECT_NBR	,DEFECT_CONTACT from rebill_regression ";
 				    	
 				    	if (allCheckBox.equals("true")) {
 				    		databaseSqlCount+="where trkngnbr is not null";
@@ -590,7 +617,14 @@ public class base {
 						databaseSqlCount="select count(*) as total from era_resolve_credit ";
 						databaseSqlQuery="select result, description, TEST_INPUT_NBR,	TIN_COUNT	,TRKNGNBR,	INVOICE_NBR_1,	INVOICE_NBR_2,	REGION,	USERNAME,	PASSWORD,	WORKABLE ,REASON_CATEGORY,	Reason_code, ROOT_CAUSE,VAL_DESC from era_resolve_credit " ;
 						break;
+					case "5":
+						databaseSqlCount="select count(*) as total from rebill_resolve_view ";
+						databaseSqlQuery="select result, description, TEST_INPUT_NBR,	TIN_COUNT	,TRKNGNBR,	reason_code,bill_acct_nbr,INVOICE_NBR_1,	INVOICE_NBR_2,	REGION,	USERNAME,	PASSWORD,comments,val_Desc from rebill_resolve_view " ;
+						
+											
+						break;
 					}
+				
 						
 					
 					if (allCheckBox.equals("true")) {
@@ -797,6 +831,29 @@ public class base {
 					dbVal=2;
 					break;
 				
+					
+					
+					
+					
+					
+					
+				case 11:	
+					databaseSqlQuery="select TEST_INPUT_NBR,GFBO_USERNAME,GFBO_PASSWORD,GFBO_PAYMENT_LEVEL,GFBO_PAYMENT_TYPE,GFBO_ACCOUNT,GFBO_EXPECTED_RESULT from gfbo_regression_view  ";
+					databaseSqlCount="select count(*) from  gfbo_regression_view ";
+					
+					if (customCheckBox.equals("true")) {
+				  		databaseSqlCount+="where "+customString;
+			    		databaseSqlQuery+="where "+customString;
+				  		 
+				  	 }
+					
+				break;
+					
+					
+
+
+					
+					
 				case 22:	
 					databaseSqlQuery="select TEST_INPUT_NBR	,TIN_COUNT	,trkngnbr from era_rerate_view  ";
 					databaseSqlCount="select count(*) from  era_rerate_view ";

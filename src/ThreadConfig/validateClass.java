@@ -10,7 +10,7 @@ import configuration.config;
 
 public class validateClass {
 	Boolean result=false,oracleBoolean=false,eraBoolean=false,prerateBoolean=false,denialBoolean=false,instantInvoiceBoolean=false;
-	String databaseDisabled,flag;
+	String databaseDisabled,flag,disputeNumber;
 	config c;
 	
 	
@@ -406,8 +406,12 @@ public void searchOracleDBRerateTemp(String sqlQuery,String testInputNbr,String 
 
 
 
-
-
+public void setDisputeCase(String disputeNumber) {
+	this.disputeNumber=disputeNumber;
+}
+public String getDisputeCase() {
+	return disputeNumber;
+}
 
 
 public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String finalResult,String finalDesc,String requestID) {
@@ -488,8 +492,20 @@ public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String
 			 stmt.setString(6,"Y");  
 			stmt.executeUpdate();
 		}
-		if (flag.equals("era_resolve_credit")) {
+		if (flag.equals("era_resolve")) {
 		    stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,era_resolve) values (?,?,?,?,?,?)");  
+			
+			//stmt.setString(1,flag); 
+			stmt.setString(1,testInputNbr);  
+			stmt.setString(2,tinCount);  
+			stmt.setString(3,trkngnbr);  
+			stmt.setString(4,finalResult);  
+			stmt.setString(5,finalDesc);  
+			 stmt.setString(6,"Y");  
+			stmt.executeUpdate();
+		}
+		if (flag.equals("era_rebill_resolve")) {
+		    stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,era_rebill_resolve) values (?,?,?,?,?,?)");  
 			
 			//stmt.setString(1,flag); 
 			stmt.setString(1,testInputNbr);  
@@ -552,8 +568,17 @@ public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String
 			 
 			stmt.executeUpdate();
 		}
-		if (flag.equals("era_resolove_credit")) {
+		if (flag.equals("era_resolve")) {
 			stmt=con.prepareStatement("update era_results set result=?,description=?,era_resolve='Y',tin_count=? where trkngnbr=?");  
+			stmt.setString(1,finalResult);  
+			stmt.setString(2,finalDesc); 
+			stmt.setString(3,tinCount);
+			stmt.setString(4,trkngnbr); 
+			stmt.executeUpdate();
+		}
+		
+		if (flag.equals("era_rebill_resolve")) {
+			stmt=con.prepareStatement("update era_results set result=?,description=?,era_rebill_resolve='Y',tin_count=? where trkngnbr=?");  
 			stmt.setString(1,finalResult);  
 			stmt.setString(2,finalDesc); 
 			stmt.setString(3,tinCount);
@@ -772,13 +797,22 @@ public void searchOracleDBDebitCredit(String sqlQuery,String testInputNbr,String
 		rs=stmt.executeQuery(sqlQuery);
 		String finalResult="";
 		String finalDesc="";
+		setDisputeCase("");
 		
-		
-		
+		Boolean disputeBoolean=false;
 			while (rs.next()) {
 			String tempString= rs.getString("NOTES");
 				 System.out.println(tempString);
-				 							  
+				 							
+				 if (tempString.contains("RDT D")){
+					 disputeBoolean=true;
+					 String temp = tempString;
+					 temp = temp.substring(temp.indexOf("[")+1);
+					 temp = temp.substring(0,temp.indexOf("]"));
+					 System.out.println(temp);
+					 setDisputeCase(temp);
+				 }
+				 
 					  if (tempString.contains("RDT CR") && denialBoolean==false && flag.equals("era_credit")) {
 						finalResult="pass";
 						finalDesc="completed";
@@ -801,9 +835,19 @@ public void searchOracleDBDebitCredit(String sqlQuery,String testInputNbr,String
 						finalResult="pass";
 						finalDesc="completed";
 						oracleBoolean=true;
+						
 						writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
 						break;
 					}
+					  
+					else if (tempString.contains("RDT RR") && denialBoolean==false && flag.equals("era_rebill_resolve")) {
+						finalResult="pass";
+						finalDesc="completed";
+						oracleBoolean=true;
+						writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
+						break;
+					}
+					  
 					else if (tempString.contains("RDT D") && denialBoolean==false && flag.equals("era_dispute")) {
 						finalResult="pass";
 						finalDesc="completed";
@@ -818,6 +862,7 @@ public void searchOracleDBDebitCredit(String sqlQuery,String testInputNbr,String
 						writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
 						break;
 					}
+					
 					  
 					  
 					  
@@ -855,13 +900,16 @@ public void searchOracleDBDebitCredit(String sqlQuery,String testInputNbr,String
 					else {
 						finalResult="na";
 						finalDesc="unable to validate";
-						oracleBoolean=false;
-						writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
+						//oracleBoolean=false;
+						//writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
 				 }
 					  
 					  
 			}	  
-					  
+					if (finalResult.equals("na")) {
+						writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,null);
+					}  
+				
 					  
 		
 	}

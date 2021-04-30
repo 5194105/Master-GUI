@@ -1,6 +1,7 @@
 package ThreadConfig;
 
 import ThreadCreditDebitDisputeResolve.debitDummyClass;
+import ThreadGFBO.gfboDummyClass;
 
 public class data {
 	String result, description, testInputNbr, tinCount, trkngnbr, reasonCode,  billAcctNbr, invoiceNbr1, invoiceNbr2, region, username, password,  rs_type, company, rebillPrerate,  workable, defectFlg, defectNbr;
@@ -15,7 +16,13 @@ public class data {
 	String payorAcctNbr, itemPrcsCd, instantInvFlg,tinComment,podScan;
 	String acct1, acct2,  trkngnbr1, trkngnbr2, service1, service2, requestType, acctType, acctName,serviceName,expectedStatus,eraCase;
 	debitDummyClass ddc;
-	String result2, description2;
+	String result2, description2,svcType;
+	String gfboUsername;
+	String gfboPassword;
+	String gfboPaymentLevel;
+	String gfboPaymentType;
+	String gfboAccount;
+	String gfboExpectedResult;
 	//Function Type
 	// 1 Single Rebill
 	// 2 Mass Rebill
@@ -29,7 +36,7 @@ public class data {
 
 
 	//Rebill Single
-	public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String reasonCode, String billAcctNbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password, String rs_type,String company,String rebillPrerate,String length,String width,String height,String actualWeight,String workable,String defectFlg,String defectNbr,int counter) {
+	public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String reasonCode, String billAcctNbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password, String rs_type,String company,String rebillPrerate,String svcType,String length,String width,String height,String actualWeight,String workable,String defectFlg,String defectNbr,int counter) {
 		this.result=result;
 		this.description=description;
 		this.testInputNbr=testInputNbr;
@@ -53,9 +60,12 @@ public class data {
 		this.width=width;
 		this.height=height;
 		this.actualWeight=actualWeight;
+		this.svcType=svcType;
 	}
 	
-	  // Rebill Mass
+
+
+	// Rebill Mass
 	public data(String result, String description,String testInputNbr,String rowcount,String trkngnbr,String reasonCode, String billAcctNbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password, String rs_type,String company,int counter) {
 		this.result=result;
 		this.description=description;
@@ -161,6 +171,27 @@ public class data {
 		this.eraCase=eraCase;
 	}
 	
+	//Rebill Resolve
+	
+	public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String reasonCode,String billAcctNbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password,String comments,String valDesc,String eraCase,debitDummyClass ddc) {
+		this.result=result;
+		this.description=description;
+		this.testInputNbr=testInputNbr;
+		this.tinCount=tinCount;
+		this.trkngnbr=trkngnbr;
+		this.reasonCode=reasonCode;
+		this.billAcctNbr=billAcctNbr;
+		this.invoiceNbr1=invoiceNbr1;
+		this.invoiceNbr2=invoiceNbr2;
+		this.region=region;
+		this.username=username;
+		this.password=password;
+		this.valDesc=valDesc;
+		this.comments=comments;
+		this.eraCase=eraCase;
+		
+	}
+	
 	//Debit
 	public data(String result, String description,String result2, String description2,String testInputNbr,String tinCount,String trkngnbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password,String workable, String reasonCategory,String reasonCode,String rootCause,String valDesc,String eraCase,debitDummyClass ddc) {
 		this.result=result;
@@ -241,8 +272,94 @@ public class data {
 	}
 	
 	
+	//GFBO Rerate Upload
+		public data(String testInputNbr,String gfboUsername,String gfboPassword,String gfboPaymentLevel,String gfboPaymentType,String gfboAccount,String gfboExpectedResult, gfboDummyClass gdc) {
+			this.testInputNbr=testInputNbr;
+			this.gfboUsername=gfboUsername;
+			this.gfboPassword=gfboPassword;
+			this.gfboPaymentLevel=gfboPaymentLevel;
+			this.gfboPaymentType=gfboPaymentType;
+			this.gfboAccount=gfboAccount;
+			this.gfboExpectedResult=gfboExpectedResult;
+		
+			
+			
+		}
 	
 	
+	
+	public String getGfboUsername() {
+			return gfboUsername;
+		}
+
+
+
+		public void setGfboUsername(String gfboUsername) {
+			this.gfboUsername = gfboUsername;
+		}
+
+
+
+		public String getGfboPassword() {
+			return gfboPassword;
+		}
+
+
+
+		public void setGfboPassword(String gfboPassword) {
+			this.gfboPassword = gfboPassword;
+		}
+
+
+
+		public String getGfboPaymentLevel() {
+			return gfboPaymentLevel;
+		}
+
+
+
+		public void setGfboPaymentLevel(String gfboPaymentLevel) {
+			this.gfboPaymentLevel = gfboPaymentLevel;
+		}
+
+
+
+		public String getGfboPaymentType() {
+			return gfboPaymentType;
+		}
+
+
+
+		public void setGfboPaymentType(String gfboPaymentType) {
+			this.gfboPaymentType = gfboPaymentType;
+		}
+
+
+
+		public String getGfboAccount() {
+			return gfboAccount;
+		}
+
+
+
+		public void setGfboAccount(String gfboAccount) {
+			this.gfboAccount = gfboAccount;
+		}
+
+
+
+		public String getGfboExpectedResult() {
+			return gfboExpectedResult;
+		}
+
+
+
+		public void setGfboExpectedResult(String gfboExpectedResult) {
+			this.gfboExpectedResult = gfboExpectedResult;
+		}
+
+
+
 	//Prerate Single
 	public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String prerateTypeCd, String prerateAmt,String currencyCd,String approvalId,String chrgCd1,String chrgAmt1,String chrgCd2, String chrgAmt2,String chrgCd3,String chrgAmt3, String chrgCd4,String chrgAmt4, String valDesc,String expectedStatus) {
 		this.result=result;
@@ -359,6 +476,13 @@ public class data {
 
 	public void setChrgCd1(String chrgCd1) {
 		this.chrgCd1 = chrgCd1;
+	}
+	  public String getSvcType() {
+		return svcType;
+	}
+
+	public void setSvcType(String svcType) {
+		this.svcType = svcType;
 	}
 
 	public String getChrgAmt1() {

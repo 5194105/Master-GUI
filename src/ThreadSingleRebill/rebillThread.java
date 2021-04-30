@@ -35,7 +35,7 @@ public class rebillThread extends Thread{
 	String databaseDisabled;
 	WebDriverWait wait;
 	String source;
-	String result, descripiton, testInputNbr, tinCount, trkngnbr, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, region , login , password, rsType , company , prerate,workable, rowNumber,length,width,height,actualWeight;
+	String result, svcType,descripiton, testInputNbr, tinCount, trkngnbr, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, region , login , password, rsType , company , prerate,workable, rowNumber,length,width,height,actualWeight;
 	int waitTime;
 	int attempts=0;
 	int maxAttempts;
@@ -81,6 +81,7 @@ public class rebillThread extends Thread{
 			width=d.getWidth();
 			height=d.getHeight();
 			actualWeight=d.getActualWeight();
+			svcType=d.getSvcType();
 			
 			//Check if track is already successful
 			
@@ -653,6 +654,13 @@ public class rebillThread extends Thread{
                  driver.findElement(By.xpath("  /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[2]/div[2]/input")).clear();
                  driver.findElement(By.xpath("  /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[2]/div[2]/input")).sendKeys(actualWeight);
              }
+             if (!svcType.equals("")) {
+              	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[4]/div[1]/div/input")));
+                 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[4]/div[1]/div/input")).clear();
+                 driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[4]/div[1]/div/input")).sendKeys(svcType);
+             }
+             
+            
             
              
          	System.out.println("")   ;   

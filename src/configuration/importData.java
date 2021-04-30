@@ -243,14 +243,18 @@ public class importData {
 	        		 c.setChromePath(System.getProperty("user.dir")+tempStringPostFix);
 	        		 break;
 	        		 
-	        		 
 	        	 case "IE Property" :
 	        		 c.setIeProperty(tempStringPostFix);
 	        		 break;
 	        		 
-	        	 case "IE Path" :
-	        		 c.setIeDriverPath(System.getProperty("user.dir")+tempStringPostFix);
+	        	 case "GFBO L3 URL" :
+	        		 c.setGfboUrl(tempStringPostFix);
 	        		 break;
+	        		 
+	        	 case "GFBO Retry Seconds" :
+	        		 c.setGfboSecondTimeout(tempStringPostFix);
+	        		 break;
+	        		
 	        		
 	        		 
 	        
