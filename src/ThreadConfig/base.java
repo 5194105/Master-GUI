@@ -9,9 +9,11 @@ import java.util.ArrayList;
 
 import ThreadCreditDebitDisputeResolve.creditDebitThread;
 import ThreadCreditDebitDisputeResolve.debitDummyClass;
+import ThreadEc.ecmod;
 import ThreadGFBO.gfboDummyClass;
 import ThreadGFBO.gfboThread;
 import ThreadInstantInvoice.instantInvoiceThread;
+import ThreadMassERARerate.massRerateDummy;
 import ThreadMassERARerate.massRerateThread;
 import ThreadSingleERARerate.eraRerateUpload;
 import ThreadSingleERARerate.singleRerateThread;
@@ -31,6 +33,7 @@ public class base {
 	int  dbVal=1;
 	 config c;
 	 String eraCase;
+	 String[][] ecArray;
 	String allCheckBox,customCheckBox,customString,nullCheckBox,failedCheckBox,domesticCheckBox,internationalCheckBox,expressCheckBox,groundCheckBox,eraWorkable,databaseSqlCount,databaseSqlQuery;
 	//public static void main(String args[]) {
 	public base(config c,int function) {
@@ -132,7 +135,12 @@ public class base {
 					case 11:	
 						threadArray.add(new gfboThread(dataArrayPartition,c));
 						break;
-					
+					case 12:
+						threadArray.add(new ecmod(dataArrayPartition,c));
+						break;
+					case 13:
+						threadArray.add(new ecmod(dataArrayPartition,c));
+						break;
 					case 22:	
 						threadArray.add(new eraRerateUpload(dataArrayPartition,c));
 						break;
@@ -142,7 +150,12 @@ public class base {
 		//Now will begin the thread execution.
 		
 		for (Object rt: threadArray) {
+			try {
 			((Thread) rt).start();
+			}
+			catch(Exception e) {
+				System.out.println(e);
+			}
 		}
 			
 		
@@ -197,6 +210,8 @@ public class base {
 	
 	public  void getDataDb() {
 		Connection con=null;
+		Connection con2=null;
+		Connection con3=null;
 		try {
 			if (dbVal==1) {
 			con=c.getGtmRevToolsConnection();
@@ -204,6 +219,12 @@ public class base {
 			if (dbVal==2) {
 				con=c.getRtmCon();
 				}
+			if (function==12 || function==13) {
+				con=c.getGtmRevToolsConnection();
+				c.setEcL3DbConnection("test_readonly", "perftest");
+				con2=c.getEcL3Con();
+				con3=c.getEcL3Con();
+			}
 		} catch (ClassNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -214,10 +235,11 @@ public class base {
 		
 
        	try {
-           	
-        		stmt = con.createStatement();
-            	rs = stmt.executeQuery(databaseSqlQuery);
-            	
+       		//If not EC UD
+           		
+	        		stmt = con.createStatement();
+	            	rs = stmt.executeQuery(databaseSqlQuery);
+           		
             	 
             	 while(rs.next()) {
             		tempCounter++;
@@ -230,6 +252,12 @@ public class base {
                 		dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),nullCheck(rs.getString(8)),nullCheck(rs.getString(9)),nullCheck(rs.getString(10)),nullCheck(rs.getString(11)),nullCheck(rs.getString(12)),nullCheck(rs.getString(13)),nullCheck(rs.getString(14)),nullCheck(rs.getString(15)),nullCheck(rs.getString(16)),nullCheck(rs.getString(17)),nullCheck(rs.getString(18)),nullCheck(rs.getString(19)),nullCheck(rs.getString(20)),nullCheck(rs.getString(21)),nullCheck(rs.getString(22)),nullCheck(rs.getString(23)),nullCheck(rs.getString(24)),nullCheck(rs.getString(25)),nullCheck(rs.getString(26)),nullCheck(rs.getString(27)),nullCheck(rs.getString(28)),tempCounter));	
                 		break;
             		
+                		
+            		case 4:
+            			massRerateDummy mrd = null;
+            			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),nullCheck(rs.getString(8)),nullCheck(rs.getString(9)),nullCheck(rs.getString(10)),nullCheck(rs.getString(11)),nullCheck(rs.getString(12)),nullCheck(rs.getString(13)),nullCheck(rs.getString(14)),nullCheck(rs.getString(15)),nullCheck(rs.getString(16)),nullCheck(rs.getString(17)),nullCheck(rs.getString(18)),nullCheck(rs.getString(19)),mrd));	
+            			break;
+                		
                 		
             		case 5:
             			eraCase = c.getEraCase();
@@ -276,6 +304,12 @@ public class base {
           			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),gdc));	
           		     	break;
          		
+            	 case 12:
+            		 dataArray.add(new data(nullCheck(rs.getString(1))));
+            		 break;
+            	 case 13:
+            		 dataArray.add(new data(nullCheck(rs.getString(1))));
+            		 break;
             		
             	 case 22:
            			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3))));	
@@ -309,6 +343,87 @@ public class base {
     	}
        	
        	
+       	if (function==12 || function==13) {
+       		
+       		//Getting EC Override
+       		try {
+       			stmt = con2.createStatement();
+       			rs = stmt.executeQuery("select count(*) from (select distinct stat_cd,stat_ovrd_type_cd from ec_schema.stat_cd_detl where work_type_cd like '%INTL%')");
+                int ecCount=0;
+           	 while(rs.next()) {
+           	
+           		ecCount=rs.getInt(1);
+           	 }
+       			databaseSqlQuery="select distinct stat_cd,stat_ovrd_type_cd from ec_schema.stat_cd_detl where work_type_cd like '%INTL%'";
+				stmt = con3.createStatement();
+				rs = stmt.executeQuery(databaseSqlQuery);
+				 ecArray = new String[ecCount][2];
+				int counter=0;
+				while(rs.next()) {
+					ecArray[counter][0]=rs.getString(1);
+					ecArray[counter][1]=rs.getString(2);
+					counter++;
+				 }
+			} catch (SQLException e1) {
+				
+				 
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+    		
+       		
+       		for (data d : dataArray) {
+       			try {
+       				databaseSqlQuery="select WORK_TYPE_CD,STAT_CD_ARRAY_DESC from ec_schema.shipment a join ec_schema.package b on a.ONLN_REV_ITEM_ID=b.ONLN_REV_ITEM_ID join ec_schema.pkg_stat_cd_array c on b.ONLN_PKG_ID=c.ONLN_PKG_ID where pkg_trkng_nbr="+d.getTrkngnbr();
+					stmt = con2.createStatement();
+					rs = stmt.executeQuery(databaseSqlQuery);
+					 while(rs.next()) {
+				        d.setEcWorkType(rs.getString(1));
+		        		d.setStatCodeArray(rs.getString(2));
+		        		//See if stat code is overridable 
+		        		
+		        	
+		        	 }
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            	
+       		}
+       	
+       	
+       	
+       	for (data d : dataArray) {
+       		d.setOverride(true);
+       		System.out.println(d.getTrkngnbr());
+       		System.out.println(d.getEcWorkType());
+       		System.out.println(d.getStatCodeArray());
+       		try {
+       		String tempArrayError=d.getStatCodeArray();
+       		String[] tempSplit = tempArrayError.split(",");
+       		for(String s: tempSplit) {
+       		//	System.out.println(s);
+       			for (int i=0;i<ecArray.length;i++){
+       				//System.out.println(ecArray[i][0]);
+       				if (s.equals(ecArray[i][0])) {
+       					if (ecArray[i][1].equals("N")) {
+       					//	System.out.println(s);
+       						d.setOverride(false);
+       						break;
+       					}
+       				}
+       			}
+       		}
+       		}
+       		catch(Exception e) {
+       			System.out.println(e);
+       			d.setOverride(false);
+       		}
+       		System.out.println("Tracking Number: " +d.getTrkngnbr()+" --  Work Type: "+ d.getEcWorkType()+ " Overridable: "+d.getOverride());
+       	}
+       		
+       		
+       	}
        	
        	
        	
@@ -529,8 +644,8 @@ public class base {
 				
 				
 				case 4:	
-					databaseSqlQuery="select  result,  DESCRIPTION, test_Input_Nbr, tin_Count, trkngnbr, invoice_Nbr_1, invoice_Nbr_2, region, username , password,  rate_weight,wgt_type,length,height,width,dim_type, rerate_type, rs_Type ,company  , mass_rerate_combo from era_rerate_mass ";
-					databaseSqlCount="select count(*) from  era_rerate_mass";
+					databaseSqlQuery="select  result,  DESCRIPTION, request_id, test_Input_Nbr,tin_Count, trkngnbr, invoice_Nbr_1, invoice_Nbr_2, region, username , password,  rate_weight,wgt_type,length,height,width,dim_type, rerate_type, rs_Type ,company  , mass_rerate_combo from era_rerate_mass ";
+					databaseSqlCount="select count(*) from  era_rerate_mass ";
 				
 					  	
 			    	
@@ -826,8 +941,8 @@ public class base {
 				
 				
 				case 10:	
-					databaseSqlQuery="select trkngnbr,PAYOR_ACCT_NBR from ( select c.test_input_nbr,c.trkngnbr, PAYOR_ACCT_NBR,INSTNT_INV_FLG, case when cntry_cd is null then 'N' else 'Y' END as TimePeriodEligble, TO_CHAR(LPAR_ENHCMNT_DT + 2-(5/24), 'YYYY-MM-DD HH:MI:SS AM') as RM_TIME_STAMP from INTL_EXPRS_ONLN_SCHEMA.INTL_online_revenue_item@L3_IORE a join INTL_EXPRS_ONLN_SCHEMA.INTL_package@L3_IORE b on a.ONLN_REV_ITEM_ID = b.ONLN_REV_ITEM_ID  join rtm.batch_shipping_results c on c.trkngnbr=b.pkg_trkng_nbr join INTL_EXPRS_ONLN_SCHEMA.intl_onln_cust_addr_info@L3_IORE d on b.ONLN_REV_ITEM_ID=d.ONLN_REV_ITEM_ID left join INTL_EXPRS_ONLN_SCHEMA.time_period_country@L3_IORE e on d.CUST_CNTRY_CD=e.cntry_cd join  intl_EXPRS_ONLN_SCHEMA.intl_package_event@L3_IORE f on b.onln_pkg_id = f.onln_pkg_id  join INTL_EXPRS_ONLN_SCHEMA.intl_rev_item_payor@L3_IORE i on b.ONLN_REV_ITEM_ID=i.ONLN_REV_ITEM_ID where CYCLE = '3' and LEVELS = '3' and rs_type = 'IL' and company = 'EP' and src_org='B' and CUST_ROLE_TYPE_CD='B'  and item_prcs_cd in ('OR','ER') and device like '%DTT%') where TimePeriodEligble='Y' and INSTNT_INV_FLG is null order by trkngnbr desc";
-					databaseSqlCount="select count(*) from ( select c.test_input_nbr,c.trkngnbr, PAYOR_ACCT_NBR,INSTNT_INV_FLG, case when cntry_cd is null then 'N' else 'Y' END as TimePeriodEligble, TO_CHAR(LPAR_ENHCMNT_DT + 2-(5/24), 'YYYY-MM-DD HH:MI:SS AM') as RM_TIME_STAMP from INTL_EXPRS_ONLN_SCHEMA.INTL_online_revenue_item@L3_IORE a join INTL_EXPRS_ONLN_SCHEMA.INTL_package@L3_IORE b on a.ONLN_REV_ITEM_ID = b.ONLN_REV_ITEM_ID  join rtm.batch_shipping_results c on c.trkngnbr=b.pkg_trkng_nbr join INTL_EXPRS_ONLN_SCHEMA.intl_onln_cust_addr_info@L3_IORE d on b.ONLN_REV_ITEM_ID=d.ONLN_REV_ITEM_ID left join INTL_EXPRS_ONLN_SCHEMA.time_period_country@L3_IORE e on d.CUST_CNTRY_CD=e.cntry_cd join  intl_EXPRS_ONLN_SCHEMA.intl_package_event@L3_IORE f on b.onln_pkg_id = f.onln_pkg_id  join INTL_EXPRS_ONLN_SCHEMA.intl_rev_item_payor@L3_IORE i on b.ONLN_REV_ITEM_ID=i.ONLN_REV_ITEM_ID where CYCLE = '3' and LEVELS = '3' and rs_type = 'IL' and company = 'EP' and src_org='B' and CUST_ROLE_TYPE_CD='B'  and item_prcs_cd in ('OR','ER') and device like '%DTT%') where TimePeriodEligble='Y' and INSTNT_INV_FLG is null order by trkngnbr desc ";
+					databaseSqlQuery="select trkngnbr,PAYOR_ACCT_NBR from ( select c.test_input_nbr,c.trkngnbr, PAYOR_ACCT_NBR,INSTNT_INV_FLG, case when cntry_cd is null then 'N' else 'Y' END as TimePeriodEligble, TO_CHAR(LPAR_ENHCMNT_DT + 2-(5/24), 'YYYY-MM-DD HH:MI:SS AM') as RM_TIME_STAMP from INTL_EXPRS_ONLN_SCHEMA.INTL_online_revenue_item@L3_IORE a join INTL_EXPRS_ONLN_SCHEMA.INTL_package@L3_IORE b on a.ONLN_REV_ITEM_ID = b.ONLN_REV_ITEM_ID  join rtm.batch_shipping_results c on c.trkngnbr=b.pkg_trkng_nbr join INTL_EXPRS_ONLN_SCHEMA.intl_onln_cust_addr_info@L3_IORE d on b.ONLN_REV_ITEM_ID=d.ONLN_REV_ITEM_ID left join INTL_EXPRS_ONLN_SCHEMA.time_period_country@L3_IORE e on d.CUST_CNTRY_CD=e.cntry_cd join  intl_EXPRS_ONLN_SCHEMA.intl_package_event@L3_IORE f on b.onln_pkg_id = f.onln_pkg_id  join INTL_EXPRS_ONLN_SCHEMA.intl_rev_item_payor@L3_IORE i on b.ONLN_REV_ITEM_ID=i.ONLN_REV_ITEM_ID where CYCLE = '"+c.getCycle()+"' and LEVELS = '3' and rs_type = 'IL' and company = 'EP' and src_org='B' and CUST_ROLE_TYPE_CD='B'  and item_prcs_cd in ('OR','ER') and device like '%DTT%') where TimePeriodEligble='Y' and INSTNT_INV_FLG is null order by trkngnbr desc";
+					databaseSqlCount="select count(*) from ( select c.test_input_nbr,c.trkngnbr, PAYOR_ACCT_NBR,INSTNT_INV_FLG, case when cntry_cd is null then 'N' else 'Y' END as TimePeriodEligble, TO_CHAR(LPAR_ENHCMNT_DT + 2-(5/24), 'YYYY-MM-DD HH:MI:SS AM') as RM_TIME_STAMP from INTL_EXPRS_ONLN_SCHEMA.INTL_online_revenue_item@L3_IORE a join INTL_EXPRS_ONLN_SCHEMA.INTL_package@L3_IORE b on a.ONLN_REV_ITEM_ID = b.ONLN_REV_ITEM_ID  join rtm.batch_shipping_results c on c.trkngnbr=b.pkg_trkng_nbr join INTL_EXPRS_ONLN_SCHEMA.intl_onln_cust_addr_info@L3_IORE d on b.ONLN_REV_ITEM_ID=d.ONLN_REV_ITEM_ID left join INTL_EXPRS_ONLN_SCHEMA.time_period_country@L3_IORE e on d.CUST_CNTRY_CD=e.cntry_cd join  intl_EXPRS_ONLN_SCHEMA.intl_package_event@L3_IORE f on b.onln_pkg_id = f.onln_pkg_id  join INTL_EXPRS_ONLN_SCHEMA.intl_rev_item_payor@L3_IORE i on b.ONLN_REV_ITEM_ID=i.ONLN_REV_ITEM_ID where CYCLE = '"+c.getCycle()+"' and LEVELS = '3' and rs_type = 'IL' and company = 'EP' and src_org='B' and CUST_ROLE_TYPE_CD='B'  and item_prcs_cd in ('OR','ER') and device like '%DTT%') where TimePeriodEligble='Y' and INSTNT_INV_FLG is null order by trkngnbr desc ";
 					dbVal=2;
 					break;
 				
@@ -849,7 +964,47 @@ public class base {
 					
 				break;
 					
+				case 12:	
+					//databaseSqlQuery="select trkngnbr from ud_green_er union all select trknngbr from ud_rebs_er  ";
+				//	databaseSqlCount="select count(*) from (select trkngnbr from ud_green_er union all select trknngbr from ud_rebs_er) ";
+					databaseSqlQuery="select trkngnbr from ud_green_er  ";
+					databaseSqlCount="select count(*) from ud_green_er ";
 					
+					if (customCheckBox.equals("true")) {
+				  		databaseSqlCount+="where "+customString;
+			    		databaseSqlQuery+="where "+customString;
+				  		 
+				  	 }
+					
+				break;
+				
+				
+				
+				
+				
+				case 13:	
+				
+					//databaseSqlQuery="select b.pkg_trkng_nbr from INTL_EXPRS_ONLN_SCHEMA.INTL_online_revenue_item@L3_IORE a join INTL_EXPRS_ONLN_SCHEMA.INTL_package@L3_IORE b on a.ONLN_REV_ITEM_ID = b.ONLN_REV_ITEM_ID  join rtm.batch_shipping_results@RTM_PROD c on c.trkngnbr=b.pkg_trkng_nbr join  intl_EXPRS_ONLN_SCHEMA.intl_package_event@L3_IORE d on b.onln_pkg_id = d.onln_pkg_id where CYCLE = '"+c.getCycle()+"' and LEVELS = '3' and rs_type = 'IL' and company = 'EP' and device like '%DTT%' and src_org='B'and DEVICE not in ('UD','NRB','PAPER','DTT') and a.ITEM_PRCS_CD in ('OR','ER') and LPAR_ENHCMNT_DT is not null";
+					//databaseSqlCount="select count(*) from INTL_EXPRS_ONLN_SCHEMA.INTL_online_revenue_item@L3_IORE a join INTL_EXPRS_ONLN_SCHEMA.INTL_package@L3_IORE b on a.ONLN_REV_ITEM_ID = b.ONLN_REV_ITEM_ID  join rtm.batch_shipping_results@RTM_PROD c on c.trkngnbr=b.pkg_trkng_nbr join  intl_EXPRS_ONLN_SCHEMA.intl_package_event@L3_IORE d on b.onln_pkg_id = d.onln_pkg_id where CYCLE = '"+c.getCycle()+"' and LEVELS = '3' and rs_type = 'IL' and company = 'EP' and device like '%DTT%' and src_org='B'and DEVICE not in ('UD','NRB','PAPER','DTT') and a.ITEM_PRCS_CD in ('OR','ER') and LPAR_ENHCMNT_DT is not null";
+					
+					
+					databaseSqlQuery="select trkngnbr from rtm.batch_Shipping_results@RTM_PROD where trkngnbr in ('132563407642',	'134873476092',	'445774973810',	'509878469140',	'144556338180',	'227765716121',	'121917799793',	'727830674719',	'394829046895',	'861214134588',	'198484334274',	'825518893526',	'597247705549',	'187153984307',	'782682975260',	'259666674289',	'444306391032',	'132598262027',	'675990377761',	'254030070016',	'789966076350',	'190080812416',	'801083371028',	'173512172409',	'149447873813',	'487052936782',	'907390684108',	'197704231119',	'877915904136',	'257167803330') ";
+					databaseSqlCount="select count(*) from rtm.batch_Shipping_results@RTM_PROD where trkngnbr in ('132563407642',	'134873476092',	'445774973810',	'509878469140',	'144556338180',	'227765716121',	'121917799793',	'727830674719',	'394829046895',	'861214134588',	'198484334274',	'825518893526',	'597247705549',	'187153984307',	'782682975260',	'259666674289',	'444306391032',	'132598262027',	'675990377761',	'254030070016',	'789966076350',	'190080812416',	'801083371028',	'173512172409',	'149447873813',	'487052936782',	'907390684108',	'197704231119',	'877915904136',	'257167803330')";
+					
+					
+
+					
+					/*
+					if (customCheckBox.equals("true")) {
+				  		databaseSqlCount+="where "+customString;
+			    		databaseSqlQuery+="where "+customString;
+				  		 
+				  	 }
+					*/
+				break;
+				
+				
+			
 
 
 					

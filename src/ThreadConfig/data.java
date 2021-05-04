@@ -2,6 +2,7 @@ package ThreadConfig;
 
 import ThreadCreditDebitDisputeResolve.debitDummyClass;
 import ThreadGFBO.gfboDummyClass;
+import ThreadMassERARerate.massRerateDummy;
 
 public class data {
 	String result, description, testInputNbr, tinCount, trkngnbr, reasonCode,  billAcctNbr, invoiceNbr1, invoiceNbr2, region, username, password,  rs_type, company, rebillPrerate,  workable, defectFlg, defectNbr;
@@ -22,7 +23,8 @@ public class data {
 	String gfboPaymentLevel;
 	String gfboPaymentType;
 	String gfboAccount;
-	String gfboExpectedResult;
+	String gfboExpectedResult,requestId,ecWorkType,statCodeArray;
+	Boolean override;
 	//Function Type
 	// 1 Single Rebill
 	// 2 Mass Rebill
@@ -34,6 +36,44 @@ public class data {
 	// 8 Prerate Hold
 	// 9 PRS Rerate
 
+	
+	public String getStatCodeArray() {
+		return statCodeArray;
+	}
+
+	public void setStatCodeArray(String statCodeArray) {
+		this.statCodeArray = statCodeArray;
+	}
+
+	public Boolean getOverride() {
+		return override;
+	}
+
+	public void setOverride(Boolean override) {
+		this.override = override;
+	}
+
+	//EC UD
+	public data(String trkngnbr  ) {
+		this.trkngnbr=trkngnbr;
+		
+	}
+
+	public String getRequestId() {
+		return requestId;
+	}
+
+	public void setRequestId(String requestId) {
+		this.requestId = requestId;
+	}
+
+	public String getEcWorkType() {
+		return ecWorkType;
+	}
+
+	public void setEcWorkType(String ecWorkType) {
+		this.ecWorkType = ecWorkType;
+	}
 
 	//Rebill Single
 	public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String reasonCode, String billAcctNbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password, String rs_type,String company,String rebillPrerate,String svcType,String length,String width,String height,String actualWeight,String workable,String defectFlg,String defectNbr,int counter) {
@@ -125,10 +165,11 @@ public class data {
 	}
 	
 	//Mass Rerate
-	public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password,String rateWeight,String length, String height,String width,String dimType, String rerateType,String rsType,String company) {
+	public data(String result, String description,String requestId,String testInputNbr,String tinCount,String trkngnbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password,String rateWeight,String length, String height,String width,String dimType, String rerateType,String rsType,String company,massRerateDummy mrd) {
 		this.result=result;
 		this.description=description;
 		this.testInputNbr=testInputNbr;
+		this.requestId=requestId;
 		this.tinCount=tinCount;
 		this.trkngnbr=trkngnbr;
 		this.invoiceNbr1=invoiceNbr1;
@@ -143,6 +184,7 @@ public class data {
 		this.password=password;
 		this.rsType=rsType;
 		this.company=company;
+		
 		
 	}
 	

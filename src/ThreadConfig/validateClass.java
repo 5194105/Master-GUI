@@ -443,6 +443,24 @@ public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String
 		stmt.executeUpdate();
 	}
 		
+		
+		
+		if (flag.equals("era_rerate_mass")) {
+			 stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,request_id,era_mass_rerate) values (?,?,?,?,?,?,?)");  
+				
+			//stmt.setString(1,flag); 
+			stmt.setString(1,testInputNbr);  
+			stmt.setString(2,tinCount);  
+			stmt.setString(3,trkngnbr);  
+			stmt.setString(4,finalResult);  
+			stmt.setString(5,finalDesc);  
+			stmt.setString(6,requestID);  
+			stmt.setString(7,"Y");  
+			stmt.executeUpdate();
+		}
+		
+		
+		
 		if (flag.equals("era_rerate")) {
 			 stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,request_id,era_rerate) values (?,?,?,?,?,?,?)");  
 				
@@ -533,6 +551,17 @@ public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String
 		
 		stmt.setString(3,trkngnbr); 
 		stmt.executeUpdate();
+		}
+		
+		
+		if (flag.equals("era_rerate_mass")) {
+			stmt=con.prepareStatement("update era_results set result=?,description=?,era_mass_rerate='Y',tin_count=? where trkngnbr=?");  
+			stmt.setString(1,finalResult);  
+			stmt.setString(2,finalDesc); 
+			stmt.setString(3,tinCount);
+			stmt.setString(4,trkngnbr); 
+			stmt.executeUpdate();	
+		
 		}
 		
 		if (flag.equals("era_rerate")) {

@@ -15,7 +15,7 @@ public static void main (String args[]) {
 	// 1 Single Rebill -- Works
 	// 2 Mass Rebill -- Not Working
 	// 3 Single Rerate -- Works
-	// 4 Mass Rerate -- Not Working
+	// 4 Mass Rerate --  Works
 	// 5 Credit Debit -- Works
 	//	--1 Credit -- Works
 	//	--2 Debit -- Works
@@ -28,14 +28,19 @@ public static void main (String args[]) {
 	// 9 PRS Rerate -- Not Working
 	// 10 Instant Invoice Device -- Works
 	// 11 GFBO -- Doesnt Work
+	// 12 EC UD -- Doesnt Work
+	// 13 EC Device -- Doesnt Work
 	// 22 ERA Rerate Upload to DB -- Works
 	
 	
-	int function = 5;
+	int function = 13;
 	c.setSessionCount("1");
 	c.setCustomCheckBox("true");
 	//c.setCustomString("trkngnbr is not null and result is null");
-	c.setCustomString("trkngnbr is not null and result is not null");
+	c.setCustomString("trkngnbr is not null");
+
+	c.setCycle("3");
+	
 	c.setEraCase("5");
 	
 	customConfig(function);
@@ -90,6 +95,19 @@ public static void customConfig (int function) {
 			break;
 			
 		case 4:
+			c.setExcelPath("C:\\Users\\FedExUser\\Documents\\rebill.xlsx");
+	    	c.setLevel("3");
+	    	c.setDriverType("2");
+	    	c.setCompatibleMode("false");
+	    	c.setSource("db");
+	    	c.setAllCheckBox("false");
+	    	c.setNullCheckBox("true");
+	    	c.setFailedCheckBox("false");
+			c.setDomesticCheckBox("true");
+			c.setInternationalCheckBox("true");
+			c.setExpressCheckBox("true");
+			c.setGroundCheckBox("true");
+			c.setDatabaseDisabled("false");
 			break;
 			
 			
@@ -185,6 +203,17 @@ public static void customConfig (int function) {
 				c.setDriverType("2");
 				c.setCompatibleMode("false");
 				
+				break;
+				
+			case 12:
+				c.setDatabaseDisabled("false");
+				c.setDriverType("2");
+				c.setCompatibleMode("false");
+				break;
+			case 13:
+				c.setDatabaseDisabled("false");
+				c.setDriverType("2");
+				c.setCompatibleMode("false");
 				break;
 				
 				

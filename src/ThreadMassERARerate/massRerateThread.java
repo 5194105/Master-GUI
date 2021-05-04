@@ -23,6 +23,7 @@ import configuration.config;
 
 public class massRerateThread extends Thread{
 	ArrayList<data> dataArray;
+	ArrayList<data> dataArray2 = new ArrayList();
 	config c;
 	String homePath;
 	WebDriver driver;
@@ -46,7 +47,7 @@ public class massRerateThread extends Thread{
 	  ArrayList<Integer> trkList = new ArrayList<Integer>();
 	  ArrayList<String> addedTrks = new ArrayList<String>();
 	  ArrayList<String> removedTrks = new ArrayList<String>();
-	
+	  Boolean execute=false;
 	public massRerateThread(ArrayList<data> dataArray,config c) {
 		this.dataArray=dataArray;
 		this.c=c;
@@ -59,7 +60,7 @@ public class massRerateThread extends Thread{
 		vc= new validateClass(c,databaseDisabled,"era_rerate_mass");
 	}
 public void run () {
-		
+	String tempTin="0";
 		for(data d: dataArray) {
 		
 			
@@ -88,16 +89,48 @@ public void run () {
 			
 			
 			
-		    if (vc.validateRebill(testInputNbr,tinCount,trkngnbr)==true) {
-		    	return;
-		    }
-		
-			try {
-				doMassRerate(result, description, testInputNbr, tinCount, trkngnbr, invoiceNbr1, invoiceNbr2,region,username,password, rateWeight , wgtType,length,width,height,dimType,rerateType,rsType,company,massRerateCombo);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}	
+			
+			
+	    	int tempNumber=0;
+	    	
+	    	
+	    	if (!testInputNbr.equals(tempTin)) {
+	    		if (execute == false) {
+	    		tempTin=testInputNbr;
+	    		dataArray2.add(d);
+	    		execute=true;
+	    		}
+	    		else {
+	    			try {
+						doMassRerate();
+						
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	    			execute=false;
+	    			dataArray2.clear();
+	    			dataArray2.add(d);
+	    		}
+	    	}
+	    	else {
+	    		dataArray2.add(d);
+	    	}
+	    	
+	    
+	    	
+	    	
+	    
+	    	
+	    
+	    	System.out.println();
+	   
+		}
+		try {
+			doMassRerate();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -129,12 +162,12 @@ public void login() {
 		}
 	catch(Exception e) {
 		
-		 Assert.fail("Could Not Login");
+		
 	}
 }
 
 
-public void doMassRerate(String result, String descripiton,String testInputNbr,String tinCount,String trkngnbr,String invoiceNbr1,String invoiceNbr2,String region,String username ,String password,String rateWeight,String wgtType,String length, String height, String width,String dimType, String rerateType,String rsType ,String company ,String massRerateCombo ) throws InterruptedException {
+public void doMassRerate( ) throws InterruptedException {
 
 
 	
@@ -173,24 +206,28 @@ public void doMassRerate(String result, String descripiton,String testInputNbr,S
     
     int max=0;
 	int min=0;
-	min=trkList.get(counter2);
 	
-	max=trkList.get(counter2+1);	
 	System.out.println(min);
 	System.out.println(max);	
 	driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div/div/textarea")).clear();
 	int trkCounter=0;
-	for(int i=min;i<max;i++) {
-			if(addedTrks.contains(allData[i][4])) {
-    			driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div/div/textarea")).sendKeys(allData[i][4]);
+	String wgt_type="";
+	String rate_weight="";
+	String dim_type="";
+	for(data d:dataArray2) {
+			
+    			driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div/div/textarea")).sendKeys(d.getTrkngnbr());
     			driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div/div/textarea")).sendKeys(Keys.chord(Keys.SHIFT,Keys.ENTER));
-    			System.out.println("Test Input Number "+allData[i][2]);
-    			System.out.println("Tracking Number "+allData[i][4]);
-    			System.out.println("Reason Code "+allData[i][5]);
-    			System.out.println("Account Number "+allData[i][6]);
-    			trkCounter++;
+    			System.out.println("Test Input Number "+d.getTestInputNbr());
+    			System.out.println("Tracking Number "+d.getTrkngnbr());
+    			System.out.println("Reason Code "+d.getReasonCode());
+    			System.out.println("Account Number "+d.getBillAcctNbr());
+    			rerateType=d.getRerateType();
+    			wgt_type=d.getWgtType();
+    			rate_weight=d.getRateWeight();
+    			dim_type=d.getDimType();
 			}
-	}
+	
     
     
     
@@ -203,7 +240,7 @@ public void doMassRerate(String result, String descripiton,String testInputNbr,S
     //Will click on trk
     driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[6]/div[1]/div/div/div[1]/div/div[1]/div/div/div/div/div/div/div/div/div")).click();
     Thread.sleep(waittimer);
-    String lowercaseRerateType=rerate_type.toLowerCase();
+    String lowercaseRerateType=rerateType.toLowerCase();
     switch(lowercaseRerateType) {
     
   //Rating
@@ -272,13 +309,16 @@ public void doMassRerate(String result, String descripiton,String testInputNbr,S
 	System.out.println( requestID);
 	
    
-		String[] resultArray = new String[3];
-	 	resultArray[0]="In Progress";
-	 	resultArray[1]="Rerate Created";
-		resultArray[2]=requestID;
-		writeToDB(testInputNbr,tinCount,trk,resultArray);
+	//	String[] resultArray = new String[3];
+	 //	resultArray[0]="In Progress";
+	 //	resultArray[1]="Rerate Created";
+	//	resultArray[2]=requestID;
+	
+	for (data d : dataArray2) {
+		vc.writeToDb(d.getTestInputNbr(),d.getTinCount(),d.getTrkngnbr(),"In Progress","Rerate Created",requestID);
     
-    
+	}
+	
 	} 
 	catch(Exception e) {
 		System.out.println("Failed on Entering Tracking Number");
@@ -289,13 +329,11 @@ public void doMassRerate(String result, String descripiton,String testInputNbr,S
       // 	 writeToExcel(rowNumber, 1,"Failed on Entering Tracking Number");
        	 }
 			 if(databaseDisabled.equals("false")) {
-   			 String[] resultArray = new String[3];
-   			 	resultArray[0]="fail";
-   				resultArray[1]="Failed on Entering Tracking Number";
-   				resultArray[2]="na";
-   				writeToDB(testInputNbr,tinCount,trk,resultArray);
+					for (data d : dataArray2) {
+						vc.writeToDb(d.getTestInputNbr(),d.getTinCount(),d.getTrkngnbr(),"In Progress","Rerate Created",null);
         	 }
-		 Assert.fail("Failed on Entering Tracking Number");
+			 }
+				
 		
 	}
 }

@@ -121,7 +121,6 @@ public class rebillThread extends Thread{
 		    driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
 			wait = new WebDriverWait(driver,waitTime);
 			driver.manage().window().maximize();
-			
 										
 			driver.findElement(By.id("okta-signin-username")).sendKeys(login);
 			driver.findElement(By.id("okta-signin-password")).sendKeys(password);
@@ -137,7 +136,7 @@ public class rebillThread extends Thread{
     public void doRebill(String testInputNbr,String tinCount,String trkngnbr,String reasonCode,String rebillAccount,String invoiceNbr1,String invoiceNbr2 ,String region ,String login ,String password,String rsType ,String company ,String prerate,String length,String width,String height,String actualWeight,String workable) throws InterruptedException {
     	String finalResult="";
     	String finalDesc="";
-    	maxAttempts=1;
+    	maxAttempts=3;
     	for (int i=0;i<maxAttempts;i++) {
     	login();
     	WebElement element=null;
@@ -149,8 +148,7 @@ public class rebillThread extends Thread{
        	
     	try {
     	//In order for clear button to be clickable need to scroll up
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-        
+      
         //Will hit the clear button. This is for whenever we switch to new tracking number    
         driver.findElement(By.xpath("//*[@id=\"inquiry-form\"]/div[1]/div/div[2]/form/div[3]/div[2]/button/a")).click();
 
@@ -514,7 +512,8 @@ public class rebillThread extends Thread{
              	 */
          		 
          		 System.out.println("Phone Details");
-     
+         		 
+         		 js.executeScript("window.scrollBy(0,-100)");
              try{
             	 //Click on rebill RPI Complete, Phone, and Continue
                   if (login.equals("5194105")|| login.equals("584168")){
@@ -716,22 +715,27 @@ public class rebillThread extends Thread{
             		 errorList=driver.findElements(By.xpath("/html/body/div[6]/div/div/div[2]/div/label/span"));
             		 int popupCounter=1;
             	 for (WebElement ele: errorList){
+            		 popupCounter++;
             		 if (popupCounter%2==1){
-                         System.out.println("This is checkbox");
+            			
+            			 System.out.println("This is checkbox");
+                         try {
                          ele.click();
-                         if (ele.isSelected()){
-                        	 System.out.println("Could Click");
-                         	}
-                         else{
+                      //   if (ele.isSelected()){
+                        //	 System.out.println("Could Click");
+                         //	}
+                         //else{
+                         }
+                         catch(Exception e) {
                         	 System.out.println("Could Not Click");
                         	 overrideBoolean=true;
                         	 vc.validateRebill(testInputNbr,tinCount,trkngnbr);
                         	 return;
-                        	 
+                         }
                        }
             		 }
             		 popupCounter++;
-            	 }
+            	 
             	 try {
             	 driver.findElement(By.xpath("/html/body/div[6]/div/div/div[3]/button[1]")).click();
             	 }
@@ -757,6 +761,9 @@ public class rebillThread extends Thread{
             	 if (vc.validateRebill(testInputNbr,tinCount,trkngnbr)==true) {
             		 return;
      		    }
+            	 else {
+            		 return;
+            	 }
             	
             	
           }
