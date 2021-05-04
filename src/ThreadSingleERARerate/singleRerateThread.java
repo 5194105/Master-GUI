@@ -343,7 +343,7 @@ public void doEraRerate(
     // driver.findElement(By.xpath("")).sendKeys();
    //  driver.findElement(By.xpath("")).click();
 	 
-     
+     try {
  if(rerateType.contains("weight")) {
 	 if (!rateWeight.equals("")) {
 		
@@ -431,6 +431,15 @@ public void doEraRerate(
 	 }
  
  }
+     }
+ catch(Exception e) {
+	 String[] resultArray = new String[2];
+		resultArray[0]="fail";
+		resultArray[1]="Couldnt Correct Input";
+		vc.writeToDb(testInputNbr,tinCount,trkngnbr,resultArray[0],resultArray[1],null);
+		}
+ 
+ try {
  if(rerateType.contains("service")) {
 	Select sel = new Select(driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div[2]/div/div/div/select")));
 	if (!serviceType.equals("")) {
@@ -443,21 +452,22 @@ public void doEraRerate(
 		
 	} 
 	*/
-	try {
+	
 	sel = new Select(driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div[3]/div/div/div/select")));
 	sel.selectByVisibleText(serviceName);
 	
 	}
+ }
 	catch(Exception e) {
 		String[] resultArray = new String[2];
 		resultArray[0]="fail";
 		resultArray[1]="Couldnt Find Service";
-		 vc.writeToDb(testInputNbr,tinCount,trkngnbr,resultArray[0],resultArray[1],null);
+		vc.writeToDb(testInputNbr,tinCount,trkngnbr,resultArray[0],resultArray[1],null);
 	 
 	 return;
 	}
 	
- }
+ 
  
  
  //Click Rerate
@@ -725,7 +735,8 @@ catch(Exception e) {
   	  }
     	
 	 }
+	}
 }
-}
+
 
 

@@ -36,8 +36,12 @@ public static void main (String args[]) {
 	int function = 1;
 	c.setSessionCount("1");
 	c.setCustomCheckBox("true");
-	//c.setCustomString("trkngnbr is not null and result is null");
-	c.setCustomString("trkngnbr is not null and company='EP' and result is null");
+	c.setCustomString("trkngnbr ='214807934571'");
+
+	//c.setCustomString("trkngnbr is not null and company='EP' and result is null");
+
+
+	
 
 	c.setCycle("3");
 	

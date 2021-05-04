@@ -51,10 +51,12 @@ public class ecmod extends Thread {
 	
 	public void run () {
 		//login();
+		
 		for (data d: dataArray) {
 			trkngnbr=d.getTrkngnbr();
 			ecWorkType=d.getEcWorkType();
 			ecOverride=d.getOverride();
+			System.out.println("EC TRK: "+trkngnbr);
 			try {
 				if (ecOverride==true) {
 					getEc();

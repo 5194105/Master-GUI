@@ -374,7 +374,7 @@ public class base {
        		
        		for (data d : dataArray) {
        			try {
-       				databaseSqlQuery="select WORK_TYPE_CD,STAT_CD_ARRAY_DESC from ec_schema.shipment a join ec_schema.package b on a.ONLN_REV_ITEM_ID=b.ONLN_REV_ITEM_ID join ec_schema.pkg_stat_cd_array c on b.ONLN_PKG_ID=c.ONLN_PKG_ID where pkg_trkng_nbr="+d.getTrkngnbr();
+       				databaseSqlQuery="select WORK_TYPE_CD,STAT_CD_ARRAY_DESC from ec_schema.shipment a join ec_schema.package b on a.ONLN_REV_ITEM_ID=b.ONLN_REV_ITEM_ID join ec_schema.pkg_stat_cd_array c on b.ONLN_PKG_ID=c.ONLN_PKG_ID where ARRAY_TYPE_CD='F' and pkg_trkng_nbr="+d.getTrkngnbr();
 					stmt = con2.createStatement();
 					rs = stmt.executeQuery(databaseSqlQuery);
 					 while(rs.next()) {
@@ -975,7 +975,7 @@ public class base {
 			    		databaseSqlQuery+="where "+customString;
 				  		 
 				  	 }
-					
+				  	 
 				break;
 				
 				

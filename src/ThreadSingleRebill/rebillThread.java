@@ -127,8 +127,8 @@ public class rebillThread extends Thread{
 			driver.findElement(By.id("okta-signin-submit")).click();
 			}
     	catch(Exception e) {
-    		
-    		
+
+    
     	}
     }
     
@@ -261,7 +261,6 @@ public class rebillThread extends Thread{
         catch(Exception e){
         	 System.out.println("Could Not Clicked All Stat Codes");
             System.out.println(e);
-          
 
         }
     	
@@ -639,19 +638,24 @@ public class rebillThread extends Thread{
                  driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[1]/input")).sendKeys(length);
              }
              if (!width.equals("")) {
-              	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[2]/input")));
+            	
+            	
+            	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[2]/input")));
+            	
+            	 driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[2]/input")).clear();
+                 driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[2]/input")).sendKeys(width);
+             }
+             if (!height.equals("")) {
+            	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[2]/input")));
                  driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[3]/input")).clear();
                  driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[3]/input")).sendKeys(width);
              }
-             if (!height.equals("")) {
-              	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[4]/input")));
-                 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[4]/input")).clear();
-                 driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[5]/div[4]/input")).sendKeys(height);
-             }
+             
              if (!actualWeight.equals("")) {
               	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("  /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[2]/div[2]/input")));
                  driver.findElement(By.xpath("  /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[2]/div[2]/input")).clear();
                  driver.findElement(By.xpath("  /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[3]/div[4]/div[2]/div[2]/input")).sendKeys(actualWeight);
+                 
              }
              if (!svcType.equals("")) {
               	 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[4]/div[1]/div/input")));
@@ -667,13 +671,21 @@ public class rebillThread extends Thread{
             
              
              
-             Thread.sleep(2000);
+             Thread.sleep(3000);
              	driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")).click();
+             	
+             	try {
+             		driver.findElement(By.xpath("//*[@id=\"invoice-grid\"]/div/div/div[2]/div/div/div/div/form/div[4]/div[8]/div[3]/button[1]")).click();
+             	}
+             	catch(Exception e) {
+             		System.out.println("Could not click rebill twice.. thats okay.");
+             	}
              	Thread.sleep(10000);
              	}
              	catch(Exception e) {
              		System.out.println("Failed Trying to Rebill..");
              		// Assert.fail("Failed Trying to Rebill..");
+             		System.out.println(e);
              	}
 
             
