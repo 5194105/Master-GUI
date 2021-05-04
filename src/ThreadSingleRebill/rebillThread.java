@@ -14,7 +14,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
+
 
 
 import ThreadConfig.data;
@@ -128,7 +128,7 @@ public class rebillThread extends Thread{
 			}
     	catch(Exception e) {
     		
-    		 Assert.fail("Could Not Login");
+    		
     	}
     }
     
@@ -201,7 +201,7 @@ public class rebillThread extends Thread{
             	js.executeScript("arguments[0].click()", element);
         }	catch(Exception ee) {
         	System.out.println("Could Not Find Pop Up Or Continue To Charge Code Screen");
-           // Assert.fail("Could Not Find Popup Or COntinue to Package Screen");
+         
         	}
     	}
     	}
@@ -261,7 +261,7 @@ public class rebillThread extends Thread{
         catch(Exception e){
         	 System.out.println("Could Not Clicked All Stat Codes");
             System.out.println(e);
-            Assert.fail("Could Not Clicked All Stat Codes");
+          
 
         }
     	
@@ -683,7 +683,7 @@ public class rebillThread extends Thread{
              }
              catch (Exception e) {
             	 System.out.println("Failed Validating in DB");
-            	 Assert.fail("Failed Validating in DB");
+            	
              }
             
              //If False.. think maybe there is stat codes to select.
