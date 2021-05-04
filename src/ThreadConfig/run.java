@@ -33,11 +33,11 @@ public static void main (String args[]) {
 	// 22 ERA Rerate Upload to DB -- Works
 	
 	
-	int function = 13;
+	int function = 1;
 	c.setSessionCount("1");
 	c.setCustomCheckBox("true");
 	//c.setCustomString("trkngnbr is not null and result is null");
-	c.setCustomString("trkngnbr is not null");
+	c.setCustomString("trkngnbr is not null and defect_flg is null and company='EP'");
 
 	c.setCycle("3");
 	
