@@ -2,6 +2,7 @@ package configuration;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Hashtable;
 
 import org.openqa.selenium.WebDriver;
 
@@ -1188,6 +1189,8 @@ public void setOracleARL3DbConnection(String username,String password) {
 	System.out.println(username+"   "+password);
 		try {
 			try {
+				// Hashtable env = new Hashtable();
+			//	env.put("com.sun.jndi.ldap.read.timeout", "1000");
 				Class.forName("oracle.jdbc.OracleDriver");
 				//Class.forName("oracle.jdbc.driver.OracleDriver");
 			} catch (ClassNotFoundException e) {

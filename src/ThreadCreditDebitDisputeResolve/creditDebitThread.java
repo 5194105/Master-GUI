@@ -175,7 +175,7 @@ public void run () {
 			}
     	catch(Exception e) {
     		
-    		
+    		System.out.println("Could NOt Login");
     	}
     }
     
@@ -682,6 +682,20 @@ try {
                   	   			 String[] resultArray = new String[2];
                   	   			 	resultArray[0]="fail";
                   	   				resultArray[1]="Adjustment can not be done for discount amount";
+                  	   			vc.writeToDb(testInputNbr,tinCount,trkngnbr,resultArray[0],resultArray[1],null);
+                  	   			return;
+          		}
+      				 
+      				 if (tempError.indexOf("MBG")==1) {
+          				 System.out.println(tempError);
+          				 if(source.equals("excel")) {
+          	               //	 writeToExcel(rowNumber, 0,"fail");
+          	               //	 writeToExcel(rowNumber, 1,"Adjustment can not be done for discount amount");
+          	               	 }
+          	   				
+                  	   			 String[] resultArray = new String[2];
+                  	   			 	resultArray[0]="fail";
+                  	   				resultArray[1]="MBG Not Eligbile";
                   	   			vc.writeToDb(testInputNbr,tinCount,trkngnbr,resultArray[0],resultArray[1],null);
                   	   			return;
           		}

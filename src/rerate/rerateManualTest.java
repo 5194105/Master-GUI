@@ -27,7 +27,7 @@ public class rerateManualTest {
 	c.setLevel("3");
 	c.setDriverType("1");
 	c.setCompatibleMode("true");
-	c.setSource("excel");
+	c.setSource("db");
 	c.setAllCheckBox("false");
 	c.setNullCheckBox("true");
 	c.setFailedCheckBox("true");
@@ -38,7 +38,7 @@ public class rerateManualTest {
 
 	c.setStartDate("01/01/2000");
 
-	c.setEndDate("04/28/2021");
+	c.setEndDate("05/05/2021");
 
 //
 	c.setSessionCount("1");

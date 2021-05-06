@@ -36,16 +36,15 @@ public static void main (String args[]) {
 	int function = 1;
 	c.setSessionCount("1");
 	c.setCustomCheckBox("true");
-	c.setCustomString("trkngnbr ='214807934571'");
-
-	//c.setCustomString("trkngnbr is not null and company='EP' and result is null");
+	c.setCustomString("company='EP'");
+	//c.setCustomString("description='Failed Selecting Contact Method and Clicking Continue'");
 
 
 	
 
 	c.setCycle("3");
 	
-	c.setEraCase("5");
+	c.setEraCase("1");
 	
 	customConfig(function);
 	base b = new base(c,function);
