@@ -30,13 +30,14 @@ public static void main (String args[]) {
 	// 11 GFBO -- Doesnt Work
 	// 12 EC UD -- Doesnt Work
 	// 13 EC Device -- Doesnt Work
-	// 22 ERA Rerate Upload to DB -- Works
+	// 22 ERA Single Rerate Upload to DB -- Works
+	// 23 ERA Mass Rerate Upload to DB -- Works
 	
 	
-	int function = 1;
+	int function = 12;
 	c.setSessionCount("1");
 	c.setCustomCheckBox("true");
-	c.setCustomString("company='EP'");
+	c.setCustomString("trkngnbr is not null");
 	//c.setCustomString("description='Failed Selecting Contact Method and Clicking Continue'");
 
 
@@ -175,8 +176,10 @@ public static void customConfig (int function) {
 				
 			case 9:
 				c.setDatabaseDisabled("false");
-				c.setDriverType("2");
+				c.setDriverType("1");
 				c.setCompatibleMode("false");
+				c.setStartDate("01/01/2000");
+				c.setEndDate("05/07/2021");
 				
 				break;
 				
@@ -223,8 +226,12 @@ public static void customConfig (int function) {
 			case 22:
 				
 				c.setDatabaseDisabled("false");
+				break;
 				
+			case 23:
 				
+				c.setDatabaseDisabled("false");
+				break;
 				
 				 
 		}

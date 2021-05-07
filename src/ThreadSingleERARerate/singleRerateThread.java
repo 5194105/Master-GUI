@@ -469,12 +469,21 @@ public void doEraRerate(
 	
  
  
- 
+ try {
  //Click Rerate
  driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[4]/div/button[1]")).click();
 //  Thread.sleep(10000);
  //Check Popup
- 
+ }
+ catch(Exception e) {
+	 System.out.println(e);
+	 System.out.println("Could not click rerate");
+	 String[] resultArray = new String[2];
+		resultArray[0]="fail";
+		resultArray[1]="Could not click rerate";
+	 vc.writeToDb(testInputNbr,tinCount,trkngnbr,resultArray[0],resultArray[1],null);
+	 return;
+ }
  
  driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
  int knter=0;

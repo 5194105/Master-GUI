@@ -35,6 +35,7 @@ public class ecmod extends Thread {
 	validateClass vc;
 	String trkngnbr,ecWorkType;
 	Boolean ecOverride;
+	Boolean firstTry=true;
 	public ecmod(ArrayList<data> dataArray,config c) {
 		this.dataArray=dataArray;
 		this.c=c;
@@ -59,6 +60,7 @@ public class ecmod extends Thread {
 			System.out.println("EC TRK: "+trkngnbr);
 			try {
 				if (ecOverride==true) {
+					if (ecWorkType.equals("INTL_AUTO") || ecWorkType.equals("INTL_AB"))
 					getEc();
 				}
 			} catch (InterruptedException e) {
@@ -100,12 +102,13 @@ public class ecmod extends Thread {
 	}
 	
 	public void getEc() throws InterruptedException {
-	
+	System.out.println();
 		
-		login();
-		
-	//	Thread.sleep(10000);
-		//928073574535
+		if (firstTry==true) {
+			login();
+			}
+
+if (firstTry==false) {
 		try {
 			WebElement frame=driver.findElement(By.xpath("//*[@id=\"transactionSuccessModalId\"]"));
 			driver.switchTo().frame(frame);
@@ -114,11 +117,17 @@ public class ecmod extends Thread {
 		catch(Exception e) {
 			System.out.println("Error");
 			System.out.println(e);
+			login();
 		}
+}
+else {
+	firstTry=false;
+}
 		
-		driver.findElement(By.xpath("//*[@id=\"ECGUI\"]/img")).click();
+		
 		
 	try {
+		driver.findElement(By.xpath("//*[@id=\"ECGUI\"]/img")).click();
 				/*
 				 File FilePath = new File("E:\\ErrorCorrection\\EC_OVR\\ER_input_1.xlsx");
 				 FileInputStream fs = new FileInputStream(FilePath);
@@ -129,8 +138,16 @@ public class ecmod extends Thread {
 					
 				    System.out.println(rowCount);
 				    */
+					
 				  Select s=new Select(driver.findElement(By.id("workTypeId")));
+				  
+				  if (ecWorkType.equals("INTL_AUTO")) {
 				  s.selectByValue("INTL_AUTO");
+				  }
+				  else if (ecWorkType.equals("INTL_AB")) {
+					  s.selectByValue("INTL_AB");
+					  }
+				 
 				  
 //				  Select s1=new Select(driver.findElement(By.id("userPrefRegionsId")));
 //				  s1.selectByValue("EMEA");

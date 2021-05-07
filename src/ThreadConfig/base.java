@@ -13,8 +13,11 @@ import ThreadEc.ecmod;
 import ThreadGFBO.gfboDummyClass;
 import ThreadGFBO.gfboThread;
 import ThreadInstantInvoice.instantInvoiceThread;
+import ThreadMassERARerate.eraMassRerateUpload;
 import ThreadMassERARerate.massRerateDummy;
 import ThreadMassERARerate.massRerateThread;
+import ThreadPRSRerate.prsRerateDummyClass;
+import ThreadPRSRerate.prsRerateThread;
 import ThreadSingleERARerate.eraRerateUpload;
 import ThreadSingleERARerate.singleRerateThread;
 import ThreadSinglePrerate.prerateHoldThread;
@@ -127,7 +130,7 @@ public class base {
 					threadArray.add(new prerateHoldThread(dataArrayPartition,c));
 					break;
 					case 9:	
-				//	threadArray.add(new prsRerateThread(dataArrayPartition,c));
+					threadArray.add(new prsRerateThread(dataArrayPartition,c));
 					break;
 					case 10:	
 					threadArray.add(new instantInvoiceThread(dataArrayPartition,c));
@@ -144,7 +147,11 @@ public class base {
 					case 22:	
 						threadArray.add(new eraRerateUpload(dataArrayPartition,c));
 						break;
+					case 23:	
+						threadArray.add(new eraMassRerateUpload(dataArrayPartition,c));
+						break;
 	}
+				
 			}
 			
 		//Now will begin the thread execution.
@@ -291,8 +298,11 @@ public class base {
             		case 8:
             			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7))));	
             		     	break;
-            		     	
-            		
+            		        
+            		case 9:
+            			prsRerateDummyClass pdc=null;
+            			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),nullCheck(rs.getString(8)),nullCheck(rs.getString(9)),nullCheck(rs.getString(10)),nullCheck(rs.getString(11)),nullCheck(rs.getString(12)),nullCheck(rs.getString(13)),pdc));	
+            		     	break;
             		
             	 case 10:
          			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),"5194105","5194105",tempCounter));	
@@ -314,7 +324,14 @@ public class base {
             	 case 22:
            			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3))));	
            		     	break;
+           		     	
+            	 case 23:
+         			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3))));	
+         		     	break;
             		}
+            		
+            	 
+             		
             		
             		
             	
@@ -934,8 +951,13 @@ public class base {
 					
 				break;
 				case 9:	
-					databaseSqlQuery="select TEST_INPUT_NBR	,TIN_COUNT	,ACCT1,	ACCT2,	TRK_NO1,	TRK_NO2	,INVOICE_NBR_1,	INV_NO2,	SERVICE1,	SERVICE2,	REQUEST_TYPE,	ACCT_TYPE,	ACCNAME from rerate_master  ";
-					databaseSqlCount="select count(*) from  rerate_master ";
+					String databaseSqlCount="select count(*) as total from (select * from rerate_master where trk_no1 is not null and acct2 is null union all select * from rerate_master where trk_no1 is not null and trk_no2 is not null and acct2 is not null)";
+			    	String databaseSqlQuery="select TEST_INPUT_NBR	,TIN_COUNT	,ACCT1,	ACCT2,	TRK_NO1,	TRK_NO2	,INVOICE_NBR_1,	INV_NO2,	SERVICE1,	SERVICE2,	REQUEST_TYPE,	ACCT_TYPE,	ACCNAME from (select * from rerate_master where trk_no1 is not null and acct2 is null union all select * from rerate_master where trk_no1 is not null and trk_no2 is not null and acct2 is not null)";
+			    	
+			    	 if (customCheckBox.equals("true")){
+			    		databaseSqlCount+="where trk_no1 is not null and "+customString;
+			    		databaseSqlQuery+="where trk_no1 is not null and "+customString;
+			    	}
 				break;
 				
 				
@@ -984,12 +1006,12 @@ public class base {
 				
 				case 13:	
 				
-					//databaseSqlQuery="select b.pkg_trkng_nbr from INTL_EXPRS_ONLN_SCHEMA.INTL_online_revenue_item@L3_IORE a join INTL_EXPRS_ONLN_SCHEMA.INTL_package@L3_IORE b on a.ONLN_REV_ITEM_ID = b.ONLN_REV_ITEM_ID  join rtm.batch_shipping_results@RTM_PROD c on c.trkngnbr=b.pkg_trkng_nbr join  intl_EXPRS_ONLN_SCHEMA.intl_package_event@L3_IORE d on b.onln_pkg_id = d.onln_pkg_id where CYCLE = '"+c.getCycle()+"' and LEVELS = '3' and rs_type = 'IL' and company = 'EP' and device like '%DTT%' and src_org='B'and DEVICE not in ('UD','NRB','PAPER','DTT') and a.ITEM_PRCS_CD in ('OR','ER') and LPAR_ENHCMNT_DT is not null";
-					//databaseSqlCount="select count(*) from INTL_EXPRS_ONLN_SCHEMA.INTL_online_revenue_item@L3_IORE a join INTL_EXPRS_ONLN_SCHEMA.INTL_package@L3_IORE b on a.ONLN_REV_ITEM_ID = b.ONLN_REV_ITEM_ID  join rtm.batch_shipping_results@RTM_PROD c on c.trkngnbr=b.pkg_trkng_nbr join  intl_EXPRS_ONLN_SCHEMA.intl_package_event@L3_IORE d on b.onln_pkg_id = d.onln_pkg_id where CYCLE = '"+c.getCycle()+"' and LEVELS = '3' and rs_type = 'IL' and company = 'EP' and device like '%DTT%' and src_org='B'and DEVICE not in ('UD','NRB','PAPER','DTT') and a.ITEM_PRCS_CD in ('OR','ER') and LPAR_ENHCMNT_DT is not null";
+					databaseSqlQuery="select b.pkg_trkng_nbr from INTL_EXPRS_ONLN_SCHEMA.INTL_online_revenue_item@L3_IORE a join INTL_EXPRS_ONLN_SCHEMA.INTL_package@L3_IORE b on a.ONLN_REV_ITEM_ID = b.ONLN_REV_ITEM_ID  join rtm.batch_shipping_results@RTM_PROD c on c.trkngnbr=b.pkg_trkng_nbr join  intl_EXPRS_ONLN_SCHEMA.intl_package_event@L3_IORE d on b.onln_pkg_id = d.onln_pkg_id where CYCLE = '"+c.getCycle()+"' and LEVELS = '3' and rs_type = 'IL' and company = 'EP' and device like '%DTT%' and src_org='B'and DEVICE not in ('UD','NRB','PAPER','DTT') and a.ITEM_PRCS_CD in ('ER') and LPAR_ENHCMNT_DT is not null";
+					databaseSqlCount="select count(*) from INTL_EXPRS_ONLN_SCHEMA.INTL_online_revenue_item@L3_IORE a join INTL_EXPRS_ONLN_SCHEMA.INTL_package@L3_IORE b on a.ONLN_REV_ITEM_ID = b.ONLN_REV_ITEM_ID  join rtm.batch_shipping_results@RTM_PROD c on c.trkngnbr=b.pkg_trkng_nbr join  intl_EXPRS_ONLN_SCHEMA.intl_package_event@L3_IORE d on b.onln_pkg_id = d.onln_pkg_id where CYCLE = '"+c.getCycle()+"' and LEVELS = '3' and rs_type = 'IL' and company = 'EP' and device like '%DTT%' and src_org='B'and DEVICE not in ('UD','NRB','PAPER','DTT') and a.ITEM_PRCS_CD in ('ER') and LPAR_ENHCMNT_DT is not null";
 					
 					
-					databaseSqlQuery="select trkngnbr from rtm.batch_Shipping_results@RTM_PROD where trkngnbr in ('132563407642',	'134873476092',	'445774973810',	'509878469140',	'144556338180',	'227765716121',	'121917799793',	'727830674719',	'394829046895',	'861214134588',	'198484334274',	'825518893526',	'597247705549',	'187153984307',	'782682975260',	'259666674289',	'444306391032',	'132598262027',	'675990377761',	'254030070016',	'789966076350',	'190080812416',	'801083371028',	'173512172409',	'149447873813',	'487052936782',	'907390684108',	'197704231119',	'877915904136',	'257167803330') ";
-					databaseSqlCount="select count(*) from rtm.batch_Shipping_results@RTM_PROD where trkngnbr in ('132563407642',	'134873476092',	'445774973810',	'509878469140',	'144556338180',	'227765716121',	'121917799793',	'727830674719',	'394829046895',	'861214134588',	'198484334274',	'825518893526',	'597247705549',	'187153984307',	'782682975260',	'259666674289',	'444306391032',	'132598262027',	'675990377761',	'254030070016',	'789966076350',	'190080812416',	'801083371028',	'173512172409',	'149447873813',	'487052936782',	'907390684108',	'197704231119',	'877915904136',	'257167803330')";
+					//databaseSqlQuery="select trkngnbr from rtm.batch_Shipping_results@RTM_PROD where trkngnbr in ('132563407642',	'134873476092',	'445774973810',	'509878469140',	'144556338180',	'227765716121',	'121917799793',	'727830674719',	'394829046895',	'861214134588',	'198484334274',	'825518893526',	'597247705549',	'187153984307',	'782682975260',	'259666674289',	'444306391032',	'132598262027',	'675990377761',	'254030070016',	'789966076350',	'190080812416',	'801083371028',	'173512172409',	'149447873813',	'487052936782',	'907390684108',	'197704231119',	'877915904136',	'257167803330') ";
+					//databaseSqlCount="select count(*) from rtm.batch_Shipping_results@RTM_PROD where trkngnbr in ('132563407642',	'134873476092',	'445774973810',	'509878469140',	'144556338180',	'227765716121',	'121917799793',	'727830674719',	'394829046895',	'861214134588',	'198484334274',	'825518893526',	'597247705549',	'187153984307',	'782682975260',	'259666674289',	'444306391032',	'132598262027',	'675990377761',	'254030070016',	'789966076350',	'190080812416',	'801083371028',	'173512172409',	'149447873813',	'487052936782',	'907390684108',	'197704231119',	'877915904136',	'257167803330')";
 					
 					
 
@@ -1021,6 +1043,21 @@ public class base {
 					  	 }
 					
 				break;
+				
+				
+				case 23:	
+					databaseSqlQuery="select TEST_INPUT_NBR	,TIN_COUNT	,trkngnbr from era_rerate_mass  ";
+					databaseSqlCount="select count(*) from  era_rerate_mass ";
+					
+					
+					 if (customCheckBox.equals("true")) {
+					  		databaseSqlCount+="where trkngnbr is not null and "+customString;
+				    		databaseSqlQuery+="where trkngnbr is not null and "+customString;
+					  		 
+					  	 }
+					
+				break;
+				
 				}
 				
 				System.out.println(databaseSqlQuery);

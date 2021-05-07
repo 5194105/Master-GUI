@@ -117,6 +117,19 @@ public class validateClass {
 	
 	
 	
+	public Boolean validateMassRerate(String testInputNbr,String tinCount,String trkngnbr) {
+		oracleBoolean=false;
+		if (databaseDisabled.equals("false")) {
+			searchEraRerateMass("select FAILED_REQ_QTY, SUCCESS_REQ_QTY ,TOTAL_REQUEST_QTY,RERATE_STATUS_CD, RERATE_OUTBOUND_TMSTP,batch_summary_nbr from invadj_schema.mass_adj_summary a join (select max(batch_summary_nbr) as bsr from invadj_schema.mass_rerate_detail where airbill_nbr ="+trkngnbr+") b on b.bsr=a.batch_summary_nbr",testInputNbr,tinCount,trkngnbr);
+			
+		}
+		return oracleBoolean;
+		
+	}
+	
+	
+	
+	
 	
 	
 	/////////////////////PRERATE
@@ -254,6 +267,71 @@ public void searchEraDB(String sqlQuery,String testInputNbr,String tinCount,Stri
 
 
 
+public void searchEraRerateMass(String sqlQuery,String testInputNbr,String tinCount,String trkngnbr) {
+	Connection con=null;
+	Statement stmt=null;
+	ResultSet rs=null;
+	String finalResult="";
+	String finalDesc="";
+	String requestID="";
+	if (trkngnbr.equals("119976543235")) {
+		System.out.println("Debug");
+	}
+	try {
+		  System.out.println(trkngnbr);
+		  con=c.getEraL3DbConnection();
+			stmt=con.createStatement();
+			rs=stmt.executeQuery(sqlQuery);
+			
+	
+	  }
+		  catch (Exception e) {
+			  }
+		 try {
+			if (rs.next()==false){
+			   
+				
+				System.out.println("Is NULL");
+				finalResult="fail";
+				finalDesc="Not Found in ERA DB";
+			}
+			   else{
+				   
+				  String SUCCESS_REQ_QTY = rs.getString("SUCCESS_REQ_QTY");
+				 String TOTAL_REQUEST_QTY = rs.getString("TOTAL_REQUEST_QTY");
+				 String batch_summary_nbr = rs.getString("batch_summary_nbr");
+				 
+				 
+				 
+				 
+				 if(SUCCESS_REQ_QTY==null || SUCCESS_REQ_QTY.equals("")) {
+					SUCCESS_REQ_QTY="";
+				 }
+				
+				 if (SUCCESS_REQ_QTY.equals(TOTAL_REQUEST_QTY)) {
+					 finalResult="pass";
+					 finalDesc="completed";
+				 }
+				 else if (SUCCESS_REQ_QTY.equals("")) {
+					 finalResult="pending";
+					 finalDesc="Still Processing";
+				 }
+				
+				  else {
+					  finalResult="na";
+					  finalDesc="Check Manually";
+					  
+				  }
+				 requestID=batch_summary_nbr;
+				  
+			   }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		writeToDb( testInputNbr, tinCount, trkngnbr, finalResult, finalDesc, requestID);
+		  }
+	      
 
 
 
@@ -555,11 +633,12 @@ public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String
 		
 		
 		if (flag.equals("era_rerate_mass")) {
-			stmt=con.prepareStatement("update era_results set result=?,description=?,era_mass_rerate='Y',tin_count=? where trkngnbr=?");  
+			stmt=con.prepareStatement("update era_results set result=?,description=?,era_mass_rerate='Y',tin_count=?,request_id=? where trkngnbr=?");  
 			stmt.setString(1,finalResult);  
 			stmt.setString(2,finalDesc); 
 			stmt.setString(3,tinCount);
-			stmt.setString(4,trkngnbr); 
+			stmt.setString(4,requestID);
+			stmt.setString(5,trkngnbr); 
 			stmt.executeUpdate();	
 		
 		}

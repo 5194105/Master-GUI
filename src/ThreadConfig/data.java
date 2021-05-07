@@ -3,6 +3,7 @@ package ThreadConfig;
 import ThreadCreditDebitDisputeResolve.debitDummyClass;
 import ThreadGFBO.gfboDummyClass;
 import ThreadMassERARerate.massRerateDummy;
+import ThreadPRSRerate.prsRerateDummyClass;
 
 public class data {
 	String result, description, testInputNbr, tinCount, trkngnbr, reasonCode,  billAcctNbr, invoiceNbr1, invoiceNbr2, region, username, password,  rs_type, company, rebillPrerate,  workable, defectFlg, defectNbr;
@@ -22,7 +23,7 @@ public class data {
 	String gfboPassword;
 	String gfboPaymentLevel;
 	String gfboPaymentType;
-	String gfboAccount;
+	String gfboAccount,trkNo1,trkNo2;
 	String gfboExpectedResult,requestId,ecWorkType,statCodeArray;
 	Boolean override;
 	//Function Type
@@ -213,8 +214,42 @@ public class data {
 		this.eraCase=eraCase;
 	}
 	
+	//prs rerate
+	public data(String testInputNbr,String tinCount,String acct1,String acct2,String trkNo1,String trkNo2,String invoiceNbr1,String invoiceNbr2,String service1, String service2,String requestType,String acctType,String acctName,prsRerateDummyClass pdc) {
+		this.testInputNbr=testInputNbr;
+		this.tinCount=tinCount;
+		this.acct1=acct1;
+		this.acct2=acct2;
+		this.trkNo1=trkNo1;
+		this.trkNo2=trkNo2;
+		this.invoiceNbr1=invoiceNbr1;
+		this.invoiceNbr2=invoiceNbr2;
+		this.service1=service1;
+		this.service2=service2;
+		this.requestType=requestType;
+		this.acctType=acctType;
+		this.acctName=acctName;
+		
+	}
+	
 	//Rebill Resolve
 	
+	public String getTrkNo1() {
+		return trkNo1;
+	}
+
+	public void setTrkNo1(String trkNo1) {
+		this.trkNo1 = trkNo1;
+	}
+
+	public String getTrkNo2() {
+		return trkNo2;
+	}
+
+	public void setTrkNo2(String trkNo2) {
+		this.trkNo2 = trkNo2;
+	}
+
 	public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String reasonCode,String billAcctNbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password,String comments,String valDesc,String eraCase,debitDummyClass ddc) {
 		this.result=result;
 		this.description=description;

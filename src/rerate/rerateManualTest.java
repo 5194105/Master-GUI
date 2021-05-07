@@ -60,7 +60,7 @@ public class rerateManualTest {
 	
 	//You can give custom query if want to
 			c.setCustomCheckBox("true");
-			c.setCustomString("trk_no1 is not null");
+			c.setCustomString("description='Not in MCO'");
 	
 	String filepath=c.getExcelPath();
 	String level=c.getLevel();

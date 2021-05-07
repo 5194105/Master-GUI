@@ -330,7 +330,7 @@ public void doMassRerate( ) throws InterruptedException {
        	 }
 			 if(databaseDisabled.equals("false")) {
 					for (data d : dataArray2) {
-						vc.writeToDb(d.getTestInputNbr(),d.getTinCount(),d.getTrkngnbr(),"In Progress","Rerate Created",null);
+						vc.writeToDb(d.getTestInputNbr(),d.getTinCount(),d.getTrkngnbr(),"fail","Unknown Error",null);
         	 }
 			 }
 				
