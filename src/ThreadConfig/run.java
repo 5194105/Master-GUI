@@ -34,18 +34,18 @@ public static void main (String args[]) {
 	// 23 ERA Mass Rerate Upload to DB -- Works
 	
 	
-	int function = 12;
+	int function = 7;
 	c.setSessionCount("1");
 	c.setCustomCheckBox("true");
-	c.setCustomString("trkngnbr is not null");
+	c.setCustomString("trkngnbr is not null ");
 	//c.setCustomString("description='Failed Selecting Contact Method and Clicking Continue'");
 
 
 	
 
-	c.setCycle("3");
+	c.setCycle("4");
 	
-	c.setEraCase("1");
+	c.setEraCase("4");
 	
 	customConfig(function);
 	base b = new base(c,function);

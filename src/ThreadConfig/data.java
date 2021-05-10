@@ -26,6 +26,7 @@ public class data {
 	String gfboAccount,trkNo1,trkNo2;
 	String gfboExpectedResult,requestId,ecWorkType,statCodeArray;
 	Boolean override;
+	String runningResult="false";
 	//Function Type
 	// 1 Single Rebill
 	// 2 Mass Rebill
@@ -38,6 +39,14 @@ public class data {
 	// 9 PRS Rerate
 
 	
+	public String getRunningResult() {
+		return runningResult;
+	}
+
+	public void setRunningResult(String runningResult) {
+		this.runningResult = runningResult;
+	}
+
 	public String getStatCodeArray() {
 		return statCodeArray;
 	}

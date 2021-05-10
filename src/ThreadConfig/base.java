@@ -951,8 +951,8 @@ public class base {
 					
 				break;
 				case 9:	
-					String databaseSqlCount="select count(*) as total from (select * from rerate_master where trk_no1 is not null and acct2 is null union all select * from rerate_master where trk_no1 is not null and trk_no2 is not null and acct2 is not null)";
-			    	String databaseSqlQuery="select TEST_INPUT_NBR	,TIN_COUNT	,ACCT1,	ACCT2,	TRK_NO1,	TRK_NO2	,INVOICE_NBR_1,	INV_NO2,	SERVICE1,	SERVICE2,	REQUEST_TYPE,	ACCT_TYPE,	ACCNAME from (select * from rerate_master where trk_no1 is not null and acct2 is null union all select * from rerate_master where trk_no1 is not null and trk_no2 is not null and acct2 is not null)";
+					 databaseSqlCount="select count(*) as total from (select * from rerate_master where trk_no1 is not null and acct2 is null union all select * from rerate_master where trk_no1 is not null and trk_no2 is not null and acct2 is not null)";
+			    	 databaseSqlQuery="select TEST_INPUT_NBR	,TIN_COUNT	,ACCT1,	ACCT2,	TRK_NO1,	TRK_NO2	,INVOICE_NBR_1,	INV_NO2,	SERVICE1,	SERVICE2,	REQUEST_TYPE,	ACCT_TYPE,	ACCNAME from (select * from rerate_master where trk_no1 is not null and acct2 is null union all select * from rerate_master where trk_no1 is not null and trk_no2 is not null and acct2 is not null)";
 			    	
 			    	 if (customCheckBox.equals("true")){
 			    		databaseSqlCount+="where trk_no1 is not null and "+customString;
@@ -989,8 +989,8 @@ public class base {
 				case 12:	
 					//databaseSqlQuery="select trkngnbr from ud_green_er union all select trknngbr from ud_rebs_er  ";
 				//	databaseSqlCount="select count(*) from (select trkngnbr from ud_green_er union all select trknngbr from ud_rebs_er) ";
-					databaseSqlQuery="select trkngnbr from ud_green_er  ";
-					databaseSqlCount="select count(*) from ud_green_er ";
+					databaseSqlQuery="select * from (select trkngnbr from ud_green_er union all select trkngnbr from ud_rebs_er) ";
+					databaseSqlCount="select count(*) from (select trkngnbr from ud_green_er union all select trkngnbr from ud_rebs_er) ";
 					
 					if (customCheckBox.equals("true")) {
 				  		databaseSqlCount+="where "+customString;

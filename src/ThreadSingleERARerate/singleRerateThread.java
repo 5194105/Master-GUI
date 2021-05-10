@@ -39,6 +39,9 @@ public class singleRerateThread extends Thread{
 	 rateWeight, actualWeight, wgtType,  length, width, height, 
 	 workable, dimType, payor, billAcctNbr, serviceType, packageType,
 	 rerateType, region, username, password, rsType, company, valDesc,comments,serviceName;
+	Boolean running=true;
+	int runningCounter;
+	data d;
 	
 	public singleRerateThread(ArrayList<data> dataArray,config c) {
 		this.dataArray=dataArray;
@@ -52,10 +55,12 @@ public class singleRerateThread extends Thread{
 		vc= new validateClass(c,databaseDisabled,"era_rerate");
 	}
 public void run () {
-		
+		while (running == true) {
+			runningCounter=0;
 		for(data d: dataArray) {
-		
-			
+			this.d=d;
+			if (d.getRunningResult().equals("false")){
+			runningCounter++;
 			this.result=d.getResult();
 			this.description=d.getDescription();
 			this.testInputNbr=d.getTestInputNbr();
@@ -86,7 +91,8 @@ public void run () {
 			this.comments=d.getComments();
 			
 			
-		    if (vc.validateRebill(testInputNbr,tinCount,trkngnbr)==true) {
+		    if (vc.validateRerate(testInputNbr,tinCount,trkngnbr)==true) {
+		    	d.setRunningResult("true");
 		    	return;
 		    }
 		
@@ -97,6 +103,9 @@ public void run () {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	
+		}
+		}
+		if (runningCounter==0) {running = false;}
 		}
 	}
 
@@ -560,7 +569,7 @@ public void doEraRerate(
  String getText =  driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[3]/select[1]")).getText();
  System.out.println(getText);
  
- System.out.println(5000);
+ System.out.println(10000);
  //click process
 
  int i=0;
@@ -734,6 +743,9 @@ catch(Exception e) {
  try {
 	 if (vc.validateRerate(testInputNbr, tinCount, trkngnbr)==true) {
 		vc.writeToDb(testInputNbr, tinCount, trkngnbr, "pass", "completed", null); 
+		d.setRunningResult("true");
+		return;
+		
 	 }
    
  }

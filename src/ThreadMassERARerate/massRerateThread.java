@@ -48,6 +48,8 @@ public class massRerateThread extends Thread{
 	  ArrayList<String> addedTrks = new ArrayList<String>();
 	  ArrayList<String> removedTrks = new ArrayList<String>();
 	  Boolean execute=false;
+	  Boolean running=true;
+		int runningCounter;
 	public massRerateThread(ArrayList<data> dataArray,config c) {
 		this.dataArray=dataArray;
 		this.c=c;
@@ -61,6 +63,7 @@ public class massRerateThread extends Thread{
 	}
 public void run () {
 	String tempTin="0";
+	
 		for(data d: dataArray) {
 		
 			
@@ -134,6 +137,8 @@ public void run () {
 		}
 	}
 
+	
+
 
 
 public void login() {
@@ -171,7 +176,7 @@ public void doMassRerate( ) throws InterruptedException {
 
 
 	
-	maxAttempts=1;
+	maxAttempts=3;
 	for (int ii=0;ii<maxAttempts;ii++) {
 	login();
 	WebElement element=null;
@@ -192,8 +197,24 @@ public void doMassRerate( ) throws InterruptedException {
    
     int waittimer=3000;
     Thread.sleep(waittimer);
+    int count=0;
   //Will click on mass adjustments
+    while (count < 10) {
+    	count++;
+    
+    try {
+    	
     driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[1]/ul/li[12]/a")).click();
+    driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div/div/textarea"));
+    break;
+    }
+    catch(Exception e) {
+    	try {
+    	driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[1]/div[5]/div/div/textarea"));
+    	}
+    	catch(Exception ee) {}
+    	}
+    }
     Thread.sleep(waittimer);
     //Will click on mass rerates
     driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div/div/div[2]/div[2]/button[3]")).click();
@@ -316,7 +337,7 @@ public void doMassRerate( ) throws InterruptedException {
 	
 	for (data d : dataArray2) {
 		vc.writeToDb(d.getTestInputNbr(),d.getTinCount(),d.getTrkngnbr(),"In Progress","Rerate Created",requestID);
-    
+		d.setRunningResult("true");
 	}
 	
 	} 

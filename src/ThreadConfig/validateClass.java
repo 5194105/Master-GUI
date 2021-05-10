@@ -912,7 +912,7 @@ public void searchOracleDBDebitCredit(String sqlQuery,String testInputNbr,String
 			String tempString= rs.getString("NOTES");
 				 System.out.println(tempString);
 				 							
-				 if (tempString.contains("RDT D")){
+				 if (tempString.contains("RDT D ")){
 					 disputeBoolean=true;
 					 String temp = tempString;
 					 temp = temp.substring(temp.indexOf("[")+1);

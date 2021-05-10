@@ -118,6 +118,8 @@ public class prerateThread extends Thread{
 			driver.findElement(By.id("username")).sendKeys("5194105");
 			driver.findElement(By.id("password")).sendKeys("5194105");
 			driver.findElement(By.id("submit")).click();
+			driver.get("https://testsso.secure.fedex.com/l3/prerates/");
+			
 			}
     	catch(Exception e) {
     		System.out.println(e);
