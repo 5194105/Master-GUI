@@ -9,7 +9,7 @@ import java.sql.Statement;
 import configuration.config;
 
 public class validateClass {
-	Boolean result=false,oracleBoolean=false,eraBoolean=false,prerateBoolean=false,denialBoolean=false,instantInvoiceBoolean=false;
+	Boolean result=false,oracleBoolean=false,eraBoolean=false,prerateBoolean=false,denialBoolean=false,instantInvoiceBoolean=false,sepBoolean=false;
 	String databaseDisabled,flag,disputeNumber;
 	config c;
 	
@@ -28,7 +28,50 @@ public class validateClass {
 	}
 
 	
+	public Boolean validateSep(String testInputNbr,String trkngnbr) {
+		Connection con=null;
+		Statement stmt=null;
+		ResultSet rs=null;
+		String sqlQuery=null;
+		if (flag.equals("emass_pup")) {
+			sqlQuery="select * from sep_l3_schema.package where PACKAGE_SCAN_DESC like '%08000%' and TRACKING_ITEM_NBR="+trkngnbr;
+			System.out.println(sqlQuery);
+		}
+		if (flag.equals("emass_stat65")) {
+			sqlQuery="";
+			System.out.println(sqlQuery);
+			}
+		if (flag.equals("emass_pod")) {
+			sqlQuery="";
+			System.out.println(sqlQuery);
+			}
+		try {
+			c.setSepL3DbConnection("SEP_L3_DATA_APP", "DAPP_Test_Env_Rocks_987..WordD");
+			con=c.getSepL3DbConnection();
+			stmt=con.createStatement();
+			rs=stmt.executeQuery(sqlQuery);
+			String finalResult="";
+			String finalDesc="";
+			
+			if (rs.next()==false){
+			      System.out.println("Is NULL");
+			      instantInvoiceBoolean=false;   
+			}
+			   else{
+			      System.out.println("IS NOT NULL");
+			      sepBoolean=true;
+			      finalResult="pass";
+            	  finalDesc="completed";
+            	  writeToDb(testInputNbr, "1", trkngnbr, finalResult, finalDesc, null); 
+			   }
+		}
+			catch(Exception e) {
+				System.out.println(e);
+			}
+		return sepBoolean;
+	}
 	
+
 	
 	public Boolean validateRebill(String testInputNbr,String tinCount,String trkngnbr) {
 		oracleBoolean=false;
@@ -521,6 +564,42 @@ public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String
 		stmt.executeUpdate();
 	}
 		
+		if (flag.equals("emass_pup")) {
+		    stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,emass_pup) values (?,?,?,?,?,?)");  
+			
+			//stmt.setString(1,flag); 
+			stmt.setString(1,testInputNbr);  
+			stmt.setString(2,tinCount);  
+			stmt.setString(3,trkngnbr);  
+			stmt.setString(4,finalResult);  
+			stmt.setString(5,finalDesc);  
+			stmt.setString(6,"Y");  
+			stmt.executeUpdate();
+		}
+		if (flag.equals("emass_stat65")) {
+		    stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,emass_stat65) values (?,?,?,?,?,?)");  
+			
+			//stmt.setString(1,flag); 
+			stmt.setString(1,testInputNbr);  
+			stmt.setString(2,tinCount);  
+			stmt.setString(3,trkngnbr);  
+			stmt.setString(4,finalResult);  
+			stmt.setString(5,finalDesc);  
+			stmt.setString(6,"Y");  
+			stmt.executeUpdate();
+		}
+		if (flag.equals("emass_pod")) {
+		    stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,emass_pod) values (?,?,?,?,?,?)");  
+			
+			//stmt.setString(1,flag); 
+			stmt.setString(1,testInputNbr);  
+			stmt.setString(2,tinCount);  
+			stmt.setString(3,trkngnbr);  
+			stmt.setString(4,finalResult);  
+			stmt.setString(5,finalDesc);  
+			stmt.setString(6,"Y");  
+			stmt.executeUpdate();
+		}
 		
 		
 		if (flag.equals("era_rerate_mass")) {
@@ -613,6 +692,20 @@ public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String
 			stmt.executeUpdate();
 		}
 		
+		if (flag.equals("prs_rerate")) {
+		    stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,request_id,prs_rerate) values (?,?,?,?,?,?,?)");  
+			
+			//stmt.setString(1,flag); 
+			stmt.setString(1,testInputNbr);  
+			stmt.setString(2,tinCount);  
+			stmt.setString(3,trkngnbr);  
+			stmt.setString(4,finalResult);  
+			stmt.setString(5,finalDesc); 
+			stmt.setString(6,requestID);  
+			 stmt.setString(7,"Y");  
+			stmt.executeUpdate();
+		}
+		
 		
 		}
 	catch(Exception e) {
@@ -626,10 +719,42 @@ public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String
 		stmt=con.prepareStatement("update era_results set result=?,description=?,era_rebill='Y' where trkngnbr=?");  
 		stmt.setString(1,finalResult);  
 		stmt.setString(2,finalDesc); 
-		
 		stmt.setString(3,trkngnbr); 
 		stmt.executeUpdate();
 		}
+		
+		if (flag.equals("emass_pup")) {
+			stmt=con.prepareStatement("update era_results set result=?,description=?,emass_pup='Y' where trkngnbr=?");  
+			stmt.setString(1,finalResult);  
+			stmt.setString(2,finalDesc); 
+			stmt.setString(3,trkngnbr); 
+			stmt.executeUpdate();
+			}
+		
+		if (flag.equals("emass_stat65")) {
+			stmt=con.prepareStatement("update era_results set result=?,description=?,emass_stat65='Y' where trkngnbr=?");  
+			stmt.setString(1,finalResult);  
+			stmt.setString(2,finalDesc); 
+			stmt.setString(3,trkngnbr); 
+			stmt.executeUpdate();
+			}
+		
+		if (flag.equals("emass_pod")) {
+			stmt=con.prepareStatement("update era_results set result=?,description=?,emass_pod='Y' where trkngnbr=?");  
+			stmt.setString(1,finalResult);  
+			stmt.setString(2,finalDesc); 
+			stmt.setString(3,trkngnbr); 
+			stmt.executeUpdate();
+			}
+		
+		if (flag.equals("prs_rerate")) {
+			stmt=con.prepareStatement("update era_results set result=?,description=?,prs_rerate='Y',request_id=? where trkngnbr=?");  
+			stmt.setString(1,finalResult);  
+			stmt.setString(2,finalDesc); 
+			stmt.setString(3,requestID); 
+			stmt.setString(4,trkngnbr); 
+			stmt.executeUpdate();
+			}
 		
 		
 		if (flag.equals("era_rerate_mass")) {

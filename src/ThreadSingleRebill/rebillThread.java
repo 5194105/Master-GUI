@@ -42,6 +42,9 @@ public class rebillThread extends Thread{
 	String level;
 	driverClass dc;
 	validateClass vc;
+	Boolean running=true;
+	int runningCounter;
+	data d;
 	
 	public rebillThread(ArrayList<data> dataArray,config c) {
 		this.dataArray=dataArray;
@@ -58,6 +61,22 @@ public class rebillThread extends Thread{
 	public void run () {
 		
 		for(data d: dataArray) {
+			if (d.getRunningResult().equals("false")) {
+				running=true;
+			}
+		}
+		
+		
+		while (running == true) {
+			running=false;
+			for(data d: dataArray) {
+				if (d.getRunningResult().equals("false")) {
+					running=true;
+				}
+			}
+			
+		for(data d: dataArray) {
+		
 			
 			//Declare Vars
 			result=d.getResult();
@@ -87,6 +106,8 @@ public class rebillThread extends Thread{
 			
 		    
 		    if (vc.validateRebill(testInputNbr,tinCount,trkngnbr)==true) {
+		    	d.getRunningResult().equals("true");
+		    }
 		    	continue;
 		    }
 		    
@@ -99,6 +120,7 @@ public class rebillThread extends Thread{
 				e.printStackTrace();
 			}		
 		}
+	
 	}
 	
 

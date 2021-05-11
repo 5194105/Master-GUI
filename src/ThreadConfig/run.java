@@ -25,19 +25,20 @@ public static void main (String args[]) {
 	// 6 Instant Invoice -- Works
 	// 7 Prerate Single -- Works
 	// 8 Prerate Hold -- Works 
-	// 9 PRS Rerate -- Not Working
+	// 9 PRS Rerate -- Works
 	// 10 Instant Invoice Device -- Works
 	// 11 GFBO -- Doesnt Work
-	// 12 EC UD -- Doesnt Work
-	// 13 EC Device -- Doesnt Work
+	// 12 EC UD --  Works
+	// 13 EC Device --  Works
+	// 14 emass -- doesnt work
 	// 22 ERA Single Rerate Upload to DB -- Works
 	// 23 ERA Mass Rerate Upload to DB -- Works
 	
 	
-	int function = 7;
+	int function = 14;
 	c.setSessionCount("1");
 	c.setCustomCheckBox("true");
-	c.setCustomString("trkngnbr is not null ");
+	c.setCustomString("trkngnbr is not null");
 	//c.setCustomString("description='Failed Selecting Contact Method and Clicking Continue'");
 
 
@@ -46,7 +47,7 @@ public static void main (String args[]) {
 	c.setCycle("4");
 	
 	c.setEraCase("4");
-	
+	c.setEmassCase("4");
 	customConfig(function);
 	base b = new base(c,function);
 }
@@ -217,6 +218,12 @@ public static void customConfig (int function) {
 				c.setCompatibleMode("false");
 				break;
 			case 13:
+				c.setDatabaseDisabled("false");
+				c.setDriverType("2");
+				c.setCompatibleMode("false");
+				break;
+				
+			case 14:
 				c.setDatabaseDisabled("false");
 				c.setDriverType("2");
 				c.setCompatibleMode("false");

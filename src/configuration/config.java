@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 
 public class config {
 	
-	Connection rtmCon,gtmRevToolsCon,ciCon,oreL2Con,doreL3Con,ioreL3Con,ecL2Con,ecL3Con,eraL2Con,eraL3Con,oracleARL3Con;
+	Connection rtmCon,gtmRevToolsCon,ciCon,oreL2Con,doreL3Con,ioreL3Con,ecL2Con,ecL3Con,eraL2Con,eraL3Con,oracleARL3Con,sepL3Con;
 	String chromeSetProperty,ieSetProperty,chromePath,ieDriverPath;
 	WebDriver ieDriver,chromeDriver,tempWebDriver;
     String gtmDbUsername,gtmDbResults,gtmDbPassword,retryAttempts,secondTimeout,rebillL2URL,rebillL3URL;
@@ -43,8 +43,22 @@ public class config {
     String whatever;
     String cycle;
     String homePath;
+    String emassCase;
+    String sepL3Password,sepL3Username;
+    public String getEmassCase() {
+		return emassCase;
+	}
 
-    String startDate,endDate;
+
+
+
+	public void setEmassCase(String emassCase) {
+		this.emassCase = emassCase;
+	}
+
+
+
+	String startDate,endDate;
     String eraCase;
     
     String compatible;
@@ -1699,6 +1713,38 @@ public void setResolveCreditCheckBox(String resolveCreditCheckBox){
 public String getResolveCreditCheckBox(){
 	return resolveCreditCheckBox;
 }
+public void setSepL3DbConnection(String username,String password) {
+	
+	try {
+		System.out.println(username);
+		System.out.println(password);
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		sepL3Con=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/SEP_SVC1_L3,cn=OracleContext",username,password);
+		} catch (SQLException | ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}
+	
+}
+public void setSepL3Username(String sepL3Username) {
+	
+	this.sepL3Username=sepL3Username;
+}
+
+public String getSepL3Username() {
+	
+	return sepL3Username;
+}
+
+public void setSepL3Password(String sepL3Password) {
+	
+	this.sepL3Password=sepL3Password;
+}
+public Connection getSepL3DbConnection() {
+
+	return sepL3Con;
+}
+
 }
 
 //jdbc:oracle:thin:@<host>:<port>:<SID>

@@ -55,12 +55,22 @@ public class singleRerateThread extends Thread{
 		vc= new validateClass(c,databaseDisabled,"era_rerate");
 	}
 public void run () {
-		while (running == true) {
-			runningCounter=0;
+	for(data d: dataArray) {
+		if (d.getRunningResult().equals("false")) {
+			running=true;
+		}
+	}
+	
+	
+	while (running == true) {
+		running=false;
 		for(data d: dataArray) {
-			this.d=d;
-			if (d.getRunningResult().equals("false")){
-			runningCounter++;
+			if (d.getRunningResult().equals("false")) {
+				running=true;
+			}
+		}
+		
+	for(data d: dataArray) {
 			this.result=d.getResult();
 			this.description=d.getDescription();
 			this.testInputNbr=d.getTestInputNbr();
@@ -105,8 +115,8 @@ public void run () {
 			}	
 		}
 		}
-		if (runningCounter==0) {running = false;}
-		}
+		
+		
 	}
 
 
@@ -128,9 +138,7 @@ public void login() {
 	    driver.get(levelUrl);
 	    driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
 		wait = new WebDriverWait(driver,waitTime);
-		driver.manage().window().maximize();
-		
-									
+		driver.manage().window().maximize();							
 		driver.findElement(By.id("okta-signin-username")).sendKeys(username);
 		driver.findElement(By.id("okta-signin-password")).sendKeys(password);
 		driver.findElement(By.id("okta-signin-submit")).click();

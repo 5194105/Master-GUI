@@ -247,6 +247,10 @@ public class importData {
 	        		 c.setIeProperty(tempStringPostFix);
 	        		 break;
 	        		 
+	        	 case "IE Path" :
+	        		 c.setIeDriverPath(System.getProperty("user.dir")+tempStringPostFix);
+	        		 break;
+	        		 
 	        	 case "GFBO L3 URL" :
 	        		 c.setGfboUrl(tempStringPostFix);
 	        		 break;

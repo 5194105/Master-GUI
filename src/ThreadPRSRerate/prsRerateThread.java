@@ -125,7 +125,7 @@ public void run () {
 			  login();
 			  
 			  firstPage(r,alert,acctName,acct1,acct2,acctType, testInputNbr, tinCount, trkNo1);
-			  secondPage(comboBoxesHandling,service1, service2, rerateType, trkNo1, trkNo2, invoiceNbr1, invoiceNbr2, acct1,  acct2, testInputNbr, tinCount);
+			  secondPage(comboBoxesHandling,service1, service2, requestType, trkNo1, trkNo2, invoiceNbr1, invoiceNbr2, acct1,  acct2, testInputNbr, tinCount);
 			  thirdPage(acctName,express,ground,combo, testInputNbr, tinCount, trkNo1);
 		}
 }
@@ -142,7 +142,12 @@ public void login() {
 		  System.out.println(e);
 		  
 	  }
-		 driver.get(prsMainUrl);
+		
+		
+		
+		
+			driver=dc.getDriver();
+			driver.get(prsMainUrl);
 	  		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 	  		wait = new WebDriverWait( driver,10);
 	  		driver.manage().window().maximize();     
@@ -182,7 +187,9 @@ public void login() {
 				driver.get(prsCreateUrl);
 		}
 }
-	catch(Exception e) {}
+	catch(Exception e) {
+		System.out.println(e);
+	}
 }
 
 
@@ -266,6 +273,7 @@ public void firstPage(Robot r,Alert alert,String name,String acct1,String acct2,
 			if (acctType.equals("CE Level")) {
 				Thread.sleep(2000);
 				r = new Robot();
+
 				r.keyPress(KeyEvent.VK_ENTER);
 				r.keyRelease(KeyEvent.VK_ENTER);
 			}

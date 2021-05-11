@@ -23,6 +23,8 @@ import ThreadSingleERARerate.singleRerateThread;
 import ThreadSinglePrerate.prerateHoldThread;
 import ThreadSinglePrerate.prerateThread;
 import ThreadSingleRebill.rebillThread;
+import ThreadeMass.threadEmass;
+import ThreadeMass.threadEmassDummy;
 import configuration.config;
 import configuration.importData;
 
@@ -37,7 +39,7 @@ public class base {
 	 config c;
 	 String eraCase;
 	 String[][] ecArray;
-	String allCheckBox,customCheckBox,customString,nullCheckBox,failedCheckBox,domesticCheckBox,internationalCheckBox,expressCheckBox,groundCheckBox,eraWorkable,databaseSqlCount,databaseSqlQuery;
+	String allCheckBox,customCheckBox,customString,nullCheckBox,failedCheckBox,domesticCheckBox,internationalCheckBox,expressCheckBox,groundCheckBox,eraWorkable,databaseSqlCount,databaseSqlQuery,databaseSqlCount2,databaseSqlQuery2,databaseSqlCount3,databaseSqlQuery3;
 	//public static void main(String args[]) {
 	public base(config c,int function) {
 		int low=0;
@@ -144,6 +146,9 @@ public class base {
 					case 13:
 						threadArray.add(new ecmod(dataArrayPartition,c));
 						break;
+					case 14:
+						threadArray.add(new threadEmass(dataArrayPartition,c));
+						break;
 					case 22:	
 						threadArray.add(new eraRerateUpload(dataArrayPartition,c));
 						break;
@@ -240,10 +245,11 @@ public class base {
 			Statement stmt = null;
 			ResultSet rs = null;
 		
-
+			if (function!=14) {
        	try {
        		//If not EC UD
            		
+       	
 	        		stmt = con.createStatement();
 	            	rs = stmt.executeQuery(databaseSqlQuery);
            		
@@ -320,6 +326,9 @@ public class base {
             	 case 13:
             		 dataArray.add(new data(nullCheck(rs.getString(1))));
             		 break;
+            		 
+            	
+            		 
             		
             	 case 22:
            			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3))));	
@@ -328,12 +337,10 @@ public class base {
             	 case 23:
          			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3))));	
          		     	break;
+ 		     	
             		}
             		
-            	 
-             		
-            		
-            		
+  
             	
           		}
             		
@@ -359,7 +366,60 @@ public class base {
     		System.out.println(e);
     	}
        	
-       	
+       	}
+			
+			
+			
+			
+			if (function==14) {
+				
+				threadEmassDummy ted = new threadEmassDummy();
+				try {
+					if(c.getEmassCase().equals("1") || c.getEmassCase().equals("4")) {
+				stmt = con.createStatement();
+            	rs = stmt.executeQuery(databaseSqlQuery);
+            	
+            	 while(rs.next()) {
+            		 dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),nullCheck(rs.getString(8)),nullCheck(rs.getString(9)),nullCheck(rs.getString(10)),nullCheck(rs.getString(11)),nullCheck(rs.getString(12)),nullCheck(rs.getString(13)),nullCheck(rs.getString(14)),nullCheck(rs.getString(15)),ted));	
+            	 }
+            	 
+            	
+            	 
+            	 
+					}
+					if(c.getEmassCase().equals("2") || c.getEmassCase().equals("4")) {
+            	stmt = con.createStatement();
+            	rs = stmt.executeQuery(databaseSqlQuery2);
+            	 while(rs.next()) {
+            		 dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),ted));	
+            	 }
+            	
+            	 }
+					if(c.getEmassCase().equals("3") || c.getEmassCase().equals("4")) {
+            	stmt = con.createStatement();
+            	rs = stmt.executeQuery(databaseSqlQuery3);
+            	 while(rs.next()) {
+            		 dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),nullCheck(rs.getString(8)),nullCheck(rs.getString(9)),ted));	
+                 	
+            	 }
+            		
+					}
+				}
+				catch(Exception e) {
+					System.out.println(e);
+				}
+				sqlCount=0;
+				for (data d:dataArray) {
+					sqlCount++;
+				}
+			}
+			
+			
+			
+			
+			
+			
+			
        	if (function==12 || function==13) {
        		
        		//Getting EC Override
@@ -1023,6 +1083,54 @@ public class base {
 				  		 
 				  	 }
 					*/
+				break;
+				
+				case 14:	
+				
+					switch(c.getEmassCase()) {
+					case "1":
+					databaseSqlQuery="select TEST_INPUT_NBR,	TRKNGNBR,	EMASS_ORIGIN_CD,	EMASS_PUP_EMP_ID,	EMASS_PUP_ROUTE,	EMASS_FORM_ID	,EMASS_COSMO_NBR	,EMASS_STOP_TYPE	,EMASS_DEST_CITY_SHORT,	EMASS_DEST_COUNTRY_CD, EMASS_DEST_COUNTRY_POSTAL,	EMASS_BASE_SVC,	EMASS_PACKAGE_TYPE,	EMASS_HANDLING_CD,	EMASS_DEL_ADDRESS from emass_pup ";
+					databaseSqlCount="select count(*) from emass_pup ";
+					break;
+					case "2":
+					databaseSqlQuery2="select TEST_INPUT_NBR,	TRKNGNBR,	EMASS_STAT_DEST_CD,	EMASS_STAT_EMP_ID,	EMASS_STANDARD_EXPORT from emass_stat65 ";
+					databaseSqlCount2="select count(*) from emass_stat65 ";
+					break;
+					case "3":
+						
+					databaseSqlQuery3="select TEST_INPUT_NBR,	TRKNGNBR,		EMASS_POD_DEST_CD,	EMASS_POD_EMP_ID,	EMASS_POD_ROUTE,	EMASS_RECEIVED_BY,	EMASS_DEL_ADDRESS,	EMASS_DEL_LOC,	EMASS_SIG_REC_LINE_NBR,	EMASS_SIG_REC_ID from emass_pod ";
+					databaseSqlCount3="select count(*) from emass_pod ";
+					break;
+					
+					case "4":
+						databaseSqlQuery="select TEST_INPUT_NBR,	TRKNGNBR,	EMASS_ORIGIN_CD,	EMASS_PUP_EMP_ID,	EMASS_PUP_ROUTE,	EMASS_FORM_ID	,EMASS_COSMO_NBR	,EMASS_STOP_TYPE	,EMASS_DEST_CITY_SHORT,	EMASS_DEST_COUNTRY_CD, EMASS_DEST_COUNTRY_POSTAL,	EMASS_BASE_SVC,	EMASS_PACKAGE_TYPE,	EMASS_HANDLING_CD,	EMASS_DEL_ADDRESS from emass_pup ";
+						databaseSqlCount="select count(*) from emass_pup ";
+						databaseSqlQuery2="select TEST_INPUT_NBR,	TRKNGNBR,	EMASS_STAT_DEST_CD,	EMASS_STAT_EMP_ID,	EMASS_STANDARD_EXPORT from emass_stat65 ";
+						databaseSqlCount2="select count(*) from emass_stat65 ";
+						databaseSqlQuery3="select TEST_INPUT_NBR,	TRKNGNBR,	EMASS_POD_DEST_CD,	EMASS_POD_EMP_ID,	EMASS_POD_ROUTE,	EMASS_RECEIVED_BY,	EMASS_DEL_ADDRESS,	EMASS_DEL_LOC,	EMASS_SIG_REC_LINE_NBR,	EMASS_SIG_REC_ID from emass_pod ";
+						databaseSqlCount3="select count(*) from emass_pod ";
+						
+						
+						break;
+					}
+					
+					//databaseSqlQuery="select trkngnbr from rtm.batch_Shipping_results@RTM_PROD where trkngnbr in ('132563407642',	'134873476092',	'445774973810',	'509878469140',	'144556338180',	'227765716121',	'121917799793',	'727830674719',	'394829046895',	'861214134588',	'198484334274',	'825518893526',	'597247705549',	'187153984307',	'782682975260',	'259666674289',	'444306391032',	'132598262027',	'675990377761',	'254030070016',	'789966076350',	'190080812416',	'801083371028',	'173512172409',	'149447873813',	'487052936782',	'907390684108',	'197704231119',	'877915904136',	'257167803330') ";
+					//databaseSqlCount="select count(*) from rtm.batch_Shipping_results@RTM_PROD where trkngnbr in ('132563407642',	'134873476092',	'445774973810',	'509878469140',	'144556338180',	'227765716121',	'121917799793',	'727830674719',	'394829046895',	'861214134588',	'198484334274',	'825518893526',	'597247705549',	'187153984307',	'782682975260',	'259666674289',	'444306391032',	'132598262027',	'675990377761',	'254030070016',	'789966076350',	'190080812416',	'801083371028',	'173512172409',	'149447873813',	'487052936782',	'907390684108',	'197704231119',	'877915904136',	'257167803330')";
+					
+					
+
+					
+					
+					if (customCheckBox.equals("true")) {
+				  		databaseSqlCount+="where "+customString;
+			    		databaseSqlQuery+="where "+customString;
+			    		databaseSqlCount2+="where "+customString;
+			    		databaseSqlQuery2+="where "+customString;
+			    		databaseSqlCount3+="where "+customString;
+			    		databaseSqlQuery3+="where "+customString;
+				  		 
+				  	 }
+					
 				break;
 				
 				

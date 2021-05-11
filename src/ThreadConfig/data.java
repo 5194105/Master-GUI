@@ -4,6 +4,7 @@ import ThreadCreditDebitDisputeResolve.debitDummyClass;
 import ThreadGFBO.gfboDummyClass;
 import ThreadMassERARerate.massRerateDummy;
 import ThreadPRSRerate.prsRerateDummyClass;
+import ThreadeMass.threadEmassDummy;
 
 public class data {
 	String result, description, testInputNbr, tinCount, trkngnbr, reasonCode,  billAcctNbr, invoiceNbr1, invoiceNbr2, region, username, password,  rs_type, company, rebillPrerate,  workable, defectFlg, defectNbr;
@@ -27,6 +28,8 @@ public class data {
 	String gfboExpectedResult,requestId,ecWorkType,statCodeArray;
 	Boolean override;
 	String runningResult="false";
+	String emassOriginCd, emassPupEmpId,  emassPupRoute, emassFormId,  emassCosmoNbr, emassStopType,  emassDestCityShort, emassDestCountryCd, emassDestCountryPostal, emassBaseSvc, emassPackageType, emassHandlingCd, emassDelAddress;
+	String emassPodDestCd, emassPodRoute, emassReceivedBy,   emassDelLoc, emassSigRecLineNbr, emassSigRecId,   emassStatDestCd, emassStatEmpId, emassStandardExport;
 	//Function Type
 	// 1 Single Rebill
 	// 2 Mass Rebill
@@ -499,6 +502,236 @@ public class data {
 		this.acctType=acctType;
 		this.acctName=acctName;
 	}
+	
+	
+	
+
+	
+	//emass pup
+	public data(String testInputNbr, String trkngnbr,String emassOriginCd,String emassPupEmpId, String emassPupRoute,String emassFormId, String emassCosmoNbr,String emassStopType, String emassDestCityShort,String emassDestCountryCd,String emassDestCountryPostal,String emassBaseSvc,String emassPackageType,String emassHandlingCd,String emassDelAddress, threadEmassDummy ted) {
+		
+		
+			
+		this.testInputNbr=testInputNbr;
+		this.trkngnbr=trkngnbr;
+		this.emassOriginCd=emassOriginCd;
+		this.emassPupEmpId=emassPupEmpId;
+		this.emassPupRoute=emassPupRoute;
+		this.emassFormId=emassFormId;
+		this.emassCosmoNbr=emassCosmoNbr;
+		this.emassStopType=emassStopType;
+		this.emassDestCityShort=emassDestCityShort;
+		this.emassDestCountryCd=emassDestCountryCd;
+		this.emassDestCountryPostal=emassDestCountryPostal;
+		this.emassBaseSvc=emassBaseSvc;
+		this.emassPackageType=emassPackageType;
+		this.emassHandlingCd=emassHandlingCd;
+		this.emassDelAddress=emassDelAddress;
+		
+	}
+	public String getEmassOriginCd() {
+		return emassOriginCd;
+	}
+
+	public void setEmassOriginCd(String emassOriginCd) {
+		this.emassOriginCd = emassOriginCd;
+	}
+
+	public String getEmassPupEmpId() {
+		return emassPupEmpId;
+	}
+
+	public void setEmassPupEmpId(String emassPupEmpId) {
+		this.emassPupEmpId = emassPupEmpId;
+	}
+
+	public String getEmassPupRoute() {
+		return emassPupRoute;
+	}
+
+	public void setEmassPupRoute(String emassPupRoute) {
+		this.emassPupRoute = emassPupRoute;
+	}
+
+	public String getEmassFormId() {
+		return emassFormId;
+	}
+
+	public void setEmassFormId(String emassFormId) {
+		this.emassFormId = emassFormId;
+	}
+
+	public String getEmassCosmoNbr() {
+		return emassCosmoNbr;
+	}
+
+	public void setEmassCosmoNbr(String emassCosmoNbr) {
+		this.emassCosmoNbr = emassCosmoNbr;
+	}
+
+	public String getEmassStopType() {
+		return emassStopType;
+	}
+
+	public void setEmassStopType(String emassStopType) {
+		this.emassStopType = emassStopType;
+	}
+
+	public String getEmassDestCityShort() {
+		return emassDestCityShort;
+	}
+
+	public void setEmassDestCityShort(String emassDestCityShort) {
+		this.emassDestCityShort = emassDestCityShort;
+	}
+
+	public String getEmassDestCountryCd() {
+		return emassDestCountryCd;
+	}
+
+	public void setEmassDestCountryCd(String emassDestCountryCd) {
+		this.emassDestCountryCd = emassDestCountryCd;
+	}
+
+	public String getEmassDestCountryPostal() {
+		return emassDestCountryPostal;
+	}
+
+	public void setEmassDestCountryPostal(String emassDestCountryPostal) {
+		this.emassDestCountryPostal = emassDestCountryPostal;
+	}
+
+	public String getEmassBaseSvc() {
+		return emassBaseSvc;
+	}
+
+	public void setEmassBaseSvc(String emassBaseSvc) {
+		this.emassBaseSvc = emassBaseSvc;
+	}
+
+	public String getEmassPackageType() {
+		return emassPackageType;
+	}
+
+	public void setEmassPackageType(String emassPackageType) {
+		this.emassPackageType = emassPackageType;
+	}
+
+	public String getEmassHandlingCd() {
+		return emassHandlingCd;
+	}
+
+	public void setEmassHandlingCd(String emassHandlingCd) {
+		this.emassHandlingCd = emassHandlingCd;
+	}
+
+	public String getEmassDelAddress() {
+		return emassDelAddress;
+	}
+
+	public void setEmassDelAddress(String emassDelAddress) {
+		this.emassDelAddress = emassDelAddress;
+	}
+
+	public String getEmassPodDestCd() {
+		return emassPodDestCd;
+	}
+
+	public void setEmassPodDestCd(String emassPodDestCd) {
+		this.emassPodDestCd = emassPodDestCd;
+	}
+
+	public String getEmassPodRoute() {
+		return emassPodRoute;
+	}
+
+	public void setEmassPodRoute(String emassPodRoute) {
+		this.emassPodRoute = emassPodRoute;
+	}
+
+	public String getEmassReceivedBy() {
+		return emassReceivedBy;
+	}
+
+	public void setEmassReceivedBy(String emassReceivedBy) {
+		this.emassReceivedBy = emassReceivedBy;
+	}
+
+	public String getEmassDelLoc() {
+		return emassDelLoc;
+	}
+
+	public void setEmassDelLoc(String emassDelLoc) {
+		this.emassDelLoc = emassDelLoc;
+	}
+
+	public String getEmassSigRecLineNbr() {
+		return emassSigRecLineNbr;
+	}
+
+	public void setEmassSigRecLineNbr(String emassSigRecLineNbr) {
+		this.emassSigRecLineNbr = emassSigRecLineNbr;
+	}
+
+	public String getEmassSigRecId() {
+		return emassSigRecId;
+	}
+
+	public void setEmassSigRecId(String emassSigRecId) {
+		this.emassSigRecId = emassSigRecId;
+	}
+
+	public String getEmassStatDestCd() {
+		return emassStatDestCd;
+	}
+
+	public void setEmassStatDestCd(String emassStatDestCd) {
+		this.emassStatDestCd = emassStatDestCd;
+	}
+
+	public String getEmassStatEmpId() {
+		return emassStatEmpId;
+	}
+
+	public void setEmassStatEmpId(String emassStatEmpId) {
+		this.emassStatEmpId = emassStatEmpId;
+	}
+
+	public String getEmassStandardExport() {
+		return emassStandardExport;
+	}
+
+	public void setEmassStandardExport(String emassStandardExport) {
+		this.emassStandardExport = emassStandardExport;
+	}
+
+	//emass stat65
+	public data(String testInputNbr, String trkngnbr, String emassStatDestCd,String emassStatEmpId,String emassStandardExport, threadEmassDummy ted) {
+		this.testInputNbr=testInputNbr;
+		this.trkngnbr=trkngnbr;
+		this.emassStatEmpId=emassStatEmpId;
+		this.emassStatDestCd=emassStatDestCd;
+		this.emassStandardExport=emassStandardExport;
+		
+	}
+
+	//emass pod
+	public data(String testInputNbr, String trkngnbr, String emassPodDestCd,String emassPodRoute,String emassReceivedBy,String emassDelAddress, String emassDelLoc,String emassSigRecLineNbr,String emassSigRecId, threadEmassDummy ted) {
+		this.testInputNbr=testInputNbr;
+		this.trkngnbr=trkngnbr;
+		this.emassPodDestCd=emassPodDestCd;
+		this.emassPodRoute=emassPodRoute;
+		this.emassReceivedBy=emassReceivedBy;
+		this.emassDelAddress=emassDelAddress;
+		this.emassDelLoc=emassDelLoc;
+		this.emassSigRecLineNbr=emassSigRecLineNbr;
+		this.emassSigRecId=emassSigRecId;
+		
+		
+	}
+	
+	
+	
 	
 	//Instant Invoice Device
 	public data(String trkngnbr, String payorAcctNbr,String username,String password, int counter) {

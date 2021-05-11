@@ -41,6 +41,9 @@ public class prerateHoldThread extends Thread{
 	driverClass dc;
 	validateClass vc;
 	String result,  description, testInputNbr, tinCount, trkngnbr, prerateTypeCd,  prerateAmt, currencyCd, approvalId, podScan, tinComment, chrgCd2,  chrgAmt2, chrgCd3, chrgAmt3,  chrgCd4, chrgAmt4, valDesc,expectedStatus;
+	Boolean running=true;
+	int runningCounter;
+	data d;
 	public prerateHoldThread(ArrayList<data> dataArray,config c) {
 		
 		this.dataArray=dataArray;
@@ -57,6 +60,21 @@ public class prerateHoldThread extends Thread{
 	public void run () {
 		
 		for(data d: dataArray) {
+			if (d.getRunningResult().equals("false")) {
+				running=true;
+			}
+		}
+		
+		
+		while (running == true) {
+			running=false;
+			for(data d: dataArray) {
+				if (d.getRunningResult().equals("false")) {
+					running=true;
+				}
+			}
+			
+		for(data d: dataArray) {
 			
 			//Declare Vars
 			this.result=d.getResult();
@@ -71,6 +89,7 @@ public class prerateHoldThread extends Thread{
 			System.out.println(trkngnbr);
 		    
 		    if (vc.validatePrerateHold(testInputNbr,tinCount,trkngnbr,tinComment)==true) {
+		    	d.getRunningResult().equals("true");
 		    	continue;
 		    }
 		  	try {
@@ -80,7 +99,11 @@ public class prerateHoldThread extends Thread{
 				e.printStackTrace();
 			}		
 		}
-	}
+		}
+		}
+
+		
+	
 	
 
     
