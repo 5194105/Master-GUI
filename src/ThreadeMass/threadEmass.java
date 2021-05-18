@@ -26,7 +26,7 @@ import configuration.config;
 
 public class threadEmass extends Thread{
 
-	ArrayList<data> dataArray,dataArrayPup;
+	ArrayList<data> dataArray,dataArrayPup,dataArrayStat65,dataArrayPod;
 	config c;
 	String homePath;
 	WebDriver driver;
@@ -36,7 +36,7 @@ public class threadEmass extends Thread{
 	String databaseDisabled;
 	WebDriverWait wait;
 	String source;
-	String result, svcType,descripiton, testInputNbr, tinCount, trkngnbr, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, region , login , password, rsType , company , prerate,workable, rowNumber,length,width,height,actualWeight;
+	String result,emassCaseData, svcType,descripiton, testInputNbr, tinCount, trkngnbr, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, region , login , password, rsType , company , prerate,workable, rowNumber,length,width,height,actualWeight;
 	int waitTime;
 	int attempts=0;
 	int maxAttempts;
@@ -64,6 +64,9 @@ public class threadEmass extends Thread{
 	public void run () {
 		
 		for(data d: dataArray) {
+			this.trkngnbr=d.getTrkngnbr();
+			this.testInputNbr=d.getTestInputNbr();
+			/*
 			 this.emassOriginCd=d.getEmassOriginCd();
 			 this.emassPupEmpId=  d.getEmassPupEmpId();
 			 this.emassPupRoute= d.getEmassPupRoute();
@@ -86,7 +89,32 @@ public class threadEmass extends Thread{
 			 this.emassStatDestCd=d.getEmassStatDestCd();
 			 this.emassStatEmpId= d.getEmassStatEmpId();
 			 this.emassStandardExport=d.getEmassStandardExport();
+			
 			 emassPup();
+			 */
+			 this.emassCaseData = d.getEmassCaseData();
+		
+			 switch (emassCaseData) {
+				 case "1":vc.setFlag("emass_pup");
+				 break;
+				 case "2":vc.setFlag("emass_stat65");
+				 break;
+				 case "3":vc.setFlag("emass_pod");
+				 break;
+			 }
+			 
+			 
+			if(vc.validateSep(testInputNbr,trkngnbr)==true) {
+				d.setRunningResult("true");
+				
+			}
+			System.out.println("Tracking Number="+trkngnbr+" -- Emass Type="+emassCaseData+ " -- Emass Result="+d.getRunningResult());
+		}
+		try {
+			emassPup();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
@@ -118,15 +146,153 @@ public class threadEmass extends Thread{
 	    
 	    	}
 	    }
-	    public void emassPup() {
+	    public void emassPup() throws InterruptedException {
 	    	levelUrl="https://test.secure.fedex.com/L3/eShipmentGUI/DisplayLinkHandler?id=351";
-	    	login();
-	    	try {
-	    		driver.findElement(By.xpath("/html/body/div[1]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr[1]/td/form/table[2]/tbody/tr/td/div/table/tbody/tr[2]/td/div/table/tbody/tr/td/div/div[3]/div/div[2]/div[1]")).click();
+	    	String tempLocCd="";
+	    	for(data d: dataArray) {
+	    		 this.emassOriginCd=d.getEmassOriginCd();
+				 this.emassPupEmpId=  d.getEmassPupEmpId();
+				 this.emassPupRoute= d.getEmassPupRoute();
+				 this.emassFormId=  d.getEmassFormId();
+				 this.emassCosmoNbr= d.getEmassCosmoNbr();
+				 this.emassStopType=  d.getEmassStopType();
+				 this.emassDestCityShort= d.getEmassDestCityShort();
+				 this.emassDestCountryCd=d.getEmassDestCountryCd();
+				 this.emassDestCountryPostal=d.getEmassDestCountryPostal();
+				 this.emassBaseSvc=d.getEmassBaseSvc();
+				 this.emassPackageType=d.getEmassPackageType();
+				 this.emassHandlingCd=d.getEmassHandlingCd();
+				 this.emassDelAddress=d.getEmassDelAddress();
+				 this.emassPodDestCd= d.getEmassPodDestCd();
+				 this.emassPodRoute= d.getEmassPodRoute();
+				 this.emassReceivedBy=d.getEmassReceivedBy();
+				 this.emassDelLoc=d.getEmassDelLoc();
+				 this.emassSigRecLineNbr=d.getEmassSigRecLineNbr();
+				 this.emassSigRecId=  d.getEmassSigRecId();
+				 this.emassStatDestCd=d.getEmassStatDestCd();
+				 this.emassStatEmpId= d.getEmassStatEmpId();
+				 this.emassStandardExport=d.getEmassStandardExport();
+				 this.trkngnbr=d.getTrkngnbr();
+				 this.testInputNbr=d.getTestInputNbr();
 	    		
+				 if (!d.getEmassOriginCd().equals(tempLocCd)) {
+					 tempLocCd=d.getEmassOriginCd();
+					 login();
+					 
+					 driver.findElement(By.xpath("/html/body/div/form/table/tbody/tr/td[2]/table/tbody/tr[1]/td/input")).sendKeys(d.getEmassOriginCd());
+					 driver.findElement(By.xpath("/html/body/div/form/table/tbody/tr/td[2]/table/tbody/tr[1]/td/button")).click();
+					
+					 //Remove when wsso is done.
+					 driver.get("https://test.secure.fedex.com/L3/Event-Entry-5539C/");
+					 Thread.sleep(2000);
+					 driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[1]/div/div/div/ul/li[4]")).click();
+					 Thread.sleep(2000);
+					 driver.findElement(By.xpath(" /html/body/table/tbody/tr[2]/td/form/span[1]/div/div/div/ul/li[4]/ul/li[1]/a/span/span")).click();
+					
+					 try {
+					// driver.findElement(By.xpath(" /html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/table/tbody/tr/td/div/div[2]/table/tbody/tr[3]/td[2]/input")).sendKeys(d.getEmassPupEmpId());
+					
+					 emassInput(" /html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/table/tbody/tr/td/div/div[2]/table/tbody/tr[3]/td[2]/input",d.getEmassPupEmpId());
+					 emassInput(" /html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/table/tbody/tr/td/div/div[2]/table/tbody/tr[5]/td[2]/input",d.getEmassPupRoute());
+					 emassInput(" /html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[5]/div/table/tbody/tr[1]/td/span/input",d.getTrkngnbr());	
+					 emassInput(" /html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[5]/div/table/tbody/tr[2]/td/span/input",d.getEmassFormId());
+					 emassInput(" /html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[9]/div/table/tbody/tr[2]/td/span/input",d.getEmassCosmoNbr());
+						/*
+					Thread.sleep(2000);
+					 driver.findElement(By.xpath(" /html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/table/tbody/tr/td/div/div[2]/table/tbody/tr[5]/td[2]/input")).click();
+					 Thread.sleep(2000);
+					 driver.findElement(By.xpath(" /html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/table/tbody/tr/td/div/div[2]/table/tbody/tr[5]/td[2]/input")).click();
+					 Thread.sleep(2000);
+					 driver.findElement(By.xpath(" /html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/table/tbody/tr/td/div/div[2]/table/tbody/tr[5]/td[2]/input")).sendKeys(d.getEmassPupRoute());
+					
+					 Thread.sleep(2000);
+					 driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[5]/div/table/tbody/tr[1]/td/span/input")).click();
+					 Thread.sleep(2000);
+					 driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[5]/div/table/tbody/tr[1]/td/span/input")).click();
+					 Thread.sleep(2000);
+					 driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[5]/div/table/tbody/tr[1]/td/span/input")).sendKeys(d.getTrkngnbr());
+					
+					 Thread.sleep(2000);
+					 driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[5]/div/table/tbody/tr[2]/td/span/input")).click();
+					 Thread.sleep(2000);
+					 driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[5]/div/table/tbody/tr[2]/td/span/input")).click();
+					 Thread.sleep(2000);
+					 driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[5]/div/table/tbody/tr[2]/td/span/input")).sendKeys(d.getEmassFormId());
+					 Thread.sleep(2000);	
+					 driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[9]/div/table/tbody/tr[2]/td/span/input")).click();
+					 Thread.sleep(2000);
+					 driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[9]/div/table/tbody/tr[2]/td/span/input")).click();
+					 Thread.sleep(2000);
+					 driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[9]/div/table/tbody/tr[2]/td/span/input")).sendKeys(d.getEmassCosmoNbr());
+						*/
+					 Select sel = new Select(driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[10]/div/table/tbody/tr/td/span/select")));
+					 sel.selectByValue("R");
+					 
+					// emassInput(driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[11]/div/table/tbody/tr[1]/td/span/input")),d.getEmassDestCityShort());	
+				//	 emassInput(driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[11]/div/table/tbody/tr[2]/td/span/input")),d.getEmassDestCountryCd());
+				//	 emassInput(driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[11]/div/table/tbody/tr[3]/td/span/input")),d.getEmassDestCountryPostal());
+					
+					 Thread.sleep(2000);
+					 driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[11]/div/table/tbody/tr[1]/td/span/input")).click();
+					 Thread.sleep(2000);
+					 driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[11]/div/table/tbody/tr[1]/td/span/input")).click();
+					 Thread.sleep(2000);
+					 driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[11]/div/table/tbody/tr[1]/td/span/input")).sendKeys(d.getEmassDestCityShort());
+					 Thread.sleep(2000);	
+					 
+					 driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[11]/div/table/tbody/tr[2]/td/span/input")).click();
+					 Thread.sleep(2000);
+					
+					 driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[11]/div/table/tbody/tr[2]/td/span/input")).click();
+					 Thread.sleep(2000);
+					 driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[11]/div/table/tbody/tr[2]/td/span/input")).sendKeys(d.getEmassDestCountryCd());
+					 Thread.sleep(2000);
+					 
+					 Thread.sleep(2000);
+					 driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[11]/div/table/tbody/tr[3]/td/span/input")).click();
+					 Thread.sleep(2000);
+					 driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[11]/div/table/tbody/tr[3]/td/span/input")).click();
+					 Thread.sleep(2000);
+					 driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[11]/div/table/tbody/tr[3]/td/span/input")).sendKeys(d.getEmassDestCountryPostal());
+						
+					 sel = new Select(driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[12]/div/table/tbody/tr[1]/td/span/select")));
+					 driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[11]/div/table/tbody/tr[2]/td/span/input")).click();
+					 driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[11]/div/table/tbody/tr[2]/td/span/input")).click();
+					
+					 sel.selectByValue(d.getEmassBaseSvc());
+					 sel = new Select(driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td/form/span[2]/div[1]/div[2]/div/div/div/table/tbody/tr/td[12]/div/table/tbody/tr[2]/td/span/select")));
+					 sel.selectByValue(d.getEmassPackageType());
+					 }
+					 catch(Exception e) {
+						 System.out.println(e);
+					 }
+					 
+					 
+					 }
+					try {
+			    //		driver.findElement(By.xpath("/html/body/div[1]/table/tbody/tr[2]/td/table/tbody/tr/td/table/tbody/tr[1]/td/form/table[2]/tbody/tr/td/div/table/tbody/tr[2]/td/div/table/tbody/tr/td/div/div[3]/div/div[2]/div[1]")).click();
+			    		
+			    	}
+			    	catch(Exception e) {
+			    		
+			    	}
 	    	}
-	    	catch(Exception e) {
+	    
+	    	
 	    		
-	    	}
+	    	
+	    
+	    
+	    }
+	    public void emassInput(String we,String input) throws InterruptedException {
+	    	
+	    	Thread.sleep(1000); 
+	    	
+	    	driver.findElement(By.xpath(we)).click();
+	    	Thread.sleep(4000);
+	    	driver.findElement(By.xpath(we)).click();
+	    	Thread.sleep(2500); 
+	    	driver.findElement(By.xpath(we)).sendKeys(input);
+	    	
 	    }
 }

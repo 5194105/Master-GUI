@@ -27,7 +27,14 @@ public class data {
 	String gfboAccount,trkNo1,trkNo2;
 	String gfboExpectedResult,requestId,ecWorkType,statCodeArray;
 	Boolean override;
-	String runningResult="false";
+	String runningResult="false",emassCaseData;
+	public String getEmassCaseData() {
+		return emassCaseData;
+	}
+
+	public void setEmassCaseData(String emassCaseData) {
+		this.emassCaseData = emassCaseData;
+	}
 	String emassOriginCd, emassPupEmpId,  emassPupRoute, emassFormId,  emassCosmoNbr, emassStopType,  emassDestCityShort, emassDestCountryCd, emassDestCountryPostal, emassBaseSvc, emassPackageType, emassHandlingCd, emassDelAddress;
 	String emassPodDestCd, emassPodRoute, emassReceivedBy,   emassDelLoc, emassSigRecLineNbr, emassSigRecId,   emassStatDestCd, emassStatEmpId, emassStandardExport;
 	//Function Type
@@ -508,7 +515,7 @@ public class data {
 
 	
 	//emass pup
-	public data(String testInputNbr, String trkngnbr,String emassOriginCd,String emassPupEmpId, String emassPupRoute,String emassFormId, String emassCosmoNbr,String emassStopType, String emassDestCityShort,String emassDestCountryCd,String emassDestCountryPostal,String emassBaseSvc,String emassPackageType,String emassHandlingCd,String emassDelAddress, threadEmassDummy ted) {
+	public data(String testInputNbr, String trkngnbr,String emassOriginCd,String emassPupEmpId, String emassPupRoute,String emassFormId, String emassCosmoNbr,String emassStopType, String emassDestCityShort,String emassDestCountryCd,String emassDestCountryPostal,String emassBaseSvc,String emassPackageType,String emassHandlingCd,String emassDelAddress,String emassCaseData, threadEmassDummy ted) {
 		
 		
 			
@@ -527,6 +534,7 @@ public class data {
 		this.emassPackageType=emassPackageType;
 		this.emassHandlingCd=emassHandlingCd;
 		this.emassDelAddress=emassDelAddress;
+		this.emassCaseData=emassCaseData;
 		
 	}
 	public String getEmassOriginCd() {
@@ -706,17 +714,18 @@ public class data {
 	}
 
 	//emass stat65
-	public data(String testInputNbr, String trkngnbr, String emassStatDestCd,String emassStatEmpId,String emassStandardExport, threadEmassDummy ted) {
+	public data(String testInputNbr, String trkngnbr, String emassStatDestCd,String emassStatEmpId,String emassStandardExport,String emassCaseData, threadEmassDummy ted) {
 		this.testInputNbr=testInputNbr;
 		this.trkngnbr=trkngnbr;
 		this.emassStatEmpId=emassStatEmpId;
 		this.emassStatDestCd=emassStatDestCd;
 		this.emassStandardExport=emassStandardExport;
+		this.emassCaseData=emassCaseData;
 		
 	}
 
 	//emass pod
-	public data(String testInputNbr, String trkngnbr, String emassPodDestCd,String emassPodRoute,String emassReceivedBy,String emassDelAddress, String emassDelLoc,String emassSigRecLineNbr,String emassSigRecId, threadEmassDummy ted) {
+	public data(String testInputNbr, String trkngnbr, String emassPodDestCd,String emassPodRoute,String emassReceivedBy,String emassDelAddress, String emassDelLoc,String emassSigRecLineNbr,String emassSigRecId,String emassCaseData, threadEmassDummy ted) {
 		this.testInputNbr=testInputNbr;
 		this.trkngnbr=trkngnbr;
 		this.emassPodDestCd=emassPodDestCd;
@@ -726,6 +735,7 @@ public class data {
 		this.emassDelLoc=emassDelLoc;
 		this.emassSigRecLineNbr=emassSigRecLineNbr;
 		this.emassSigRecId=emassSigRecId;
+		this.emassCaseData=emassCaseData;
 		
 		
 	}

@@ -35,10 +35,10 @@ public static void main (String args[]) {
 	// 23 ERA Mass Rerate Upload to DB -- Works
 	
 	
-	int function = 14;
+	int function = 9;
 	c.setSessionCount("1");
 	c.setCustomCheckBox("true");
-	c.setCustomString("trkngnbr is not null");
+	c.setCustomString(" trk_no1 is not null and service2 is null and service1 like '%Ground%'");
 	//c.setCustomString("description='Failed Selecting Contact Method and Clicking Continue'");
 
 

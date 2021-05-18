@@ -9,8 +9,8 @@ import java.sql.Statement;
 import configuration.config;
 
 public class validateClass {
-	Boolean result=false,oracleBoolean=false,eraBoolean=false,prerateBoolean=false,denialBoolean=false,instantInvoiceBoolean=false,sepBoolean=false;
-	String databaseDisabled,flag,disputeNumber;
+	Boolean result=false,oracleBoolean=false,eraBoolean=false,prerateBoolean=false,denialBoolean=false,instantInvoiceBoolean=false,sepBoolean=false,sepBooleanPup=true,sepBooleanStat65=true,sepBooleanPod=true;
+	String databaseDisabled,flag,disputeNumber,sepResults;
 	config c;
 	
 	
@@ -29,41 +29,134 @@ public class validateClass {
 
 	
 	public Boolean validateSep(String testInputNbr,String trkngnbr) {
-		Connection con=null;
-		Statement stmt=null;
-		ResultSet rs=null;
-		String sqlQuery=null;
-		if (flag.equals("emass_pup")) {
-			sqlQuery="select * from sep_l3_schema.package where PACKAGE_SCAN_DESC like '%08000%' and TRACKING_ITEM_NBR="+trkngnbr;
-			System.out.println(sqlQuery);
-		}
-		if (flag.equals("emass_stat65")) {
-			sqlQuery="";
-			System.out.println(sqlQuery);
-			}
-		if (flag.equals("emass_pod")) {
-			sqlQuery="";
-			System.out.println(sqlQuery);
-			}
+		sepBoolean=false;
+		Connection con1=null, con2=null, con3=null;
+		Statement stmt1=null,stmt2=null,stmt3=null;
+		ResultSet rs1=null,rs2=null,rs3=null;
+		String sqlQuery1=null,sqlQuery2=null,sqlQuery3=null;
+		
+			sqlQuery1="select * from sep_l3_schema.package where PACKAGE_SCAN_DESC like '%08000%' and TRACKING_ITEM_NBR in('"+trkngnbr+"')";
+			//sqlQuery1="select * from sep_l3_schema.package";
+			System.out.println(sqlQuery1);
+		
+	
+			sqlQuery2="select * from sep_l3_schema.package where PACKAGE_SCAN_DESC like '%07000%' and TRACKING_ITEM_NBR in('"+trkngnbr+"')";
+			System.out.println(sqlQuery2);
+			
+		
+			sqlQuery3="select * from sep_l3_schema.package where PACKAGE_SCAN_DESC like '%20000%' and TRACKING_ITEM_NBR in('"+trkngnbr+"')";
+			System.out.println(sqlQuery3);
+			
 		try {
 			c.setSepL3DbConnection("SEP_L3_DATA_APP", "DAPP_Test_Env_Rocks_987..WordD");
-			con=c.getSepL3DbConnection();
-			stmt=con.createStatement();
-			rs=stmt.executeQuery(sqlQuery);
+			con1=c.getSepL3DbConnection();
+			stmt1=con1.createStatement();
+			con2=c.getSepL3DbConnection();
+			stmt2=con2.createStatement();
+			con3=c.getSepL3DbConnection();
+			stmt3=con3.createStatement();
+		//	rs=stmt.executeQuery(sqlQuery);
+			rs1=stmt1.executeQuery(sqlQuery1);
+			rs2=stmt2.executeQuery(sqlQuery2);
+			rs3=stmt3.executeQuery(sqlQuery3);
 			String finalResult="";
 			String finalDesc="";
 			
-			if (rs.next()==false){
-			      System.out.println("Is NULL");
-			      instantInvoiceBoolean=false;   
+			if (rs1.next()==false){
+				sepBooleanPup=false;   
+			
 			}
 			   else{
 			      System.out.println("IS NOT NULL");
-			      sepBoolean=true;
-			      finalResult="pass";
-            	  finalDesc="completed";
-            	  writeToDb(testInputNbr, "1", trkngnbr, finalResult, finalDesc, null); 
+			      sepBooleanPup=true;
+			    //  finalResult="pass";
+            	//  finalDesc="completed";
+            	//  writeToDb(testInputNbr, "1", trkngnbr, finalResult, finalDesc, null); 
 			   }
+			
+			if (rs2.next()==false){
+				sepBooleanStat65=false;   
+			
+			}
+			   else{
+			      System.out.println("IS NOT NULL");
+			      sepBooleanStat65=true;
+			    //  finalResult="pass";
+            	 // finalDesc="completed";
+            	 // writeToDb(testInputNbr, "1", trkngnbr, finalResult, finalDesc, null); 
+			   }
+			
+			if (rs3.next()==false){
+				sepBooleanPod=false;   
+			
+			}
+			   else{
+			      System.out.println("IS NOT NULL");
+			      sepBooleanPod=true;
+			     // finalResult="pass";
+            	 // finalDesc="completed";
+            	  //writeToDb(testInputNbr, "1", trkngnbr, finalResult, finalDesc, null); 
+			   }
+			
+			
+			
+			
+			if (flag.equals("emass_pup")) {
+				if (sepBooleanPup==true) {
+					 sepBoolean=true;
+					 finalResult="in progress";
+	            	 finalDesc="pup completed";
+	            	 writeToDb(testInputNbr, "1", trkngnbr, finalResult, finalDesc, null); 
+					
+				}
+			}
+			if (flag.equals("emass_stat65")) {
+				if (sepBooleanPup==true) {
+					if (sepBooleanStat65==true) {
+						 sepBoolean=true;
+						 finalResult="in progress";
+		            	 finalDesc="pup and stat completed";
+		            	 writeToDb(testInputNbr, "1", trkngnbr, finalResult, finalDesc, null);
+					}
+					else {
+						System.out.println("Pup applied, but stat has not... continuing with stat");
+					}
+				}
+				else {
+					 sepBoolean=true;
+					 finalResult="na";
+	            	 finalDesc="pup not yet completed";
+	            	 writeToDb(testInputNbr, "1", trkngnbr, finalResult, finalDesc, null);
+				}
+				
+				
+			}
+			
+			if (flag.equals("emass_pod")) {
+				if (sepBooleanPup==true) {
+					if (sepBooleanStat65==true) {
+						if (sepBooleanPod==true) {
+							 sepBoolean=true;
+							 finalResult="completed";
+			            	 finalDesc="pup and stat and pod completed";
+			            	 writeToDb(testInputNbr, "1", trkngnbr, finalResult, finalDesc, null);
+					}
+			}
+					else {
+						 sepBoolean=true;
+						 finalResult="na";
+		            	 finalDesc="stat not yet completed";
+		            	 writeToDb(testInputNbr, "1", trkngnbr, finalResult, finalDesc, null);
+					}
+				}
+				else {
+					 sepBoolean=true;
+					 finalResult="na";
+	            	 finalDesc="pup and stat not yet completed";
+	            	 writeToDb(testInputNbr, "1", trkngnbr, finalResult, finalDesc, null);
+				}
+			
+		}
 		}
 			catch(Exception e) {
 				System.out.println(e);
@@ -577,7 +670,7 @@ public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String
 			stmt.executeUpdate();
 		}
 		if (flag.equals("emass_stat65")) {
-		    stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,emass_stat65) values (?,?,?,?,?,?)");  
+		    stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,result,description,emass_stat) values (?,?,?,?,?,?)");  
 			
 			//stmt.setString(1,flag); 
 			stmt.setString(1,testInputNbr);  
@@ -732,7 +825,7 @@ public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String
 			}
 		
 		if (flag.equals("emass_stat65")) {
-			stmt=con.prepareStatement("update era_results set result=?,description=?,emass_stat65='Y' where trkngnbr=?");  
+			stmt=con.prepareStatement("update era_results set result=?,description=?,emass_stat='Y' where trkngnbr=?");  
 			stmt.setString(1,finalResult);  
 			stmt.setString(2,finalDesc); 
 			stmt.setString(3,trkngnbr); 
