@@ -58,6 +58,7 @@ public void run () {
 	for(data d: dataArray) {
 		if (d.getRunningResult().equals("false")) {
 			running=true;
+			break;
 		}
 	}
 	
@@ -67,6 +68,7 @@ public void run () {
 		for(data d: dataArray) {
 			if (d.getRunningResult().equals("false")) {
 				running=true;
+				break;
 			}
 		}
 		
@@ -103,7 +105,7 @@ public void run () {
 			
 		    if (vc.validateRerate(testInputNbr,tinCount,trkngnbr)==true) {
 		    	d.setRunningResult("true");
-		    	return;
+		    	continue;
 		    }
 		
 			try {

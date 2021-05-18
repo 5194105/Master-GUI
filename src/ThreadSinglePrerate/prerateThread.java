@@ -60,6 +60,7 @@ public class prerateThread extends Thread{
 		for(data d: dataArray) {
 			if (d.getRunningResult().equals("false")) {
 				running=true;
+				break;
 			}
 		}
 		
@@ -69,6 +70,7 @@ public class prerateThread extends Thread{
 			for(data d: dataArray) {
 				if (d.getRunningResult().equals("false")) {
 					running=true;
+					break;
 				}
 			}
 			

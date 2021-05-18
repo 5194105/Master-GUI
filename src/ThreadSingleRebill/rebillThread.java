@@ -63,6 +63,7 @@ public class rebillThread extends Thread{
 		for(data d: dataArray) {
 			if (d.getRunningResult().equals("false")) {
 				running=true;
+				break;
 			}
 		}
 		
@@ -72,6 +73,7 @@ public class rebillThread extends Thread{
 			for(data d: dataArray) {
 				if (d.getRunningResult().equals("false")) {
 					running=true;
+					break;
 				}
 			}
 			
@@ -107,9 +109,10 @@ public class rebillThread extends Thread{
 		    
 		    if (vc.validateRebill(testInputNbr,tinCount,trkngnbr)==true) {
 		    	d.getRunningResult().equals("true");
-		    }
 		    	continue;
 		    }
+		    
+		    
 		    
 		    
 		
@@ -120,7 +123,7 @@ public class rebillThread extends Thread{
 				e.printStackTrace();
 			}		
 		}
-	
+		}
 	}
 	
 

@@ -67,6 +67,7 @@ public void run () {
 		for(data d: dataArray) {
 			if (d.getRunningResult().equals("false")) {
 				running=true;
+				break;
 			}
 		}
 		
@@ -76,6 +77,7 @@ public void run () {
 			for(data d: dataArray) {
 				if (d.getRunningResult().equals("false")) {
 					running=true;
+					break;
 				}
 			}
 			
