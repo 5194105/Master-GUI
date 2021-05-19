@@ -89,7 +89,7 @@ public class prerateHoldThread extends Thread{
 			System.out.println(trkngnbr);
 		    
 		    if (vc.validatePrerateHold(testInputNbr,tinCount,trkngnbr,tinComment)==true) {
-		    	d.getRunningResult().equals("true");
+		    	d.setRunningResult("true");
 		    	continue;
 		    }
 		  	try {

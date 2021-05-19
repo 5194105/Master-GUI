@@ -64,6 +64,24 @@ public class massRerateThread extends Thread{
 public void run () {
 	String tempTin="0";
 	
+	
+	for(data d: dataArray) {
+		if (d.getRunningResult().equals("false")) {
+			running=true;
+			break;
+		}
+	}
+	
+	
+	while (running == true) {
+		running=false;
+		for(data d: dataArray) {
+			if (d.getRunningResult().equals("false")) {
+				running=true;
+				break;
+			}
+		}
+	
 		for(data d: dataArray) {
 		
 			
@@ -96,7 +114,7 @@ public void run () {
 			
 	    	int tempNumber=0;
 	    	
-	    	
+	    	if (d.getRunningResult().equals("false")) {
 	    	if (!testInputNbr.equals(tempTin)) {
 	    		if (execute == false) {
 	    		tempTin=testInputNbr;
@@ -124,17 +142,12 @@ public void run () {
 	    	
 	    	
 	    
-	    	
+	    	}
 	    
 	    	System.out.println();
-	   
 		}
-		try {
-			doMassRerate();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+		
 	}
 
 	
@@ -339,7 +352,7 @@ public void doMassRerate( ) throws InterruptedException {
 		vc.writeToDb(d.getTestInputNbr(),d.getTinCount(),d.getTrkngnbr(),"In Progress","Rerate Created",requestID);
 		d.setRunningResult("true");
 	}
-	
+	return;
 	} 
 	catch(Exception e) {
 		System.out.println("Failed on Entering Tracking Number");
@@ -352,7 +365,10 @@ public void doMassRerate( ) throws InterruptedException {
 			 if(databaseDisabled.equals("false")) {
 					for (data d : dataArray2) {
 						vc.writeToDb(d.getTestInputNbr(),d.getTinCount(),d.getTrkngnbr(),"fail","Unknown Error",null);
+						d.setRunningResult("true");
+						
         	 }
+					return;
 			 }
 				
 		

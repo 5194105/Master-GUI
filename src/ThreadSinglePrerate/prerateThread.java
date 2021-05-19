@@ -96,13 +96,13 @@ public class prerateThread extends Thread{
 			this.chrgAmt4=d.getChrgAmt4();
 			this.valDesc=d.getValDesc();
 			this.expectedStatus=d.getExpectedStatus();
-			System.out.println(chrgCd3);
+		//	System.out.println(chrgCd3);
 			
 			//Check if track is already successful
 			System.out.println(trkngnbr);
 		    
 		    if (vc.validatePrerate(testInputNbr,tinCount,trkngnbr)==true) {
-		    	d.getRunningResult().equals("true");
+		    	d.setRunningResult("true");
 		    	continue;
 		    }
 		
@@ -184,9 +184,8 @@ public void homepage() {
 	  System.out.println("Attempt Number :"+(i+1));
 		
 	  
-	  
-	  	
-    	WebElement element;
+	  	login();
+	  	WebElement element;
     	JavascriptExecutor Executor;
     	JavascriptExecutor Executor1;
     	JavascriptExecutor Executor2;
@@ -201,7 +200,7 @@ public void homepage() {
     	String errorMessage;
     	
     	
-    	
+    	/*
     	try {
     		driver.get(levelUrl);
     		driver.switchTo().frame("header");
@@ -222,14 +221,14 @@ public void homepage() {
     	
 	    	
 	    		
-	    		
+	    		*/
 	    	
 	    try {
 	    	wait = new WebDriverWait(driver,3);
 	    	driver.switchTo().frame("header");}
 	    	catch(Exception e) {}
 	    	try {
-	    		wait = new WebDriverWait(driver,5);
+	    	wait = new WebDriverWait(driver,5);
 			driver.findElement(By.id("preRateEntrySelection")).click();
 			driver.switchTo().defaultContent();
 			driver.switchTo().frame("content");

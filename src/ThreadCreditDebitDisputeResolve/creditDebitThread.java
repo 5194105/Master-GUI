@@ -134,7 +134,7 @@ public void run () {
 			 }
 				 if (vc.validateCreditDebit(testInputNbr,tinCount,trkngnbr,valDesc)==true) {
 					 vc.writeToDb(testInputNbr, tinCount, trkngnbr, "pass", "completed", null);
-					 d.getRunningResult().equals("true");
+					 d.setRunningResult("true");
 				 continue;
 				 }
 				 
@@ -143,7 +143,7 @@ public void run () {
 					 if(disputeNumber.equals("")) {
 						 System.out.println("No Dispute Found");
 						 vc.writeToDb(testInputNbr, tinCount, trkngnbr, "fail", "dispute not found", null);
-						 d.getRunningResult().equals("true");
+						 d.setRunningResult("true");
 						 continue;
 					 }
 					 else {

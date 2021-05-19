@@ -108,7 +108,7 @@ public class rebillThread extends Thread{
 			
 		    
 		    if (vc.validateRebill(testInputNbr,tinCount,trkngnbr)==true) {
-		    	d.getRunningResult().equals("true");
+		    	d.setRunningResult("true");
 		    	continue;
 		    }
 		    
