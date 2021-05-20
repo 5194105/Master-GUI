@@ -36,9 +36,9 @@ public static void main (String args[]) {
 	
 	
 	int function = 7;
-	c.setSessionCount("4");
+	c.setSessionCount("1");
 	c.setCustomCheckBox("true");
-	c.setCustomString("trkngnbr is not null and result='fail'");
+	c.setCustomString("trkngnbr is not null and DESCRIPTION='Unknown Not Eligible Error'");
 	//c.setCustomString("description='Failed Selecting Contact Method and Clicking Continue'");
 
 

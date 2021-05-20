@@ -62,6 +62,7 @@ public class prerateHoldThread extends Thread{
 		for(data d: dataArray) {
 			if (d.getRunningResult().equals("false")) {
 				running=true;
+				break;
 			}
 		}
 		
@@ -71,6 +72,7 @@ public class prerateHoldThread extends Thread{
 			for(data d: dataArray) {
 				if (d.getRunningResult().equals("false")) {
 					running=true;
+					break;
 				}
 			}
 			
@@ -176,7 +178,7 @@ public void homepage() {
   	
   	String errorMessage;
   	
-  	
+  	/*
 
 	try {
 		driver.get(levelUrl);
@@ -194,6 +196,8 @@ public void homepage() {
     	wait = new WebDriverWait(driver,3);
     	driver.switchTo().frame("header");}
     	catch(Exception e) {}
+    	*/
+  	login();
     	try {
     		wait = new WebDriverWait(driver,5);
 		driver.findElement(By.id("preRateEntrySelection")).click();

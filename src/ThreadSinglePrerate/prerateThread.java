@@ -417,9 +417,14 @@ public void homepage() {
 						 return;
 					 }
 					
-					 
+					 	if (expectedStatus.equals("disabled")) {
+					 		resultArray[0]="pass";
+					 	}
+					 	else {
+					 		resultArray[0]="fail";
+					 	}
 					
-							resultArray[0]="fail";
+							
 							resultArray[1]="Override Disabled";
 						
 					

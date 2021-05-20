@@ -376,7 +376,12 @@ public class rebillThread extends Thread{
     	  	System.out.println("Failed at Drop Down");
 			finalResult="fail";
 	   	    finalDesc="Could Not Find Rebill Dropdown";
+	   	 if (vc.searchOracleDBError(testInputNbr, tinCount, trkngnbr, invoiceNbr1)==true){
+		   		return;
+	    		}
+	   	 else {
 	   		vc.writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,"");
+	   	 }
 	   		continue;
       }
     	     
@@ -767,6 +772,7 @@ public class rebillThread extends Thread{
                         	 System.out.println("Could Not Click");
                         	 overrideBoolean=true;
                         	 vc.validateRebill(testInputNbr,tinCount,trkngnbr);
+                        	 
                         	 return;
                          }
                        }
@@ -787,11 +793,15 @@ public class rebillThread extends Thread{
             } 
             
             catch(Exception e2) {
+            	vc.validateRebill(testInputNbr,tinCount,trkngnbr);
+            	return;
+            /*
             	System.out.println("Did not reach override errors or failed here");
             	finalResult="fail";
  		   	    finalDesc="Failed at the end with unknown error";
  		   		vc.writeToDb(testInputNbr,tinCount,trkngnbr,finalResult,finalDesc,"");
  		   		continue;
+ 		   		*/
             }
             	 
             	 //Check For Validation again and save result.
