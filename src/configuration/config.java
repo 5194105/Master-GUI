@@ -45,7 +45,39 @@ public class config {
     String homePath;
     String emassCase;
     String sepL3Password,sepL3Username;
-    public String getEmassCase() {
+    String runAllEc;
+    String rebillOci;
+    
+    
+    public String getRebillOci() {
+		return rebillOci;
+	}
+
+
+
+
+	public void setRebillOci(String rebillOci) {
+		this.rebillOci = rebillOci;
+	}
+
+
+
+
+	public String getRunAllEc() {
+		return runAllEc;
+	}
+
+
+
+
+	public void setRunAllEc(String runAllEc) {
+		this.runAllEc = runAllEc;
+	}
+
+
+
+
+	public String getEmassCase() {
 		return emassCase;
 	}
 

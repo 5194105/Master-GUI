@@ -62,40 +62,43 @@ public class Highest {
   static Connection oracleARL3Con;
   
     	public static void main (String[] arg) {
-    		WebDriver driver=null;
-    		System.setProperty("webdriver.chrome.driver","E:\\Everyone Workspace Folders\\stephen\\Master-GUI\\drivers\\chromedriver.exe");
     		
-    		for (int i=0;i<100;i++) {
     		
-    			
-    			try { 
-    	    		driver.quit();
-    	    		driver.close();
-    		  }
-    		  catch(Exception e) {
-    			  System.out.println(e);
-    			  
-    		  }
-    			try {
-    		driver = new ChromeDriver();
-    		driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-    		WebDriverWait wait = new WebDriverWait(driver,10);
-    		driver.get("https://test-myapps.secure.fedex.com/L3/eRA/");
-    		driver.manage().window().maximize();
-    		driver.findElement(By.id("okta-signin-username")).sendKeys("5194105");
-			driver.findElement(By.id("okta-signin-password")).sendKeys("July2021");
-			driver.findElement(By.id("okta-signin-submit")).click();
-			driver.findElement(By.xpath("//*[@id=\"inquiry-form\"]/div[1]/div/div[2]/form/div[3]/div[2]/button/a")).click();
+    		
+    		for (int i=0;i<2000;i++) {
+    			System.out.println(i%500);
+    			if ((i%500)==0) {
+    				System.out.println(i);
+    				System.out.println("Mod is zero");
     			}
+    		}
     		
-			  catch(Exception e) {
-    			  System.out.println(e);
-    			  
-    		  }
     		
+    		importData id = new importData();
+    		config c=id.getConfig();
+    		c.setEcL3DbConnection("test_readonly", "perftest");
+    		Connection con = c.getEcL3DbConnection();
+    		for (int i=0;i<2000;i++) {
+    		try {
+    			if (i==500 || i==1000 || i==1500) {
+    			c.setEcL3DbConnection("test_readonly", "perftest");
+        		con = c.getEcL3DbConnection();
+    			}
+    			String databaseSqlQuery="select WORK_TYPE_CD,STAT_CD_ARRAY_DESC from ec_schema.shipment a join ec_schema.package b on a.ONLN_REV_ITEM_ID=b.ONLN_REV_ITEM_ID join ec_schema.pkg_stat_cd_array c on b.ONLN_PKG_ID=c.ONLN_PKG_ID where ARRAY_TYPE_CD='F' and pkg_trkng_nbr="+i;
+    			Statement stmt = con.createStatement();
+    			ResultSet rs = stmt.executeQuery(databaseSqlQuery);
+    			System.out.println(i);
+    			while(rs.next()) {
+    				//  d.setEcWorkType(rs.getString(1));
+	        		//d.setStatCodeArray(rs.getString(2));
+	        		//See if stat code is overridable 
+        		}
+        	 }
+    		catch(Exception e) {
+    			System.out.println(e);
+    		}
     	}
-    	
-    	}
+    }
 }
  
 

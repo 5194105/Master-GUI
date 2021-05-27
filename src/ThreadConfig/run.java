@@ -35,17 +35,17 @@ public static void main (String args[]) {
 	// 23 ERA Mass Rerate Upload to DB -- Works
 	
 	
-	int function = 7;
+	int function = 1;
 	c.setSessionCount("1");
 	c.setCustomCheckBox("true");
-	c.setCustomString("trkngnbr is not null and DESCRIPTION='Unknown Not Eligible Error'");
+	c.setCustomString("trkngnbr is not null and result ='fail'");
 	//c.setCustomString("description='Failed Selecting Contact Method and Clicking Continue'");
 
 
 	
 
-	c.setCycle("4");
-	
+	c.setCycle("6");
+	c.setRunAllEc("true");
 	c.setEraCase("4");
 	c.setEmassCase("4");
 	customConfig(function);
@@ -58,6 +58,7 @@ public static void customConfig (int function) {
 			c.setLevel("3");
 			c.setDriverType("2");	
 			c.setCompatibleMode("false");
+			//c.setSource("db");
 			c.setSource("db");
 			c.setDatabaseDisabled("false");
 			c.setHeadlessString("false");
@@ -70,7 +71,7 @@ public static void customConfig (int function) {
 			c.setExpressCheckBox("true");	
 			c.setGroundCheckBox("false");
 			c.setEraWorkable("false");
-			
+			c.setRebillOci("true");
 			
 			break;
 			

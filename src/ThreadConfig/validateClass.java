@@ -505,10 +505,12 @@ public void searchOracleDB(String sqlQuery,String testInputNbr,String tinCount,S
 				if (tempString.contains("RDT CR")) {
 					finalResult="pass";
 					finalDesc="completed";
+					 oracleBoolean=true;
 				  }
 				  else  if (tempString.contains("RDT DN")) {
 					  finalResult="pass";
 					  finalDesc="denied";
+					  oracleBoolean=true;
 				  }
 				  else {
 					  finalResult="na";
@@ -597,6 +599,7 @@ public void searchOracleDBRerateTemp(String sqlQuery,String testInputNbr,String 
     				  if (tempString.contains("RDT CR")) {
     					  resultArray[0]="pass";
 	    			      resultArray[1]="completed";
+	    			      
     				  }
     				  else  if (tempString.contains("RDT DN")) {
     					  resultArray[0]="pass";

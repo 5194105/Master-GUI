@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import ThreadCreditDebitDisputeResolve.creditDebitThread;
 import ThreadCreditDebitDisputeResolve.debitDummyClass;
+import ThreadEc.ecdummyClass;
 import ThreadEc.ecmod;
 import ThreadGFBO.gfboDummyClass;
 import ThreadGFBO.gfboThread;
@@ -72,7 +73,12 @@ public class base {
 		
 		setSqlQuery();
 		//Stores data to a data object then puts it in array
-		getDataDb();
+		if (c.getSource().equals("db") || c.getSource()==null) {
+			getDataDb();
+		}
+		if (c.getSource().equals("excel")){
+			getDataExcel();
+		}
 		//Gets which segements data is in based on thread count.
 		minMaxArrayMath(threadCount);
 		
@@ -174,7 +180,25 @@ public class base {
 		
 	}
 	
-	
+	public  void getDataExcel() {
+		excel e = new excel();
+		e.setUpExcelWorkbook("C:\\Users\\5194105\\Documents\\L3 Test Data.xlsx");
+		e.setUpExcelSheet(0);
+		e.setRowCountAutomatically(2);
+		System.out.println(e.getRowCount());
+		tempCounter=0;
+		for (int i=1;i<e.getRowCount();i++) {
+		switch(function) {
+		case 1:
+			dataArray.add(new data(nullCheck(e.getCellData(i, 0)),nullCheck(e.getCellData(i, 1)),nullCheck(e.getCellData(i, 2)),nullCheck(e.getCellData(i, 3)),nullCheck(e.getCellData(i, 4)),nullCheck(e.getCellData(i, 5)),nullCheck(e.getCellData(i, 6)),nullCheck(e.getCellData(i, 7)),nullCheck(e.getCellData(i, 8)),nullCheck(e.getCellData(i, 9)),nullCheck(e.getCellData(i, 10)),nullCheck(e.getCellData(i, 11)),nullCheck(e.getCellData(i, 12)),nullCheck(e.getCellData(i, 13)),nullCheck(e.getCellData(i, 14)),nullCheck(e.getCellData(i, 15)),nullCheck(e.getCellData(i, 16)),nullCheck(e.getCellData(i, 17)),nullCheck(e.getCellData(i, 18)),nullCheck(e.getCellData(i, 19)),nullCheck(e.getCellData(i, 20)),nullCheck(e.getCellData(i, 21)),nullCheck(e.getCellData(i, 22)),tempCounter));	
+			
+			//dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),nullCheck(rs.getString(8)),nullCheck(rs.getString(9)),nullCheck(rs.getString(10)),nullCheck(rs.getString(11)),nullCheck(rs.getString(12)),nullCheck(rs.getString(13)),nullCheck(rs.getString(14)),nullCheck(rs.getString(15)),nullCheck(rs.getString(16)),nullCheck(rs.getString(17)),nullCheck(rs.getString(18)),nullCheck(rs.getString(19)),nullCheck(rs.getString(20)),nullCheck(rs.getString(19)),nullCheck(rs.getString(20)),nullCheck(rs.getString(21)),tempCounter));	
+			
+		//	dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),nullCheck(rs.getString(8)),nullCheck(rs.getString(9)),nullCheck(rs.getString(10)),nullCheck(rs.getString(11)),nullCheck(rs.getString(12)),nullCheck(rs.getString(13)),nullCheck(rs.getString(14)),nullCheck(rs.getString(15)),nullCheck(rs.getString(16)),nullCheck(rs.getString(17)),nullCheck(rs.getString(18)),nullCheck(rs.getString(19)),nullCheck(rs.getString(20)),nullCheck(rs.getString(19)),nullCheck(rs.getString(20)),nullCheck(rs.getString(21)),tempCounter));	
+		break;
+		}
+		}
+	}
 	
 	
 	public  void setVars() {
@@ -258,7 +282,7 @@ public class base {
             		tempCounter++;
             		switch(function) {
             		case 1:
-            		dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),nullCheck(rs.getString(8)),nullCheck(rs.getString(9)),nullCheck(rs.getString(10)),nullCheck(rs.getString(11)),nullCheck(rs.getString(12)),nullCheck(rs.getString(13)),nullCheck(rs.getString(14)),nullCheck(rs.getString(15)),nullCheck(rs.getString(16)),nullCheck(rs.getString(17)),nullCheck(rs.getString(18)),nullCheck(rs.getString(19)),nullCheck(rs.getString(20)),nullCheck(rs.getString(19)),nullCheck(rs.getString(20)),nullCheck(rs.getString(21)),tempCounter));	
+            		dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),nullCheck(rs.getString(8)),nullCheck(rs.getString(9)),nullCheck(rs.getString(10)),nullCheck(rs.getString(11)),nullCheck(rs.getString(12)),nullCheck(rs.getString(13)),nullCheck(rs.getString(14)),nullCheck(rs.getString(15)),nullCheck(rs.getString(16)),nullCheck(rs.getString(17)),nullCheck(rs.getString(18)),nullCheck(rs.getString(19)),nullCheck(rs.getString(20)),nullCheck(rs.getString(21)),nullCheck(rs.getString(22)),nullCheck(rs.getString(23)),tempCounter));	
             		break;
             		
             		case 3:
@@ -321,10 +345,12 @@ public class base {
           		     	break;
          		
             	 case 12:
-            		 dataArray.add(new data(nullCheck(rs.getString(1))));
+            		 ecdummyClass ecd=null;
+            		 dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),ecd));
             		 break;
             	 case 13:
-            		 dataArray.add(new data(nullCheck(rs.getString(1))));
+       //     		 System.out.println(nullCheck(rs.getString(1)));
+            		 dataArray.add(new data(null,null,nullCheck(rs.getString(1)),null));
             		 break;
             		 
             	
@@ -448,9 +474,14 @@ public class base {
 				e1.printStackTrace();
 			}
     		
-       		
+       		int sqlcount=0;
        		for (data d : dataArray) {
        			try {
+       				if ((sqlcount%500)==0) {
+       					c.setEcL3DbConnection("test_readonly", "perftest");
+       	        		con2 = c.getEcL3DbConnection();
+        			}
+       				sqlcount++;
        				databaseSqlQuery="select WORK_TYPE_CD,STAT_CD_ARRAY_DESC from ec_schema.shipment a join ec_schema.package b on a.ONLN_REV_ITEM_ID=b.ONLN_REV_ITEM_ID join ec_schema.pkg_stat_cd_array c on b.ONLN_PKG_ID=c.ONLN_PKG_ID where ARRAY_TYPE_CD='F' and pkg_trkng_nbr="+d.getTrkngnbr();
 					stmt = con2.createStatement();
 					rs = stmt.executeQuery(databaseSqlQuery);
@@ -500,11 +531,33 @@ public class base {
        	}
        		
        		
+       	if(function==12) {
+    	for (data d : dataArray) {
+    		try {
+    			databaseSqlQuery="select * from ec_temp where scenario_id='"+d.getScenarioId()+"' and shipment_id='"+d.getShipmentId()+"'";
+    		Statement stmtEc = con.createStatement();
+        	ResultSet rsEC = stmtEc.executeQuery(databaseSqlQuery);
+        	System.out.println(databaseSqlQuery);
+        	 while(rsEC.next()) {
+        		 d.addEcDataArray(rsEC.getString(1), rsEC.getString(2), rsEC.getString(3), rsEC.getString(4), rsEC.getString(5));
+        	 }
+        	
+    	}
+    		catch(Exception e) {
+    			System.out.println(e);
+    		}
+    		for(ecData ed: d.getEcDataArray()) {
+    			System.out.println(ed.toString());
+    		}
+    	}
+    	
+       	}
        	}
        	
        	
        	
        	try {
+       		
        		con.close();
 			stmt.close();
 			rs.close();
@@ -1049,8 +1102,8 @@ public class base {
 				case 12:	
 					//databaseSqlQuery="select trkngnbr from ud_green_er union all select trknngbr from ud_rebs_er  ";
 				//	databaseSqlCount="select count(*) from (select trkngnbr from ud_green_er union all select trknngbr from ud_rebs_er) ";
-					databaseSqlQuery="select * from (select trkngnbr from ud_green_er union all select trkngnbr from ud_rebs_er) ";
-					databaseSqlCount="select count(*) from (select trkngnbr from ud_green_er union all select trkngnbr from ud_rebs_er) ";
+					databaseSqlQuery="select distinct * from (select scenario_id,shipment_id,trkngnbr from ud_green_er union all select scenario_id,shipment_id,trkngnbr from ud_rebs_er) ";
+					databaseSqlCount="select count(*) from (select distinct scenario_id,shipment_id,trkngnbr from ud_green_er union all select distinct scenario_id,shipment_id,trkngnbr from ud_rebs_er) ";
 					
 					if (customCheckBox.equals("true")) {
 				  		databaseSqlCount+="where "+customString;

@@ -109,6 +109,9 @@ public class excel {
 			//	cellData=cell.toString();
 				
 				System.out.println("Cell Data "+cellData);
+				if (cellData.equals("EP")) {
+					System.out.println("Cell Data "+cellData);
+				}
 
 			}
 			catch(Exception e) {

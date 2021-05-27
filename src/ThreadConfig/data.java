@@ -1,6 +1,9 @@
 package ThreadConfig;
 
+import java.util.ArrayList;
+
 import ThreadCreditDebitDisputeResolve.debitDummyClass;
+import ThreadEc.ecdummyClass;
 import ThreadGFBO.gfboDummyClass;
 import ThreadMassERARerate.massRerateDummy;
 import ThreadPRSRerate.prsRerateDummyClass;
@@ -8,7 +11,7 @@ import ThreadeMass.threadEmassDummy;
 
 public class data {
 	String result, description, testInputNbr, tinCount, trkngnbr, reasonCode,  billAcctNbr, invoiceNbr1, invoiceNbr2, region, username, password,  rs_type, company, rebillPrerate,  workable, defectFlg, defectNbr;
-	
+	ArrayList<ecData> ecDataArray = new ArrayList<ecData>();
 	String prerateTypeCd,  prerateAmt, currencyCd, approvalId, chrgCd1, chrgAmt1, chrgCd2,  chrgAmt2, chrgCd3, chrgAmt3,  chrgCd4, chrgAmt4;
 	String rowcount;
 	int counter;
@@ -28,6 +31,7 @@ public class data {
 	String gfboExpectedResult,requestId,ecWorkType,statCodeArray;
 	Boolean override;
 	String runningResult="false",emassCaseData;
+	String scenarioId, shipmentId;
 	public String getEmassCaseData() {
 		return emassCaseData;
 	}
@@ -74,9 +78,36 @@ public class data {
 	}
 
 	//EC UD
-	public data(String trkngnbr  ) {
-		this.trkngnbr=trkngnbr;
+	public data(String scenarioId,String shipmentId,String trkngnbr,ecdummyClass ecd  ) {
 		
+		this.trkngnbr=trkngnbr;
+		this.scenarioId=scenarioId;
+		this.shipmentId=shipmentId;
+		
+	}
+	
+	public void addEcDataArray(String ecScenarioid,String ecShipmentId,String ecField,String ecValue,String ecComments) {
+		ecDataArray.add(new ecData( ecScenarioid, ecShipmentId, ecField, ecValue, ecComments));
+	}
+	public ArrayList<ecData> getEcDataArray(){
+		return ecDataArray;
+	}
+	
+
+	public String getScenarioId() {
+		return scenarioId;
+	}
+
+	public void setScenarioId(String scenarioId) {
+		this.scenarioId = scenarioId;
+	}
+
+	public String getShipmentId() {
+		return shipmentId;
+	}
+
+	public void setShipmentId(String shipmentId) {
+		this.shipmentId = shipmentId;
 	}
 
 	public String getRequestId() {

@@ -49,7 +49,12 @@ public class rebillThread extends Thread{
 	public rebillThread(ArrayList<data> dataArray,config c) {
 		this.dataArray=dataArray;
 		this.c=c;
+		if(c.getRebillOci().equals("false")) {
 		levelUrl=c.getRebillL3Url();
+		}
+		else if (c.getRebillOci().equals("true")) {
+			levelUrl="https://test-myapps.secure.fedex.com/L3/eRA_OCI/index.html";
+		}
 		databaseDisabled=c.getDatabaseDisabled();
 		source=c.getSource();
 		waitTime=Integer.parseInt(c.getRebillSecondTimeout());
