@@ -40,11 +40,12 @@ public static void main (String args[]) {
 	c.setCustomCheckBox("true");
 	c.setCustomString("trkngnbr is not null and result ='fail'");
 	//c.setCustomString("description='Failed Selecting Contact Method and Clicking Continue'");
-
+	c.setSource("db");
+	
 
 	
 
-	c.setCycle("6");
+	c.setCycle("7");
 	c.setRunAllEc("true");
 	c.setEraCase("4");
 	c.setEmassCase("4");
