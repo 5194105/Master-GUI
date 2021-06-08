@@ -31,15 +31,18 @@ public static void main (String args[]) {
 	// 12 EC UD --  Works
 	// 13 EC Device --  Works
 	// 14 emass -- doesnt work
+	
 	// 22 ERA Single Rerate Upload to DB -- Works
 	// 23 ERA Mass Rerate Upload to DB -- Works
+	// 24 ERA Single Rebill Upload to DB
 	
 	
-	int function = 1;
+	int function = 6;
 	c.setSessionCount("1");
 	c.setCustomCheckBox("true");
-	c.setCustomString("trkngnbr is not null and result ='fail'");
-	//c.setCustomString("description='Failed Selecting Contact Method and Clicking Continue'");
+	
+	c.setCustomString("results='NA'");
+	//c.setCustomString("trkngnbr is not null and (result is null or result ='fail') order by result,description");
 	c.setSource("db");
 	
 
@@ -47,7 +50,7 @@ public static void main (String args[]) {
 
 	c.setCycle("7");
 	c.setRunAllEc("true");
-	c.setEraCase("4");
+	c.setEraCase("5");
 	c.setEmassCase("4");
 	customConfig(function);
 	base b = new base(c,function);
@@ -72,7 +75,7 @@ public static void customConfig (int function) {
 			c.setExpressCheckBox("true");	
 			c.setGroundCheckBox("false");
 			c.setEraWorkable("false");
-			c.setRebillOci("true");
+			c.setRebillOci("false");
 			
 			break;
 			
@@ -242,6 +245,10 @@ public static void customConfig (int function) {
 				c.setDatabaseDisabled("false");
 				break;
 				
+				case 24:
+				
+				c.setDatabaseDisabled("false");
+				break;
 				 
 		}
 	

@@ -53,7 +53,7 @@ public void run () {
 			//Check if track is already successful
 			
 		    
-		    if (vc.validateRerate(testInputNbr,tinCount,trkngnbr)==true) {
+		    if (vc.validateRebill(testInputNbr,tinCount,trkngnbr)==true) {
 		    	continue;
 		    }
 		}

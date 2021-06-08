@@ -23,6 +23,7 @@ import ThreadSingleERARerate.eraRerateUpload;
 import ThreadSingleERARerate.singleRerateThread;
 import ThreadSinglePrerate.prerateHoldThread;
 import ThreadSinglePrerate.prerateThread;
+import ThreadSingleRebill.eraRebillUpload;
 import ThreadSingleRebill.rebillThread;
 import ThreadeMass.threadEmass;
 import ThreadeMass.threadEmassDummy;
@@ -72,13 +73,16 @@ public class base {
 		dbVal=1;
 		
 		setSqlQuery();
+		getDataDb();
 		//Stores data to a data object then puts it in array
+		/*
 		if (c.getSource().equals("db") || c.getSource()==null) {
 			getDataDb();
 		}
 		if (c.getSource().equals("excel")){
 			getDataExcel();
 		}
+		*/
 		//Gets which segements data is in based on thread count.
 		minMaxArrayMath(threadCount);
 		
@@ -160,6 +164,9 @@ public class base {
 						break;
 					case 23:	
 						threadArray.add(new eraMassRerateUpload(dataArrayPartition,c));
+						break;
+					case 24:	
+						threadArray.add(new eraRebillUpload(dataArrayPartition,c));
 						break;
 	}
 				
@@ -363,6 +370,10 @@ public class base {
             	 case 23:
          			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3))));	
          		     	break;
+         		     	
+            	 case 24:
+          			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3))));	
+          		     	break;
  		     	
             		}
             		
@@ -1209,6 +1220,19 @@ public class base {
 				case 23:	
 					databaseSqlQuery="select TEST_INPUT_NBR	,TIN_COUNT	,trkngnbr from era_rerate_mass  ";
 					databaseSqlCount="select count(*) from  era_rerate_mass ";
+					
+					
+					 if (customCheckBox.equals("true")) {
+					  		databaseSqlCount+="where trkngnbr is not null and "+customString;
+				    		databaseSqlQuery+="where trkngnbr is not null and "+customString;
+					  		 
+					  	 }
+					
+				break;
+				
+				case 24:	
+					databaseSqlQuery="select TEST_INPUT_NBR	,TIN_COUNT	,trkngnbr from rebill_regression  ";
+					databaseSqlCount="select count(*) from  rebill_regression ";
 					
 					
 					 if (customCheckBox.equals("true")) {
