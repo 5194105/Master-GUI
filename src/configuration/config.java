@@ -1208,7 +1208,7 @@ public void setEraL3DbConnection(String username,String password) {
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			eraL3Con=DriverManager.getConnection("jdbc:oracle:thin:@//sdb00325.ute.fedex.com:1526/SDB00325.ute.fedex.com",username,password);
+			eraL3Con=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.ute.fedex.com:3060/PD00T03_OCI,cn=OracleContext,dc=ute,dc=fedex,dc=com",username,password);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

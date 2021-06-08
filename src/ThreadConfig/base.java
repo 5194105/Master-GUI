@@ -22,6 +22,7 @@ import ThreadPRSRerate.prsRerateThread;
 import ThreadSingleERARerate.eraRerateUpload;
 import ThreadSingleERARerate.singleRerateThread;
 import ThreadSinglePrerate.prerateHoldThread;
+import ThreadSinglePrerate.prerateSingleUpload;
 import ThreadSinglePrerate.prerateThread;
 import ThreadSingleRebill.eraRebillUpload;
 import ThreadSingleRebill.rebillThread;
@@ -167,6 +168,9 @@ public class base {
 						break;
 					case 24:	
 						threadArray.add(new eraRebillUpload(dataArrayPartition,c));
+						break;
+					case 25:	
+						threadArray.add(new prerateSingleUpload(dataArrayPartition,c));
 						break;
 	}
 				
@@ -374,6 +378,10 @@ public class base {
             	 case 24:
           			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3))));	
           		     	break;
+          		     	
+            	 case 25:
+           			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3))));	
+           		     	break;
  		     	
             		}
             		
@@ -1233,6 +1241,18 @@ public class base {
 				case 24:	
 					databaseSqlQuery="select TEST_INPUT_NBR	,TIN_COUNT	,trkngnbr from rebill_regression  ";
 					databaseSqlCount="select count(*) from  rebill_regression ";
+					
+					
+					 if (customCheckBox.equals("true")) {
+					  		databaseSqlCount+="where trkngnbr is not null and "+customString;
+				    		databaseSqlQuery+="where trkngnbr is not null and "+customString;
+					  		 
+					  	 }
+					 break;
+					 
+				case 25:	
+					databaseSqlQuery="select TEST_INPUT_NBR	,TIN_COUNT	,trkngnbr from prerate_view  ";
+					databaseSqlCount="select count(*) from  prerate_view ";
 					
 					
 					 if (customCheckBox.equals("true")) {

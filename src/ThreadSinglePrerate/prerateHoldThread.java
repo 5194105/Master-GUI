@@ -197,9 +197,13 @@ public void homepage() {
     	driver.switchTo().frame("header");}
     	catch(Exception e) {}
     	*/
-  	login();
+	login();
+    try {
+    	wait = new WebDriverWait(driver,3);
+    	driver.switchTo().frame("header");}
+    	catch(Exception e) {}
     	try {
-    		wait = new WebDriverWait(driver,5);
+    	wait = new WebDriverWait(driver,5);
 		driver.findElement(By.id("preRateEntrySelection")).click();
 		driver.switchTo().defaultContent();
 		driver.switchTo().frame("content");
@@ -222,7 +226,7 @@ public void homepage() {
 		}
 		 continue;
 		}
-		
+	
     	
     	
     	

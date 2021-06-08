@@ -35,13 +35,13 @@ public static void main (String args[]) {
 	// 22 ERA Single Rerate Upload to DB -- Works
 	// 23 ERA Mass Rerate Upload to DB -- Works
 	// 24 ERA Single Rebill Upload to DB
+	// 25 Prerate Single Upload to DB
 	
-	
-	int function = 6;
+	int function = 8;
 	c.setSessionCount("1");
 	c.setCustomCheckBox("true");
 	
-	c.setCustomString("results='NA'");
+	c.setCustomString("trkngnbr is not null");
 	//c.setCustomString("trkngnbr is not null and (result is null or result ='fail') order by result,description");
 	c.setSource("db");
 	
@@ -52,6 +52,7 @@ public static void main (String args[]) {
 	c.setRunAllEc("true");
 	c.setEraCase("5");
 	c.setEmassCase("4");
+	c.setDatabaseDisabled("false");
 	customConfig(function);
 	base b = new base(c,function);
 }
