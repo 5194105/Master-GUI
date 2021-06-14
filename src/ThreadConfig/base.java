@@ -525,6 +525,7 @@ public class base {
        		System.out.println(d.getTrkngnbr());
        		System.out.println(d.getEcWorkType());
        		System.out.println(d.getStatCodeArray());
+       	 d.setEcOverrideUd(false);
        		try {
        		String tempArrayError=d.getStatCodeArray();
        		String[] tempSplit = tempArrayError.split(",");
@@ -558,6 +559,7 @@ public class base {
         	ResultSet rsEC = stmtEc.executeQuery(databaseSqlQuery);
         	System.out.println(databaseSqlQuery);
         	 while(rsEC.next()) {
+        		 d.setEcOverrideUd(true);
         		 d.addEcDataArray(rsEC.getString(1), rsEC.getString(2), rsEC.getString(3), rsEC.getString(4), rsEC.getString(5));
         	 }
         	

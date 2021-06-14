@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -36,6 +37,7 @@ public class ecmod extends Thread {
 	validateClass vc;
 	String trkngnbr,ecWorkType;
 	Boolean ecOverride;
+	Boolean ecOverrideUd;
 	Boolean firstTry=true;
 	public ecmod(ArrayList<data> dataArray,config c) {
 		this.dataArray=dataArray;
@@ -58,9 +60,10 @@ public class ecmod extends Thread {
 			trkngnbr=d.getTrkngnbr();
 			ecWorkType=d.getEcWorkType();
 			ecOverride=d.getOverride();
+			ecOverrideUd=d.getEcOverrideUd();
 			System.out.println("EC TRK: "+trkngnbr);
 			try {
-				if (ecOverride==true || c.getRunAllEc().equals("true")) {
+				if (ecOverride==true || c.getRunAllEc().equals("true") || ecOverrideUd==true) {
 					if (ecWorkType.equals("INTL_AUTO") || ecWorkType.equals("INTL_AB"))
 					getEc(d);
 				}
@@ -75,6 +78,13 @@ public class ecmod extends Thread {
 	public void login() {
 		try {
 			try { 
+				driver.manage().deleteAllCookies(); //delete all cookies
+				Thread.sleep(7000);
+				for(Cookie ck : driver.manage().getCookies())							
+	            {			
+	               System.out.println(ck.getName()+";"+ck.getValue()+";"+ck.getDomain()+";"+ck.getPath()+";"+ck.getExpiry()+";"+ck.isSecure());																									
+	                        
+	            }	
 	    		driver.quit();
 	    		driver.close();
 		  }
@@ -87,14 +97,18 @@ public class ecmod extends Thread {
 		    driver.manage().timeouts().implicitlyWait(waitTime,TimeUnit.SECONDS);
 			wait = new WebDriverWait(driver,waitTime);
 			driver.manage().window().maximize();
+						
 			
-										
+				
 			 WebElement  id=driver.findElement(By.id("username"));
 			 id.sendKeys("5194105");
 			 WebElement  pass=driver.findElement(By.id("password"));
 			 pass.sendKeys("5194105");
 			 
 			driver.findElement(By.id("submit")).click();
+			
+			
+			
 			}
 		catch(Exception e) {
 			 System.out.println(e);
@@ -201,10 +215,11 @@ else {
 					Thread.sleep(10000);
 					
 					
-					if (ecOverride==false) {
+					if (ecOverrideUd==true) {
 						try {
 							WebElement ecElement = null;
 							for (ecData ed : d.getEcDataArray()) {
+								if(!ed.getEcField().equals("override")) {
 							switch (ed.getEcField()){
 							case "dest_country":
 								ecElement=	driver.findElement(By.id("destinationCountryId"));
@@ -342,8 +357,11 @@ else {
 							ecElement.clear();
 							ecElement.sendKeys(ed.getEcValue());
 					}
+							}
 						}
-						catch(Exception e) {}
+						catch(Exception e) {
+							System.out.println(e);
+						}
 					
 					}
 					

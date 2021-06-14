@@ -29,9 +29,10 @@ public class data {
 	String gfboPaymentType;
 	String gfboAccount,trkNo1,trkNo2;
 	String gfboExpectedResult,requestId,ecWorkType,statCodeArray;
-	Boolean override;
+	Boolean override,ecOverrideUd;
 	String runningResult="false",emassCaseData;
 	String scenarioId, shipmentId;
+	
 	public String getEmassCaseData() {
 		return emassCaseData;
 	}
@@ -59,6 +60,15 @@ public class data {
 
 	public void setRunningResult(String runningResult) {
 		this.runningResult = runningResult;
+	}
+	
+	
+	public Boolean getEcOverrideUd() {
+		return ecOverrideUd;
+	}
+
+	public void setEcOverrideUd(Boolean ecOverrideUd) {
+		this.ecOverrideUd = ecOverrideUd;
 	}
 
 	public String getStatCodeArray() {
