@@ -37,7 +37,7 @@ public static void main (String args[]) {
 	// 24 ERA Single Rebill Upload to DB
 	// 25 Prerate Single Upload to DB
 	
-	int function = 12;
+	int function = 3;
 	c.setSessionCount("1");
 	c.setCustomCheckBox("true");
 	

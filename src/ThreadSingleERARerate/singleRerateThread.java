@@ -585,12 +585,21 @@ public void doEraRerate(
  int i=0;
  try {
 	 driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
-	    
+     
+
+     
+
+     //Find element by link text and store in variable "Element"        		
+   
 while (i<10) {
 	i++;
 	
-	driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[9]/div[1]/button")).click();
-	
+	//
+	  WebElement Element = driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[9]/div[1]/button"));
+
+	     //This will scroll the page till the element is found		
+	     js.executeScript("arguments[0].scrollIntoView();", Element);
+	     driver.findElement(By.xpath(" /html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[2]/div[9]/div[1]/button")).click();
 	try {
 		//if normal continue
 		String tempString11 = driver.findElement(By.xpath("/html/body/div[2]/div/div/div/div/div[1]/div[2]/div/div/div/div[2]/div/div/div/div/form/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div[2]/div[3]/button[1]")).getText();
