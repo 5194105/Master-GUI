@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Random;
 
 import configuration.config;
 
@@ -165,6 +166,10 @@ public class validateClass {
 	}
 	
 
+	
+	
+	
+	
 	
 	public Boolean validateRebill(String testInputNbr,String tinCount,String trkngnbr) {
 		oracleBoolean=false;
@@ -629,6 +634,58 @@ public void setDisputeCase(String disputeNumber) {
 public String getDisputeCase() {
 	return disputeNumber;
 }
+
+public void writeToDb(String gfboUsername,String gfboPaymentLevel,String gfboPaymentType,String gfboResult,String gfboDescription,String level,String cycle) {
+	try {
+	if (databaseDisabled.equals("false")) {
+	Connection con=null;
+	try {
+		c.setGtmRevToolsConnection();
+		con = c.getGtmRevToolsConnection();
+	} catch (ClassNotFoundException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+
+	PreparedStatement stmt = null;
+	
+	Random r = new Random();
+	int low=1;
+	int high=2147483645;
+	int randomNumber=r.nextInt(high-low)+low; 
+	String randomTrk = String.valueOf(randomNumber);
+	
+	 stmt=con.prepareStatement("insert into gtm_rev_tools.era_results (test_input_nbr,tin_count,trkngnbr,GFBO_USERNAME,GFBO_PAYMENT_LEVEL,GFBO_PAYMENT_TYPE,result,description,gfbo_levels,gfbo_cycle) values ('11111','1','"+randomTrk+"',?,?,?,?,?,?,?)");  
+		
+		//stmt.setString(1,flag); 
+		stmt.setString(1,gfboUsername);  
+		stmt.setString(2,gfboPaymentLevel);  
+		stmt.setString(3,gfboPaymentType);  
+		stmt.setString(4,gfboResult);  
+		stmt.setString(5,gfboDescription);  
+		stmt.setString(6,level);  
+		stmt.setString(7,cycle);  
+		stmt.executeUpdate();
+		
+		
+		
+		
+			stmt=con.prepareStatement("update era_results set result=?,description=? where  GFBO_USERNAME=? and GFBO_PAYMENT_LEVEL=? and GFBO_PAYMENT_TYPE=? and gfbo_levels=? and gfbo_cycle=?");  
+			stmt.setString(1,gfboResult);  
+			stmt.setString(2,gfboDescription); 
+			stmt.setString(3,gfboUsername);  
+			stmt.setString(4,gfboPaymentLevel); 
+			stmt.setString(5,gfboPaymentType); 
+			stmt.setString(6,level); 
+			stmt.setString(7,cycle); 
+			stmt.executeUpdate();
+	}
+	}catch(Exception e) {
+		System.out.println(e);
+	}
+	}
+
+
 
 
 public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String finalResult,String finalDesc,String requestID) {

@@ -37,20 +37,23 @@ public static void main (String args[]) {
 	// 24 ERA Single Rebill Upload to DB
 	// 25 Prerate Single Upload to DB
 	
-	int function = 3;
+	int function = 1;
 	c.setSessionCount("1");
 	c.setCustomCheckBox("true");
 	
-	c.setCustomString("trkngnbr is not null");
+	c.setCustomString("trkngnbr is not null and company='GD'");
+	
+	//c.setCustomString("gfbo_username='REBS603226135'");
 	//c.setCustomString("trkngnbr is not null and (result is null or result ='fail') order by result,description");
 	c.setSource("db");
-	
+	c.setLevel("3");
+	c.setCycle("10");
 
 	
 
-	c.setCycle("8");
+	c.setCycle("10");
 	c.setRunAllEc("false");
-	c.setEraCase("5");
+	c.setEraCase("2");
 	c.setEmassCase("4");
 	c.setDatabaseDisabled("false");
 	customConfig(function);
@@ -64,7 +67,7 @@ public static void customConfig (int function) {
 			c.setDriverType("2");	
 			c.setCompatibleMode("false");
 			//c.setSource("db");
-			c.setSource("db");
+		//	c.setSource("db");
 			c.setDatabaseDisabled("false");
 			c.setHeadlessString("false");
 			c.setExcelPath("C:\\Users\\FedExUser\\Desktop\\stephen\\R66\\L3C6\\rebill.xlsx");

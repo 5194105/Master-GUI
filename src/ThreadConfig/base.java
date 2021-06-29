@@ -72,18 +72,17 @@ public class base {
 		// 1 GTM
 		// 2 RTM
 		dbVal=1;
-		
+
+	//	if (c.getSource().equals("db") || c.getSource()==null) {
 		setSqlQuery();
 		getDataDb();
 		//Stores data to a data object then puts it in array
-		/*
-		if (c.getSource().equals("db") || c.getSource()==null) {
-			getDataDb();
-		}
-		if (c.getSource().equals("excel")){
-			getDataExcel();
-		}
-		*/
+
+		//}
+		//if (c.getSource().equals("excel")){
+		//	getDataExcel();
+	//	}
+		
 		//Gets which segements data is in based on thread count.
 		minMaxArrayMath(threadCount);
 		
@@ -192,12 +191,14 @@ public class base {
 	}
 	
 	public  void getDataExcel() {
+		try {
 		excel e = new excel();
 		e.setUpExcelWorkbook("C:\\Users\\5194105\\Documents\\L3 Test Data.xlsx");
 		e.setUpExcelSheet(0);
 		e.setRowCountAutomatically(2);
 		System.out.println(e.getRowCount());
 		tempCounter=0;
+		dataArray = new ArrayList<data>();
 		for (int i=1;i<e.getRowCount();i++) {
 		switch(function) {
 		case 1:
@@ -208,6 +209,10 @@ public class base {
 		//	dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),nullCheck(rs.getString(8)),nullCheck(rs.getString(9)),nullCheck(rs.getString(10)),nullCheck(rs.getString(11)),nullCheck(rs.getString(12)),nullCheck(rs.getString(13)),nullCheck(rs.getString(14)),nullCheck(rs.getString(15)),nullCheck(rs.getString(16)),nullCheck(rs.getString(17)),nullCheck(rs.getString(18)),nullCheck(rs.getString(19)),nullCheck(rs.getString(20)),nullCheck(rs.getString(19)),nullCheck(rs.getString(20)),nullCheck(rs.getString(21)),tempCounter));	
 		break;
 		}
+		}
+		}
+		catch(Exception e) {
+			System.out.println(e);
 		}
 	}
 	
@@ -352,7 +357,7 @@ public class base {
             	 
             	 case 11 :
             		 gfboDummyClass gdc = null;
-          			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),gdc));	
+          			dataArray.add(new data(nullCheck(rs.getString(1)),nullCheck(rs.getString(2)),nullCheck(rs.getString(3)),nullCheck(rs.getString(4)),nullCheck(rs.getString(5)),nullCheck(rs.getString(6)),nullCheck(rs.getString(7)),nullCheck(rs.getString(8)),gdc));	
           		     	break;
          		
             	 case 12:
@@ -1109,7 +1114,7 @@ public class base {
 					
 					
 				case 11:	
-					databaseSqlQuery="select TEST_INPUT_NBR,GFBO_USERNAME,GFBO_PASSWORD,GFBO_PAYMENT_LEVEL,GFBO_PAYMENT_TYPE,GFBO_ACCOUNT,GFBO_EXPECTED_RESULT from gfbo_regression_view  ";
+					databaseSqlQuery="select result,description,GFBO_USERNAME,GFBO_PASSWORD,GFBO_PAYMENT_LEVEL,GFBO_PAYMENT_TYPE,GFBO_ACCOUNT,GFBO_EXPECTED_RESULT from gfbo_regression_view  ";
 					databaseSqlCount="select count(*) from  gfbo_regression_view ";
 					
 					if (customCheckBox.equals("true")) {

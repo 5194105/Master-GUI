@@ -64,24 +64,8 @@ public class creditDebitThread extends Thread{
 	
 public void run () {
 		levelUrlTemp=levelUrl;
-		for(data d: dataArray) {
-			if (d.getRunningResult().equals("false")) {
-				running=true;
-				break;
-			}
-		}
-		
-		
-		while (running == true) {
-			running=false;
-			for(data d: dataArray) {
-				if (d.getRunningResult().equals("false")) {
-					running=true;
-					break;
-				}
-			}
-			
-		for(data d: dataArray) {
+		while(true) {
+			for(data d: new  ArrayList<data>(dataArray)) {
 			
 			
 			//Declare Vars
@@ -143,7 +127,7 @@ public void run () {
 					 if(disputeNumber.equals("")) {
 						 System.out.println("No Dispute Found");
 						 vc.writeToDb(testInputNbr, tinCount, trkngnbr, "fail", "dispute not found", null);
-						 d.setRunningResult("true");
+						dataArray.remove(d);
 						 continue;
 					 }
 					 else {

@@ -80,26 +80,20 @@ public String getCellData(int x, int y) {
 	
 	cellData="";
 	try {
+		System.out.println(x +" "+y);
 		cell=excelSheet.getRow(x).getCell(y);
 		cellData=cell.toString();
-	
+		
 		
 		if (cell.getCellType()==Cell.CELL_TYPE_NUMERIC) {
 			cellData=new BigDecimal(cell.toString()).toPlainString();
 			System.out.println(cellData);
 		}
-		/*
-		else {
-			cellData=cell.toString();
-			System.out.println(cellData);
+		if (cellData.equals("L3C6R68")) {
+			System.out.println("Cell Data "+cellData);	
 		}
-		*/
-	//	cellData=cell.toString();
-		
 		System.out.println("Cell Data "+cellData);
-		if (cellData.equals("EP")) {
-			System.out.println("Cell Data "+cellData);
-		}
+		
 	}
 	catch(Exception e) {
 	//	System.out.println(e);

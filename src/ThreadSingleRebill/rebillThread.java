@@ -65,24 +65,9 @@ public class rebillThread extends Thread{
 	
 	public void run () {
 		
-		for(data d: dataArray) {
-			if (d.getRunningResult().equals("false")) {
-				running=true;
-				break;
-			}
-		}
 		
-		
-		while (running == true) {
-			running=false;
-			for(data d: dataArray) {
-				if (d.getRunningResult().equals("false")) {
-					running=true;
-					break;
-				}
-			}
-			
-		for(data d: dataArray) {
+			while(true) {
+		for(data d: new  ArrayList<data>(dataArray)) {
 		
 			
 			//Declare Vars
@@ -113,14 +98,12 @@ public class rebillThread extends Thread{
 			
 		    
 		    if (vc.validateRebill(testInputNbr,tinCount,trkngnbr)==true) {
-		    	d.setRunningResult("true");
+		    //	d.setRunningResult("true");
+		    	dataArray.remove(d);
 		    	continue;
 		    }
 		    
-		    
-		    
-		    
-		
+		    		   
 			try {
 				doRebill(testInputNbr, tinCount, trkngnbr, reasonCode, rebillAccount, invoiceNbr1, invoiceNbr2, region , login , password, rsType ,company , prerate,length,width,height,actualWeight,workable);
 			} catch (InterruptedException e) {
@@ -130,6 +113,7 @@ public class rebillThread extends Thread{
 		}
 		}
 	}
+	
 	
 
     

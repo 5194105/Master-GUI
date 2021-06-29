@@ -55,24 +55,8 @@ public class singleRerateThread extends Thread{
 		vc= new validateClass(c,databaseDisabled,"era_rerate");
 	}
 public void run () {
-	for(data d: dataArray) {
-		if (d.getRunningResult().equals("false")) {
-			running=true;
-			break;
-		}
-	}
-	
-	
-	while (running == true) {
-		running=false;
-		for(data d: dataArray) {
-			if (d.getRunningResult().equals("false")) {
-				running=true;
-				break;
-			}
-		}
-		
-	for(data d: dataArray) {
+	while(true) {
+		for(data d: new  ArrayList<data>(dataArray)) {
 			this.result=d.getResult();
 			this.description=d.getDescription();
 			this.testInputNbr=d.getTestInputNbr();
@@ -104,7 +88,7 @@ public void run () {
 			
 			
 		    if (vc.validateRerate(testInputNbr,tinCount,trkngnbr)==true) {
-		    	d.setRunningResult("true");
+		    dataArray.remove(d);
 		    	continue;
 		    }
 		

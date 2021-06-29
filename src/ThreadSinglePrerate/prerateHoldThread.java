@@ -59,24 +59,8 @@ public class prerateHoldThread extends Thread{
 	
 	public void run () {
 		
-		for(data d: dataArray) {
-			if (d.getRunningResult().equals("false")) {
-				running=true;
-				break;
-			}
-		}
-		
-		
-		while (running == true) {
-			running=false;
-			for(data d: dataArray) {
-				if (d.getRunningResult().equals("false")) {
-					running=true;
-					break;
-				}
-			}
-			
-		for(data d: dataArray) {
+		while(true) {
+			for(data d: new  ArrayList<data>(dataArray)) {
 			
 			//Declare Vars
 			this.result=d.getResult();
@@ -91,7 +75,8 @@ public class prerateHoldThread extends Thread{
 			System.out.println(trkngnbr);
 		    
 		    if (vc.validatePrerateHold(testInputNbr,tinCount,trkngnbr,tinComment)==true) {
-		    	d.setRunningResult("true");
+		    	
+		    	dataArray.remove(d);
 		    	continue;
 		    }
 		  	try {

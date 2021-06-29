@@ -410,8 +410,9 @@ public class data {
 	
 	
 	//GFBO Rerate Upload
-		public data(String testInputNbr,String gfboUsername,String gfboPassword,String gfboPaymentLevel,String gfboPaymentType,String gfboAccount,String gfboExpectedResult, gfboDummyClass gdc) {
-			this.testInputNbr=testInputNbr;
+		public data(String result,String description,String gfboUsername,String gfboPassword,String gfboPaymentLevel,String gfboPaymentType,String gfboAccount,String gfboExpectedResult, gfboDummyClass gdc) {
+			this.result=result;
+			this.description=description;
 			this.gfboUsername=gfboUsername;
 			this.gfboPassword=gfboPassword;
 			this.gfboPaymentLevel=gfboPaymentLevel;

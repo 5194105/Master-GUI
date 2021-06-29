@@ -81,8 +81,9 @@ public class Highest {
     		for (int i=0;i<2000;i++) {
     		try {
     			if (i==500 || i==1000 || i==1500) {
-    			c.setEcL3DbConnection("test_readonly", "perftest");
-        		con = c.getEcL3DbConnection();
+    			//con.close();
+    			//c.setEcL3DbConnection("test_readonly", "perftest");
+        		//con = c.getEcL3DbConnection();
     			}
     			String databaseSqlQuery="select WORK_TYPE_CD,STAT_CD_ARRAY_DESC from ec_schema.shipment a join ec_schema.package b on a.ONLN_REV_ITEM_ID=b.ONLN_REV_ITEM_ID join ec_schema.pkg_stat_cd_array c on b.ONLN_PKG_ID=c.ONLN_PKG_ID where ARRAY_TYPE_CD='F' and pkg_trkng_nbr="+i;
     			Statement stmt = con.createStatement();
@@ -98,6 +99,12 @@ public class Highest {
     			System.out.println(e);
     		}
     	}
+    		try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     }
 }
  
