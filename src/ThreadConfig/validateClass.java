@@ -331,12 +331,19 @@ public class validateClass {
 		}
 			catch(Exception e) {
 				System.out.println(e);
+				checkCursorError(e);
 			}
 	}
 	
 	
 	
-	
+	public void checkCursorError(Exception  e) {
+		if (e.getMessage().contains("maximum open cursors exceeded")) {
+			System.out.println("Ending Program Due to Max Open Cursors");
+			System.exit(0);
+		}
+		
+	}
 
 public void searchEraDB(String sqlQuery,String testInputNbr,String tinCount,String trkngnbr,int methodNumber) {
 	Connection con=null;
@@ -394,6 +401,7 @@ public void searchEraDB(String sqlQuery,String testInputNbr,String tinCount,Stri
 	}
 	catch(Exception e) {
 		System.out.println(e);
+		checkCursorError(e);
 	}
 	try {
 	//	con.close();
@@ -538,6 +546,7 @@ public void searchOracleDB(String sqlQuery,String testInputNbr,String tinCount,S
 	}
 	catch(Exception e) {
 		System.out.println(e);
+		checkCursorError(e);
 		}
 	try {
 	//	con.close();
@@ -682,6 +691,7 @@ public void writeToDb(String gfboUsername,String gfboPaymentLevel,String gfboPay
 	}
 	}catch(Exception e) {
 		System.out.println(e);
+		checkCursorError(e);
 	}
 	}
 
@@ -863,6 +873,7 @@ public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String
 		}
 	catch(Exception e) {
 		System.out.println(e);
+		checkCursorError(e);
 	}
 	
 	
@@ -975,6 +986,7 @@ public void writeToDb(String testInputNbr,String tinCount,String trkngnbr,String
 }
 catch(Exception e) {
 	System.out.println(e);
+	checkCursorError(e);
 }
 	
 	try {
@@ -1073,6 +1085,7 @@ if (flag.equals("prerate_hold")) {
 }
 catch(Exception e) {
 	System.out.println(e);
+	checkCursorError(e);
 }
 }
 
@@ -1128,6 +1141,7 @@ public Boolean searchOracleDBError(String testInputNbr,String tinCount,String tr
 	}
 	catch(Exception e) {
 		System.out.println(e);
+		checkCursorError(e);
 		}
 	try {
 	//	con.close();
@@ -1301,6 +1315,7 @@ public void searchOracleDBDebitCredit(String sqlQuery,String testInputNbr,String
 	}
 	catch(Exception e) {
 		System.out.println(e);
+		checkCursorError(e);
 		}
 	try {
 	//	con.close();

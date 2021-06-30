@@ -97,6 +97,11 @@ public class Highest {
         	 }
     		catch(Exception e) {
     			System.out.println(e);
+    			
+    			if (e.getMessage().contains("maximum open cursors exceeded")) {
+    				System.out.println("Ending Program Due to Max Open Cursors");
+    				System.exit(0);
+    			}
     		}
     	}
     		try {

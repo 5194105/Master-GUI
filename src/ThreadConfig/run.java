@@ -37,21 +37,20 @@ public static void main (String args[]) {
 	// 24 ERA Single Rebill Upload to DB
 	// 25 Prerate Single Upload to DB
 	
-	int function = 1;
-	c.setSessionCount("1");
+	int function = 3;
+	c.setSessionCount("2");
 	c.setCustomCheckBox("true");
 	
-	c.setCustomString("trkngnbr is not null and company='GD'");
+	c.setCustomString("trkngnbr is not null and region !='USA'");
 	
 	//c.setCustomString("gfbo_username='REBS603226135'");
 	//c.setCustomString("trkngnbr is not null and (result is null or result ='fail') order by result,description");
 	c.setSource("db");
 	c.setLevel("3");
-	c.setCycle("10");
+	c.setCycle("11");
 
 	
 
-	c.setCycle("10");
 	c.setRunAllEc("false");
 	c.setEraCase("2");
 	c.setEmassCase("4");
