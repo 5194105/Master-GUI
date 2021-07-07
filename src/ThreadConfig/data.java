@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import ThreadCreditDebitDisputeResolve.debitDummyClass;
 import ThreadEc.ecdummyClass;
 import ThreadGFBO.gfboDummyClass;
+import ThreadInstantInvoice.instantInvoiceDummy;
 import ThreadMassERARerate.massRerateDummy;
 import ThreadPRSRerate.prsRerateDummyClass;
+import ThreadSingleERARerate.singleEraRerateDummy;
+import ThreadSingleRebill.singleRebillDummy;
 import ThreadeMass.threadEmassDummy;
 
 public class data {
@@ -32,27 +35,407 @@ public class data {
 	Boolean override,ecOverrideUd;
 	String runningResult="false",emassCaseData;
 	String scenarioId, shipmentId;
-	
-	public String getEmassCaseData() {
-		return emassCaseData;
-	}
-
-	public void setEmassCaseData(String emassCaseData) {
-		this.emassCaseData = emassCaseData;
-	}
 	String emassOriginCd, emassPupEmpId,  emassPupRoute, emassFormId,  emassCosmoNbr, emassStopType,  emassDestCityShort, emassDestCountryCd, emassDestCountryPostal, emassBaseSvc, emassPackageType, emassHandlingCd, emassDelAddress;
 	String emassPodDestCd, emassPodRoute, emassReceivedBy,   emassDelLoc, emassSigRecLineNbr, emassSigRecId,   emassStatDestCd, emassStatEmpId, emassStandardExport;
+	
+	
 	//Function Type
-	// 1 Single Rebill
-	// 2 Mass Rebill
-	// 3 Single Rerate
-	// 4 Mass Rerate
-	// 5 Credit Debit
-	// 6 Instant Invoice
-	// 7 Prerate Single
-	// 8 Prerate Hold
-	// 9 PRS Rerate
+			// 1 Single Rebill -- Works
+			// 2 Mass Rebill -- Not Working
+			// 3 Single Rerate -- Works
+			// 4 Mass Rerate --  Works
+			// 5 Credit Debit -- Works
+			//	--1 Credit -- Works
+			//	--2 Debit -- Works
+			//	--3 Dispute -- Works
+			//	--4 Resolve Credit -- Works
+			//	--5 Resolve Rebill -- Works
+			// 6 Instant Invoice -- Works
+			// 7 Prerate Single -- Works
+			// 8 Prerate Hold -- Works 
+			// 9 PRS Rerate -- Works
+			// 10 Instant Invoice Device -- Works
+			// 11 GFBO --  Works
+			// 12 EC UD --  Works
+			// 13 EC Device --  Works
+			// 14 emass -- doesnt work
+			
+			// 22 ERA Single Rerate Upload to DB -- Works
+			// 23 ERA Mass Rerate Upload to DB -- Works
+			// 24 ERA Single Rebill Upload to DB
+			// 25 Prerate Single Upload to DB
+	
+	//Rebill Single
+		public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String reasonCode, String billAcctNbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password, String rs_type,String company,String rebillPrerate,String svcType,String length,String width,String height,String actualWeight,String workable,String defectFlg,String defectNbr,singleRebillDummy srd) {
+			this.result=result;
+			this.description=description;
+			this.testInputNbr=testInputNbr;
+			this.tinCount=tinCount;
+			this.trkngnbr=trkngnbr;
+			this.reasonCode=reasonCode;
+			this.billAcctNbr=billAcctNbr; 
+			this.invoiceNbr1=invoiceNbr1;
+			this.invoiceNbr2=invoiceNbr2;
+			this.region=region;
+			this.username=username;
+			this.password=password;
+			this.rs_type=rs_type;
+			this.company=company;
+			this.rebillPrerate=rebillPrerate;  
+			this.workable=workable;
+			this.defectFlg=defectFlg;
+			this.defectNbr=defectNbr;
+			this.length=length;
+			this.width=width;
+			this.height=height;
+			this.actualWeight=actualWeight;
+			this.svcType=svcType;
+		}
+	
+		// Rebill Mass
+		public data(String result, String description,String testInputNbr,String rowcount,String trkngnbr,String reasonCode, String billAcctNbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password, String rs_type,String company,int counter) {
+			this.result=result;
+			this.description=description;
+			this.trkngnbr=trkngnbr;
+			this.rowcount=rowcount;
+			this.reasonCode=reasonCode;
+			this.billAcctNbr=billAcctNbr; 
+			this.invoiceNbr1=invoiceNbr1;
+			this.invoiceNbr2=invoiceNbr2;
+			this.region=region;
+			this.username=username;
+			this.password=password;
+			this.rs_type=rs_type;
+			this.company=company;
+			this.counter=counter;
+		}
+	
+		//Single Rerate
+		public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String invoiceNbr1,String invoiceNbr2,
+				String rateWeight,String actualWeight,String wgtType, String length,String width,String height, 
+				String workable,String dimType,String payor,String billAcctNbr,String serviceType,String serviceName,String packageType,
+				String rerateType,String region,String username,String password,String rsType,String company,String valDesc,String comments ,singleEraRerateDummy serd) {
+			this.result=result;
+			this.description=description;
+			this.testInputNbr=testInputNbr;
+			this.tinCount=tinCount;
+			this.trkngnbr=trkngnbr;
+			this.invoiceNbr1=invoiceNbr1;
+			this.invoiceNbr2=invoiceNbr2;
+			this.rateWeight=rateWeight;
+			this.actualWeight=actualWeight;
+			this.wgtType=wgtType;
+			this.length=length;
+			this.width=width;
+			this.height=height;
+			this.workable=workable;
+			this.dimType=dimType;
+			this.payor=payor;
+			this.billAcctNbr=billAcctNbr;
+			this.serviceType=serviceType;
+			this.serviceName=serviceName;
+			this.packageType=packageType;
+			this.rerateType=rerateType;
+			this.region=region;
+			this.username=username;
+			this.password=password;
+			this.rsType=rsType;
+			this.company=company;
+			this.valDesc=valDesc;
+			this.comments=comments;
+			
+		}
+	
 
+		//Mass Rerate
+		public data(String result, String description,String requestId,String testInputNbr,String tinCount,String trkngnbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password,String rateWeight,String length, String height,String width,String dimType, String rerateType,String rsType,String company,massRerateDummy mrd) {
+			this.result=result;
+			this.description=description;
+			this.testInputNbr=testInputNbr;
+			this.requestId=requestId;
+			this.tinCount=tinCount;
+			this.trkngnbr=trkngnbr;
+			this.invoiceNbr1=invoiceNbr1;
+			this.invoiceNbr2=invoiceNbr2;
+			this.rateWeight=rateWeight;
+			this.length=length;
+			this.width=width;
+			this.dimType=dimType;
+			this.rerateType=rerateType;
+			this.region=region;
+			this.username=username;
+			this.password=password;
+			this.rsType=rsType;
+			this.company=company;
+		}
+		
+		
+
+		//Credit/
+
+		public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password,String workable, String reasonCategory,String reasonCode,String rootCause,String valDesc,String eraCase) {
+			this.result=result;
+			this.description=description;
+			this.testInputNbr=testInputNbr;
+			this.tinCount=tinCount;
+			this.trkngnbr=trkngnbr;
+			this.invoiceNbr1=invoiceNbr1;
+			this.invoiceNbr2=invoiceNbr2;
+			this.region=region;
+			this.username=username;
+			this.password=password;
+			this.workable=workable;
+			this.reasonCode=reasonCode;
+			this.reasonCategory=reasonCategory;
+			this.rootCause=rootCause;
+			this.valDesc=valDesc;
+			this.eraCase=eraCase;
+		}
+		
+		
+		public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String reasonCode,String billAcctNbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password,String comments,String valDesc,String eraCase,debitDummyClass ddc) {
+			this.result=result;
+			this.description=description;
+			this.testInputNbr=testInputNbr;
+			this.tinCount=tinCount;
+			this.trkngnbr=trkngnbr;
+			this.reasonCode=reasonCode;
+			this.billAcctNbr=billAcctNbr;
+			this.invoiceNbr1=invoiceNbr1;
+			this.invoiceNbr2=invoiceNbr2;
+			this.region=region;
+			this.username=username;
+			this.password=password;
+			this.valDesc=valDesc;
+			this.comments=comments;
+			this.eraCase=eraCase;
+			
+		}
+		
+		//Debit
+		public data(String result, String description,String result2, String description2,String testInputNbr,String tinCount,String trkngnbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password,String workable, String reasonCategory,String reasonCode,String rootCause,String valDesc,String eraCase,debitDummyClass ddc) {
+			this.result=result;
+			this.description=description;
+			this.description2=description2;
+			this.result2=result2;
+			this.testInputNbr=testInputNbr;
+			this.tinCount=tinCount;
+			this.trkngnbr=trkngnbr;
+			this.invoiceNbr1=invoiceNbr1;
+			this.invoiceNbr2=invoiceNbr2;
+			this.region=region;
+			this.username=username;
+			this.password=password;
+			this.workable=workable;
+			this.reasonCode=reasonCode;
+			this.reasonCategory=reasonCategory;
+			this.rootCause=rootCause;
+			this.valDesc=valDesc;
+			this.eraCase=eraCase;
+			
+			
+		}
+		
+		
+		//Instant Invoice
+		public data(String testInputNbr,String trkngnbr,String payorAcctNbr,String itemPrcsCd,String instantInvFlg,String username,String password, instantInvoiceDummy iid) {
+			this.testInputNbr=testInputNbr;
+			this.trkngnbr=trkngnbr;
+			this.payorAcctNbr=payorAcctNbr;
+			this.itemPrcsCd=itemPrcsCd;
+			this.instantInvFlg=instantInvFlg;
+			this.username=username;
+			this.password=password;
+			
+		}
+		
+		
+		//Prerate Single
+				public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String prerateTypeCd, String prerateAmt,String currencyCd,String approvalId,String chrgCd1,String chrgAmt1,String chrgCd2, String chrgAmt2,String chrgCd3,String chrgAmt3, String chrgCd4,String chrgAmt4, String valDesc,String expectedStatus) {
+					this.result=result;
+					this.description=description;
+					this.testInputNbr=testInputNbr;
+					this.tinCount=tinCount;
+					this.trkngnbr=trkngnbr;
+					this.prerateTypeCd=prerateTypeCd;
+					this.prerateAmt=prerateAmt;
+					this.currencyCd=currencyCd;
+					this.approvalId=approvalId;
+					this.chrgCd1=chrgCd1;
+					this.chrgAmt1=chrgAmt1;
+					this.chrgCd2=chrgCd2;
+					this.chrgAmt2=chrgAmt2;
+					this.chrgCd3=chrgCd3;
+					this.chrgAmt3=chrgAmt3;
+					this.chrgCd4=chrgCd4;
+					this.chrgAmt4=chrgAmt4;
+					this.valDesc=valDesc;
+					this.expectedStatus=expectedStatus;
+				}
+				
+				
+				//Prerate Hold
+				public data(String result, String description,String podScan,String testInputNbr,String tinCount,String trkngnbr,String tinComment) {
+					this.result=result;
+					this.description=description;
+					this.testInputNbr=testInputNbr;
+					this.tinCount=tinCount;
+					this.trkngnbr=trkngnbr;
+					this.podScan=podScan;
+					this.tinComment=tinComment;
+					
+				}
+		
+				//prs rerate
+				public data(String testInputNbr,String tinCount,String acct1,String acct2,String trkNo1,String trkNo2,String invoiceNbr1,String invoiceNbr2,String service1, String service2,String requestType,String acctType,String acctName,prsRerateDummyClass pdc) {
+					this.testInputNbr=testInputNbr;
+					this.tinCount=tinCount;
+					this.acct1=acct1;
+					this.acct2=acct2;
+					this.trkNo1=trkNo1;
+					this.trkNo2=trkNo2;
+					this.invoiceNbr1=invoiceNbr1;
+					this.invoiceNbr2=invoiceNbr2;
+					this.service1=service1;
+					this.service2=service2;
+					this.requestType=requestType;
+					this.acctType=acctType;
+					this.acctName=acctName;
+					
+				}
+		
+		
+				//Instant Invoice Device
+				public data(String trkngnbr, String payorAcctNbr,String username,String password, int counter) {
+					this.trkngnbr=trkngnbr;
+					this.payorAcctNbr=payorAcctNbr;
+					this.username=username;
+					this.password=password;
+					this.counter=counter;
+					
+				}
+		
+		
+		//GFBO 
+			public data(String result,String description,String gfboUsername,String gfboPassword,String gfboPaymentLevel,String gfboPaymentType,String gfboAccount,String gfboExpectedResult, gfboDummyClass gdc) {
+				this.result=result;
+				this.description=description;
+				this.gfboUsername=gfboUsername;
+				this.gfboPassword=gfboPassword;
+				this.gfboPaymentLevel=gfboPaymentLevel;
+				this.gfboPaymentType=gfboPaymentType;
+				this.gfboAccount=gfboAccount;
+				this.gfboExpectedResult=gfboExpectedResult;
+			
+				
+				
+			}
+		
+		
+		
+		//EC UD
+		public data(String scenarioId,String shipmentId,String trkngnbr,ecdummyClass ecd  ) {
+			
+			this.trkngnbr=trkngnbr;
+			this.scenarioId=scenarioId;
+			this.shipmentId=shipmentId;
+			
+		}
+	
+	
+		public void addEcDataArray(String ecScenarioid,String ecShipmentId,String ecField,String ecValue,String ecComments) {
+			ecDataArray.add(new ecData( ecScenarioid, ecShipmentId, ecField, ecValue, ecComments));
+		}
+	
+
+		
+
+	
+		
+		//emass pup
+			public data(String testInputNbr, String trkngnbr,String emassOriginCd,String emassPupEmpId, String emassPupRoute,String emassFormId, String emassCosmoNbr,String emassStopType, String emassDestCityShort,String emassDestCountryCd,String emassDestCountryPostal,String emassBaseSvc,String emassPackageType,String emassHandlingCd,String emassDelAddress,String emassCaseData, threadEmassDummy ted) {
+				this.testInputNbr=testInputNbr;
+				this.trkngnbr=trkngnbr;
+				this.emassOriginCd=emassOriginCd;
+				this.emassPupEmpId=emassPupEmpId;
+				this.emassPupRoute=emassPupRoute;
+				this.emassFormId=emassFormId;
+				this.emassCosmoNbr=emassCosmoNbr;
+				this.emassStopType=emassStopType;
+				this.emassDestCityShort=emassDestCityShort;
+				this.emassDestCountryCd=emassDestCountryCd;
+				this.emassDestCountryPostal=emassDestCountryPostal;
+				this.emassBaseSvc=emassBaseSvc;
+				this.emassPackageType=emassPackageType;
+				this.emassHandlingCd=emassHandlingCd;
+				this.emassDelAddress=emassDelAddress;
+				this.emassCaseData=emassCaseData;
+					
+				}
+	
+		
+		
+		//emass stat65
+		public data(String testInputNbr, String trkngnbr, String emassStatDestCd,String emassStatEmpId,String emassStandardExport,String emassCaseData, threadEmassDummy ted) {
+			this.testInputNbr=testInputNbr;
+			this.trkngnbr=trkngnbr;
+			this.emassStatEmpId=emassStatEmpId;
+			this.emassStatDestCd=emassStatDestCd;
+			this.emassStandardExport=emassStandardExport;
+			this.emassCaseData=emassCaseData;
+			
+		}
+
+		//emass pod
+		public data(String testInputNbr, String trkngnbr, String emassPodDestCd,String emassPodRoute,String emassReceivedBy,String emassDelAddress, String emassDelLoc,String emassSigRecLineNbr,String emassSigRecId,String emassCaseData, threadEmassDummy ted) {
+			this.testInputNbr=testInputNbr;
+			this.trkngnbr=trkngnbr;
+			this.emassPodDestCd=emassPodDestCd;
+			this.emassPodRoute=emassPodRoute;
+			this.emassReceivedBy=emassReceivedBy;
+			this.emassDelAddress=emassDelAddress;
+			this.emassDelLoc=emassDelLoc;
+			this.emassSigRecLineNbr=emassSigRecLineNbr;
+			this.emassSigRecId=emassSigRecId;
+			this.emassCaseData=emassCaseData;
+			
+			
+		}
+		
+		
+		
+		
+	
+
+		
+		
+		
+		
+		
+		
+		
+		
+		//ERA Rerate Upload
+		public data(String testInputNbr,String tinCount,String trkngnbr) {
+			this.testInputNbr=testInputNbr;
+			this.tinCount=tinCount;
+			this.trkngnbr=trkngnbr;
+		
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	
 	public String getRunningResult() {
 		return runningResult;
@@ -87,22 +470,19 @@ public class data {
 		this.override = override;
 	}
 
-	//EC UD
-	public data(String scenarioId,String shipmentId,String trkngnbr,ecdummyClass ecd  ) {
-		
-		this.trkngnbr=trkngnbr;
-		this.scenarioId=scenarioId;
-		this.shipmentId=shipmentId;
-		
-	}
+
 	
-	public void addEcDataArray(String ecScenarioid,String ecShipmentId,String ecField,String ecValue,String ecComments) {
-		ecDataArray.add(new ecData( ecScenarioid, ecShipmentId, ecField, ecValue, ecComments));
-	}
+	
 	public ArrayList<ecData> getEcDataArray(){
 		return ecDataArray;
 	}
-	
+	public String getEmassCaseData() {
+		return emassCaseData;
+	}
+
+	public void setEmassCaseData(String emassCaseData) {
+		this.emassCaseData = emassCaseData;
+	}
 
 	public String getScenarioId() {
 		return scenarioId;
@@ -136,161 +516,20 @@ public class data {
 		this.ecWorkType = ecWorkType;
 	}
 
-	//Rebill Single
-	public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String reasonCode, String billAcctNbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password, String rs_type,String company,String rebillPrerate,String svcType,String length,String width,String height,String actualWeight,String workable,String defectFlg,String defectNbr,int counter) {
-		this.result=result;
-		this.description=description;
-		this.testInputNbr=testInputNbr;
-		this.tinCount=tinCount;
-		this.trkngnbr=trkngnbr;
-		this.reasonCode=reasonCode;
-		this.billAcctNbr=billAcctNbr; 
-		this.invoiceNbr1=invoiceNbr1;
-		this.invoiceNbr2=invoiceNbr2;
-		this.region=region;
-		this.username=username;
-		this.password=password;
-		this.rs_type=rs_type;
-		this.company=company;
-		this.rebillPrerate=rebillPrerate;  
-		this.workable=workable;
-		this.defectFlg=defectFlg;
-		this.defectNbr=defectNbr;
-		this.counter=counter;
-		this.length=length;
-		this.width=width;
-		this.height=height;
-		this.actualWeight=actualWeight;
-		this.svcType=svcType;
-	}
+	
 	
 
 
-	// Rebill Mass
-	public data(String result, String description,String testInputNbr,String rowcount,String trkngnbr,String reasonCode, String billAcctNbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password, String rs_type,String company,int counter) {
-		this.result=result;
-		this.description=description;
-		this.trkngnbr=trkngnbr;
-		this.rowcount=rowcount;
-		this.reasonCode=reasonCode;
-		this.billAcctNbr=billAcctNbr; 
-		this.invoiceNbr1=invoiceNbr1;
-		this.invoiceNbr2=invoiceNbr2;
-		this.region=region;
-		this.username=username;
-		this.password=password;
-		this.rs_type=rs_type;
-		this.company=company;
-		this.counter=counter;
-	}
-	
-	
-	
-	//Single Rerate
-	public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String invoiceNbr1,String invoiceNbr2,
-			String rateWeight,String actualWeight,String wgtType, String length,String width,String height, 
-			String workable,String dimType,String payor,String billAcctNbr,String serviceType,String serviceName,String packageType,
-			String rerateType,String region,String username,String password,String rsType,String company,String valDesc,String comments,int counter) {
-		this.result=result;
-		this.description=description;
-		this.testInputNbr=testInputNbr;
-		this.tinCount=tinCount;
-		this.trkngnbr=trkngnbr;
-		this.invoiceNbr1=invoiceNbr1;
-		this.invoiceNbr2=invoiceNbr2;
-		this.rateWeight=rateWeight;
-		this.actualWeight=actualWeight;
-		this.wgtType=wgtType;
-		this.length=length;
-		this.width=width;
-		this.height=height;
-		this.workable=workable;
-		this.dimType=dimType;
-		this.payor=payor;
-		this.billAcctNbr=billAcctNbr;
-		this.serviceType=serviceType;
-		this.serviceName=serviceName;
-		this.packageType=packageType;
-		this.rerateType=rerateType;
-		this.region=region;
-		this.username=username;
-		this.password=password;
-		this.rsType=rsType;
-		this.company=company;
-		this.valDesc=valDesc;
-		this.comments=comments;
-		
-	
-		
-	
-	}
-	
-	//Mass Rerate
-	public data(String result, String description,String requestId,String testInputNbr,String tinCount,String trkngnbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password,String rateWeight,String length, String height,String width,String dimType, String rerateType,String rsType,String company,massRerateDummy mrd) {
-		this.result=result;
-		this.description=description;
-		this.testInputNbr=testInputNbr;
-		this.requestId=requestId;
-		this.tinCount=tinCount;
-		this.trkngnbr=trkngnbr;
-		this.invoiceNbr1=invoiceNbr1;
-		this.invoiceNbr2=invoiceNbr2;
-		this.rateWeight=rateWeight;
-		this.length=length;
-		this.width=width;
-		this.dimType=dimType;
-		this.rerateType=rerateType;
-		this.region=region;
-		this.username=username;
-		this.password=password;
-		this.rsType=rsType;
-		this.company=company;
-		
-		
-	}
 	
 	
 	
 	
 	
-	//Credit/
-
-	public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password,String workable, String reasonCategory,String reasonCode,String rootCause,String valDesc,String eraCase) {
-		this.result=result;
-		this.description=description;
-		this.testInputNbr=testInputNbr;
-		this.tinCount=tinCount;
-		this.trkngnbr=trkngnbr;
-		this.invoiceNbr1=invoiceNbr1;
-		this.invoiceNbr2=invoiceNbr2;
-		this.region=region;
-		this.username=username;
-		this.password=password;
-		this.workable=workable;
-		this.reasonCode=reasonCode;
-		this.reasonCategory=reasonCategory;
-		this.rootCause=rootCause;
-		this.valDesc=valDesc;
-		this.eraCase=eraCase;
-	}
 	
-	//prs rerate
-	public data(String testInputNbr,String tinCount,String acct1,String acct2,String trkNo1,String trkNo2,String invoiceNbr1,String invoiceNbr2,String service1, String service2,String requestType,String acctType,String acctName,prsRerateDummyClass pdc) {
-		this.testInputNbr=testInputNbr;
-		this.tinCount=tinCount;
-		this.acct1=acct1;
-		this.acct2=acct2;
-		this.trkNo1=trkNo1;
-		this.trkNo2=trkNo2;
-		this.invoiceNbr1=invoiceNbr1;
-		this.invoiceNbr2=invoiceNbr2;
-		this.service1=service1;
-		this.service2=service2;
-		this.requestType=requestType;
-		this.acctType=acctType;
-		this.acctName=acctName;
-		
-	}
+	
+	
+	
+	
 	
 	//Rebill Resolve
 	
@@ -310,48 +549,7 @@ public class data {
 		this.trkNo2 = trkNo2;
 	}
 
-	public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String reasonCode,String billAcctNbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password,String comments,String valDesc,String eraCase,debitDummyClass ddc) {
-		this.result=result;
-		this.description=description;
-		this.testInputNbr=testInputNbr;
-		this.tinCount=tinCount;
-		this.trkngnbr=trkngnbr;
-		this.reasonCode=reasonCode;
-		this.billAcctNbr=billAcctNbr;
-		this.invoiceNbr1=invoiceNbr1;
-		this.invoiceNbr2=invoiceNbr2;
-		this.region=region;
-		this.username=username;
-		this.password=password;
-		this.valDesc=valDesc;
-		this.comments=comments;
-		this.eraCase=eraCase;
-		
-	}
 	
-	//Debit
-	public data(String result, String description,String result2, String description2,String testInputNbr,String tinCount,String trkngnbr,String invoiceNbr1,String invoiceNbr2,String region,String username,String password,String workable, String reasonCategory,String reasonCode,String rootCause,String valDesc,String eraCase,debitDummyClass ddc) {
-		this.result=result;
-		this.description=description;
-		this.description2=description2;
-		this.result2=result2;
-		this.testInputNbr=testInputNbr;
-		this.tinCount=tinCount;
-		this.trkngnbr=trkngnbr;
-		this.invoiceNbr1=invoiceNbr1;
-		this.invoiceNbr2=invoiceNbr2;
-		this.region=region;
-		this.username=username;
-		this.password=password;
-		this.workable=workable;
-		this.reasonCode=reasonCode;
-		this.reasonCategory=reasonCategory;
-		this.rootCause=rootCause;
-		this.valDesc=valDesc;
-		this.eraCase=eraCase;
-		this.ddc=ddc;
-		
-	}
 	
 	
 	
@@ -387,42 +585,7 @@ public class data {
 		this.description2 = description2;
 	}
 
-	//Instant Invoice
-	public data(String testInputNbr,String trkngnbr,String payorAcctNbr,String itemPrcsCd,String instantInvFlg,String username,String password,int counter) {
-		this.testInputNbr=testInputNbr;
-		this.trkngnbr=trkngnbr;
-		this.payorAcctNbr=payorAcctNbr;
-		this.itemPrcsCd=itemPrcsCd;
-		this.instantInvFlg=instantInvFlg;
-		this.username=username;
-		this.password=password;
-		
-	}
 	
-	//ERA Rerate Upload
-	public data(String testInputNbr,String tinCount,String trkngnbr) {
-		this.testInputNbr=testInputNbr;
-		this.tinCount=tinCount;
-		this.trkngnbr=trkngnbr;
-		
-		
-	}
-	
-	
-	//GFBO Rerate Upload
-		public data(String result,String description,String gfboUsername,String gfboPassword,String gfboPaymentLevel,String gfboPaymentType,String gfboAccount,String gfboExpectedResult, gfboDummyClass gdc) {
-			this.result=result;
-			this.description=description;
-			this.gfboUsername=gfboUsername;
-			this.gfboPassword=gfboPassword;
-			this.gfboPaymentLevel=gfboPaymentLevel;
-			this.gfboPaymentType=gfboPaymentType;
-			this.gfboAccount=gfboAccount;
-			this.gfboExpectedResult=gfboExpectedResult;
-		
-			
-			
-		}
 	
 	
 	
@@ -498,87 +661,7 @@ public class data {
 
 
 
-	//Prerate Single
-	public data(String result, String description,String testInputNbr,String tinCount,String trkngnbr,String prerateTypeCd, String prerateAmt,String currencyCd,String approvalId,String chrgCd1,String chrgAmt1,String chrgCd2, String chrgAmt2,String chrgCd3,String chrgAmt3, String chrgCd4,String chrgAmt4, String valDesc,String expectedStatus) {
-		this.result=result;
-		this.description=description;
-		this.testInputNbr=testInputNbr;
-		this.tinCount=tinCount;
-		this.trkngnbr=trkngnbr;
-		this.prerateTypeCd=prerateTypeCd;
-		this.prerateAmt=prerateAmt;
-		this.currencyCd=currencyCd;
-		this.approvalId=approvalId;
-		this.chrgCd1=chrgCd1;
-		this.chrgAmt1=chrgAmt1;
-		this.chrgCd2=chrgCd2;
-		this.chrgAmt2=chrgAmt2;
-		this.chrgCd3=chrgCd3;
-		this.chrgAmt3=chrgAmt3;
-		this.chrgCd4=chrgCd4;
-		this.chrgAmt4=chrgAmt4;
-		this.valDesc=valDesc;
-		this.expectedStatus=expectedStatus;
-	}
-	
-	
-	//Prerate Hold
-	public data(String result, String description,String podScan,String testInputNbr,String tinCount,String trkngnbr,String tinComment) {
-		this.result=result;
-		this.description=description;
-		this.testInputNbr=testInputNbr;
-		this.tinCount=tinCount;
-		this.trkngnbr=trkngnbr;
-		this.podScan=podScan;
-		this.tinComment=tinComment;
-		
-	}
-	
-	//Prs rerate
-	
-	public data(String testInputNbr, String tinCount,String acct1,String acct2, String trkngnbr1,String trkngnbr2, String invoiceNbr1,String invoiceNbr2, String service1,String service2,String requestType,String acctType,String acctName) {
-		this.testInputNbr=testInputNbr;
-		this.tinCount=tinCount;
-		this.acct1=acct1;
-		this.acct2=acct2;
-		this.trkngnbr1=trkngnbr1;
-		this.trkngnbr2=trkngnbr2;
-		this.invoiceNbr1=invoiceNbr1;
-		this.invoiceNbr2=invoiceNbr2;
-		this.service1=service1;
-		this.service2=service2;
-		this.requestType=requestType;
-		this.acctType=acctType;
-		this.acctName=acctName;
-	}
-	
-	
-	
 
-	
-	//emass pup
-	public data(String testInputNbr, String trkngnbr,String emassOriginCd,String emassPupEmpId, String emassPupRoute,String emassFormId, String emassCosmoNbr,String emassStopType, String emassDestCityShort,String emassDestCountryCd,String emassDestCountryPostal,String emassBaseSvc,String emassPackageType,String emassHandlingCd,String emassDelAddress,String emassCaseData, threadEmassDummy ted) {
-		
-		
-			
-		this.testInputNbr=testInputNbr;
-		this.trkngnbr=trkngnbr;
-		this.emassOriginCd=emassOriginCd;
-		this.emassPupEmpId=emassPupEmpId;
-		this.emassPupRoute=emassPupRoute;
-		this.emassFormId=emassFormId;
-		this.emassCosmoNbr=emassCosmoNbr;
-		this.emassStopType=emassStopType;
-		this.emassDestCityShort=emassDestCityShort;
-		this.emassDestCountryCd=emassDestCountryCd;
-		this.emassDestCountryPostal=emassDestCountryPostal;
-		this.emassBaseSvc=emassBaseSvc;
-		this.emassPackageType=emassPackageType;
-		this.emassHandlingCd=emassHandlingCd;
-		this.emassDelAddress=emassDelAddress;
-		this.emassCaseData=emassCaseData;
-		
-	}
 	public String getEmassOriginCd() {
 		return emassOriginCd;
 	}
@@ -755,46 +838,6 @@ public class data {
 		this.emassStandardExport = emassStandardExport;
 	}
 
-	//emass stat65
-	public data(String testInputNbr, String trkngnbr, String emassStatDestCd,String emassStatEmpId,String emassStandardExport,String emassCaseData, threadEmassDummy ted) {
-		this.testInputNbr=testInputNbr;
-		this.trkngnbr=trkngnbr;
-		this.emassStatEmpId=emassStatEmpId;
-		this.emassStatDestCd=emassStatDestCd;
-		this.emassStandardExport=emassStandardExport;
-		this.emassCaseData=emassCaseData;
-		
-	}
-
-	//emass pod
-	public data(String testInputNbr, String trkngnbr, String emassPodDestCd,String emassPodRoute,String emassReceivedBy,String emassDelAddress, String emassDelLoc,String emassSigRecLineNbr,String emassSigRecId,String emassCaseData, threadEmassDummy ted) {
-		this.testInputNbr=testInputNbr;
-		this.trkngnbr=trkngnbr;
-		this.emassPodDestCd=emassPodDestCd;
-		this.emassPodRoute=emassPodRoute;
-		this.emassReceivedBy=emassReceivedBy;
-		this.emassDelAddress=emassDelAddress;
-		this.emassDelLoc=emassDelLoc;
-		this.emassSigRecLineNbr=emassSigRecLineNbr;
-		this.emassSigRecId=emassSigRecId;
-		this.emassCaseData=emassCaseData;
-		
-		
-	}
-	
-	
-	
-	
-	//Instant Invoice Device
-	public data(String trkngnbr, String payorAcctNbr,String username,String password, int counter) {
-		this.trkngnbr=trkngnbr;
-		this.payorAcctNbr=payorAcctNbr;
-		this.username=username;
-		this.password=password;
-		this.counter=counter;
-		
-	}
-	
 	public void setExpectedStatus(String expectedStatus) {
 		this.expectedStatus=expectedStatus;
 	}

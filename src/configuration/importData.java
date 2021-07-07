@@ -29,7 +29,7 @@ public class importData {
 	     }
 	 
 	          String st;
-	          int counter=0;
+	          
 	          String tempStringPostFix="";
 	          String tempStringPreFix="";
 	          String[] parts=null;
@@ -45,7 +45,7 @@ public class importData {
 	        	 parts = st.split("=");
 	        	 tempStringPreFix = parts[0]; 
 	        	 tempStringPostFix = parts[1];
-	        	 System.out.println (tempStringPreFix);
+	        	// System.out.println (tempStringPreFix);
 	        //System.out.println ("POST: "+tempStringPostFix);
 	        	// tempStringPreFix=st.substring(st.indexOf("=")+1);
 	        	// tempStringPostFix=st.substring(st.indexOf("=")+1);
@@ -274,7 +274,7 @@ public class importData {
 	         
 	     
 	     //Setup DBs for use.
-	     
+	     /*
 	     if (c.getFedexNetwork()==true) {
 		     c.setRtmDbConnection(c.getRtmDbUsername(),c.getRtmDbPassword());
 		     c.setGtmRevToolsConnection(c.getGtmDbUsername(),c.getGtmDbPassword());
@@ -289,7 +289,7 @@ public class importData {
 		     c.setOracleARL3DbConnection("appsread","appsread");
 		     
 	     }
-	   
+	   */
 	
 	}
 	public Boolean covertBoolean(String tempBooleanString) {

@@ -2,13 +2,13 @@ package configuration;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Hashtable;
+
 
 import org.openqa.selenium.WebDriver;
 
 public class config {
 	
-	Connection rtmCon,gtmRevToolsCon,ciCon,oreL2Con,doreL3Con,ioreL3Con,ecL2Con,ecL3Con,eraL2Con,eraL3Con,oracleARL3Con,sepL3Con;
+	
 	String chromeSetProperty,ieSetProperty,chromePath,ieDriverPath;
 	WebDriver ieDriver,chromeDriver,tempWebDriver;
     String gtmDbUsername,gtmDbResults,gtmDbPassword,retryAttempts,secondTimeout,rebillL2URL,rebillL3URL;
@@ -627,37 +627,14 @@ public void setEraRerateRetryAttempts(String eraRerateRetryAttempts) {
 		}
 	
 	
-	public Connection getRtmCon() {
-		return rtmCon;
-	}
+	
 
 
 
-	public Connection getCiCon() {
-		return ciCon;
-	}
 
-	public Connection getOreL2Con() {
-		return oreL2Con;
-	}
 
 	
 
-	public Connection getEcL2Con() {
-		return ecL2Con;
-	}
-
-	public Connection getEcL3Con() {
-		return ecL3Con;
-	}
-
-	public Connection getEraL2Con() {
-		return eraL2Con;
-	}
-
-	public Connection getEraL3Con() {
-		return eraL3Con;
-	}
 
 	public String getChromeSetProperty() {
 		return chromeSetProperty;
@@ -994,7 +971,7 @@ public void setFlavour(String flavour) {
 		
 		return chromeDriver;
 	}
-	
+	/*
 	public void setRtmDbConnection(String username,String password) {
 			try {
 				Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -1005,8 +982,19 @@ public void setFlavour(String flavour) {
 				e.printStackTrace();
 			}
 	}
-
-	
+	*/
+public Connection getRtmCon() {
+	Connection con = null;
+	try {
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		con=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD1_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","ri","ri");
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
+	return con;
+	}
+	/*
 public void setGtmRevToolsConnection(String username,String password) {
 		
 		try {
@@ -1030,13 +1018,19 @@ public void setGtmRevToolsConnection() {
 	}
 	
 }
-
+*/
 
 	
 	public Connection getGtmRevToolsConnection() throws ClassNotFoundException {
-		
-	
-		return gtmRevToolsCon;
+		Connection con = null;
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			con=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/GTM_PROD5_SVC1_L3,cn=OracleContext,dc=ute,dc=fedex,dc=com","GTM_REV_TOOLS","Wr4l3pP5gWVd7apow8eZwnarI3s4e1");
+		} catch (SQLException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return con;
 	}
 	
 	
@@ -1078,12 +1072,9 @@ public void setGtmRevToolsConnection() {
 		 
 	}
 
-	public Connection getCiDbConnection() {
+	
 
-		return ciCon;
-	}
-
-
+/*
 public void setOreL2DbConnection(String username,String password) {
 	
 	try {
@@ -1095,14 +1086,11 @@ public void setOreL2DbConnection(String username,String password) {
 	}
 	//return ciCon;
 }
-
-public Connection getOreL2DbConnection() {
-
-	return oreL2Con;
-}
+*/
 
 
 
+/*
 public void setDoreL3DbConnection(String username,String password) {
 	
 	try {
@@ -1117,9 +1105,9 @@ public void setDoreL3DbConnection(String username,String password) {
 	}
 	//return ciCon;
 }
+*/
 
-
-
+/*
 public void setIoreL3DbConnection(String username,String password) {
 	
 	try {
@@ -1132,19 +1120,34 @@ public void setIoreL3DbConnection(String username,String password) {
 	}
 	//return ciCon;
 }
-
+*/
 public Connection getDoreL3DbConnection() {
-
-	return doreL3Con;
+	Connection con = null;
+	try {
+		
+		Class.forName("oracle.jdbc.OracleDriver");
+		con=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/PT1DORE,cn=OracleContext,dc=ute,dc=fedex,dc=com","test_readonly","perftest");
+		} catch (SQLException | ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return con;
 }
 
 public Connection getIoreL3DbConnection() {
-
-	return ioreL3Con;
+	Connection con = null;
+	try {
+		Class.forName("oracle.jdbc.OracleDriver");
+		con=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/PT1IORE,cn=OracleContext,dc=ute,dc=fedex,dc=com","test_readonly","perftest");
+		} catch (SQLException | ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return con;
 }
 
 
-
+/*
 public void setEcL2DbConnection(String username,String password) {
 	
 	
@@ -1158,13 +1161,10 @@ public void setEcL2DbConnection(String username,String password) {
 		}
 
 }
-
-public Connection getEcL2DbConnection() {
-
-	return ecL2Con;
-}
+*/
 
 
+/*
 public void setEcL3DbConnection(String username,String password) {
 	
 	try {
@@ -1177,14 +1177,22 @@ public void setEcL3DbConnection(String username,String password) {
 	}
 	
 }
-
+*/
 public Connection getEcL3DbConnection() {
-
-	return ecL3Con;
+	Connection con = null;
+	try {
+		
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		con=DriverManager.getConnection("jdbc:oracle:thin:@//sdb00299.ute.fedex.com:1526/SDB00299.ute.fedex.com","test_readonly","perftest");
+			} catch (ClassNotFoundException | SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return con;
 }
 
 
-
+/*
 public void setEraL2DbConnection(String username,String password) {
 	
 	try {
@@ -1201,8 +1209,8 @@ public Connection getEraL2DbConnection() {
 
 	return eraL2Con;
 }
-
-
+*/
+/*
 public void setEraL3DbConnection(String username,String password) {
 	
 
@@ -1216,43 +1224,36 @@ public void setEraL3DbConnection(String username,String password) {
 		
 	
 }
-
+*/
 
 
 
 
 
 public Connection getEraL3DbConnection() {
-
-	return eraL3Con;
+	Connection con = null;
+	try {
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		con=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.ute.fedex.com:3060/PD00T03_OCI,cn=OracleContext,dc=ute,dc=fedex,dc=com","test_readonly","perftest");
+	} catch (ClassNotFoundException | SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return con;
 }
 
-public void setOracleARL3DbConnection(String username,String password) {
-	
 
-	//String url="jdbc:oracle:thin:@ldap://hdsoid.ute.fedex.com:3060/ENBL_SVC1_LVL3,CN=OracleContext,DC=ute,DC=fedex,DC=com";
-	String url="jdbc:oracle:thin:@ldap://hdsoid.ute.fedex.com:3060/ENBL_INT_SVC1_LVL3,CN=OracleContext,DC=ute,DC=fedex,DC=com";
-	System.out.println(username+"   "+password);
-		try {
-			try {
-				// Hashtable env = new Hashtable();
-			//	env.put("com.sun.jndi.ldap.read.timeout", "1000");
-				Class.forName("oracle.jdbc.OracleDriver");
-				//Class.forName("oracle.jdbc.driver.OracleDriver");
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		    oracleARL3Con=DriverManager.getConnection(url,username,password);
-		} catch (SQLException e) {
-			System.out.println(e);
-			e.printStackTrace();
-		}
-}
 
 public Connection getOracleARL3DbConnection() {
-
-	return oracleARL3Con;
+	Connection con = null;
+	try {
+		Class.forName("oracle.jdbc.OracleDriver");
+		con=DriverManager.getConnection("jdbc:oracle:thin:@ldap://hdsoid.ute.fedex.com:3060/ENBL_INT_SVC1_LVL3,CN=OracleContext,DC=ute,DC=fedex,DC=com","appsread","appsread");
+	} catch (ClassNotFoundException | SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return con;
 }
 
 public void setLparDate(String lparDate) {
@@ -1745,6 +1746,7 @@ public void setResolveCreditCheckBox(String resolveCreditCheckBox){
 public String getResolveCreditCheckBox(){
 	return resolveCreditCheckBox;
 }
+/*
 public void setSepL3DbConnection(String username,String password) {
 	
 	try {
@@ -1758,6 +1760,7 @@ public void setSepL3DbConnection(String username,String password) {
 		}
 	
 }
+*/
 public void setSepL3Username(String sepL3Username) {
 	
 	this.sepL3Username=sepL3Username;
@@ -1773,8 +1776,15 @@ public void setSepL3Password(String sepL3Password) {
 	this.sepL3Password=sepL3Password;
 }
 public Connection getSepL3DbConnection() {
-
-	return sepL3Con;
+	Connection con = null;
+	try {
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		con=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/SEP_SVC1_L3,cn=OracleContext","sep","sep");
+		} catch (SQLException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	return con;
 }
 
 }
