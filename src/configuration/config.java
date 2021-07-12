@@ -1775,11 +1775,16 @@ public void setSepL3Password(String sepL3Password) {
 	
 	this.sepL3Password=sepL3Password;
 }
+
+
+
+
+
 public Connection getSepL3DbConnection() {
 	Connection con = null;
 	try {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
-		con=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/SEP_SVC1_L3,cn=OracleContext","sep","sep");
+		con=DriverManager.getConnection("jdbc:oracle:thin:@ldap://oid.inf.fedex.com:3060/SEP_SVC1_L3,cn=OracleContext","SEP_L3_DATA_APP","DAPP_Test_Env_Rocks_987..WordD");
 		} catch (SQLException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

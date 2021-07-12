@@ -596,7 +596,7 @@ public class base {
    		}
    	
    	
-   	//This is where we are going to determine if this shipment can be overridable.
+   		//This is where we are going to determine if this shipment can be overridable.
    		//First, iterate through the array for each object.. ie each trk.
    		//Now remember when we stored EVERY stat code and if it is overridable in a 2d array?
    		//Well now we will compare the functional errors for each trk to the 2d array list of errors.

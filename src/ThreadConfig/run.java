@@ -73,7 +73,6 @@ public class run {
 				c.setExpressCheckBox("true");	
 				c.setGroundCheckBox("false");
 				c.setEraWorkable("false");
-				c.setRebillOci("false");
 				break;
 				
 			//REBILL MASS
