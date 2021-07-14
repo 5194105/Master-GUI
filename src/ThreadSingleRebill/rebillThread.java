@@ -149,7 +149,7 @@ public class rebillThread extends Thread{
     	String finalResult="";
     	String finalDesc="";
     	WebElement element=null;
-    	JavascriptExecutor js= (JavascriptExecutor) driver;
+    	
     	int packageCounter=0;
     	Boolean exist;
     	WebElement scrollElement;
@@ -161,7 +161,7 @@ public class rebillThread extends Thread{
     	for (int i=0;i<maxAttempts;i++) {
     		//Attemp to login.
 	    	login();
-	    	
+	    	JavascriptExecutor js= (JavascriptExecutor) driver;
 	    	try {
 	    	    //Will hit the clear button. This is for whenever we switch to new tracking number (Not needed since we just open new browser  
 	    		//driver.findElement(By.xpath("//*[@id=\"inquiry-form\"]/div[1]/div/div[2]/form/div[3]/div[2]/button/a")).click();
