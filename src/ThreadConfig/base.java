@@ -5,9 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import org.junit.internal.Classes;
-
 import ThreadCreditDebitDisputeResolve.creditDebitThread;
 import ThreadCreditDebitDisputeResolve.debitDummyClass;
 import ThreadEc.ecdummyClass;

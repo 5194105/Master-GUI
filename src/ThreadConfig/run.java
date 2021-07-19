@@ -37,7 +37,7 @@ public class run {
 		// 25 Prerate Single Upload to DB
 		
 		//Set of common custom values.
-		int function = 3;
+		int function = 1;
 		c.setSessionCount("1");
 		c.setCustomCheckBox("true");
 		c.setCustomString("trkngnbr='385316818936'");

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import ThreadConfig.data;
 import ThreadConfig.driverClass;
 import ThreadConfig.validateClass;

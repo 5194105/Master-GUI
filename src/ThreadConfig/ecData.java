@@ -3,18 +3,13 @@ package ThreadConfig;
 public class ecData {
 	String ecScenarioId,ecShipmentId,ecField, ecValue, ecValueComments;
 	public ecData(String ecScenarioId,String ecShipmentId,String ecField,String ecValue,String ecValueComments) {
-		
 		this.ecScenarioId=ecScenarioId;
 		this.ecShipmentId=ecShipmentId;
 		this.ecField=ecField;
 		this.ecValue=ecValue;
 		this.ecValueComments=ecValueComments;
 	}
-	@Override
-	public String toString() {
-		return "ecData [ecScenarioId=" + ecScenarioId + ", ecShipmentId=" + ecShipmentId + ", ecField=" + ecField
-				+ ", ecValue=" + ecValue + ", ecValueComments=" + ecValueComments + "]";
-	}
+	
 	public String getEcScenarioId() {
 		return ecScenarioId;
 	}
@@ -44,5 +39,11 @@ public class ecData {
 	}
 	public void setEcValueComments(String ecValueComments) {
 		this.ecValueComments = ecValueComments;
+	}
+	
+	@Override
+	public String toString() {
+		return "ecData [ecScenarioId=" + ecScenarioId + ", ecShipmentId=" + ecShipmentId + ", ecField=" + ecField
+				+ ", ecValue=" + ecValue + ", ecValueComments=" + ecValueComments + "]";
 	}
 }

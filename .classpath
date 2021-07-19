@@ -37,7 +37,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/javafx.swing.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/javafx.web.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/javafx-swt.jar"/>
-	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
 	<classpathentry exported="true" kind="lib" path="lib/ojdbc7.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
